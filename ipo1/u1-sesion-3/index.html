@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Del riesgo al daño · Sesión 3</title>
+<!-- FONT: versió del DOCENT (amb solucions). genera_sessio_03.py en treu la de l'alumnat (sense els blocs
+     marcats D, amb els marcats A). No editis les còpies: edita aquest fitxer. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+  --bold:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+
+/* ---------- barra de dalt ---------- */
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+
+/* ---------- pantalles ---------- */
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+
+/* on ho estudies: el lligam amb els apunts */
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid currentColor;text-decoration:none;white-space:nowrap}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.pres{color:var(--lila);background:var(--lilaclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+
+/* peces */
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px}
+.dos .emp{background:var(--blauclar);border:2px solid var(--blau)}
+.dos .tu{background:var(--verdclar);border:2px solid var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+
+/* votacions */
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.voto.fet.obert .porque{background:var(--mostassaclar)}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+
+/* preguntes i solucions */
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+
+/* ---------- mode projectar ---------- */
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  .dalt nav{display:none}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+
+<header class="dalt">
+  <span class="nom">IPO I · Unidad 1 · Sesión 3<small>Del riesgo al daño</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
+  <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
+</header>
+
+<main>
+
+<!-- ============================================================ INICI -->
+<section class="p" id="inicio" data-titol="Inicio">
+  <p class="kicker">Sesión 3 · dos horas</p>
+  <h2>Del riesgo al daño</h2>
+  <p style="font-size:1.15em">¿Te pueden obligar a trabajar con alerta roja? ¿Una caída en el pasillo de tu casa puede ser un accidente de trabajo? Hoy respondemos las dos cosas, con dos casos reales.</p>
+  <div class="cadena">
+    <span class="fet">Condición de trabajo</span><i>→</i><span class="fet">Factor de riesgo</span><i>→</i><span class="avui">Riesgo grave e inminente · nuevo y emergente</span><i>→</i><span class="avui">Daño · accidente de trabajo</span>
+  </div>
+  <div class="plan">
+    <div><b>Hora 1 · El riesgo</b><ol><li>Repaso del viernes</li><li>La DANA: ¿te pueden obligar?</li><li>Riesgo grave e inminente</li><li>Riesgo nuevo y emergente</li></ol></div>
+    <div><b>Hora 2 · El daño</b><ol start="5"><li>La pregunta del viernes: el moderador</li><li>La caída en casa: ¿accidente de trabajo?</li><li>Los supuestos: <i>in itinere</i>, en misión, imprudencias</li><li><b>Evidencia A</b> (20 min, cuenta)</li></ol></div>
+  </div>
+  <h3>Cómo usar esta página</h3>
+  <p>En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
+  <div class="refs">
+    <a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=8" target="_blank">Hoja de estudio · págs. 8 a 16</a>
+    <span class="ref libro">Libro · págs. 7 a 12</span>
+    <span class="ref pres">Presentaciones 03 a 06 (Classroom)</span>
+    <span class="ref ficha">Fichas 1 y 2 (en papel)</span>
+  </div>
+  <p class="nota">Verde: la hoja de estudio (se abre en la página exacta). Azul: el libro. Lila: la presentación del Classroom. Amarillo: la ficha que respondes en papel en clase.</p>
+</section>
+
+<div class="hora">Hora 1 · El riesgo</div>
+
+<!-- ============================================================ REPÀS -->
+<section class="p" id="repaso" data-titol="1 · Repaso">
+  <p class="kicker">1 · Repaso · lo del viernes en cuatro votos</p>
+  <h2>¿Condición o factor?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=5" target="_blank">Hoja · págs. 5 a 7</a><span class="ref libro">Libro · págs. 5 a 7</span><span class="ref pres">Presentación 02</span></div>
+  <p>La condición de trabajo es <b>neutra</b>: describe el trabajo. El factor de riesgo es <b>la parte que te puede hacer daño</b>.</p>
+  <div class="grup">
+    <div class="voto" data-ok="a"><p class="q">Programar ocho horas al día delante del ordenador</p>
+      <div class="opc"><button data-v="a">Condición</button><button data-v="b">Factor</button></div>
+      <p class="porque">Condición: describe el trabajo y es neutra. Los factores serían la pantalla con reflejos, la silla o las horas sin pausa.</p></div>
+    <div class="voto" data-ok="b"><p class="q">Una silla que no se puede ajustar</p>
+      <div class="opc"><button data-v="a">Condición</button><button data-v="b">Factor</button></div>
+      <p class="porque">Factor. Exigencias de la tarea (la postura), tabla 1.3. Da un riesgo <b>ergonómico</b>.</p></div>
+    <div class="voto" data-ok="b"><p class="q">Alertas de ciberataque todas las noches de guardia</p>
+      <div class="opc"><button data-v="a">Condición</button><button data-v="b">Factor</button></div>
+      <p class="porque">Factor. Organización del trabajo (tiempo de trabajo: noche, sin descanso). Da un riesgo <b>psicosocial</b>.</p></div>
+    <div class="voto" data-ok="b"><p class="q">«Un riesgo aceptable es un riesgo que ya no existe»</p>
+      <div class="opc"><button data-v="a">Verdadero</button><button data-v="b">Falso</button></div>
+      <p class="porque">Falso. Aceptable no es cero: es poco probable, con consecuencias poco importantes y poco frecuente (hoja, pág. 7).</p></div>
+  </div>
+</section>
+
+<!-- ============================================================ DANA -->
+<section class="p" id="dana" data-titol="2 · La DANA">
+  <p class="kicker">2 · Caso real · Valencia, 2024</p>
+  <h2>Si hay alerta roja, ¿te pueden obligar a ir a trabajar?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=8" target="_blank">Hoja · pág. 8</a><span class="ref ficha">Ficha 1 · pregunta 1</span><span class="ref pres">Presentación 04</span></div>
+  <div class="caso">
+    <p>El <b>29 de octubre de 2024</b>, una DANA (un temporal de lluvias muy fuertes) inundó buena parte de la provincia de Valencia. Aquel día, gran parte de la provincia estaba en <b>alerta roja</b> por lluvias, el nivel de peligro más alto.</p>
+    <p>Algunas empresas mantuvieron la actividad. Días después, el Ministerio de Trabajo explicó que la Inspección de Trabajo actuaba contra esas empresas. El 18 de noviembre anunció <b>106 expedientes</b> a empresas por posibles incumplimientos de las normas laborales durante la DANA.</p>
+    <p class="fuente">Fuentes: <a href="https://www.elespanol.com/valencia/20241029/aviso-urgente-aemet-valencia-alerta-roja-dana-dejara-lluvias-torrenciales-trt/897160373_0.html" target="_blank">El Español, 29-10-2024</a> · <a href="https://www.infobae.com/espana/2024/11/14/yolanda-diaz-asegura-que-inspeccion-de-trabajo-actua-con-contundencia-contra-las-empresas-que-obligaron-a-trabajar-en-la-dana/" target="_blank">Infobae, 14-11-2024</a> · <a href="https://elderecho.com/trabajo-abre-106-expedientes-a-empresas-por-presuntos-incumplimientos-de-normativa-laboral-en-la-dana" target="_blank">elDerecho.com, 18-11-2024</a></p>
+  </div>
+  <div class="voto obert" data-ok=""><p class="q">Antes de la teoría: la empresa te dice que vayas. ¿Tienes que ir?</p>
+    <div class="opc"><button data-v="a">Sí, manda la empresa</button><button data-v="b">No</button><button data-v="c">Depende</button></div>
+    <p class="porque">Escribe tu respuesta en la <b>ficha 1, pregunta 1</b>, con un porqué. No se corrige: la resolvemos dentro de un rato, cuando sepamos qué dice la ley.</p></div>
+</section>
+
+<!-- ============================================================ TRES NOTES -->
+<section class="p" id="tres-notas" data-titol="3 · Grave e inminente">
+  <p class="kicker">3 · Teoría · riesgo grave e inminente</p>
+  <h2>Tres notas, y tienen que darse las tres a la vez</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=8" target="_blank">Hoja · pág. 8</a><span class="ref libro">Libro · pág. 7-8 · figura 1.3</span><span class="ref pres">Presentación 03</span></div>
+  <p>Es el que es <b>racionalmente probable</b> que se materialice <b>en un futuro inmediato</b> y puede suponer un <b>daño grave</b> para la salud (<a href="https://www.boe.es/buscar/act.php?id=BOE-A-1995-24292#a4" target="_blank">art. 4.4.º de la Ley de Prevención de Riesgos Laborales</a>).</p>
+  <div class="tres">
+    <div><b>1 · Probabilidad racional</b><span>Hay motivos reales para pensar que va a pasar. No es un miedo: es algo que se ve.</span></div>
+    <div><b>2 · Inminencia</b><span>Va a pasar ya, en un futuro inmediato. No «algún día».</span></div>
+    <div><b>3 · Gravedad</b><span>Si pasa, el daño para la salud es grave: heridas graves o la muerte.</span></div>
+  </div>
+  <div class="clau">Grave e inminente = <b>va a pasar</b>, <b>va a pasar ya</b> y <b>puede hacer mucho daño</b>. Si falta una de las tres, es un riesgo, pero no grave e inminente.</div>
+</section>
+
+<section class="p" id="art21" data-titol="Art. 21">
+  <p class="kicker">3 · Teoría · qué dice la ley cuando se dan las tres</p>
+  <h2>La empresa tiene tres obligaciones. Tú, un derecho y una garantía</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=8" target="_blank">Hoja · págs. 8-9</a><span class="ref libro">Libro · pág. 8 · «Importante» y «Sabías que…»</span><span class="ref pres">Presentación 03</span></div>
+  <div class="dos">
+    <div class="emp"><h3>La empresa (art. 21.1)</h3><ol><li><b>Informar</b> lo antes posible a quien esté afectado.</li><li><b>Dar instrucciones</b> para que se pueda parar y, si hace falta, salir de inmediato.</li><li>Prever qué hace quien <b>no puede contactar</b> con su superior.</li></ol></div>
+    <div class="tu"><h3>Tú (art. 21.2 y 21.4)</h3><ul><li><b>Derecho</b> a parar y abandonar el lugar de trabajo si crees que seguir es un riesgo grave e inminente para tu vida o tu salud.</li><li><b>Garantía:</b> no te pueden perjudicar por hacerlo —ni sanción, ni pérdida de salario—, salvo mala fe o negligencia grave.</li></ul></div>
+  </div>
+  <p>La parada es <b>temporal</b>: dura lo que dura el riesgo. <a href="https://www.boe.es/buscar/act.php?id=BOE-A-1995-24292#a21" target="_blank">Artículo 21 en el BOE</a>.</p>
+  <p class="nota"><b>Y después de la DANA:</b> desde el 30 de noviembre de 2024 hay además un permiso pagado de hasta cuatro días cuando no puedes llegar al trabajo por las restricciones de las autoridades o hay un riesgo grave e inminente, también por una catástrofe o un temporal (art. 37.3.g del Estatuto de los Trabajadores). Lo creó el <a href="https://www.boe.es/buscar/doc.php?id=BOE-A-2024-24840" target="_blank">Real Decreto-ley 8/2024</a>, a raíz de la DANA: <b>el día de la DANA todavía no existía</b>.</p>
+</section>
+
+<section class="p" id="grave-votos" data-titol="¿Grave e inminente?">
+  <p class="kicker">3 · Practica · las tres notas o nada</p>
+  <h2>¿Es un riesgo grave e inminente?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=9" target="_blank">Hoja · pág. 9 · caso resuelto 1.2</a></div>
+  <div class="grup">
+    <div class="voto" data-ok="a"><p class="q">Se rompe una tubería y sale un gas muy tóxico en la nave <span class="inventat">· caso resuelto 1.2 del libro</span></p>
+      <div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div>
+      <p class="porque"><b>Sí, las tres.</b> El gas es tóxico y está saliendo (probabilidad), la exposición es ya (inminencia) y puede causar una intoxicación grave o la muerte (gravedad).</p></div>
+    <div class="voto" data-ok="b"><p class="q">Tu silla es incómoda y al final del día te duele la espalda <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div>
+      <p class="porque"><b>No.</b> Es un riesgo real (ergonómico), pero no va a causar un daño grave de forma inmediata. No se para el trabajo: se corrige con prevención (otra silla, pausas).</p></div>
+    <div class="voto" data-ok="b"><p class="q">A las 3 de la madrugada un <i>ransomware</i> cifra todos los servidores de la empresa <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div>
+      <p class="porque"><b>No.</b> Es gravísimo para la empresa y sus datos, pero no pone en peligro inmediato tu <b>vida o tu salud</b>, que es de lo que habla el artículo 21. El estrés de esa guardia es otra cosa: un riesgo psicosocial.</p></div>
+    <div class="voto" data-ok="a"><p class="q">Estás en la sala de servidores, salta la alarma de incendio y huele a quemado <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div>
+      <p class="porque"><b>Sí.</b> Hay motivos reales (alarma y olor), está pasando ya y el humo o el fuego pueden ser graves. Se sale (art. 21.2), y la empresa tenía que haber dado antes las instrucciones (art. 21.1).</p></div>
+  </div>
+</section>
+
+<section class="p" id="dana-despues" data-titol="La DANA, después">
+  <p class="kicker">3 · Vuelve al caso · ficha 1, «Después»</p>
+  <h2>Ahora ya lo sabes: ¿tenías que ir?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=9" target="_blank">Hoja · págs. 9-10</a><span class="ref ficha">Ficha 1 · preguntas 2, 3 y 4</span></div>
+  <button class="revela">Ver la respuesta a «¿tienes que ir?»</button>
+  <div class="sol">No. Ante un riesgo grave e inminente para tu vida o tu salud <b>tienes derecho a parar y marcharte</b> (art. 21.2), sin perder el salario ni ser sancionado (art. 21.4). Por eso la Inspección de Trabajo actuó contra empresas que mantuvieron la actividad.</div>
+  <p>Respóndelo en la <b>ficha 1</b> (en papel):</p>
+  <div class="preg"><span class="n">2</span> Explica las tres notas del riesgo grave e inminente (figura 1.3) con el ejemplo de tener que trabajar en medio de una inundación: probabilidad racional, inminencia y gravedad del daño.
+    </div>
+  <div class="preg"><span class="n">3</span> Aquel día, una persona que hubiera parado el trabajo y se hubiera marchado para protegerse, ¿podía ser sancionada o perder el salario? ¿Por qué?
+    </div>
+  <div class="preg"><span class="n">4</span> ¿Verdadero o falso? Corrige las falsas. <b>a)</b> Si la empresa lo dice, siempre hay que ir a trabajar, aunque haya alerta roja. <b>b)</b> Ante un riesgo grave e inminente, la empresa debe avisar al personal y darle instrucciones para poder dejar el trabajo. <b>c)</b> Desde noviembre de 2024, una catástrofe o un temporal puede dar derecho a hasta cuatro días de permiso pagado.
+    </div>
+  <p class="encls">Las soluciones de la ficha las vemos en clase.</p>
+</section>
+
+<!-- ============================================================ NOU I EMERGENT -->
+<section class="p" id="nuevo" data-titol="4 · Nuevo y emergente">
+  <p class="kicker">4 · Teoría · riesgo nuevo y emergente</p>
+  <h2>Nuevo <u>y</u> emergente: hacen falta las dos cosas</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=10" target="_blank">Hoja · págs. 10-11</a><span class="ref libro">Libro · págs. 8-9 · tabla 1.5</span><span class="ref pres">Presentación 04</span></div>
+  <p>La tecnología y las nuevas formas de trabajar traen riesgos nuevos: la <b>inteligencia artificial</b>, el <b>teletrabajo</b>, el trabajo en <b>plataformas digitales</b>. Para llamar a un riesgo «nuevo y emergente» se tienen que cumplir <b>los dos requisitos</b> (tabla 1.5):</p>
+  <div class="dos">
+    <div class="emp"><h3>Nuevo</h3><p>No existía antes (nuevos procesos, tecnologías u organización); o existía, pero ahora la sociedad lo ve de otra manera; o la ciencia ha descubierto factores que antes no se veían.</p></div>
+    <div class="tu"><h3>Emergente</h3><p><b>Aumenta</b> algo: los factores que lo causan, la probabilidad de estar expuesto o las consecuencias (daños más graves o a más personas).</p></div>
+  </div>
+  <div class="clau">La trampa más repetida de la unidad: decir solo «es una tecnología nueva» <b>no basta</b>. Tienes que justificar también que <b>aumenta</b> algo.</div>
+</section>
+
+<section class="p" id="nuevo-practica" data-titol="¿Nuevo y emergente?">
+  <p class="kicker">4 · Practica</p>
+  <h2>¿Nuevo y emergente?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=11" target="_blank">Hoja · pág. 11 · caso resuelto 1.3 y actividad 1.7</a></div>
+  <div class="grup">
+    <div class="voto" data-ok="a"><p class="q">Llega la realidad virtual a tu puesto y, tras varias jornadas, hay mareos y fatiga visual <span class="inventat">· caso resuelto 1.3 del libro</span></p>
+      <div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div>
+      <p class="porque"><b>Sí.</b> Nuevo: una tecnología recién llegada al puesto. Emergente: cada vez más personas la usan y más horas, así que aumenta la exposición. Quien solo dice «es nueva» se deja la mitad.</p></div>
+    <div class="voto" data-ok="b"><p class="q">Tu empresa cambia el programa de facturación por la versión nueva, que se usa igual <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div>
+      <p class="porque"><b>No.</b> Es nuevo como programa, pero no trae ningún riesgo que antes no existiera ni aumenta nada. La novedad de la tecnología no basta.</p></div>
+  </div>
+  <div class="preg"><span class="n" style="background:var(--tinta)">1.7</span> <b>En la libreta · los robots con IA.</b> Una empresa introduce robots con inteligencia artificial. Hay menos tareas manuales, pero más carga mental: ahora las personas tienen que vigilar el proceso y resolver fallos inesperados. ¿Es un riesgo nuevo y emergente? Justifícalo con los dos requisitos.
+    </div>
+  <div class="preg"><span class="n" style="background:var(--lila)">?</span> <b>Para discutir:</b> el moderador de contenidos del viernes, ¿tenía un riesgo nuevo y emergente? No hay una sola respuesta: vale si lo justificas con los dos requisitos.
+    </div>
+</section>
+
+<div class="hora">Hora 2 · El daño</div>
+
+<!-- ============================================================ EL DANY -->
+<section class="p" id="dano" data-titol="5 · El daño">
+  <p class="kicker">5 · La pregunta del viernes</p>
+  <h2>Si nadie se cayó, ¿por qué lo del moderador fue accidente de trabajo?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=11" target="_blank">Hoja · pág. 11 · tabla 1.6</a><span class="ref libro">Libro · págs. 9-10</span><span class="ref pres">Presentación 05</span></div>
+  <p><b>Daños derivados del trabajo</b> son las enfermedades, patologías o lesiones sufridas con motivo u ocasión del trabajo (art. 4.3.º de la Ley de Prevención). Pueden ser de dos tipos (tabla 1.6):</p>
+  <table>
+    <tr><th>Patología</th><th>Relación con el trabajo</th><th>Daños</th></tr>
+    <tr><td><b>Específica</b></td><td>Directa y clara</td><td>Accidente de trabajo y enfermedad profesional</td></tr>
+    <tr><td><b>Inespecífica</b></td><td>Indirecta o difícil de demostrar</td><td>Fatiga, estrés, insatisfacción laboral</td></tr>
+  </table>
+</section>
+
+<section class="p" id="moderador" data-titol="El moderador">
+  <p class="kicker">5 · La respuesta</p>
+  <h2>El moderador: un daño que costaba probar, y se probó</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=11" target="_blank">Hoja · pág. 11</a><span class="ref pres">Presentación 05</span></div>
+  <div class="clau">«Inespecífica» <b>no</b> quiere decir que no tenga nada que ver con el trabajo: quiere decir que <b>cuesta probarlo</b>. Con el moderador, un juzgado de Barcelona (enero de 2024) y después el TSJ de Cataluña lo dieron por probado: el trabajo fue la causa única, y por eso fue <b>accidente de trabajo</b> (art. 156.2.e de la Ley General de la Seguridad Social).</div>
+  <p class="fuente"><a href="https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Tribunales-Superiores-de-Justicia/TSJ-Cataluna/Noticias-Judiciales-TSJ-Cataluna/El-Tribunal-Superior-de-Justicia-de-Cataluna-confirma--como-accidente-laboral--la-incapacidad-temporal-de-un-visionador-de-contenidos-extremos" target="_blank">TSJ de Cataluña, nota del 17-12-2024</a></p>
+  <div class="voto" data-ok="b"><p class="q">Pablo y Sofía, del equipo de ventas: objetivos muy ambiciosos, mucha ansiedad y estrés <span class="inventat">· caso práctico 1.5 del libro</span></p>
+    <div class="opc"><button data-v="a">Específica</button><button data-v="b">Inespecífica</button></div>
+    <p class="porque"><b>Inespecífica:</b> la relación con el trabajo es indirecta y cuesta demostrarla. Si se probara que la causa es el trabajo, podría llegar a ser accidente de trabajo, como el moderador.</p></div>
+</section>
+
+<!-- ============================================================ CAIGUDA A CASA -->
+<section class="p" id="casa" data-titol="6 · La caída en casa">
+  <p class="kicker">6 · Caso real · Cáceres, 2022</p>
+  <h2>¿Una caída en el pasillo de tu casa puede ser accidente de trabajo?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=12" target="_blank">Hoja · pág. 12</a><span class="ref ficha">Ficha 2 · pregunta 1</span><span class="ref pres">Presentación 05</span></div>
+  <div class="caso">
+    <p>El <b>8 de marzo de 2022</b>, una trabajadora <b>teletrabajaba desde casa</b>. Fue al baño y, al salir para volver al trabajo, tropezó en el pasillo y se cayó. Se hizo daño en el codo y en el costado derecho.</p>
+    <p>La <b>mutua</b> (la entidad que, colaborando con la Seguridad Social, cubre los accidentes de trabajo) decía que no era accidente de trabajo, porque no había pasado mientras estaba delante del ordenador. Un juzgado de lo social de Cáceres le dio la razón a ella el 26 de octubre de 2022. La sentencia se podía recurrir.</p>
+    <p class="fuente">Fuente: <a href="https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/Un-juzgado-de-Caceres-considera-accidente-laboral-la-caida-de-una-empleada-en-su-casa-mientras-teletrabajaba" target="_blank">Consejo General del Poder Judicial, 07-11-2022</a></p>
+  </div>
+  <div class="voto obert" data-ok=""><p class="q">Antes de la teoría: ¿es un accidente de trabajo?</p>
+    <div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div>
+    <p class="porque">Escríbelo en la <b>ficha 2, pregunta 1</b>, con un porqué. Lo que dijo el juzgado lo vemos después de la teoría.</p></div>
+</section>
+
+<section class="p" id="accidente" data-titol="Accidente de trabajo">
+  <p class="kicker">6 · Teoría · el accidente de trabajo</p>
+  <h2>Tres elementos y una presunción</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=12" target="_blank">Hoja · págs. 12-13</a><span class="ref libro">Libro · págs. 10-11 · tabla 1.7 y figura 1.4</span><span class="ref pres">Presentación 05</span></div>
+  <p>Accidente de trabajo es <i>toda lesión corporal que el trabajador sufra con ocasión o por consecuencia del trabajo que ejecute por cuenta ajena</i> (<a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724#a156" target="_blank">art. 156.1 de la Ley General de la Seguridad Social</a>).</p>
+  <div class="tres">
+    <div><b>Subjetivo</b><span>Lo sufre una persona que trabaja <b>por cuenta ajena</b> (con alguna excepción, también las autónomas).</span></div>
+    <div><b>Objetivo</b><span>Hay una <b>lesión</b>. También cuentan las secuelas y las enfermedades psíquicas.</span></div>
+    <div><b>Causal</b><span>Hay una <b>relación</b>, directa o indirecta, entre el trabajo y la lesión.</span></div>
+  </div>
+  <p><b>Tiempo de trabajo:</b> el horario, las horas extra y el tiempo de prepararse para trabajar. <b>Lugar de trabajo:</b> donde haces las tareas, <b>aunque no sea el sitio de siempre</b>.</p>
+  <div class="clau"><b>La presunción</b> (art. 156.3): si la lesión pasa <b>en tiempo y lugar de trabajo</b>, se considera accidente de trabajo salvo que se demuestre lo contrario. No hay que probar que fue el trabajo: hay que probar que <b>no</b> lo fue.</div>
+  <p class="nota">Por eso un infarto en el trabajo cuenta como accidente de trabajo: en 2025 murieron 735 personas en accidente laboral y la primera causa fueron los <b>infartos y derrames cerebrales (251)</b> (noticia del libro, pág. 19; Europa Press, 13-02-2026, con datos provisionales del Ministerio de Trabajo).</p>
+</section>
+
+<section class="p" id="casa-despues" data-titol="La caída, después">
+  <p class="kicker">6 · Vuelve al caso · ficha 2, «Después»</p>
+  <h2>¿Qué dijo el juzgado, y por qué?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=13" target="_blank">Hoja · pág. 13</a><span class="ref ficha">Ficha 2 · preguntas 2, 3 y 4</span></div>
+  <button class="revela">Ver lo que dijo el juzgado</button>
+  <div class="sol"><b>Accidente de trabajo.</b> Ir al baño durante la jornada no rompe la relación con el trabajo, y la presunción del artículo 156.3 no cae por eso. La idea: quien teletrabaja no puede quedar desprotegido.</div>
+  <p>Respóndelo en la <b>ficha 2</b> (en papel):</p>
+  <div class="preg"><span class="n">2</span> ¿Se dan en este caso los tres elementos del accidente de trabajo (subjetivo, objetivo y causal)? Explica cada uno.
+    </div>
+  <div class="preg"><span class="n">3</span> En este caso, ¿cuál era el tiempo de trabajo y cuál era el lugar de trabajo?
+    </div>
+  <div class="preg"><span class="n">4</span> La primera causa de muerte en accidente laboral en 2025 fueron los infartos y los derrames cerebrales, con 251 muertes. ¿Por qué un infarto puede contar como accidente de trabajo?
+    </div>
+  <p class="encls">Las soluciones de la ficha las vemos en clase.</p>
+</section>
+
+<!-- ============================================================ SUPÒSITS -->
+<section class="p" id="supuestos" data-titol="7 · Los supuestos">
+  <p class="kicker">7 · Teoría · los supuestos (tabla 1.8)</p>
+  <h2>Lo que también es accidente de trabajo, y lo que lo rompe</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=14" target="_blank">Hoja · págs. 14-16</a><span class="ref libro">Libro · págs. 11-12 · tabla 1.8</span><span class="ref pres">Presentación 06</span></div>
+  <table>
+    <tr><th>Supuesto</th><th>Qué es</th></tr>
+    <tr><td><b><i>In itinere</i></b></td><td>Al <b>ir o volver</b> del trabajo (art. 156.2.a).</td></tr>
+    <tr><td><b>En misión</b></td><td>En el trayecto para hacer una tarea que te han encargado, o mientras la haces, dentro de la jornada. Lo han reconocido los tribunales.</td></tr>
+    <tr><td><b>Imprudencia profesional</b></td><td>La que nace de la rutina y la confianza de hacerlo cada día: <b>sigue siendo</b> accidente de trabajo (156.5.a).</td></tr>
+    <tr><td><b>En concurrencia</b></td><td>Aunque la culpa sea de la empresa, de un compañero o de otra persona, <b>sigue siendo</b> accidente de trabajo, salvo que no tenga nada que ver con el trabajo (156.5.b).</td></tr>
+    <tr><td><b>Enfermedad agravada</b></td><td>Una enfermedad que <b>ya tenías</b> y que el accidente empeora (156.2.f).</td></tr>
+    <tr><td><b>Enfermedad intercurrente</b></td><td>Una complicación que <b>aparece durante la curación</b> del accidente (156.2.g).</td></tr>
+  </table>
+  <p class="nota">La tabla 1.8 tiene cuatro más: cargo sindical, tareas distintas, actos de salvamento y enfermedad causada por el trabajo (la del moderador). Están en la hoja, pág. 15.</p>
+</section>
+
+<section class="p" id="dos-preguntas" data-titol="Las dos preguntas">
+  <p class="kicker">7 · Las dos preguntas que deciden la evidencia A</p>
+  <h2>Dos preguntas que te sacan de dudas</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=16" target="_blank">Hoja · pág. 16</a><span class="ref libro">Libro · pág. 12 · «Sabías que…»</span></div>
+  <div class="dos">
+    <div class="emp"><h3>¿<i>In itinere</i> o en misión?</h3><p>Pregúntate: <b>«Ese trayecto, ¿lo hacía para ir a trabajar o lo hacía trabajando?»</b> De casa al trabajo: <i>in itinere</i>. Si el desplazamiento era el encargo: en misión.</p></div>
+    <div class="tu"><h3>¿Profesional o temeraria?</h3><p><b>Profesional:</b> un despiste de rutina, por confianza → sí es accidente de trabajo. <b>Temeraria:</b> se salta a sabiendas las precauciones más elementales y asume riesgos innecesarios → <b>deja de serlo</b> (156.4).</p></div>
+  </div>
+  <div class="clau">Lo que <b>no</b> es accidente de trabajo: hacerse daño <b>a propósito</b> (dolo), la <b>imprudencia temeraria</b> y la <b>fuerza mayor</b> que no tiene nada que ver con el trabajo. Pero la insolación y el rayo <b>nunca</b> cuentan como «extraños» al trabajo (art. 156.4).</div>
+</section>
+
+<section class="p" id="supuestos-votos" data-titol="¿Qué supuesto es?">
+  <p class="kicker">7 · Practica · ejemplos inventados de vuestro sector</p>
+  <h2>¿<i>In itinere</i> o en misión?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=16" target="_blank">Hoja · pág. 16 · la pregunta que distingue</a></div>
+  <div class="grup">
+    <div class="voto" data-ok="a"><p class="q">Sales del trabajo, vas andando directo a casa y te tuerces el tobillo en un bordillo <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a"><i>In itinere</i></button><button data-v="b">En misión</button><button data-v="c">No es accidente de trabajo</button></div>
+      <p class="porque"><b><i>In itinere</i>:</b> volvías del trabajo a casa (art. 156.2.a).</p></div>
+    <div class="voto" data-ok="b"><p class="q">La empresa te manda a casa de un cliente a configurar su router y resbalas en su escalera <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a"><i>In itinere</i></button><button data-v="b">En misión</button><button data-v="c">No es accidente de trabajo</button></div>
+      <p class="porque"><b>En misión:</b> no ibas a trabajar, <b>estabas trabajando</b>. El desplazamiento y la tarea eran el encargo, dentro de la jornada.</p></div>
+  </div>
+</section>
+
+<section class="p" id="imprudencias-votos" data-titol="¿Qué imprudencia?">
+  <p class="kicker">7 · Practica · ejemplos inventados de vuestro sector</p>
+  <h2>¿Qué imprudencia? ¿Agravada o intercurrente?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=15" target="_blank">Hoja · págs. 15-16</a></div>
+  <div class="grup">
+    <div class="voto" data-ok="b"><p class="q">Para acabar antes, quitas la protección de la destructora de papel y la desatascas en marcha, aunque sabes que está prohibido <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Profesional: sí es accidente</button><button data-v="b">Temeraria: no lo es</button></div>
+      <p class="porque"><b>Temeraria:</b> conoces el riesgo y la prohibición y te la saltas para ganar tiempo. Si te lesionas, no es accidente de trabajo (art. 156.4).</p></div>
+    <div class="voto" data-ok="a"><p class="q">Llevas años pasando cable. Un día, con la confianza de siempre, no miras dónde pones el pie en la escalera y te caes <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Profesional: sí es accidente</button><button data-v="b">Temeraria: no lo es</button></div>
+      <p class="porque"><b>Profesional:</b> un despiste de la rutina, no una decisión de correr un riesgo. Sigue siendo accidente de trabajo (art. 156.5.a).</p></div>
+    <div class="voto" data-ok="a"><p class="q">Ya tenías una lesión antigua en la rodilla. Te caes en el trabajo y la lesión empeora <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Agravada</button><button data-v="b">Intercurrente</button></div>
+      <p class="porque"><b>Agravada:</b> ya la tenías antes y el accidente la empeora (156.2.f). Intercurrente sería una complicación nueva que aparece <b>durante la curación</b> (156.2.g).</p></div>
+  </div>
+</section>
+
+<!-- ============================================================ EVIDÈNCIA A -->
+<section class="p" id="evidencia" data-titol="8 · Evidencia A">
+  <p class="kicker">8 · Cuenta · 20 minutos · individual</p>
+  <h2>Evidencia A · el accidente de trabajo</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=14" target="_blank">Hoja · págs. 14-16 (puedes tenerla abierta)</a><span class="ref libro">Libro · págs. 21-22 · actividades 1.10 a 1.14</span></div>
+  <p>Cinco casos: Carlos, Raúl, Laura, Pablo y Borja. Los enunciados están dentro de la evidencia.</p>
+  <ol>
+    <li>Abre la tarea <b>«Evidencia A · Unidad 1»</b> del Classroom y abre el archivo.</li>
+    <li>Escribe tu nombre y tu grupo arriba del todo.</li>
+    <li>Para cada caso responde tres cosas: <b>¿es accidente de trabajo?</b> · <b>¿de qué tipo?</b> · <b>¿por qué?</b></li>
+    <li>Pulsa «He terminado», vuelve a la tarea y entrega el fichero que se ha descargado. <b>Antes de salir de clase.</b></li>
+  </ol>
+  <div class="clau">Cada caso vale <b>2 puntos</b>: la respuesta <b>y</b> el porqué. La etiqueta sola vale 1. Usa las palabras de hoy: <i>in itinere</i>, en misión, profesional, temeraria, intercurrente.</div>
+  <p><a class="boto-gran solo-web" href="evidencia-a.html" target="_blank">Abrir la evidencia A aquí</a></p>
+</section>
+
+<!-- ============================================================ TANCAMENT -->
+<section class="p" id="cierre" data-titol="Cierre">
+  <p class="kicker">Cierre · la cadena completa</p>
+  <h2>Del riesgo al daño, en una línea</h2>
+  <div class="cadena">
+    <span>Condición</span><i>→</i><span>Factor</span><i>→</i><span>Riesgo (aceptable · grave e inminente · nuevo y emergente)</span><i>→</i><span>Daño (accidente de trabajo · enfermedad profesional · otros)</span>
+  </div>
+  <p>Tres preguntas para salir. Si sabes responderlas en voz alta, has entendido la sesión:</p>
+  <ol>
+    <li>¿Qué tres notas tiene un riesgo grave e inminente, y qué puedes hacer tú?</li>
+    <li>¿Qué tiene que pasar para que un riesgo sea nuevo <b>y</b> emergente?</li>
+    <li>¿Por qué la caída en el pasillo de casa fue accidente de trabajo?</li>
+  </ol>
+  <p class="nota">Próxima sesión: la enfermedad profesional y los otros daños (hoja, pág. 17).</p>
+</section>
+
+<!-- ============================================================ PER A CASA -->
+<section class="p" id="casa-deberes" data-titol="Para casa">
+  <p class="kicker">Para casa · no cuenta para la nota</p>
+  <h2>Para estudiar esta semana</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=8" target="_blank">Hoja · págs. 8 a 16</a></div>
+  <h3>Lo mínimo · unos 20 minutos</h3>
+  <ol>
+    <li>Lee la hoja de estudio, <b>págs. 8 a 16</b>, con esta página al lado. Cada bloque de aquí te dice en qué página está.</li>
+    <li>Responde aquí debajo las seis preguntas de «Comprueba que lo sabes». Si no te sale una, busca en la hoja: la respuesta está en la página que se indica.</li>
+  </ol>
+  <div class="jo noproj"><label>Nombre y apellidos <input id="nom" autocomplete="off"></label><label>Grupo <input id="grup" autocomplete="off" size="8"></label></div>
+  <div class="preg"><span class="n">6</span> ¿Cuáles son las tres notas de un riesgo grave e inminente? ¿Qué tres cosas tiene que hacer la empresa? <span class="encls">(pág. 8)</span>
+    <textarea class="resp" data-clau="c6"></textarea>
+    </div>
+  <div class="preg"><span class="n">7</span> Ante un riesgo grave e inminente paras el trabajo y te marchas. ¿Te pueden sancionar o quitar el salario? <span class="encls">(pág. 8)</span>
+    <textarea class="resp" data-clau="c7"></textarea>
+    </div>
+  <div class="preg"><span class="n">8</span> ¿Qué dos condiciones debe cumplir un riesgo para ser «nuevo y emergente»? <span class="encls">(pág. 10)</span>
+    <textarea class="resp" data-clau="c8"></textarea>
+    </div>
+  <div class="preg"><span class="n">10</span> ¿Qué dice la presunción de laboralidad y para qué sirve? ¿Qué es tiempo y qué es lugar de trabajo? <span class="encls">(págs. 12-13)</span>
+    <textarea class="resp" data-clau="c10"></textarea>
+    </div>
+  <div class="preg"><span class="n">11</span> ¿Qué diferencia hay entre un accidente <i>in itinere</i> y uno en misión? <span class="encls">(págs. 15-16)</span>
+    <textarea class="resp" data-clau="c11"></textarea>
+    </div>
+  <div class="preg"><span class="n">12</span> ¿Qué imprudencia rompe el accidente de trabajo y cuál no? <span class="encls">(pág. 16)</span>
+    <textarea class="resp" data-clau="c12"></textarea>
+    </div>
+  <h3>Si quieres más · de la hoja de estudio</h3>
+  <div class="preg"><span class="n" style="background:var(--tinta)">1.6</span> <b>La tormenta</b> (pág. 10). Alfredo, técnico en electricidad, está reparando un poste de alta tensión cuando se desata una fuerte tormenta con rayos y viento. ¿Debe seguir o debe parar? ¿Por qué?
+    <textarea class="resp" data-clau="x16"></textarea>
+    </div>
+  <div class="preg"><span class="n" style="background:var(--tinta)">1.9</span> <b>Alicia</b> (pág. 14). Es cocinera en un restaurante. Mientras transporta una olla caliente, resbala en el suelo mojado de la cocina: quemadura en el brazo y tobillo torcido. Identifica los tres elementos del accidente.
+    <textarea class="resp" data-clau="x19"></textarea>
+    </div>
+  <div class="preg"><span class="n" style="background:var(--tinta)">CP 1.7</span> <b>Lola</b> (pág. 16). Es electricista y decide reparar una instalación sin cortar antes la corriente, aunque conoce las advertencias y los protocolos que lo prohíben. Si tuviera un accidente, ¿qué imprudencia habría cometido? Justifícalo.
+    <textarea class="resp" data-clau="x17"></textarea>
+    </div>
+  <p><button class="boto-gran noproj" id="baixa">He terminado · descargar mis respuestas</button></p>
+  <div class="missatge" id="missatge" hidden></div>
+  <p class="nota">Se guarda solo en este ordenador mientras escribes. Si quieres, entrega el fichero en la tarea «Para casa · Sesión 3» del Classroom: no cuenta, pero así el profesor ve qué dudas hay.</p>
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
+</main>
+
+<div class="ctrl"><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
+
+<script>
+(function(){
+  "use strict";
+  var CLAU = "ipo1-u1-sesion3-v1";
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inicio|^Cierre|^Para casa/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? "La clase: " + encerts + " de " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    var ok = v.getAttribute("data-ok");
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    encerts = 0; vots = 0; pinta();
+  }
+
+  /* solucions i respostes que es revelen */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+    });
+  });
+
+  /* mode projectar */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    alcada(); encaixa();
+    pos.textContent = (i + 1) + " / " + pant.length;
+    nav.querySelectorAll("a").forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      var seg = nav.querySelectorAll("a");
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(seg, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = pant.findIndex ? pant.findIndex(function(s){ return s.id === h; }) : -1;
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = "✕ Salir";
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = "▶ Proyectar";
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
+  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm("¿Borrar los votos y el marcador para empezar con otro grupo?")) reinicia(); }
+    else if (/^[1-4]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+  document.addEventListener("fullscreenchange", function(){ if (!document.fullscreenElement && document.body.classList.contains("proj")) {} });
+
+  /* respostes de casa: es desen i es baixen */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || "";
+    [nom, grup].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+  var bx = document.getElementById("baixa"), msg = document.getElementById("missatge");
+  if (bx) bx.addEventListener("click", function(){
+    if (!net(nom.value)) { msg.hidden = false; msg.textContent = "Escribe tu nombre y apellidos antes de descargar."; nom.focus(); return; }
+    var d = new Date();
+    var L = ["Para casa · Sesión 3 · Del riesgo al daño (IPO I, unidad 1)", "Alumno/a: " + net(nom.value), "Grupo: " + net(grup.value),
+      "Fecha: " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || "(sin respuesta)"); L.push("");
+    });
+    var f = "PARA-CASA-S3-" + net(nom.value).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      msg.hidden = false; msg.innerHTML = "Hecho: se ha descargado <b>" + f + "</b>. Si quieres, entrégalo en la tarea «Para casa · Sesión 3» del Classroom.";
+    } catch (e) { msg.hidden = false; msg.textContent = "Este navegador no ha dejado descargar el fichero."; }
+  });
+
+  if (location.hash === "#proyectar") entra();
+})();
+</script>
+</body>
+</html>
