@@ -60,7 +60,7 @@ textarea.resp:focus, input.cel:focus { outline:2px solid var(--tinta); outline-o
     <datalist id="grups"><option value="SMX-1"><option value="DAW-1"><option value="SMX-2"><option value="DAW-2"></datalist></div>
   <div class="jo-estat"><span id="compte"></span><span id="estat"></span></div>
 </header>
-<p class="avis">Se guarda solo mientras escribes. Cuando acabes, pulsa el botón de abajo: se descargará un fichero con tus respuestas que tienes que <b>entregar en la tarea del Classroom antes de salir de clase</b>.</p>
+<p class="avis">Se guarda solo mientras escribes. Cuando acabes, pulsa el botón de abajo: se descargará un fichero con tus respuestas que tienes que <b>entregar en la tarea del Classroom</b>. Si no acabas a tiempo, entrega lo que tengas: la clase siguiente tendrás unos minutos para acabarla.</p>
 <main>
 <h1>Evidencia A · Unidad 1 · El accidente de trabajo</h1>
 <p><strong>Itinerario personal para la empleabilidad I · curso 2026-2027</strong></p>
@@ -228,7 +228,8 @@ textarea.resp:focus, input.cel:focus { outline:2px solid var(--tinta); outline-o
     missatge.hidden = false;
     missatge.innerHTML = "Hecho. Se ha descargado <b>" + fitxer + "</b> en la carpeta de descargas. " +
       "Ahora ve al <b>Classroom</b>, abre la tarea de esta actividad, «Añadir o crear &rarr; Archivo», " +
-      "elige este fichero y pulsa <b>Entregar</b>. Todo esto, <b>antes de salir de clase</b>.";
+      "elige este fichero y pulsa <b>Entregar</b>. Si no has acabado, entrega lo que tengas: " +
+      "la clase siguiente tendrás unos minutos para acabarla.";
     missatge.scrollIntoView({ block: "nearest" });
   });
 })();
