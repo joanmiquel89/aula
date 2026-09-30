@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lección 2 animada</title>
+<style>
+:root{--bg:#f7f7f5;--fg:#1f2328;--mut:#5b6270;--line:#d5d8de;--card:#fff;--acc:#1a73e8;--ok:#188038;--warn:#a15c00;--warnbg:#fff4e0}
+@media(prefers-color-scheme:dark){:root{--bg:#17181b;--fg:#e8e9eb;--mut:#a0a5ae;--line:#33363c;--card:#202226;--acc:#8ab4f8;--ok:#7fd18d;--warn:#f0b35a;--warnbg:#2c2417}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,"Segoe UI",Arial,sans-serif;padding:16px}
+.wrap{max-width:1100px;margin:0 auto}
+h1{font-size:1.25rem;margin:0 0 2px}
+.sub{color:var(--mut);margin:0 0 12px;font-size:.9rem}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.tabs button{padding:7px 12px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;cursor:pointer;font:inherit}
+.tabs button[aria-selected=true]{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.main{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:900px){.main{grid-template-columns:1fr}}
+@media(min-width:901px){.main>div:first-child{position:sticky;top:8px}}
+#cap{min-height:2.7em;font-weight:600;color:var(--acc);margin:0 0 8px}
+.stage{position:relative;background:#fff;color:#202124;border:1px solid #c7c9cc;border-radius:8px;font:12.5px Arial,Helvetica,sans-serif;overflow:hidden}
+.fbar{display:flex;align-items:center;gap:8px;height:30px;padding:0 8px;border-bottom:1px solid #dadce0;background:#fff}
+.nb{min-width:110px;border:1px solid #dadce0;border-radius:3px;padding:2px 8px;font-weight:600;background:#fff}
+.nb.flash{outline:3px solid #e8710a;background:#fff4e0}
+.fx{color:#80868b;font-style:italic;font-family:Georgia,serif}
+.fv{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scroll{overflow-x:auto;overflow-y:hidden}
+.inner{position:relative;display:inline-block;min-width:100%}
+table.sh{border-collapse:collapse;table-layout:fixed;background:#fff}
+.sh th{background:#f8f9fa;border:1px solid #dadce0;font-weight:400;color:#5f6368;font-size:11px;height:22px;padding:0;text-align:center;overflow:hidden}
+.sh thead th{height:21px}
+.sh th.hs{background:#e8eaed;color:#202124}
+.sh th.hf{background:#a8c7fa;color:#041e49}
+.sh td{border:1px solid #e1e3e6;padding:0 4px;height:22px;overflow:hidden;white-space:nowrap;text-overflow:clip;vertical-align:middle;line-height:1.1}
+.sh td.n{text-align:right}
+.sh td.b{font-weight:700}
+.sh td.hd{background:#e7e6e6;font-weight:700}
+.sh td.y{background:#fff2cc}
+.sh td.sel{background:rgba(26,115,232,.14)}
+.sh td.y.sel{background:#e6dcb5}
+.sh td.ttl{font-weight:700;font-size:14px}
+.sh td.ed{background:#fff;outline:2px solid #1a73e8;outline-offset:-2px;overflow:visible}
+.sh td.ed::after{content:"";display:inline-block;width:1px;height:14px;background:#202124;vertical-align:middle;margin-left:1px;animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.sh tr.gap th,.sh tr.gap td{height:14px;font-size:10px;color:#9aa0a6;background:#fafafa;text-align:center;line-height:1}
+.ov{position:absolute;pointer-events:none;border:2px solid #1a73e8;z-index:3}
+.ov.pv{border-style:dashed}
+.ov.mq{border:2px dashed #188038;background:transparent}
+.ov.ring{border:3px solid #e8710a;border-radius:4px;box-shadow:0 0 0 3px rgba(232,113,10,.25)}
+.hnd{position:absolute;width:8px;height:8px;background:#1a73e8;border:1px solid #fff;z-index:4;pointer-events:none}
+.status{display:flex;justify-content:flex-end;align-items:center;height:32px;padding:0 8px;border-top:1px solid #dadce0;background:#f8f9fa;position:relative}
+.sum{border:1px solid #cfd3d7;background:#e6f4ea;color:#137333;border-radius:4px;padding:3px 10px;font-weight:600;min-width:120px;text-align:center}
+.sum.off{visibility:hidden}
+.pop{position:absolute;right:8px;bottom:36px;background:#fff;border:1px solid #cfd3d7;border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.22);padding:6px 0;z-index:9;display:none;min-width:190px}
+.pop div{padding:4px 14px;display:flex;justify-content:space-between;gap:20px}
+.pop b{font-weight:600}
+.menu{position:absolute;background:#fff;border:1px solid #cfd3d7;border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.25);padding:6px 0;z-index:9;display:none;min-width:230px}
+.menu div{padding:5px 16px;white-space:nowrap}
+.menu div.on{background:#e8f0fe}
+.menu small{display:block;padding:2px 16px;color:#80868b;font-size:10px}
+.dlg{position:absolute;left:50%;top:26%;transform:translateX(-50%);background:#fff;border:1px solid #cfd3d7;border-radius:8px;box-shadow:0 8px 28px rgba(0,0,0,.35);padding:16px 18px;z-index:9;display:none;width:340px}
+.dlg h4{margin:0 0 10px;font-size:14px}
+.dlg .r{margin:6px 0}
+.dlg input[type=text]{width:60px;border:1px solid #9aa0a6;border-radius:3px;padding:2px 4px;margin:0 4px}
+.dlg .bt{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+.dlg .bt span{padding:5px 14px;border-radius:4px;border:1px solid #cfd3d7}
+.dlg .bt span.p{background:#1a73e8;color:#fff;border-color:#1a73e8}
+.dlg .bt span.on{outline:3px solid #e8710a}
+.dlg .r.on{background:#fff4e0;outline:2px solid #e8710a;border-radius:4px}
+#chip{position:absolute;right:10px;top:38px;background:#202124;color:#fff;padding:3px 12px;border-radius:6px;font-weight:700;z-index:10;opacity:0;transition:opacity .15s}
+#chip.on{opacity:1}
+#cur{position:absolute;left:0;top:0;width:0;height:0;z-index:12;pointer-events:none}
+#cur svg{position:absolute;display:none}
+#cur[data-k=arrow] .k-arrow,#cur[data-k=hand] .k-hand,#cur[data-k=cross] .k-cross,#cur[data-k=hres] .k-hres{display:block}
+#cur .k-arrow{left:0;top:0}
+#cur .k-hand{left:-11px;top:-3px}
+#cur .k-cross{left:-9px;top:-9px}
+#cur .k-hres{left:-11px;top:-8px}
+#ghost{position:absolute;left:0;top:0;display:none;border:2px solid #1a73e8;background:rgba(232,240,254,.85);white-space:nowrap;padding:2px 4px;font-weight:700;font-size:13px;color:#202124;transform:translateX(-50%)}
+.rip{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;border:3px solid #e8710a;z-index:11;pointer-events:none;animation:rp .45s ease-out forwards}
+.rip.r{border-color:#a142f4}
+@keyframes rp{from{transform:scale(.2);opacity:1}to{transform:scale(1.15);opacity:0}}
+.ans{margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.ans h4{margin:0 0 6px;font-size:.85rem;color:var(--mut);font-weight:600}
+.ans .row{display:flex;gap:8px;align-items:center;margin:4px 0;font-size:.9rem}
+.ans .row span{flex:0 0 46%}
+.ans .box{flex:1;min-height:26px;background:#fff2cc;color:#202124;border:1px solid #c9b76a;padding:3px 8px;border-radius:3px;font:13px Arial,sans-serif}
+.ans .box.ed::after{content:"";display:inline-block;width:1px;height:14px;background:#202124;vertical-align:middle;animation:bl 1s steps(1) infinite}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.ctl button,.ctl select{padding:7px 12px;border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:8px;cursor:pointer;font:inherit}
+.ctl button.pri{background:var(--acc);border-color:var(--acc);color:#fff;font-weight:600}
+.ctl button:disabled{opacity:.45;cursor:default}
+.note{color:var(--mut);font-size:.8rem;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.card h2{font-size:1rem;margin:0 0 4px}
+.card .intro{color:var(--mut);font-size:.88rem;margin:0 0 8px}
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:8px 8px 8px 38px;border-radius:8px;cursor:pointer;border:1px solid transparent}
+ol.steps li::before{content:counter(s);position:absolute;left:8px;top:8px;width:22px;height:22px;border-radius:50%;background:var(--line);color:var(--fg);font-weight:700;font-size:.8rem;text-align:center;line-height:22px}
+ol.steps li:hover{background:rgba(26,115,232,.07)}
+ol.steps li.act{background:rgba(26,115,232,.1);border-color:var(--acc)}
+ol.steps li.act::before{background:var(--acc);color:#fff}
+ol.steps li.done::before{background:var(--ok);color:#fff}
+ol.steps .tip{display:none;margin-top:6px;background:var(--warnbg);color:var(--warn);border-radius:6px;padding:6px 9px;font-size:.84rem}
+ol.steps li.act .tip{display:block}
+.chk{margin-top:10px;border-top:1px solid var(--line);padding-top:8px;font-size:.9rem}
+.chk.ok{color:var(--ok);font-weight:600}
+.chk .fin{display:none;margin-top:4px}
+.chk.ok .fin{display:block}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Lección 2 · Los Paso a paso, animados</h1>
+<p class="sub">Hoja de cálculo · Aplicaciones ofimáticas · Es un dibujo de la hoja de Google, no la hoja de verdad: sirve para ver el gesto de cada número. Pulsa <b>Siguiente</b>, o haz clic en un número de la lista.</p>
+<div class="tabs" id="tabs" role="tablist"></div>
+<div class="main">
+  <div>
+    <p id="cap">&nbsp;</p>
+    <div class="stage" id="stage">
+      <div class="fbar"><span class="nb" id="nb">A1</span><span class="fx">fx</span><span class="fv" id="fv"></span></div>
+      <div class="scroll" id="scroll"><div class="inner" id="inner"></div></div>
+      <div class="status"><span class="sum off" id="sum">Suma: 0</span></div>
+      <div class="pop" id="pop"></div>
+      <div class="menu" id="menu"></div>
+      <div class="dlg" id="dlg"></div>
+      <div id="chip"></div>
+      <div id="cur" data-k="arrow">
+        <svg class="k-arrow" width="20" height="24" viewBox="0 0 20 24"><path d="M1 1 V18 L5.5 13.8 L9 21.5 L12 20.2 L8.6 12.8 L14.5 12.8 Z" fill="#fff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <svg class="k-hand" width="24" height="26" viewBox="0 0 24 26"><g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"><rect x="5" y="3" width="3.6" height="12" rx="1.8"/><rect x="9" y="1.5" width="3.6" height="13" rx="1.8"/><rect x="13" y="3" width="3.6" height="12" rx="1.8"/><rect x="17" y="6" width="3.4" height="10" rx="1.7"/><path d="M4 12 C1.5 11 1 15 4 18 L7 23 H18 C19 20 20.5 18 20.5 15 V13 H5 Z"/></g></svg>
+        <svg class="k-cross" width="18" height="18" viewBox="0 0 18 18"><path d="M9 1V17M1 9H17" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M9 1V17M1 9H17" stroke="#111" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg class="k-hres" width="24" height="18" viewBox="0 0 24 18"><path d="M2 9H22M6 4.5L2 9L6 13.5M18 4.5L22 9L18 13.5" fill="none" stroke="#fff" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 9H22M6 4.5L2 9L6 13.5M18 4.5L22 9L18 13.5" fill="none" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div id="ghost"></div>
+      </div>
+    </div>
+    <div id="ansbox"></div>
+    <div class="ctl">
+      <button id="bPrev">◀ Anterior</button>
+      <button id="bNext" class="pri">▶ Siguiente</button>
+      <button id="bRep">↻ Repetir</button>
+      <button id="bAll">⏩ Ver todo seguido</button>
+      <select id="sp" aria-label="Velocidad"><option value="1">Velocidad normal</option><option value="1.8">Velocidad rápida</option></select>
+    </div>
+    <p class="note">Las filas con «⋮» existen, pero aquí no se dibujan. Si usas un Mac, donde pone <b>Ctrl</b> usa <b>⌘</b>. En un Chromebook, el botón derecho es tocar el panel con dos dedos.</p>
+  </div>
+  <div class="card" id="side"></div>
+</div>
+</div>
+<script>
+(()=>{
+'use strict';
+/* ---------------- utilidades ---------------- */
+const $=(s,e=document)=>e.querySelector(s);
+const L=i=>String.fromCharCode(64+i), CI=c=>c.charCodeAt(0)-64;
+const REF=(c,r)=>L(c)+r;
+const parse=r=>{const m=/^([A-Z])(\d+)$/.exec(r);if(!m)throw new Error('ref '+r);return{c:CI(m[1]),r:+m[2]}};
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const DIAS=['lunes','martes','miércoles','jueves','viernes','sábado','domingo'];
+const BIG=1048576, p2=n=>String(n).padStart(2,'0');
+const fmtNum=(n,dec)=>{let s=dec!=null?n.toFixed(dec):String(Math.round(n*100)/100);return s.replace('.',',')};
+class Cancel{}
+const cv=document.createElement('canvas').getContext('2d');
+const measure=(font,t)=>{cv.font=font;return Math.ceil(cv.measureText(t).width)};
+
+/* ---------------- hojas (datos de la hoja de práctica) ---------------- */
+const VENDES=[['Folios A4 (paquetes)',[12,8,17,10,9]],['Bolígrafos',[25,30,18,22,27]],['Carpetas',[6,4,9,5,7]],['Archivadores',[3,5,2,4,6]],['Subrayadores',[14,11,16,9,15]]];
+const DIASES=['Lunes','Martes','Miércoles','Jueves','Viernes'];
+function cfg1(){
+  const cells={};
+  ['Artículo',...DIASES].forEach((t,i)=>cells[REF(i+1,4)]=t);
+  VENDES.forEach(([a,xs],k)=>{cells[REF(1,5+k)]=a;xs.forEach((x,j)=>cells[REF(j+2,5+k)]=x)});
+  ['Qué seleccionas','Recuento','Suma'].forEach((t,i)=>cells[REF(i+1,12)]=t);
+  ['1. Toda la fila 7','2. Toda la columna D','3. El rango B5:F9','4. B5:B9 y F5:F9 a la vez (con Ctrl)','5. Desde B5, con Mayús: 4 veces → y 2 veces ↓','6. ¿Cómo se llama el rango de la 5?'].forEach((t,i)=>cells['A'+(13+i)]=t);
+  const header=new Set(['A4','B4','C4','D4','E4','F4','A12','B12','C12']);
+  const yellow=r=>{const p=parse(r);return (p.r>=13&&p.r<=17&&(p.c===2||p.c===3))||r==='B18'};
+  return{cells,nCols:6,colW:{A:300,B:74,C:74,D:74,E:74,F:74},rows:()=>[4,5,6,7,8,9,0,12,13,14,15,16,17,18],header,yellow,act:{r:5,c:2}};
+}
+function cfg2(){
+  const cells={C1:'Agenda · sala de reuniones',A4:'Día',B4:'Mañana',C4:'Tarde',
+    A5:'Lunes',B5:'Claustro',C5:'Tutorías',A6:'Martes',B6:'Reunión de departamento',
+    A7:'Miércoles',B7:'Consejo escolar',C7:'Libre',E7:'¡Esta celda sobra!',A9:'Viernes',B9:'Libre',C9:'Libre',
+    A13:'Jueves',B13:'Reunión de departamento',C13:'Tutorías'};
+  return{cells,nCols:5,colW:{A:96,B:168,C:110,D:22,E:140},rows:()=>[1,0,4,5,6,7,8,9,0,13],header:new Set(['A4','B4','C4']),yellow:()=>false,act:{r:1,c:1}};
+}
+const SERIES=[['A','Número',[1,2],23],['B','Mes',['enero'],15],['C','Día',['lunes'],10],['D','Pedido',['Pedido 1'],13],['E','Fecha',['01/10/2026'],10],['F','Hora',['8:00','8:30'],16],['G','Precio',[5,10],23],['H','Copia',['X'],10]];
+function cfg3(){
+  const cells={};SERIES.forEach(([c,t])=>cells[c+3]=t);
+  const fins={};SERIES.forEach(([c,,,f])=>fins[c]=f);
+  const header=new Set(SERIES.map(s=>s[0]+3));
+  const yellow=r=>{const p=parse(r);return p.r>=4&&p.r<=fins[L(p.c)]};
+  const rows=[];for(let r=3;r<=23;r++)rows.push(r);
+  return{cells,nCols:8,colW:{A:80,B:80,C:80,D:80,E:80,F:80,G:80,H:80},rows:()=>rows,header,yellow,act:{r:3,c:1}};
+}
+const PEDIDO=[['Paquete de folios A4',6,4.25],['Bolígrafos azules (caja de 50)',2,12.9],['Archivadores de palanca',10,3.4],['Carpetas de gomas',15,0.95],['Tóner para la impresora',1,68.5],['Tóner para la impresora',1,68.5]];
+const TITULO4='Paso a paso 4 · El pedido de Secretaría';
+function cfg4(){
+  const cells={A1:TITULO4,A13:'Artículo',B13:'Unidades',C13:'Precio (€)',D13:'Importe (€)',E13:'Notas internas'};
+  PEDIDO.forEach(([a,u,p],k)=>{cells['A'+(14+k)]=a;cells['B'+(14+k)]=u;cells['C'+(14+k)]=p});
+  cells.D14={f:'mul'};cells.A20='Total';cells.D20={f:'sum',from:14};
+  return{cells,nCols:5,colW:{A:118,B:76,C:26,D:92,E:146},dec:{C:2,D:2},rowH:{1:28},
+    rows:m=>{const rs=[1,0];let mx=13;for(const k in m.cells)mx=Math.max(mx,parse(k).r);for(let r=13;r<=mx;r++)rs.push(r);return rs},
+    header:new Set(['A13','B13','C13','D13','E13']),yellow:()=>false,act:{r:14,c:4}};
+}
+
+/* ---------------- modelo ---------------- */
+let M=null;
+function newModel(cfg){
+  return{cfg,cells:JSON.parse(JSON.stringify(cfg.cells)),colW:{...cfg.colW},rowH:{...(cfg.rowH||{})},nCols:cfg.nCols,bold:new Set(),
+    sel:[{r1:cfg.act.r,r2:cfg.act.r,c1:cfg.act.c,c2:cfg.act.c}],act:{...cfg.act},head:{...cfg.act},clip:null,edit:null,pv:null,rings:[],ans:{},hideHandle:false};
+}
+const num=(m,ref)=>{const v=m.cells[ref];if(v===undefined)return 0;if(typeof v==='number')return v;if(v&&v.f)return val(m,ref);return 0};
+function val(m,ref){
+  const v=m.cells[ref],{r}=parse(ref);
+  if(v.f==='mul')return num(m,'B'+r)*num(m,'C'+r);
+  if(v.f==='sum'){let s=0;for(let k=v.from;k<r;k++){const x=m.cells['D'+k];if(x!==undefined&&(typeof x==='number'||x.f))s+=num(m,'D'+k)}return s}
+  return NaN;
+}
+function isNum(m,ref){const v=m.cells[ref];return typeof v==='number'||(v&&v.f)}
+function disp(m,ref){
+  const v=m.cells[ref];if(v===undefined||v==='')return'';
+  const c=parse(ref).c,dec=m.cfg.dec&&m.cfg.dec[L(c)];
+  if(typeof v==='number')return fmtNum(v,dec);
+  if(typeof v==='string')return v;
+  if(v.f)return fmtNum(val(m,ref),dec);
+  if(v.d!==undefined){const d=new Date(v.d*864e5);return p2(d.getUTCDate())+'/'+p2(d.getUTCMonth()+1)+'/'+d.getUTCFullYear()}
+  if(v.m!==undefined)return Math.floor(v.m/60)+':'+p2(v.m%60);
+  return'';
+}
+function barText(m,ref){
+  const v=m.cells[ref];if(v===undefined)return'';
+  const {r}=parse(ref);
+  if(v.f==='mul')return'=B'+r+'*C'+r;
+  if(v.f==='sum')return'=SUMA(D'+v.from+':D'+(r-1)+')';
+  if(typeof v==='number')return String(v).replace('.',',');
+  return disp(m,ref);
+}
+function parseInput(t){
+  if(/^-?\d+(,\d+)?$/.test(t))return parseFloat(t.replace(',','.'));
+  let x=/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(t);if(x)return{d:Date.UTC(+x[3],+x[2]-1,+x[1])/864e5};
+  x=/^(\d{1,2}):(\d{2})$/.exec(t);if(x)return{m:+x[1]*60+ +x[2]};
+  return t;
+}
+function seriesAt(seeds,k){
+  const last=seeds[seeds.length-1],one=seeds.length===1,prev=seeds[seeds.length-2];
+  if(typeof last==='number')return last+(one?0:last-prev)*k;
+  if(last&&last.d!==undefined)return{d:last.d+(one?1:last.d-prev.d)*k};
+  if(last&&last.m!==undefined)return{m:last.m+(one?0:last.m-prev.m)*k};
+  if(typeof last==='string'&&one){
+    const lo=last.toLowerCase();
+    for(const list of [MESES,DIAS]){const i=list.indexOf(lo);if(i>=0)return list[(i+k)%list.length]}
+    const x=/^(.*?)(\d+)$/.exec(last);if(x)return x[1]+(+x[2]+k);
+  }
+  return last;
+}
+const inR=(g,r,c)=>r>=g.r1&&r<=g.r2&&c>=g.c1&&c<=g.c2;
+const lastSel=m=>m.sel[m.sel.length-1];
+function selName(m){
+  const g=lastSel(m);
+  if(g.rowFull)return g.r1+':'+g.r2;
+  if(g.colFull)return L(g.c1)+':'+L(g.c2);
+  if(g.r1===g.r2&&g.c1===g.c2)return REF(g.c1,g.r1);
+  return REF(g.c1,g.r1)+':'+REF(g.c2,g.r2);
+}
+function stats(m){
+  const nums=[];let cnt=0;
+  for(const ref in m.cells){
+    const {r,c}=parse(ref);
+    if(!m.sel.some(g=>inR(g,r,c)))continue;
+    const v=m.cells[ref];if(v===''||v===undefined)continue;
+    cnt++;if(isNum(m,ref))nums.push(typeof v==='number'?v:val(m,ref));
+  }
+  if(!nums.length)return null;
+  const s=nums.reduce((a,b)=>a+b,0);
+  return{suma:s,media:s/nums.length,min:Math.min(...nums),max:Math.max(...nums),recuento:cnt,contar:nums.length};
+}
+/* operaciones estructurales */
+function shiftKeys(m,fn){const n={};for(const k in m.cells){const p=parse(k),q=fn(p);if(q)n[REF(q.c,q.r)]=m.cells[k]}m.cells=n}
+function insertRow(m,r){
+  shiftKeys(m,p=>({c:p.c,r:p.r>=r?p.r+1:p.r}));
+  const h={};for(const k in m.rowH){const n=+k;h[n>=r?n+1:n]=m.rowH[k]}m.rowH=h;
+  m.bold=new Set([...m.bold].map(k=>{const p=parse(k);return REF(p.c,p.r>=r?p.r+1:p.r)}));
+}
+function deleteRow(m,r){
+  shiftKeys(m,p=>p.r===r?null:{c:p.c,r:p.r>r?p.r-1:p.r});
+  const h={};for(const k in m.rowH){const n=+k;if(n===r)continue;h[n>r?n-1:n]=m.rowH[k]}m.rowH=h;
+}
+function deleteCol(m,c){
+  shiftKeys(m,p=>p.c===c?null:{c:p.c>c?p.c-1:p.c,r:p.r});
+  const w={};for(let i=1;i<=m.nCols;i++){if(i===c)continue;w[L(i>c?i-1:i)]=m.colW[L(i)]}
+  m.colW=w;m.nCols--;
+}
+
+/* ---------------- dibujo ---------------- */
+const stage=$('#stage'),inner=$('#inner'),curEl=$('#cur'),chipEl=$('#chip'),popEl=$('#pop'),menuEl=$('#menu'),dlgEl=$('#dlg'),sumEl=$('#sum'),nbEl=$('#nb'),fvEl=$('#fv'),capEl=$('#cap'),ghost=$('#ghost');
+const cellEl=(r,c)=>inner.querySelector('td[data-ref="'+REF(c,r)+'"]');
+function render(){
+  const m=M,cfg=m.cfg,rows=cfg.rows(m),nC=m.nCols;
+  const colSel=new Map(),rowSel=new Map();
+  for(const g of m.sel){
+    for(let c=g.c1;c<=Math.min(g.c2,nC);c++)colSel.set(c,g.colFull?2:Math.max(1,colSel.get(c)||0));
+    for(const r of rows){if(r&&r>=g.r1&&r<=g.r2)rowSel.set(r,g.rowFull?2:Math.max(1,rowSel.get(r)||0))}
+  }
+  let w=44;for(let i=1;i<=nC;i++)w+=m.colW[L(i)];
+  let h='<table class="sh" style="width:'+w+'px"><colgroup><col style="width:44px">';
+  for(let i=1;i<=nC;i++)h+='<col style="width:'+m.colW[L(i)]+'px">';
+  h+='</colgroup><thead><tr><th></th>';
+  for(let i=1;i<=nC;i++){const s=colSel.get(i);h+='<th data-col="'+L(i)+'" class="'+(s===2?'hf':s?'hs':'')+'">'+L(i)+'</th>'}
+  h+='</tr></thead><tbody>';
+  for(const r of rows){
+    if(r===0){h+='<tr class="gap"><th>⋮</th><td colspan="'+nC+'"></td></tr>';continue}
+    const s=rowSel.get(r);
+    h+='<tr style="height:'+(m.rowH[r]||22)+'px"><th data-row="'+r+'" class="'+(s===2?'hf':s?'hs':'')+'">'+r+'</th>';
+    for(let c=1;c<=nC;c++){
+      const ref=REF(c,r),v=m.cells[ref];
+      let cls=[],span='';
+      if(m.sel.some(g=>inR(g,r,c)))cls.push('sel');
+      if(m.bold.has(ref))cls.push('b');
+      if(cfg.header.has(ref))cls.push('hd');
+      if(cfg.yellow(ref))cls.push('y');
+      let txt=disp(m,ref);
+      const isEd=m.edit&&m.edit.ref===ref;
+      if(isEd){cls.push('ed');txt=m.edit.text}
+      else if(typeof v==='number'||(v&&typeof v==='object'))cls.push('n');
+      if(r===1&&typeof v==='string'&&!isEd){cls.push('ttl');span=' colspan="'+(nC-c+1)+'"'}
+      h+='<td data-ref="'+ref+'" class="'+cls.join(' ')+'"'+span+'>'+esc(txt)+'</td>';
+      if(span)break;
+    }
+    h+='</tr>';
+  }
+  h+='</tbody></table>';
+  inner.innerHTML=h;
+  overlays();
+  nbEl.textContent=m.edit?m.edit.ref:selName(m);
+  fvEl.textContent=m.edit?m.edit.text:barText(m,REF(m.act.c,m.act.r));
+  const st=stats(m);
+  sumEl.classList.toggle('off',!st);
+  if(st)sumEl.textContent='Suma: '+fmtNum(st.suma);
+  renderAns();
+}
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function rectOf(g){
+  const rows=M.cfg.rows(M).filter(Boolean);
+  const rs=rows.filter(r=>r>=g.r1&&r<=g.r2);if(!rs.length)return null;
+  const c2=Math.min(g.c2,M.nCols);
+  const a=cellEl(rs[0],g.c1),b=cellEl(rs[rs.length-1],c2);if(!a||!b)return null;
+  const ib=inner.getBoundingClientRect(),ra=a.getBoundingClientRect(),rb=b.getBoundingClientRect();
+  return{x:ra.left-ib.left,y:ra.top-ib.top,w:rb.right-ra.left,h:rb.bottom-ra.top};
+}
+function addOv(cls,g){
+  const r=rectOf(g);if(!r)return null;
+  const d=document.createElement('div');d.className='ov '+cls;
+  d.style.cssText='left:'+(r.x-1)+'px;top:'+(r.y-1)+'px;width:'+(r.w+1)+'px;height:'+(r.h+1)+'px';
+  inner.appendChild(d);return r;
+}
+function overlays(){
+  const m=M;
+  for(const g of m.sel)addOv('',g);
+  if(m.pv)addOv('pv',m.pv);
+  if(m.clip)addOv('mq',m.clip.range);
+  for(const ref of m.rings){const p=parse(ref);addOv('ring',{r1:p.r,r2:p.r,c1:p.c,c2:p.c})}
+  if(!m.hideHandle&&!m.edit&&!m.pv){
+    const g=lastSel(m);
+    if(!g.rowFull&&!g.colFull){
+      const r=rectOf(g);
+      if(r){const d=document.createElement('div');d.className='hnd';d.id='hnd';d.style.left=(r.x+r.w-5)+'px';d.style.top=(r.y+r.h-5)+'px';inner.appendChild(d)}
+    }
+  }
+}
+/* respuestas (celdas amarillas que en la hoja real quedan a la derecha) */
+function renderAns(){
+  const box=$('#ansbox'),a=M.cfg.answers;
+  if(!a){box.innerHTML='';return}
+  box.innerHTML='<div class="ans"><h4>'+a.title+'</h4>'+a.items.map(it=>{
+    const v=M.ans[it.id],ed=M.ansEdit===it.id;
+    return'<div class="row"><span>'+it.label+'</span><div class="box'+(ed?' ed':'')+'" data-a="'+it.id+'">'+esc(v||'')+'</div></div>'}).join('')+'</div>';
+}
+
+/* ---------------- cursor y elementos flotantes ---------------- */
+let speed=1,TOK=0;
+const rc=e=>{const a=e.getBoundingClientRect(),b=stage.getBoundingClientRect();return{x:a.left-b.left,y:a.top-b.top,w:a.width,h:a.height}};
+function posOf(spec){
+  let e,m,f=.5;
+  if(spec==='sum')e=sumEl;
+  else if(spec==='name')e=nbEl;
+  else if(spec==='handle'){e=$('#hnd');const r=rc(e);return{x:r.x+r.w/2,y:r.y+r.h/2}}
+  else if((m=/^row:(\d+)$/.exec(spec)))e=inner.querySelector('th[data-row="'+m[1]+'"]');
+  else if((m=/^col:([A-Z])$/.exec(spec)))e=inner.querySelector('th[data-col="'+m[1]+'"]');
+  else if((m=/^line:([A-Z])$/.exec(spec))){const r=rc(inner.querySelector('th[data-col="'+m[1]+'"]'));return{x:r.x+r.w-1,y:r.y+r.h/2}}
+  else if((m=/^top:([A-Z]\d+)$/.exec(spec))){const r=rc(inner.querySelector('td[data-ref="'+m[1]+'"]'));return{x:r.x+r.w/2,y:r.y+2}}
+  else if((m=/^ans:(\w+)$/.exec(spec)))e=$('[data-a="'+m[1]+'"]');
+  else if((m=/^menu:(\d+)$/.exec(spec)))e=menuEl.children[+m[1]];
+  else if((m=/^dlg:(\w+)$/.exec(spec)))e=dlgEl.querySelector('[data-d="'+m[1]+'"]');
+  else e=inner.querySelector('td[data-ref="'+spec+'"]');
+  if(!e)throw new Error('sin destino '+spec);
+  const r=rc(e);return{x:r.x+r.w*f,y:r.y+r.h*f};
+}
+function setCur(p,kind,dur){
+  curEl.style.transition=dur?'transform '+dur+'ms ease':'none';
+  curEl.style.transform='translate('+p.x+'px,'+p.y+'px)';
+  if(kind)curEl.dataset.k=kind;
+}
+function ripple(right){
+  const p=curEl.style.transform.match(/translate\(([-\d.]+)px,([-\d.]+)px\)/);if(!p)return;
+  const d=document.createElement('div');d.className='rip'+(right?' r':'');d.style.left=p[1]+'px';d.style.top=p[2]+'px';
+  stage.appendChild(d);setTimeout(()=>d.remove(),500);
+}
+let held=null;
+function chip(t,on){chipEl.textContent=t||'';chipEl.classList.toggle('on',!!on)}
+
+/* ---------------- API de los pasos ---------------- */
+function makeS(tok,fast){
+  const chk=()=>{if(tok!==TOK)throw new Cancel()};
+  const S={
+    fast,
+    async wait(ms){chk();if(!fast&&ms>0)await new Promise(r=>setTimeout(r,ms/speed));chk()},
+    say(t){if(!fast)capEl.textContent=t},
+    async go(spec,dur=560,kind){chk();const p=posOf(spec);setCur(p,kind||curEl.dataset.k,fast?0:dur/speed);await S.wait(dur+40)},
+    async click(right){if(!fast){ripple(right);await S.wait(150)}},
+    up(){render()},
+    /* selección */
+    async clickCell(ref,opt={}){
+      await S.go(ref);await S.click();
+      const p=parse(ref);M.sel=[{r1:p.r,r2:p.r,c1:p.c,c2:p.c}];M.act={r:p.r,c:p.c};M.head={r:p.r,c:p.c};render();await S.wait(200);
+    },
+    async clickRow(n){
+      await S.go('row:'+n);await S.click();
+      M.sel=[{r1:n,r2:n,c1:1,c2:26,rowFull:true}];M.act={r:n,c:1};render();await S.wait(250);
+    },
+    async clickCol(c){
+      await S.go('col:'+c);await S.click();
+      const i=CI(c);M.sel=[{r1:1,r2:BIG,c1:i,c2:i,colFull:true}];M.act={r:1,c:i};render();await S.wait(250);
+    },
+    async drag(a,b,o={}){
+      await S.go(a);await S.click();
+      const A=parse(a),B=parse(b);
+      const mk=(r,c)=>({r1:Math.min(A.r,r),r2:Math.max(A.r,r),c1:Math.min(A.c,c),c2:Math.max(A.c,c)});
+      if(o.add)M.sel.push(mk(A.r,A.c));else M.sel=[mk(A.r,A.c)];
+      M.act={r:A.r,c:A.c};M.head={r:A.r,c:A.c};render();
+      const n=Math.max(Math.abs(B.r-A.r),Math.abs(B.c-A.c));
+      for(let i=1;i<=n;i++){
+        const r=A.r+Math.round((B.r-A.r)*i/n),c=A.c+Math.round((B.c-A.c)*i/n);
+        await S.go(REF(c,r),200);M.sel[M.sel.length-1]=mk(r,c);M.head={r,c};render();
+      }
+      await S.wait(250);
+    },
+    async extend(dr,dc,label){
+      chip('Mayús + '+label,true);await S.wait(450);
+      const a=M.act;M.head={r:M.head.r+dr,c:M.head.c+dc};
+      const h=M.head;M.sel=[{r1:Math.min(a.r,h.r),r2:Math.max(a.r,h.r),c1:Math.min(a.c,h.c),c2:Math.max(a.c,h.c)}];
+      render();await S.wait(350);chip('Mayús',true);
+    },
+    /* teclas */
+    hold(t){held=t;chip(t,true)},
+    release(){held=null;chip('',false)},
+    async press(t,ms=700){chip(t,true);await S.wait(ms);chip(held||'',!!held)},
+    /* suma */
+    async openSum(){
+      await S.go('sum');await S.click();
+      const st=stats(M);if(!st)return;
+      const f=n=>fmtNum(n);
+      popEl.innerHTML=[['Suma',st.suma],['Media',st.media],['Mín.',st.min],['Máx.',st.max],['Recuento',st.recuento],['Contar números',st.contar]].map(x=>'<div><span>'+x[0]+'</span><b>'+f(x[1])+'</b></div>').join('');
+      popEl.style.display='block';await S.wait(600);
+    },
+    closeSum(){popEl.style.display='none'},
+    /* escribir */
+    async type(ref,text){
+      await S.clickCell(ref);
+      M.edit={ref,text:''};render();
+      for(const ch of text){M.edit.text+=ch;render();if(!fast)await S.wait(55)}
+      await S.wait(180);
+      M.cells[ref]=parseInput(text);M.edit=null;render();await S.wait(160);
+    },
+    async typeAns(id,text){
+      await S.go('ans:'+id);await S.click();
+      M.ansEdit=id;M.ans[id]='';renderAns();
+      for(const ch of text){M.ans[id]+=ch;renderAns();if(!fast)await S.wait(fast?0:30)}
+      M.ansEdit=null;renderAns();await S.wait(300);
+    },
+    /* portapapeles */
+    async copy(){await S.press('Ctrl + C',600);const g=lastSel(M);M.clip={range:{...g},mode:'copy'};render();await S.wait(300)},
+    async cut(){await S.press('Ctrl + X',600);const g=lastSel(M);M.clip={range:{...g},mode:'cut'};render();await S.wait(300)},
+    async paste(){
+      await S.press('Ctrl + V',600);
+      const cl=M.clip,g=cl.range,a=M.act,dr=a.r-g.r1,dc=a.c-g.c1;
+      const moves=[];
+      for(let r=g.r1;r<=g.r2;r++)for(let c=g.c1;c<=g.c2;c++){const k=REF(c,r);moves.push([k,REF(c+dc,r+dr),M.cells[k]])}
+      if(cl.mode==='cut')for(const [k] of moves)delete M.cells[k];
+      for(const [,t,v] of moves){if(v===undefined)delete M.cells[t];else M.cells[t]=JSON.parse(JSON.stringify(v))}
+      M.sel=[{r1:g.r1+dr,r2:g.r2+dr,c1:g.c1+dc,c2:g.c2+dc}];
+      if(cl.mode==='cut')M.clip=null;
+      render();await S.wait(400);
+    },
+    async esc(){await S.press('Esc',500);M.clip=null;render();await S.wait(200)},
+    async del(){
+      await S.press('Supr',600);
+      for(const ref of Object.keys(M.cells)){const p=parse(ref);if(M.sel.some(g=>inR(g,p.r,p.c)))delete M.cells[ref]}
+      render();await S.wait(400);
+    },
+    async bold(){
+      await S.press('Ctrl + B',700);
+      const rows=M.cfg.rows(M).filter(Boolean);
+      for(const g of M.sel)for(const r of rows)if(r>=g.r1&&r<=g.r2)for(let c=g.c1;c<=Math.min(g.c2,M.nCols);c++)M.bold.add(REF(c,r));
+      render();await S.wait(500);
+    },
+    /* mover arrastrando por el borde */
+    async moveDrag(a,b){
+      await S.clickCell(a);
+      await S.go('top:'+a,500,'hand');
+      const cw=rc(inner.querySelector('td[data-ref="'+a+'"]'));
+      ghost.style.display='block';ghost.textContent=disp(M,a);ghost.style.minWidth=Math.min(cw.w,220)+'px';ghost.style.height=cw.h+'px';
+      await S.wait(250);
+      await S.go('top:'+b,900,'hand');
+      ghost.style.display='none';
+      const pa=parse(a),pb=parse(b);M.cells[b]=M.cells[a];delete M.cells[a];
+      M.sel=[{r1:pb.r,r2:pb.r,c1:pb.c,c2:pb.c}];M.act={r:pb.r,c:pb.c};render();
+      await S.go(b,300,'arrow');await S.wait(300);
+    },
+    /* controlador de relleno */
+    async fillDrag(toRow){
+      const g={...lastSel(M)};const c=g.c1;
+      const seeds=[];for(let r=g.r1;r<=g.r2;r++)seeds.push(M.cells[REF(c,r)]);
+      await S.go('handle',560,'cross');
+      await S.wait(200);
+      M.hideHandle=true;
+      for(let r=g.r2+1;r<=toRow;r++){
+        await S.go(REF(c,r),fast?0:110,'cross');
+        M.pv={r1:g.r1,r2:r,c1:c,c2:c};render();
+        await S.wait(40);
+      }
+      M.pv=null;M.hideHandle=false;
+      for(let r=g.r2+1;r<=toRow;r++)M.cells[REF(c,r)]=seeds.length&&typeof seeds[seeds.length-1]==='object'&&seeds[seeds.length-1]&&seeds[seeds.length-1].f?JSON.parse(JSON.stringify(seeds[seeds.length-1])):seriesAt(seeds,r-g.r2);
+      M.sel=[{r1:g.r1,r2:toRow,c1:c,c2:c}];render();
+      await S.go(REF(c,toRow),200,'arrow');await S.wait(400);
+    },
+    /* menús con botón derecho */
+    async menu(spec,items,pick,after){
+      await S.go(spec);await S.click(true);
+      const p=posOf(spec);
+      menuEl.innerHTML=items.map(t=>'<div>'+t+'</div>').join('')+'<small>(menú resumido)</small>';
+      menuEl.style.left=Math.min(p.x+8,stage.clientWidth-250)+'px';menuEl.style.top=(p.y+10)+'px';menuEl.style.display='block';
+      await S.wait(500);
+      await S.go('menu:'+pick,450);
+      menuEl.children[pick].classList.add('on');await S.wait(450);await S.click();
+      menuEl.style.display='none';
+      if(after)await after();
+    },
+    async dblLine(col,widthPx){
+      await S.go('line:'+col,560,'hres');await S.wait(150);await S.click();await S.wait(150);await S.click();
+      M.colW[col]=widthPx;render();
+      await S.go('line:'+col,10,'hres');await S.wait(400);curEl.dataset.k='arrow';
+    },
+    async rowDialog(row){
+      dlgEl.innerHTML='<h4>Modificar tamaño de fila</h4><div class="r on" data-d="rad">◉ Especificar el alto de fila <input type="text" data-d="in" value="21" readonly> píxeles</div><div class="r">○ Ajustar a los datos</div><div class="bt"><span>Cancelar</span><span class="p" data-d="ok">Aceptar</span></div>';
+      dlgEl.style.display='block';await S.wait(900);
+      const inp=dlgEl.querySelector('[data-d="in"]');
+      await S.go('dlg:in',500);await S.click();inp.value='';
+      for(const ch of '40'){inp.value+=ch;await S.wait(300)}
+      await S.wait(300);
+      await S.go('dlg:ok',500);dlgEl.querySelector('[data-d="ok"]').classList.add('on');await S.wait(300);await S.click();
+      dlgEl.style.display='none';M.rowH[row]=40;render();await S.wait(400);
+    },
+    async ring(refs,ms=1400){M.rings=refs;render();await S.wait(ms);M.rings=[];render()},
+    async flashName(ms=1500){nbEl.classList.add('flash');await S.wait(ms);nbEl.classList.remove('flash')},
+    afterDelRow:0
+  };
+  return S;
+}
+
+/* ---------------- los cuatro Paso a paso ---------------- */
+const TABS=[];
+TABS.push({tab:'1 · Seleccionar',title:'Paso a paso 1 · Seleccionar',intro:'Pestaña «1 Seleccionar». Las ventas de la papelería: cinco selecciones y, de cada una, el Recuento y la Suma del recuadro.',cfg:cfg1,
+steps:[
+ {t:'<b>Una fila:</b> haz clic en el número <b>7</b> de la izquierda. Suma: <b>31</b>. Haz clic en el recuadro: <b>Recuento: 6</b>. Escribe <b>6</b> en B13 y <b>31</b> en C13. Esc cierra la lista.',
+  tip:'Si te sale <b>5</b>: has seleccionado B7:F7, no la fila entera. Hay que hacer clic en el <b>número</b> 7, no en las celdas.',
+  async run(S){
+    S.say('Clic en el número 7, a la izquierda: se selecciona toda la fila');
+    await S.clickRow(7);
+    S.say('Abajo a la derecha: Suma 31. Clic en el recuadro para ver la lista');
+    await S.wait(500);await S.openSum();await S.wait(1800);
+    S.say('Recuento: 6 (las cinco cantidades y el nombre «Carpetas»). Esc cierra la lista');
+    await S.wait(1200);await S.press('Esc',500);S.closeSum();
+    S.say('Apunta 6 en B13 y 31 en C13');
+    await S.type('B13','6');await S.type('C13','31');
+  }},
+ {t:'<b>Una columna:</b> haz clic en la letra <b>D</b> de arriba. Mira el recuadro y su lista, y apunta el recuento y la suma en <b>B14</b> y <b>C14</b>.',
+  tip:'Si no sale «Suma: 62», comprueba que has hecho clic en la <b>letra</b> D de arriba.',
+  async run(S){
+    S.say('Clic en la letra D: se selecciona toda la columna');
+    await S.clickCol('D');
+    await S.wait(500);await S.openSum();S.say('Suma 62 · Recuento 6 (el título «Miércoles» y cinco números)');await S.wait(2200);
+    await S.press('Esc',400);S.closeSum();
+    S.say('Apunta 6 en B14 y 62 en C14');
+    await S.type('B14','6');await S.type('C14','62');
+  }},
+ {t:'<b>Un rango con el ratón:</b> haz clic en <b>B5</b> y, sin soltar, arrastra hasta <b>F9</b>. El cuadro de nombres dice B5:F9. Apunta los dos números en la fila 15.',
+  tip:'Si no sale 25 y 294: has soltado el ratón antes de llegar a F9, o has empezado en otra celda. Empieza de nuevo en B5.',
+  async run(S){
+    S.say('Clic en B5 y, sin soltar, arrastra hasta F9');
+    await S.drag('B5','F9');
+    S.say('El cuadro de nombres dice B5:F9 · Suma 294');
+    await S.flashName(1400);await S.openSum();S.say('Recuento: 25 celdas con número');await S.wait(1800);
+    await S.press('Esc',400);S.closeSum();
+    S.say('Apunta 25 en B15 y 294 en C15');
+    await S.type('B15','25');await S.type('C15','294');
+  }},
+ {t:'<b>Dos rangos a la vez:</b> selecciona <b>B5:B9</b> (arrastrando). Mantén pulsada <b>Ctrl</b> y selecciona <b>F5:F9</b>. Apunta los dos números en la fila 16. Con los dos rangos todavía seleccionados, <b>Ctrl + B</b> (negrita).',
+  tip:'Si solo se ve un rango en azul: has soltado <b>Ctrl</b> antes de acabar el segundo. Vuelve a empezar y no la sueltes hasta el final.',
+  async run(S){
+    S.say('Selecciona B5:B9 arrastrando');
+    await S.drag('B5','B9');
+    S.say('Mantén pulsada Ctrl…');S.hold('Ctrl');await S.wait(900);
+    S.say('…y, sin soltarla, selecciona F5:F9');
+    await S.drag('F5','F9',{add:true});
+    await S.wait(500);S.release();
+    S.say('Los dos rangos en azul a la vez: Suma 124');
+    await S.openSum();S.say('Recuento: 10');await S.wait(1600);S.closeSum();
+    S.say('Con los dos rangos todavía seleccionados: Ctrl + B');
+    await S.bold();
+    S.say('Solo esas dos columnas se ponen en negrita. Apunta 10 en B16 y 124 en C16');
+    await S.wait(600);
+    await S.type('B16','10');await S.type('C16','124');
+  }},
+ {t:'<b>Un rango con el teclado:</b> haz clic en <b>B5</b>. Mantén pulsada <b>Mayús</b> y pulsa <b>cuatro veces →</b> y <b>dos veces ↓</b>. Apunta los dos números en la fila 17.',
+  tip:'Si sale otro rango: has empezado en otra celda, o has soltado <b>Mayús</b> antes de acabar. El rango tiene que acabar en F7.',
+  async run(S){
+    S.say('Clic en B5');
+    await S.clickCell('B5');
+    S.say('Mantén pulsada Mayús…');S.hold('Mayús');await S.wait(800);
+    for(let i=1;i<=4;i++){S.say('…y pulsa → ('+i+' de 4)');await S.extend(0,1,'→')}
+    for(let i=1;i<=2;i++){S.say('…y pulsa ↓ ('+i+' de 2)');await S.extend(1,0,'↓')}
+    S.release();
+    S.say('Rango B5:F7 · Suma 209');
+    await S.openSum();S.say('Recuento: 15');await S.wait(1600);S.closeSum();
+    S.say('Apunta 15 en B17 y 209 en C17');
+    await S.type('B17','15');await S.type('C17','209');
+  }},
+ {t:'Mira el cuadro de nombres en el número 5: ¿cómo se llama ese rango? Escríbelo en <b>B18</b>.',
+  tip:'Un rango se nombra con la celda de <b>arriba a la izquierda</b>, dos puntos y la de <b>abajo a la derecha</b>.',
+  async run(S){
+    S.say('Vuelve a seleccionar el rango del 5 y mira el cuadro de nombres');
+    await S.drag('B5','F7');
+    S.say('El cuadro de nombres dice B5:F7');
+    await S.flashName(1600);
+    S.say('Escribe B5:F7 en B18');
+    await S.type('B18','B5:F7');
+  }}
+],
+check:'Tu tabla de abajo es igual que la de la foto final: <b>6 y 31</b>, <b>6 y 62</b>, <b>25 y 294</b>, <b>10 y 124</b>, <b>15 y 209</b>, y <b>B5:F7</b>. Las cinco sumas juntas dan <b>720</b>.'});
+
+TABS.push({tab:'2 · Mover',title:'Paso a paso 2 · La agenda de la sala de reuniones',intro:'Pestaña «2 Mover». La agenda está desordenada: el título no está en su sitio, falta una tarde, el jueves se ha ido abajo y hay una celda que sobra.',cfg:cfg2,
+steps:[
+ {t:'<b>Mover arrastrando:</b> el título está en <b>C1</b>. Haz clic en C1, pon el ratón en el <b>borde</b> de la celda hasta que veas la <b>mano</b> y arrástralo hasta <b>A1</b>.',
+  tip:'Si en lugar de moverse se selecciona un rango: has arrastrado desde el <b>centro</b> de la celda. Hay que empezar desde el borde, cuando el puntero es una mano.',
+  async run(S){
+    S.say('Clic en C1');
+    await S.clickCell('C1');
+    S.say('Pon el ratón en el borde de la celda: el puntero se convierte en una mano');
+    await S.moveDrag('C1','A1');
+    S.say('El título ya está en A1');await S.wait(900);
+  }},
+ {t:'<b>Copiar:</b> el martes por la tarde también hay tutorías. Haz clic en <b>C5</b> y pulsa <b>Ctrl + C</b>: sale el borde discontinuo. Haz clic en <b>C6</b> y pulsa <b>Ctrl + V</b>. Pulsa <b>Esc</b>.',
+  tip:'Si en C6 no aparece «Tutorías»: comprueba que has hecho clic en C6 antes de pulsar Ctrl + V.',
+  async run(S){
+    S.say('Clic en C5 y Ctrl + C: sale el borde discontinuo');
+    await S.clickCell('C5');await S.copy();
+    S.say('Clic en C6 y Ctrl + V');
+    await S.clickCell('C6');await S.paste();
+    S.say('Esc para quitar el borde discontinuo');
+    await S.esc();
+  }},
+ {t:'<b>Cortar:</b> el jueves se ha quedado en la fila 13. Selecciona <b>A13:C13</b> y pulsa <b>Ctrl + X</b>. Haz clic en <b>A8</b> y pulsa <b>Ctrl + V</b>. La fila 13 se queda vacía: al cortar, el original se va.',
+  tip:'Si la fila 13 todavía tiene el jueves: lo has <b>copiado</b> (Ctrl + C) en lugar de <b>cortarlo</b> (Ctrl + X).',
+  async run(S){
+    S.say('Selecciona A13:C13 arrastrando');
+    await S.drag('A13','C13');
+    S.say('Ctrl + X: cortar');
+    await S.cut();
+    S.say('Clic en A8 y Ctrl + V');
+    await S.clickCell('A8');await S.paste();
+    S.say('La fila 13 se queda vacía: al cortar, el original se va');await S.wait(1200);
+  }},
+ {t:'<b>Borrar:</b> haz clic en <b>E7</b> («¡Esta celda sobra!») y pulsa <b>Supr</b>.',
+  tip:'En un Chromebook, Supr es <b>Alt + Retroceso</b>.',
+  async run(S){
+    S.say('Clic en E7');
+    await S.clickCell('E7');
+    S.say('Supr: desaparece lo que está escrito');
+    await S.del();
+  }}
+],
+check:'La agenda va de lunes a viernes, <b>sin ninguna celda vacía</b> en A5:C9; el título está en A1, y C1, E7 y la fila 13 están vacías.'});
+
+TABS.push({tab:'3 · Series',title:'Paso a paso 3 · ¿Copia o serie?',intro:'Pestaña «3 Series». Ocho columnas amarillas: escribes lo de la primera celda (o las dos primeras) y arrastras el controlador de relleno hasta la última celda amarilla.',cfg:cfg3,
+steps:[
+ {t:'<b>A, Número:</b> escribe <b>1</b> en A4 y <b>2</b> en A5. Selecciona las dos, pon el ratón en el controlador hasta ver la cruz y arrastra hasta <b>A23</b>: del 1 al 20.',
+  tip:'Si sale «1» en todas: has arrastrado con una sola celda seleccionada. Selecciona <b>las dos</b> (1 y 2) antes de arrastrar.',
+  async run(S){
+    S.say('Escribe 1 en A4 y 2 en A5');
+    await S.type('A4','1');await S.type('A5','2');
+    S.say('Selecciona las dos celdas');
+    await S.drag('A4','A5');
+    S.say('El ratón en el controlador (la cruz) y arrastra hasta A23');
+    await S.fillDrag(23);
+  }},
+ {t:'<b>B, Mes:</b> escribe <b>enero</b> en B4. Haz clic en B4 y arrastra el controlador hasta <b>B15</b>: de enero a diciembre.',
+  tip:'Si «enero» se copia sin hacer serie: el archivo no está en configuración regional <b>España</b>, o has escrito «gener» en catalán.',
+  async run(S){
+    S.say('Escribe enero en B4');
+    await S.type('B4','enero');
+    S.say('Arrastra el controlador hasta B15: de enero a diciembre');
+    await S.fillDrag(15);
+  }},
+ {t:'<b>C, Día:</b> <b>lunes</b> en C4, y hasta <b>C10</b>: de lunes a domingo.',
+  tip:'Si «lunes» se copia sin hacer serie: escríbelo en castellano («lunes», no «dilluns») y con la hoja en configuración España.',
+  async run(S){
+    S.say('Escribe lunes en C4');
+    await S.type('C4','lunes');
+    S.say('Arrastra el controlador hasta C10: de lunes a domingo');
+    await S.fillDrag(10);
+  }},
+ {t:'<b>D, Pedido:</b> <b>Pedido 1</b> en D4, y hasta <b>D13</b>: de Pedido 1 a Pedido 10.',
+  tip:'Un texto que acaba en número hace serie. Si sale «Pedido 1» en todas, comprueba que has escrito el número al final.',
+  async run(S){
+    S.say('Escribe Pedido 1 en D4');
+    await S.type('D4','Pedido 1');
+    S.say('Arrastra el controlador hasta D13: de Pedido 1 a Pedido 10');
+    await S.fillDrag(13);
+  }},
+ {t:'<b>E, Fecha:</b> <b>01/10/2026</b> en E4, y hasta <b>E10</b>: del 01/10 al 07/10.',
+  tip:'Si la fecha se copia igual en todas las celdas, comprueba que has escrito la fecha completa: 01/10/2026.',
+  async run(S){
+    S.say('Escribe 01/10/2026 en E4');
+    await S.type('E4','01/10/2026');
+    S.say('Arrastra el controlador hasta E10: una fecha avanza de día en día');
+    await S.fillDrag(10);
+  }},
+ {t:'<b>F, Hora:</b> <b>8:00</b> en F4 y <b>8:30</b> en F5; selecciona las dos y arrastra hasta <b>F16</b>: de 8:00 a 14:00, de media en media hora.',
+  tip:'Si sale 8:00 en todas: has arrastrado con una sola celda seleccionada. Selecciona <b>las dos</b> horas.',
+  async run(S){
+    S.say('Escribe 8:00 en F4 y 8:30 en F5');
+    await S.type('F4','8:00');await S.type('F5','8:30');
+    S.say('Selecciona las dos y arrastra hasta F16: sigue de media en media hora');
+    await S.drag('F4','F5');
+    await S.fillDrag(16);
+  }},
+ {t:'<b>G, Precio:</b> <b>5</b> en G4 y <b>10</b> en G5; las dos, hasta <b>G23</b>: de 5 en 5, del 5 al 100.',
+  tip:'Con dos números seleccionados, el controlador sigue la serie (5, 10, 15…). Con uno solo, lo copia.',
+  async run(S){
+    S.say('Escribe 5 en G4 y 10 en G5');
+    await S.type('G4','5');await S.type('G5','10');
+    S.say('Selecciona las dos y arrastra hasta G23: de 5 en 5');
+    await S.drag('G4','G5');
+    await S.fillDrag(23);
+  }},
+ {t:'<b>H, Copia:</b> <b>X</b> en H4, y hasta <b>H10</b>: X en todas. Un texto sin número se copia.',
+  tip:'Aquí no hay serie: «X» es un texto sin número y se copia tal cual.',
+  async run(S){
+    S.say('Escribe X en H4');
+    await S.type('H4','X');
+    S.say('Arrastra el controlador hasta H10: un texto sin número se copia');
+    await S.fillDrag(10);
+  }},
+ {t:'Contesta las tres preguntas de la derecha (columna K).',
+  tip:'Compara con tu hoja: G23 dice 100, y la hora 12:00 está en la fila 12.',
+  async run(S){
+    S.say('¿Qué hay en la celda G23? Mira la hoja');
+    await S.ring(['G23'],1500);
+    await S.typeAns('q1','100');
+    S.say('¿En qué fila sale la hora 12:00? Mira la columna F');
+    await S.ring(['F12'],1500);
+    await S.typeAns('q2','12');
+    S.say('¿Por qué la columna H no hace serie y la D sí?');
+    await S.wait(900);
+    await S.typeAns('q3','Porque X es un texto sin número: se copia. «Pedido 1» acaba en número y hace la serie.');
+  }}
+],
+check:'Tu hoja es igual que la foto: la última hora de la columna F es <b>14:00</b>, el último pedido, <b>Pedido 10</b>, y G23 dice <b>100</b>.',
+answers:{title:'Preguntas (columna K de la hoja)',items:[{id:'q1',label:'¿Qué hay en la celda G23?'},{id:'q2',label:'¿En qué fila sale la hora 12:00?'},{id:'q3',label:'¿Por qué la columna H no hace serie y la D sí?'}]}});
+
+TABS.push({tab:'4 · Pedido',title:'Paso a paso 4 · El pedido de Secretaría',intro:'Pestaña «4 Pedido». A la derecha de la tabla tienes los mismos pasos, con las celdas amarillas donde apuntar los resultados (aquí, en el recuadro amarillo de abajo).',cfg:cfg4,
+steps:[
+ {t:'<b>Copiar la fórmula:</b> haz clic en <b>D14</b>: la barra de fórmulas dice <code>=B14*C14</code>. Arrastra el controlador de relleno hasta <b>D19</b>. El total de D20 pasa a <b>236,55</b>: apúntalo en la primera celda amarilla.',
+  tip:'Si D15:D19 salen vacías o iguales: has arrastrado desde otra celda. Selecciona <b>D14</b> y arrastra su controlador (el cuadradito de la esquina).',
+  async run(S){
+    S.say('Clic en D14: la barra de fórmulas dice =B14*C14');
+    await S.clickCell('D14');await S.wait(1200);
+    S.say('Arrastra el controlador de relleno hasta D19');
+    await S.fillDrag(19);
+    S.say('El total de D20 pasa a 236,55');
+    await S.ring(['D20'],1500);
+    await S.typeAns('a1','236,55');
+  }},
+ {t:'Haz clic en <b>D16</b> y mira la barra de fórmulas: dice <code>=B16*C16</code>. Google ha adaptado la fórmula a su fila. Escríbelo, <b>sin el signo =</b>, en la segunda celda amarilla.',
+  tip:'La fórmula se adapta a cada fila: en D16 es B16*C16, no B14*C14.',
+  async run(S){
+    S.say('Clic en D16: la barra de fórmulas dice =B16*C16');
+    await S.clickCell('D16');await S.wait(1600);
+    S.say('Google ha adaptado la fórmula a su fila. Escríbela sin el signo =');
+    await S.typeAns('a2','B16*C16');
+  }},
+ {t:'<b>El ancho:</b> los precios de la columna C salen cortados. Haz doble clic en la línea entre las letras <b>C</b> y <b>D</b>. Haz lo mismo con la columna <b>A</b>.',
+  tip:'Si el doble clic no funciona: botón derecho en la <b>C</b> › <b>Modificar tamaño de columna</b> › <b>Ajustar a los datos</b> › <b>Aceptar</b>.',
+  async run(S){
+    S.say('Los precios de la columna C salen cortados');
+    await S.ring(['C15'],1300);
+    S.say('Doble clic en la línea entre las letras C y D');
+    await S.dblLine('C',80);
+    S.say('Lo mismo con la columna A: doble clic en la línea entre A y B');
+    await S.dblLine('A',measure('bold 14px Arial',TITULO4)+14);
+  }},
+ {t:'<b>Insertar:</b> falta un artículo entre los archivadores y las carpetas. Botón derecho en el número <b>17</b> › <b>Insertar 1 fila encima</b>. En la fila nueva escribe <b>Clips (caja de 100)</b>, <b>10</b> y <b>0,85</b>. Copia la fórmula de <b>D16</b> a <b>D17</b> (Ctrl + C y Ctrl + V). El total pasa a <b>245,05</b>.',
+  tip:'Si al final tu total es <b>168,05</b>: has insertado los clips sin copiar la fórmula a D17. Copia D16 y pégalo en D17.',
+  async run(S){
+    S.say('Botón derecho en el número 17');
+    await S.menu('row:17',['Insertar 1 fila encima','Insertar 1 fila debajo','Eliminar fila','Modificar tamaño de fila'],0,async()=>{insertRow(M,17);M.sel=[{r1:17,r2:17,c1:1,c2:26,rowFull:true}];M.act={r:17,c:1};render()});
+    S.say('Se ha insertado una fila nueva encima: escribe el artículo');
+    await S.wait(700);
+    await S.type('A17','Clips (caja de 100)');await S.type('B17','10');await S.type('C17','0,85');
+    S.say('Copia la fórmula de D16 a D17');
+    await S.clickCell('D16');await S.copy();
+    await S.clickCell('D17');await S.paste();await S.esc();
+    S.say('El total pasa a 245,05: la SUMA se ha ensanchado sola');
+    await S.ring(['D21'],1700);
+  }},
+ {t:'<b>Eliminar una fila:</b> el tóner está repetido. Botón derecho en el número de la fila del <b>segundo</b> tóner (la <b>20</b>) › <b>Eliminar fila</b>. No uses Supr: dejaría un hueco.',
+  tip:'Si has usado Supr: la fila se queda vacía y la tabla no se cierra. Hay que <b>Eliminar fila</b>. Si tu total final es <b>245,05</b>, no has eliminado el tóner repetido.',
+  async run(S){
+    S.say('Botón derecho en el número 20, la fila del segundo tóner');
+    await S.menu('row:20',['Insertar 1 fila encima','Insertar 1 fila debajo','Eliminar fila','Modificar tamaño de fila'],2,async()=>{deleteRow(M,20);M.sel=[{r1:20,r2:20,c1:1,c2:26,rowFull:true}];M.act={r:20,c:1};render()});
+    S.say('La fila se elimina y la tabla se cierra: el total pasa a 176,55');
+    await S.wait(1500);
+  }},
+ {t:'<b>Eliminar una columna:</b> la columna <b>E</b> (<i>Notas internas</i>) no sirve. Botón derecho en la letra <b>E</b> › <b>Eliminar columna</b>. Los pasos de la derecha se desplazan una columna a la izquierda: es normal.',
+  tip:'Es normal que las celdas amarillas de los pasos se desplacen una columna a la izquierda.',
+  async run(S){
+    S.say('Botón derecho en la letra E');
+    await S.menu('col:E',['Insertar 1 columna a la izquierda','Insertar 1 columna a la derecha','Eliminar columna','Modificar tamaño de columna'],2,async()=>{deleteCol(M,5);M.sel=[{r1:14,r2:14,c1:4,c2:4}];M.act={r:14,c:4};render()});
+    S.say('La columna Notas internas desaparece');
+    await S.wait(1400);
+  }},
+ {t:'<b>El alto:</b> la fila <b>13</b> (los títulos) tiene que ser más alta. Botón derecho en el número <b>13</b> › <b>Modificar tamaño de fila</b>. Comprueba que está marcado <b>Especificar el alto de fila</b>, escribe <b>40</b> y <b>Aceptar</b>.',
+  tip:'Comprueba que está marcado «Especificar el alto de fila» antes de escribir el 40.',
+  async run(S){
+    S.say('Botón derecho en el número 13');
+    await S.menu('row:13',['Insertar 1 fila encima','Insertar 1 fila debajo','Eliminar fila','Modificar tamaño de fila'],3,null);
+    S.say('Comprueba que está marcado «Especificar el alto de fila», escribe 40 y Aceptar');
+    await S.rowDialog(13);
+    S.say('La fila de títulos ya es más alta');await S.wait(1000);
+  }},
+ {t:'Apunta el total final en la última celda amarilla (el número, no una fórmula).',
+  tip:'Si tu total no es <b>176,55</b>: <b>168,05</b> → insertaste los clips sin copiar la fórmula; <b>245,05</b> → no eliminaste el tóner repetido; <b>236,55</b> → no hiciste nada después del número 1.',
+  async run(S){
+    S.say('El total final es 176,55');
+    await S.ring(['D20'],1500);
+    await S.typeAns('a8','176,55');
+  }}
+],
+check:'El total del número 1 es <b>236,55 €</b> y el total final, <b>176,55 €</b>; la tabla va de la fila 13 a la 20, sin la columna <i>Notas internas</i>, como en la foto final.',
+answers:{title:'Celdas amarillas (a la derecha de la tabla)',items:[{id:'a1',label:'Paso 1 · total de D20 tras copiar'},{id:'a2',label:'Paso 2 · fórmula de D16 (sin =)'},{id:'a8',label:'Paso 8 · total final (el número)'}]}});
+
+/* ---------------- interfaz ---------------- */
+let T=0,curStep=0,busy=false;
+const side=$('#side');
+function buildTabs(){
+  $('#tabs').innerHTML=TABS.map((t,i)=>'<button role="tab" aria-selected="'+(i===T)+'" data-i="'+i+'">'+t.tab+'</button>').join('');
+  $('#tabs').querySelectorAll('button').forEach(b=>b.onclick=()=>setTab(+b.dataset.i));
+}
+function setTab(i){
+  TOK++;T=i;curStep=0;buildTabs();
+  const tb=TABS[i];
+  M=newModel(Object.assign({},tb.cfg(),{answers:tb.answers}));
+  side.innerHTML='<h2>'+tb.title+'</h2><p class="intro">'+tb.intro+'</p><ol class="steps">'+tb.steps.map((s,k)=>'<li data-k="'+(k+1)+'"><span>'+s.t+'</span><div class="tip"><b>Si te sale otra cosa:</b> '+s.tip+'</div></li>').join('')+'</ol><div class="chk" id="chk"><b>Comprueba:</b> '+tb.check+'<div class="fin">✔ Paso a paso acabado. Ahora hazlo tú en tu hoja de práctica.</div></div>';
+  side.querySelectorAll('li').forEach(li=>li.onclick=()=>play(+li.dataset.k));
+  resetUI();render();placeCur();mark();
+}
+function placeCur(){const r=rc(inner);setCur({x:r.w-60,y:r.y+r.h-40},'arrow',0)}
+function resetUI(){popEl.style.display='none';menuEl.style.display='none';dlgEl.style.display='none';chip('',false);held=null;ghost.style.display='none';capEl.innerHTML='&nbsp;';M.hideHandle=false;nbEl.classList.remove('flash')}
+function mark(){
+  side.querySelectorAll('li').forEach(li=>{const k=+li.dataset.k;li.classList.toggle('act',k===curStep);li.classList.toggle('done',k<curStep)});
+  $('#chk').classList.toggle('ok',curStep===TABS[T].steps.length);
+  $('#bPrev').disabled=curStep===0;
+  $('#bNext').disabled=curStep>=TABS[T].steps.length;
+  $('#bRep').disabled=curStep===0;
+  const a=side.querySelector('li.act');if(a&&a.scrollIntoView&&window.innerWidth<=900)a.scrollIntoView({block:'nearest'});
+}
+async function play(n){
+  const tb=TABS[T],tok=++TOK;
+  M=newModel(Object.assign({},tb.cfg(),{answers:tb.answers}));resetUI();render();
+  curStep=n;mark();
+  try{
+    for(let i=1;i<n;i++)await tb.steps[i-1].run(makeS(tok,true));
+    if(n>0){placeCur();await tb.steps[n-1].run(makeS(tok,false))}
+  }catch(e){if(!(e instanceof Cancel))throw e}
+}
+async function playAll(){
+  const tb=TABS[T],tok=++TOK;
+  M=newModel(Object.assign({},tb.cfg(),{answers:tb.answers}));resetUI();render();placeCur();
+  try{
+    for(let i=1;i<=tb.steps.length;i++){
+      curStep=i;mark();
+      await tb.steps[i-1].run(makeS(tok,false));
+      await makeS(tok,false).wait(1200);
+    }
+  }catch(e){if(!(e instanceof Cancel))throw e}
+}
+$('#bNext').onclick=()=>play(curStep+1);
+$('#bPrev').onclick=()=>play(curStep-1);
+$('#bRep').onclick=()=>play(curStep);
+$('#bAll').onclick=()=>playAll();
+$('#sp').onchange=e=>{speed=parseFloat(e.target.value)};
+window.addEventListener('resize',()=>{if(M)render()});
+window.__anim={
+  setTab,play,tabs:TABS,
+  get M(){return M},
+  async fast(tab,n){setTab(tab);const tok=++TOK;const tb=TABS[tab];for(let i=1;i<=(n||tb.steps.length);i++)await tb.steps[i-1].run(makeS(tok,true));return M}
+};
+setTab(0);
+})();
+</script>
+</body>
+</html>
