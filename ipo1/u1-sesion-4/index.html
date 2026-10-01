@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cuando el daño llega poco a poco · Sesión 4</title>
+<!-- FONT: versió del DOCENT (amb solucions). genera_sessio_04.py en treu la de l'alumnat (sense els blocs
+     marcats D, amb els marcats A). No editis les còpies: edita aquest fitxer. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+  --bold:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+
+/* ---------- barra de dalt ---------- */
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+
+/* ---------- pantalles ---------- */
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+
+/* on ho estudies: el lligam amb els apunts */
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid currentColor;text-decoration:none;white-space:nowrap}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.pres{color:var(--lila);background:var(--lilaclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+
+/* peces */
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px}
+.dos .emp{background:var(--blauclar);border:2px solid var(--blau)}
+.dos .tu{background:var(--verdclar);border:2px solid var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+
+/* votacions */
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.voto.fet.obert .porque{background:var(--mostassaclar)}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+
+/* preguntes i solucions */
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+
+/* ---------- mode projectar ---------- */
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  .dalt nav{display:none}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+
+<header class="dalt">
+  <span class="nom">IPO I · Unidad 1 · Sesión 4<small>Cuando el daño llega poco a poco</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
+  <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
+</header>
+
+<main>
+
+<!-- ============================================================ INICI -->
+<section class="p" id="inicio" data-titol="Inicio">
+  <p class="kicker">Sesión 4 · 55 minutos</p>
+  <h2>Cuando el daño llega poco a poco</h2>
+  <p style="font-size:1.15em">Hasta ahora, el daño casi siempre llegaba de golpe: una caída, un golpe, un tropiezo en el pasillo. Hoy, el que llega poco a poco. Pero antes, comprobamos lo del lunes con cuatro casos.</p>
+  <div class="cadena">
+    <span class="fet">Condición</span><i>→</i><span class="fet">Factor</span><i>→</i><span class="fet">Riesgo</span><i>→</i><span class="fet">Daño: accidente de trabajo</span><i>→</i><span class="avui">Daño: enfermedad profesional</span>
+  </div>
+  <div class="plan">
+    <div><b>Para empezar</b><ol><li>Repaso del lunes: dos preguntas</li><li>Ensayo: cuatro casos (no cuenta)</li><li>Accidente, incidente y avería</li></ol></div>
+    <div><b>Lo nuevo</b><ol start="4"><li><b>Enfermedad profesional</b>: la que está en la lista</li></ol><p style="margin:8px 0 0"><b>Para salir:</b> tres preguntas en voz alta.</p></div>
+  </div>
+  <h3>Cómo usar esta página</h3>
+  <p>En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
+  <div class="refs">
+    <a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=17" target="_blank">Hoja de estudio · págs. 17 a 19</a>
+    <span class="ref libro">Libro · págs. 12 a 13</span>
+    <span class="ref ficha">La hoja de hoy (en papel, por las dos caras)</span>
+  </div>
+  <p class="nota noproj">Verde: la hoja de estudio (se abre en la página exacta). Azul: el libro. Amarillo: la hoja que rellenas en clase.</p>
+  <div class="clau"><b>¿Todavía sin libro o sin correo del centro?</b> No pasa nada: esta página y la hoja están en <b>joanmiquel89.github.io/aula</b>, sin contraseña. Y hoy no cuenta nada para la nota.</div>
+</section>
+
+<!-- ============================================================ REPÀS -->
+<section class="p" id="repaso" data-titol="1 · Repaso">
+  <p class="kicker">1 · Repaso · lo del lunes, antes de que nadie diga nada</p>
+  <h2>Dos preguntas, en voz baja con tu compañero</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=8" target="_blank">Hoja · págs. 8-9 y 12-13</a></div>
+  <div class="preg"><span class="n">1</span> <b>Riesgo grave e inminente:</b> ¿qué tres cosas tienen que darse a la vez? Y si se dan, ¿qué puedes hacer tú?
+    <button class="revela">Ver la respuesta</button><div class="sol">Probabilidad racional, inminencia y gravedad: las tres a la vez. Tienes derecho a parar el trabajo y marcharte (art. 21.2 LPRL), sin sanción ni pérdida de salario (art. 21.4 LPRL), salvo mala fe o negligencia grave.</div></div>
+  <div class="preg"><span class="n">2</span> <b>La presunción:</b> si te lesionas en tu tiempo y en tu lugar de trabajo, ¿quién tiene que demostrar qué?
+    <button class="revela">Ver la respuesta</button><div class="sol">Se presume que es accidente de trabajo (art. 156.3 LGSS). No hay que probar que fue el trabajo: hay que probar que <b>no</b> lo fue.</div></div>
+</section>
+
+<!-- ============================================================ ASSAIG -->
+<section class="p" id="ensayo" data-titol="2 · Ensayo">
+  <p class="kicker">2 · Ensayo · no cuenta · diez minutos solo, y lo corregimos juntos</p>
+  <h2>Cuatro casos: ¿es accidente de trabajo?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=15" target="_blank">Hoja · págs. 15-16 (puedes tenerla abierta)</a><span class="ref ficha">Cara A de la hoja de hoy</span></div>
+  <p>Solo y sin hablar, en la <b>cara A</b> de la hoja (son los casos del lunes: si ya has visto la solución, dilo). Para cada caso, <b>una línea</b>: <b>¿es accidente de trabajo?</b> · <b>¿de qué tipo?</b> · <b>¿por qué?</b></p>
+  <div class="clau">Después te pones la nota tú, con la regla de la evidencia A: <b>2</b> = la respuesta <b>y</b> el porqué · <b>1</b> = solo la etiqueta · <b>0</b> = en blanco o mal. Sirve para saber qué te falta.</div>
+  <div class="preg"><span class="n">1</span> Sales del trabajo y, antes de ir a casa, pasas dos horas en el cine con unos amigos. Al salir del cine, de camino a casa, te atropellan. <span class="inventat">· ejemplo inventado</span>
+    </div>
+  <div class="preg"><span class="n">2</span> Un compañero deja abierta la puerta del armario de servidores y, durante tu turno, al pasar por el pasillo de la oficina, te das un golpe en la cabeza con ella. <span class="inventat">· ejemplo inventado</span>
+    </div>
+  <div class="preg"><span class="n">3</span> <b>Lola</b> (caso práctico 1.7 del libro; hoja, pág. 16). Es electricista y decide reparar una instalación sin cortar antes la corriente, aunque conoce las advertencias y los protocolos de seguridad que lo prohíben. Si tuviera un accidente, ¿qué imprudencia habría cometido? ¿Sería accidente de trabajo?
+    </div>
+  <div class="preg"><span class="n">4</span> Arrastras una lesión antigua en el hombro. En el almacén de la tienda donde trabajas, durante tu turno, una caja cae de un estante justo sobre ese hombro y la lesión empeora. <span class="inventat">· ejemplo inventado</span>
+    </div>
+  <p class="encls">Las soluciones las vemos en clase.</p>
+</section>
+
+<!-- ============================================================ INCIDENT -->
+<section class="p" id="incidente" data-titol="3 · Incidente">
+  <p class="kicker">3 · Teoría y votos · el concepto técnico de accidente</p>
+  <h2>Accidente, incidente y avería: no son lo mismo</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=17" target="_blank">Hoja · pág. 17 · figura 1.5</a><span class="ref libro">Libro · pág. 12</span></div>
+  <p>Hasta ahora hemos visto el concepto <b>legal</b> (el que decide qué protección recibes). La prevención usa otro, el <b>técnico</b>, para investigar lo que pasa:</p>
+  <table>
+    <tr><th>Término</th><th>Qué es</th></tr>
+    <tr><td><b>Accidente</b></td><td>Un hecho anormal y repentino que <b>produce daños</b> a personas o a cosas.</td></tr>
+    <tr><td><b>Incidente</b></td><td>Un hecho anormal, brusco e imprevisto que <b>no</b> produce lesiones ni daños materiales, <b>pero podría haberlos producido</b>.</td></tr>
+    <tr><td><b>Avería</b></td><td>Un daño que impide funcionar a equipos o vehículos, <b>sin posibilidad de lesionar</b> a las personas.</td></tr>
+  </table>
+  <div class="clau">A la prevención le interesan los <b>incidentes</b> precisamente porque no ha pasado nada: son un <b>aviso gratis</b>. El cable suelto que hoy solo ha hecho tropezar a alguien es la caída de mañana.</div>
+  <div class="grup">
+    <div class="voto" data-ok="b"><p class="q">Un rack mal anclado se inclina y casi aplasta a un técnico, que se aparta a tiempo. No hay heridos ni nada roto <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Accidente</button><button data-v="b">Incidente</button><button data-v="c">Avería</button></div>
+      <p class="porque"><b>Incidente:</b> no produjo daños, pero podría haberlos producido. Es justo el aviso que hay que investigar.</p></div>
+    <div class="voto" data-ok="c"><p class="q">Se funde la fuente de alimentación de un servidor y deja de funcionar. La sala está vacía y no hay peligro para nadie <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Accidente</button><button data-v="b">Incidente</button><button data-v="c">Avería</button></div>
+      <p class="porque"><b>Avería:</b> daña un equipo y no había posibilidad de lesionar a nadie.</p></div>
+    <div class="voto" data-ok="a"><p class="q">El rack se cae y le aplasta el pie a un técnico <span class="inventat">· ejemplo inventado</span></p>
+      <div class="opc"><button data-v="a">Accidente</button><button data-v="b">Incidente</button><button data-v="c">Avería</button></div>
+      <p class="porque"><b>Accidente:</b> hecho anormal y repentino que produce daños a una persona.</p></div>
+  </div>
+</section>
+
+<!-- ============================================================ ENFERMETAT PROFESSIONAL -->
+<section class="p" id="dato" data-titol="4 · Enfermedad profesional">
+  <p class="kicker">4 · Un dato antes de la teoría · España, 2024</p>
+  <h2>26.803 enfermedades profesionales en un año. ¿Cuál fue la causa más frecuente?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=17" target="_blank">Hoja · págs. 17-18</a><span class="ref libro">Libro · págs. 12-13</span></div>
+  <div class="caso">
+    <p>En <b>2024</b> se comunicaron a la Seguridad Social <b>26.803 enfermedades profesionales</b>, con baja o sin ella. Son enfermedades que están en una lista oficial de enfermedades causadas por el trabajo.</p>
+    <p>Los casos que pone el libro son de fábricas, minas y talleres. ¿Y en la realidad?</p>
+    <p class="fuente">Fuente: <a href="https://www.mites.gob.es/ficheros/ministerio/estadisticas/anuarios/2024/EPR/EPR.pdf" target="_blank">Anuario de Estadísticas del Ministerio de Trabajo 2024, tabla EPR-3</a> (datos del sistema CEPROSS de la Seguridad Social).</p>
+  </div>
+  <div class="voto" data-ok="d"><p class="q">¿Cuál fue la causa más frecuente?</p>
+    <div class="opc"><button data-v="a">Productos químicos</button><button data-v="b">Ruido</button><button data-v="c">Polvo (minas, canteras)</button><button data-v="d">Movimientos repetidos y posturas forzadas</button></div>
+    <p class="porque"><b>Movimientos repetidos y posturas forzadas.</b> Solo contando dos tipos, 13.385 casos de tendones inflamados (como la epicondilitis) y 7.089 de nervios comprimidos (como el síndrome del túnel carpiano), ya son 20.474: el 76 %. Para comparar: productos químicos, 707; polvo de sílice, 512; ruido, 268. <b>La mayoría de las enfermedades profesionales de hoy no son las del libro: son de tendones y nervios.</b></p></div>
+</section>
+
+<section class="p" id="teoria-ep" data-titol="La lista">
+  <p class="kicker">4 · Teoría · tres elementos y un cuadro</p>
+  <h2>La enfermedad profesional es la que está en la lista</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=17" target="_blank">Hoja · págs. 17-18</a><span class="ref libro">Libro · págs. 12-13 · tabla 1.9</span></div>
+  <p>Es la enfermedad contraída a consecuencia del trabajo por cuenta ajena, en las actividades que el cuadro especifica y provocada por los elementos o sustancias que el cuadro indica para cada una (resumen del <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11724#a157" target="_blank">art. 157 de la Ley General de la Seguridad Social</a>). Tiene <b>tres elementos</b> (tabla 1.9):</p>
+  <div class="tres">
+    <div><b>Subjetivo</b><span>Una persona que trabaja <b>por cuenta ajena</b> (con alguna excepción, también las autónomas).</span></div>
+    <div><b>Actividad</b><span>Se contrae trabajando en una de las <b>actividades</b> que dice el cuadro.</span></div>
+    <div><b>Agente</b><span>La provoca uno de los <b>elementos o sustancias</b> que el cuadro indica para esa enfermedad.</span></div>
+  </div>
+  <div class="clau">España usa un <b>sistema de lista</b>: la enfermedad, la actividad y el agente tienen que estar en el cuadro oficial (anexo 1 del <a href="https://www.boe.es/buscar/act.php?id=BOE-A-2006-22169" target="_blank">Real Decreto 1299/2006</a>). Si están, el libro explica que el vínculo con el trabajo <b>se presume</b>: no hay que demostrar la relación.</div>
+  <p class="nota">El anexo 2 es una lista complementaria de enfermedades que se sospecha que tienen origen profesional y que podrían entrar en el cuadro en el futuro. Y para distinguirla del accidente: el accidente suele ser un hecho que pasa <b>de golpe</b>; la enfermedad profesional aparece <b>poco a poco</b>, por exposición a un agente de la lista.</p>
+</section>
+
+<section class="p" id="grupos" data-titol="Los seis grupos">
+  <p class="kicker">4 · Teoría · los seis grupos del cuadro</p>
+  <h2>El cuadro se ordena en seis grupos, según el agente</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=18" target="_blank">Hoja · pág. 18</a><span class="ref libro">Libro · pág. 13 · tabla 1.10</span></div>
+  <table>
+    <tr><th style="width:8%">Grupo</th><th style="width:34%">Causa</th><th>Ejemplo del libro</th></tr>
+    <tr><td><b>1</b></td><td>Agentes químicos</td><td>Níquel, en trabajos de bisutería</td></tr>
+    <tr><td><b>2</b></td><td>Agentes físicos</td><td>Sordera por ruido (hipoacusia), en el remachado de metales</td></tr>
+    <tr><td><b>3</b></td><td>Agentes biológicos</td><td>Enfermedades infecciosas del personal sanitario</td></tr>
+    <tr><td><b>4</b></td><td>Inhalación de sustancias</td><td>Silicosis por polvo de sílice, en las minas</td></tr>
+    <tr><td><b>5</b></td><td>Enfermedades de la piel</td><td>Sustancias de bajo peso molecular, en la industria textil o química</td></tr>
+    <tr><td><b>6</b></td><td>Agentes carcinógenos</td><td>Cáncer de pulmón por amianto, en trabajos de aislamiento</td></tr>
+  </table>
+  <p class="nota">Los movimientos repetidos y las posturas forzadas, que son la mayoría de los casos reales, van en el <b>grupo 2</b>: son agentes <b>físicos</b>.</p>
+</section>
+
+<section class="p" id="parejas" data-titol="Parejas · cara B">
+  <p class="kicker">4 · En parejas · cara B de la hoja · unos nueve minutos</p>
+  <h2>¿Es enfermedad profesional? ¿De qué grupo?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=18" target="_blank">Hoja · pág. 18</a><span class="ref ficha">Cara B de la hoja de hoy</span></div>
+  <div class="clau">Si no acabáis, no pasa nada: se recoge el papel tal como esté y lo corregimos juntos. Lo importante es el <b>porqué</b>.</div>
+  <div class="preg"><span class="n">1</span> <b>Silvia</b> (caso práctico 1.8 del libro). Lleva años en una fábrica donde las máquinas hacen ruido todo el día, y no siempre se ha puesto bien los protectores de los oídos. Ahora oye menos. ¿Es una enfermedad profesional? Si lo es, ¿en qué grupo del cuadro va?
+    </div>
+  <div class="preg"><span class="n">2</span> <b>Marcos</b> (actividad final 1.15 del libro). Trabajó quince años en una mina, respirando polvo de sílice sin la protección respiratoria adecuada. Con el tiempo le cuesta respirar y le diagnostican silicosis. ¿A qué grupo de enfermedades profesionales pertenece?
+    </div>
+  <div class="preg"><span class="n">3</span> <b>Noelia</b> <span class="inventat">· ejemplo inventado</span>. Lleva años montando placas de circuitos a mano en un taller de electrónica, ocho horas al día, con movimientos repetidos de la muñeca. Le diagnostican síndrome del túnel carpiano. ¿Es una enfermedad profesional? ¿De qué grupo?
+    </div>
+  <div class="preg"><span class="n">4</span> <b>El moderador de contenidos</b> de la sesión del viernes pasado: lo que le pasó no estaba en el cuadro. ¿Qué tipo de daño fue? ¿Qué tuvieron que demostrar?
+    </div>
+  <p class="encls">Las soluciones las vemos en clase.</p>
+</section>
+
+<!-- ============================================================ TANCAMENT -->
+<section class="p" id="cierre" data-titol="Cierre">
+  <p class="kicker">Cierre · la cadena completa</p>
+  <h2>El daño, de golpe o poco a poco</h2>
+  <div class="cadena">
+    <span>Daño derivado del trabajo</span><i>→</i><span>Accidente de trabajo: un hecho concreto, normalmente de golpe</span><i>→</i><span>Enfermedad profesional: poco a poco, y está en la lista</span>
+  </div>
+  <p>Tres preguntas para salir. Si sabes responderlas en voz alta, has entendido la sesión:</p>
+  <ol>
+    <li>¿Qué tres cosas hacen falta para que una enfermedad sea <b>profesional</b>?</li>
+    <li>Si un daño es claramente del trabajo pero <b>no está</b> en el cuadro, ¿puede protegerte la ley? ¿Cómo?</li>
+    <li>La sordera por ruido y la silicosis, ¿de qué grupo cada una?</li>
+  </ol>
+  <p class="nota">Próxima sesión (lunes 5): el marco normativo, la Ley de Prevención de Riesgos Laborales y la ficha 3. La evidencia A (esa sí cuenta) la haremos más adelante, en clase, cuando todos tengáis el correo del centro. Os avisaré antes.</p>
+</section>
+
+<!-- ============================================================ PER A CASA -->
+<section class="p" id="casa-deberes" data-titol="Para casa">
+  <p class="kicker">Para casa · no cuenta para la nota</p>
+  <h2>Para estudiar esta semana</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=17" target="_blank">Hoja · págs. 17 a 19</a></div>
+  <h3>Lo mínimo · unos 20 minutos</h3>
+  <ol>
+    <li>Lee la hoja de estudio, <b>págs. 17 a 19</b>, con esta página al lado.</li>
+    <li>Lee también lo que hoy no hemos visto: en la <b>pág. 15</b>, los supuestos de cargo sindical, tareas distintas y actos de salvamento; en la <b>pág. 19</b>, «Otros daños derivados del trabajo» (fatiga, estrés, <i>mobbing</i> y <i>burnout</i>, que se estudian en la unidad 2).</li>
+    <li>Responde aquí debajo las cinco preguntas de «Comprueba que lo sabes». Si no te sale una, busca en la hoja: la respuesta está en la página que se indica.</li>
+  </ol>
+  <div class="jo noproj"><label>Nombre y apellidos <input id="nom" autocomplete="off"></label><label>Grupo <input id="grup" autocomplete="off" size="8"></label></div>
+  <div class="preg"><span class="n">9</span> Define accidente de trabajo y di sus tres elementos. <span class="encls">(págs. 12-13)</span>
+    <textarea class="resp" data-clau="c9"></textarea>
+    </div>
+  <div class="preg"><span class="n">13</span> ¿Qué diferencia hay entre una enfermedad agravada y una intercurrente? <span class="encls">(pág. 15)</span>
+    <textarea class="resp" data-clau="c13"></textarea>
+    </div>
+  <div class="preg"><span class="n">14</span> ¿Qué hace falta para que una enfermedad sea enfermedad profesional? ¿Y si no está en la lista? <span class="encls">(págs. 17-18)</span>
+    <textarea class="resp" data-clau="c14"></textarea>
+    </div>
+  <div class="preg"><span class="n">15</span> ¿En qué grupo del cuadro van la hipoacusia por ruido y la silicosis? <span class="encls">(pág. 18)</span>
+    <textarea class="resp" data-clau="c15"></textarea>
+    </div>
+  <div class="preg"><span class="n">16</span> Accidente, incidente y avería: ¿qué los distingue? <span class="encls">(pág. 17)</span>
+    <textarea class="resp" data-clau="c16"></textarea>
+    </div>
+  <p><button class="boto-gran noproj" id="baixa">He terminado · descargar mis respuestas</button></p>
+  <div class="missatge" id="missatge" hidden></div>
+  <p class="nota">Se guarda solo en este ordenador mientras escribes. No se entrega ni cuenta: descarga tus respuestas y guárdalas para repasar.</p>
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
+</main>
+
+<div class="ctrl"><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
+
+<script>
+(function(){
+  "use strict";
+  var CLAU = "ipo1-u1-sesion4-v1";
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inicio|^Cierre|^Para casa/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? "La clase: " + encerts + " de " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    var ok = v.getAttribute("data-ok");
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    encerts = 0; vots = 0; pinta();
+  }
+
+  /* solucions i respostes que es revelen */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+      if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
+    });
+  });
+
+  /* mode projectar */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    alcada(); encaixa();
+    pos.textContent = (i + 1) + " / " + pant.length;
+    nav.querySelectorAll("a").forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      var seg = nav.querySelectorAll("a");
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(seg, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = pant.findIndex ? pant.findIndex(function(s){ return s.id === h; }) : -1;
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = "✕ Salir";
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = "▶ Proyectar";
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
+  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm("¿Borrar los votos y el marcador para empezar con otro grupo?")) reinicia(); }
+    else if (/^[1-4]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+  document.addEventListener("fullscreenchange", function(){ if (!document.fullscreenElement && document.body.classList.contains("proj")) {} });
+
+  /* respostes de casa: es desen i es baixen */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || "";
+    [nom, grup].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+  var bx = document.getElementById("baixa"), msg = document.getElementById("missatge");
+  if (bx) bx.addEventListener("click", function(){
+    if (!net(nom.value)) { msg.hidden = false; msg.textContent = "Escribe tu nombre y apellidos antes de descargar."; nom.focus(); return; }
+    var d = new Date();
+    var L = ["Para casa · Sesión 4 · Cuando el daño llega poco a poco (IPO I, unidad 1)", "Alumno/a: " + net(nom.value), "Grupo: " + net(grup.value),
+      "Fecha: " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || "(sin respuesta)"); L.push("");
+    });
+    var f = "PARA-CASA-S4-" + net(nom.value).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      msg.hidden = false; msg.innerHTML = "Hecho: se ha descargado <b>" + f + "</b>. Guárdalo para repasar.";
+    } catch (e) { msg.hidden = false; msg.textContent = "Este navegador no ha dejado descargar el fichero."; }
+  });
+
+  if (location.hash === "#proyectar") entra();
+})();
+</script>
+</body>
+</html>
