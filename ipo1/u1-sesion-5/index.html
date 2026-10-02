@@ -161,6 +161,7 @@ body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;ga
   <span class="nom">IPO I · Unidad 1 · Sesión 5<small>El deber de proteger</small></span>
   <nav id="index"></nav>
   <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
+  <button id="baixa2" class="solo-web noproj" title="Descargar mis respuestas de hoy">⬇ Mis respuestas</button>
   <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
 </header>
 
@@ -183,9 +184,11 @@ body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;ga
   <div class="refs">
     <a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=19" target="_blank">Hoja de estudio · págs. 19 a 25</a>
     <span class="ref libro">Libro · págs. 14 a 16 y 22</span>
-    <span class="ref ficha">La hoja de hoy (en papel, por las dos caras)</span>
+    <span class="ref ficha">Tus respuestas, en esta misma página</span>
   </div>
-  <p class="nota noproj">Verde: la hoja de estudio (se abre en la página exacta). Azul: el libro. Amarillo: la hoja que rellenas en clase.</p>
+  <div class="jo noproj"><label>Nombre y apellidos <input id="nom" autocomplete="off"></label><label>Grupo <input id="grup" autocomplete="off" size="8"></label><label>Con quién trabajas <input id="parella" autocomplete="off"></label></div>
+  <p class="nota noproj"><b>Hoy no hay papel:</b> escribes tus respuestas en esta página (se guardan solas en tu ordenador) y, al acabar, las puedes descargar con el botón «Mis respuestas» de arriba. No se entregan ni cuentan.</p>
+  <p class="nota noproj">Verde: la hoja de estudio (se abre en la página exacta). Azul: el libro. Amarillo: lo que escribes en esta página.</p>
   <div class="clau"><b>¿Todavía sin libro o sin correo del centro?</b> No pasa nada: esta página y la hoja están en <b>joanmiquel89.github.io/aula</b>, sin contraseña. Y hoy no cuenta nada para la nota.</div>
 </section>
 
@@ -205,13 +208,14 @@ body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;ga
 <section class="p" id="cisterna" data-titol="2 · La cisterna">
   <p class="kicker">2 · Un caso de Palma · antes de la teoría</p>
   <h2>¿Qué falló en la cisterna?</h2>
-  <div class="refs"><span class="ref ficha">Ficha 3 · cara A de la hoja de hoy</span></div>
+  <div class="refs"><span class="ref ficha">Ficha 3 · pregunta 1</span></div>
   <div class="caso">
     <p>El <b>21 de junio de 2021</b>, una empresa de limpieza envió a un trabajador a desinfectar una <b>cisterna de 8 metros de profundidad</b> en un hotel de Palma. No tenía contrato y no le dieron formación ni instrucciones. Le facilitaron solo botas y casco: ni arnés ni línea de vida. En su lugar, una cuerda atada entre los cinturones de los dos trabajadores y una escalera enrollable sin fijar. El gerente de la empresa se marchó del lugar, aunque su presencia era obligatoria por tratarse de un espacio confinado.</p>
     <p>Perdió el equilibrio, cayó y se hizo daño en el brazo; después volvió a caer de espaldas desde más de 2 metros. Necesitó <b>93 días</b> de tratamiento médico y rehabilitación. El caso llegó a la <b>Audiencia Provincial de las Illes Balears</b>.</p>
   </div>
-  <div class="clau"><b>Solo y sin hablar, tres minutos:</b> en la cara A de la hoja, pregunta <b>1</b>. ¿Qué falló ahí? Haz una lista de <b>todo</b> lo que faltaba.</div>
-  
+  <div class="preg"><span class="n">1</span> <b>Solo y sin hablar, tres minutos:</b> ¿qué falló ahí? Haz una lista de <b>todo</b> lo que faltaba.
+    <textarea class="resp" data-clau="f1"></textarea>
+    </div>
   <div class="voto" data-ok="a"><p class="q">¿Qué decidió la Audiencia Provincial?</p>
     <div class="opc"><button data-v="a">Confirmó la condena del empresario</button><button data-v="b">Condenó al trabajador por no tener cuidado</button><button data-v="c">Archivó el caso: fue un accidente</button></div>
     <p class="porque"><b>Confirmó la condena del empresario</b>: 21 meses de prisión, una multa y una indemnización, por un delito contra los derechos de los trabajadores en concurso con lesiones por imprudencia. Cuando se publicó la noticia (21-04-2026), la sentencia no era firme: cabía recurso ante el Tribunal Supremo. <span class="fuente">Fuente: <a href="https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/Avalada-la-condena-a-un-empresario-de-Palma-por-descuidar-la-seguridad-de-un-trabajador-sin-contrato" target="_blank">Consejo General del Poder Judicial, 21-04-2026</a>.</span> Ahora, el porqué.</p></div>
@@ -239,15 +243,18 @@ body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;ga
 </section>
 
 <section class="p" id="parejas1" data-titol="4 · Ficha 3">
-  <p class="kicker">4 · En parejas · ficha 3, cara A de la hoja · unos catorce minutos</p>
+  <p class="kicker">4 · En parejas · ficha 3 · unos catorce minutos</p>
   <h2>Vuelve a la cisterna</h2>
-  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=20" target="_blank">Hoja · págs. 20-21</a><span class="ref ficha">Cara A de la hoja de hoy · preguntas 2, 3 y 4</span></div>
-  <div class="clau">Si no acabáis, no pasa nada: el papel se recoge tal como esté y lo que falte lo corregimos juntos. Lo importante es el <b>porqué</b>.</div>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=20" target="_blank">Hoja · págs. 20-21</a><span class="ref ficha">Ficha 3 · preguntas 2, 3 y 4</span></div>
+  <div class="clau">Si no acabáis, no pasa nada: lo que falte lo corregimos juntos. Las diez obligaciones están en la pantalla 3 y en la hoja de estudio, pág. 20. Lo importante es el <b>porqué</b>.</div>
   <div class="preg"><span class="n">2</span> ¿El trabajador sufrió un <b>accidente de trabajo</b> o una <b>enfermedad profesional</b>? ¿Por qué?
+    <textarea class="resp" data-clau="f2"></textarea>
     </div>
   <div class="preg"><span class="n">3</span> Mira las diez obligaciones de la empresa. ¿Cuáles <b>tres</b> incumplió en este caso?
+    <textarea class="resp" data-clau="f3"></textarea>
     </div>
   <div class="preg"><span class="n">4</span> El artículo 29 dice que cada trabajador debe cumplir las medidas de prevención. ¿Libera eso a la empresa de su deber? Explícalo con lo que pasó en la cisterna.
+    <textarea class="resp" data-clau="f4"></textarea>
     </div>
   <p class="encls">Las soluciones las vemos en clase.</p>
 </section>
@@ -314,15 +321,18 @@ body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;ga
 </section>
 
 <section class="p" id="parejas2" data-titol="8 · Parejas">
-  <p class="kicker">8 · En parejas · cara B de la hoja · unos doce minutos</p>
+  <p class="kicker">8 · En parejas · tres casos · unos doce minutos</p>
   <h2>¿Qué principios aplica la empresa?</h2>
-  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=22" target="_blank">Hoja · págs. 22-23</a><span class="ref ficha">Cara B de la hoja de hoy</span></div>
-  <div class="clau">Para cada caso, el principio <b>y</b> de dónde sale en el caso. Si no acabáis, no pasa nada: se recoge el papel tal como esté y lo corregimos juntos.</div>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=22" target="_blank">Hoja · págs. 22-23</a><span class="ref ficha">Los nueve principios, en la pantalla 7</span></div>
+  <div class="clau">Para cada caso, el principio <b>y</b> de dónde sale en el caso. Si no acabáis, no pasa nada: lo que falte lo corregimos juntos.</div>
   <div class="preg"><span class="n">1</span> <b>El hospital</b> (actividad final 1.17 del libro). El equipo de limpieza de un hospital está en contacto con fluidos corporales sin protegerse bien. La empresa evalúa los riesgos y después reparte guantes, mascarillas y batas impermeables, organiza cursos de bioseguridad y cambia los productos de limpieza por otros menos peligrosos. ¿Qué principios aplica?
+    <textarea class="resp" data-clau="p1"></textarea>
     </div>
   <div class="preg"><span class="n">2</span> <b>La obra</b> (actividad final 1.18 del libro). En una obra se trabaja en el tejado. No hay barandillas ni redes; a cambio, la empresa da a cada persona un arnés, un casco y una cuerda. ¿Es correcto? Razónalo.
+    <textarea class="resp" data-clau="p2"></textarea>
     </div>
   <div class="preg"><span class="n">3</span> <b>El servicio de soporte</b> <span class="inventat">· ejemplo inventado</span>. Una empresa de soporte informático tiene a su plantilla ocho horas al día delante de los monitores. Los reflejos de las ventanas molestan y algunas sillas no se pueden regular. La empresa pone persianas, cambia las sillas por otras regulables, programa pausas y da un curso sobre cómo colocar la silla y la pantalla. ¿Qué principios aplica?
+    <textarea class="resp" data-clau="p3"></textarea>
     </div>
   <p class="encls">Las soluciones las vemos en clase.</p>
 </section>
@@ -397,7 +407,6 @@ body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;ga
     <li>Lee también lo que hoy no hemos visto: en la <b>pág. 19</b>, de dónde viene la LPRL (la directiva europea y el Convenio 155 de la OIT) y, en la <b>pág. 23</b>, los tres criterios que tienen que cumplir los reales decretos.</li>
     <li>Responde aquí debajo las cinco preguntas de «Comprueba que lo sabes». Si no te sale una, busca en la hoja: la respuesta está en la página que se indica.</li>
   </ol>
-  <div class="jo noproj"><label>Nombre y apellidos <input id="nom" autocomplete="off"></label><label>Grupo <input id="grup" autocomplete="off" size="8"></label></div>
   <div class="preg"><span class="n">17</span> ¿Qué dice el artículo 40.2 de la Constitución y por qué no basta para reclamar ante un juez? ¿Dónde está el derecho exigible? <span class="encls">(pág. 19)</span>
     <textarea class="resp" data-clau="c17"></textarea>
     </div>
@@ -555,11 +564,11 @@ body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;ga
   document.addEventListener("fullscreenchange", function(){ if (!document.fullscreenElement && document.body.classList.contains("proj")) {} });
 
   /* respostes de casa: es desen i es baixen */
-  var nom = document.getElementById("nom"), grup = document.getElementById("grup");
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup"), parella = document.getElementById("parella");
   var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
   if (nom) {
-    nom.value = estat.__nom || ""; grup.value = estat.__grup || "";
-    [nom, grup].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || ""; parella.value = estat.__parella || "";
+    [nom, grup, parella].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
   }
   resp.forEach(function(t){
     t.value = estat[t.dataset.clau] || "";
@@ -568,24 +577,29 @@ body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;ga
   function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
   function dos(x){ return (x < 10 ? "0" : "") + x; }
   var bx = document.getElementById("baixa"), msg = document.getElementById("missatge");
-  if (bx) bx.addEventListener("click", function(){
-    if (!net(nom.value)) { msg.hidden = false; msg.textContent = "Escribe tu nombre y apellidos antes de descargar."; nom.focus(); return; }
+  function baixa(){
+    if (!net(nom.value)) {
+      msg.hidden = false; msg.textContent = "Escribe tu nombre y apellidos antes de descargar.";
+      try { document.getElementById("inicio").scrollIntoView(); nom.focus(); alert("Escribe tu nombre y apellidos en la primera pantalla y vuelve a pulsar el botón."); } catch (e) {}
+      return;
+    }
     var d = new Date();
-    var L = ["Para casa · Sesión 5 · El deber de proteger (IPO I, unidad 1)", "Alumno/a: " + net(nom.value), "Grupo: " + net(grup.value),
+    var L = ["Sesión 5 · El deber de proteger · mis respuestas (IPO I, unidad 1)", "Alumno/a: " + net(nom.value), "Grupo: " + net(grup.value), "Con quién he trabajado: " + (net(parella.value) || "(nadie)"),
       "Fecha: " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
     resp.forEach(function(t){
       var p = t.closest(".preg"), c = p.cloneNode(true);
       c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
       L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || "(sin respuesta)"); L.push("");
     });
-    var f = "PARA-CASA-S5-" + net(nom.value).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    var f = "RESPUESTAS-S5-" + net(nom.value).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
     try {
       var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
       var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
       setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
-      msg.hidden = false; msg.innerHTML = "Hecho: se ha descargado <b>" + f + "</b>. Guárdalo para repasar.";
+      msg.hidden = false; msg.innerHTML = "Hecho: se ha descargado <b>" + f + "</b>. Guárdalo para repasar; no se entrega.";
     } catch (e) { msg.hidden = false; msg.textContent = "Este navegador no ha dejado descargar el fichero."; }
-  });
+  }
+  [bx, document.getElementById("baixa2")].forEach(function(b){ if (b) b.addEventListener("click", baixa); });
 
   if (location.hash === "#proyectar") entra();
 })();
