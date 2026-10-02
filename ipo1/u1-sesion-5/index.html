@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>El deber de proteger · Sesión 5</title>
+<!-- FONT: versió del DOCENT (amb solucions). genera_sessio_05.py en treu la de l'alumnat (sense els blocs
+     marcats D, amb els marcats A). No editis les còpies: edita aquest fitxer. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+  --bold:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+
+/* ---------- barra de dalt ---------- */
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+
+/* ---------- pantalles ---------- */
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+
+/* on ho estudies: el lligam amb els apunts */
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid currentColor;text-decoration:none;white-space:nowrap}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.pres{color:var(--lila);background:var(--lilaclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+
+/* peces */
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px}
+.dos .emp{background:var(--blauclar);border:2px solid var(--blau)}
+.dos .tu{background:var(--verdclar);border:2px solid var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+ol.dosc{columns:2;column-gap:28px;margin:6px 0 10px}ol.dosc li{break-inside:avoid}
+#principios td,#principios th{padding:2px 8px}#principios table{margin:4px 0 8px}#principios .clau{margin:6px 0;padding:8px 14px}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+
+/* votacions */
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.voto.fet.obert .porque{background:var(--mostassaclar)}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+
+/* preguntes i solucions */
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+
+/* ---------- mode projectar ---------- */
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  .dalt nav{display:none}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+
+<header class="dalt">
+  <span class="nom">IPO I · Unidad 1 · Sesión 5<small>El deber de proteger</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
+  <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
+</header>
+
+<main>
+
+<!-- ============================================================ INICI -->
+<section class="p" id="inicio" data-titol="Inicio">
+  <p class="kicker">Sesión 5 · dos horas</p>
+  <h2>El deber de proteger</h2>
+  <p style="font-size:1.15em">Hasta ahora hemos visto qué daños puede causar el trabajo. Hoy, la otra mitad: <b>quién tiene el deber de evitarlos</b>, con qué principios y qué normas lo dicen. Empezamos con un caso de Palma.</p>
+  <div class="cadena">
+    <span class="fet">Condición</span><i>→</i><span class="fet">Factor</span><i>→</i><span class="fet">Riesgo</span><i>→</i><span class="fet">Daño</span><i>→</i><span class="avui">Prevención: quién protege y cómo</span>
+  </div>
+  <div class="plan">
+    <div><b>Hora 1 · el deber de la empresa</b><ol><li>Repaso del viernes: dos preguntas</li><li>La cisterna de Palma</li><li>Las obligaciones de la empresa</li><li>En parejas: ficha 3</li><li>Dos casos rápidos</li></ol></div>
+    <div><b>Hora 2 · cómo y con qué normas</b><ol start="6"><li>Repaso de la hora 1</li><li>Los nueve principios de la acción preventiva</li><li>En parejas: tres casos</li><li>Quién hace las normas y cuáles te tocan</li></ol><p style="margin:8px 0 0"><b>Para salir:</b> tres preguntas en voz alta.</p></div>
+  </div>
+  <h3 class="noproj">Cómo usar esta página</h3>
+  <p class="noproj">En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
+  <div class="refs">
+    <a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=19" target="_blank">Hoja de estudio · págs. 19 a 25</a>
+    <span class="ref libro">Libro · págs. 14 a 16 y 22</span>
+    <span class="ref ficha">La hoja de hoy (en papel, por las dos caras)</span>
+  </div>
+  <p class="nota noproj">Verde: la hoja de estudio (se abre en la página exacta). Azul: el libro. Amarillo: la hoja que rellenas en clase.</p>
+  <div class="clau"><b>¿Todavía sin libro o sin correo del centro?</b> No pasa nada: esta página y la hoja están en <b>joanmiquel89.github.io/aula</b>, sin contraseña. Y hoy no cuenta nada para la nota.</div>
+</section>
+
+<!-- ============================================================ HORA 1 -->
+<div class="hora">Hora 1 · el deber de la empresa</div>
+
+<section class="p" id="repaso" data-titol="1 · Repaso">
+  <p class="kicker">1 · Repaso · lo del viernes, antes de que nadie diga nada</p>
+  <h2>Dos preguntas, en voz baja con tu compañero</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=17" target="_blank">Hoja · págs. 17-18</a></div>
+  <div class="preg"><span class="n">1</span> <b>La lista:</b> ¿qué tres cosas hacen falta para que una enfermedad sea <b>profesional</b>?
+    <button class="revela">Ver la respuesta</button><div class="sol">Una persona que trabaja por cuenta ajena, una <b>actividad</b> que está en el cuadro y un <b>agente</b> que está en el cuadro (anexo 1 del RD 1299/2006). Si están los tres, el libro explica que el vínculo con el trabajo se presume.</div></div>
+  <div class="preg"><span class="n">2</span> <b>Los grupos:</b> la sordera por ruido y la silicosis, ¿de qué grupo del cuadro va cada una?
+    <button class="revela">Ver la respuesta</button><div class="sol">Sordera por ruido (hipoacusia): <b>grupo 2</b>, agentes físicos. Silicosis: <b>grupo 4</b>, inhalación de sustancias. La trampa: la silicosis <b>no</b> es del grupo 1. Antes de mirar si algo «suena» químico, pregúntate qué agente es y cómo hace el daño.</div></div>
+</section>
+
+<section class="p" id="cisterna" data-titol="2 · La cisterna">
+  <p class="kicker">2 · Un caso de Palma · antes de la teoría</p>
+  <h2>¿Qué falló en la cisterna?</h2>
+  <div class="refs"><span class="ref ficha">Ficha 3 · cara A de la hoja de hoy</span></div>
+  <div class="caso">
+    <p>El <b>21 de junio de 2021</b>, una empresa de limpieza envió a un trabajador a desinfectar una <b>cisterna de 8 metros de profundidad</b> en un hotel de Palma. No tenía contrato y no le dieron formación ni instrucciones. Le facilitaron solo botas y casco: ni arnés ni línea de vida. En su lugar, una cuerda atada entre los cinturones de los dos trabajadores y una escalera enrollable sin fijar. El gerente de la empresa se marchó del lugar, aunque su presencia era obligatoria por tratarse de un espacio confinado.</p>
+    <p>Perdió el equilibrio, cayó y se hizo daño en el brazo; después volvió a caer de espaldas desde más de 2 metros. Necesitó <b>93 días</b> de tratamiento médico y rehabilitación. El caso llegó a la <b>Audiencia Provincial de las Illes Balears</b>.</p>
+  </div>
+  <div class="clau"><b>Solo y sin hablar, tres minutos:</b> en la cara A de la hoja, pregunta <b>1</b>. ¿Qué falló ahí? Haz una lista de <b>todo</b> lo que faltaba.</div>
+  
+  <div class="voto" data-ok="a"><p class="q">¿Qué decidió la Audiencia Provincial?</p>
+    <div class="opc"><button data-v="a">Confirmó la condena del empresario</button><button data-v="b">Condenó al trabajador por no tener cuidado</button><button data-v="c">Archivó el caso: fue un accidente</button></div>
+    <p class="porque"><b>Confirmó la condena del empresario</b>: 21 meses de prisión, una multa y una indemnización, por un delito contra los derechos de los trabajadores en concurso con lesiones por imprudencia. Cuando se publicó la noticia (21-04-2026), la sentencia no era firme: cabía recurso ante el Tribunal Supremo. <span class="fuente">Fuente: <a href="https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/Avalada-la-condena-a-un-empresario-de-Palma-por-descuidar-la-seguridad-de-un-trabajador-sin-contrato" target="_blank">Consejo General del Poder Judicial, 21-04-2026</a>.</span> Ahora, el porqué.</p></div>
+</section>
+
+<section class="p" id="deber" data-titol="3 · El deber">
+  <p class="kicker">3 · Teoría · el deber de protección</p>
+  <h2>La empresa tiene el deber de protegerte</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=19" target="_blank">Hoja · págs. 19-21</a><span class="ref libro">Libro · pág. 14 · figura 1.6</span></div>
+  <p>La <b>Ley 31/1995 de Prevención de Riesgos Laborales (LPRL)</b> incorpora al derecho español la directiva marco europea (89/391/CEE). Su pieza central es el <b>artículo 14.1</b>: tienes <b>derecho a una protección eficaz</b> en seguridad y salud, y eso supone un <b>deber de protección del empresario</b>. Es un deber amplio: el empresario tiene que cumplir <b>toda</b> la normativa de prevención, no solo lo que lista la LPRL (art. 14.3).</p>
+  <p><b>Las diez obligaciones concretas de la empresa</b> (figura 1.6):</p>
+  <ol class="dosc">
+    <li>Integrar la prevención en la gestión de la empresa</li>
+    <li>Constituir un sistema de prevención</li>
+    <li>Proporcionar equipos de trabajo y de protección adecuados</li>
+    <li>Consultar a la plantilla y permitir su participación</li>
+    <li>Informar y formar</li>
+    <li>Vigilar la salud</li>
+    <li>Coordinar las actividades con otras empresas</li>
+    <li>Elaborar y conservar la documentación</li>
+    <li>Proteger la maternidad</li>
+    <li>Proteger a los menores</li>
+  </ol>
+  <div class="clau">Y tú también tienes deberes (art. 29): usar bien máquinas y equipos de protección, no desactivar los dispositivos de seguridad, avisar de los riesgos y cooperar. Pero siempre <b>«de conformidad con su formación y las instrucciones del empresario»</b> (art. 29.1-2). Y no por eso la empresa queda libre de su deber: tus deberes <b>complementan</b> los suyos, no los sustituyen (art. 14.4).</div>
+</section>
+
+<section class="p" id="parejas1" data-titol="4 · Ficha 3">
+  <p class="kicker">4 · En parejas · ficha 3, cara A de la hoja · unos catorce minutos</p>
+  <h2>Vuelve a la cisterna</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=20" target="_blank">Hoja · págs. 20-21</a><span class="ref ficha">Cara A de la hoja de hoy · preguntas 2, 3 y 4</span></div>
+  <div class="clau">Si no acabáis, no pasa nada: el papel se recoge tal como esté y lo que falte lo corregimos juntos. Lo importante es el <b>porqué</b>.</div>
+  <div class="preg"><span class="n">2</span> ¿El trabajador sufrió un <b>accidente de trabajo</b> o una <b>enfermedad profesional</b>? ¿Por qué?
+    </div>
+  <div class="preg"><span class="n">3</span> Mira las diez obligaciones de la empresa. ¿Cuáles <b>tres</b> incumplió en este caso?
+    </div>
+  <div class="preg"><span class="n">4</span> El artículo 29 dice que cada trabajador debe cumplir las medidas de prevención. ¿Libera eso a la empresa de su deber? Explícalo con lo que pasó en la cisterna.
+    </div>
+  <p class="encls">Las soluciones las vemos en clase.</p>
+</section>
+
+<section class="p" id="rapidos" data-titol="5 · Dos casos">
+  <p class="kicker">5 · ✂ Dos casos rápidos · ¿qué obligaciones incumple la empresa?</p>
+  <h2>Mismas diez obligaciones, otros dos casos</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=21" target="_blank">Hoja · pág. 21</a><span class="ref libro">Libro · págs. 14 y 22</span></div>
+  <div class="preg"><span class="n">a</span> <b>Andrea y Juanjo</b> (caso práctico 1.9 del libro). Trabajan en una obra. No tienen cascos ni arneses. La empresa no ha evaluado los riesgos, no les ha dado formación en prevención ni les ha explicado qué hacer en caso de emergencia. ¿Qué obligaciones está incumpliendo la empresa?
+    </div>
+  <div class="preg"><span class="n">b</span> <b>La fábrica de productos químicos</b> (actividad final 1.16 del libro). La plantilla no tiene los equipos de protección que necesita, nadie le hace revisiones médicas y nadie le ha explicado qué riesgos tienen los productos que maneja. ¿Qué obligaciones está incumpliendo?
+    </div>
+  <p class="encls">Las soluciones las vemos en clase.</p>
+</section>
+
+<!-- ============================================================ HORA 2 -->
+<div class="hora">Hora 2 · cómo y con qué normas</div>
+
+<section class="p" id="repaso2" data-titol="6 · Repaso">
+  <p class="kicker">6 · Repaso · lo de la primera hora, antes de seguir</p>
+  <h2>Otras dos preguntas, en voz baja</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=20" target="_blank">Hoja · págs. 20-21</a></div>
+  <div class="preg"><span class="n">1</span> <b>El artículo 14.1:</b> ¿qué derecho te da y qué deber crea para la empresa?
+    <button class="revela">Ver la respuesta</button><div class="sol">Te da derecho a una <b>protección eficaz</b> en seguridad y salud en el trabajo, y eso supone el <b>deber de protección del empresario</b> frente a los riesgos laborales. Es la pieza central de la LPRL.</div></div>
+  <div class="preg"><span class="n">2</span> <b>Tus deberes:</b> una empresa te manda trabajar sin darte formación ni instrucciones. ¿Qué dice el artículo 29 sobre tus deberes? ¿Libera eso a la empresa?
+    <button class="revela">Ver la respuesta</button><div class="sol">Tus deberes se cumplen <b>«de conformidad con su formación y las instrucciones del empresario»</b> (art. 29.1-2): dependen de lo que la empresa te dé. Y, hagas lo que hagas, <b>no la eximen</b> de su deber de protección (art. 14.4).</div></div>
+</section>
+
+<section class="p" id="rack" data-titol="7 · Los principios">
+  <p class="kicker">7 · Antes de la teoría · ¿basta con repartir cascos?</p>
+  <h2>Un rack mal anclado</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=21" target="_blank">Hoja · págs. 21-22</a><span class="ref libro">Libro · pág. 15 · tabla 1.11</span></div>
+  <div class="voto" data-ok="b"><p class="q">En un almacén de equipos informáticos, un rack de más de dos metros, mal anclado, se inclina y casi aplasta a un técnico, que se aparta a tiempo. Para que no vuelva a pasar, la empresa reparte cascos a toda la plantilla y no toca el rack. ¿Basta? <span class="inventat">· ejemplo inventado</span></p>
+    <div class="opc"><button data-v="a">Sí: con casco, el golpe ya no es grave</button><button data-v="b">No: primero hay que anclar el rack; el casco es el último recurso</button><button data-v="c">Sí, pero solo para quien trabaje junto al rack</button></div>
+    <p class="porque"><b>No basta.</b> El riesgo se puede <b>evitar</b> (anclando el rack), y eso protege a todos a la vez. El equipo individual solo se usa cuando el riesgo no se puede evitar o limitar lo suficiente con protección colectiva o con medidas de organización del trabajo (art. 17.2 LPRL). Es el principio de la acción preventiva que más se pregunta: ahora, los nueve.</p></div>
+</section>
+
+<section class="p" id="principios" data-titol="Los nueve principios">
+  <p class="kicker">7 · Teoría · artículo 15.1 de la LPRL · los principios generales de la prevención</p>
+  <h2>Los nueve principios de la acción preventiva</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=21" target="_blank">Hoja · págs. 21-22</a><span class="ref libro">Libro · pág. 15 · tabla 1.11</span></div>
+  <table>
+    <tr><th style="width:5%">#</th><th style="width:36%">Principio</th><th>Qué quiere decir</th></tr>
+    <tr><td>1</td><td><b>Evitar</b> los riesgos</td><td>Intentar eliminarlos todos</td></tr>
+    <tr><td>2</td><td><b>Evaluar</b> los que no se puedan evitar</td><td>Saber qué magnitud tienen</td></tr>
+    <tr><td>3</td><td><b>Combatirlos en su origen</b></td><td>Actuar primero sobre la fuente del riesgo</td></tr>
+    <tr><td>4</td><td><b>Adaptar el trabajo a la persona</b></td><td>Al diseñar los puestos y elegir equipos y métodos</td></tr>
+    <tr><td>5</td><td>Tener en cuenta la <b>evolución de la técnica</b></td><td>Usar las medidas que más protejan en cada momento</td></tr>
+    <tr><td>6</td><td><b>Sustituir</b> lo peligroso</td><td>Cambiarlo por lo que entrañe poco o ningún peligro</td></tr>
+    <tr><td>7</td><td><b>Planificar</b> la prevención</td><td>Buscar un conjunto coherente: técnica, organización, condiciones de trabajo, relaciones sociales y factores ambientales</td></tr>
+    <tr><td>8</td><td><b>Anteponer la protección colectiva</b> a la individual</td><td>Lo que protege a todos a la vez va primero</td></tr>
+    <tr><td>9</td><td>Dar las <b>debidas instrucciones</b></td><td>Unido a informar y formar</td></tr>
+  </table>
+  <div class="clau">El <b>8</b> es una prioridad expresa de la ley (art. 15.1.h): en una obra sin barandillas ni redes, repartir arneses a todo el mundo no basta. Primero lo colectivo; el equipo individual es el <b>último recurso</b>.</div>
+</section>
+
+<section class="p" id="modelo" data-titol="Un ejemplo resuelto">
+  <p class="kicker">7 · Un ejemplo resuelto · así se contesta</p>
+  <h2>El aire de la oficina</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=22" target="_blank">Hoja · pág. 22</a><span class="ref libro">Libro · pág. 15 · caso práctico resuelto 1.4</span></div>
+  <div class="caso"><p>Para mejorar el aire de una oficina, una empresa instala un sistema de climatización con filtros, regula la temperatura y la humedad y programa revisiones periódicas. ¿Qué principios aplica?</p></div>
+  <button class="revela">Ver la solución</button><div class="sol"><b>Combatir los riesgos en su origen</b> (la climatización con filtros), <b>adaptar el trabajo a la persona</b> (la temperatura y la humedad) y <b>planificar la prevención</b> (las revisiones programadas).</div>
+  <div class="clau">Fijaos en cómo se contesta: <b>principio + de dónde sale en el caso</b>. Eso es lo que vais a hacer ahora, en parejas.</div>
+</section>
+
+<section class="p" id="parejas2" data-titol="8 · Parejas">
+  <p class="kicker">8 · En parejas · cara B de la hoja · unos doce minutos</p>
+  <h2>¿Qué principios aplica la empresa?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=22" target="_blank">Hoja · págs. 22-23</a><span class="ref ficha">Cara B de la hoja de hoy</span></div>
+  <div class="clau">Para cada caso, el principio <b>y</b> de dónde sale en el caso. Si no acabáis, no pasa nada: se recoge el papel tal como esté y lo corregimos juntos.</div>
+  <div class="preg"><span class="n">1</span> <b>El hospital</b> (actividad final 1.17 del libro). El equipo de limpieza de un hospital está en contacto con fluidos corporales sin protegerse bien. La empresa evalúa los riesgos y después reparte guantes, mascarillas y batas impermeables, organiza cursos de bioseguridad y cambia los productos de limpieza por otros menos peligrosos. ¿Qué principios aplica?
+    </div>
+  <div class="preg"><span class="n">2</span> <b>La obra</b> (actividad final 1.18 del libro). En una obra se trabaja en el tejado. No hay barandillas ni redes; a cambio, la empresa da a cada persona un arnés, un casco y una cuerda. ¿Es correcto? Razónalo.
+    </div>
+  <div class="preg"><span class="n">3</span> <b>El servicio de soporte</b> <span class="inventat">· ejemplo inventado</span>. Una empresa de soporte informático tiene a su plantilla ocho horas al día delante de los monitores. Los reflejos de las ventanas molestan y algunas sillas no se pueden regular. La empresa pone persianas, cambia las sillas por otras regulables, programa pausas y da un curso sobre cómo colocar la silla y la pantalla. ¿Qué principios aplica?
+    </div>
+  <p class="encls">Las soluciones las vemos en clase.</p>
+</section>
+
+<section class="p" id="govern" data-titol="9 · Las normas">
+  <p class="kicker">9 · ¿Quién hace las normas de prevención?</p>
+  <h2>La Constitución, la ley y el Govern</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=19" target="_blank">Hoja · págs. 19 y 23</a><span class="ref libro">Libro · págs. 14-15</span></div>
+  <div class="voto" data-ok="b"><p class="q">¿Puede el Parlament de les Illes Balears aprobar su propia ley de prevención de riesgos laborales?</p>
+    <div class="opc"><button data-v="a">Sí: la prevención es competencia de cada comunidad</button><button data-v="b">No: la legislación laboral es del Estado</button><button data-v="c">Solo si es más exigente que la del Estado</button></div>
+    <p class="porque"><b>No.</b> La legislación laboral es competencia <b>exclusiva del Estado</b> (art. 149.1.7.ª de la Constitución, «sin perjuicio de su ejecución por los órganos de las Comunidades Autónomas»). La comunidad puede <b>ejecutar</b> las normas estatales y crear organismos propios, pero no legislar la prevención, ni siquiera para mejorarla: las mejoras sobre el mínimo se pactan en los convenios colectivos (art. 2.2 LPRL).</p></div>
+  <p>Y de dónde sale tu derecho: el <b>artículo 40.2 de la Constitución</b> manda a los poderes públicos velar por la seguridad e higiene en el trabajo, pero es un <b>principio rector</b>: no te da un derecho que puedas reclamar directamente ante un juez. El derecho exigible lo crea la ley que cumple ese mandato: el <b>art. 14.1 de la LPRL</b>.</p>
+</section>
+
+<section class="p" id="reales" data-titol="Los reales decretos">
+  <p class="kicker">9 · La ley es el marco, los reales decretos son el detalle</p>
+  <h2>¿Cuál es tu real decreto?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=23" target="_blank">Hoja · págs. 23-24 · tabla 1.12</a><span class="ref libro">Libro · págs. 15-16</span></div>
+  <p>La LPRL es el marco; el detalle de cada materia está en los <b>reales decretos</b> que la desarrollan (la hoja lista veinte). Estos cuatro son los de tu oficio. ¿Cuál se aplica en cada caso?</p>
+  <div class="grup">
+    <div class="voto" data-ok="c"><p class="q">Pasas ocho horas al día delante de monitores en el servicio de soporte de una empresa <span class="inventat">· inventado</span></p>
+      <div class="opc"><button data-v="a">RD 486/1997 · lugares de trabajo</button><button data-v="b">RD 487/1997 · cargas</button><button data-v="c">RD 488/1997 · pantallas</button><button data-v="d">RD 614/2001 · riesgo eléctrico</button></div>
+      <p class="porque"><b>RD 488/1997, pantallas de visualización:</b> es, literalmente, tu puesto de trabajo.</p></div>
+    <div class="voto" data-ok="d"><p class="q">Conectas fuentes de alimentación y trabajas con cuadros y cables de corriente en una sala de servidores <span class="inventat">· inventado</span></p>
+      <div class="opc"><button data-v="a">RD 486/1997 · lugares de trabajo</button><button data-v="b">RD 487/1997 · cargas</button><button data-v="c">RD 488/1997 · pantallas</button><button data-v="d">RD 614/2001 · riesgo eléctrico</button></div>
+      <p class="porque"><b>RD 614/2001, riesgo eléctrico:</b> la hoja lo señala para montar equipos y redes, sobre todo en SMX.</p></div>
+    <div class="voto" data-ok="a"><p class="q">En la oficina hace mucho calor, hay poca luz y los pasillos son tan estrechos que no se puede pasar con un carro <span class="inventat">· inventado</span></p>
+      <div class="opc"><button data-v="a">RD 486/1997 · lugares de trabajo</button><button data-v="b">RD 487/1997 · cargas</button><button data-v="c">RD 488/1997 · pantallas</button><button data-v="d">RD 614/2001 · riesgo eléctrico</button></div>
+      <p class="porque"><b>RD 486/1997, lugares de trabajo:</b> espacio, iluminación y temperatura de la oficina.</p></div>
+    <div class="voto" data-ok="b"><p class="q">Cada día levantas y mueves a mano cajas pesadas de equipos <span class="inventat">· inventado</span></p>
+      <div class="opc"><button data-v="a">RD 486/1997 · lugares de trabajo</button><button data-v="b">RD 487/1997 · cargas</button><button data-v="c">RD 488/1997 · pantallas</button><button data-v="d">RD 614/2001 · riesgo eléctrico</button></div>
+      <p class="porque"><b>RD 487/1997, manipulación manual de cargas.</b></p></div>
+  </div>
+  <p class="nota">El cuadro de enfermedades profesionales (RD 1299/2006), el del viernes, no está en esta lista: es un reglamento de la Seguridad Social, no de la LPRL.</p>
+</section>
+
+<section class="p" id="convenios" data-titol="Los convenios">
+  <p class="kicker">9 · ✂ Un mínimo, no un máximo</p>
+  <h2>Los convenios colectivos pueden mejorar la ley</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=25" target="_blank">Hoja · pág. 25</a><span class="ref libro">Libro · pág. 16</span></div>
+  <p>Las disposiciones laborales de la LPRL y de sus reglamentos son un <b>mínimo</b> (art. 2.2 LPRL): los convenios colectivos las pueden <b>mejorar y desarrollar</b>. Por ejemplo, pueden regular cómo se designa a los delegados de prevención, crear órganos específicos que asuman sus competencias o acordar servicios de prevención mancomunados (compartidos entre varias empresas).</p>
+  <div class="cadena">
+    <span>Constitución</span><i>→</i><span>LPRL</span><i>→</i><span>Reales decretos</span><i>→</i><span>Convenio colectivo</span>
+  </div>
+  <p class="nota">También el contrato de trabajo puede incluir pactos individuales sobre condiciones de trabajo importantes para la prevención.</p>
+</section>
+
+<!-- ============================================================ TANCAMENT -->
+<section class="p" id="cierre" data-titol="Cierre">
+  <p class="kicker">Cierre · tres preguntas para salir</p>
+  <h2>Quién protege, en qué orden y con qué normas</h2>
+  <div class="cadena">
+    <span>El deber de la empresa (art. 14.1)</span><i>→</i><span>Los nueve principios (art. 15.1)</span><i>→</i><span>Las normas: LPRL, reales decretos, convenios</span>
+  </div>
+  <p>Si sabes responderlas en voz alta, has entendido la sesión:</p>
+  <ol>
+    <li>En la cisterna, el artículo 29 obliga al trabajador a cumplir las medidas. ¿Por qué eso no libera a la empresa de su deber?</li>
+    <li>¿Qué va primero, la protección colectiva o la individual? Pon un ejemplo.</li>
+    <li>¿Puede el Parlament balear hacer su propia ley de prevención? ¿De quién es esa competencia?</li>
+  </ol>
+  <p class="nota">Próxima sesión (viernes 9): <b>quién vigila que se cumpla</b>, es decir, los organismos públicos (la Inspección de Trabajo, el INSST y los europeos), y cerramos la unidad. La evidencia A (esa sí cuenta) la haremos más adelante, en clase, cuando todos tengáis el correo del centro. Os avisaré antes.</p>
+</section>
+
+<!-- ============================================================ PER A CASA -->
+<section class="p" id="casa-deberes" data-titol="Para casa">
+  <p class="kicker">Para casa · no cuenta para la nota</p>
+  <h2>Para estudiar esta semana</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=19" target="_blank">Hoja · págs. 19 a 25</a></div>
+  <h3>Lo mínimo · unos 20 minutos</h3>
+  <ol>
+    <li>Lee la hoja de estudio, <b>págs. 19 a 25</b>, con esta página al lado.</li>
+    <li>Lee también lo que hoy no hemos visto: en la <b>pág. 19</b>, de dónde viene la LPRL (la directiva europea y el Convenio 155 de la OIT) y, en la <b>pág. 23</b>, los tres criterios que tienen que cumplir los reales decretos.</li>
+    <li>Responde aquí debajo las cinco preguntas de «Comprueba que lo sabes». Si no te sale una, busca en la hoja: la respuesta está en la página que se indica.</li>
+  </ol>
+  <div class="jo noproj"><label>Nombre y apellidos <input id="nom" autocomplete="off"></label><label>Grupo <input id="grup" autocomplete="off" size="8"></label></div>
+  <div class="preg"><span class="n">17</span> ¿Qué dice el artículo 40.2 de la Constitución y por qué no basta para reclamar ante un juez? ¿Dónde está el derecho exigible? <span class="encls">(pág. 19)</span>
+    <textarea class="resp" data-clau="c17"></textarea>
+    </div>
+  <div class="preg"><span class="n">18</span> Cita los tres primeros principios que enumera el art. 15.1 de la LPRL. <span class="encls">(pág. 22)</span>
+    <textarea class="resp" data-clau="c18"></textarea>
+    </div>
+  <div class="preg"><span class="n">19</span> En una obra sin barandillas, la empresa reparte arneses a todo el mundo. ¿Es correcto? ¿Qué principio incumple? <span class="encls">(pág. 22)</span>
+    <textarea class="resp" data-clau="c19"></textarea>
+    </div>
+  <div class="preg"><span class="n">20</span> ¿Puede una comunidad autónoma aprobar su propia ley de prevención? <span class="encls">(pág. 23)</span>
+    <textarea class="resp" data-clau="c20"></textarea>
+    </div>
+  <div class="preg"><span class="n">21</span> ¿Qué tres criterios tienen que cumplir los reglamentos que desarrollan la LPRL? <span class="encls">(pág. 23)</span>
+    <textarea class="resp" data-clau="c21"></textarea>
+    </div>
+  <p><button class="boto-gran noproj" id="baixa">He terminado · descargar mis respuestas</button></p>
+  <div class="missatge" id="missatge" hidden></div>
+  <p class="nota">Se guarda solo en este ordenador mientras escribes. No se entrega ni cuenta: descarga tus respuestas y guárdalas para repasar.</p>
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
+</main>
+
+<div class="ctrl"><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
+
+<script>
+(function(){
+  "use strict";
+  var CLAU = "ipo1-u1-sesion5-v1";
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inicio|^Cierre|^Para casa/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? "La clase: " + encerts + " de " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    var ok = v.getAttribute("data-ok");
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    encerts = 0; vots = 0; pinta();
+  }
+
+  /* solucions i respostes que es revelen */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+      if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
+    });
+  });
+
+  /* mode projectar */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    alcada(); encaixa();
+    pos.textContent = (i + 1) + " / " + pant.length;
+    nav.querySelectorAll("a").forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      var seg = nav.querySelectorAll("a");
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(seg, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = pant.findIndex ? pant.findIndex(function(s){ return s.id === h; }) : -1;
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = "✕ Salir";
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = "▶ Proyectar";
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
+  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm("¿Borrar los votos y el marcador para empezar con otro grupo?")) reinicia(); }
+    else if (/^[1-4]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+  document.addEventListener("fullscreenchange", function(){ if (!document.fullscreenElement && document.body.classList.contains("proj")) {} });
+
+  /* respostes de casa: es desen i es baixen */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || "";
+    [nom, grup].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+  var bx = document.getElementById("baixa"), msg = document.getElementById("missatge");
+  if (bx) bx.addEventListener("click", function(){
+    if (!net(nom.value)) { msg.hidden = false; msg.textContent = "Escribe tu nombre y apellidos antes de descargar."; nom.focus(); return; }
+    var d = new Date();
+    var L = ["Para casa · Sesión 5 · El deber de proteger (IPO I, unidad 1)", "Alumno/a: " + net(nom.value), "Grupo: " + net(grup.value),
+      "Fecha: " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || "(sin respuesta)"); L.push("");
+    });
+    var f = "PARA-CASA-S5-" + net(nom.value).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      msg.hidden = false; msg.innerHTML = "Hecho: se ha descargado <b>" + f + "</b>. Guárdalo para repasar.";
+    } catch (e) { msg.hidden = false; msg.textContent = "Este navegador no ha dejado descargar el fichero."; }
+  });
+
+  if (location.hash === "#proyectar") entra();
+})();
+</script>
+</body>
+</html>
