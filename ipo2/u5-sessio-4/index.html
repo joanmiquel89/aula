@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Tancar la hackató i el 5.2 · Sessió 4</title>
+<!-- Generat per genera_web_sessions_04_05.py (motor: sessió 5 d'IPO I). No l'editis a mà. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+  --bold:"Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+
+/* ---------- barra de dalt ---------- */
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+
+/* ---------- pantalles ---------- */
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+
+/* on ho estudies: el lligam amb els apunts */
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid currentColor;text-decoration:none;white-space:nowrap}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.pres{color:var(--lila);background:var(--lilaclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+
+/* peces */
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px}
+.dos .emp{background:var(--blauclar);border:2px solid var(--blau)}
+.dos .tu{background:var(--verdclar);border:2px solid var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+ol.dosc{columns:2;column-gap:28px;margin:6px 0 10px}ol.dosc li{break-inside:avoid}
+#principios td,#principios th{padding:2px 8px}#principios table{margin:4px 0 8px}#principios .clau{margin:6px 0;padding:8px 14px}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+
+/* votacions */
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.voto.fet.obert .porque{background:var(--mostassaclar)}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+
+/* preguntes i solucions */
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+
+/* ---------- mode projectar ---------- */
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+
+/* ronda rápida i rellotge de parelles (05-10) */
+.cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
+.compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
+.compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
+.compte .barra{flex:1;height:14px;border-radius:99px;background:#e6dccb;overflow:hidden}
+.compte .barra i{display:block;height:100%;width:100%;background:var(--vermell);transform-origin:left}
+.compte.zero .xifra{color:var(--verd)}
+body.proj .compte{display:flex}
+body.proj .cas-flash{font-size:1.55em}
+body.proj .flash .sol{font-size:1.1em}
+.rellotge{display:none;font-weight:800;font-variant-numeric:tabular-nums}
+body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta);border-radius:8px;padding:6px 12px;font-size:20px}
+.rellotge.fi{background:var(--vermell)!important;color:#fff!important}
+
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  .dalt nav{display:none}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+<header class="dalt">
+  <span class="nom">IPO II · Unitat 5 · Sessió 4<small>Tancar la hackató i el 5.2</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Encerts de la classe a les votacions"></span>
+  <button id="bproj" title="Pantalla completa per projectar (tecla P)">▶ Projectar</button>
+</header>
+<main>
+
+<section class="p" id="inici" data-titol="Inici">
+  <p class="kicker">Sessió 4 · dilluns 5 d'octubre</p>
+  <h2>Tancar la hackató i el 5.2</h2>
+  <p style="font-size:1.15em">Dijous ho vau fer. <b>Avui li posem nom</b>, i fem el pas següent: com la tecnologia canvia les empreses.</p>
+  <div class="cadena"><span class="fet">Emprendre i intraprendre</span><i>→</i><span class="fet">La hackató</span><i>→</i><span class="avui">Lean, Scrum i pensament de disseny</span><i>→</i><span class="avui">5.2 · Tecnologia i empreses</span><i>→</i><span>5.3 · Sostenibilitat</span></div>
+  <div class="plan"><div><b>Avui</b><ol><li>Acabeu el full d'equip</li><li>Això que vau fer té nom</li><li>Fitxa A2, a l'ordinador</li></ol></div><div><b>&nbsp;</b><ol start="4"><li>Lean i Scrum, amb els dits</li><li>La tecnologia canvia les empreses</li><li>El vostre Canvas, tres caselles</li></ol></div></div>
+  <h3 class="noproj">Com fer servir aquesta pàgina</h3>
+  <p class="noproj">A classe la projectem. A casa et serveix per estudiar: cada bloc et diu <b>on és al full d'estudi</b> (el botó verd l'obre a la pàgina exacta).</p>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=6" target="_blank">Full d'estudi · pàg. 6 a 15</a></div>
+  <div class="clau"><b>Prova del RA3: dijous 15 d'octubre.</b> Apartats 5.1, 5.2 i 5.3 del full d'estudi (pàgines 3 a 22).</div>
+</section>
+
+<section class="p" id="record" data-titol="Record">
+  <p class="kicker">Una pregunta · abans de res</p>
+  <h2>Per què vau ensenyar el dibuix a l'altre equip sense explicar-lo?</h2>
+  <div class="preg"><span class="n">1</span> Pensa-ho deu segons. <button class="revela">Veure la resposta</button><div class="sol"><b>Per veure si s'entén sol.</b> És <b>validar</b>: provar la idea amb algú abans de gastar-hi temps o doblers.</div></div>
+</section>
+
+<section class="p" id="full" data-titol="1 · Full d'equip" data-min="5">
+  <p class="kicker">1 · En equip · 5 minuts</p>
+  <h2>Acabeu el full d'equip</h2>
+  <ul><li><b>La idea triada i per què.</b></li><li><b>Proveu-la:</b> una cosa que funciona i una que milloraríeu.</li><li>El portaveu el lliura.</li></ul>
+  <p class="nota noproj">Tecla T: rellotge de 5 minuts.</p>
+</section>
+
+<section class="p" id="te-nom" data-titol="2 · Té nom">
+  <p class="kicker">2 · Això que vau fer té nom</p>
+  <h2>Pensament de disseny</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=8" target="_blank">Full d'estudi · pàg. 8 i 9</a></div>
+  <div class="voto" data-ok="c"><p class="q">Ensenyar el dibuix a l'altre equip, quina etapa és?</p><div class="opc"><button data-v="a">Empatitzar</button><button data-v="b">Prototipar</button><button data-v="c">Validar</button></div><p class="porque"><b>Validar</b>: escoltar l'usuari i ajustar. El dibuix era el <b>prototip</b>.</p></div>
+  <button class="revela">Veure les cinc etapes</button><div class="sol"><table><tr><th>El que vau fer</th><th>Com es diu</th></tr>
+  <tr><td>Preguntar abans d'inventar</td><td><b>1 · Empatitzar</b></td></tr>
+  <tr><td>El problema en una frase</td><td><b>2 · Definir</b></td></tr>
+  <tr><td>Vuit idees sense jutjar-ne cap</td><td><b>3 · Idear</b></td></tr>
+  <tr><td>El dibuix</td><td><b>4 · Prototipar</b></td></tr>
+  <tr><td>Ensenyar-lo a l'altre equip</td><td><b>5 · Validar</b></td></tr></table>
+  Treure idees sense jutjar és pensament <b>divergent</b>. Votar i triar-ne una, <b>convergent</b>.</div>
+</section>
+
+<section class="p" id="fitxa" data-titol="3 · Fitxa A2" data-min="12">
+  <p class="kicker">3 · Compta · individual · a l'ordinador</p>
+  <h2>Fitxa A2</h2>
+  <ul><li>Classroom › <b>Activitat 2</b> · obre el fitxer adjunt.</li><li>Tres preguntes, <b>només teves</b>.</li><li>En acabar, «He acabat», i lliura el fitxer a la tasca.</li><li><b>Si tens l'A1 pendent:</b> avui fas l'A1, i la fitxa A2 dijous a primera hora.</li></ul>
+  <p class="nota noproj">Tecla T: rellotge de 12 minuts.</p>
+</section>
+
+<section class="p" id="push" data-titol="4 · Lean">
+  <p class="kicker">4 · Amb els dits · ☝ un dit = abans, per si de cas · ✌ dos dits = quan algú ho demana</p>
+  <h2>Abans o quan t'ho demanen?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=6" target="_blank">Full d’estudi · pàg. 6</a></div>
+  <div class="grup">
+  <div class="voto" data-ok="b"><p class="q">1. El bar que fa el cafè quan el demanes.</p><div class="opc"><button data-v="a">☝ Abans (push)</button><button data-v="b">✌ Quan ho demanen (pull)</button></div><p class="porque"><b>Pull.</b> Demanda real: no sobra res.</p></div>
+  <div class="voto" data-ok="a"><p class="q">2. La pastisseria que fa cent ensaïmades a les sis del matí.</p><div class="opc"><button data-v="a">☝ Abans (push)</button><button data-v="b">✌ Quan ho demanen (pull)</button></div><p class="porque"><b>Push.</b> Per previsió; si en sobren, es perden.</p></div>
+  <div class="voto" data-ok="b"><p class="q">3. Dell, als anys noranta, muntava cada ordinador quan el client l'havia encarregat.</p><div class="opc"><button data-v="a">☝ Abans (push)</button><button data-v="b">✌ Quan ho demanen (pull)</button></div><p class="porque"><b>Pull.</b> Sense magatzem ple, i amb les peces que el client triava.</p></div>
+  <div class="voto" data-ok="a"><p class="q">4. Nintendo: més de 3,5 milions de Switch 2 venudes en quatre dies (juny de 2025).</p><div class="opc"><button data-v="a">☝ Abans (push)</button><button data-v="b">✌ Quan ho demanen (pull)</button></div><p class="porque"><b>Push.</b> Per vendre-les el primer dia, les havia de tenir fetes abans.</p></div>
+  </div>
+</section>
+
+<section class="p" id="lean" data-titol="Lean">
+  <p class="kicker">4 · La del milió</p>
+  <div class="voto" data-ok="b"><p class="q">Quina de les dues maneres malgasta menys?</p><div class="opc"><button data-v="a">Push</button><button data-v="b">Pull</button></div><p class="porque"><b>El pull.</b> Per això el tria <b>Lean</b>.</p></div>
+  <div class="clau"><b>Lean</b> vol dir «magre». Neix a <b>Toyota</b>: crear valor per al client traient el malbaratament. El push no és dolent: és el normal quan saps que hi haurà cua.</div>
+</section>
+
+<section class="p" id="scrum" data-titol="Scrum">
+  <p class="kicker">4 · Sou quatre i voleu fer un joc per a mòbil</p>
+  <h2>Pla A o pla B?</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=7" target="_blank">Full d’estudi · pàg. 7</a></div>
+  <div class="dos"><div class="emp"><h3>Pla A</h3>Ho planifiqueu tot el primer dia, i ningú el prova fins al final.</div><div class="tu"><h3>Pla B</h3>Cada dues setmanes, una versió que ja es pot jugar. La proven jugadors de debò, i cada matí us expliqueu en cinc minuts què fareu.</div></div>
+  <div class="voto" data-ok="b"><p class="q">Quin pla va fer Minecraft durant dos anys i mig?</p><div class="opc"><button data-v="a">Pla A</button><button data-v="b">Pla B</button></div><p class="porque"><b>El pla B.</b> Primera versió jugable el 17-05-2009, la 1.0 el 18-11-2011: dos anys i mig de versions que la gent ja jugava. No deia que fes Scrum, però funcionava com el pla B.</p></div>
+  <div class="clau">El pla B és <b>Scrum</b>: <b>esprints</b> (cicles curts que acaben amb una versió que funciona), una reunió curta cada dia i tres pilars: <b>transparència, inspecció i adaptació</b>.</div>
+</section>
+
+<section class="p" id="tecnologia" data-titol="5 · El 5.2">
+  <p class="kicker">5 · Nou</p>
+  <h2>La tecnologia canvia les empreses</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=11" target="_blank">Full d'estudi · pàg. 11 i 12</a></div>
+  <p><b>Modernitzar el sector productiu:</b> actualitzar processos, estructures i models de negoci amb digitalització. Ho paguen els fons europeus <b>Next Generation EU</b>.</p>
+  <div class="tres"><div><b>Turisme</b><span>el sector que més ocupació genera</span></div><div><b>Indústria</b><span>tecnologies avançades i formació</span></div><div><b>Pimes</b><span>el 99,8 % de les empreses i el 66 % de l'ocupació</span></div></div>
+  <div class="voto" data-ok="c"><p class="q">La informàtica, en quin sector és?</p><div class="opc"><button data-v="a">Secundari</button><button data-v="b">Terciari</button><button data-v="c">Quaternari</button></div><p class="porque"><b>Quaternari</b>: informació i tecnologia. Abans s'incloïa dins el terciari.</p></div>
+</section>
+
+<section class="p" id="startup" data-titol="Start-up">
+  <p class="kicker">5 · Start-up o empresa nova?</p>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=13" target="_blank">Full d'estudi · pàg. 13 a 15</a></div>
+  <div class="voto" data-ok="b"><p class="q">Un bar que obre al poble, és una start-up?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div><p class="porque"><b>No.</b> Una start-up crea un producte o servei <b>nou</b> en <b>incertesa extrema</b> (Eric Ries). Un bar que obre no és ni una cosa ni l'altra.</p></div>
+  <p><b>Innovació</b> no és el mateix que tecnologia: es pot innovar sense tecnologia nova, amb una nova manera d'organitzar-se.</p>
+  <div class="clau"><b>Lean Startup: crear, mesurar, aprendre.</b> Fas una versió mínima, la prova gent real i decideixes si continues o canvies. <b>És el que vau fer dijous.</b></div>
+  <p><b>Canvas</b> (Osterwalder): nou blocs per dibuixar un model de negoci.</p>
+</section>
+
+<section class="p" id="canvas" data-titol="6 · Canvas" data-min="7">
+  <p class="kicker">6 · Per equips · en un full en blanc</p>
+  <h2>El vostre Canvas, tres caselles</h2>
+  <p>La idea de la vostra botiga:</p>
+  <div class="tres"><div><b>Segments de clients</b><span>A qui va?</span></div><div><b>Proposta de valor</b><span>Què li resol?</span></div><div><b>Canals</b><span>Per on li arriba?</span></div></div>
+  <div class="preg"><span class="n">1</span> Un exemple, si us encalleu. <button class="revela">Veure un exemple</button><div class="sol"><span class='inventat'>exemple inventat</span><br><b>Segments:</b> joves de 16 a 20 anys del poble · <b>proposta de valor:</b> un mòbil de segona mà revisat i amb garantia · <b>canals:</b> Instagram i el taulell de la botiga.</div></div>
+</section>
+
+<section class="p" id="tancament" data-titol="Tancament">
+  <p class="kicker">Per acabar</p>
+  <h2>Dijous: una societat més sostenible</h2>
+  <div class="clau"><b>Prova del RA3: dijous 15 d'octubre.</b> Apartats 5.1, 5.2 i 5.3 del full d'estudi, pàgines 3 a 22. Prepara-la amb els «Comprova que ho saps» 1-16.</div>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=3" target="_blank">Full d'estudi · obre'l</a></div>
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / desar en PDF</button></div>
+</main>
+<div class="ctrl"><span class="rellotge" id="rellotge" title="Rellotge (tecla T)"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Següent (→ o espai)">→</button><button id="surt" title="Surt (Esc)">✕</button></div>
+<script>
+(function(){
+  "use strict";
+  var CLAU = "ipo2-u5-sessio4";
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inici|^Tancament/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? "La classe: " + encerts + " de " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    var ok = v.getAttribute("data-ok");
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    encerts = 0; vots = 0; pinta();
+  }
+
+  /* solucions i respostes que es revelen */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+      if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
+    });
+  });
+
+
+  /* ronda rápida: compte enrere de 15 s en entrar a la targeta (tecla T el torna a engegar) */
+  var tCompte = null;
+  function compte(s){
+    clearInterval(tCompte);
+    var c = s && s.querySelector(".compte"); if (!c) return;
+    var tot = +c.getAttribute("data-seg") || 15, ini = Date.now(), x = c.querySelector(".xifra"), b = c.querySelector(".barra i");
+    c.classList.remove("zero");
+    function pas(){
+      var q = Math.max(0, tot - (Date.now() - ini) / 1000);
+      x.textContent = q > 0 ? Math.ceil(q) : "Dits!";
+      b.style.transform = "scaleX(" + (q / tot).toFixed(3) + ")";
+      if (q <= 0) { clearInterval(tCompte); c.classList.add("zero"); }
+    }
+    pas(); tCompte = setInterval(pas, 100);
+  }
+  /* rellotge de parelles: tecla T en una pantalla amb data-min (14 min…); segueix encara que canviïs de pantalla */
+  var rel = document.getElementById("rellotge"), tRel = null;
+  function rellotge(min){
+    clearInterval(tRel);
+    if (!min || rel.classList.contains("on")) { rel.classList.remove("on", "fi"); return; }
+    var fi = Date.now() + min * 60000;
+    rel.classList.add("on"); rel.classList.remove("fi");
+    function pas(){
+      var q = Math.max(0, Math.round((fi - Date.now()) / 1000));
+      rel.textContent = "⏱ " + Math.floor(q / 60) + ":" + dos(q % 60);
+      if (!q) { clearInterval(tRel); rel.classList.add("fi"); rel.textContent = "⏱ Temps!"; }
+    }
+    pas(); tRel = setInterval(pas, 500);
+  }
+
+  /* mode projectar */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    alcada(); encaixa();
+    compte(pant[i].classList.contains("flash") ? pant[i] : null);
+    pos.textContent = (i + 1) + " / " + pant.length;
+    nav.querySelectorAll("a").forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      var seg = nav.querySelectorAll("a");
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(seg, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = pant.findIndex ? pant.findIndex(function(s){ return s.id === h; }) : -1;
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = "✕ Surt";
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = "▶ Projectar";
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
+  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "t" || ev.key === "T") { if (pant[i].classList.contains("flash")) compte(pant[i]); else rellotge(+pant[i].getAttribute("data-min") || 0); }
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm("Esborrar els vots i el marcador per començar amb un altre grup?")) reinicia(); }
+    else if (/^[1-4]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+  document.addEventListener("fullscreenchange", function(){ if (!document.fullscreenElement && document.body.classList.contains("proj")) {} });
+
+  /* respostes de casa: es desen i es baixen */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup"), parella = document.getElementById("parella");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || ""; parella.value = estat.__parella || "";
+    [nom, grup, parella].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  var bx = document.getElementById("baixa"), msg = document.getElementById("missatge");
+  function baixa(){
+    if (!net(nom.value)) {
+      msg.hidden = false; msg.textContent = "Escribe tu nombre y apellidos antes de descargar.";
+      try { document.getElementById("inicio").scrollIntoView(); nom.focus(); alert("Escribe tu nombre y apellidos en la primera pantalla y vuelve a pulsar el botón."); } catch (e) {}
+      return;
+    }
+    var d = new Date();
+    var L = ["Sesión 5 · La lista y el deber de proteger · mis respuestas (IPO I, unidad 1)", "Alumno/a: " + net(nom.value), "Grupo: " + net(grup.value), "Con quién he trabajado: " + (net(parella.value) || "(nadie)"),
+      "Fecha: " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || "(sin respuesta)"); L.push("");
+    });
+    var f = "RESPUESTAS-S5-" + net(nom.value).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      msg.hidden = false; msg.innerHTML = "Hecho: se ha descargado <b>" + f + "</b>. Guárdalo para repasar; no se entrega.";
+    } catch (e) { msg.hidden = false; msg.textContent = "Este navegador no ha dejado descargar el fichero."; }
+  }
+  [bx, document.getElementById("baixa2")].forEach(function(b){ if (b) b.addEventListener("click", baixa); });
+
+  if (location.hash === "#projectar") entra();
+})();
+</script>
+</body>
+</html>
