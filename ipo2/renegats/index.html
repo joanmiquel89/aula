@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Els renegats · stop-motion</title>
+<style>
+:root{
+  --kraft:#c9ab7e; --kraft2:#b8976a; --paper:#fbf6ea; --ink:#1d1a16; --red:#d2412c; --green:#2f8a55;
+  --blue:#2f5f9e; --mustard:#e2a82b; --teal:#2e8b8b; --plum:#7c5aa6; --grey:#6b6b6b;
+  --hand:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  --bold:"Arial Black","Segoe UI Black","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#2a2118;overflow:hidden;font-family:"Segoe UI",Arial,sans-serif;color:var(--ink)}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#stage{width:1600px;height:900px;position:relative;flex:none;transform-origin:center center;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(255,240,210,.35), rgba(0,0,0,0) 60%),
+    radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 55%, rgba(40,20,0,.45) 100%),
+    var(--kraft);
+  box-shadow:0 20px 80px rgba(0,0,0,.6)}
+#stage::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:50;opacity:.28;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .12  0 0 0 .9 0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>")}
+#flicker{position:absolute;inset:0;pointer-events:none;z-index:51;background:#fff;opacity:0}
+
+/* ---------- escenes ---------- */
+.scene{position:absolute;inset:0;display:none}
+.scene.on{display:block}
+.abs{position:absolute}
+[data-at]{opacity:0}
+[data-at].in{animation:pop .5s steps(1,end) forwards}
+@keyframes pop{
+  0%{opacity:1;transform:scale(.35) rotate(-9deg)}
+  30%{opacity:1;transform:scale(.8) rotate(5deg)}
+  60%{opacity:1;transform:scale(1.07) rotate(-2deg)}
+  100%{opacity:1;transform:scale(1) rotate(0)}}
+.drop.in{animation:drop .6s steps(1,end) forwards}
+@keyframes drop{0%{opacity:1;transform:translateY(-420px)}25%{opacity:1;transform:translateY(-260px)}50%{opacity:1;transform:translateY(-110px)}75%{opacity:1;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+.slidein.in{animation:slidein .8s steps(1,end) forwards}
+@keyframes slidein{0%{opacity:1;transform:translateX(-700px) rotate(-4deg)}20%{opacity:1;transform:translateX(-520px) rotate(3deg)}40%{opacity:1;transform:translateX(-340px) rotate(-3deg)}60%{opacity:1;transform:translateX(-170px) rotate(2deg)}80%{opacity:1;transform:translateX(-40px) rotate(-1deg)}100%{opacity:1;transform:none}}
+.stamp.in{animation:stamp .5s steps(1,end) forwards}
+@keyframes stamp{0%{opacity:1;transform:scale(2.4) rotate(-14deg)}40%{opacity:1;transform:scale(1.25) rotate(-9deg)}70%{opacity:1;transform:scale(.94) rotate(-7deg)}100%{opacity:1;transform:scale(1) rotate(-8deg)}}
+
+/* peces de paper */
+.paper{background:var(--paper);box-shadow:3px 5px 0 rgba(60,35,10,.28),0 0 0 1px rgba(0,0,0,.04);
+  clip-path:polygon(0 2%,3% 0,50% 1%,97% 0,100% 3%,99% 50%,100% 97%,96% 100%,50% 99%,3% 100%,0 96%,1% 50%)}
+.caption{left:120px;right:120px;bottom:48px;padding:22px 34px;font-family:var(--hand);font-size:38px;line-height:1.3;text-align:center}
+.caption b{font-family:var(--bold);font-weight:900}
+.titol{font-family:var(--bold);font-size:78px;line-height:1.02;letter-spacing:-1px;color:var(--ink)}
+.etiq{font-family:var(--bold);font-size:26px;letter-spacing:3px;text-transform:uppercase;color:var(--paper);background:var(--ink);padding:6px 16px;display:inline-block}
+.bubble{background:#fff;padding:18px 26px;font-family:var(--hand);font-size:32px;line-height:1.25;border-radius:28px;box-shadow:3px 5px 0 rgba(60,35,10,.28)}
+.bubble::after{content:"";position:absolute;width:0;height:0;border:18px solid transparent;border-top-color:#fff;left:var(--tail,40px);bottom:-34px}
+.stamp{font-family:var(--bold);font-size:56px;color:var(--red);border:8px solid var(--red);padding:6px 22px;border-radius:10px;background:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:2px}
+.stamp.green{color:var(--green);border-color:var(--green)}
+.sticky{background:#ffe066;padding:18px 22px;font-family:var(--hand);font-size:30px;line-height:1.2;box-shadow:3px 6px 0 rgba(60,35,10,.25)}
+.box3{display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--bold);color:#fff}
+
+/* figura de paper (la construeix el JS) */
+.fig{width:10em;height:22em;font-size:10px}
+.fig .cap{position:absolute;left:2.4em;top:0;width:5.2em;height:5.2em;border-radius:50%;background:#f1c8a0;box-shadow:2px 3px 0 rgba(0,0,0,.2)}
+.fig .cap::before,.fig .cap::after{content:"";position:absolute;top:2.1em;width:.55em;height:.7em;border-radius:50%;background:var(--ink)}
+.fig .cap::before{left:1.4em}.fig .cap::after{right:1.4em}
+.fig .cos{position:absolute;left:1.3em;top:5.6em;width:7.4em;height:9em;border-radius:2.6em 2.6em .8em .8em;background:var(--c,#555);box-shadow:2px 3px 0 rgba(0,0,0,.2)}
+.fig .cama{position:absolute;top:14.4em;width:2.4em;height:5.4em;background:#3b3b3b;border-radius:0 0 .6em .6em}
+.fig .cama.e{left:2.5em}.fig .cama.d{left:5.1em}
+.fig .nom{position:absolute;left:50%;top:8.6em;transform:translateX(-50%) rotate(-3deg);white-space:nowrap;font-family:var(--hand);font-size:2.4em;background:var(--paper);padding:0 .35em;box-shadow:2px 3px 0 rgba(0,0,0,.2)}
+.fig.corbata .cos::after{content:"";position:absolute;left:3.2em;top:.4em;width:1em;height:4.5em;background:var(--red);clip-path:polygon(50% 0,100% 20%,70% 100%,30% 100%,0 20%)}
+.fig.cabell .cap{box-shadow:inset 0 1.1em 0 #5a3b22,2px 3px 0 rgba(0,0,0,.2)}
+.fig.ulleres .cap::before,.fig.ulleres .cap::after{width:1.3em;height:1.1em;background:transparent;border:.3em solid var(--ink);top:1.8em}
+.fig.ulleres .cap::before{left:.9em}.fig.ulleres .cap::after{right:.9em}
+
+/* elements concrets */
+.edifici{background:repeating-linear-gradient(90deg,transparent 0 26px,rgba(255,255,255,.0) 26px 30px),
+  repeating-linear-gradient(0deg,#55616e 0 18px,#8fc3e8 18px 44px);box-shadow:4px 6px 0 rgba(0,0,0,.3)}
+.moneda{width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe9a0,#e0a81e 60%,#b07b10);
+  box-shadow:2px 3px 0 rgba(0,0,0,.3);font-family:var(--bold);font-size:30px;color:#7a5200;display:flex;align-items:center;justify-content:center}
+.bloc{width:90px;height:90px;box-shadow:inset -8px -8px 0 rgba(0,0,0,.18),3px 4px 0 rgba(0,0,0,.25)}
+.bloc.gespa{background:linear-gradient(#5fa84a 0 30%,#8b5a2b 30%)}
+.bloc.terra{background:#8b5a2b}.bloc.pedra{background:#8d8d8d}
+.pantalla{background:#1f2430;border:14px solid #3a3a3a;border-radius:18px;color:#cfe8cf;font-family:Consolas,monospace;font-size:28px;padding:18px 22px;box-shadow:4px 6px 0 rgba(0,0,0,.3)}
+.camera{position:absolute;left:0;top:0;width:1600px}
+.panup.in{animation:panup 2.4s steps(8,end) forwards}
+@keyframes panup{from{transform:translateY(0)}to{transform:translateY(-760px)}}
+.porta{transform-origin:left center}
+.porta.in{animation:obre 1.2s steps(1,end) forwards}
+@keyframes obre{0%{opacity:1;transform:perspective(900px) rotateY(0)}25%{opacity:1;transform:perspective(900px) rotateY(-20deg)}50%{opacity:1;transform:perspective(900px) rotateY(-42deg)}75%{opacity:1;transform:perspective(900px) rotateY(-62deg)}100%{opacity:0;transform:perspective(900px) rotateY(-88deg)}}
+.balanca.in{animation:balanca 2s steps(1,end) forwards}
+@keyframes balanca{0%{opacity:1;transform:rotate(0)}25%{opacity:1;transform:rotate(-7deg)}50%{opacity:1;transform:rotate(5deg)}75%{opacity:1;transform:rotate(-4deg)}100%{opacity:1;transform:rotate(-2deg)}}
+.coet.in{animation:coet 1.6s steps(1,end) forwards}
+@keyframes coet{0%{opacity:1;transform:translate(-300px,420px) rotate(35deg)}20%{opacity:1;transform:translate(-200px,300px) rotate(35deg)}40%{opacity:1;transform:translate(-110px,190px) rotate(35deg)}60%{opacity:1;transform:translate(-40px,90px) rotate(35deg)}80%{opacity:1;transform:translate(0,20px) rotate(35deg)}100%{opacity:1;transform:rotate(35deg)}}
+.ratlla{position:relative}
+.ratlla.in::after{content:"";position:absolute;left:-6%;right:-6%;top:48%;height:10px;background:var(--red);transform:rotate(-6deg)}
+
+/* votacions */
+.vots{left:0;right:0;bottom:190px;display:flex;justify-content:center;gap:60px}
+.vot{font-family:var(--bold);font-size:40px;padding:18px 38px;border:0;cursor:pointer;background:var(--paper);color:var(--ink);box-shadow:4px 6px 0 rgba(60,35,10,.35);
+  clip-path:polygon(0 4%,4% 0,96% 2%,100% 6%,98% 96%,94% 100%,4% 98%,0 94%)}
+.vot:hover{background:#fff4c9}
+.vot.triat{background:var(--ink);color:var(--paper)}
+.vot small{display:block;font-family:"Segoe UI",Arial,sans-serif;font-size:20px;font-weight:600;letter-spacing:.5px}
+.resposta{display:none}
+.resposta.mostra{display:block}
+.marcador{right:40px;top:28px;font-family:var(--bold);font-size:24px;background:var(--ink);color:var(--paper);padding:8px 16px;z-index:40}
+.pista{left:40px;top:28px;font-family:var(--bold);font-size:22px;letter-spacing:3px;text-transform:uppercase;color:rgba(29,26,22,.7)}
+
+/* barra de control */
+#barra{position:fixed;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:8px;align-items:center;z-index:100;
+  background:rgba(20,15,10,.72);padding:6px 10px;border-radius:24px;color:#f4e6cf;font:600 14px "Segoe UI",Arial,sans-serif;opacity:.25;transition:opacity .2s}
+#barra:hover{opacity:1}
+#barra button{background:none;border:1px solid rgba(244,230,207,.5);color:inherit;border-radius:14px;padding:4px 12px;font:inherit;cursor:pointer}
+#progres{position:absolute;left:0;bottom:0;height:8px;background:var(--red);z-index:60;transition:width .2s steps(2)}
+
+@media (prefers-reduced-motion:reduce){
+  [data-at]{opacity:1}
+  [data-at].in,.panup.in,.porta.in,.balanca.in,.coet.in{animation:none}
+}
+@media print{
+  @page{size:A4 landscape;margin:8mm}
+  html,body{height:auto;overflow:visible;background:#fff}
+  #viewport{position:static;display:block}
+  #stage{transform:none!important;width:auto;height:auto;box-shadow:none;background:none;overflow:visible}
+  #stage::before,#flicker,#barra,#progres,.vots{display:none}
+  .scene{display:block!important;position:relative;width:1600px;height:900px;zoom:.62;break-after:page;background:var(--kraft);overflow:hidden}
+  [data-at]{opacity:1!important;animation:none!important}
+  .resposta{display:block!important}
+  .camera{transform:none!important}
+}
+</style>
+</head>
+<body>
+<div id="viewport"><div id="stage">
+<div id="flicker"></div>
+<div id="progres"></div>
+<div class="abs marcador" id="marcador" style="display:none">Classe: 0 / 0</div>
+
+<!-- 0 · TÍTOL -->
+<section class="scene" data-nom="Títol">
+  <div class="abs paper" style="left:330px;top:120px;width:940px;height:560px;background:#222;clip-path:none;box-shadow:8px 12px 0 rgba(0,0,0,.35)"></div>
+  <div class="abs b" style="left:330px;top:60px;width:940px;height:90px;background:repeating-linear-gradient(-45deg,#fff 0 60px,#222 60px 120px);transform-origin:left bottom;box-shadow:4px 6px 0 rgba(0,0,0,.3)" data-at="200"></div>
+  <div class="abs" style="left:390px;top:200px;width:820px;color:#fff;font-family:var(--hand);font-size:34px" data-at="500">IPO II · Unitat 5 · Emprenedoria social</div>
+  <div class="abs titol" style="left:390px;top:270px;color:#fff;font-size:120px" data-at="800">ELS<br>RENEGATS</div>
+  <div class="abs" style="left:390px;top:540px;width:820px;color:#f0d9a8;font-family:var(--hand);font-size:34px;line-height:1.3" data-at="1300">Com quatre treballadors van convèncer Microsoft de fer la Xbox</div>
+  <div class="abs sticky b" style="left:1180px;top:640px;transform:rotate(6deg)" data-at="1900">Un stop-motion<br>de paper</div>
+  <div class="abs" style="left:0;right:0;bottom:40px;text-align:center;font-family:var(--hand);font-size:26px;color:rgba(29,26,22,.75)" data-at="2400">→ per avançar · F pantalla completa</div>
+</section>
+
+<!-- 1 · MICROSOFT 1999 -->
+<section class="scene" data-nom="1999">
+  <div class="abs pista">Part 1 · La història</div>
+  <div class="abs titol b" style="left:120px;top:90px" data-at="100">1999.</div>
+  <div class="abs edifici b" style="left:180px;top:250px;width:360px;height:420px" data-at="300"></div>
+  <div class="abs paper b" style="left:210px;top:210px;width:300px;padding:10px;text-align:center;font-family:var(--bold);font-size:34px" data-at="600">MICROSOFT</div>
+  <div class="abs paper b" style="left:620px;top:190px;width:420px;height:300px;padding:26px;text-align:center;background:#dfe9f5" data-at="900">
+    <div style="font-family:var(--bold);font-size:44px;color:var(--blue)">WINDOWS</div>
+    <div style="font-family:var(--hand);font-size:30px;margin-top:14px">el 90 % dels ordinadors del món</div>
+  </div>
+  <div class="abs moneda drop" style="left:1120px;top:560px" data-at="1300">$</div>
+  <div class="abs moneda drop" style="left:1200px;top:560px" data-at="1500">$</div>
+  <div class="abs moneda drop" style="left:1280px;top:560px" data-at="1700">$</div>
+  <div class="abs moneda drop" style="left:1160px;top:500px" data-at="1900">$</div>
+  <div class="abs moneda drop" style="left:1240px;top:500px" data-at="2100">$</div>
+  <div class="abs moneda drop" style="left:1200px;top:440px" data-at="2300">$</div>
+  <div class="abs stamp b" style="left:1030px;top:250px;white-space:nowrap;font-size:46px" data-at="2700">1.000 M$ / mes</div>
+  <div class="abs caption paper" data-at="3200">A finals dels 90, Windows ingressa <b>mil milions de dòlars al mes</b>. Microsoft és un gegant que no té rival.</div>
+</section>
+
+<!-- 2 · L'AMENAÇA DE SONY -->
+<section class="scene" data-nom="L'amenaça">
+  <div class="abs pista">Part 1 · La història</div>
+  <div class="abs titol b" style="left:120px;top:90px" data-at="100">Però arriba<br>una amenaça.</div>
+  <div class="abs fig b" data-c="#2b2b2b" data-n="Sony" style="left:180px;top:425px;font-size:10px" data-at="500"></div>
+  <div class="abs paper b" style="left:470px;top:300px;width:560px;height:360px;padding:24px;background:#fff" data-at="900">
+    <div style="font-family:var(--bold);font-size:28px">La casa del futur</div>
+    <div style="position:absolute;left:70px;top:120px;width:220px;height:0;border-left:130px solid transparent;border-right:130px solid transparent;border-bottom:90px solid var(--red)"></div>
+    <div style="position:absolute;left:90px;top:210px;width:220px;height:120px;background:#f1e3c3;border:4px solid var(--ink)"></div>
+    <div style="position:absolute;left:130px;top:250px;padding:6px 12px;background:var(--ink);color:#fff;font-family:var(--bold);font-size:24px">PS2</div>
+    <div class="ratlla" style="position:absolute;left:350px;top:170px;font-family:var(--bold);font-size:30px;padding:10px 14px;border:4px solid var(--ink);background:#dfe9f5" data-at="1800">PC</div>
+  </div>
+  <div class="abs bubble b" style="left:60px;top:268px;width:380px;--tail:130px;font-size:29px" data-at="1300">La PlayStation 2 substituirà l'ordinador!</div>
+  <div class="abs stamp b" style="left:1090px;top:430px" data-at="2400">ALARMA!</div>
+  <div class="abs caption paper" data-at="2900">Sony anuncia la <b>PlayStation 2</b> i presenta cases on hi ha consola i <b>no hi ha ordinador</b>. A Microsoft salten totes les alarmes.</div>
+</section>
+
+<!-- 3 · QUI HO RESOL? (panoràmica cap avall) -->
+<section class="scene" data-nom="Qui ho resol?">
+  <div class="abs pista">Part 1 · La història</div>
+  <div class="camera panup" data-at="1600" style="opacity:1">
+    <div class="abs edifici" style="left:560px;top:120px;width:480px;height:1480px"></div>
+    <div class="abs paper" style="left:600px;top:170px;width:400px;padding:12px;text-align:center;font-family:var(--bold);font-size:32px">DIRECCIÓ</div>
+    <div class="abs" style="left:640px;top:250px;font-family:var(--bold);font-size:90px;color:#fff;text-shadow:3px 4px 0 rgba(0,0,0,.3)">? ? ?</div>
+    <div class="abs paper" style="left:600px;top:560px;width:400px;padding:12px;text-align:center;font-family:var(--bold);font-size:30px">WINDOWS · OFFICE</div>
+    <div class="abs paper" style="left:600px;top:980px;width:400px;padding:12px;text-align:center;font-family:var(--bold);font-size:30px;background:#ffe066">EQUIP DirectX</div>
+    <div class="abs" style="left:620px;top:1060px;width:360px;font-family:var(--hand);font-size:26px;color:#fff;text-align:center;text-shadow:2px 2px 0 rgba(0,0,0,.4)">les eines perquè els jocs funcionin a Windows</div>
+    <div class="abs fig" data-c="var(--red)" style="left:610px;top:1180px;font-size:7px"></div>
+    <div class="abs fig" data-c="var(--teal)" style="left:700px;top:1180px;font-size:7px"></div>
+    <div class="abs fig" data-c="var(--mustard)" style="left:790px;top:1180px;font-size:7px"></div>
+    <div class="abs fig" data-c="var(--plum)" style="left:880px;top:1180px;font-size:7px"></div>
+  </div>
+  <div class="abs titol b" style="left:100px;top:110px;font-size:64px" data-at="200">Qui ho<br>resol?</div>
+  <div class="abs caption paper" data-at="4300">La resposta <b>no va venir de dalt</b>, sinó de baix de tot: de quatre treballadors de l'equip de <b>DirectX</b>.</div>
+</section>
+
+<!-- 4 · ELS QUATRE -->
+<section class="scene" data-nom="Els quatre">
+  <div class="abs pista">Part 1 · La història</div>
+  <div class="abs titol b" style="left:120px;top:50px;font-size:64px" data-at="100">Els quatre renegats</div>
+  <div class="abs fig b cabell" data-c="var(--red)" data-n="Otto" style="left:170px;top:160px;font-size:11px" data-at="500"></div>
+  <div class="abs sticky b" style="left:120px;top:470px;width:300px;font-size:24px;transform:rotate(-3deg)" data-at="900">Dirigeix DirectX. Podia treballar a Windows, però l'apassionen els gràfics.</div>
+  <div class="abs fig b" data-c="var(--teal)" data-n="Ted" style="left:520px;top:160px;font-size:11px" data-at="1400"></div>
+  <div class="abs sticky b" style="left:470px;top:470px;width:300px;font-size:24px;transform:rotate(2deg)" data-at="1800">Porta el màrqueting de DirectX.</div>
+  <div class="abs fig b ulleres" data-c="var(--mustard)" data-n="Seamus" style="left:870px;top:160px;font-size:11px" data-at="2300"></div>
+  <div class="abs sticky b" style="left:820px;top:470px;width:300px;font-size:24px;transform:rotate(-2deg)" data-at="2700">Físic i matemàtic. De petit no volia jugar: volia fer jocs.</div>
+  <div class="abs fig b" data-c="var(--plum)" data-n="Kevin" style="left:1220px;top:160px;font-size:11px" data-at="3200"></div>
+  <div class="abs sticky b" style="left:1170px;top:470px;width:300px;font-size:24px;transform:rotate(3deg)" data-at="3600">Sap d'anàlisi financera i de mercat.</div>
+  <div class="abs caption paper" style="bottom:30px" data-at="4300">Tots quatre juguen a videojocs i els volen <b>dissenyar</b>.</div>
+</section>
+
+<!-- 5 · FEINA DE DIA -->
+<section class="scene" data-nom="Feina i idea">
+  <div class="abs pista">Part 1 · La història</div>
+  <div class="abs paper b" style="left:130px;top:430px;width:560px;height:230px;background:#9c7a52;clip-path:none" data-at="200"></div>
+  <div class="abs pantalla b" style="left:240px;top:250px;width:340px;height:200px;font-size:24px" data-at="400">DirectX.dll<br>compilant…<br>OK</div>
+  <div class="abs fig b" data-c="var(--mustard)" style="left:620px;top:360px;font-size:12px" data-at="700"></div>
+  <div class="abs stamp b" style="left:170px;top:600px;font-size:38px" data-at="1200">FEINA DE CADA DIA</div>
+  <div class="abs b" style="left:820px;top:330px;width:40px;height:40px;border-radius:50%;background:#fff" data-at="1800"></div>
+  <div class="abs b" style="left:880px;top:260px;width:60px;height:60px;border-radius:50%;background:#fff" data-at="2100"></div>
+  <div class="abs paper b" style="left:960px;top:90px;width:520px;height:320px;border-radius:50%;clip-path:none;background:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--hand);font-size:40px;padding:40px" data-at="2500">Una caixa per jugar al saló…</div>
+  <div class="abs caption paper" data-at="3200">Tenien la seva feina a DirectX, però el que els interessava era <b>construir una cosa completament nova</b>.</div>
+</section>
+
+<!-- 6 · LA IDEA: XBOX -->
+<section class="scene" data-nom="La idea">
+  <div class="abs pista">Part 1 · La història</div>
+  <div class="abs titol b" style="left:120px;top:80px" data-at="100">La idea</div>
+  <div class="abs box3 b" style="left:300px;top:200px;width:460px;height:220px;background:#3a3a3a;font-size:60px;box-shadow:6px 8px 0 rgba(0,0,0,.35)" data-at="500">DirectX</div>
+  <div class="abs box3 b" style="left:790px;top:200px;width:360px;height:220px;background:#6d6d6d;font-size:60px;box-shadow:6px 8px 0 rgba(0,0,0,.35)" data-at="1000">Box</div>
+  <div class="abs b" style="left:330px;top:300px;width:400px;height:14px;background:var(--red);transform:rotate(-8deg)" data-at="1900"></div>
+  <div class="abs box3 b" style="left:520px;top:460px;width:520px;height:150px;background:var(--green);font-size:96px;box-shadow:6px 8px 0 rgba(0,0,0,.35)" data-at="2500">Xbox</div>
+  <div class="abs caption paper" data-at="3100">Un ordinador disfressat de consola, amb DirectX a dins. «Caixa DirectX» era massa llarg… i va quedar <b>Xbox</b>.</div>
+</section>
+
+<!-- 7 · QUÈ ELS DIUEN -->
+<section class="scene" data-nom="Què els diuen">
+  <div class="abs pista">Part 1 · La història</div>
+  <div class="abs titol b" style="left:120px;top:70px;font-size:64px" data-at="100">I què els diuen?</div>
+  <div class="abs fig b corbata" data-c="#4d4d4d" style="left:190px;top:380px;font-size:11px" data-at="300"></div>
+  <div class="abs fig b corbata" data-c="#5c5c5c" style="left:720px;top:380px;font-size:11px" data-at="300"></div>
+  <div class="abs fig b corbata" data-c="#3f3f3f" style="left:1260px;top:380px;font-size:11px" data-at="300"></div>
+  <div class="abs bubble b" style="left:100px;top:210px;width:420px;--tail:120px" data-at="900">Fer aparells? Això ho hem descartat.</div>
+  <div class="abs bubble b" style="left:560px;top:230px;width:460px;--tail:200px" data-at="1700">Treure diners de Windows per fer jocs? Un disbarat!</div>
+  <div class="abs bubble b" style="left:1060px;top:210px;width:440px;--tail:240px" data-at="2500">I els diners d'Office, per a una consola?</div>
+  <div class="abs caption paper" data-at="3300">Es colen a reunions per fer-se escoltar, i a cada una algú de dalt els diu que no. I a fora molts s'ho prenen a broma: <b>Microsoft, fent consoles?</b></div>
+</section>
+
+<!-- 8 · QUÈ S'HI JUGUEN -->
+<section class="scene" data-nom="Què s'hi juguen">
+  <div class="abs pista">Part 1 · La història</div>
+  <div class="abs titol b" style="left:120px;top:70px;font-size:64px" data-at="100">Què s'hi juguen?</div>
+  <div class="abs" style="left:780px;top:330px;width:40px;height:300px;background:#6b4b2a" data-at="300"></div>
+  <div class="abs balanca" style="left:420px;top:300px;width:760px;height:40px;transform-origin:center" data-at="700">
+    <div style="position:absolute;left:0;right:0;top:12px;height:16px;background:#6b4b2a"></div>
+    <div class="paper" style="position:absolute;left:-40px;top:40px;width:300px;padding:18px;text-align:center;font-family:var(--hand);font-size:30px">la seva feina i el seu nom</div>
+    <div class="paper" style="position:absolute;right:-40px;top:40px;width:300px;padding:18px;text-align:center;font-family:var(--hand);font-size:30px;background:#ffe066">una idea que ningú no ha demanat</div>
+  </div>
+  <div class="abs stamp b" style="left:150px;top:540px;font-size:40px" data-at="2000">POR</div>
+  <div class="abs stamp b" style="left:620px;top:560px;font-size:40px" data-at="2300">INCERTESA</div>
+  <div class="abs stamp b" style="left:1150px;top:540px;font-size:40px" data-at="2600">DUBTE</div>
+  <div class="abs caption paper" style="bottom:30px" data-at="3200">Ells mateixos ho expliquen com <b>una aposta arriscada</b>, dins una empresa acostumada a no perdre.</div>
+</section>
+
+<!-- 9 · BILL GATES -->
+<section class="scene" data-nom="La porta">
+  <div class="abs pista">Part 1 · La història</div>
+  <div class="abs paper" style="left:560px;top:140px;width:480px;height:600px;background:#7a5634;clip-path:none" data-at="100"></div>
+  <div class="abs fig b corbata" data-c="#2f4b7c" data-n="Bill Gates" style="left:720px;top:330px;font-size:13px" data-at="1900"></div>
+  <div class="abs porta paper" style="left:580px;top:250px;width:440px;height:490px;background:#a57a4c;clip-path:none" data-at="700"></div>
+  <div class="abs paper" style="left:610px;top:180px;width:380px;padding:10px;text-align:center;font-family:var(--bold);font-size:28px" data-at="200">DESPATX DE BILL GATES</div>
+  <div class="abs fig b" data-c="var(--red)" style="left:180px;top:420px;font-size:10px" data-at="300"></div>
+  <div class="abs fig b" data-c="var(--teal)" style="left:280px;top:420px;font-size:10px" data-at="300"></div>
+  <div class="abs fig b" data-c="var(--mustard)" style="left:380px;top:420px;font-size:10px" data-at="300"></div>
+  <div class="abs fig b" data-c="var(--plum)" style="left:1140px;top:420px;font-size:10px" data-at="300"></div>
+  <div class="abs bubble b" style="left:1060px;top:170px;width:460px;font-size:44px;--tail:120px" data-at="2300">«Deixem-los fer-ho.»</div>
+  <div class="abs stamp green b" style="left:1110px;top:680px;font-size:40px" data-at="3000">Nov. 2001: a les botigues</div>
+  <div class="abs caption paper" style="left:80px;right:560px;bottom:40px;font-size:32px" data-at="3500">El febrer de 2000, Bill Gates els dona llum verda. La Xbox surt a la venda el novembre de 2001.</div>
+</section>
+
+<!-- 10 · PREGUNTA DEL MILIÓ -->
+<section class="scene vota" data-nom="Són emprenedors?" data-correcte="1" data-compta="no">
+  <div class="abs pista">La pregunta del milió</div>
+  <div class="abs paper b" style="left:160px;top:110px;width:1280px;padding:36px;text-align:center" data-at="100">
+    <div class="titol" style="font-size:62px">No van crear cap empresa.<br>Cobraven de Microsoft.</div>
+    <div style="font-family:var(--hand);font-size:52px;margin-top:18px;color:var(--red)">Són emprenedors?</div>
+  </div>
+  <div class="abs vots" style="bottom:300px" data-at="700">
+    <button class="vot" data-v="1">SÍ</button>
+    <button class="vot" data-v="2">NO</button>
+  </div>
+  <div class="resposta">
+    <div class="abs paper" style="left:130px;top:470px;width:420px;padding:22px;text-align:center;background:#ffe066"><div class="titol" style="font-size:44px">IDEA</div><div style="font-family:var(--hand);font-size:26px">una caixa DirectX per al saló</div></div>
+    <div class="abs paper" style="left:590px;top:470px;width:420px;padding:22px;text-align:center;background:#bfe3c9"><div class="titol" style="font-size:44px">ACCIÓ</div><div style="font-family:var(--hand);font-size:26px">prototip i convèncer caps</div></div>
+    <div class="abs paper" style="left:1050px;top:470px;width:420px;padding:22px;text-align:center;background:#c9dcf2"><div class="titol" style="font-size:44px">VALOR PER A ALTRES</div><div style="font-family:var(--hand);font-size:26px">els jugadors i l'empresa</div></div>
+    <div class="abs stamp green" style="left:520px;top:720px;font-size:60px;transform:rotate(-6deg)">SÍ: INTRAPRENEDORIA</div>
+  </div>
+</section>
+
+<!-- 11 · LA TAULA -->
+<section class="scene" data-nom="Emprendre i intraprendre">
+  <div class="abs pista">Ara ho posem nom · full d'estudi, pàg. 3-4</div>
+  <div class="abs paper b" style="left:120px;top:90px;width:1360px;padding:26px 34px" data-at="100">
+    <div style="font-family:var(--bold);font-size:40px">Intraprenedoria</div>
+    <div style="font-family:var(--hand);font-size:32px;line-height:1.3;margin-top:6px">Gent d'una empresa <b>que ja existeix</b> pren la iniciativa per innovar, <b>encara que vagi més enllà de la seva feina</b>.</div>
+  </div>
+  <div class="abs paper slidein" style="left:120px;top:330px;width:1360px;padding:0;background:#fff" data-at="700">
+    <table style="width:100%;border-collapse:collapse;font-size:34px">
+      <tr style="font-family:var(--bold)"><td style="padding:14px 24px;width:24%"></td><td style="padding:14px 24px;background:#ffe066">☝ Emprenedoria</td><td style="padding:14px 24px;background:#bfe3c9">✌ Intraprenedoria</td></tr>
+      <tr style="border-top:3px solid #1d1a16"><td style="padding:12px 24px;font-family:var(--bold)">On neix</td><td style="padding:12px 24px">una empresa nova</td><td style="padding:12px 24px">dins una que ja existeix</td></tr>
+      <tr style="border-top:2px solid #ccc"><td style="padding:12px 24px;font-family:var(--bold)">Recursos</td><td style="padding:12px 24px">els has de trobar tu</td><td style="padding:12px 24px">els de l'empresa</td></tr>
+      <tr style="border-top:2px solid #ccc"><td style="padding:12px 24px;font-family:var(--bold)">Risc</td><td style="padding:12px 24px">el corres tu</td><td style="padding:12px 24px">el comparteix l'empresa</td></tr>
+    </table>
+  </div>
+  <div class="abs sticky b" style="left:170px;top:700px;width:620px;transform:rotate(-2deg)" data-at="1600"><b>Valor rutinari:</b> la feina de cada dia (DirectX)</div>
+  <div class="abs sticky b" style="left:830px;top:700px;width:620px;transform:rotate(2deg);background:#bfe3c9" data-at="2100"><b>Valor innovador:</b> la cosa nova (la Xbox)</div>
+</section>
+
+<!-- 12 · TRANSICIÓ A LA PART 2 -->
+<section class="scene" data-nom="On va néixer?">
+  <div class="abs pista">Part 2 · Ara vosaltres</div>
+  <div class="abs titol b" style="left:120px;top:140px;font-size:110px" data-at="100">On va<br>néixer?</div>
+  <div class="abs paper b" style="left:800px;top:170px;width:640px;padding:30px;font-size:40px;line-height:1.5" data-at="700">
+    <div><span style="font-size:60px">☝</span> <b>un dit</b>: empresa nova</div>
+    <div><span style="font-size:60px">✌</span> <b>dos dits</b>: dins una empresa que ja existeix</div>
+  </div>
+  <div class="abs sticky b" style="left:820px;top:560px;width:600px;transform:rotate(-2deg)" data-at="1400">Cinc casos. A la de tres, dits enlaire. Compte: n'hi ha dos que són paranys.</div>
+</section>
+
+<!-- 13 · MINECRAFT -->
+<section class="scene vota" data-nom="Minecraft" data-correcte="1">
+  <div class="abs pista">Cas 1 de 5</div>
+  <div class="abs titol b" style="left:120px;top:60px" data-at="100">Minecraft</div>
+  <div class="abs paper b" style="left:120px;top:190px;width:430px;padding:16px 20px;font-family:var(--hand);font-size:27px;line-height:1.3" data-at="400"><b>2009.</b> Un programador suec treballa en una empresa de videojocs (King). A les nits, al seu temps lliure, fa un joc de blocs.</div>
+  <div class="abs bloc gespa" style="left:720px;top:520px" data-at="900"></div>
+  <div class="abs bloc terra" style="left:810px;top:520px" data-at="1100"></div>
+  <div class="abs bloc pedra" style="left:900px;top:520px" data-at="1300"></div>
+  <div class="abs bloc gespa" style="left:765px;top:430px" data-at="1500"></div>
+  <div class="abs bloc terra" style="left:855px;top:430px" data-at="1700"></div>
+  <div class="abs bloc gespa" style="left:810px;top:340px" data-at="1900"></div>
+  <div class="abs paper b" style="left:1060px;top:190px;width:420px;padding:16px 20px;font-family:var(--hand);font-size:27px;line-height:1.3" data-at="2400">Munta la seva pròpia empresa, <b>Mojang</b>, i el 2010 ja pot deixar la feina.</div>
+  <div class="abs stamp b" style="left:1070px;top:420px;width:420px;font-size:30px;text-align:center;line-height:1.15" data-at="3000">2014 · Microsoft la compra per 2.500 M$</div>
+  <div class="abs vots" data-at="3600"><button class="vot" data-v="1">☝ <small>empresa nova</small></button><button class="vot" data-v="2">✌ <small>dins una empresa</small></button></div>
+  <div class="resposta"><div class="abs caption paper" style="bottom:36px;font-size:32px"><b>☝ Emprenedoria.</b> Treballava a King, però ho va fer fora de la feina, sense els seus recursos, i va crear una empresa nova. Avui és el videojoc més venut de la història.</div></div>
+</section>
+
+<!-- 14 · PLAYSTATION -->
+<section class="scene vota" data-nom="PlayStation" data-correcte="2">
+  <div class="abs pista">Cas 2 de 5</div>
+  <div class="abs titol b" style="left:120px;top:60px" data-at="100">PlayStation</div>
+  <div class="abs fig b" data-c="var(--red)" data-n="la filla" style="left:150px;top:300px;font-size:9px" data-at="400"></div>
+  <div class="abs paper b" style="left:130px;top:560px;width:190px;height:80px;background:#9e9e9e;clip-path:none;border-radius:16px" data-at="600"></div>
+  <div class="abs fig b" data-c="var(--blue)" data-n="l'enginyer" style="left:430px;top:250px;font-size:12px" data-at="1000"></div>
+  <div class="abs paper b" style="left:600px;top:420px;width:120px;height:80px;background:#2e7d4f;clip-path:none;box-shadow:inset 0 0 0 6px #1e5a37;color:#fff;font-family:var(--bold);font-size:18px;display:flex;align-items:center;justify-content:center" data-at="1500">xip</div>
+  <div class="abs bubble b" style="left:760px;top:190px;width:330px;--tail:30px" data-at="1900">(d'amagat…)</div>
+  <div class="abs fig b corbata" data-c="#4d4d4d" style="left:900px;top:330px;font-size:11px" data-at="2400"></div>
+  <div class="abs stamp b" style="left:840px;top:300px;font-size:60px" data-at="2700">!!</div>
+  <div class="abs fig b corbata" data-c="#2f4b7c" data-n="el president" style="left:1200px;top:280px;font-size:12px" data-at="3200"></div>
+  <div class="abs paper b" style="left:1120px;top:600px;width:360px;padding:12px 16px;font-family:var(--hand);font-size:26px" data-at="3600">El defensa… i acaba dirigint la PlayStation.</div>
+  <div class="abs vots" style="bottom:120px" data-at="4100"><button class="vot" data-v="1">☝ <small>empresa nova</small></button><button class="vot" data-v="2">✌ <small>dins una empresa</small></button></div>
+  <div class="resposta"><div class="abs caption paper" style="bottom:36px;font-size:32px"><b>✌ Intraprenedoria.</b> Com la Xbox (i en va ser la rival): va més enllà de la seva feina a Sony, s'hi juga el lloc, i el defensa algú de dalt.</div></div>
+</section>
+
+<!-- 15 · BE MY EYES -->
+<section class="scene vota" data-nom="Be My Eyes" data-correcte="1">
+  <div class="abs pista">Cas 3 de 5</div>
+  <div class="abs titol b" style="left:120px;top:60px" data-at="100">Be My Eyes</div>
+  <div class="abs paper b" style="left:120px;top:190px;width:560px;padding:16px 20px;font-family:var(--hand);font-size:28px;line-height:1.3" data-at="400"><b>2015.</b> Un danès amb problemes greus de visió crea una app: una persona cega fa una videotrucada i un voluntari li diu què té davant.</div>
+  <div class="abs paper b" style="left:820px;top:170px;width:250px;height:460px;background:#222;clip-path:none;border-radius:34px" data-at="900">
+    <div style="position:absolute;left:55px;top:150px;width:140px;height:90px;border-radius:50%;background:#fff"></div>
+    <div style="position:absolute;left:100px;top:170px;width:50px;height:50px;border-radius:50%;background:#2f5f9e"></div>
+  </div>
+  <div class="abs fig b" data-c="var(--green)" data-n="voluntari" style="left:1180px;top:250px;font-size:11px" data-at="1400"></div>
+  <div class="abs paper b" style="left:120px;top:450px;width:600px;padding:20px;text-align:center" data-at="1900">
+    <div style="font-family:var(--hand);font-size:26px">voluntaris apuntats</div>
+    <div class="comptador" data-to="10000" data-sufix=" en 24 h" style="font-family:var(--bold);font-size:48px;white-space:nowrap">0</div>
+  </div>
+  <div class="abs stamp b" style="left:150px;top:596px;font-size:32px;white-space:nowrap" data-at="3600">avui: més d'11 milions</div>
+  <div class="abs vots" style="bottom:110px" data-at="4300"><button class="vot" data-v="1">☝ <small>empresa nova</small></button><button class="vot" data-v="2">✌ <small>dins una empresa</small></button></div>
+  <div class="resposta"><div class="abs caption paper" style="bottom:36px;font-size:32px"><b>☝ Emprenedoria.</b> I el valor és sobretot <b>social</b>: no cal que sigui per diners. S'hi pot participar com a voluntari.</div></div>
+</section>
+
+<!-- 16 · CURSOR -->
+<section class="scene vota" data-nom="Cursor" data-correcte="1">
+  <div class="abs pista">Cas 4 de 5</div>
+  <div class="abs titol b" style="left:120px;top:60px" data-at="100">Cursor</div>
+  <div class="abs paper b" style="left:120px;top:190px;width:520px;padding:16px 20px;font-family:var(--hand);font-size:28px;line-height:1.3" data-at="400"><b>2022.</b> Quatre estudiants del MIT creen un editor de codi amb intel·ligència artificial.</div>
+  <div class="abs pantalla b" style="left:720px;top:170px;width:560px;height:330px" data-at="800">
+    <div data-at="1300">def hola():</div>
+    <div data-at="1700">&nbsp;&nbsp;# IA: completa-ho</div>
+    <div data-at="2100" style="color:#8fd18f">&nbsp;&nbsp;return "hola, món"</div>
+    <div data-at="2500" style="display:inline-block;width:16px;height:30px;background:#cfe8cf"></div>
+  </div>
+  <div class="abs fig b" data-c="var(--red)" style="left:160px;top:430px;font-size:8px" data-at="1000"></div>
+  <div class="abs fig b" data-c="var(--teal)" style="left:260px;top:430px;font-size:8px" data-at="1100"></div>
+  <div class="abs fig b" data-c="var(--mustard)" style="left:360px;top:430px;font-size:8px" data-at="1200"></div>
+  <div class="abs fig b" data-c="var(--plum)" style="left:460px;top:430px;font-size:8px" data-at="1300"></div>
+  <div class="abs coet" style="left:1330px;top:190px;width:90px;height:220px" data-at="3000">
+    <div style="position:absolute;left:0;top:50px;width:90px;height:150px;background:#eee;border-radius:10px;box-shadow:3px 4px 0 rgba(0,0,0,.3)"></div>
+    <div style="position:absolute;left:0;top:0;width:0;height:0;border-left:45px solid transparent;border-right:45px solid transparent;border-bottom:60px solid var(--red)"></div>
+    <div style="position:absolute;left:20px;top:200px;width:50px;height:40px;background:var(--mustard);clip-path:polygon(0 0,100% 0,50% 100%)"></div>
+  </div>
+  <div class="abs stamp b" style="left:860px;top:530px;width:540px;font-size:30px;text-align:center;line-height:1.15" data-at="3700">Agost 2026 · SpaceX el compra per 60.000 M$</div>
+  <div class="abs vots" style="bottom:120px" data-at="4300"><button class="vot" data-v="1">☝ <small>empresa nova</small></button><button class="vot" data-v="2">✌ <small>dins una empresa</small></button></div>
+  <div class="resposta"><div class="abs caption paper" style="bottom:36px;font-size:32px"><b>☝ Emprenedoria.</b> Empresa nova, feta per estudiants d'uns vint anys. Emprendre no és cosa de gent gran amb diners.</div></div>
+</section>
+
+<!-- 17 · GMAIL -->
+<section class="scene vota" data-nom="Gmail" data-correcte="parany" data-compta="no">
+  <div class="abs pista">Cas 5 de 5</div>
+  <div class="abs titol b" style="left:120px;top:60px" data-at="100">Gmail</div>
+  <div class="abs paper b" style="left:120px;top:190px;width:560px;padding:16px 20px;font-family:var(--hand);font-size:28px;line-height:1.3" data-at="400">Un enginyer de Google hi comença a treballar el 2001. Surt l'1 d'abril de 2004, amb <b>1 GB</b> d'espai.</div>
+  <div class="abs b" style="left:800px;top:200px;width:460px;height:300px;background:#fff;box-shadow:4px 6px 0 rgba(0,0,0,.3)" data-at="800">
+    <div style="position:absolute;left:0;top:0;width:0;height:0;border-left:230px solid transparent;border-right:230px solid transparent;border-top:170px solid #e9e1d0"></div>
+    <div style="position:absolute;left:150px;top:190px;font-family:var(--bold);font-size:56px;color:var(--red)">1 GB</div>
+  </div>
+  <div class="abs sticky b" style="left:1120px;top:470px;width:360px;transform:rotate(5deg)" data-at="1600">Diuen que es va fer amb el «20 % de temps lliure» de Google…</div>
+  <div class="abs vots" style="bottom:150px" data-at="2300"><button class="vot" data-v="1">☝ <small>empresa nova</small></button><button class="vot" data-v="2">✌ <small>dins una empresa</small></button></div>
+  <div class="resposta">
+    <div class="abs stamp" style="left:800px;top:250px;font-size:58px">PARANY!</div>
+    <div class="abs caption paper" style="bottom:36px;font-size:30px">El seu creador diu que <b>era un encàrrec oficial</b>: li havien demanat fer un correu. És innovació dins Google, però no va més enllà de la seva feina, i el mite del 20 %, aquí, no és cert. <b>Abans de creure't una història d'empresa, mira qui la diu.</b></div>
+  </div>
+</section>
+
+<!-- 18 · TANCAMENT -->
+<section class="scene" data-nom="Tancament">
+  <div class="abs paper b" style="left:160px;top:130px;width:1280px;padding:40px;text-align:center" data-at="100">
+    <div style="font-family:var(--hand);font-size:44px;line-height:1.35">La diferència no és <b>on treballes</b>, sinó <b>on neix el projecte</b> i <b>amb quins recursos creix</b>.</div>
+  </div>
+  <div class="abs stamp b" style="left:420px;top:460px;font-size:56px;transform:rotate(-4deg)" data-at="1000">Ara us toca: A1 · compta</div>
+  <div class="abs sticky b" style="left:500px;top:620px;width:600px;text-align:center;transform:rotate(2deg)" data-at="1600">NotebookLM va néixer dins Google.<br>Classroom → tasca A1.</div>
+  <div class="abs" style="left:0;right:0;bottom:40px;text-align:center;font-family:var(--hand);font-size:24px;color:rgba(29,26,22,.75)" data-at="2200">→ crèdits i fonts</div>
+</section>
+
+<!-- 19 · CRÈDITS -->
+<section class="scene" data-nom="Fonts">
+  <div class="abs paper" style="left:160px;top:80px;width:1280px;padding:36px 44px;font-size:24px;line-height:1.45" data-at="100">
+    <div style="font-family:var(--bold);font-size:36px;margin-bottom:10px">Fonts (comprovades el 23-09-2026)</div>
+    <div><b>Xbox:</b> documental oficial «Power On: The Story of Xbox · Chapter 1: The Renegades», canal de Xbox a YouTube (2021), minuts 0:00-1:35, 5:03-11:10 i 12:57-15:04; dates de llançament: Wikipedia, «Xbox (console)».</div>
+    <div><b>Minecraft:</b> Microsoft, 15-09-2014; Wikipedia, «Minecraft» i «Mojang Studios».</div>
+    <div><b>PlayStation:</b> Wikipedia, «Ken Kutaragi».</div>
+    <div><b>Be My Eyes:</b> la seva pàgina «About».</div>
+    <div><b>Cursor:</b> Wikipedia, «Cursor (company)»; Investing.com, 14-08-2026.</div>
+    <div><b>Gmail:</b> Time, 01-04-2014, «How Gmail Happened».</div>
+    <div style="margin-top:12px;font-size:21px;color:#5b5b5b">Els dibuixos són retalls de paper fets per a aquesta classe, no imatges del documental. Les frases dels personatges són paràfrasis; només «Deixem-los fer-ho» és literal: és com un dels protagonistes explica, al documental, el que va dir Bill Gates. La història de la Xbox és la versió de la mateixa empresa.</div>
+  </div>
+  <button class="abs vot" style="left:640px;top:760px;font-size:30px" onclick="window.print()">Imprimir / desar en PDF</button>
+</section>
+
+</div></div>
+
+<div id="barra">
+  <button id="ant" title="Enrere (←)">◀</button>
+  <span id="comptador">1 / 20</span>
+  <button id="seg" title="Endavant (→)">▶</button>
+  <button id="pc" title="Pantalla completa (F)">⤢</button>
+  <button id="rep" title="Tornar a reproduir l'escena (R)">↺</button>
+</div>
+
+<script>
+(function(){
+  const stage=document.getElementById('stage');
+  const escenes=[...document.querySelectorAll('.scene')];
+  const reduit=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i=0, timers=[], encerts=0, votades=0;
+
+  // figures de paper
+  document.querySelectorAll('.fig').forEach(f=>{
+    f.style.setProperty('--c', f.dataset.c||'#555');
+    f.innerHTML='<div class="cama e"></div><div class="cama d"></div><div class="cos"></div><div class="cap"></div>'+
+      (f.dataset.n?'<div class="nom">'+f.dataset.n+'</div>':'');
+  });
+
+  function escala(){
+    const s=Math.min(innerWidth/1600, innerHeight/900);
+    stage.style.transform='scale('+s+')';
+  }
+  addEventListener('resize',escala); escala();
+
+  function neteja(){ timers.forEach(clearTimeout); timers=[]; }
+
+  function comptador(el){
+    const to=+el.dataset.to, suf=el.dataset.sufix||'';
+    let n=0; const passos=8;
+    for(let k=1;k<=passos;k++){
+      timers.push(setTimeout(()=>{ n=Math.round(to*k/passos); el.textContent=n.toLocaleString('ca')+ (k===passos?suf:''); }, k*160));
+    }
+  }
+
+  function mostra(n){
+    neteja();
+    escenes[i].classList.remove('on');
+    i=Math.max(0,Math.min(escenes.length-1,n));
+    const e=escenes[i];
+    // reinicia
+    e.querySelectorAll('[data-at]').forEach(el=>el.classList.remove('in'));
+    e.querySelectorAll('.resposta').forEach(r=>r.classList.remove('mostra'));
+    e.querySelectorAll('.vot').forEach(b=>b.classList.remove('triat'));
+    e.querySelectorAll('.vots').forEach(v=>v.style.visibility='');
+    e.querySelectorAll('.comptador').forEach(c=>c.textContent='0');
+    delete e.dataset.fet;
+    void e.offsetWidth;
+    e.classList.add('on');
+    e.querySelectorAll('[data-at]').forEach(el=>{
+      const t=reduit?0:+el.dataset.at;
+      timers.push(setTimeout(()=>{
+        el.classList.add('in');
+        el.querySelectorAll('.comptador').forEach(comptador);
+      }, t));
+    });
+    // flaix de canvi de fotograma
+    const fl=document.getElementById('flicker');
+    if(!reduit){ fl.style.opacity=.18; setTimeout(()=>fl.style.opacity=0,90); }
+    document.getElementById('comptador').textContent=(i+1)+' / '+escenes.length;
+    document.getElementById('progres').style.width=((i+1)/escenes.length*100)+'%';
+    const m=document.getElementById('marcador');
+    m.style.display=(votades>0 && i>=12 && i<=17)?'block':'none';
+  }
+
+  function vota(e,v){
+    if(e.dataset.fet) return;
+    e.dataset.fet='1';
+    const correcte=e.dataset.correcte;
+    e.querySelectorAll('.vot').forEach(b=>b.classList.toggle('triat', b.dataset.v===String(v)));
+    if(v && e.dataset.compta!=='no'){
+      votades++;
+      if(correcte!=='parany' && String(v)===correcte) encerts++;
+      const m=document.getElementById('marcador');
+      m.textContent='Classe: '+encerts+' / '+votades; m.style.display='block';
+    }
+    e.querySelectorAll('.vots').forEach(v=>v.style.visibility='hidden');
+    e.querySelectorAll('.resposta').forEach(r=>{
+      r.classList.add('mostra');
+      r.querySelectorAll('.stamp').forEach(s=>{ s.classList.remove('in'); void s.offsetWidth; s.style.opacity=1; s.classList.add('in'); });
+    });
+  }
+
+  document.querySelectorAll('.vot[data-v]').forEach(b=>b.addEventListener('click',ev=>{
+    ev.stopPropagation(); vota(b.closest('.scene'), b.dataset.v);
+  }));
+
+  function seguent(){
+    const e=escenes[i];
+    if(e.classList.contains('vota') && !e.dataset.fet){ vota(e,null); return; }
+    if(i<escenes.length-1) mostra(i+1);
+  }
+  function anterior(){ if(i>0) mostra(i-1); }
+
+  document.getElementById('seg').onclick=seguent;
+  document.getElementById('ant').onclick=anterior;
+  document.getElementById('rep').onclick=()=>mostra(i);
+  document.getElementById('pc').onclick=()=>{ document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen(); };
+  document.getElementById('viewport').addEventListener('click',ev=>{ if(!ev.target.closest('button')) seguent(); });
+
+  addEventListener('keydown',ev=>{
+    const k=ev.key;
+    if(['ArrowRight','PageDown',' ','Enter'].includes(k)){ ev.preventDefault(); seguent(); }
+    else if(['ArrowLeft','PageUp','Backspace'].includes(k)){ ev.preventDefault(); anterior(); }
+    else if(k==='f'||k==='F'){ document.getElementById('pc').click(); }
+    else if(k==='r'||k==='R'){ mostra(i); }
+    else if((k==='1'||k==='2') && escenes[i].classList.contains('vota')){ vota(escenes[i],k); }
+  });
+
+  // «boil»: el tremolor del stop-motion, 8 fotogrames per segon
+  if(!reduit){
+    setInterval(()=>{
+      escenes[i].querySelectorAll('.b.in, .b:not([data-at])').forEach(el=>{
+        el.style.translate=((Math.random()*2.4-1.2).toFixed(1))+'px '+((Math.random()*2.4-1.2).toFixed(1))+'px';
+        el.style.rotate=((Math.random()*1.2-.6).toFixed(2))+'deg';
+      });
+    },125);
+  }
+
+  mostra(0);
+})();
+</script>
+</body>
+</html>
