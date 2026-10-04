@@ -166,6 +166,10 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   main{max-width:none;padding:0}
   .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
 }
+</style><style>
+.diapo{display:none}
+body.proj .diapo.on{display:flex;position:fixed;inset:0;z-index:25;background:#111;align-items:center;justify-content:center;cursor:pointer}
+.diapo img{max-width:100%;max-height:100%;object-fit:contain}
 </style>
 </head>
 <body>
@@ -177,7 +181,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
 </header>
 <main>
 
-<section class="p" id="inici" data-titol="Inici">
+<section class="p" id="inici" data-diapos="01,-" data-titol="Inici">
   <p class="kicker">Sessió 4 · dilluns 5 d'octubre</p>
   <h2>Tancar la hackató i el 5.2</h2>
   <p style="font-size:1.15em">Dijous ho vau fer. <b>Avui li posem nom</b>, i fem el pas següent: com la tecnologia canvia les empreses.</p>
@@ -189,20 +193,20 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <div class="clau"><b>Prova del RA3: dijous 15 d'octubre.</b> Apartats 5.1, 5.2 i 5.3 del full d'estudi (pàgines 3 a 22).</div>
 </section>
 
-<section class="p" id="record" data-titol="Record">
+<section class="p" id="record" data-diapos="02,-" data-titol="Record">
   <p class="kicker">Una pregunta · abans de res</p>
   <h2>Per què vau ensenyar el dibuix a l'altre equip sense explicar-lo?</h2>
   <div class="preg"><span class="n">1</span> Pensa-ho deu segons. <button class="revela">Veure la resposta</button><div class="sol"><b>Per veure si s'entén sol.</b> És <b>validar</b>: provar la idea amb algú abans de gastar-hi temps o doblers.</div></div>
 </section>
 
-<section class="p" id="full" data-titol="1 · Full d'equip" data-min="5">
+<section class="p" id="full" data-diapos="03,-" data-titol="1 · Full d'equip" data-min="5">
   <p class="kicker">1 · En equip · 5 minuts</p>
   <h2>Acabeu el full d'equip</h2>
   <ul><li><b>La idea triada i per què.</b></li><li><b>Proveu-la:</b> una cosa que funciona i una que milloraríeu.</li><li>El portaveu el lliura.</li></ul>
   <p class="nota noproj">Tecla T: rellotge de 5 minuts.</p>
 </section>
 
-<section class="p" id="te-nom" data-titol="2 · Té nom">
+<section class="p" id="te-nom" data-diapos="-,04" data-titol="2 · Té nom">
   <p class="kicker">2 · Això que vau fer té nom</p>
   <h2>Pensament de disseny</h2>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=8" target="_blank">Full d'estudi · pàg. 8 i 9</a></div>
@@ -216,14 +220,14 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   Treure idees sense jutjar és pensament <b>divergent</b>. Votar i triar-ne una, <b>convergent</b>.</div>
 </section>
 
-<section class="p" id="fitxa" data-titol="3 · Fitxa A2" data-min="12">
+<section class="p" id="fitxa" data-diapos="05,-" data-titol="3 · Fitxa A2" data-min="12">
   <p class="kicker">3 · Compta · individual · a l'ordinador</p>
   <h2>Fitxa A2</h2>
   <ul><li>Classroom › <b>Activitat 2</b> · obre el fitxer adjunt.</li><li>Tres preguntes, <b>només teves</b>.</li><li>En acabar, «He acabat», i lliura el fitxer a la tasca.</li><li><b>Si tens l'A1 pendent:</b> avui fas l'A1, i la fitxa A2 dijous a primera hora.</li></ul>
   <p class="nota noproj">Tecla T: rellotge de 12 minuts.</p>
 </section>
 
-<section class="p" id="push" data-titol="4 · Lean">
+<section class="p" id="push" data-diapos="06,-" data-titol="4 · Lean">
   <p class="kicker">4 · Amb els dits · ☝ un dit = abans, per si de cas · ✌ dos dits = quan algú ho demana</p>
   <h2>Abans o quan t'ho demanen?</h2>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=6" target="_blank">Full d’estudi · pàg. 6</a></div>
@@ -235,13 +239,13 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   </div>
 </section>
 
-<section class="p" id="lean" data-titol="Lean">
+<section class="p" id="lean" data-diapos="-,07" data-titol="Lean">
   <p class="kicker">4 · La del milió</p>
   <div class="voto" data-ok="b"><p class="q">Quina de les dues maneres malgasta menys?</p><div class="opc"><button data-v="a">Push</button><button data-v="b">Pull</button></div><p class="porque"><b>El pull.</b> Per això el tria <b>Lean</b>.</p></div>
   <div class="clau"><b>Lean</b> vol dir «magre». Neix a <b>Toyota</b>: crear valor per al client traient el malbaratament. El push no és dolent: és el normal quan saps que hi haurà cua.</div>
 </section>
 
-<section class="p" id="scrum" data-titol="Scrum">
+<section class="p" id="scrum" data-diapos="08,-,09" data-titol="Scrum">
   <p class="kicker">4 · Sou quatre i voleu fer un joc per a mòbil</p>
   <h2>Pla A o pla B?</h2>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=7" target="_blank">Full d’estudi · pàg. 7</a></div>
@@ -250,7 +254,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <div class="clau">El pla B és <b>Scrum</b>: <b>esprints</b> (cicles curts que acaben amb una versió que funciona), una reunió curta cada dia i tres pilars: <b>transparència, inspecció i adaptació</b>.</div>
 </section>
 
-<section class="p" id="tecnologia" data-titol="5 · El 5.2">
+<section class="p" id="tecnologia" data-diapos="10,-" data-titol="5 · El 5.2">
   <p class="kicker">5 · Nou</p>
   <h2>La tecnologia canvia les empreses</h2>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=11" target="_blank">Full d'estudi · pàg. 11 i 12</a></div>
@@ -259,7 +263,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <div class="voto" data-ok="c"><p class="q">La informàtica, en quin sector és?</p><div class="opc"><button data-v="a">Secundari</button><button data-v="b">Terciari</button><button data-v="c">Quaternari</button></div><p class="porque"><b>Quaternari</b>: informació i tecnologia. Abans s'incloïa dins el terciari.</p></div>
 </section>
 
-<section class="p" id="startup" data-titol="Start-up">
+<section class="p" id="startup" data-diapos="-,11,12" data-titol="Start-up">
   <p class="kicker">5 · Start-up o empresa nova?</p>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=13" target="_blank">Full d'estudi · pàg. 13 a 15</a></div>
   <div class="voto" data-ok="b"><p class="q">Un bar que obre al poble, és una start-up?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div><p class="porque"><b>No.</b> Una start-up crea un producte o servei <b>nou</b> en <b>incertesa extrema</b> (Eric Ries). Un bar que obre no és ni una cosa ni l'altra.</p></div>
@@ -268,7 +272,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <p><b>Canvas</b> (Osterwalder): nou blocs per dibuixar un model de negoci.</p>
 </section>
 
-<section class="p" id="canvas" data-titol="6 · Canvas" data-min="7">
+<section class="p" id="canvas" data-diapos="13,-" data-titol="6 · Canvas" data-min="7">
   <p class="kicker">6 · Per equips · en un full en blanc</p>
   <h2>El vostre Canvas, tres caselles</h2>
   <p>La idea de la vostra botiga:</p>
@@ -276,7 +280,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <div class="preg"><span class="n">1</span> Un exemple, si us encalleu. <button class="revela">Veure un exemple</button><div class="sol"><span class='inventat'>exemple inventat</span><br><b>Segments:</b> joves de 16 a 20 anys del poble · <b>proposta de valor:</b> un mòbil de segona mà revisat i amb garantia · <b>canals:</b> Instagram i el taulell de la botiga.</div></div>
 </section>
 
-<section class="p" id="tancament" data-titol="Tancament">
+<section class="p" id="tancament" data-diapos="14,-" data-titol="Tancament">
   <p class="kicker">Per acabar</p>
   <h2>Dijous: una societat més sostenible</h2>
   <div class="clau"><b>Prova del RA3: dijous 15 d'octubre.</b> Apartats 5.1, 5.2 i 5.3 del full d'estudi, pàgines 3 a 22. Prepara-la amb els «Comprova que ho saps» 1-16.</div>
@@ -489,6 +493,35 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   [bx, document.getElementById("baixa2")].forEach(function(b){ if (b) b.addEventListener("click", baixa); });
 
   if (location.hash === "#projectar") entra();
+})();
+</script><script>
+(function(){
+  var cap = document.createElement("div"); cap.className = "diapo"; var img = document.createElement("img"); img.alt = "";
+  cap.appendChild(img); document.body.appendChild(cap);
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p")), ara = null, k = 0;
+  function seq(s){ return s && s.dataset.diapos ? s.dataset.diapos.split(",") : ["-"]; }
+  function pinta(){
+    var q = seq(ara), d = q[k];
+    if (d && d !== "-") { img.src = "recursos/diapositives/" + d + ".jpg"; cap.classList.add("on"); }
+    else cap.classList.remove("on");
+  }
+  setInterval(function(){
+    var s = document.querySelector("section.p.actual");
+    if (s !== ara) { var enrere = ara && pant.indexOf(s) < pant.indexOf(ara); ara = s; k = enrere ? seq(s).length - 1 : 0; pinta(); }
+  }, 80);
+  function pas(n){ var q = seq(ara), j = k + n; if (j < 0 || j >= q.length) return false; k = j; pinta(); return true; }
+  document.addEventListener("keydown", function(ev){
+    if (!document.body.classList.contains("proj") || !ara) return;
+    var e = ev.key;
+    if (e === "ArrowRight" || e === "PageDown" || e === " ") { if (pas(1)) { ev.preventDefault(); ev.stopImmediatePropagation(); } }
+    else if (e === "ArrowLeft" || e === "PageUp") { if (pas(-1)) { ev.preventDefault(); ev.stopImmediatePropagation(); } }
+    else if (e === "d" || e === "D") { var q = seq(ara); if (q.length > 1) { k = q[k] === "-" ? q.findIndex(function(x){ return x !== "-"; }) : q.indexOf("-"); pinta(); } }
+    else if (/^[1-4sStT]$/.test(e) && cap.classList.contains("on")) { k = seq(ara).indexOf("-"); pinta(); }
+  }, true);
+  [["seg", 1], ["ant", -1]].forEach(function(b){
+    document.getElementById(b[0]).addEventListener("click", function(ev){ if (ara && pas(b[1])) ev.stopImmediatePropagation(); }, true);
+  });
+  cap.addEventListener("click", function(){ if (!pas(1)) document.getElementById("seg").click(); });
 })();
 </script>
 </body>
