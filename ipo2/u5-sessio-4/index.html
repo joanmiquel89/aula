@@ -500,6 +500,8 @@ body.proj .diapo.on{display:flex;position:fixed;inset:0;z-index:25;background:#1
   cap.appendChild(img); document.body.appendChild(cap);
   var pant = Array.prototype.slice.call(document.querySelectorAll("section.p")), ara = null, k = 0;
   function seq(s){ return s && s.dataset.diapos ? s.dataset.diapos.split(",") : ["-"]; }
+  var cau = [];  // es baixen totes en obrir la pàgina: a classe surten a l'instant
+  pant.forEach(function(s){ seq(s).forEach(function(d){ if (d !== "-") { var im = new Image(); im.src = "recursos/diapositives/" + d + ".jpg"; cau.push(im); } }); });
   function pinta(){
     var q = seq(ara), d = q[k];
     if (d && d !== "-") { img.src = "recursos/diapositives/" + d + ".jpg"; cap.classList.add("on"); }
