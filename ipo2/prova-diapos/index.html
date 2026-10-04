@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Diapositives interactives · prova</title>
+<!-- Prova (04-10): les diapositives de NotebookLM de la sessió 4 d'IPO II, amb peces interactives a sobre.
+     Les posicions són en % de la diapositiva (1912×1067), perquè quadrin a qualsevol mida de pantalla. -->
+<style>
+:root{--paper:#f4eedd;--tinta:#1a1a1a;--verd:#2E7D4F;--vermell:#C0392B;--groc:#ffe27a}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#111;font-family:"Helvetica Neue",Arial,sans-serif;color:var(--tinta)}
+.escena{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.diapo{position:relative;width:min(100vw,calc(100vh*1912/1067));aspect-ratio:1912/1067;display:none;container-type:inline-size}
+.diapo.actual{display:block}
+.diapo>img{width:100%;height:100%;display:block;user-select:none}
+.peca{position:absolute}
+/* paperet que tapa la resposta */
+.tapa{background:var(--paper);border-radius:2px;box-shadow:0 .25cqw .6cqw rgba(0,0,0,.35);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font:700 2.1cqw/1 "Segoe Print","Comic Sans MS",cursive;color:#8a6d3b;
+  transform:rotate(var(--r,-1.5deg));transition:transform .55s cubic-bezier(.5,-0.3,.7,1),opacity .55s}
+.tapa::after{content:"";position:absolute;top:-.6cqw;left:40%;width:22%;height:1.2cqw;background:rgba(255,255,255,.55);transform:rotate(-4deg)}
+.tapa.fora{transform:translate(6cqw,-8cqw) rotate(25deg);opacity:0;pointer-events:none}
+/* panell de vot, com un tros de paper */
+.vot{background:var(--paper);padding:1.2cqw 1.4cqw;box-shadow:0 .3cqw .8cqw rgba(0,0,0,.35);transform:rotate(-1deg);width:24cqw}
+.vot .q{font:700 1.45cqw/1.25 inherit;margin:0 0 .9cqw}
+.vot button{display:block;width:100%;margin:.5cqw 0;padding:.7cqw 1cqw;font:600 1.35cqw/1.2 inherit;text-align:left;
+  background:#fff;border:.15cqw solid var(--tinta);border-radius:.4cqw;cursor:pointer}
+.vot button .k{display:inline-block;min-width:1.8cqw;font-weight:800;color:#777}
+.vot button.ok{background:#dff0e4;border-color:var(--verd)}
+.vot button.ko{background:#f7dcd8;border-color:var(--vermell)}
+.vot .perque{display:none;font-size:1.2cqw;line-height:1.35;margin:.7cqw 0 0}
+.vot.fet .perque{display:block}
+/* marcador fluorescent i segell */
+.fluor{background:var(--groc);mix-blend-mode:multiply;opacity:0;transition:opacity .3s;pointer-events:none}
+.fluor.on{opacity:.75}
+.segell{font:800 1.5cqw/1 inherit;color:var(--vermell);border:.25cqw solid var(--vermell);padding:.25cqw .6cqw;border-radius:.3cqw;
+  transform:rotate(-8deg) scale(1.6);opacity:0;transition:all .35s cubic-bezier(.2,1.6,.4,1);background:rgba(255,255,255,.7)}
+.segell.on{opacity:1;transform:rotate(-8deg) scale(1)}
+.segell.pull{color:var(--verd);border-color:var(--verd)}
+/* barra inferior */
+.barra{position:fixed;right:1vw;bottom:1vh;display:flex;gap:.5vw;align-items:center;z-index:9;font:600 14px/1 inherit;color:#ddd}
+.barra button{background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:6px;padding:6px 10px;cursor:pointer;font:inherit}
+.marcador{background:var(--groc);color:var(--tinta);border-radius:6px;padding:6px 10px}
+.rellotge{display:none;background:var(--groc);color:var(--tinta);border-radius:6px;padding:6px 10px;font-size:18px}
+.rellotge.on{display:inline-block}
+.ajuda{position:fixed;left:1vw;bottom:1vh;color:#888;font:13px/1.3 inherit;z-index:9}
+</style>
+</head>
+<body>
+<div class="escena">
+
+<!-- DIAPOSITIVA 4 · el pensament de disseny: es vota i després es desenganxen els paperets -->
+<section class="diapo" data-min="0">
+  <img src="diapositives/04.jpg" alt="Diapositiva 4: Això que vau fer té nom. Pensament de disseny">
+  <div class="peca vot" style="left:3%;top:14%" data-ok="c">
+    <p class="q">Ensenyar el dibuix a l'altre equip, quina etapa és?</p>
+    <button data-v="a"><span class="k">1</span>Empatitzar</button>
+    <button data-v="b"><span class="k">2</span>Prototipar</button>
+    <button data-v="c"><span class="k">3</span>Validar</button>
+    <p class="perque"><b>Validar:</b> escoltar l'usuari i ajustar. El dibuix era el <b>prototip</b>. Ara, desenganxeu els paperets (S).</p>
+  </div>
+  <div class="peca tapa" style="left:56.8%;top:70.6%;width:10.9%;height:4.8%;--r:-2deg">?</div>
+  <div class="peca tapa" style="left:57.9%;top:74.9%;width:6.8%;height:4.7%;--r:1.5deg">?</div>
+  <div class="peca tapa" style="left:57.1%;top:79.0%;width:5.7%;height:4.7%;--r:-1deg">?</div>
+  <div class="peca tapa" style="left:49.1%;top:83.2%;width:10.2%;height:4.8%;--r:2deg">?</div>
+  <div class="peca tapa" style="left:58.2%;top:87.3%;width:7.2%;height:4.8%;--r:-1.5deg">?</div>
+</section>
+
+<!-- DIAPOSITIVA 6 · push o pull: es vota cas a cas; la línia es marca i surt el segell -->
+<section class="diapo">
+  <img src="diapositives/06.jpg" alt="Diapositiva 6: Abans o quan t'ho demanen? Quatre casos">
+  <div class="peca fluor" style="left:27.5%;top:80.7%;width:40.8%;height:4.6%"></div>
+  <div class="peca fluor" style="left:20.5%;top:85.1%;width:62.9%;height:4.6%"></div>
+  <div class="peca fluor" style="left:10.2%;top:89.4%;width:76.5%;height:4.6%"></div>
+  <div class="peca fluor" style="left:16.3%;top:93.7%;width:67.5%;height:4.6%"></div>
+  <div class="peca segell" style="left:69%;top:80.4%">PULL</div>
+  <div class="peca segell" style="left:84.2%;top:84.8%">PUSH</div>
+  <div class="peca segell" style="left:87.7%;top:89.1%">PULL</div>
+  <div class="peca segell" style="left:84.6%;top:93.4%">PUSH</div>
+  <div class="peca vot casos" style="left:3%;top:8%" data-oks="b,a,b,a">
+    <p class="q">Cas <span class="ncas">1</span> de 4: abans o quan t'ho demanen?</p>
+    <button data-v="a"><span class="k">1</span>☝ Abans, per si de cas (push)</button>
+    <button data-v="b"><span class="k">2</span>✌ Quan algú ho demana (pull)</button>
+    <p class="perque"></p>
+  </div>
+</section>
+
+<!-- DIAPOSITIVA 7 · Lean: el títol dona la resposta, així que va tapat fins que es vota -->
+<section class="diapo">
+  <img src="diapositives/07.jpg" alt="Diapositiva 7: Lean, el pull malgasta menys">
+  <div class="peca tapa" style="left:25.8%;top:8.2%;width:63.4%;height:12%;--r:-1deg;font-size:3.4cqw">quina malgasta menys?</div>
+  <div class="peca vot" style="left:2%;top:26%" data-ok="b">
+    <p class="q">Quina de les dues maneres malgasta menys?</p>
+    <button data-v="a"><span class="k">1</span>Push</button>
+    <button data-v="b"><span class="k">2</span>Pull</button>
+    <p class="perque"><b>El pull.</b> Per això el tria Lean. El push no és dolent: és el normal quan saps que hi haurà cua.</p>
+  </div>
+</section>
+
+</div>
+<div class="ajuda">→ ← canvia · 1-3 vota · S desenganxa · T rellotge · F pantalla completa</div>
+<div class="barra"><span class="rellotge" id="rellotge"></span><span class="marcador" id="marcador">La classe: 0 de 0</span>
+  <button id="ant">←</button><span id="pos"></span><button id="seg">→</button></div>
+
+<script>
+(function(){
+  var dia = [].slice.call(document.querySelectorAll(".diapo")), i = 0, encerts = 0, vots = 0;
+  function marca(){ document.getElementById("marcador").textContent = "La classe: " + encerts + " de " + vots; }
+  function mostra(n){ i = Math.max(0, Math.min(dia.length - 1, n));
+    dia.forEach(function(d, j){ d.classList.toggle("actual", j === i); });
+    document.getElementById("pos").textContent = (i + 1) + " / " + dia.length; }
+  function puntua(b, ok){ b.classList.add(b.dataset.v === ok ? "ok" : "ko"); vots++; if (b.dataset.v === ok) encerts++; marca(); }
+
+  // vot simple: es marca la resposta i es destapa el paperet que tapava el títol (si n'hi ha un de gran)
+  document.querySelectorAll(".vot:not(.casos)").forEach(function(v){
+    v.querySelectorAll("button").forEach(function(b){ b.addEventListener("click", function(){
+      if (v.classList.contains("fet")) return;
+      v.classList.add("fet"); puntua(b, v.dataset.ok);
+      v.querySelectorAll("button").forEach(function(x){ if (x.dataset.v === v.dataset.ok) x.classList.add("ok"); });
+      var gran = v.parentNode.querySelector(".tapa[style*='font-size']"); if (gran) gran.classList.add("fora");
+    }); });
+  });
+  // vot per casos: cada vot marca la línia del cas, posa el segell i passa al cas següent
+  document.querySelectorAll(".vot.casos").forEach(function(v){
+    var oks = v.dataset.oks.split(","), c = 0, d = v.parentNode, fl = d.querySelectorAll(".fluor"), se = d.querySelectorAll(".segell");
+    var perq = ["<b>Pull.</b> Demanda real: no sobra res.", "<b>Push.</b> Per previsió; si en sobren, es perden.",
+                "<b>Pull.</b> Muntava cada ordinador quan el client l'havia encarregat.", "<b>Push.</b> Per vendre-les el primer dia, les havia de tenir fetes abans."];
+    function cas(){ fl.forEach(function(f, j){ f.classList.toggle("on", j === c); }); v.querySelector(".ncas").textContent = c + 1;
+      v.querySelectorAll("button").forEach(function(x){ x.className = ""; }); }
+    v.querySelectorAll("button").forEach(function(b){ b.addEventListener("click", function(){
+      if (c >= oks.length || b.classList.contains("ok") || b.classList.contains("ko")) return;
+      puntua(b, oks[c]); se[c].classList.add("on"); v.querySelector(".perque").innerHTML = perq[c]; v.classList.add("fet");
+      var esta = c; setTimeout(function(){ if (c === esta && c < oks.length - 1) { c++; cas(); } else if (c === esta) { fl.forEach(function(f){ f.classList.remove("on"); }); } }, 2200);
+    }); });
+    cas();
+  });
+  // paperets: clic o tecla S per desenganxar-los d'un en un
+  document.querySelectorAll(".tapa").forEach(function(t){ t.addEventListener("click", function(){ t.classList.add("fora"); }); });
+
+  // rellotge senzill (tecla T: 1 minut, per a la prova)
+  var rel = document.getElementById("rellotge"), tic = null;
+  function rellotge(seg){ clearInterval(tic); if (rel.classList.contains("on")) { rel.classList.remove("on"); return; }
+    rel.classList.add("on"); var fi = Date.now() + seg * 1000;
+    (function pinta(){ var r = Math.max(0, Math.round((fi - Date.now()) / 1000)); rel.textContent = "⏱ " + Math.floor(r / 60) + ":" + ("0" + r % 60).slice(-2);
+      if (r === 0) { clearInterval(tic); rel.textContent = "⏱ Temps!"; } })();
+    tic = setInterval(function(){ var r = Math.max(0, Math.round((fi - Date.now()) / 1000)); rel.textContent = r ? "⏱ " + Math.floor(r / 60) + ":" + ("0" + r % 60).slice(-2) : "⏱ Temps!"; if (!r) clearInterval(tic); }, 250); }
+
+  document.getElementById("ant").onclick = function(){ mostra(i - 1); };
+  document.getElementById("seg").onclick = function(){ mostra(i + 1); };
+  document.addEventListener("keydown", function(e){
+    var d = dia[i];
+    if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") { e.preventDefault(); mostra(i + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") mostra(i - 1);
+    else if (/^[1-3]$/.test(e.key)) { var bs = d.querySelectorAll(".vot button"), b = bs[+e.key - 1]; if (b) b.click(); }
+    else if (e.key === "s" || e.key === "S") { var t = d.querySelector(".tapa:not(.fora)"); if (t) t.classList.add("fora"); }
+    else if (e.key === "t" || e.key === "T") rellotge(60);
+    else if (e.key === "f" || e.key === "F") { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(function(){}); else document.exitFullscreen(); }
+  });
+  marca(); mostra(0);
+})();
+</script>
+</body>
+</html>
