@@ -36,6 +36,9 @@ html,body{margin:0;height:100%;background:#111;font-family:"Helvetica Neue",Aria
 .ajuda{position:fixed;left:1vw;bottom:1vh;color:#888;font:13px/1.3 "Helvetica Neue",Arial,sans-serif;z-index:9}
 body.net .ajuda,body.net .barra button{opacity:0}
 body.net .barra:hover button{opacity:1}
+.enllacos{position:fixed;left:1vw;top:1vh;z-index:9;display:flex;flex-direction:column;gap:6px;max-width:34vw}
+.enllacos a{background:var(--groc);color:var(--tinta);border-radius:6px;padding:8px 12px;font:600 15px/1.25 "Helvetica Neue",Arial,sans-serif;text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.enllacos a:hover{background:#fff}
 </style>
 </head>
 <body>
@@ -60,10 +63,13 @@ var N = 14, FITXES = {"2": {"vot": {"opcions": ["Sí", "No"], "ok": 1, "perque":
     }
     esc.appendChild(d); dia.push(d);
   }
+
+  var ENL = {"4": [["Per què tres planetes? Com es mesura (Global Footprint Network)", "https://overshoot.footprintnetwork.org/about-earth-overshoot-day/"], ["Informe Brundtland: la definició de sostenibilitat (ONU)", "https://www.un.org/es/ga/president/65/issues/sustdev.shtml"]], "6": [["Els 17 ODS, un per un (Nacions Unides)", "https://www.un.org/sustainabledevelopment/sustainable-development-goals/"]], "9": [["Exemple d'RSC: Patagonia, els beneficis van a combatre el canvi climàtic", "https://en.wikipedia.org/wiki/Patagonia,_Inc."], ["Créixer i ser sostenible: Ørsted, de fòssils a eòlica marina", "https://orsted.com/en/about-us"]]}, en = document.createElement("div"); en.className = "enllacos"; document.body.appendChild(en);
+  function enllacos(k){ var l = ENL[k + 1] || []; en.innerHTML = l.map(function(x){ return '<a href="' + x[1] + '" target="_blank" rel="noopener">🔗 ' + x[0] + '</a>'; }).join(""); }
   function marca(){ document.getElementById("marcador").textContent = "La classe: " + encerts + " de " + vots; }
   function mostra(k){ i = Math.max(0, Math.min(dia.length - 1, k));
     dia.forEach(function(d, j){ d.classList.toggle("actual", j === i); });
-    document.getElementById("pos").textContent = (i + 1) + " / " + dia.length; }
+    document.getElementById("pos").textContent = (i + 1) + " / " + dia.length; enllacos(i); }
   document.querySelectorAll(".vot").forEach(function(v){
     v.querySelectorAll("button").forEach(function(b){ b.addEventListener("click", function(){
       if (v.classList.contains("fet")) return;
