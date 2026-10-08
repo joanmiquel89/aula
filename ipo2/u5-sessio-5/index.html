@@ -4,22 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Una societat més sostenible · Sessió 5</title>
-<!-- Generat per genera_web_sessions_04_05.py (motor: sessió 5 d'IPO I). No l'editis a mà. -->
+<title>El Canvas, la tecnologia i la sostenibilitat · Sessió 5</title>
+<!-- Generat per sistema/tools/sessio_aula.py des de fitxa-sessio-05.toml. No l'editis a mà: edita la fitxa. -->
 <style>
 :root{
   --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
   --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
   --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
-  --bold:"Segoe UI","Helvetica Neue",Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
 a{color:var(--blau)}
 b,strong{font-weight:700}
-
-/* ---------- barra de dalt ---------- */
 .dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
 .dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
 .dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
@@ -28,10 +25,7 @@ b,strong{font-weight:700}
 .dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
 .dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
 .marcador{font-size:13px;opacity:.9;white-space:nowrap}
-
 main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
-
-/* ---------- pantalles ---------- */
 .p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
 .p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
 .p h3{font-size:19px;margin:16px 0 6px}
@@ -39,16 +33,15 @@ main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
 .hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
 .hora::after{content:"";flex:1;height:2px;background:var(--linia)}
 .kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
-
-/* on ho estudies: el lligam amb els apunts */
 .refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.voto~.refs,.grup~.refs{margin:12px 0 0}
+.refs.despres{display:none}
+.votat .refs.despres{display:flex}
 .ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid currentColor;text-decoration:none;white-space:nowrap}
 .ref.hoja{color:var(--verd);background:var(--verdclar)}
 a.ref.hoja::after{content:" ↗"}
 .ref.libro{color:var(--blau);background:var(--blauclar)}
-.ref.pres{color:var(--lila);background:var(--lilaclar)}
 .ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
-
 .caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
 .caso p:last-child{margin:0}
 .fuente{font-size:13px;color:var(--suau)}
@@ -56,20 +49,16 @@ a.ref.hoja::after{content:" ↗"}
 .clau b{color:#ffd66b}
 .nota{font-size:14px;color:var(--suau)}
 .inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
-
-/* peces */
 .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
 .tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
 .tres>div b{display:block;font-size:18px;margin-bottom:4px}
 .tres>div span{font-size:15px;color:var(--suau)}
 .dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
-.dos>div{border-radius:10px;padding:12px 16px}
-.dos .emp{background:var(--blauclar);border:2px solid var(--blau)}
-.dos .tu{background:var(--verdclar);border:2px solid var(--verd)}
+.dos>div{border-radius:10px;padding:12px 16px;background:var(--blauclar);border:2px solid var(--blau)}
+.dos>div+div{background:var(--verdclar);border-color:var(--verd)}
 .dos h3{margin:0 0 6px}
 ul,ol{margin:4px 0 10px;padding-left:22px}
 ol.dosc{columns:2;column-gap:28px;margin:6px 0 10px}ol.dosc li{break-inside:avoid}
-#principios td,#principios th{padding:2px 8px}#principios table{margin:4px 0 8px}#principios .clau{margin:6px 0;padding:8px 14px}
 li{margin:0 0 4px}
 table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
 th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
@@ -82,8 +71,6 @@ th{background:#f3ecdf}
 .plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
 .plan ol{margin:0;padding-left:20px}
-
-/* votacions */
 .voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
 .voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
 .opc{display:flex;flex-wrap:wrap;gap:8px}
@@ -95,11 +82,8 @@ th{background:#f3ecdf}
 .opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
 .porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
 .voto.fet .porque{display:block}
-.voto.fet.obert .porque{background:var(--mostassaclar)}
 .grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .grup .voto{margin:0}
-
-/* preguntes i solucions */
 .preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
 .preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
 .revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
@@ -115,11 +99,8 @@ textarea.resp:focus{outline:2px solid var(--tinta)}
 .jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
 .jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
 .jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
-
 .peu{text-align:center;margin:30px 0}
 .peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
-
-/* ---------- mode projectar ---------- */
 .ctrl{display:none}
 body.proj{background:var(--kraft);overflow:hidden}
 body.proj main{max-width:none;padding:0}
@@ -138,8 +119,6 @@ body.proj textarea.resp,body.proj .jo{display:none}
 body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
 .ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
 .ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
-
-/* ronda rápida i rellotge de parelles (05-10) */
 .cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
 .compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
 .compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
@@ -148,20 +127,21 @@ body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;ga
 .compte.zero .xifra{color:var(--verd)}
 body.proj .compte{display:flex}
 body.proj .cas-flash{font-size:1.55em}
-body.proj .flash .sol{font-size:1.1em}
 .rellotge{display:none;font-weight:800;font-variant-numeric:tabular-nums}
 body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta);border-radius:8px;padding:6px 12px;font-size:20px}
 .rellotge.fi{background:var(--vermell)!important;color:#fff!important}
-
 @media (max-width:700px){
   body{font-size:16px}
   .p{padding:16px 14px}
   .p h2{font-size:23px}
   .tres,.dos,.plan,.grup{grid-template-columns:1fr}
-  .dalt nav{display:none}
+  ol.dosc{columns:1}
+  .dalt nav,.dalt .nom small{display:none}
+  .opc button{flex:1 1 100%;text-align:left}
 }
 @media print{
   .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  .refs.despres{display:flex!important}
   body{background:#fff;font-size:11pt}
   main{max-width:none;padding:0}
   .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
@@ -169,90 +149,183 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
 </style>
 </head>
 <body>
+
 <header class="dalt">
-  <span class="nom">IPO II · Unitat 5 · Sessió 5<small>Una societat més sostenible</small></span>
+  <span class="nom">IPO II · Unitat 5 · Sessió 5<small>El Canvas, la tecnologia i la sostenibilitat</small></span>
   <nav id="index"></nav>
   <span class="marcador" id="marcador" title="Encerts de la classe a les votacions"></span>
+  <button id="baixa2" class="solo-web noproj" title="Descarregar les meves respostes d'avui">⬇ Les meves respostes</button>
   <button id="bproj" title="Pantalla completa per projectar (tecla P)">▶ Projectar</button>
 </header>
+
 <main>
 
-<section class="p" id="inici" data-titol="Inici">
-  <p class="kicker">Sessió 5 · dijous 8 d'octubre</p>
-  <h2>Una societat més sostenible</h2>
-  <p style="font-size:1.15em">Què vol dir que una empresa sigui sostenible, i com ho fa una empresa de Mallorca amb intel·ligència artificial.</p>
-  <div class="cadena"><span class="fet">5.1 · Emprendre i metodologies</span><i>→</i><span class="fet">5.2 · Tecnologia i empreses</span><i>→</i><span class="avui">5.3 · Sostenibilitat</span><i>→</i><span>Prova del RA3</span></div>
-  <div class="plan"><div><b>Avui</b><ol><li>Una societat més sostenible</li><li>A5 · Iberostar, a l'ordinador</li></ol></div><div><b>Si tens pendent la fitxa A2 o l'A1</b><p>A l'ordinador fins a les 15.20: venç aleshores.</p></div></div>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=17" target="_blank">Full d'estudi · pàg. 17 a 22</a></div>
-  <div class="clau"><b>Prova del RA3: dijous 15 d'octubre.</b> Apartats 5.1, 5.2 i 5.3 (pàgines 3 a 22).</div>
+<section class="p" id="inicio" data-titol="Inici">
+  <p class="kicker">Sessió 5 · una hora</p>
+  <h2>El Canvas, la tecnologia i la sostenibilitat</h2>
+  <p style="font-size:1.15em">Dilluns vam començar el 5.2 per sobre. Avui hi tornem amb calma: com es dibuixa un model de negoci (el Canvas), què vol dir innovar i quan una empresa nova és una start-up. I després, què vol dir que una empresa sigui sostenible.</p>
+  <div class="cadena"><span class="fet">5.1 · Emprendre i metodologies</span><i>→</i><span class="avui">5.2 · El Canvas i la tecnologia</span><i>→</i><span class="avui">5.3 · Sostenibilitat</span><i>→</i><span>A5 (dijous 15)</span><i>→</i><span>Prova del RA3 (dilluns 19)</span></div>
+  <div class="plan"><div><b>Avui</b><ol start="1"><li>Una pregunta de dilluns <small>· 2 min</small></li><li>El Canvas: un exemple i, per parelles, una app real <small>· 21 min</small></li><li>5.2 · Innovar, la tecnologia i les start-ups <small>· 10 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>5.3 · Una empresa sostenible: els ODS i l'RSC <small>· 8 min</small></li><li>Com ho fa una empresa: la taula 5.5 <small>· 4 min</small></li><li>Si sobra temps: una altra app en tres caselles <small>· ➕ si hi ha temps</small></li></ol></div></div>
+  <h3 class="noproj">Com fer servir aquesta pàgina</h3>
+  <p class="noproj">A classe la projectem. A casa et serveix per estudiar: cada bloc et diu <b>on és al full d'estudi</b> (el botó verd l'obre a la pàgina exacta).</p>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=11" target="_blank">Full d'estudi · pàg. 11-15 i 17-20</a><span class="ref ficha">Escriviu les respostes en aquesta pàgina</span></div>
+  <div class="jo noproj"><label>Nom i llinatges <input id="nom" autocomplete="off"></label><label>Grup <input id="grup" autocomplete="off" size="8"></label><label>Amb qui treballes <input id="parella" autocomplete="off"></label></div>
+  <p class="nota noproj"><b>Avui no hi ha paper:</b> escrius les respostes en aquesta pàgina (es desen soles al teu ordinador) i, en acabar, les pots descarregar amb el botó «Les meves respostes» de dalt.</p>
+  <p class="nota noproj">Verd: el full d'estudi (s'obre a la pàgina exacta). Groc: el que escrius en aquesta pàgina.</p>
 </section>
 
-<section class="p" id="record" data-titol="Record">
-  <p class="kicker">Una pregunta · abans de res</p>
-  <div class="voto" data-ok="b"><p class="q">Un bar que obre al poble, és una start-up?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div><p class="porque"><b>No.</b> Una start-up crea un producte o servei <b>nou</b> en <b>incertesa extrema</b>.</p></div>
+<section class="p" id="record" data-titol="1 · Record">
+  <p class="kicker">1 · Una pregunta de dilluns · abans de res</p>
+  <h2>El pla B del joc per a mòbil</h2>
+  <div class="preg"><span class="n">1</span> Dilluns, el pla B del joc per a mòbil tenia nom: <b>Scrum</b>. Què és un <b>esprint</b>? <button class="revela">Veure la resposta</button><div class="sol">Un <b>cicle curt</b> de treball. Al final de cada esprint es lliura una part del producte <b>que ja funciona</b>: al pla B, cada dues setmanes, una versió del joc que ja es pot jugar (full d'estudi, pàg. 7).</div></div>
 </section>
 
-<section class="p" id="sostenibilitat" data-titol="1 · Sostenibilitat">
-  <p class="kicker">1 · Nou</p>
+<section class="p" id="canvas-exemple" data-titol="2 · Canvas">
+  <p class="kicker">2 · Primer, un exemple · la botiga de la hackató</p>
+  <h2>Un model de negoci en tres caselles</h2>
+  <p>Un <b>model de negoci</b> explica com una empresa <b>crea, entrega i captura valor</b> al mercat: què ofereix, a qui, com hi arriba i com en treu diners. El <b>Canvas</b>, d'Alexander Osterwalder, el dibuixa en nou blocs. Avui en fem tres:</p>
+<div class="tres"><div><b>Segments de clients</b><span>A qui va?</span></div><div><b>Proposta de valor</b><span>Què li resol?</span></div><div><b>Canals</b><span>Per on li arriba?</span></div></div>
+<div class="caso"><p>La botiga de reparació de la hackató vol vendre mòbils de segona mà, revisats i amb garantia, als joves de 16 a 20 anys del poble. Els anuncia a Instagram i els ven al taulell.</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
+<div class="voto" data-ok="c"><p class="q">«Instagram i el taulell de la botiga»: a quina casella va? <span class="inventat">· exemple inventat</span></p><div class="opc"><button data-v="a">Segments de clients</button><button data-v="b">Proposta de valor</button><button data-v="c">Canals</button></div><p class="porque"><b>Canals:</b> és per on la proposta de valor arriba al client.</p></div>
+<div class="preg"><span class="n">1</span> I les altres dues caselles? <button class="revela">Veure les altres dues</button><div class="sol"><b>Segments de clients:</b> joves de 16 a 20 anys del poble · <b>proposta de valor:</b> un mòbil de segona mà revisat i amb garantia.</div></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=13" target="_blank">Full d'estudi · pàg. 13-14</a></div>
+</section>
+
+<section class="p" id="canvas-parelles" data-min="15">
+  <p class="kicker">2 · Per parelles · una app real · uns quinze minuts</p>
+  <h2>Too Good To Go en tres caselles</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=14" target="_blank">Full d'estudi · pàg. 14</a><span class="ref ficha">Escriviu en aquesta pàgina</span></div>
+  <div class="caso"><p><b>Too Good To Go</b> és una aplicació nascuda a Dinamarca el 2016 que funciona a Espanya des del 2018. Restaurants i botigues d'alimentació hi posen el menjar que els ha sobrat del dia en un <b>«pack sorpresa»</b> a preu reduït. La gent el compra i el paga a l'app, i el passa a recollir per l'establiment a l'hora que li diuen. Així aquest menjar no es llença.</p><p class="fuente">Font: InfoHoreca, 29-09-2023.</p></div>
+<div class="clau">Escriviu les tres caselles. <b>Pista:</b> aquesta app té més d'un tipus de client. Si no acabeu, no passa res: ho corregim junts.</div>
+<div class="preg"><span class="n">1</span> <b>Segments de clients:</b> qui fa servir l'app? Recordeu la pista.
+    <textarea class="resp" data-clau="canvas-parelles-1"></textarea>
+    </div>
+<div class="preg"><span class="n">2</span> <b>Proposta de valor:</b> quin problema resol a cada segment?
+    <textarea class="resp" data-clau="canvas-parelles-2"></textarea>
+    </div>
+<div class="preg"><span class="n">3</span> <b>Canals:</b> per on els arriba, des de la compra fins a la recollida?
+    <textarea class="resp" data-clau="canvas-parelles-3"></textarea>
+    </div>
+<div class="preg"><span class="n">4</span> <b>Si acabeu abans:</b> les tres caselles de la idea del vostre equip a la hackató.
+    <textarea class="resp" data-clau="canvas-parelles-4"></textarea></div>
+
+  <p class="encls">Les solucions les veiem a classe.</p>
+</section>
+
+<section class="p" id="innovar" data-titol="3 · 5.2">
+  <p class="kicker">3 · Dilluns: modernitzar és posar al dia les empreses amb digitalització i tecnologies avançades</p>
+  <h2>Dell</h2>
+  <div class="voto" data-ok="b"><p class="q">Dell va néixer el 1984 per vendre ordinadors compatibles amb els d'IBM, fets amb peces que ja existien. La diferència: els venia directament al client, sense botigues pel mig, i aviat va muntar cada ordinador amb les opcions que el client triava. Va innovar?</p><div class="opc"><button data-v="a">No: sense tecnologia nova no hi ha innovació</button><button data-v="b">Sí: una manera nova d'organitzar-se també és innovar</button></div><p class="porque"><b>Sí.</b> Dell no va inventar cap peça: va canviar la manera de vendre i de fabricar (dilluns ho vau veure: era el pull). Es pot innovar sense tecnologia nova, amb una nova forma d'organització o de col·laboració.<br><b>Innovació</b> (taula 5.3): introduir novetats que aporten <b>valor afegit</b>. La <b>tecnologia</b> són les eines que permeten fer-les realitat. <span class="fuente">Font: Wikipedia, «Dell» (1984: compatibles d'IBM amb peces de sèrie i venda directa; després, cada ordinador muntat amb les opcions del client), consultada el 05-10-2026.</span></p></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=11" target="_blank">Full d'estudi · pàg. 11-13</a></div>
+</section>
+
+<section class="p" id="voltic">
+  <p class="kicker">3 · Una empresa de Mallorca</p>
+  <h2>Voltic i els hotels</h2>
+  <div class="caso"><p><b>Voltic Technologies</b> és una empresa tecnològica mallorquina. Fa sistemes sense fils per a hotels i edificis que controlen la climatització i el consum d'energia <b>sense fer obres ni passar cables</b>. La nota del premi diu que pot reduir el consum fins a un 30 %. L'abril de 2026 va guanyar a les Balears els Premis EmprendeXXI.</p><p class="fuente">Font: CaixaBank, nota dels Premis EmprendeXXI, 21-04-2026.</p></div>
+<div class="voto" data-ok="b"><p class="q">Per què diem que una empresa com Voltic <b>modernitza</b> el turisme?</p><div class="opc"><button data-v="a">Perquè és una empresa nova</button><button data-v="b">Perquè porta als hotels una solució més eficient a una necessitat real</button><button data-v="c">Perquè ven més barat que la competència</button></div><p class="porque"><b>Per la segona.</b> És <b>emprenedoria basada en la tecnologia</b>: crear empreses que fan servir avenços tecnològics per a productes o serveis innovadors. Modernitza el sector perquè hi porta solucions <b>més eficients i adaptades a demandes reals</b>, no suposades. I el turisme és una de les tres àrees que s'han de modernitzar primer, amb la indústria i les pimes.</p></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=11" target="_blank">Full d'estudi · pàg. 11-13</a></div>
+</section>
+
+<section class="p" id="startup">
+  <p class="kicker">3 · Start-up o empresa nova?</p>
+  <h2>La botiga de la hackató o Voltic?</h2>
+  <div class="voto" data-ok="b"><p class="q">La botiga de reparació de la hackató, que fa anys que obre cada matí, o Voltic, amb un sistema que no existia i que encara ha de demostrar que els hotels el volen: quina s'assembla més a una start-up?</p><div class="opc"><button data-v="a">La botiga</button><button data-v="b">Voltic</button><button data-v="c">Totes dues: són empreses</button></div><p class="porque"><b>Voltic.</b> Per a <b>Eric Ries</b>, una start-up és una institució humana pensada per crear un producte o servei <b>nou</b> en condicions d'<b>incertesa extrema</b>. La botiga ofereix un servei conegut; Voltic, un producte nou que encara no sap si triomfarà. I compte: no tota empresa nova és una start-up (un bar que obre, per exemple, no ho és).</p></div>
+<div class="clau"><b>Lean Startup: crear, mesurar, aprendre.</b> Fas una versió mínima del producte, mires com hi reaccionen clients de debò i decideixes si continues o canvies. És el que vau fer a la hackató: el dibuix, l'altre equip i el que milloraríeu.</div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=14" target="_blank">Full d'estudi · pàg. 14-15</a></div>
+</section>
+
+<section class="p" id="sostenibilitat" data-titol="4 · 5.3">
+  <p class="kicker">4 · Nou · el 5.3</p>
   <h2>Sostenibilitat ambiental</h2>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=17" target="_blank">Full d’estudi · pàg. 17</a></div>
   <p>Fer servir els recursos per a les necessitats d'avui <b>sense comprometre les de les generacions futures</b> (informe Brundtland, Nacions Unides, 1987).</p>
-  <div class="clau">Al ritme actual, el 2050 caldrien els recursos de <b>tres planetes</b> (WWF).</div>
-  <p><b>Quatre actors:</b> governs, ONG, ciutadania i empreses. Innovar per a la sostenibilitat no és només tecnologia: també és organitzar-se d'una altra manera.</p>
+<div class="clau">Al ritme actual, el 2050 caldrien els recursos de <b>tres planetes</b> (WWF, el Fons Mundial per la Natura).</div>
+<p><b>Quatre actors:</b> governs, ONG, ciutadania i empreses. Innovar per a la sostenibilitat no és només tecnologia: també és organitzar-se d'una altra manera.</p>
+<div class="voto" data-ok="b"><p class="q">Els 17 objectius de desenvolupament sostenible (ODS) de l'Agenda 2030 de les Nacions Unides, són només de medi ambient?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div><p class="porque"><b>No.</b> El 1 és la fi de la pobresa, el 5 la igualtat de gènere i el 8 el treball digne.</p></div>
+<p>Per saber-ne més: <a href="https://www.un.org/sustainabledevelopment/sustainable-development-goals/" target="_blank" rel="noopener">els 17 ODS, un per un (Nacions Unides)</a> · <a href="https://www.un.org/es/ga/president/65/issues/sustdev.shtml" target="_blank" rel="noopener">la definició de sostenibilitat de l'informe Brundtland (ONU)</a> · <a href="https://overshoot.footprintnetwork.org/about-earth-overshoot-day/" target="_blank" rel="noopener">com es calcula quantes Terres gastem (Global Footprint Network)</a></p>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=17" target="_blank">Full d'estudi · pàg. 17-18</a></div>
 </section>
 
-<section class="p" id="ods" data-titol="ODS">
-  <p class="kicker">1 · Els ODS: 17 objectius de l'Agenda 2030 (Nacions Unides, 2015)</p>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=18" target="_blank">Full d’estudi · pàg. 18</a></div>
-  <div class="voto" data-ok="b"><p class="q">Els ODS, són només de medi ambient?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div><p class="porque"><b>No.</b> El 1 és la fi de la pobresa, el 5 la igualtat de gènere i el 8 el treball digne.</p></div>
+<section class="p" id="rsc">
+  <p class="kicker">4 · La responsabilitat social corporativa (RSC)</p>
+  <h2>Fer donacions, és fer RSC?</h2>
+  <div class="voto" data-ok="b"><p class="q">Una empresa que fa donacions a una ONG, ja fa RSC?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No, no n'hi ha prou</button></div><p class="porque"><b>No n'hi ha prou.</b> L'RSC és una manera de <b>gestionar</b> l'empresa tenint en compte les conseqüències socials i ambientals del que fa: inclou complir la llei i anar-hi més enllà.<br>Sis principis: transparència · ètica · governança (com es prenen les decisions) i compliment legal · sostenibilitat ambiental · drets humans i laborals · benestar social.</p></div>
+<p>Dos exemples reals: <a href="https://en.wikipedia.org/wiki/Patagonia,_Inc." target="_blank" rel="noopener">Patagonia, que destina els beneficis a combatre el canvi climàtic (RSC)</a> · <a href="https://orsted.com/en/about-us" target="_blank" rel="noopener">Ørsted, que va passar dels combustibles fòssils a l'eòlica marina i ha crescut (rendibilitat i sostenibilitat)</a></p>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=19" target="_blank">Full d'estudi · pàg. 19-20</a></div>
 </section>
 
-<section class="p" id="rsc" data-titol="RSC">
-  <p class="kicker">1 · La responsabilitat social corporativa (RSC)</p>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=19" target="_blank">Full d'estudi · pàg. 19 i 20</a></div>
-  <div class="voto" data-ok="b"><p class="q">Una empresa que fa donacions, ja fa RSC?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No, no n'hi ha prou</button></div><p class="porque"><b>No n'hi ha prou.</b> L'RSC és una manera de <b>gestionar</b> l'empresa tenint en compte les conseqüències socials i ambientals: inclou complir la llei i anar-hi més enllà.</p></div>
-  <p>Sis principis: transparència · ètica · governança i compliment legal · sostenibilitat ambiental · drets humans i laborals · benestar social.</p>
-</section>
-
-<section class="p" id="iniciatives" data-titol="Taula 5.5">
-  <p class="kicker">1 · Com ho fa una empresa: les sis iniciatives (taula 5.5)</p>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=20" target="_blank">Full d’estudi · pàg. 20</a></div>
-  <table><tr><td><b>1</b> Energies renovables i estalvi d'energia</td><td><b>4</b> Reduir la petjada de carboni</td></tr>
-  <tr><td><b>2</b> Gestió responsable de l'aigua</td><td><b>5</b> Conservar els recursos naturals</td></tr>
-  <tr><td><b>3</b> Reduir l'impacte dels processos (economia circular)</td><td><b>6</b> Educació i sensibilització del personal</td></tr></table>
+<section class="p" id="taula55" data-titol="5 · Taula 5.5">
+  <p class="kicker">5 · ✂ Com ho fa una empresa: les sis iniciatives (taula 5.5)</p>
+  <h2>Dues que es confonen</h2>
   <div class="grup">
-  <div class="voto" data-ok="b"><p class="q">El gas natural, és renovable?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div><p class="porque"><b>No:</b> és un combustible fòssil.</p></div>
-  <div class="voto" data-ok="c"><p class="q">Comprar a proveïdors de proximitat, quina iniciativa és?</p><div class="opc"><button data-v="a">La 2</button><button data-v="b">La 5</button><button data-v="c">La 4</button></div><p class="porque"><b>La 4</b>, la petjada de carboni: menys transport.</p></div>
-  </div>
+<div class="voto" data-ok="b"><p class="q">El gas natural, és una energia renovable?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div><p class="porque"><b>No:</b> és un combustible fòssil.</p></div>
+<div class="voto" data-ok="b"><p class="q">Comprar a proveïdors de proximitat, quina iniciativa és?</p><div class="opc"><button data-v="a">La 2 · gestió de l'aigua</button><button data-v="b">La 4 · petjada de carboni</button><button data-v="c">La 5 · recursos naturals</button></div><p class="porque"><b>La 4</b>, la petjada de carboni: menys transport.</p></div>
+</div>
+<table><tr><td><b>1</b> Adopció d'energies renovables</td><td><b>4</b> Reducció de la petjada de carboni (les emissions de CO₂ que causa l'empresa, també pel transport)</td></tr>
+<tr><td><b>2</b> Gestió responsable de l'aigua</td><td><b>5</b> Conservació i regeneració de recursos naturals</td></tr>
+<tr><td><b>3</b> Reducció de l'impacte ambiental dels processos (economia circular: donar nova vida a productes i materials)</td><td><b>6</b> Educació i sensibilització</td></tr></table>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=20" target="_blank">Full d'estudi · pàg. 20</a></div>
 </section>
 
-<section class="p" id="a5" data-titol="2 · A5" data-min="35">
-  <p class="kicker">2 · Compta · individual · a l'ordinador · uns 35 minuts</p>
-  <h2>A5 · Iberostar: la sostenibilitat dins l'estratègia</h2>
-  <ul><li>Classroom › <b>Activitat A5</b> · obre l'enllaç <a href="../a5/" target="_blank">A5</a>.</li><li>Nom i grup a dalt, i <b>quatre preguntes</b>.</li><li>La taula 5.5 és a la pàgina 20 del full d'estudi; la llista dels ODS, al final de la fitxa.</li><li>En acabar, «He acabat», i lliura el fitxer a la tasca.</li></ul>
-  <p><b>Si no acabes</b>, lliura el que tinguis: dilluns 19 tindràs 10 minuts per acabar-la.</p>
-  <p class="nota noproj">Tecla T: rellotge de 35 minuts.</p>
+<section class="p" id="wallapop" data-titol="6 · ➕ ➕ Wallapop">
+  <p class="kicker">6 · ➕ Si hi ha temps · Si sobra temps · per parelles · una altra app</p>
+  <h2>Wallapop</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=13" target="_blank">Full d'estudi · pàg. 13-14</a><span class="ref ficha">Escriviu en aquesta pàgina</span></div>
+  <div class="caso"><p><b>Wallapop</b> va néixer a Barcelona el 2013. És una plataforma per comprar i vendre coses, sobretot de segona mà, entre particulars: segons l'empresa, cada mes hi entren més de 19 milions d'usuaris. L'app fa servir la ubicació del mòbil perquè compris i venguis a prop teu, i també es pot enviar per correu.</p><p class="fuente">Font: Wallapop, nota de premsa, 10-12-2024 (i Wikipedia, «Wallapop»: la ubicació i els enviaments).</p></div>
+<div class="preg"><span class="n">1</span> Wallapop, en el Canvas: a qui va, què ofereix a cada un i per on li arriba?
+    <textarea class="resp" data-clau="wallapop-1"></textarea>
+    </div>
+
+  <p class="encls">La solució la veiem a classe.</p>
 </section>
 
-<section class="p" id="tancament" data-titol="Tancament">
-  <p class="kicker">Per acabar</p>
-  <h2>Dijous 15: la prova del RA3</h2>
-  <div class="clau">Apartats <b>5.1, 5.2 i 5.3</b> del full d'estudi (pàgines 3 a 22). Prepara-la amb els «Comprova que ho saps» 1-16 i els tests de les pàgines 5, 8, 12, 15 i 22.</div>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=3" target="_blank">Full d'estudi · obre'l</a></div>
+<section class="p" id="cierre" data-titol="Tancament">
+  <p class="kicker">Tancament</p>
+  <h2>Dijous 15, l'A5. Dilluns 19, la prova</h2>
+  <div class="cadena"><span>5.1 · Emprendre i metodologies</span><i>→</i><span>5.2 · El Canvas i la tecnologia</span><i>→</i><span>5.3 · Sostenibilitat</span><i>→</i><span>A5 (dijous 15)</span><i>→</i><span>Prova del RA3 (dilluns 19)</span></div>
+  <div class="clau"><b>Prova del RA3: dilluns 19 d'octubre.</b> Entren el 5.1, el 5.2 i el 5.3 del full d'estudi (pàg. 3-22). Prepara-la amb els «Comprova que ho saps» 1-16.</div>
+  <p class="nota">Propera sessió (dijous 15 d'octubre): l'A5 (Iberostar), a l'ordinador, i repàs per a la prova, que passa a <b>dilluns 19</b>.</p>
+</section>
+
+<section class="p" id="casa" data-titol="Per a casa">
+  <p class="kicker">Per a casa · no compta per a la nota</p>
+  <h2>Per preparar la prova</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=17" target="_blank">Full d'estudi · pàg. 17 i 22</a></div>
+  <h3>El mínim · uns 20 minuts</h3>
+  <ol><li>Llegeix el full d'estudi, <b>pàg. 11 a 15 i 17 a 20</b>, amb aquesta pàgina al costat.</li><li>Respon aquí les preguntes 9 i 13 de «Comprova que ho saps» (al full, pàg. 17 i 22). Les altres d'aquests apartats ja les hem fet a classe. Si no te'n surt una, busca-la al full: la resposta és a les pàgines 11 a 15.</li></ol>
+  <div class="preg"><span class="n">9</span> Quines són les tres àrees preferents de modernització del sector productiu? D'on surten els diners?
+    <textarea class="resp" data-clau="casa-9"></textarea>
+    </div>
+<div class="preg"><span class="n">13</span> Quina és la definició de sostenibilitat ambiental i quina dada en dona el WWF? Quins quatre actors hi intervenen?
+    <textarea class="resp" data-clau="casa-13"></textarea>
+    </div>
+  <p class="encls">Les solucions les veiem a classe.</p>
+  <p><button class="boto-gran noproj" id="baixa">He acabat · descarregar les meves respostes</button></p>
+  <div class="missatge" id="missatge" hidden></div>
+  <p class="nota">Es desa només en aquest ordinador mentre escrius: descarrega les respostes i desa-les per repassar.</p>
 </section>
 
 <div class="peu"><button onclick="window.print()">Imprimir / desar en PDF</button></div>
 </main>
-<div class="ctrl"><span class="rellotge" id="rellotge" title="Rellotge (tecla T)"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Següent (→ o espai)">→</button><button id="surt" title="Surt (Esc)">✕</button></div>
+
+<div class="ctrl"><span class="rellotge" id="rellotge" title="Rellotge de feina (tecla T)"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Següent (→ o espai)">→</button><button id="surt" title="Surt (Esc)">✕</button></div>
+
 <script>
 (function(){
   "use strict";
-  var CLAU = "ipo2-u5-sessio5";
+  var TX = {"clau": "ipo2-u5-u5-sessio-5-v1", "la_classe": "La classe: ", "dits": "Dits!", "temps": "⏱ Temps!", "proj": "▶ Projectar", "surt": "✕ Surt", "esborra": "Esborrar els vots i el marcador per començar amb un altre grup?", "hash": "projectar", "escriu_nom": "Escriu el teu nom i llinatges abans de descarregar.", "escriu_nom_alert": "Escriu el teu nom i llinatges a la primera pantalla i torna a prémer el botó.", "cap_resp": "Sessió 5 · El Canvas, la tecnologia i la sostenibilitat · les meves respostes (IPO II, unitat 5)", "qui": "Alumne/a", "grup": "Grup", "amb_qui": "Amb qui he treballat", "ningu": "(ningú)", "data": "Data", "sense_resp": "(sense resposta)", "fitxer": "RESPOSTES-S5", "fet_baixa": "Fet: s'ha descarregat <b>{f}</b>. Desa'l per repassar.", "no_baixa": "Aquest navegador no ha deixat descarregar el fitxer."};
+  var CLAU = TX.clau;
   var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
   var estat = {};
   try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
   function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
-
   if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
   function dos(x){ return (x < 10 ? "0" : "") + x; }
 
@@ -260,18 +333,17 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   var nav = document.getElementById("index");
   pant.forEach(function(s){
     var t = s.getAttribute("data-titol");
-    if (!t || !/^\d|^Inici|^Tancament/.test(t)) return;
+    if (!t || !/^\d|^Inici|^Tancament|^Per a casa/.test(t)) return;
     var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
     a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
     nav.appendChild(a);
   });
 
-  /* votacions */
+  /* votacions: la resposta (el perquè) només surt després de votar */
   var marc = document.getElementById("marcador");
   var encerts = 0, vots = 0;
-  function pinta(){ marc.textContent = vots ? "La classe: " + encerts + " de " + vots : ""; }
+  function pinta(){ marc.textContent = vots ? TX.la_classe + encerts + " / " + vots : ""; }
   document.querySelectorAll(".voto").forEach(function(v){
-    var ok = v.getAttribute("data-ok");
     v.querySelectorAll(".opc button").forEach(function(b, i){
       var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
       b.insertBefore(k, b.firstChild);
@@ -283,6 +355,8 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
     var ok = v.getAttribute("data-ok");
     v.classList.add("fet");
     b.classList.add("triat");
+    var sec = v.closest("section");   // «on ho estudies» surt quan tots els vots de la pantalla estan fets
+    if (sec && !sec.querySelector(".voto:not(.fet)")) sec.classList.add("votat");
     if (ok) {
       vots++;
       if (b.getAttribute("data-v") === ok) encerts++;
@@ -295,6 +369,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
     encaixa();
   }
   function reinicia(){
+    document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
     document.querySelectorAll(".voto").forEach(function(v){
       v.classList.remove("fet");
       v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
@@ -303,7 +378,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
     encerts = 0; vots = 0; pinta();
   }
 
-  /* solucions i respostes que es revelen */
+  /* solucions i respostes que es revelen (botó o tecla S) */
   document.querySelectorAll(".revela").forEach(function(b){
     b.addEventListener("click", function(){
       var s = b.nextElementSibling;
@@ -314,8 +389,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
     });
   });
 
-
-  /* ronda rápida: compte enrere de 15 s en entrar a la targeta (tecla T el torna a engegar) */
+  /* ronda ràpida: compte enrere en entrar a la targeta (tecla T el torna a engegar) */
   var tCompte = null;
   function compte(s){
     clearInterval(tCompte);
@@ -324,13 +398,13 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
     c.classList.remove("zero");
     function pas(){
       var q = Math.max(0, tot - (Date.now() - ini) / 1000);
-      x.textContent = q > 0 ? Math.ceil(q) : "Dits!";
+      x.textContent = q > 0 ? Math.ceil(q) : TX.dits;
       b.style.transform = "scaleX(" + (q / tot).toFixed(3) + ")";
       if (q <= 0) { clearInterval(tCompte); c.classList.add("zero"); }
     }
     pas(); tCompte = setInterval(pas, 100);
   }
-  /* rellotge de parelles: tecla T en una pantalla amb data-min (14 min…); segueix encara que canviïs de pantalla */
+  /* rellotge de feina: tecla T en una pantalla amb data-min; segueix encara que canviïs de pantalla */
   var rel = document.getElementById("rellotge"), tRel = null;
   function rellotge(min){
     clearInterval(tRel);
@@ -340,12 +414,12 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
     function pas(){
       var q = Math.max(0, Math.round((fi - Date.now()) / 1000));
       rel.textContent = "⏱ " + Math.floor(q / 60) + ":" + dos(q % 60);
-      if (!q) { clearInterval(tRel); rel.classList.add("fi"); rel.textContent = "⏱ Temps!"; }
+      if (!q) { clearInterval(tRel); rel.classList.add("fi"); rel.textContent = TX.temps; }
     }
     pas(); tRel = setInterval(pas, 500);
   }
 
-  /* mode projectar */
+  /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
   var i = 0, pos = document.getElementById("pos");
   function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
   function encaixa(){
@@ -362,25 +436,26 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
     alcada(); encaixa();
     compte(pant[i].classList.contains("flash") ? pant[i] : null);
     pos.textContent = (i + 1) + " / " + pant.length;
-    nav.querySelectorAll("a").forEach(function(a){
+    var segs = nav.querySelectorAll("a");
+    segs.forEach(function(a){
       var idx = pant.indexOf(document.getElementById(a.dataset.id));
-      var seg = nav.querySelectorAll("a");
-      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(seg, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(segs, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
     });
     try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
   }
   function entra(){
     document.body.classList.add("proj");
-    var h = location.hash.slice(1), k = pant.findIndex ? pant.findIndex(function(s){ return s.id === h; }) : -1;
+    var h = location.hash.slice(1), k = -1;
+    pant.forEach(function(s, j){ if (s.id === h) k = j; });
     mostra(k >= 0 ? k : 0);
     if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
-    document.getElementById("bproj").textContent = "✕ Surt";
+    document.getElementById("bproj").textContent = TX.surt;
   }
   function surt(){
     document.body.classList.remove("proj");
     pant.forEach(function(s){ s.classList.remove("actual"); });
     if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
-    document.getElementById("bproj").textContent = "▶ Projectar";
+    document.getElementById("bproj").textContent = TX.proj;
     pant[i].scrollIntoView();
   }
   document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
@@ -401,15 +476,14 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
       var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
       if (b) b.click();
     }
-    else if (ev.key === "0") { if (confirm("Esborrar els vots i el marcador per començar amb un altre grup?")) reinicia(); }
-    else if (/^[1-4]$/.test(ev.key)) {
+    else if (ev.key === "0") { if (confirm(TX.esborra)) reinicia(); }
+    else if (/^[1-8]$/.test(ev.key)) {
       var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
       if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
     }
   });
-  document.addEventListener("fullscreenchange", function(){ if (!document.fullscreenElement && document.body.classList.contains("proj")) {} });
 
-  /* respostes de casa: es desen i es baixen */
+  /* respostes de l'alumnat: es desen al navegador i es baixen en un .txt (no s'entreguen) */
   var nom = document.getElementById("nom"), grup = document.getElementById("grup"), parella = document.getElementById("parella");
   var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
   if (nom) {
@@ -421,32 +495,32 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
     t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
   });
   function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
-  var bx = document.getElementById("baixa"), msg = document.getElementById("missatge");
+  var msg = document.getElementById("missatge");
   function baixa(){
-    if (!net(nom.value)) {
-      msg.hidden = false; msg.textContent = "Escribe tu nombre y apellidos antes de descargar.";
-      try { document.getElementById("inicio").scrollIntoView(); nom.focus(); alert("Escribe tu nombre y apellidos en la primera pantalla y vuelve a pulsar el botón."); } catch (e) {}
+    if (!nom || !net(nom.value)) {
+      if (msg) { msg.hidden = false; msg.textContent = TX.escriu_nom; }
+      try { document.getElementById("inicio").scrollIntoView(); if (nom) nom.focus(); alert(TX.escriu_nom_alert); } catch (e) {}
       return;
     }
     var d = new Date();
-    var L = ["Sesión 5 · La lista y el deber de proteger · mis respuestas (IPO I, unidad 1)", "Alumno/a: " + net(nom.value), "Grupo: " + net(grup.value), "Con quién he trabajado: " + (net(parella.value) || "(nadie)"),
-      "Fecha: " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    var L = [TX.cap_resp, TX.qui + ": " + net(nom.value), TX.grup + ": " + net(grup.value), TX.amb_qui + ": " + (net(parella.value) || TX.ningu),
+      TX.data + ": " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
     resp.forEach(function(t){
       var p = t.closest(".preg"), c = p.cloneNode(true);
       c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
-      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || "(sin respuesta)"); L.push("");
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || TX.sense_resp); L.push("");
     });
-    var f = "RESPUESTAS-S5-" + net(nom.value).normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    var f = TX.fitxer + "-" + net(nom.value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
     try {
       var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
       var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
       setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
-      msg.hidden = false; msg.innerHTML = "Hecho: se ha descargado <b>" + f + "</b>. Guárdalo para repasar; no se entrega.";
-    } catch (e) { msg.hidden = false; msg.textContent = "Este navegador no ha dejado descargar el fichero."; }
+      if (msg) { msg.hidden = false; msg.innerHTML = TX.fet_baixa.replace("{f}", f); }
+    } catch (e) { if (msg) { msg.hidden = false; msg.textContent = TX.no_baixa; } }
   }
-  [bx, document.getElementById("baixa2")].forEach(function(b){ if (b) b.addEventListener("click", baixa); });
+  ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
 
-  if (location.hash === "#projectar") entra();
+  if (location.hash === "#" + TX.hash) entra();
 })();
 </script>
 </body>
