@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Sessió 5 · Una societat més sostenible · deck interactiu</title>
+<!-- Generat per genera_deck_interactiu_s5.py. No l'editis a mà. -->
+<style>
+:root{--paper:#f4eedd;--tinta:#1a1a1a;--verd:#2E7D4F;--vermell:#C0392B;--groc:#ffe27a}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#111;font-family:"Helvetica Neue",Arial,sans-serif;color:var(--tinta)}
+.escena{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.diapo{position:relative;width:min(100vw,calc(100vh*1912/1067));aspect-ratio:1912/1067;display:none;container-type:inline-size}
+.diapo.actual{display:block}
+.diapo>img{width:100%;height:100%;display:block;user-select:none}
+/* el panell de vot viu dins la franja buida (la meitat esquerra de les diapositives de pregunta) */
+.vot{position:absolute;left:5%;top:50%;width:38%;transform:translateY(-50%) rotate(-1deg);background:var(--paper);
+  padding:2cqw 2.2cqw;box-shadow:0 .4cqw 1cqw rgba(0,0,0,.3)}
+.vot::before{content:"";position:absolute;top:-.8cqw;left:38%;width:24%;height:1.6cqw;background:rgba(255,255,255,.6);transform:rotate(-3deg)}
+.vot button{display:flex;align-items:center;gap:1.2cqw;width:100%;margin:.9cqw 0;padding:1.2cqw 1.6cqw;font:700 2.3cqw/1.15 "Helvetica Neue",Arial,sans-serif;text-align:left;
+  background:#fff;border:.2cqw solid var(--tinta);border-radius:.6cqw;cursor:pointer;color:var(--tinta)}
+.vot button .k{display:inline-flex;align-items:center;justify-content:center;width:3cqw;height:3cqw;border-radius:50%;background:var(--tinta);color:#fff;font-size:1.7cqw;flex:none}
+.vot button.ok{background:#dff0e4;border-color:var(--verd)}
+.vot button.ok .k{background:var(--verd)}
+.vot button.ko{background:#f7dcd8;border-color:var(--vermell)}
+.vot button.ko .k{background:var(--vermell)}
+.vot .perque{display:none;font-size:1.8cqw;line-height:1.35;margin:1.2cqw 0 0}
+.vot.fet .perque{display:block}
+.vot .dits{font:700 1.6cqw/1 "Segoe Print","Comic Sans MS",cursive;color:#8a6d3b;margin:0 0 .6cqw}
+.barra{position:fixed;right:1vw;bottom:1vh;display:flex;gap:.5vw;align-items:center;z-index:9;font:600 14px/1 "Helvetica Neue",Arial,sans-serif;color:#ddd}
+.barra button{background:#2a2a2a;color:#eee;border:1px solid #555;border-radius:6px;padding:6px 10px;cursor:pointer;font:inherit}
+.marcador{background:var(--groc);color:var(--tinta);border-radius:6px;padding:6px 10px}
+.rellotge{display:none;background:var(--groc);color:var(--tinta);border-radius:6px;padding:8px 12px;font-size:22px}
+.rellotge.on{display:inline-block}
+.ajuda{position:fixed;left:1vw;bottom:1vh;color:#888;font:13px/1.3 "Helvetica Neue",Arial,sans-serif;z-index:9}
+body.net .ajuda,body.net .barra button{opacity:0}
+body.net .barra:hover button{opacity:1}
+</style>
+</head>
+<body>
+<div class="escena" id="escena"></div>
+<div class="ajuda">→ ← canvia · 1-3 vota · T rellotge · F pantalla completa · R esborra els vots</div>
+<div class="barra"><span class="rellotge" id="rellotge"></span><span class="marcador" id="marcador"></span>
+  <button id="ant">←</button><span id="pos"></span><button id="seg">→</button></div>
+<script>
+var N = 14, FITXES = {"2": {"vot": {"opcions": ["Sí", "No"], "ok": 1, "perque": "<b>No.</b> Una start-up crea un producte o servei <b>nou</b> en <b>incertesa extrema</b>. Un bar que obre no és ni una cosa ni l'altra."}}, "3": {"vot": {"opcions": ["Un", "Dos", "Tres"], "ok": 2, "perque": "<b>Tres.</b> Ho diu el WWF: ho veiem a la diapositiva següent."}}, "6": {"vot": {"opcions": ["Sí", "No"], "ok": 1, "perque": "<b>No.</b> El 1 és la fi de la pobresa, el 5 la igualtat de gènere i el 8 el treball digne."}}, "8": {"vot": {"opcions": ["Sí", "No, no n'hi ha prou"], "ok": 1, "perque": "<b>No n'hi ha prou.</b> L'RSC és una manera de <b>gestionar</b> l'empresa, no fer donacions."}}, "10": {"vot": {"opcions": ["Sí", "No"], "ok": 1, "perque": "<b>No:</b> és un combustible fòssil. Les sis iniciatives, a la diapositiva següent."}}, "12": {"vot": {"opcions": ["La 2", "La 4", "La 5"], "ok": 1, "perque": "<b>La 4</b>, la petjada de carboni: menys transport."}}, "13": {"min": 35}};
+(function(){
+  var esc = document.getElementById("escena"), dia = [], i = 0, encerts = 0, vots = 0;
+  for (var n = 1; n <= N; n++) {
+    var d = document.createElement("section"); d.className = "diapo";
+    d.innerHTML = '<img src="diapositives/' + ("0" + n).slice(-2) + '.jpg" alt="Diapositiva ' + n + '">';
+    var f = FITXES[n];
+    if (f && f.vot) {
+      var v = document.createElement("div"); v.className = "vot"; v.dataset.ok = f.vot.ok;
+      v.innerHTML = '<p class="dits">Dits enlaire</p>' + f.vot.opcions.map(function(o, j){
+        return '<button data-v="' + j + '"><span class="k">' + (j + 1) + '</span>' + o + '</button>'; }).join("") +
+        '<p class="perque">' + f.vot.perque + '</p>';
+      d.appendChild(v);
+    }
+    esc.appendChild(d); dia.push(d);
+  }
+  function marca(){ document.getElementById("marcador").textContent = "La classe: " + encerts + " de " + vots; }
+  function mostra(k){ i = Math.max(0, Math.min(dia.length - 1, k));
+    dia.forEach(function(d, j){ d.classList.toggle("actual", j === i); });
+    document.getElementById("pos").textContent = (i + 1) + " / " + dia.length; }
+  document.querySelectorAll(".vot").forEach(function(v){
+    v.querySelectorAll("button").forEach(function(b){ b.addEventListener("click", function(){
+      if (v.classList.contains("fet")) return;
+      v.classList.add("fet"); vots++; if (b.dataset.v === v.dataset.ok) encerts++; else b.classList.add("ko");
+      v.querySelector('button[data-v="' + v.dataset.ok + '"]').classList.add("ok"); marca();
+    }); });
+  });
+  var rel = document.getElementById("rellotge"), tic = null;
+  function rellotge(min){ clearInterval(tic); if (rel.classList.contains("on")) { rel.classList.remove("on"); return; }
+    rel.classList.add("on"); var fi = Date.now() + min * 60000;
+    function pinta(){ var r = Math.max(0, Math.round((fi - Date.now()) / 1000));
+      rel.textContent = r ? "⏱ " + Math.floor(r / 60) + ":" + ("0" + r % 60).slice(-2) : "⏱ Temps!"; if (!r) clearInterval(tic); }
+    pinta(); tic = setInterval(pinta, 250); }
+  document.getElementById("ant").onclick = function(){ mostra(i - 1); };
+  document.getElementById("seg").onclick = function(){ mostra(i + 1); };
+  document.addEventListener("keydown", function(e){
+    var d = dia[i], f = FITXES[i + 1];
+    if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") { e.preventDefault(); mostra(i + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") mostra(i - 1);
+    else if (/^[1-3]$/.test(e.key)) { var b = d.querySelectorAll(".vot button")[+e.key - 1]; if (b) b.click(); }
+    else if (e.key === "t" || e.key === "T") rellotge(f && f.min ? f.min : 1);
+    else if (e.key === "f" || e.key === "F") { if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(function(){}); else document.exitFullscreen(); }
+    else if ((e.key === "r" || e.key === "R") && confirm("Esborrar els vots i el marcador per començar amb un altre grup?")) {
+      encerts = vots = 0; marca();
+      document.querySelectorAll(".vot").forEach(function(v){ v.classList.remove("fet");
+        v.querySelectorAll("button").forEach(function(b){ b.className = ""; }); }); }
+  });
+  document.addEventListener("fullscreenchange", function(){ document.body.classList.toggle("net", !!document.fullscreenElement); });
+  marca(); mostra(0);
+})();
+</script>
+</body>
+</html>
