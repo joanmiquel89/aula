@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>La sostenibilitat i l'A5 · Sessió 6</title>
+<!-- Generat per sistema/tools/sessio_aula.py des de fitxa-sessio-06.toml. No l'editis a mà: edita la fitxa. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.voto~.refs,.grup~.refs{margin:12px 0 0}
+.refs.despres{display:none}
+.votat .refs.despres{display:flex}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid currentColor;text-decoration:none;white-space:nowrap}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px;background:var(--blauclar);border:2px solid var(--blau)}
+.dos>div+div{background:var(--verdclar);border-color:var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+ol.dosc{columns:2;column-gap:28px;margin:6px 0 10px}ol.dosc li{break-inside:avoid}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+.cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
+.compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
+.compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
+.compte .barra{flex:1;height:14px;border-radius:99px;background:#e6dccb;overflow:hidden}
+.compte .barra i{display:block;height:100%;width:100%;background:var(--vermell);transform-origin:left}
+.compte.zero .xifra{color:var(--verd)}
+body.proj .compte{display:flex}
+body.proj .cas-flash{font-size:1.55em}
+.rellotge{display:none;font-weight:800;font-variant-numeric:tabular-nums}
+body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta);border-radius:8px;padding:6px 12px;font-size:20px}
+.rellotge.fi{background:var(--vermell)!important;color:#fff!important}
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  ol.dosc{columns:1}
+  .dalt nav,.dalt .nom small{display:none}
+  .opc button{flex:1 1 100%;text-align:left}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  .refs.despres{display:flex!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+
+<header class="dalt">
+  <span class="nom">IPO II · Unitat 5 · Sessió 6<small>La sostenibilitat i l'A5</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Encerts de la classe a les votacions"></span>
+  <button id="bproj" title="Pantalla completa per projectar (tecla P)">▶ Projectar</button>
+</header>
+
+<main>
+
+<section class="p" id="inicio" data-titol="Inici">
+  <p class="kicker">Sessió 6 · una hora</p>
+  <h2>La sostenibilitat i l'A5</h2>
+  <p style="font-size:1.15em">Dijous passat vam arribar a la start-up i el 5.3 es va quedar sense fer. Avui fem els ODS i l'RSC en versió curta i després fas l'A5, amb el full d'estudi obert, per posar-ho en pràctica: la lliures en acabar la classe. Dilluns 19 te la torno corregida i en parlem (i fem la start-up); la prova passa a dijous 22. Al final d'aquesta primera pantalla, el quadre de la prova.</p>
+  <div class="cadena"><span class="fet">5.1 · Emprendre i metodologies</span><i>→</i><span class="fet">5.2 · El Canvas i la tecnologia</span><i>→</i><span class="avui">5.3 · Sostenibilitat</span><i>→</i><span class="avui">A5 (Iberostar)</span><i>→</i><span>Dilluns 19 · l'A5 corregida, la start-up i dubtes</span><i>→</i><span>Prova del RA3 (dijous 22)</span></div>
+  <div class="plan"><div><b>Avui</b><ol start="1"><li>Una pregunta de dijous <small>· 3 min</small></li><li>5.3 · Una empresa sostenible: els ODS i l'RSC <small>· 10 min</small></li></ol></div><div><b>&nbsp;</b><ol start="3"><li>L'A5: Iberostar, amb el full d'estudi obert <small>· 35 min</small></li><li>Si sobra temps: una altra app en tres caselles <small>· ➕ si hi ha temps</small></li></ol></div></div>
+  <h3 class="noproj">Com fer servir aquesta pàgina</h3>
+  <p class="noproj">A classe la projectem. A casa et serveix per estudiar: cada bloc et diu <b>on és al full d'estudi</b> (el botó verd l'obre a la pàgina exacta).</p>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=17" target="_blank">Full d'estudi · pàg. 17-22</a></div>
+    <p class="nota noproj">Verd: el full d'estudi (s'obre a la pàgina exacta).</p>
+  <div class="clau"><b>La prova del RA3 · dijous 22</b> · 55 minuts, individual, sense apunts<br><b>5.1</b> · full d'estudi <span style="white-space:nowrap">pàg. 3-11</span> · <span style="white-space:nowrap">«Comprova» 1-8</span><br><b>5.2</b> · <span style="white-space:nowrap">pàg. 11-17</span> · <span style="white-space:nowrap">«Comprova» 9-12</span><br><b>5.3</b> · <span style="white-space:nowrap">pàg. 17-22</span> · <span style="white-space:nowrap">«Comprova» 13-16</span><br><b>No entren:</b> l'A3 (pàg. 16), l'A4 (pàg. 18-19), la IA (pàg. 15) ni els sectors (el «Comprova» 10). Els «Comprova» són el millor entrenament, però no ho cobreixen tot: hi surten també el Canvas (pàg. 13-14) i la taula 5.5 (pàg. 20). Al final d'aquesta pàgina tens <b>les respostes dels «Comprova que ho saps»</b> per comprovar-te (les 11, 12, 14 i 15 les respon el vot corresponent d'aquesta pàgina; la 12, la start-up, la fem dilluns).</div>
+</section>
+
+<section class="p" id="record" data-titol="1 · Record">
+  <p class="kicker">1 · Una pregunta de dijous · abans de res</p>
+  <h2>Un taller de bicicletes</h2>
+  <div class="caso"><p>Fins ara, a Palma, el client sempre havia de portar la bicicleta al taller. Un taller nou la recull a casa seva, la repara i la hi torna; cap altre taller de l'illa ho fa. Fa servir les eines de sempre i no ha comprat cap aparell nou.</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
+<div class="voto" data-ok="c"><p class="q">Ha innovat el taller?</p><div class="opc"><button data-v="a">No: sense tecnologia nova no es pot parlar d'innovar</button><button data-v="b">No: només és una comoditat per al client, no una novetat</button><button data-v="c">Sí: és una novetat que aporta valor al client</button></div><p class="porque"><b>Sí.</b> Innovar és <b>introduir novetats que aporten valor afegit</b> (taula 5.3); la tecnologia són les eines que permeten fer-les realitat, i no sempre han de ser noves. El taller no ha comprat res, però ofereix al client una cosa que fins ara ningú no oferia: no s'ha de moure de casa. Per això es pot innovar sense tecnologia nova, amb una nova forma d'organització o de col·laboració.<br>«Comprova que ho saps», 11 (pàg. 17).</p></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=13" target="_blank">Full d'estudi · pàg. 13</a></div>
+</section>
+
+<section class="p" id="sostenibilitat" data-titol="2 · 5.3">
+  <p class="kicker">2 · Nou · el 5.3</p>
+  <h2>Sostenibilitat ambiental</h2>
+  <p>Fer servir els recursos per a les necessitats d'avui <b>sense comprometre les de les generacions futures</b> (informe Brundtland, Nacions Unides, 1987).</p>
+<div class="clau">Al ritme actual, el 2050 caldrien els recursos de <b>tres planetes</b> (WWF, el Fons Mundial per la Natura).</div>
+<p><b>Quatre actors:</b> governs, ONG, ciutadania i empreses. Innovar per a la sostenibilitat no és només tecnologia: també és organitzar-se d'una altra manera.</p>
+<div class="voto" data-ok="b"><p class="q">Els 17 objectius de desenvolupament sostenible (ODS) de l'Agenda 2030 de les Nacions Unides, són només de medi ambient?</p><div class="opc"><button data-v="a">Sí</button><button data-v="b">No</button></div><p class="porque"><b>No.</b> El 1 és la fi de la pobresa, el 5 la igualtat de gènere i el 8 el treball digne.<br>«Comprova que ho saps», 14 (pàg. 22).<br>Per saber-ne més: <a href="https://www.un.org/sustainabledevelopment/sustainable-development-goals/" target="_blank" rel="noopener">els 17 ODS, un per un (Nacions Unides)</a> · <a href="https://www.un.org/es/ga/president/65/issues/sustdev.shtml" target="_blank" rel="noopener">la definició de sostenibilitat de l'informe Brundtland (ONU)</a> · <a href="https://overshoot.footprintnetwork.org/about-earth-overshoot-day/" target="_blank" rel="noopener">com es calcula quantes Terres gastem (Global Footprint Network)</a></p></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=17" target="_blank">Full d'estudi · pàg. 17-18</a></div>
+</section>
+
+<section class="p" id="rsc">
+  <p class="kicker">2 · La responsabilitat social corporativa (RSC)</p>
+  <h2>L'RSC, en tres empreses</h2>
+  <div class="caso"><p><b>A.</b> Una empresa que patrocina la festa major del poble i hi posa el seu nom a tots els cartells i a l'escenari.</p><p><b>B.</b> Una empresa que gasta menys aigua als seus processos, compleix la llei i publica cada any què fa i què li falta per millorar.</p><p><b>C.</b> Una empresa que posa «sostenible» a tots els anuncis i a l'etiqueta dels productes, sense explicar què ha canviat.</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
+<div class="voto" data-ok="b"><p class="q">Segons el full d'estudi, quina de les tres s'assembla més a l'RSC?</p><div class="opc"><button data-v="a">La A</button><button data-v="b">La B</button><button data-v="c">La C</button></div><p class="porque"><b>La B.</b> L'RSC <b>no és fer donacions</b>: és una manera de <b>gestionar</b> l'empresa tenint en compte les conseqüències socials i ambientals del que fa, i inclou complir la llei i anar-hi més enllà. La B toca tres dels sis principis (sostenibilitat ambiental, compliment legal i transparència). Patrocinar la festa és una aportació concreta: només toca un (el benestar social), i dir «sostenible» als anuncis no és fer-ho.<br>Sis principis: transparència i rendició de comptes (comunicar-se amb claredat i honestedat) · ètica empresarial (anar més enllà del que obliga la llei) · governança i compliment legal (com es prenen les decisions, i complir la llei) · sostenibilitat ambiental · drets humans i laborals · benestar social (participar en la comunitat).<br>«Comprova que ho saps», 15 (pàg. 22).<br>Un exemple real de sostenibilitat dins l'estratègia: <a href="https://orsted.com/en/about-us/history-and-transformation" target="_blank" rel="noopener">Ørsted, que va passar del petroli i el gas a l'eòlica marina (la seva pàgina d'història)</a>. I tot seguit, Iberostar, a l'A5.</p></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=19" target="_blank">Full d'estudi · pàg. 19-20</a></div>
+</section>
+
+<section class="p" id="a5" data-titol="3 · A5" data-min="35">
+  <p class="kicker">3 · Individual · 35 minuts · amb el full d'estudi obert</p>
+  <h2>A5 · Iberostar: la sostenibilitat dins l'estratègia</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=17" target="_blank">Full d'estudi · pàg. 17-22</a></div>
+  <div class="clau">Obre l'A5 en una pestanya nova: <a href="https://joanmiquel89.github.io/aula/ipo2/a5/" target="_blank" rel="noopener"><b>joanmiquel89.github.io/aula/ipo2/a5</b></a>. Són 4 preguntes. <b>Comença per l'1 i el 2</b>: treballen la taula 5.5 i els ODS que acabem de veure. La lliures <b>avui en acabar la classe</b> (a les 16.00): si no l'has acabada, lliura el que tinguis. Dilluns 19 te la torno corregida i a classe podràs preguntar el que no t'hagi sortit.</div>
+<p><b>La taula 5.5</b> (full d'estudi, pàg. 20): les sis iniciatives d'una empresa sostenible.</p>
+<table><tr><td><b>1</b> Adopció d'energies renovables</td><td><b>4</b> Reducció de la petjada de carboni (les emissions de CO₂ que causa l'empresa, també pel transport)</td></tr>
+<tr><td><b>2</b> Gestió responsable de l'aigua</td><td><b>5</b> Conservació i regeneració de recursos naturals</td></tr>
+<tr><td><b>3</b> Reducció de l'impacte ambiental dels processos (economia circular: donar nova vida a productes i materials)</td><td><b>6</b> Educació i sensibilització</td></tr></table>
+</section>
+
+<section class="p" id="wallapop" data-titol="4 · ➕ ➕ Wallapop">
+  <p class="kicker">4 · ➕ Si hi ha temps · Per parelles · una altra app</p>
+  <h2>Wallapop</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=13" target="_blank">Full d'estudi · pàg. 13-14</a></div>
+  <div class="caso"><p><b>Wallapop</b> és una plataforma amb seu a Barcelona, fundada el 2013, per comprar i vendre coses, sobretot de segona mà, entre particulars. Segons l'empresa (setembre del 2025), té més de 19 milions d'usuaris mensuals al sud d'Europa. L'app fa servir la ubicació del mòbil perquè compris i venguis a prop teu, i els paquets es poden enviar per correu.</p><p class="fuente">Font: Wikipedia (es), «Wallapop» (fundada el 2013, seu a Barcelona, geolocalització i acord amb Correos per als enviaments); Ara, 10-09-2025 (la xifra d'usuaris és de l'empresa).</p></div>
+<div class="preg"><span class="n">1</span> Wallapop, en el Canvas: a qui va, què ofereix a cada un i per on li arriba? <button class="revela">Veure la resposta</button><div class="sol"><b>Segments:</b> la gent que vol <b>vendre</b> el que ja no fa servir i la que vol <b>comprar</b> de segona mà (una sola persona pot ser totes dues coses). <b>Proposta de valor:</b> a qui ven, treure diners del que ja no fa servir; a qui compra, coses més barates i a prop. <b>Canals:</b> l'<b>app</b> (i el web), i la trobada en persona o l'enviament per correu.</div></div>
+</section>
+
+<section class="p" id="cierre" data-titol="Tancament">
+  <p class="kicker">Tancament</p>
+  <h2>Dilluns 19, l'A5 corregida · dijous 22, la prova</h2>
+  <div class="cadena"><span>5.1 · Emprendre i metodologies</span><i>→</i><span>5.2 · El Canvas i la tecnologia</span><i>→</i><span>5.3 · Sostenibilitat</span><i>→</i><span>A5 corregida i dubtes (dilluns 19)</span><i>→</i><span>Prova del RA3 (dijous 22)</span></div>
+  <div class="clau"><b>Què entra i on ho estudies:</b> el quadre de la primera pantalla. Les respostes dels «Comprova que ho saps», al final d'aquesta pàgina. <b>A5:</b> lliura-la ara, tal com la tinguis. Dilluns 19 te la torno corregida i en parlem; <b>la prova és dijous 22</b>.</div>
+  <p class="nota">Propera sessió (dilluns 19 d'octubre): Et torno l'A5 corregida i resolem els dubtes. La prova del RA3 passa a <b>dijous 22</b>.</p>
+</section>
+
+<section class="p" id="casa" data-titol="Per a casa">
+  <p class="kicker">Per a casa · no compta per a la nota</p>
+  <h2>Per preparar la prova</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=11" target="_blank">Full d'estudi · pàg. 11 i 17 i 22</a></div>
+  <h3>El mínim · uns 20 minuts</h3>
+  <ol><li>Contesta els «Comprova que ho saps» 1-16 del full d'estudi (pàg. 11, 17 i 22) abans de mirar res. La 10 (els sectors) no entra a la prova.</li><li>Comprova't amb les respostes d'aquí sota. Les 11, 14 i 15 les respon el vot d'aquesta pàgina (el record i el bloc 2): vota i veuràs la resposta. Les que t'hagin sortit malament, torna-hi al full d'estudi: les pàgines són al quadre de la primera pantalla.</li></ol>
+  <div class="preg"><span class="n">1</span> Apartat 5.1 · «Comprova que ho saps» 1-8 (full d'estudi, pàg. 11). <button class="revela">Veure les respostes</button><div class="sol"><ol>
+<li>Actuar sobre les oportunitats i les idees per crear valor per a altres persones (social, cultural o econòmic). A «tinc un munt d'idees» hi falten passar a l'acció i que el valor sigui per a altres.</li>
+<li>Idees i oportunitats, Recursos i En acció; cinc competències cadascuna, quinze en total.</li>
+<li>L'emprenedoria crea una empresa nova; la intraprenedoria neix dins una organització que ja existeix, amb els seus recursos, i va més enllà de les tasques habituals.</li>
+<li>Perquè són les úniques que s'adapten de manera flexible a un entorn VUCA: volàtil, incert, complex i ambigu.</li>
+<li>Una filosofia de gestió centrada a crear valor per al client eliminant el malbaratament; neix del sistema de producció de Toyota i «lean» vol dir magre. Push produeix per previsions, abans de les comandes; pull, segons la demanda real. Lean tria el pull perquè evita la sobreproducció.</li>
+<li>L'esprint és el cicle curt que acaba amb un increment de producte que funciona. Transparència (tot és visible), inspecció (es revisa sovint el progrés) i adaptació (s'ajusta per no desviar-se).</li>
+<li>Empatitzar, definir, idear, prototipar i validar. El divergent obre opcions (idear); el convergent en tria (definir i prototipar).</li>
+<li>Perquè serveix per provar i aprendre, no per vendre.</li>
+</ol></div></div>
+<div class="preg"><span class="n">2</span> Apartat 5.2 · «Comprova que ho saps» 9-12 (pàg. 17). <button class="revela">Veure les respostes</button><div class="sol"><ol start="9">
+<li>Turística, industrial i pimes; dels fons europeus per reparar els danys de la COVID-19 (Next Generation EU).</li>
+<li>(No entra a la prova.) Al quaternari, que abans s'incloïa dins el terciari. La terciarització és el pas d'una economia del primari i el secundari al predomini dels serveis.</li>
+<li>La resposta surt al vot del bloc 1 (el taller de bicicletes): vota i la veuràs.</li>
+<li>No necessàriament. Segons Eric Ries, una start-up és una institució humana que crea un producte o servei <b>nou</b> en condicions d'<b>incertesa extrema</b> (institució, innovació i context). Un bar que obre és una empresa nova, però no una start-up; i no cal ser tecnològica. Ho fem dilluns 19 amb un cas.</li>
+</ol></div></div>
+<div class="preg"><span class="n">3</span> Apartat 5.3 · «Comprova que ho saps» 13-16 (pàg. 22). <button class="revela">Veure les respostes</button><div class="sol"><ol start="13">
+<li>L'ús responsable dels recursos naturals per satisfer les necessitats presents sense comprometre les de les generacions futures; segons el WWF, al ritme actual el 2050 caldrien els recursos de tres planetes. Governs, ONG, ciutadania i sector empresarial.</li>
+<li>La resposta surt al vot del bloc 2 (els ODS): vota i la veuràs.</li>
+<li>La resposta surt al vot del bloc 2 (l'RSC): vota i la veuràs, amb els sis principis.</li>
+<li>Renovables, aigua, impacte dels processos, petjada de carboni, conservació de recursos i educació. Proveïdors de proximitat: petjada de carboni.</li>
+</ol></div></div>
+  
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / desar en PDF</button></div>
+</main>
+
+<div class="ctrl"><span class="rellotge" id="rellotge" title="Rellotge de feina (tecla T)"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Següent (→ o espai)">→</button><button id="surt" title="Surt (Esc)">✕</button></div>
+
+<script>
+(function(){
+  "use strict";
+  var TX = {"clau": "ipo2-u5-u5-sessio-6-v1", "la_classe": "La classe: ", "dits": "Dits!", "temps": "⏱ Temps!", "proj": "▶ Projectar", "surt": "✕ Surt", "esborra": "Esborrar els vots i el marcador per començar amb un altre grup?", "hash": "projectar", "escriu_nom": "Escriu el teu nom i llinatges abans de descarregar.", "escriu_nom_alert": "Escriu el teu nom i llinatges a la primera pantalla i torna a prémer el botó.", "cap_resp": "Sessió 6 · La sostenibilitat i l'A5 · les meves respostes (IPO II, unitat 5)", "qui": "Alumne/a", "grup": "Grup", "amb_qui": "Amb qui he treballat", "ningu": "(ningú)", "data": "Data", "sense_resp": "(sense resposta)", "fitxer": "RESPOSTES-S6", "fet_baixa": "Fet: s'ha descarregat <b>{f}</b>. Desa'l per repassar.", "no_baixa": "Aquest navegador no ha deixat descarregar el fitxer."};
+  var CLAU = TX.clau;
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inici|^Tancament|^Per a casa/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions: la resposta (el perquè) només surt després de votar */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? TX.la_classe + encerts + " / " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    var sec = v.closest("section");   // «on ho estudies» surt quan tots els vots de la pantalla estan fets
+    if (sec && !sec.querySelector(".voto:not(.fet)")) sec.classList.add("votat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    encerts = 0; vots = 0; pinta();
+  }
+
+  /* solucions i respostes que es revelen (botó o tecla S) */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+      if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
+    });
+  });
+
+  /* ronda ràpida: compte enrere en entrar a la targeta (tecla T el torna a engegar) */
+  var tCompte = null;
+  function compte(s){
+    clearInterval(tCompte);
+    var c = s && s.querySelector(".compte"); if (!c) return;
+    var tot = +c.getAttribute("data-seg") || 15, ini = Date.now(), x = c.querySelector(".xifra"), b = c.querySelector(".barra i");
+    c.classList.remove("zero");
+    function pas(){
+      var q = Math.max(0, tot - (Date.now() - ini) / 1000);
+      x.textContent = q > 0 ? Math.ceil(q) : TX.dits;
+      b.style.transform = "scaleX(" + (q / tot).toFixed(3) + ")";
+      if (q <= 0) { clearInterval(tCompte); c.classList.add("zero"); }
+    }
+    pas(); tCompte = setInterval(pas, 100);
+  }
+  /* rellotge de feina: tecla T en una pantalla amb data-min; segueix encara que canviïs de pantalla */
+  var rel = document.getElementById("rellotge"), tRel = null;
+  function rellotge(min){
+    clearInterval(tRel);
+    if (!min || rel.classList.contains("on")) { rel.classList.remove("on", "fi"); return; }
+    var fi = Date.now() + min * 60000;
+    rel.classList.add("on"); rel.classList.remove("fi");
+    function pas(){
+      var q = Math.max(0, Math.round((fi - Date.now()) / 1000));
+      rel.textContent = "⏱ " + Math.floor(q / 60) + ":" + dos(q % 60);
+      if (!q) { clearInterval(tRel); rel.classList.add("fi"); rel.textContent = TX.temps; }
+    }
+    pas(); tRel = setInterval(pas, 500);
+  }
+
+  /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    alcada(); encaixa();
+    compte(pant[i].classList.contains("flash") ? pant[i] : null);
+    pos.textContent = (i + 1) + " / " + pant.length;
+    var segs = nav.querySelectorAll("a");
+    segs.forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(segs, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = -1;
+    pant.forEach(function(s, j){ if (s.id === h) k = j; });
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.surt;
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.proj;
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
+  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "t" || ev.key === "T") { if (pant[i].classList.contains("flash")) compte(pant[i]); else rellotge(+pant[i].getAttribute("data-min") || 0); }
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm(TX.esborra)) reinicia(); }
+    else if (/^[1-8]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+
+  /* respostes de l'alumnat: es desen al navegador i es baixen en un .txt (no s'entreguen) */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup"), parella = document.getElementById("parella");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || ""; parella.value = estat.__parella || "";
+    [nom, grup, parella].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  var msg = document.getElementById("missatge");
+  function baixa(){
+    if (!nom || !net(nom.value)) {
+      if (msg) { msg.hidden = false; msg.textContent = TX.escriu_nom; }
+      try { document.getElementById("inicio").scrollIntoView(); if (nom) nom.focus(); alert(TX.escriu_nom_alert); } catch (e) {}
+      return;
+    }
+    var d = new Date();
+    var L = [TX.cap_resp, TX.qui + ": " + net(nom.value), TX.grup + ": " + net(grup.value), TX.amb_qui + ": " + (net(parella.value) || TX.ningu),
+      TX.data + ": " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || TX.sense_resp); L.push("");
+    });
+    var f = TX.fitxer + "-" + net(nom.value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      if (msg) { msg.hidden = false; msg.innerHTML = TX.fet_baixa.replace("{f}", f); }
+    } catch (e) { if (msg) { msg.hidden = false; msg.textContent = TX.no_baixa; } }
+  }
+  ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
+
+  if (location.hash === "#" + TX.hash) entra();
+})();
+</script>
+</body>
+</html>
