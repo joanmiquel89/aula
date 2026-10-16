@@ -89,6 +89,47 @@ th{background:#f3ecdf}
 .revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
 .sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
 .sol.obert{display:block}
+/* soluciones visuales (JM, 16-10): respuesta grande, pocas palabras y la página donde está el apoyo; todo en em */
+.resp{display:flex;align-items:center;gap:.5em;font-size:1.3em;font-weight:800;line-height:1.15;margin:0 0 .35em}
+.resp i{flex:none;font-style:normal;width:1.45em;height:1.45em;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.8em;color:#fff;background:var(--verd)}
+.resp.no i{background:var(--vermell)}
+.ley{display:inline-block;font-size:.8em;font-weight:700;border:1.5px solid var(--tinta);border-radius:99px;padding:.05em .65em;margin:0 .3em .3em 0;background:#fff;white-space:nowrap}
+.flujo{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.25em 0 .5em}
+.flujo span{padding:.18em .7em;border-radius:.5em;background:#fff;border:1.5px solid var(--verd)}
+.flujo i{font-style:normal;font-weight:800;color:var(--suau)}
+.cuadro4{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em;margin:.35em 0 .5em}
+.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff}
+.cuadro4 h4{margin:0 0 .2em;font-size:.72em;text-transform:uppercase;letter-spacing:.05em;color:var(--suau)}
+.cuadro4 p{margin:0 0 .15em;font-weight:700}
+.cuadro4 small{display:block;font-weight:400;color:var(--suau)}
+.cuadro4 .si{border-color:var(--verd);background:#f3faf6}
+.cuadro4 .alt{border-style:dashed;opacity:.9}
+.nueve{display:grid;grid-template-columns:repeat(9,1fr);gap:.3em;margin:.35em 0 .5em}
+.nueve>div{border:1.5px solid #bdb39d;border-radius:.45em;padding:.2em .15em;text-align:center;font-size:.72em;line-height:1.15;background:#fff;color:var(--suau)}
+.nueve b{display:block;font-size:1.6em;color:var(--tinta)}
+.nueve .no{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.nueve .no b{color:#fff}
+.rama{display:grid;grid-template-columns:1fr 1fr;gap:.5em;margin:.35em 0 .5em}
+.rama>div{border-radius:.5em;padding:.35em .6em;border:2px solid var(--verd);background:#f3faf6}
+.rama>div+div{border-color:var(--mostassa);background:var(--mostassaclar)}
+.rama small{display:block;font-weight:400;color:var(--suau)}
+.donde{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.5em 0 0;padding-top:.4em;border-top:1.5px dashed rgba(31,122,77,.4)}
+.donde .dl,.porque .dl{font-size:.75em;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--suau)}
+.ref.otra{color:var(--mostassa);background:var(--mostassaclar)}
+.mapa{margin:.2em 0}
+.mapa .cap{font-size:.72em;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--suau);margin:.45em 0 .2em}
+.mapa .f{display:grid;gap:.45em}
+.mapa .f4{grid-template-columns:repeat(4,1fr)}
+.mapa .f3{grid-template-columns:repeat(3,1fr)}
+.mapa .leyenda{display:flex;flex-wrap:wrap;gap:.2em .9em;font-size:.8em;font-weight:700;margin:.1em 0 .2em}
+.org{border-radius:.6em;padding:.4em .55em;color:#fff;line-height:1.2}
+.org b{display:block;font-size:1.1em;letter-spacing:.04em}
+.org .sg{display:block;font-weight:800;font-size:1.05em;margin:.05em 0}
+.org small{display:block;font-size:.72em}
+.org.manda{background:#b3321f}
+.org.sabe{background:#1f5596}
+.org.apoya{background:#1f7a4d}
+@media (max-width:700px){.cuadro4,.mapa .f4,.mapa .f3{grid-template-columns:1fr 1fr}.nueve{grid-template-columns:repeat(3,1fr)}.rama{grid-template-columns:1fr}}
 .encls{font-size:14px;color:var(--suau);font-style:italic}
 textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
 textarea.resp:focus{outline:2px solid var(--tinta)}
@@ -176,8 +217,13 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <p class="kicker">1 · Repaso · lo del viernes, antes de que nadie diga nada</p>
   <h2>Dos preguntas, en voz baja con tu compañero</h2>
   <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=22" target="_blank">Hoja · págs. 22-23</a></div>
-  <div class="preg"><span class="n">1</span> Una gestoría guardaba los archivadores viejos en un altillo al que se sube con una escalera de mano. Decide no subir nada más: desde ahora lo guarda todo en la planta baja. ¿Qué principio de la acción preventiva aplica? <span class="inventat">· ejemplo inventado</span> <button class="revela">Ver la respuesta</button><div class="sol"><b>Evitar los riesgos</b> (art. 15.1.a LPRL): si nadie sube, el riesgo de caerse de la escalera desaparece. No es combatirlo ni protegerse de él: es quitarlo.</div></div>
-<div class="preg"><span class="n">2</span> El real decreto de pantallas (RD 488/1997), ¿quién lo aprueba? ¿Es una ley? <button class="revela">Ver la respuesta</button><div class="sol">Lo aprueba <b>el Gobierno</b>, y <b>no es una ley</b>: es un <b>reglamento</b>, una norma que concreta lo que dice una ley (aquí, la LPRL). Las leyes las aprueban las Cortes Generales (el Parlamento del Estado).</div></div>
+  <div class="preg"><span class="n">1</span> Una gestoría guardaba los archivadores viejos en un altillo al que se sube con una escalera de mano. Decide no subir nada más: desde ahora lo guarda todo en la planta baja. ¿Qué principio de la acción preventiva aplica? <span class="inventat">· ejemplo inventado</span> <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Evitar los riesgos</span></div><span class="ley">art. 15.1.a LPRL · principio 1</span>
+<div class="flujo"><span>nadie sube</span><i>→</i><span>el riesgo de caída desaparece</span></div>
+<p class="nota">No es combatirlo ni protegerse de él: es quitarlo.</p>
+<div class="donde"><span class="dl">Dónde lo estudias</span><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=22" target="_blank">Hoja · pág. 22 · principios</a></div></div></div>
+<div class="preg"><span class="n">2</span> El real decreto de pantallas (RD 488/1997), ¿quién lo aprueba? ¿Es una ley? <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>El Gobierno · es un reglamento, no una ley</span></div>
+<div class="flujo"><span>Ley (LPRL): la aprueban las Cortes Generales</span><i>→</i><span>Real decreto (RD 488/1997): lo aprueba el Gobierno y concreta la ley</span></div>
+<div class="donde"><span class="dl">Dónde lo estudias</span><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=23" target="_blank">Hoja · págs. 23-24 · reglamentos, tabla 1.12</a><span class="ref otra">quién los aprueba: lo vimos en la sesión 6</span></div></div></div>
 </section>
 
 <section class="p" id="noticia" data-titol="2 · Quién vigila">
@@ -198,7 +244,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <h2>¿Quién puede entrar en la empresa?</h2>
   <div class="voto" data-ok="b"><p class="q">En el almacén de una tienda de informática, la salida de emergencia está siempre bloqueada con cajas. Un dependiente lo denuncia. ¿Quién puede ir a la tienda, exigir que lo corrija y proponer una multa? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">El INSST (Instituto Nacional de Seguridad y Salud en el Trabajo)</button><button data-v="b">La Inspección de Trabajo y Seguridad Social</button><button data-v="c">La mutua (la entidad que atiende los accidentes de trabajo de la empresa)</button></div><p class="porque"><b>La Inspección de Trabajo y Seguridad Social (ITSS).</b> Es el servicio público que vigila y controla que se cumplan las normas de prevención: comprueba el incumplimiento, requiere a la empresa que lo corrija en un plazo y propone la sanción (art. 43 LPRL) a la autoridad laboral (la administración de trabajo), que es quien la pone (art. 9.1.a). Si hay un riesgo grave e inminente, puede paralizar los trabajos (art. 44). Ni el INSST ni la mutua inspeccionan ni proponen sanciones.</p></div>
 
-  <div class="refs despres"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=25" target="_blank">Hoja · págs. 25-27</a><span class="ref libro">Libro · pág. 17 · tabla 1.13</span></div>
+  <div class="refs despres"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=26" target="_blank">Hoja · pág. 26 · tabla 1.13</a><span class="ref libro">Libro · pág. 17</span></div>
 </section>
 
 <section class="p" id="insst">
@@ -206,19 +252,30 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <h2>¿Dónde busca ayuda una empresa que quiere hacerlo bien?</h2>
   <div class="voto" data-ok="a"><p class="q">Una academia de informática quiere colocar bien las pantallas y las sillas de su aula nueva y busca una guía técnica oficial y gratuita. ¿Qué organismo la publica? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">El INSST (Instituto Nacional de Seguridad y Salud en el Trabajo)</button><button data-v="b">La Inspección de Trabajo y Seguridad Social</button><button data-v="c">El juzgado de lo social (el que juzga los conflictos laborales)</button></div><p class="porque"><b>El INSST.</b> Es el órgano científico y técnico de la prevención: estudia las condiciones de seguridad y salud, asesora y publica guías para ayudar a cumplir la normativa. La guía técnica del trabajo con pantallas se la encarga el propio RD 488/1997. No inspecciona ni propone sanciones. La Inspección también informa y asesora a empresas y trabajadores (art. 9.1.b LPRL), pero lo suyo es vigilar y exigir. <b>INSST e Inspección no son lo mismo:</b> uno estudia y asesora; la otra vigila y exige.</p></div>
 
-  <div class="refs despres"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=25" target="_blank">Hoja · págs. 25-26</a></div>
+  <div class="refs despres"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=26" target="_blank">Hoja · pág. 26 · tabla 1.13</a><span class="ref libro">Libro · pág. 17</span></div>
 </section>
 
 <section class="p" id="otros">
-  <p class="kicker">2 · Y además · para leer en la hoja</p>
+  <p class="kicker">2 · Mapa rápido · ¿quién hace qué?</p>
   <h2>Otros organismos</h2>
-  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=25" target="_blank">Hoja · págs. 25-27 · tablas 1.13 y 1.14</a><span class="ref libro">Libro · pág. 17</span></div>
-  <table class="t">
-<tr><th>Organismo</th><th>Qué hace</th></tr>
-<tr><td>Comisión Nacional de Seguridad y Salud en el Trabajo</td><td>Asesora a las administraciones públicas; en ella participan las administraciones, las empresas y los sindicatos</td></tr>
-<tr><td>Fundación Estatal para la Prevención de Riesgos Laborales</td><td>Promueve actividades para mejorar la seguridad y la salud</td></tr>
-</table>
-<p class="nota">Las comunidades autónomas tienen sus propios organismos de participación. Y en la Unión Europea hay tres más: los tienes en la hoja (pág. 26).</p>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=26" target="_blank">Hoja · pág. 26 · tablas 1.13 y 1.14</a><span class="ref libro">Libro · pág. 17</span></div>
+  <div class="mapa">
+<div class="leyenda"><span style="color:#b3321f">■ MANDA: vigila y propone sanciones</span><span style="color:#1f5596">■ SABE: estudia e informa</span><span style="color:#1f7a4d">■ ACOMPAÑA: asesora y promueve</span></div>
+<p class="cap">España</p>
+<div class="f f4">
+<div class="org manda"><b>VIGILA</b><span class="sg">ITSS</span><small>Inspección de Trabajo y Seguridad Social · requiere, propone sanciones y paraliza</small></div>
+<div class="org sabe"><b>ESTUDIA</b><span class="sg">INSST</span><small>Instituto Nacional de Seguridad y Salud en el Trabajo · apoya la mejora · no sanciona</small></div>
+<div class="org apoya"><b>ASESORA</b><span class="sg">Comisión Nacional</span><small>de Seguridad y Salud en el Trabajo · asesora a las administraciones</small></div>
+<div class="org apoya"><b>PROMUEVE</b><span class="sg">Fundación Estatal</span><small>F.S.P. · actividades para mejorar la seguridad y la salud</small></div>
+</div>
+<p class="cap">Unión Europea</p>
+<div class="f f3">
+<div class="org sabe"><b>INFORMA</b><span class="sg">EU-OSHA</span><small>Agencia Europea · información técnica, científica y económica</small></div>
+<div class="org apoya"><b>AYUDA</b><span class="sg">Comité Consultivo</span><small>ayuda a la Comisión Europea a preparar y aplicar sus decisiones</small></div>
+<div class="org sabe"><b>CREA CONOCIMIENTO</b><span class="sg">Eurofound</span><small>tripartito: gobiernos, empresas y sindicatos</small></div>
+</div>
+</div>
+<p class="nota">Las comunidades autónomas tienen sus propios organismos de participación.</p>
 <div class="clau">Y los jueces no vigilan: deciden cuando alguien les lleva un caso, como el juzgado de lo social con la caída en casa o la Audiencia Provincial con la cisterna.</div>
 </section>
 
@@ -253,7 +310,10 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <h2>No era su trabajo</h2>
   <p class="cas-flash">Una dependienta de una tienda de informática sube un día a la azotea, por orden de su jefa, a sacar unas cajas viejas: no es su trabajo. Resbala y se rompe un tobillo. ¿Es accidente de trabajo? <span class="inventat">· ejemplo inventado</span></p>
 <div class="compte" data-seg="20"><span class="xifra">20</span><span class="barra"><i></i></span></div>
-<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><b>Sí.</b> Son <b>tareas distintas</b> de las de su puesto, pero las hace por orden de la empresa: la Ley General de la Seguridad Social (LGSS) las considera accidente de trabajo (art. 156.2.c). También lo serían si las hiciera por su cuenta para que la empresa funcione bien.</div></div>
+<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><i>✔</i><span>Sí, es accidente de trabajo</span></div><span class="ley">art. 156.2.c LGSS</span>
+<div class="flujo"><span>tareas distintas de su puesto</span><i>→</i><span>por orden de la empresa</span></div>
+<p class="nota">También lo serían si las hiciera por su cuenta, para que la empresa funcione bien.</p>
+<div class="donde"><span class="dl">Dónde lo estudias</span><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=15" target="_blank">Hoja · pág. 15 · tabla 1.8</a></div></div></div>
 </section>
 
 <section class="p flash" id="rep2">
@@ -261,7 +321,9 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <h2>Ayudar a un compañero</h2>
   <p class="cas-flash">Un técnico ve que a un compañero se le ha quedado la mano atrapada en una máquina. Corre a sacarlo y se hace un corte profundo en el brazo. ¿Es accidente de trabajo? <span class="inventat">· ejemplo inventado</span></p>
 <div class="compte" data-seg="20"><span class="xifra">20</span><span class="barra"><i></i></span></div>
-<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><b>Sí.</b> Es un <b>acto de salvamento</b> relacionado con el trabajo: la LGSS lo considera accidente de trabajo (art. 156.2.d).</div></div>
+<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><i>✔</i><span>Sí, es accidente de trabajo</span></div><span class="ley">art. 156.2.d LGSS</span>
+<div class="flujo"><span>acto de salvamento</span><i>→</i><span>relacionado con el trabajo</span></div>
+<div class="donde"><span class="dl">Dónde lo estudias</span><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=15" target="_blank">Hoja · pág. 15 · tabla 1.8</a></div></div></div>
 </section>
 
 <section class="p flash" id="rep3">
@@ -269,7 +331,9 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <h2>¿La culpa es del sol?</h2>
   <p class="cas-flash">Un instalador de antenas trabaja en un tejado en pleno julio y sufre una insolación. La empresa dice que no es accidente de trabajo, porque «la culpa es del sol, no del trabajo». ¿Tiene razón? <span class="inventat">· ejemplo inventado</span></p>
 <div class="compte" data-seg="20"><span class="xifra">20</span><span class="barra"><i></i></span></div>
-<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><b>No.</b> La fuerza mayor que no tiene nada que ver con el trabajo no es accidente de trabajo, pero la ley dice que la <b>insolación</b>, el rayo y otros fenómenos parecidos de la naturaleza <b>nunca</b> cuentan como fuerza mayor extraña al trabajo (art. 156.4.a LGSS). Es accidente de trabajo.</div></div>
+<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp no"><i>✘</i><span>No tiene razón: es accidente de trabajo</span></div><span class="ley">art. 156.4.a LGSS</span>
+<div class="flujo"><span>la insolación, el rayo…</span><i>→</i><span>nunca son fuerza mayor extraña al trabajo</span></div>
+<div class="donde"><span class="dl">Dónde lo estudias</span><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=16" target="_blank">Hoja · pág. 16 · qué rompe el accidente de trabajo</a></div></div></div>
 </section>
 
 <section class="p" id="cierre" data-titol="Cierre">
