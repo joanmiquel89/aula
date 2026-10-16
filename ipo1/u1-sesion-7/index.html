@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Quién vigila y el caso de Lorena · Sesión 7</title>
+<!-- Generat per sistema/tools/sessio_aula.py des de fitxa-sesion-07.toml. No l'editis a mà: edita la fitxa. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.voto~.refs,.grup~.refs{margin:12px 0 0}
+.refs.despres{display:none}
+.votat .refs.despres{display:flex}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid currentColor;text-decoration:none;white-space:nowrap}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px;background:var(--blauclar);border:2px solid var(--blau)}
+.dos>div+div{background:var(--verdclar);border-color:var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+ol.dosc{columns:2;column-gap:28px;margin:6px 0 10px}ol.dosc li{break-inside:avoid}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+.cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
+.compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
+.compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
+.compte .barra{flex:1;height:14px;border-radius:99px;background:#e6dccb;overflow:hidden}
+.compte .barra i{display:block;height:100%;width:100%;background:var(--vermell);transform-origin:left}
+.compte.zero .xifra{color:var(--verd)}
+body.proj .compte{display:flex}
+body.proj .cas-flash{font-size:1.55em}
+.rellotge{display:none;font-weight:800;font-variant-numeric:tabular-nums}
+body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta);border-radius:8px;padding:6px 12px;font-size:20px}
+.rellotge.fi{background:var(--vermell)!important;color:#fff!important}
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  ol.dosc{columns:1}
+  .dalt nav,.dalt .nom small{display:none}
+  .opc button{flex:1 1 100%;text-align:left}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  .refs.despres{display:flex!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+
+<header class="dalt">
+  <span class="nom">IPO I · Unidad 1 · Sesión 7<small>Quién vigila y el caso de Lorena</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
+  <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
+</header>
+
+<main>
+
+<section class="p" id="inicio" data-titol="Inicio">
+  <p class="kicker">Sesión 7 · una hora</p>
+  <h2>Quién vigila y el caso de Lorena</h2>
+  <p style="font-size:1.15em">El viernes vimos quién hace las normas de prevención. Hoy cerramos la unidad: <b>quién vigila</b> que se cumplan y el caso de Lorena, que es el ensayo del examen del lunes.</p>
+  <div class="cadena"><span class="fet">Los principios (art. 15.1)</span><i>→</i><span class="fet">Quién hace las normas</span><i>→</i><span class="avui">Quién vigila</span><i>→</i><span class="avui">Lorena: el ensayo del examen</span><i>→</i><span>Examen de la unidad 1 (lunes 19)</span></div>
+  <div class="plan"><div><b>Hoy</b><ol start="1"><li>Repaso del viernes: dos preguntas <small>· 3 min</small></li><li>735 muertes en 2025: ¿quién vigila que se cumpla la ley? <small>· 9 min</small></li></ol></div><div><b>&nbsp;</b><ol start="3"><li>En parejas, el caso de Lorena: el ensayo del examen <small>· 25 min</small></li><li>Si sobra tiempo: tres supuestos que no han salido <small>· ➕ si da tiempo</small></li></ol></div></div>
+  <h3 class="noproj">Cómo usar esta página</h3>
+  <p class="noproj">En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=25" target="_blank">Hoja · págs. 25-28</a><span class="ref libro">Libro · págs. 17-19</span></div>
+    <p class="nota noproj">Verde: la hoja de estudio (se abre en la página exacta). Azul: el libro. Amarillo: lo que escribes en esta página.</p>
+  <div class="clau"><b>Lunes 19, a las 16.55: examen de la unidad 1.</b> En papel, sin libro ni apuntes, unos 45 minutos: un test, preguntas cortas y un caso como el de Lorena. Entra toda la hoja de estudio (<span style="white-space:nowrap">págs. 3-28</span>; «Para ir más allá» no entra). Para repasar, los «Comprueba que lo sabes» 1 a 23 (<span style="white-space:nowrap">págs. 7, 11, 19, 25 y 27</span>).<br><b>¿Todavía sin libro o sin correo del centro?</b> No pasa nada: esta página y la hoja están en <b>joanmiquel89.github.io/aula</b>, sin contraseña.</div>
+</section>
+
+<section class="p" id="repaso" data-titol="1 · Repaso">
+  <p class="kicker">1 · Repaso · lo del viernes, antes de que nadie diga nada</p>
+  <h2>Dos preguntas, en voz baja con tu compañero</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=22" target="_blank">Hoja · págs. 22-23</a></div>
+  <div class="preg"><span class="n">1</span> Una gestoría guardaba los archivadores viejos en un altillo al que se sube con una escalera de mano. Decide no subir nada más: desde ahora lo guarda todo en la planta baja. ¿Qué principio de la acción preventiva aplica? <span class="inventat">· ejemplo inventado</span> <button class="revela">Ver la respuesta</button><div class="sol"><b>Evitar los riesgos</b> (art. 15.1.a LPRL): si nadie sube, el riesgo de caerse de la escalera desaparece. No es combatirlo ni protegerse de él: es quitarlo.</div></div>
+<div class="preg"><span class="n">2</span> El real decreto de pantallas (RD 488/1997), ¿quién lo aprueba? ¿Es una ley? <button class="revela">Ver la respuesta</button><div class="sol">Lo aprueba <b>el Gobierno</b>, y <b>no es una ley</b>: es un <b>reglamento</b>, una norma que concreta lo que dice una ley (aquí, la LPRL). Las leyes las aprueban las Cortes Generales (el Parlamento del Estado).</div></div>
+</section>
+
+<section class="p" id="noticia" data-titol="2 · Quién vigila">
+  <p class="kicker">2 · La noticia que cierra la unidad</p>
+  <h2>735 muertes en el trabajo en 2025</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=28" target="_blank">Hoja · pág. 28</a><span class="ref libro">Libro · pág. 19 · la noticia</span></div>
+  <div class="caso"><ul>
+<li><b>735 personas</b> murieron en accidente laboral en 2025, 61 menos que en 2024.</li>
+<li>584 murieron en jornada de trabajo y 151 <i>in itinere</i> (yendo al trabajo o volviendo).</li>
+<li>Primeras causas: infartos y derrames cerebrales (251), caídas (97), quedar atrapado o aplastado o sufrir una amputación (82) y accidentes de tráfico (73).</li>
+<li>En jornada, por sectores: servicios 262, construcción 164 (el único sector que sube, un 21,5 %), industria 110 y agrario 48.</li>
+</ul><p class="fuente">Fuente: Europa Press, 13-02-2026, con datos provisionales del Ministerio de Trabajo (es la noticia del libro, pág. 19).</p></div>
+<div class="clau">Ya tenemos las leyes, los reglamentos y los convenios. Pero ¿quién comprueba que las empresas los cumplan?</div>
+</section>
+
+<section class="p" id="vigila">
+  <p class="kicker">2 · ¿Quién vigila?</p>
+  <h2>¿Quién puede entrar en la empresa?</h2>
+  <div class="voto" data-ok="b"><p class="q">En el almacén de una tienda de informática, la salida de emergencia está siempre bloqueada con cajas. Un dependiente lo denuncia. ¿Quién puede ir a la tienda, exigir que lo corrija y proponer una multa? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">El INSST (Instituto Nacional de Seguridad y Salud en el Trabajo)</button><button data-v="b">La Inspección de Trabajo y Seguridad Social</button><button data-v="c">La mutua (la entidad que atiende los accidentes de trabajo de la empresa)</button></div><p class="porque"><b>La Inspección de Trabajo y Seguridad Social (ITSS).</b> Es el servicio público que vigila y controla que se cumplan las normas de prevención: comprueba el incumplimiento, requiere a la empresa que lo corrija en un plazo y propone la sanción (art. 43 LPRL) a la autoridad laboral (la administración de trabajo), que es quien la pone (art. 9.1.a). Si hay un riesgo grave e inminente, puede paralizar los trabajos (art. 44). Ni el INSST ni la mutua inspeccionan ni proponen sanciones.</p></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=25" target="_blank">Hoja · págs. 25-27</a><span class="ref libro">Libro · pág. 17 · tabla 1.13</span></div>
+</section>
+
+<section class="p" id="insst">
+  <p class="kicker">2 · Otra situación</p>
+  <h2>¿Dónde busca ayuda una empresa que quiere hacerlo bien?</h2>
+  <div class="voto" data-ok="a"><p class="q">Una academia de informática quiere colocar bien las pantallas y las sillas de su aula nueva y busca una guía técnica oficial y gratuita. ¿Qué organismo la publica? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">El INSST (Instituto Nacional de Seguridad y Salud en el Trabajo)</button><button data-v="b">La Inspección de Trabajo y Seguridad Social</button><button data-v="c">El juzgado de lo social (el que juzga los conflictos laborales)</button></div><p class="porque"><b>El INSST.</b> Es el órgano científico y técnico de la prevención: estudia las condiciones de seguridad y salud, asesora y publica guías para ayudar a cumplir la normativa. La guía técnica del trabajo con pantallas se la encarga el propio RD 488/1997. No inspecciona ni propone sanciones. La Inspección también informa y asesora a empresas y trabajadores (art. 9.1.b LPRL), pero lo suyo es vigilar y exigir. <b>INSST e Inspección no son lo mismo:</b> uno estudia y asesora; la otra vigila y exige.</p></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=25" target="_blank">Hoja · págs. 25-26</a></div>
+</section>
+
+<section class="p" id="otros">
+  <p class="kicker">2 · Y además · para leer en la hoja</p>
+  <h2>Otros organismos</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=25" target="_blank">Hoja · págs. 25-27 · tablas 1.13 y 1.14</a><span class="ref libro">Libro · pág. 17</span></div>
+  <table class="t">
+<tr><th>Organismo</th><th>Qué hace</th></tr>
+<tr><td>Comisión Nacional de Seguridad y Salud en el Trabajo</td><td>Asesora a las administraciones públicas; en ella participan las administraciones, las empresas y los sindicatos</td></tr>
+<tr><td>Fundación Estatal para la Prevención de Riesgos Laborales</td><td>Promueve actividades para mejorar la seguridad y la salud</td></tr>
+</table>
+<p class="nota">Las comunidades autónomas tienen sus propios organismos de participación. Y en la Unión Europea hay tres más: los tienes en la hoja (pág. 26).</p>
+<div class="clau">Y los jueces no vigilan: deciden cuando alguien les lleva un caso, como el juzgado de lo social con la caída en casa o la Audiencia Provincial con la cisterna.</div>
+</section>
+
+<section class="p" id="como" data-titol="3 · Lorena">
+  <p class="kicker">3 · Así será el lunes</p>
+  <h2>Un caso y varias preguntas: cómo se contesta</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=28" target="_blank">Hoja · pág. 28</a></div>
+  <div class="clau"><ol>
+<li><b>Contesta lo que te preguntan</b>, con las palabras de la unidad: factor de riesgo, daño, principio…</li>
+<li><b>Di de dónde sale en el caso</b>: «poca ventilación → …».</li>
+<li><b>Si la sabes, la norma o la tabla</b>: «art. 15.1 LPRL», «tabla 1.3».</li>
+</ol></div>
+<p>Hoy no cuenta: es un ensayo. Lo hacéis en parejas, <b>por escrito en una hoja o en la libreta</b> (si no tenéis papel, en el móvil), y con la hoja de estudio al lado si la necesitáis. El lunes será igual, pero solos, en papel y sin hoja.</p>
+</section>
+
+<section class="p" id="lorena" data-min="18">
+  <p class="kicker">3 · En parejas · el caso de Lorena · unos veinte minutos</p>
+  <h2>Lorena, en la fábrica textil</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=28" target="_blank">Hoja · pág. 28</a><span class="ref libro">Libro · pág. 18 · caso de estudio</span><span class="ref ficha">Escribid en una hoja o en la libreta</span></div>
+  <div class="caso"><p>Lorena trabaja en una fábrica textil, con jornadas largas y poca ventilación. No ha recibido formación en seguridad y usa maquinaria sin protección. La empresa no evalúa los riesgos ni aplica medidas de prevención. Con el tiempo, Lorena sufre una lesión muscular y problemas respiratorios. Lo denuncia, y la Inspección de Trabajo interviene y obliga a la empresa a mejorar las condiciones.</p></div>
+<p class="nota">Las preguntas 1 a 3 del libro. La 4 (qué organismos pueden intervenir) ya la hemos hecho hoy.</p>
+<div class="preg"><span class="n">1</span> ¿Qué factores de riesgo hay en este trabajo? Clasifícalos con la tabla 1.3 (condiciones de seguridad · medio ambiente · exigencias de la tarea · organización del trabajo).
+</div>
+<div class="preg"><span class="n">2</span> ¿Qué daños derivados del trabajo ha sufrido Lorena? ¿De qué tipo pueden ser?
+</div>
+<div class="preg"><span class="n">3</span> ¿Qué normas de prevención se aplican en este caso? ¿Qué principios de la acción preventiva no ha cumplido la empresa?
+</div>
+</section>
+
+<section class="p flash" id="rep1" data-titol="4 · ➕ Tres supuestos">
+  <p class="kicker">4 · ➕ Si da tiempo · Repaso · primer caso</p>
+  <h2>No era su trabajo</h2>
+  <p class="cas-flash">Una dependienta de una tienda de informática sube un día a la azotea, por orden de su jefa, a sacar unas cajas viejas: no es su trabajo. Resbala y se rompe un tobillo. ¿Es accidente de trabajo? <span class="inventat">· ejemplo inventado</span></p>
+<div class="compte" data-seg="20"><span class="xifra">20</span><span class="barra"><i></i></span></div>
+<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><b>Sí.</b> Son <b>tareas distintas</b> de las de su puesto, pero las hace por orden de la empresa: la Ley General de la Seguridad Social (LGSS) las considera accidente de trabajo (art. 156.2.c). También lo serían si las hiciera por su cuenta para que la empresa funcione bien.</div></div>
+</section>
+
+<section class="p flash" id="rep2">
+  <p class="kicker">4 · Repaso · segundo caso</p>
+  <h2>Ayudar a un compañero</h2>
+  <p class="cas-flash">Un técnico ve que a un compañero se le ha quedado la mano atrapada en una máquina. Corre a sacarlo y se hace un corte profundo en el brazo. ¿Es accidente de trabajo? <span class="inventat">· ejemplo inventado</span></p>
+<div class="compte" data-seg="20"><span class="xifra">20</span><span class="barra"><i></i></span></div>
+<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><b>Sí.</b> Es un <b>acto de salvamento</b> relacionado con el trabajo: la LGSS lo considera accidente de trabajo (art. 156.2.d).</div></div>
+</section>
+
+<section class="p flash" id="rep3">
+  <p class="kicker">4 · Repaso · tercer caso</p>
+  <h2>¿La culpa es del sol?</h2>
+  <p class="cas-flash">Un instalador de antenas trabaja en un tejado en pleno julio y sufre una insolación. La empresa dice que no es accidente de trabajo, porque «la culpa es del sol, no del trabajo». ¿Tiene razón? <span class="inventat">· ejemplo inventado</span></p>
+<div class="compte" data-seg="20"><span class="xifra">20</span><span class="barra"><i></i></span></div>
+<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><b>No.</b> La fuerza mayor que no tiene nada que ver con el trabajo no es accidente de trabajo, pero la ley dice que la <b>insolación</b>, el rayo y otros fenómenos parecidos de la naturaleza <b>nunca</b> cuentan como fuerza mayor extraña al trabajo (art. 156.4.a LGSS). Es accidente de trabajo.</div></div>
+</section>
+
+<section class="p" id="cierre" data-titol="Cierre">
+  <p class="kicker">Cierre</p>
+  <h2>El lunes 19, examen de la unidad 1</h2>
+  
+  <div class="clau">A las 16.55, en papel y sin libro ni apuntes: entra toda la hoja (págs. 3-28). Repasa los «Comprueba que lo sabes» y el caso de Lorena.</div>
+  <p class="nota">Próxima sesión (lunes 19 de octubre): el examen de la unidad 1, en papel, a las 16.55.</p>
+</section>
+
+<section class="p" id="casa" data-titol="Para casa">
+  <p class="kicker">Para casa · no cuenta para la nota</p>
+  <h2>Para el examen del lunes</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/hoja-de-estudio-U1.pdf#page=3" target="_blank">Hoja · págs. 3-28</a></div>
+  <h3>Lo mínimo · unos 60 minutos</h3>
+  <ol><li>Repasa la hoja de estudio, <b>págs. 3 a 28</b>: es lo que entra en el examen.</li><li>Repasa los «Comprueba que lo sabes» (págs. 7, 11, 19, 25 y 27). Aquí debajo, la 23, que no ha salido en clase.</li></ol>
+  <div class="preg"><span class="n">23</span> ¿Qué organismo europeo da información técnica y científica sobre seguridad y salud? <span class="encls">(pág. 26)</span> <button class="revela">Ver la respuesta</button><div class="sol">La Agencia Europea para la Seguridad y la Salud en el Trabajo (EU-OSHA).</div></div>
+  
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
+</main>
+
+<div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
+
+<script>
+(function(){
+  "use strict";
+  var TX = {"clau": "ipo1-u1-u1-sesion-7-v1", "la_classe": "La clase: ", "dits": "¡Dedos!", "temps": "⏱ ¡Tiempo!", "proj": "▶ Proyectar", "surt": "✕ Salir", "esborra": "¿Borrar los votos y el marcador para empezar con otro grupo?", "hash": "proyectar", "escriu_nom": "Escribe tu nombre y apellidos antes de descargar.", "escriu_nom_alert": "Escribe tu nombre y apellidos en la primera pantalla y vuelve a pulsar el botón.", "cap_resp": "Sesión 7 · Quién vigila y el caso de Lorena · mis respuestas (IPO I, unidad 1)", "qui": "Alumno/a", "grup": "Grupo", "amb_qui": "Con quién he trabajado", "ningu": "(nadie)", "data": "Fecha", "sense_resp": "(sin respuesta)", "fitxer": "RESPUESTAS-S7", "fet_baixa": "Hecho: se ha descargado <b>{f}</b>. Guárdalo para repasar; no se entrega.", "no_baixa": "Este navegador no ha dejado descargar el fichero."};
+  var CLAU = TX.clau;
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inicio|^Cierre|^Para casa/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions: la resposta (el perquè) només surt després de votar */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? TX.la_classe + encerts + " / " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    var sec = v.closest("section");   // «on ho estudies» surt quan tots els vots de la pantalla estan fets
+    if (sec && !sec.querySelector(".voto:not(.fet)")) sec.classList.add("votat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    encerts = 0; vots = 0; pinta();
+  }
+
+  /* solucions i respostes que es revelen (botó o tecla S) */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+      if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
+    });
+  });
+
+  /* ronda ràpida: compte enrere en entrar a la targeta (tecla T el torna a engegar) */
+  var tCompte = null;
+  function compte(s){
+    clearInterval(tCompte);
+    var c = s && s.querySelector(".compte"); if (!c) return;
+    var tot = +c.getAttribute("data-seg") || 15, ini = Date.now(), x = c.querySelector(".xifra"), b = c.querySelector(".barra i");
+    c.classList.remove("zero");
+    function pas(){
+      var q = Math.max(0, tot - (Date.now() - ini) / 1000);
+      x.textContent = q > 0 ? Math.ceil(q) : TX.dits;
+      b.style.transform = "scaleX(" + (q / tot).toFixed(3) + ")";
+      if (q <= 0) { clearInterval(tCompte); c.classList.add("zero"); }
+    }
+    pas(); tCompte = setInterval(pas, 100);
+  }
+  /* rellotge de feina: tecla T en una pantalla amb data-min; segueix encara que canviïs de pantalla */
+  var rel = document.getElementById("rellotge"), tRel = null;
+  function rellotge(min){
+    clearInterval(tRel);
+    if (!min || rel.classList.contains("on")) { rel.classList.remove("on", "fi"); return; }
+    var fi = Date.now() + min * 60000;
+    rel.classList.add("on"); rel.classList.remove("fi");
+    function pas(){
+      var q = Math.max(0, Math.round((fi - Date.now()) / 1000));
+      rel.textContent = "⏱ " + Math.floor(q / 60) + ":" + dos(q % 60);
+      if (!q) { clearInterval(tRel); rel.classList.add("fi"); rel.textContent = TX.temps; }
+    }
+    pas(); tRel = setInterval(pas, 500);
+  }
+
+  /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    alcada(); encaixa();
+    compte(pant[i].classList.contains("flash") ? pant[i] : null);
+    pos.textContent = (i + 1) + " / " + pant.length;
+    var segs = nav.querySelectorAll("a");
+    segs.forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(segs, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = -1;
+    pant.forEach(function(s, j){ if (s.id === h) k = j; });
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.surt;
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.proj;
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
+  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "t" || ev.key === "T") { if (pant[i].classList.contains("flash")) compte(pant[i]); else rellotge(+pant[i].getAttribute("data-min") || 0); }
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm(TX.esborra)) reinicia(); }
+    else if (/^[1-8]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+
+  /* respostes de l'alumnat: es desen al navegador i es baixen en un .txt (no s'entreguen) */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup"), parella = document.getElementById("parella");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || ""; parella.value = estat.__parella || "";
+    [nom, grup, parella].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  var msg = document.getElementById("missatge");
+  function baixa(){
+    if (!nom || !net(nom.value)) {
+      if (msg) { msg.hidden = false; msg.textContent = TX.escriu_nom; }
+      try { document.getElementById("inicio").scrollIntoView(); if (nom) nom.focus(); alert(TX.escriu_nom_alert); } catch (e) {}
+      return;
+    }
+    var d = new Date();
+    var L = [TX.cap_resp, TX.qui + ": " + net(nom.value), TX.grup + ": " + net(grup.value), TX.amb_qui + ": " + (net(parella.value) || TX.ningu),
+      TX.data + ": " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || TX.sense_resp); L.push("");
+    });
+    var f = TX.fitxer + "-" + net(nom.value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      if (msg) { msg.hidden = false; msg.innerHTML = TX.fet_baixa.replace("{f}", f); }
+    } catch (e) { if (msg) { msg.hidden = false; msg.textContent = TX.no_baixa; } }
+  }
+  ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
+
+  if (location.hash === "#" + TX.hash) entra();
+})();
+</script>
+</body>
+</html>
