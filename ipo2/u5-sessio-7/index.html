@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>L'A5 corregida, la start-up i dubtes · Sessió 7</title>
+<!-- Generat per sistema/tools/sessio_aula.py des de fitxa-sessio-07.toml. No l'editis a mà: edita la fitxa. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.voto~.refs,.grup~.refs{margin:12px 0 0}
+.refs.despres{display:none}
+.votat .refs.despres{display:flex}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid currentColor;text-decoration:none;white-space:nowrap}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px;background:var(--blauclar);border:2px solid var(--blau)}
+.dos>div+div{background:var(--verdclar);border-color:var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+ol.dosc{columns:2;column-gap:28px;margin:6px 0 10px}ol.dosc li{break-inside:avoid}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+/* soluciones visuales (JM, 16-10): respuesta grande, pocas palabras y la página donde está el apoyo; todo en em */
+.resp{display:flex;align-items:center;gap:.5em;font-size:1.3em;font-weight:800;line-height:1.15;margin:0 0 .35em}
+.resp i{flex:none;font-style:normal;width:1.45em;height:1.45em;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.8em;color:#fff;background:var(--verd)}
+.resp.no i{background:var(--vermell)}
+.ley{display:inline-block;font-size:.8em;font-weight:700;border:1.5px solid var(--tinta);border-radius:99px;padding:.05em .65em;margin:0 .3em .3em 0;background:#fff;white-space:nowrap}
+.flujo{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.25em 0 .5em}
+.flujo span{padding:.18em .7em;border-radius:.5em;background:#fff;border:1.5px solid var(--verd)}
+.flujo i{font-style:normal;font-weight:800;color:var(--suau)}
+.cuadro4{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em;margin:.35em 0 .5em}
+.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff}
+.cuadro4 h4{margin:0 0 .2em;font-size:.72em;text-transform:uppercase;letter-spacing:.05em;color:var(--suau)}
+.cuadro4 p{margin:0 0 .15em;font-weight:700}
+.cuadro4 small{display:block;font-weight:400;color:var(--suau)}
+.cuadro4 .si{border-color:var(--verd);background:#f3faf6}
+.cuadro4 .alt{border-style:dashed;opacity:.9}
+.nueve{display:grid;grid-template-columns:repeat(9,1fr);gap:.3em;margin:.35em 0 .5em}
+.nueve>div{border:1.5px solid #bdb39d;border-radius:.45em;padding:.2em .15em;text-align:center;font-size:.72em;line-height:1.15;background:#fff;color:var(--suau)}
+.nueve b{display:block;font-size:1.6em;color:var(--tinta)}
+.nueve .no{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.nueve .no b{color:#fff}
+.rama{display:grid;grid-template-columns:1fr 1fr;gap:.5em;margin:.35em 0 .5em}
+.rama>div{border-radius:.5em;padding:.35em .6em;border:2px solid var(--verd);background:#f3faf6}
+.rama>div+div{border-color:var(--mostassa);background:var(--mostassaclar)}
+.rama small{display:block;font-weight:400;color:var(--suau)}
+.donde{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.5em 0 0;padding-top:.4em;border-top:1.5px dashed rgba(31,122,77,.4)}
+.donde .dl,.porque .dl{font-size:.75em;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--suau)}
+.ref.otra{color:var(--mostassa);background:var(--mostassaclar)}
+.mapa{margin:.2em 0}
+.mapa .cap{font-size:.72em;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--suau);margin:.45em 0 .2em}
+.mapa .f{display:grid;gap:.45em}
+.mapa .f4{grid-template-columns:repeat(4,1fr)}
+.mapa .f3{grid-template-columns:repeat(3,1fr)}
+.mapa .leyenda{display:flex;flex-wrap:wrap;gap:.2em .9em;font-size:.8em;font-weight:700;margin:.1em 0 .2em}
+.org{border-radius:.6em;padding:.4em .55em;color:#fff;line-height:1.2}
+.org b{display:block;font-size:1.1em;letter-spacing:.04em}
+.org .sg{display:block;font-weight:800;font-size:1.05em;margin:.05em 0}
+.org small{display:block;font-size:.72em}
+.org.manda{background:#b3321f}
+.org.sabe{background:#1f5596}
+.org.apoya{background:#1f7a4d}
+@media (max-width:700px){.cuadro4,.mapa .f4,.mapa .f3{grid-template-columns:1fr 1fr}.nueve{grid-template-columns:repeat(3,1fr)}.rama{grid-template-columns:1fr}}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+.cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
+.compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
+.compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
+.compte .barra{flex:1;height:14px;border-radius:99px;background:#e6dccb;overflow:hidden}
+.compte .barra i{display:block;height:100%;width:100%;background:var(--vermell);transform-origin:left}
+.compte.zero .xifra{color:var(--verd)}
+body.proj .compte{display:flex}
+body.proj .cas-flash{font-size:1.55em}
+.rellotge{display:none;font-weight:800;font-variant-numeric:tabular-nums}
+body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta);border-radius:8px;padding:6px 12px;font-size:20px}
+.rellotge.fi{background:var(--vermell)!important;color:#fff!important}
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  ol.dosc{columns:1}
+  .dalt nav,.dalt .nom small{display:none}
+  .opc button{flex:1 1 100%;text-align:left}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  .refs.despres{display:flex!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+
+<header class="dalt">
+  <span class="nom">IPO II · Unitat 5 · Sessió 7<small>L'A5 corregida, la start-up i dubtes</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Encerts de la classe a les votacions"></span>
+  <button id="bproj" title="Pantalla completa per projectar (tecla P)">▶ Projectar</button>
+</header>
+
+<main>
+
+<section class="p" id="inicio" data-titol="Inici">
+  <p class="kicker">Sessió 7 · una hora</p>
+  <h2>L'A5 corregida, la start-up i dubtes</h2>
+  <p style="font-size:1.15em">Dijous vas lliurar l'A5. Avui te la torno corregida i en parlem, fem la start-up que ens va quedar pendent, practiques el Canvas amb Wallapop i resolem els teus dubtes de cara a la prova de dijous 22. Avui no compta res. Al final d'aquesta primera pantalla, el quadre de la prova.</p>
+  <div class="cadena"><span class="fet">5.1 · Emprendre i metodologies</span><i>→</i><span class="fet">5.2 · El Canvas i la tecnologia</span><i>→</i><span class="fet">5.3 · Sostenibilitat i l'A5</span><i>→</i><span class="avui">L'A5 corregida, la start-up i dubtes</span><i>→</i><span>Prova del RA3 (dijous 22)</span></div>
+  <div class="plan"><div><b>Avui</b><ol start="1"><li>Una pregunta de dijous <small>· 3 min</small></li><li>L'A5 corregida: llegeixes la teva i en parlem <small>· 13 min</small></li><li>5.2 · Start-up: què la fa diferent? <small>· 5 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>Per parelles: Wallapop en el Canvas <small>· 15 min</small></li><li>Els teus dubtes de cara a la prova <small>· 10 min</small></li><li>Si sobra temps: els «Comprova» del 5.1, per parelles <small>· ➕ si hi ha temps</small></li></ol></div></div>
+  <h3 class="noproj">Com fer servir aquesta pàgina</h3>
+  <p class="noproj">A classe la projectem. A casa et serveix per estudiar: cada bloc et diu <b>on és al full d'estudi</b> (el botó verd l'obre a la pàgina exacta).</p>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=13" target="_blank">Full d'estudi · pàg. 13-15</a></div>
+    <p class="nota noproj">Verd: el full d'estudi (s'obre a la pàgina exacta).</p>
+  <div class="clau"><b>La prova del RA3 · dijous 22</b> · 55 minuts, individual, sense apunts<br><b>5.1</b> · full d'estudi <span style="white-space:nowrap">pàg. 3-11</span> · <span style="white-space:nowrap">«Comprova» 1-8</span><br><b>5.2</b> · <span style="white-space:nowrap">pàg. 11-17</span> · <span style="white-space:nowrap">«Comprova» 9-12</span><br><b>5.3</b> · <span style="white-space:nowrap">pàg. 17-22</span> · <span style="white-space:nowrap">«Comprova» 13-16</span><br><b>No entren:</b> l'A3 (pàg. 16), l'A4 (pàg. 18-19), la IA (pàg. 15) ni els sectors (el «Comprova» 10). Els «Comprova» són el millor entrenament, però no ho cobreixen tot: hi surten també el Canvas (pàg. 13-14) i la taula 5.5 (pàg. 20). Les respostes dels «Comprova» són al final de <a href="https://joanmiquel89.github.io/aula/ipo2/u5-sessio-6/index.html#casa" target="_blank" rel="noopener">la pàgina de dijous 15</a> (les 11, 14 i 15, als vots d'aquella pàgina); la 12, la start-up, la fem avui.</div>
+</section>
+
+<section class="p" id="record" data-titol="1 · Record">
+  <p class="kicker">1 · Una pregunta de dijous · abans de res</p>
+  <h2>Els pous d'una illa</h2>
+  <div class="caso"><p>Una illa treu cada any dels pous més aigua de la que hi torna amb la pluja. Ara n'hi ha prou per a tothom, hotels i cases, però el nivell dels pous baixa una mica cada any.</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
+<div class="voto" data-ok="c"><p class="q">Segons el full d'estudi, aquesta manera de fer servir l'aigua és sostenible?</p><div class="opc"><button data-v="a">Sí: avui no falta aigua a ningú, ni als hotels ni a les cases</button><button data-v="b">Sí: la pluja torna cada any, i l'aigua és un recurs renovable</button><button data-v="c">No: cada any en deixen menys per als qui vindran després</button></div><p class="porque"><b>No.</b> La sostenibilitat ambiental és l'ús responsable dels recursos naturals per satisfer les necessitats d'avui <b>sense comprometre les de les generacions futures</b> (la idea de l'informe Brundtland, Nacions Unides, 1987). Que avui n'hi hagi prou no basta: si cada any se'n treu més del que hi torna, els qui vinguin en tindran menys. I que la pluja torni no ho arregla si se'n gasta més del que en cau.<br>«Comprova que ho saps», 13 (pàg. 22).</p></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=17" target="_blank">Full d'estudi · pàg. 17</a></div>
+</section>
+
+<section class="p" id="a5-corregida" data-titol="2 · A5 corregida">
+  <p class="kicker">2 · L'A5 · corregida</p>
+  <h2>L'A5, pregunta a pregunta</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=17" target="_blank">Full d'estudi · pàg. 17-20</a></div>
+  <div class="clau">Obre el correu amb la teva <b>A5 corregida</b> (Gmail de l'institut) i llegeix-lo <b>sol, quatre minuts</b>: la nota, el que has fet bé i el que et falta. Després la repassem pregunta a pregunta. Si no hi estàs d'acord, ho mirem en acabar la classe, amb la teva A5 al davant.</div>
+<p>Sobre 8 punts (la nota es multiplica per 1,25 per passar-la a 10).</p>
+<div class="preg"><span class="n">1</span> 1 (1,5 punts) · Tres mesures d'Iberostar a la taula 5.5. <button class="revela">Veure la resposta</button><div class="sol">Sense plàstic d'un sol ús, les fonts d'aigua (per gastar menys botelles), el 80 % dels residus fora de l'abocador i Winnow → <b>3</b>, impacte ambiental dels processos · el 7 % menys d'emissions i la neutralitat de carboni el 2030 → <b>4</b>, petjada de carboni · el 93 % de peix i marisc d'origen responsable → <b>5</b>, conservació de recursos naturals · BRAIAN i el 35 % menys d'energia → <b>1</b> (tecnologies eficients i estalvi) o <b>3</b> (programari que optimitza processos): valen totes dues.</div></div>
+<div class="preg"><span class="n">2</span> 2 (2 punts) · Dos ODS, cadascun amb una dada del cas. <button class="revela">Veure la resposta</button><div class="sol"><b>14</b> Vida submarina (93 % de peix responsable, menys plàstic) · <b>12</b> Consum i producció responsables (80 % de residus fora de l'abocador, Winnow) · <b>13</b> Acció climàtica (7 % menys d'emissions, neutralitat el 2030) · <b>7</b> Energia neta (BRAIAN, 35 % menys d'energia) · <b>9</b> Indústria, innovació i infraestructures (la IA aplicada a l'hotel). Cada ODS, amb la seva dada.</div></div>
+<div class="preg"><span class="n">3</span> 3 (2,5 punts) · Les tres fonts de dades de BRAIAN, i per què cal ajuntar-les. <button class="revela">Veure la resposta</button><div class="sol">El <b>BMS</b> (el sistema de control de l'hotel), el <b>PMS</b> (l'ocupació) i la <b>previsió del temps</b>. Juntes, permeten climatitzar només on hi haurà gent i just a temps: sense l'ocupació refredaria zones buides; sense el temps no sabria quanta calor farà; sense el BMS no podria actuar sobre els equips.</div></div>
+<div class="preg"><span class="n">4</span> 4 (2 punts) · Dues preguntes per saber si va pel bon camí. <button class="revela">Veure la resposta</button><div class="sol">Les que demanen una <b>dada que falta</b>: respecte de quin any es compta el 85 %? (els articles no ho diuen) · quantes tones emeten ara i quantes n'emetien aquell any? · qui revisa aquestes dades? · la neutralitat vol dir reduir, o també pagar per compensar emissions? · inclou tots els hotels? És la transparència i rendició de comptes de l'RSC.</div></div>
+</section>
+
+<section class="p" id="startup" data-titol="3 · Start-up">
+  <p class="kicker">3 · ✂ Pendent · el «Comprova» 12</p>
+  <h2>Una cafeteria nova</h2>
+  <div class="caso"><p>Dos amics obren una cafeteria nova al centre de Palma, amb una carta com la de tantes altres.</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
+<div class="voto" data-ok="b"><p class="q">Segons Eric Ries, és una start-up?</p><div class="opc"><button data-v="a">Sí: és una empresa nova que acaba d'obrir</button><button data-v="b">No: ofereix un servei conegut, no un producte nou</button><button data-v="c">Sí: ja és una institució, amb local, personal i cultura</button></div><p class="porque"><b>No.</b> Per a Ries, una start-up és una <b>institució humana</b> dissenyada per crear un producte o servei <b>nou</b> en condicions d'<b>incertesa extrema</b>. Té tres components: la <b>institució</b> (una empresa, personal, una cultura), la <b>innovació</b> (el producte és la font de valor) i el <b>context</b> (incertesa extrema). La cafeteria és una institució i és nova, però ofereix un servei conegut: no crea res de nou ni afronta una incertesa extrema (el full d'estudi ho diu del bar que obre). I tampoc cal ser tecnològica: una empresa que prova un material nou, sense saber si funcionarà ni si algú el voldrà, ho seria encara que no fos informàtica.<br>«Comprova que ho saps», 12 (pàg. 17).</p></div>
+<div class="clau"><b>Lean Startup (full d'estudi, pàg. 15):</b> un cicle de tres passes que es repeteix, crear, mesurar i aprendre. Es crea una versió mínima del producte, es mira com hi reaccionen clients de debò i es decideix si es continua pel mateix camí o es canvia. És el que vau fer a la hackató.</div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=14" target="_blank">Full d'estudi · pàg. 14-15</a></div>
+</section>
+
+<section class="p" id="wallapop" data-titol="4 · Wallapop" data-min="12">
+  <p class="kicker">4 · Per parelles · practica el Canvas</p>
+  <h2>Wallapop</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=13" target="_blank">Full d'estudi · pàg. 13-14</a></div>
+  <div class="caso"><p><b>Wallapop</b> és una plataforma amb seu a Barcelona, fundada el 2013, per comprar i vendre coses, sobretot de segona mà, entre particulars. Segons l'empresa (setembre del 2025), té més de 19 milions d'usuaris mensuals al sud d'Europa. L'app fa servir la ubicació del mòbil perquè compris i venguis a prop teu, i els paquets es poden enviar per correu.</p><p class="fuente">Font: Wikipedia (es), «Wallapop» (fundada el 2013, seu a Barcelona, geolocalització i acord amb Correos per als enviaments); Ara, 10-09-2025 (la xifra d'usuaris és de l'empresa).</p></div>
+<div class="clau">Per parelles, en un paper: escriviu les <b>tres caselles</b> del Canvas de Wallapop (full d'estudi, pàg. 13-14): <b>a qui va</b> (segments de clients), <b>què ofereix a cada un</b> (proposta de valor) i <b>per on li arriba</b> (canals). Teniu <b>12 minuts</b>; després ho corregim junts.</div>
+
+</section>
+
+<section class="p" id="dubtes" data-titol="5 · Dubtes">
+  <p class="kicker">5 · Dubtes · per a dijous</p>
+  <h2>La prova de dijous: els teus dubtes</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=3" target="_blank">Full d'estudi · pàg. 3-22</a></div>
+  <p><b>Com és:</b> 55 minuts, individual, sense apunts. Un test, preguntes curtes i un cas nou: el cas et dona les dades, no cal saber-les de memòria.</p>
+<div class="clau">Quin «Comprova que ho saps» no t'ha sortit? Digues-ne el <b>número</b> i el resolem entre tots.</div>
+<p>Les respostes són al final de <a href="https://joanmiquel89.github.io/aula/ipo2/u5-sessio-6/index.html#casa" target="_blank" rel="noopener">la pàgina de dijous 15</a> (les 11, 14 i 15, als vots d'aquella pàgina). Les pàgines de cada apartat, al quadre de la primera pantalla.</p>
+</section>
+
+<section class="p" id="company" data-titol="6 · ➕ Al company">
+  <p class="kicker">6 · ➕ Si hi ha temps · Per parelles · repàs</p>
+  <h2>Pregunta-li al company</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U5.pdf#page=11" target="_blank">Full d'estudi · pàg. 11 i 17</a></div>
+  <div class="clau"><b>Un</b> tria quatre «Comprova que ho saps» del 5.1 (de l'1 al 8, pàg. 11) i els pregunta a l'altre, que respon <b>sense mirar</b>. Després canvieu: els altres quatre i la 9 (pàg. 17).</div>
+<p>Comproveu-ho amb les respostes del final de <a href="https://joanmiquel89.github.io/aula/ipo2/u5-sessio-6/index.html#casa" target="_blank" rel="noopener">la pàgina de dijous 15</a>. El que cap dels dos no sàpiga, és el dubte per a tota la classe.</p>
+</section>
+
+<section class="p" id="cierre" data-titol="Tancament">
+  <p class="kicker">Tancament</p>
+  <h2>Dijous 22, la prova del RA3</h2>
+  <div class="cadena"><span>5.1 · Emprendre i metodologies</span><i>→</i><span>5.2 · El Canvas i la tecnologia</span><i>→</i><span>5.3 · Sostenibilitat i l'A5</span><i>→</i><span>L'A5 corregida i dubtes (avui)</span><i>→</i><span>Prova del RA3 (dijous 22)</span></div>
+  <div class="clau"><b>Què entra i on ho estudies:</b> el quadre de la primera pantalla. Per preparar-la, els «Comprova que ho saps» del 5.1 (1-8) i la 9, sense mirar, i després les respostes del final de la pàgina de dijous 15; la resta ja les hem fet a classe. <b>Dijous 22</b>: 55 minuts, individual, sense apunts.</div>
+  <p class="nota">Propera sessió (dijous 22 d'octubre): <b>la prova del RA3</b>: 55 minuts, individual, sense apunts.</p>
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / desar en PDF</button></div>
+</main>
+
+<div class="ctrl"><span class="rellotge" id="rellotge" title="Rellotge de feina (tecla T)"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Següent (→ o espai)">→</button><button id="surt" title="Surt (Esc)">✕</button></div>
+
+<script>
+(function(){
+  "use strict";
+  var TX = {"clau": "ipo2-u5-u5-sessio-7-v1", "la_classe": "La classe: ", "dits": "Dits!", "temps": "⏱ Temps!", "proj": "▶ Projectar", "surt": "✕ Surt", "esborra": "Esborrar els vots i el marcador per començar amb un altre grup?", "hash": "projectar", "escriu_nom": "Escriu el teu nom i llinatges abans de descarregar.", "escriu_nom_alert": "Escriu el teu nom i llinatges a la primera pantalla i torna a prémer el botó.", "cap_resp": "Sessió 7 · L'A5 corregida, la start-up i dubtes · les meves respostes (IPO II, unitat 5)", "qui": "Alumne/a", "grup": "Grup", "amb_qui": "Amb qui he treballat", "ningu": "(ningú)", "data": "Data", "sense_resp": "(sense resposta)", "fitxer": "RESPOSTES-S7", "fet_baixa": "Fet: s'ha descarregat <b>{f}</b>. Desa'l per repassar.", "no_baixa": "Aquest navegador no ha deixat descarregar el fitxer."};
+  var CLAU = TX.clau;
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inici|^Tancament|^Per a casa/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions: la resposta (el perquè) només surt després de votar */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? TX.la_classe + encerts + " / " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    var sec = v.closest("section");   // «on ho estudies» surt quan tots els vots de la pantalla estan fets
+    if (sec && !sec.querySelector(".voto:not(.fet)")) sec.classList.add("votat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    encerts = 0; vots = 0; pinta();
+  }
+
+  /* solucions i respostes que es revelen (botó o tecla S) */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+      if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
+    });
+  });
+
+  /* ronda ràpida: compte enrere en entrar a la targeta (tecla T el torna a engegar) */
+  var tCompte = null;
+  function compte(s){
+    clearInterval(tCompte);
+    var c = s && s.querySelector(".compte"); if (!c) return;
+    var tot = +c.getAttribute("data-seg") || 15, ini = Date.now(), x = c.querySelector(".xifra"), b = c.querySelector(".barra i");
+    c.classList.remove("zero");
+    function pas(){
+      var q = Math.max(0, tot - (Date.now() - ini) / 1000);
+      x.textContent = q > 0 ? Math.ceil(q) : TX.dits;
+      b.style.transform = "scaleX(" + (q / tot).toFixed(3) + ")";
+      if (q <= 0) { clearInterval(tCompte); c.classList.add("zero"); }
+    }
+    pas(); tCompte = setInterval(pas, 100);
+  }
+  /* rellotge de feina: tecla T en una pantalla amb data-min; segueix encara que canviïs de pantalla */
+  var rel = document.getElementById("rellotge"), tRel = null;
+  function rellotge(min){
+    clearInterval(tRel);
+    if (!min || rel.classList.contains("on")) { rel.classList.remove("on", "fi"); return; }
+    var fi = Date.now() + min * 60000;
+    rel.classList.add("on"); rel.classList.remove("fi");
+    function pas(){
+      var q = Math.max(0, Math.round((fi - Date.now()) / 1000));
+      rel.textContent = "⏱ " + Math.floor(q / 60) + ":" + dos(q % 60);
+      if (!q) { clearInterval(tRel); rel.classList.add("fi"); rel.textContent = TX.temps; }
+    }
+    pas(); tRel = setInterval(pas, 500);
+  }
+
+  /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    alcada(); encaixa();
+    compte(pant[i].classList.contains("flash") ? pant[i] : null);
+    pos.textContent = (i + 1) + " / " + pant.length;
+    var segs = nav.querySelectorAll("a");
+    segs.forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(segs, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = -1;
+    pant.forEach(function(s, j){ if (s.id === h) k = j; });
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.surt;
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.proj;
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
+  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "t" || ev.key === "T") { if (pant[i].classList.contains("flash")) compte(pant[i]); else rellotge(+pant[i].getAttribute("data-min") || 0); }
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm(TX.esborra)) reinicia(); }
+    else if (/^[1-8]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+
+  /* respostes de l'alumnat: es desen al navegador i es baixen en un .txt (no s'entreguen) */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup"), parella = document.getElementById("parella");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || ""; parella.value = estat.__parella || "";
+    [nom, grup, parella].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  var msg = document.getElementById("missatge");
+  function baixa(){
+    if (!nom || !net(nom.value)) {
+      if (msg) { msg.hidden = false; msg.textContent = TX.escriu_nom; }
+      try { document.getElementById("inicio").scrollIntoView(); if (nom) nom.focus(); alert(TX.escriu_nom_alert); } catch (e) {}
+      return;
+    }
+    var d = new Date();
+    var L = [TX.cap_resp, TX.qui + ": " + net(nom.value), TX.grup + ": " + net(grup.value), TX.amb_qui + ": " + (net(parella.value) || TX.ningu),
+      TX.data + ": " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || TX.sense_resp); L.push("");
+    });
+    var f = TX.fitxer + "-" + net(nom.value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      if (msg) { msg.hidden = false; msg.innerHTML = TX.fet_baixa.replace("{f}", f); }
+    } catch (e) { if (msg) { msg.hidden = false; msg.textContent = TX.no_baixa; } }
+  }
+  ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
+
+  if (location.hash === "#" + TX.hash) entra();
+})();
+</script>
+</body>
+</html>
