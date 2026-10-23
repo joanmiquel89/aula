@@ -37,7 +37,7 @@ main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
 .voto~.refs,.grup~.refs{margin:12px 0 0}
 .refs.despres{display:none}
 .votat .refs.despres{display:flex}
-.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:99px;border:1.5px solid currentColor;text-decoration:none;white-space:nowrap}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:.9em;border:1.5px solid currentColor;text-decoration:none;white-space:normal;overflow-wrap:anywhere;max-width:100%;display:inline-block}
 .ref.hoja{color:var(--verd);background:var(--verdclar)}
 a.ref.hoja::after{content:" ↗"}
 .ref.libro{color:var(--blau);background:var(--blauclar)}
@@ -220,9 +220,26 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <p class="kicker">1 · Unidad 2 · para empezar</p>
   <h2>Dos preguntas, antes de abrir el libro</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 26 · tabla 2.1</span><span class="ref libro">Libro · pág. 27 · apartado 2.1.1, 2.º párrafo</span></div>
-  <div class="preg"><span class="n">1</span> La tabla 2.1 del libro pone nombre a formas de hacerse daño en el trabajo. ¿Cuántos nombres distintos creéis que tiene: cinco, quince o cuarenta? <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Quince</span></div><p class="nota">Los vemos ahora mismo, con dos accidentes reales.</p>
+  <style>
+/* 23-10 (JM): soluciones con el procedimiento, paso a paso y visuales */
+.pasos{list-style:none;counter-reset:p;margin:.35em 0 .5em;padding:0}
+.pasos>li{counter-increment:p;position:relative;padding:.12em 0 .32em 2em;line-height:1.35}
+.pasos>li::before{content:counter(p);position:absolute;left:0;top:.12em;width:1.45em;height:1.45em;border-radius:50%;background:var(--verd);color:#fff;font-weight:800;font-size:.85em;display:flex;align-items:center;justify-content:center}
+.tcalc-w{overflow-x:auto;margin:.3em 0 .5em}
+.tcalc{width:100%;border-collapse:collapse;font-size:.86em;background:#fff}
+.tcalc th{background:#efe9dc;text-align:left;font-size:.78em;text-transform:uppercase;letter-spacing:.04em}
+.tcalc th,.tcalc td{border:1px solid #bdb39d;padding:.25em .45em;vertical-align:top}
+.tcalc td.ok{background:#f3faf6;color:#1f7a4d;font-weight:800}
+.tcalc td.ko{background:#fbeeec;color:#b3261e;font-weight:800}
+.tcalc tr.marca td{font-weight:700}
+.formula{display:inline-block;background:#fff;border:1.5px dashed #bdb39d;border-radius:.4em;padding:.05em .5em;margin:.1em 0;font-weight:700}
+</style>
+<div class="preg"><span class="n">1</span> La tabla 2.1 del libro pone nombre a formas de hacerse daño en el trabajo. ¿Cuántos nombres distintos creéis que tiene: cinco, quince o cuarenta? <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Quince</span></div>
+<ol class="pasos"><li>Abre el libro por la <b>pág. 26</b> y busca la <b>tabla 2.1</b>.</li><li>Cuenta las filas de la <b>primera columna</b> («Riesgos laborales»): de «Caídas al mismo nivel» a «Incendio».</li><li>Salen <b>15</b>. Cada una tiene al lado su «Descripción»: es lo que usaremos para ponerles nombre.</li></ol>
+<p class="nota">Los vemos ahora mismo, con dos accidentes reales.</p>
 <div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 26 · apartado 2.1 · tabla 2.1 (columna «Riesgos laborales»: cuenta las filas)</span></div></div></div>
-<div class="preg"><span class="n">2</span> Para la ley, ¿los aseos y el comedor de una empresa también son «lugar de trabajo»? <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Sí</span></div><span class="ley">RD 486/1997 · art. 2.1</span><p>Lugar de trabajo es cualquier zona del centro, con edificio o sin él, donde hay que estar o a la que se va por el trabajo. Y la ley añade: también los <b>aseos</b>, los locales de <b>descanso</b> y de <b>primeros auxilios</b> y los <b>comedores</b>. Todos tienen que cumplir unas medidas mínimas: hoy, algunas.</p>
+<div class="preg"><span class="n">2</span> Para la ley, ¿los aseos y el comedor de una empresa también son «lugar de trabajo»? <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Sí</span></div><span class="ley">RD 486/1997 · art. 2.1</span>
+<ol class="pasos"><li><b>Lee la definición</b> (pág. 27, primer párrafo del 2.1.1): lugar de trabajo es cualquier zona del centro, con edificio o sin él, donde hay que estar o a la que se va <b>por el trabajo</b>.</li><li><b>Lee lo que añade</b> el segundo párrafo: también los <b>aseos</b>, los locales de <b>descanso</b> y de <b>primeros auxilios</b> y los <b>comedores</b>.</li><li><b>Compara con la pregunta:</b> aseos y comedor están en la lista → <b>sí</b>. Y por eso tienen que cumplir las medidas mínimas, como la oficina.</li></ol>
 <div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 27 · apartado 2.1.1 «Lugares de trabajo», 2.º párrafo («Se incluyen en esta definición…»)</span></div></div></div>
 </section>
 
@@ -233,7 +250,14 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <div class="caso"><p><b>Puerto de Palma, lunes 29 de julio de 2024, 10.50 h.</b> Un trabajador de 55 años de una naviera mueve mercancías en el muelle. Se baja de una carretilla elevadora (un «toro») y la máquina sigue avanzando sola, sin conductor: le atrapa una pierna. Los bomberos la tienen que levantar para sacarlo. Herido grave.</p><p class="fuente">Fuente: Noudiari (agencia EFE), 29-07-2024.</p></div>
 <div class="caso"><p><b>Sant Llorenç des Cardassar, sábado 17 de septiembre de 2022, hacia las 21 h.</b> Un trabajador de la construcción, de unos 40 años, queda aprisionado entre la pala de una máquina y una pared. Muere.</p><p class="fuente">Fuente: Majorca Daily Bulletin (agencia EFE), 18-09-2022.</p></div>
 <div class="preg"><span class="n">1</span> Con el libro cerrado: en los dos casos una máquina atrapa a una persona. ¿Pasa de la misma manera? ¿Qué nombre les pondríais? Decidlo con vuestras palabras. <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>No pasa igual, y la tabla les pone nombre según cómo pasa</span></div>
-<div class="cuadro4" style="grid-template-columns:repeat(2,1fr)"><div class="si"><h4>Puerto de Palma</h4><p>Atropello</p><small>un vehículo en marcha le pilla, aunque no lleve conductor. Si alguien dice «atrapamiento», no va mal: la noticia dice «atrapado». Si la máquina hubiera volcado encima, sería «por vuelco».</small></div><div class="si"><h4>Sant Llorenç</h4><p>Atrapamiento por o entre objetos</p><small>aprisionado entre la pala y la pared</small></div></div>
+<p><b>Cómo se elige el nombre</b>, en tres pasos:</p>
+<ol class="pasos"><li><b>¿Qué le hace daño?</b> Puerto: un vehículo, la carretilla. Sant Llorenç: la pala de una máquina, contra una pared.</li><li><b>¿Cómo pasa?</b> Puerto: el vehículo se mueve solo y le alcanza. Sant Llorenç: queda apretado <b>entre</b> dos cosas.</li><li><b>Busca en la tabla 2.1 la «Descripción» que encaja</b> (no solo el nombre: la descripción dice cómo pasa).</li></ol>
+<p>Tres filas de la tabla se parecen. La diferencia es <b>cómo</b> te pilla:</p>
+<div class="tcalc-w"><table class="tcalc"><tr><th>Lo que pasa</th><th>Fila de la tabla 2.1</th><th>Caso</th></tr>
+<tr class="marca"><td>Un vehículo en movimiento te alcanza</td><td>Atropellos</td><td class="ok">Puerto de Palma</td></tr>
+<tr class="marca"><td>Quedas aprisionado entre objetos o partes de una máquina</td><td>Atrapamiento por o entre objetos</td><td class="ok">Sant Llorenç</td></tr>
+<tr><td>Una máquina o un vehículo vuelca y te atrapa</td><td>Atrapamiento por vuelco</td><td>ninguno</td></tr></table></div>
+<p class="nota">En el puerto, si alguien dice «atrapamiento», no va mal: la noticia dice «atrapado». Pero la carretilla no vuelca: avanza. Por eso, atropello.</p>
 <p class="nota">Lo que cuenta es explicar cómo pasó. Hoy solo les ponemos nombre: las noticias no dicen por qué pasó.</p>
 <div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 26 · tabla 2.1, fila «Atropellos»</span><span class="ref libro">Libro · pág. 26 · tabla 2.1, fila «Atrapamiento por o entre objetos»</span><span class="ref libro">Libro · pág. 26 · tabla 2.1, fila «Atrapamiento por vuelco de máquinas o vehículos»</span></div></div></div>
 </section>
@@ -326,13 +350,14 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
 <section class="p" id="despacho-voto">
   <p class="kicker">3 · Corrección · el despacho de Roberto y Julia</p>
   <h2>¿Cuántas cumplen?</h2>
-  <div class="voto" data-ok="b"><p class="q">De las cinco medidas del despacho de Roberto y Julia, ¿cuántas cumplen el mínimo?</p><div class="opc"><button data-v="a">Ninguna</button><button data-v="b">Una</button><button data-v="c">Tres</button><button data-v="d">Todas</button></div><div class="porque"><b>Solo una: el aire.</b><div class="cuadro4 cinc">
-<div class="no"><h4>Pasillo</h4><p>90 cm</p><small>mínimo 1 m</small></div>
-<div class="no"><h4>Peldaños</h4><p>20 cm de huella</p><small>entre 23 y 36 cm</small></div>
-<div class="no"><h4>Altura</h4><p>2,4 m</p><small>despacho: 2,5 m</small></div>
-<div class="no"><h4>Superficie</h4><p>3 m² para dos</p><small>2 m² por persona: 4</small></div>
-<div class="si"><h4>Volumen</h4><p>20 m³ para dos</p><small>10 m³ por persona: justo</small></div>
-</div>
+  <div class="voto" data-ok="b"><p class="q">De las cinco medidas del despacho de Roberto y Julia, ¿cuántas cumplen el mínimo?</p><div class="opc"><button data-v="a">Ninguna</button><button data-v="b">Una</button><button data-v="c">Tres</button><button data-v="d">Todas</button></div><div class="porque"><b>Solo una: el aire.</b> Así se resuelve:
+<ol class="pasos"><li><b>Saca las cinco cifras del caso:</b> pasillo 90 cm · huella 20 cm · altura 2,4 m · 3 m² · 20 m³.</li><li><b>Busca cada una en la tabla 2.2</b> (pág. 27): el pasillo, en «Vías de circulación»; la huella, en «Escaleras · Peldaños»; altura, superficie y volumen, en «Espacios de trabajo». Ojo: es un <b>despacho</b>, así que la altura mínima es 2,5 m, no 3.</li><li><b>Si la tabla dice «por persona», divide</b> entre los dos: <span class="formula">3 m² ÷ 2 = 1,5 m²</span> <span class="formula">20 m³ ÷ 2 = 10 m³</span></li><li><b>Compara:</b> cumple si llega al mínimo o lo pasa; si se queda corto, no cumple.</li></ol>
+<div class="tcalc-w"><table class="tcalc"><tr><th>Medida</th><th>En el caso</th><th>Mínimo (tabla 2.2)</th><th>¿Cumple?</th></tr>
+<tr><td>Pasillo</td><td>90 cm</td><td>1 m = 100 cm</td><td class="ko">✗ faltan 10 cm</td></tr>
+<tr><td>Peldaño (huella)</td><td>20 cm</td><td>23 cm</td><td class="ko">✗ faltan 3 cm</td></tr>
+<tr><td>Altura</td><td>2,4 m</td><td>2,5 m (despacho)</td><td class="ko">✗ faltan 10 cm</td></tr>
+<tr><td>Superficie libre</td><td>3 ÷ 2 = 1,5 m² cada uno</td><td>2 m² por persona</td><td class="ko">✗ para dos, 4 m²</td></tr>
+<tr><td>Aire sin ocupar</td><td>20 ÷ 2 = 10 m³ cada uno</td><td>10 m³ por persona</td><td class="ok">✓ justo</td></tr></table></div>
 <span class="ley">RD 486/1997 · anexo I.A, apartados 2, 5 y 7</span> El RD 486/1997 es el real decreto de los lugares de trabajo: la tabla 2.2 del libro sale de él. La tabla distingue un pasillo «principal» de 1,2 m; la norma pide 1 m para todos los pasillos. Aquí da igual: 90 cm no llega a ninguno de los dos. <span class="ref libro">Libro · pág. 27 · tabla 2.2: «Espacios de trabajo» (altura, superficie, volumen), «Vías de circulación» (pasillos) y «Escaleras · Peldaños · Huella»</span> <span class="fuente">Fuente: Libro, caso práctico propuesto 2.2 (pág. 28), comprobado con el RD 486/1997.</span></div></div>
 
   <div class="refs despres"><span class="ref libro">Libro · pág. 27 · tabla 2.2, filas «Espacios de trabajo», «Vías de circulación» y «Escaleras · Peldaños»</span></div>
@@ -341,7 +366,9 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
 <section class="p" id="reto-voto" data-min="18">
   <p class="kicker">3 · Corrección · el reto de la gestoría</p>
   <h2>¿Caben los nueve puestos?</h2>
-  <div class="voto" data-ok="d"><p class="q">En el local de la gestoría, ¿cuántas personas pueden trabajar a la vez, como máximo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">15</button><button data-v="b">9</button><button data-v="c">8</button><button data-v="d">7</button></div><div class="porque"><b>Siete: manda el aire.</b><div class="cuadro4" style="grid-template-columns:repeat(3,1fr)">
+  <div class="voto" data-ok="d"><p class="q">En el local de la gestoría, ¿cuántas personas pueden trabajar a la vez, como máximo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">15</button><button data-v="b">9</button><button data-v="c">8</button><button data-v="d">7</button></div><div class="porque"><b>Siete: manda el aire.</b> Así se resuelve, medida a medida:
+<ol class="pasos"><li><b>Altura:</b> 2,7 m frente a 2,5 m de una oficina → cumple. No deja fuera a nadie.</li><li><b>Superficie libre</b> = suelo total − muebles: <span class="formula">6 × 5 = 30 m²</span> <span class="formula">30 − 12 = 18 m²</span> A 2 m² por persona: <span class="formula">18 ÷ 2 = 9 personas</span></li><li><b>Aire sin ocupar</b> = volumen total − muebles: <span class="formula">30 m² × 2,7 m = 81 m³</span> <span class="formula">81 − 9 = 72 m³</span> A 10 m³ por persona: <span class="formula">72 ÷ 10 = 7,2 → 7 personas</span> (la octava ya no tendría sus 10 m³: no se redondea hacia arriba).</li><li><b>Manda el número más pequeño:</b> hay que cumplir las dos cosas a la vez. Por el suelo caben 9 y por el aire, 7: manda el aire → <b>7</b>.</li></ol>
+<div class="cuadro4" style="grid-template-columns:repeat(3,1fr)">
 <div class="si"><h4>Altura</h4><p>2,7 m</p><small>oficina: 2,5 m como mínimo · cumple</small></div>
 <div class="alt"><h4>Superficie libre</h4><p>30 − 12 = 18 m²</p><small>2 m² por persona: 9 personas</small></div>
 <div class="si"><h4>Aire sin ocupar · manda</h4><p>30 × 2,7 = 81 m³ − 9 = 72 m³</p><small>10 m³ por persona: 7 personas</small></div>
@@ -356,8 +383,13 @@ Suelo y aire se tienen que cumplir a la vez: manda el número más pequeño. Con
   <h2>Sin espejos y con toallas compartidas</h2>
   <p class="cas-flash">En una fábrica, los aseos no tienen espejos y las toallas son de uso compartido. ¿Qué tiene que cambiar la empresa para cumplir? <span class="encls">(Libro, pág. 53, actividades finales «De aplicación», 2.4)</span></p>
 <div class="compte" data-seg="20"><span class="xifra">20</span><span class="barra"><i></i></span></div>
-<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Espejos, jabón y toallas individuales</span></div><span class="ley">RD 486/1997 · anexo V</span>
-<div class="flujo"><span>espejos</span><span>lavabos con agua corriente (caliente si hace falta)</span><span>jabón</span><span>toallas individuales u otro secado higiénico</span></div>
+<div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Espejos y toallas individuales</span></div><span class="ley">RD 486/1997 · anexo V</span>
+<ol class="pasos"><li><b>¿Qué sitio es?</b> Un aseo → tabla 2.4 (pág. 28), fila «Locales de aseo».</li><li><b>Lee lo que pide</b> esa fila y <b>compáralo</b> con lo que dice el caso, punto por punto.</li><li>Lo que falta o está mal, es <b>lo que la empresa tiene que cambiar</b>.</li></ol>
+<div class="tcalc-w"><table class="tcalc"><tr><th>Lo que pide la tabla 2.4</th><th>En la fábrica</th><th>Qué hacer</th></tr>
+<tr><td>Espejos</td><td class="ko">✗ no hay</td><td>Poner espejos</td></tr>
+<tr><td>Toallas individuales u otro secado higiénico</td><td class="ko">✗ compartidas</td><td>Toallas individuales, de papel o secador de manos</td></tr>
+<tr><td>Lavabos con agua corriente (caliente si hace falta)</td><td>el caso no lo dice</td><td>Comprobarlo</td></tr>
+<tr><td>Jabón</td><td>el caso no lo dice</td><td>Comprobarlo</td></tr></table></div>
 <div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 28 · tabla 2.4 (abajo, a la derecha), fila «Locales de aseo»</span></div></div></div>
 </section>
 
@@ -367,6 +399,7 @@ Suelo y aire se tienen que cumplir a la vez: manda el número más pequeño. Con
   <p class="cas-flash">En una oficina, un empleado que va en silla de ruedas no puede usar la fotocopiadora: está en una zona elevada. ¿Qué tendría que hacer la empresa? <span class="encls">(Libro, pág. 53, actividades finales «De aplicación», 2.5)</span></p>
 <div class="compte" data-seg="20"><span class="xifra">20</span><span class="barra"><i></i></span></div>
 <div class="preg"><span class="n">1</span> Piénsalo antes de mirar. <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Acondicionar el puesto para que pueda usarlo</span></div><span class="ley">RD 486/1997 · anexo I.A.13</span>
+<ol class="pasos"><li><b>¿Cuál es el problema?</b> Un puesto que él necesita (la fotocopiadora) está donde no puede llegar con la silla.</li><li><b>¿Qué pide la norma?</b> Los puestos, puertas, pasillos y escaleras que use una persona con discapacidad tienen que estar <b>acondicionados</b> para que pueda usarlos.</li><li><b>¿Qué se cambia?</b> Todo lo que le impide llegar y usarla, de camino a la máquina y en la máquina:</li></ol>
 <div class="flujo"><span>la fotocopiadora a su alcance</span><span>un acceso sin escalón o una rampa (como mucho al 12, 10 u 8 %, según lo larga que sea)</span><span>paso libre para la silla</span></div>
 <div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 53 · actividades finales «De aplicación», 2.5</span><span class="ref libro">Libro · pág. 27 · tabla 2.2, fila «Rampas» (pendiente máxima según la longitud)</span></div></div></div>
 </section>
@@ -374,7 +407,12 @@ Suelo y aire se tienen que cumplir a la vez: manda el número más pequeño. Con
 <section class="p" id="equipo" data-titol="5 · ➕ Equipos de trabajo">
   <p class="kicker">5 · ➕ Si da tiempo · Libro, pág. 29 · apartado 2.1.2 «Equipos de trabajo»</p>
   <h2>¿Qué es un equipo de trabajo?</h2>
-  <div class="voto" data-ok="c"><p class="q">Para la ley, ¿cuál de estos es un «equipo de trabajo»: el taladro de un taller, el ordenador de una oficina o la carretilla de una nave?</p><div class="opc"><button data-v="a">Solo el taladro y la carretilla: son máquinas</button><button data-v="b">Solo el ordenador: es el que se usa todo el día</button><button data-v="c">Los tres</button></div><div class="porque"><b>Los tres.</b> Para la ley, equipo de trabajo es <b>cualquier máquina, aparato, instrumento o instalación</b> que se usa en el trabajo. El ordenador también.<span class="ley">RD 1215/1997 · art. 2.a</span> <span class="ref libro">Libro · pág. 29 · apartado 2.1.2 «Equipos de trabajo», 1.er párrafo (la definición entre comillas)</span></div></div>
+  <div class="voto" data-ok="c"><p class="q">Para la ley, ¿cuál de estos es un «equipo de trabajo»: el taladro de un taller, el ordenador de una oficina o la carretilla de una nave?</p><div class="opc"><button data-v="a">Solo el taladro y la carretilla: son máquinas</button><button data-v="b">Solo el ordenador: es el que se usa todo el día</button><button data-v="c">Los tres</button></div><div class="porque"><b>Los tres.</b> La definición (pág. 29) tiene <b>dos condiciones</b>: ser una máquina, aparato, instrumento o instalación, y <b>usarse en el trabajo</b>. Se comprueban las dos con cada uno:
+<div class="tcalc-w"><table class="tcalc"><tr><th></th><th>¿Máquina, aparato, instrumento o instalación?</th><th>¿Se usa para trabajar?</th><th>¿Equipo de trabajo?</th></tr>
+<tr><td>Taladro del taller</td><td>máquina ✓</td><td>✓</td><td class="ok">Sí</td></tr>
+<tr><td>Ordenador de la oficina</td><td>aparato ✓</td><td>✓</td><td class="ok">Sí</td></tr>
+<tr><td>Carretilla de la nave</td><td>máquina ✓</td><td>✓</td><td class="ok">Sí</td></tr></table></div>
+No hace falta que sea grande ni peligrosa: el ordenador también cuenta.<span class="ley">RD 1215/1997 · art. 2.a</span> <span class="ref libro">Libro · pág. 29 · apartado 2.1.2 «Equipos de trabajo», 1.er párrafo (la definición entre comillas)</span></div></div>
 
   <div class="refs despres"><span class="ref libro">Libro · pág. 29 · apartado 2.1.2, 1.er párrafo</span></div>
 </section>
@@ -382,7 +420,8 @@ Suelo y aire se tienen que cumplir a la vez: manda el número más pequeño. Con
 <section class="p" id="arranque">
   <p class="kicker">5 · Libro, pág. 29 · tabla 2.5 · fila «Accionamiento»</p>
   <h2>Vuelve la luz y la amasadora arranca</h2>
-  <div class="voto" data-ok="b"><p class="q">En una panadería hay un corte de luz. Cuando vuelve la corriente, la amasadora, que estaba encendida, se pone en marcha sin que nadie pulse nada. ¿Cumple el equipo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Sí: si se para sola cuando se va la luz, ya es segura</button><button data-v="b">No: solo puede ponerse en marcha cuando alguien lo decide, también después de una parada</button><button data-v="c">Sí, si tiene una señal de peligro bien visible</button></div><div class="porque"><b>No cumple.</b> Un equipo solo puede ponerse en marcha con una <b>acción voluntaria</b> sobre su mando, y eso vale también <b>después de una parada, sea cual sea la causa</b>: también un corte de luz (la norma solo hace excepciones cuando arrancar no supone ningún riesgo). Una amasadora que arranca sin aviso puede pillar a quien tiene las manos dentro.<span class="ley">RD 1215/1997 · anexo I.1.2</span> <span class="ref libro">Libro · pág. 29 · tabla 2.5, fila «Accionamiento», 2.º punto («La puesta en marcha solo se podrá efectuar con una acción voluntaria»)</span></div></div>
+  <div class="voto" data-ok="b"><p class="q">En una panadería hay un corte de luz. Cuando vuelve la corriente, la amasadora, que estaba encendida, se pone en marcha sin que nadie pulse nada. ¿Cumple el equipo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Sí: si se para sola cuando se va la luz, ya es segura</button><button data-v="b">No: solo puede ponerse en marcha cuando alguien lo decide, también después de una parada</button><button data-v="c">Sí, si tiene una señal de peligro bien visible</button></div><div class="porque"><b>No cumple.</b> Así se resuelve:
+<ol class="pasos"><li><b>Busca la regla:</b> tabla 2.5 (pág. 29), fila «Accionamiento», 2.º punto: la puesta en marcha solo con una <b>acción voluntaria</b>, es decir, que alguien lo decida y pulse el mando.</li><li><b>Mira el caso:</b> ¿alguien pulsa algo cuando vuelve la luz? <b>No</b>: arranca sola.</li><li><b>Compara:</b> sin acción voluntaria → <b>no cumple</b>. La norma lo pide también <b>después de una parada, sea cual sea la causa</b>: un corte de luz también (solo hay excepción si arrancar no supone ningún riesgo).</li><li><b>Qué tendría que pasar:</b> al volver la luz, la amasadora se queda parada hasta que alguien pulse el mando. Si arranca sola, puede pillar a quien tiene las manos dentro.</li></ol><span class="ley">RD 1215/1997 · anexo I.1.2</span> <span class="ref libro">Libro · pág. 29 · tabla 2.5, fila «Accionamiento», 2.º punto («La puesta en marcha solo se podrá efectuar con una acción voluntaria»)</span></div></div>
 
   <div class="refs despres"><span class="ref libro">Libro · pág. 29 · tabla 2.5, fila «Accionamiento», 2.º punto</span></div>
 </section>
