@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Escoltar el problema: entrevistes i opinions reals · Sessió 2</title>
+<!-- Generat per sistema/tools/sessio_aula.py des de fitxa-sessio-02.toml. No l'editis a mà: edita la fitxa. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.voto~.refs,.grup~.refs{margin:12px 0 0}
+.refs.despres{display:none}
+.votat .refs.despres{display:flex}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:.9em;border:1.5px solid currentColor;text-decoration:none;white-space:normal;overflow-wrap:anywhere;max-width:100%;display:inline-block}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px;background:var(--blauclar);border:2px solid var(--blau)}
+.dos>div+div{background:var(--verdclar);border-color:var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+ol.dosc{columns:2;column-gap:28px;margin:6px 0 10px}ol.dosc li{break-inside:avoid}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+/* soluciones visuales (JM, 16-10): respuesta grande, pocas palabras y la página donde está el apoyo; todo en em */
+.resp{display:flex;align-items:center;gap:.5em;font-size:1.3em;font-weight:800;line-height:1.15;margin:0 0 .35em}
+.resp i{flex:none;font-style:normal;width:1.45em;height:1.45em;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.8em;color:#fff;background:var(--verd)}
+.resp.no i{background:var(--vermell)}
+.ley{display:inline-block;font-size:.8em;font-weight:700;border:1.5px solid var(--tinta);border-radius:99px;padding:.05em .65em;margin:0 .3em .3em 0;background:#fff;white-space:nowrap}
+.flujo{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.25em 0 .5em}
+.flujo span{padding:.18em .7em;border-radius:.5em;background:#fff;border:1.5px solid var(--verd)}
+.flujo i{font-style:normal;font-weight:800;color:var(--suau)}
+.cuadro4{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em;margin:.35em 0 .5em}
+.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff}
+.cuadro4 h4{margin:0 0 .2em;font-size:.72em;text-transform:uppercase;letter-spacing:.05em;color:var(--suau)}
+.cuadro4 p{margin:0 0 .15em;font-weight:700}
+.cuadro4 small{display:block;font-weight:400;color:var(--suau)}
+.cuadro4 .si{border-color:var(--verd);background:#f3faf6}
+.cuadro4 .alt{border-style:dashed;opacity:.9}
+.cuadro4 .no{border-color:var(--vermell);background:#fbeeec}
+.cuadro4.cinc{grid-template-columns:repeat(5,1fr)}
+@media (max-width:700px){.cuadro4.cinc{grid-template-columns:1fr 1fr}}
+.nueve{display:grid;grid-template-columns:repeat(9,1fr);gap:.3em;margin:.35em 0 .5em}
+.nueve>div{border:1.5px solid #bdb39d;border-radius:.45em;padding:.2em .15em;text-align:center;font-size:.72em;line-height:1.15;background:#fff;color:var(--suau)}
+.nueve b{display:block;font-size:1.6em;color:var(--tinta)}
+.nueve .no{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.nueve .no b{color:#fff}
+.rama{display:grid;grid-template-columns:1fr 1fr;gap:.5em;margin:.35em 0 .5em}
+.rama>div{border-radius:.5em;padding:.35em .6em;border:2px solid var(--verd);background:#f3faf6}
+.rama>div+div{border-color:var(--mostassa);background:var(--mostassaclar)}
+.rama small{display:block;font-weight:400;color:var(--suau)}
+.donde{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.5em 0 0;padding-top:.4em;border-top:1.5px dashed rgba(31,122,77,.4)}
+.donde .dl,.porque .dl{font-size:.75em;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--suau)}
+.ref.otra{color:var(--mostassa);background:var(--mostassaclar)}
+.mapa{margin:.2em 0}
+.mapa .cap{font-size:.72em;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--suau);margin:.45em 0 .2em}
+.mapa .f{display:grid;gap:.45em}
+.mapa .f4{grid-template-columns:repeat(4,1fr)}
+.mapa .f3{grid-template-columns:repeat(3,1fr)}
+.mapa .leyenda{display:flex;flex-wrap:wrap;gap:.2em .9em;font-size:.8em;font-weight:700;margin:.1em 0 .2em}
+.org{border-radius:.6em;padding:.4em .55em;color:#fff;line-height:1.2}
+.org b{display:block;font-size:1.1em;letter-spacing:.04em}
+.org .sg{display:block;font-weight:800;font-size:1.05em;margin:.05em 0}
+.org small{display:block;font-size:.72em}
+.org.manda{background:#b3321f}
+.org.sabe{background:#1f5596}
+.org.apoya{background:#1f7a4d}
+@media (max-width:700px){.cuadro4,.mapa .f4,.mapa .f3{grid-template-columns:1fr 1fr}.nueve{grid-template-columns:repeat(3,1fr)}.rama{grid-template-columns:1fr}}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+.cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
+.compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
+.compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
+.compte .barra{flex:1;height:14px;border-radius:99px;background:#e6dccb;overflow:hidden}
+.compte .barra i{display:block;height:100%;width:100%;background:var(--vermell);transform-origin:left}
+.compte.zero .xifra{color:var(--verd)}
+body.proj .compte{display:flex}
+body.proj .cas-flash{font-size:1.55em}
+.rellotge{display:none;font-weight:800;font-variant-numeric:tabular-nums}
+body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta);border-radius:8px;padding:6px 12px;font-size:20px}
+.rellotge.fi{background:var(--vermell)!important;color:#fff!important}
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  ol.dosc{columns:1}
+  .dalt nav,.dalt .nom small{display:none}
+  .opc button{flex:1 1 100%;text-align:left}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  .refs.despres{display:flex!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+
+<header class="dalt">
+  <span class="nom">IPO II · Unitat 6 · Sessió 2<small>Escoltar el problema: entrevistes i opinions reals</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Encerts de la classe a les votacions"></span>
+  <button id="bproj" title="Pantalla completa per projectar (tecla P)">▶ Projectar</button>
+</header>
+
+<main>
+
+<section class="p" id="inicio" data-titol="Inici">
+  <p class="kicker">Sessió 2 · una hora</p>
+  <h2>Escoltar el problema: entrevistes i opinions reals</h2>
+  <p style="font-size:1.15em">Ja tens un problema i una idea (fitxa 1). Avui aprens com es pregunta per un problema sense donar la resposta, i escoltes gent de debò que té el teu problema: opinions reals que trobaràs a internet, amb la seva font.</p>
+  <div class="cadena"><span class="fet">U6 · El problema i la idea</span><i>→</i><span class="avui">U6 · Entrevistes i opinions reals</span><i>→</i><span>U6 · Empatitzar, definir i idear (dijous 5)</span><i>→</i><span>U6 · L'entorn i el model de negoci</span></div>
+  <div class="plan"><div><b>Avui</b><ol start="1"><li>Una pregunta de dilluns <small>· 3 min</small></li><li>Sol: acabar la fitxa 1 (qui l'ha acabada, llegeix el full) <small>· 8 min</small></li><li>6.2.1 · L'entrevista de problema: a qui, què i com <small>· 12 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>Sol, amb l'ordinador: opinions reals del teu problema (fitxa 2) <small>· 18 min</small></li><li>Si sobra temps: 6.2.2 · empatitzar, observar per entendre <small>· ➕ si hi ha temps</small></li></ol></div></div>
+  <h3 class="noproj">Com fer servir aquesta pàgina</h3>
+  <p class="noproj">A classe la projectem. A casa et serveix per estudiar: cada bloc et diu <b>on és al full d'estudi</b> (el botó verd l'obre a la pàgina exacta).</p>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=11" target="_blank">Full d'estudi · pàg. 11-15</a></div>
+    <p class="nota noproj">Verd: el full d'estudi (s'obre a la pàgina exacta).</p>
+</section>
+
+<section class="p" id="record" data-titol="1 · Record">
+  <p class="kicker">1 · Una pregunta de dilluns · abans de res</p>
+  <h2>Gossos i patinets</h2>
+  <div class="caso"><p>Un noi de Manacor té una idea per a la gent que fa moltes hores i no pot treure el gos a passejar: «com les apps de patinets de lloguer, però per trobar qui et passegi el gos aquella tarda».</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
+<div class="voto" data-ok="b"><p class="q">Quina tècnica del pensament lateral ha fet servir?</p><div class="opc"><button data-v="a">Provocació</button><button data-v="b">Analogia</button><button data-v="c">Inversió</button></div><div class="porque"><b>La b: analogia</b>, «com X, però per a Y» (taula 6.4, full d'estudi, pàg. 7).<br>· La provocació és una afirmació absurda per sortir del camí de sempre.<br>· La inversió fa el contrari del normal («en lloc de vendre-ho, es regala»).</div></div>
+</section>
+
+<section class="p" id="fitxa1" data-titol="2 · Fitxa 1" data-min="8">
+  <p class="kicker">2 · Sol · 8 minuts</p>
+  <h2>Acaba la fitxa 1</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=10" target="_blank">Full d'estudi · pàg. 10-11</a></div>
+  <div class="clau">Qui <b>no la va acabar</b> dilluns: acaba-la ara (8 minuts).<br>Qui <b>ja la té</b>: llegeix el full d'estudi, pàg. 11-12 (l'entrevista de problema): és el que fem tot seguit.</div>
+</section>
+
+<section class="p" id="earlyadopter" data-titol="3 · L&#x27;entrevista">
+  <p class="kicker">3 · 6.2.1 · A qui preguntes</p>
+  <h2>L'aparcament de l'institut</h2>
+  <div class="caso"><p>En Joan vol fer una app que avisi quan queden places lliures a l'aparcament de l'institut. Abans de fer-la, en vol parlar amb algunes persones.</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
+<div class="voto" data-ok="c"><p class="q">A qui li hauria de preguntar primer?</p><div class="opc"><button data-v="a">A tothom que té cotxe</button><button data-v="b">Als veïns del carrer</button><button data-v="c">A qui arriba cada dia a les 8 i fa tard per trobar lloc</button></div><div class="porque"><b>La c.</b> És l'<b>early adopter</b> («qui adopta aviat»): la persona que té la necessitat més forta i que provaria una solució abans que ningú (full d'estudi, pàg. 12).<br>· «Tothom que té cotxe» és massa ampli: no tots en pateixen.<br>· Els veïns potser en pateixen, però no són els usuaris de l'app.</div></div>
+<div class="clau"><b>Com es fa</b> (taula 6.6): ① crear confiança · ② <b>preguntes obertes</b> («com t'afecta?», «des de quan?») · ③ registrar. Escoltar molt i <b>no influir</b>.<br><b>Què s'analitza</b>: la <b>severitat</b> (frustració o cost), la <b>freqüència</b> (quanta gent ho té) i l'<b>interès</b> en una solució. I tornes al bucle: perseverar o pivotar.</div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=11" target="_blank">Full d'estudi · pàg. 11-13</a></div>
+</section>
+
+<section class="p" id="on" data-titol="4 · Fitxa 2">
+  <p class="kicker">4 · Abans de començar · 3 minuts</p>
+  <h2>On parla la gent del teu problema</h2>
+  <div class="tres" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))"><div><b>Ressenyes</b><span>de solucions que ja existeixen: Google Maps, botigues d'apps (les d'1 i 2 estrelles diuen què falla)</span></div><div><b>Fòrums</b><span>Reddit, fòrums del sector, grups: busca les paraules de la gent («no puc…», «odio que…»)</span></div><div><b>Comentaris i dades</b><span>comentaris a notícies, vídeos; alguna dada pública (INE, IBESTAT)</span></div></div>
+<div class="clau">De cada opinió apunta <b>què diu</b> i <b>d'on surt</b>. Ha de ser de gent de debò: <b>res inventat ni fet amb una IA</b>.</div>
+</section>
+
+<section class="p" id="fitxa2" data-min="15">
+  <p class="kicker">4 · Sol · amb l'ordinador · la fitxa 2</p>
+  <h2>Escolta el teu problema</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=12" target="_blank">Full d'estudi · pàg. 12-15</a></div>
+  <div class="clau">A la fitxa, sol · <b>15 minuts</b><br>① La teva persona tipus com a <b>early adopter</b>: qui té el problema més fort?<br>② <b>Dues o tres hipòtesis</b>: el que creus del problema i encara no has comprovat.<br>③ <b>5-10 opinions reals</b> de gent amb el teu problema: què diu i d'on surt.<br>④ <b>Què n'aprens</b>: com és de greu (severitat), quanta gent ho té (freqüència), si en volen una solució (interès). Les hipòtesis s'aguanten? <b>Perseveres o pivotes?</b></div>
+<p class="nota">És l'«Al teu projecte 6.2» del full d'estudi (pàg. 15). Si vols entrevistar algú de fora, és opcional i no té nota: quatre o cinc preguntes obertes, com diu la pàg. 15.</p>
+</section>
+
+<section class="p" id="empatitzar" data-titol="5 · ➕ Empatitzar">
+  <p class="kicker">5 · ➕ Si hi ha temps · ➕ · el començament de dijous 5</p>
+  <h2>Les bicis de l'entrada</h2>
+  <div class="caso"><p>L'institut vol millorar l'aparcament de bicis. Té tres maneres de començar a entendre què li passa a qui hi va amb bici.</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
+<div class="voto" data-ok="b"><p class="q">Amb quina començaries, segons el pensament de disseny?</p><div class="opc"><button data-v="a">Comprar un informe amb dades de mobilitat de tot Espanya</button><button data-v="b">Passar un matí a l'entrada mirant on i com deixa la bici la gent</button><button data-v="c">Fer una enquesta d'una sola pregunta: «vols més aparcaments?»</button></div><div class="porque"><b>La b.</b> Empatitzar (full d'estudi, 6.2.2, pàg. 14-15): <b>observació activa</b> → comprensió (<i>insight</i>) → empatia. Un insight surt d'observar a fons les persones, no de grans volums de dades.<br>· La a són dades a l'engròs: diuen quants, no per què.<br>· La c és una pregunta tancada que ja porta la resposta dins.</div></div>
+
+  <div class="refs despres"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=14" target="_blank">Full d'estudi · pàg. 14-15</a></div>
+</section>
+
+<section class="p" id="cierre" data-titol="Tancament">
+  <p class="kicker">Tancament</p>
+  <h2>Les fitxes 1 i 2, a la carpeta</h2>
+  <div class="cadena"><span>U6 · El problema i la idea</span><i>→</i><span>U6 · Entrevistes i opinions reals (avui)</span><i>→</i><span>U6 · Empatitzar, definir i idear (dijous 5)</span><i>→</i><span>U6 · L'entorn i el model de negoci</span></div>
+  <div class="clau"><b>Les fitxes es queden a la carpeta</b>, tal com estiguin.<br><b>Dijous 5:</b> empatitzar (el que la gent no diu), i després definir i idear. Full d'estudi, pàg. 14-17.</div>
+  <p class="nota">Propera sessió (dijous 5 de novembre): <b>empatitzar</b>: observar la gent per trobar el que no diu, i després definir i idear. Full d'estudi, pàg. 14-17.</p>
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / desar en PDF</button></div>
+</main>
+
+<div class="ctrl"><span class="rellotge" id="rellotge" title="Rellotge de feina (tecla T)"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Següent (→ o espai)">→</button><button id="surt" title="Surt (Esc)">✕</button></div>
+
+<script>
+(function(){
+  "use strict";
+  var TX = {"clau": "ipo2-u6-u6-sessio-2-v1", "la_classe": "La classe: ", "dits": "Dits!", "temps": "⏱ Temps!", "proj": "▶ Projectar", "surt": "✕ Surt", "esborra": "Esborrar els vots i el marcador per començar amb un altre grup?", "hash": "projectar", "escriu_nom": "Escriu el teu nom i llinatges abans de descarregar.", "escriu_nom_alert": "Escriu el teu nom i llinatges a la primera pantalla i torna a prémer el botó.", "cap_resp": "Sessió 2 · Escoltar el problema: entrevistes i opinions reals · les meves respostes (IPO II, unitat 6)", "qui": "Alumne/a", "grup": "Grup", "amb_qui": "Amb qui he treballat", "ningu": "(ningú)", "data": "Data", "sense_resp": "(sense resposta)", "fitxer": "RESPOSTES-S2", "fet_baixa": "Fet: s'ha descarregat <b>{f}</b>. Desa'l per repassar.", "no_baixa": "Aquest navegador no ha deixat descarregar el fitxer."};
+  var CLAU = TX.clau;
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inici|^Tancament|^Per a casa/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions: la resposta (el perquè) només surt després de votar */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? TX.la_classe + encerts + " / " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    var sec = v.closest("section");   // «on ho estudies» surt quan tots els vots de la pantalla estan fets
+    if (sec && !sec.querySelector(".voto:not(.fet)")) sec.classList.add("votat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    encerts = 0; vots = 0; pinta();
+  }
+
+  /* solucions i respostes que es revelen (botó o tecla S) */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+      if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
+    });
+  });
+
+  /* ronda ràpida: compte enrere en entrar a la targeta (tecla T el torna a engegar) */
+  var tCompte = null;
+  function compte(s){
+    clearInterval(tCompte);
+    var c = s && s.querySelector(".compte"); if (!c) return;
+    var tot = +c.getAttribute("data-seg") || 15, ini = Date.now(), x = c.querySelector(".xifra"), b = c.querySelector(".barra i");
+    c.classList.remove("zero");
+    function pas(){
+      var q = Math.max(0, tot - (Date.now() - ini) / 1000);
+      x.textContent = q > 0 ? Math.ceil(q) : TX.dits;
+      b.style.transform = "scaleX(" + (q / tot).toFixed(3) + ")";
+      if (q <= 0) { clearInterval(tCompte); c.classList.add("zero"); }
+    }
+    pas(); tCompte = setInterval(pas, 100);
+  }
+  /* rellotge de feina: tecla T en una pantalla amb data-min; segueix encara que canviïs de pantalla */
+  var rel = document.getElementById("rellotge"), tRel = null;
+  function rellotge(min){
+    clearInterval(tRel);
+    if (!min || rel.classList.contains("on")) { rel.classList.remove("on", "fi"); return; }
+    var fi = Date.now() + min * 60000;
+    rel.classList.add("on"); rel.classList.remove("fi");
+    function pas(){
+      var q = Math.max(0, Math.round((fi - Date.now()) / 1000));
+      rel.textContent = "⏱ " + Math.floor(q / 60) + ":" + dos(q % 60);
+      if (!q) { clearInterval(tRel); rel.classList.add("fi"); rel.textContent = TX.temps; }
+    }
+    pas(); tRel = setInterval(pas, 500);
+  }
+
+  /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    alcada(); encaixa();
+    compte(pant[i].classList.contains("flash") ? pant[i] : null);
+    pos.textContent = (i + 1) + " / " + pant.length;
+    var segs = nav.querySelectorAll("a");
+    segs.forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(segs, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = -1;
+    pant.forEach(function(s, j){ if (s.id === h) k = j; });
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.surt;
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.proj;
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
+  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "t" || ev.key === "T") { if (pant[i].classList.contains("flash")) compte(pant[i]); else rellotge(+pant[i].getAttribute("data-min") || 0); }
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm(TX.esborra)) reinicia(); }
+    else if (/^[1-8]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+
+  /* respostes de l'alumnat: es desen al navegador i es baixen en un .txt (no s'entreguen) */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup"), parella = document.getElementById("parella");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || ""; parella.value = estat.__parella || "";
+    [nom, grup, parella].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  var msg = document.getElementById("missatge");
+  function baixa(){
+    if (!nom || !net(nom.value)) {
+      if (msg) { msg.hidden = false; msg.textContent = TX.escriu_nom; }
+      try { document.getElementById("inicio").scrollIntoView(); if (nom) nom.focus(); alert(TX.escriu_nom_alert); } catch (e) {}
+      return;
+    }
+    var d = new Date();
+    var L = [TX.cap_resp, TX.qui + ": " + net(nom.value), TX.grup + ": " + net(grup.value), TX.amb_qui + ": " + (net(parella.value) || TX.ningu),
+      TX.data + ": " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || TX.sense_resp); L.push("");
+    });
+    var f = TX.fitxer + "-" + net(nom.value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      if (msg) { msg.hidden = false; msg.innerHTML = TX.fet_baixa.replace("{f}", f); }
+    } catch (e) { if (msg) { msg.hidden = false; msg.textContent = TX.no_baixa; } }
+  }
+  ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
+
+  if (location.hash === "#" + TX.hash) entra();
+})();
+</script>
+</body>
+</html>
