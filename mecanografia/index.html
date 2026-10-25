@@ -544,6 +544,17 @@ details.detall[open] > summary::before{transform:rotate(45deg)}
 .ja-tens{margin-top:22px; padding:20px 22px; border-radius:var(--radi); border:1.5px dashed var(--linia-f); display:grid; gap:8px; justify-items:start}
 .ja-tens p{color:var(--suau); font-size:.95rem; max-width:52ch}
 .ja-tens code{font-family:var(--mono); font-size:.82em}
+.ja-tens{margin:0 0 22px}
+.ja-tens-botons{display:flex; flex-wrap:wrap; gap:10px 18px; align-items:center}
+.ja-tens .avis{margin:4px 0 0; max-width:none; display:block}
+.com-es-fa{font-size:.92rem; color:var(--suau); max-width:56ch}
+.com-es-fa summary{cursor:pointer; color:var(--tinta); font-weight:600}
+.com-es-fa ol{margin:8px 0 6px 1.2em; display:grid; gap:6px}
+.la-fitxa .com-es-fa{grid-column:1 / -1; margin-top:4px}
+.carrega-no{display:block; margin-top:6px; font-size:.9rem}
+.capa .targeta.enganxa{text-align:left; align-items:stretch}
+.capa .targeta.enganxa h2{text-align:center}
+#t-enganxa{width:100%; font-family:var(--mono); font-size:.8rem; border-radius:12px; border:1.5px solid var(--linia-f); padding:10px; background:var(--fons); color:var(--tinta); resize:vertical}
 
 /* ---------- les escenes 3D ---------- */
 .escena{position:relative}
@@ -1173,6 +1184,24 @@ tr.revisar td{background:color-mix(in srgb, var(--or-suau) 70%, transparent)}
         <button class="boto primari gran" id="b-continua" type="button">Continua com a <span id="qui-ultim"></span></button>
         <button class="enllac" id="b-no-soc" type="button">No sóc jo</button>
       </div>
+      <div class="ja-tens" id="qui-ja-tens">
+        <span class="etiqueta">Ja havies practicat? Primer, això</span>
+        <p>Carrega la teva fitxa (<code>TECLA-A-TECLA-….txt</code>) <b>abans d'escriure el nom</b> i continues on ho vas deixar. Si en tens diverses, tria-les totes alhora: s'ajunten soles. També les pots arrossegar a qualsevol lloc de la pàgina.</p>
+        <div class="ja-tens-botons">
+          <button class="boto primari" id="b-qui-carrega" type="button">Carrega les meves fitxes</button>
+          <button class="enllac" id="b-qui-enganxa" type="button">No s'obre? Enganxa-la</button>
+        </div>
+        <p class="avis" id="qui-avis" role="status" hidden></p>
+        <details class="com-es-fa">
+          <summary>Com guardo i recupero el progrés?</summary>
+          <ol>
+            <li><b>En acabar:</b> clica <b>Descarrega la fitxa</b>. Va a la carpeta de baixades, que a l'institut s'esborra: <b>puja-la ara mateix</b> a la teva carpeta del Drive (o lliura-la al Classroom).</li>
+            <li><b>En començar el dia següent:</b> baixa del Drive la fitxa més nova (o totes, no passa res) i clica <b>Carrega les meves fitxes</b>. Pots triar-ne diverses alhora, amb Ctrl o Maj.</li>
+            <li><b>Si no s'obre:</b> obre la fitxa al Drive, prem Ctrl+A i Ctrl+C, clica <b>Enganxa-la</b> i prem Ctrl+V.</li>
+          </ol>
+          <p class="suau">Serveixen la fitxa <code>.txt</code>, la taula per a l'Excel <code>.csv</code> (les de després del 25-10), el <code>.zip</code> que fa el Drive si en baixes diverses i el Word si el Drive l'ha convertit.</p>
+        </details>
+      </div>
       <form class="targeta" id="f-qui" autocomplete="off" novalidate>
         <label class="camp"><span>Com et dius?</span>
           <input id="i-nom" type="text" maxlength="40" placeholder="El teu nom" spellcheck="false" autocapitalize="words"></label>
@@ -1190,11 +1219,6 @@ tr.revisar td{background:color-mix(in srgb, var(--or-suau) 70%, transparent)}
         <p class="avis mal" id="qui-error" hidden></p>
         <button class="boto primari gran" type="submit">Endavant</button>
       </form>
-      <div class="ja-tens" id="qui-ja-tens">
-        <span class="etiqueta">Ja havies practicat?</span>
-        <p>Carrega la teva fitxa (<code>TECLA-A-TECLA-….txt</code>) i continues on ho vas deixar, amb tot l'historial. També la pots arrossegar a qualsevol lloc de la pàgina.</p>
-        <button class="boto secundari" id="b-qui-carrega" type="button">Carrega la meva fitxa</button>
-      </div>
     </div>
     <figure class="qui-3d" id="qui-3d">
       <div class="lloc-3d" id="qui-3d-lloc" aria-hidden="true">
@@ -1458,8 +1482,18 @@ tr.revisar td{background:color-mix(in srgb, var(--or-suau) 70%, transparent)}
   <button class="enllac" id="b-peu-imprimeix" type="button">Imprimeix o PDF</button>
   <span id="peu-mag" class="suau"></span>
 </footer>
-<input type="file" id="i-fitxa" accept=".txt,text/plain" hidden>
-<div class="deixa-anar" id="deixa-anar" hidden><div>Deixa anar la fitxa aquí</div></div>
+<input type="file" id="i-fitxa" multiple accept=".txt,.csv,.zip,.docx,text/plain,text/csv,application/zip" hidden>
+<div class="deixa-anar" id="deixa-anar" hidden><div>Deixa anar aquí les teves fitxes</div></div>
+<div class="capa" id="capa-enganxa" hidden>
+  <div class="targeta enganxa" role="dialog" aria-modal="true" aria-labelledby="enganxa-titol">
+    <h2 id="enganxa-titol">Enganxa la teva fitxa</h2>
+    <p class="suau">Obre la fitxa (al Drive, al Classroom o amb el Bloc de notes), prem <b>Ctrl+A</b> per seleccionar-ho tot i <b>Ctrl+C</b> per copiar. Després, aquí, <b>Ctrl+V</b>.</p>
+    <textarea id="t-enganxa" rows="6" spellcheck="false" aria-label="El text de la fitxa"></textarea>
+    <p class="avis mal" id="enganxa-error" hidden></p>
+    <button class="boto primari gran" id="b-enganxa-si" type="button">Carrega-la</button>
+    <button class="enllac" id="b-enganxa-no" type="button">Cancel·la</button>
+  </div>
+</div>
 <div class="capa" id="capa-avis" hidden>
   <div class="targeta" role="alertdialog" aria-modal="true" aria-labelledby="avis-titol" aria-describedby="avis-text">
     <div class="avis-icona" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M6 2.5h8l4.5 4.5v14.5H6z"/><path d="M14 2.5V7h4.5M12 10.5v6M9.2 14l2.8 2.8 2.8-2.8"/></svg></div>
@@ -7000,10 +7034,31 @@ function nomFitxer(perfil, ara){
   return "TECLA-A-TECLA-" + (net(perfil.nom) || "sense-nom") + (perfil.grup ? "-" + net(perfil.grup) : "") + "-" + dataLocal(ara || new Date()) + ".txt";
 }
 
+/* una línia de dades tal com pot arribar després de passar per l'Excel o el Google Docs:
+   entre cometes de CSV (amb les cometes de dins doblades), amb separadors al final o amb cometes «tipogràfiques» */
+function liniaDeDades(l){
+  l = l.replace(/^\s+/, "").replace(/[\s;,]+$/, "");
+  if (/^"TAT1\|/.test(l) && /"$/.test(l)) l = l.slice(1, -1).replace(/""/g, '"');
+  if (l.indexOf(PREFIX) === 0) l = l.replace(/[“”„«»]/g, '"');
+  return l;
+}
+/* les línies de dades d'una fitxa (per posar-les també a la taula de l'Excel, que així també es pot carregar) */
+function liniesDeDades(perfil, ara){
+  return fitxaText(perfil, ara).split("\r\n").filter(function(l){ return l.indexOf(PREFIX) === 0; });
+}
+/* el text d'un document de Word (.docx): el que dona el Drive si ha convertit la fitxa en un document de Google */
+function textDeDocx(xml){
+  var ent = {amp:"&", lt:"<", gt:">", quot:'"', apos:"'"};
+  return String(xml).replace(/<w:tab\/>/g, "\t").replace(/<w:br\/>|<\/w:p>/g, "\n").replace(/<[^>]+>/g, "")
+    .replace(/&(amp|lt|gt|quot|apos);|&#(\d+);|&#x([0-9a-f]+);/gi, function(m, n, d, h){ return n ? ent[n] : String.fromCharCode(d ? +d : parseInt(h, 16)); });
+}
+/* la taula per a l'Excel d'abans del 25-10-2026: no porta les dades, però es reconeix per dir-ho clar */
+function esTaulaExcel(text){ return /^\s*﻿?dia;hora;tipus;/.test(String(text)); }
+
 /* llegeix una fitxa nova (TAT1) o un fitxer de la prova inicial antiga (DADES;v1) */
 function llegeixFitxa(text){
   var linies = String(text).replace(BOM_INICI, "").split(/\r?\n/).map(function(l){ return l.replace(/\s+$/, ""); });
-  var dades = linies.filter(function(l){ return l.indexOf(PREFIX) === 0; });
+  var dades = linies.map(liniaDeDades).filter(function(l){ return l.indexOf(PREFIX) === 0; });
   if (dades.length){
     var r = {format:"tat1", nom:"", grup:"", ll:"ca", sessions:[], segellOk:false, problemes:[]};
     var cos = [], segellLlegit = null;
@@ -7044,6 +7099,7 @@ function llegeixFitxa(text){
     return {format:"v1", nom:p[2]||"", grup:(p[3] && p[3] !== "(sense grup)") ? p[3] : "", ll:"ca",
             sessions: s.data ? [s] : [], segellOk:null, problemes:[]};
   }
+  if (esTaulaExcel(text)) return {format:"taula", nom:"", grup:"", sessions:[], segellOk:null, problemes:["és la taula per a l'Excel i no porta el progrés"]};
   return {format:"desconegut", nom:"", grup:"", sessions:[], segellOk:null, problemes:["no és una fitxa de Tecla a tecla"]};
 }
 
@@ -7078,6 +7134,38 @@ function netejaSessio(o){
     return q;
   });
   return s;
+}
+
+/* l'alumne carrega d'un cop tot el que té (una fitxa, quatre, la taula de l'Excel, un .zip del Drive):
+   s'ajunta tot el que és de la mateixa persona, sense repetir cap sessió, i es diu què s'ha deixat i per què.
+   llegits: [{nom, text}] · clauActual: la persona que ja hi ha oberta (mana si alguna fitxa és seva) ·
+   identifica: el nom de la llista de l'aula, si n'hi ha */
+function aplega(llegits, clauActual, identifica){
+  var grups = Object.create(null), ordre = [], taules = [], dolents = [];
+  (llegits || []).forEach(function(f){
+    var r = llegeixFitxa(f.text || "");
+    if (r.nom && identifica) r.nom = identifica(r.nom);
+    if (r.format === "taula") return taules.push(f.nom);
+    if (r.format === "desconegut" || !r.nom) return dolents.push(f.nom);
+    var k = clauNom(r.nom);
+    if (!grups[k]){ grups[k] = []; ordre.push(k); }
+    grups[k].push({nom:f.nom, r:r});
+  });
+  if (!ordre.length) return {perfil:null, fitxes:0, taules:taules, dolents:dolents, altres:[], modificades:[]};
+  var tria = clauActual && grups[clauActual] ? clauActual : ordre.slice().sort(function(a, b){ return grups[b].length - grups[a].length; })[0];
+  var desada = function(x){ return x.r.desada || ""; };
+  var v = grups[tria].slice().sort(function(a, b){ return desada(a) < desada(b) ? -1 : (desada(a) > desada(b) ? 1 : 0); });
+  var nova = v[v.length - 1].r, sessions = [], ergo = null, jardi = null, modificades = [];
+  v.forEach(function(x){
+    if (x.r.segellOk === false){ modificades.push(x.nom); x.r.sessions.forEach(function(s){ s.dubte = true; }); }
+    sessions = fusiona(sessions, x.r.sessions);
+    if (x.r.ergo && x.r.segellOk !== false) ergo = primeraErgo(ergo, x.r.ergo);
+    if (x.r.jardi) jardi = x.r.jardi;              /* el de la fitxa més nova que en porti */
+  });
+  var p = {nom:nova.nom, grup:nova.grup || "", ll:nova.ll || null, blocs:nova.blocs || null, sessions:sessions, ergo:ergo, jardi:jardi,
+           format:v.some(function(x){ return x.r.format === "v1"; }) ? "v1" : "tat1", desada:nova.desada || null};
+  var altres = ordre.filter(function(k){ return k !== tria; }).map(function(k){ return {persona:grups[k][0].r.nom, fitxers:grups[k].map(function(x){ return x.nom; })}; });
+  return {perfil:p, clau:tria, fitxes:v.length, fitxers:v.map(function(x){ return x.nom; }), taules:taules, dolents:dolents, altres:altres, modificades:modificades};
 }
 
 /* uneix sessions sense repetir-ne cap (la mateixa sessió pot venir de dos fitxers) */
@@ -7214,19 +7302,31 @@ function llegeixZip(buf){
     }
     var fets = [], problemes = [];
     /* en l'ordre del .zip, encara que unes es descomprimeixin abans que les altres */
-    var feines = entrades.filter(function(e){ return /\.txt$/i.test(e.nom) && !/(^|\/)__MACOSX\//.test(e.nom); }).map(function(e, ix){
+    /* les fitxes (.txt), la taula de l'Excel (.csv), un Word (.docx: la fitxa convertida pel Drive, que és un .zip a dins)
+       i, si el .zip és un Word, el seu text (word/document.xml) */
+    var feines = entrades.filter(function(e){ return /\.(txt|csv|docx|zip)$/i.test(e.nom) || e.nom === "word/document.xml"; })
+      .filter(function(e){ return !/(^|\/)__MACOSX\//.test(e.nom); }).map(function(e, ix){
       var curt = e.nom.split("/").pop();
       if (e.flags & 1){ problemes.push(curt + ": està xifrat"); return Promise.resolve(); }
       if (e.mida === 0xffffffff || e.off + 30 > u8.length || dv.getUint32(e.off, true) !== 0x04034b50){ problemes.push(curt + ": no es pot llegir"); return Promise.resolve(); }
       var ini = e.off + 30 + dv.getUint16(e.off + 26, true) + dv.getUint16(e.off + 28, true);
       var dades = u8.slice(ini, ini + e.mida);
-      var text = function(b){ return new TextDecoder("utf-8").decode(b); };
-      if (e.metode === 0){ fets[ix] = {nom:curt, text:text(dades)}; return Promise.resolve(); }
+      var desa = function(b){
+        if (/\.(docx|zip)$/i.test(e.nom)){
+          return llegeixZip(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength)).then(function(r){
+            fets[ix] = r.fitxers.map(function(f){ return {nom:/\.docx$/i.test(e.nom) && f.nom === "document.xml" ? curt : f.nom, text:f.text}; });
+            r.problemes.forEach(function(p){ problemes.push(curt + " › " + p); });
+          }, function(){ problemes.push(curt + ": no es pot obrir"); });
+        }
+        var t = new TextDecoder("utf-8").decode(b);
+        fets[ix] = [{nom:curt, text:e.nom === "word/document.xml" ? textDeDocx(t) : t}];
+      };
+      if (e.metode === 0) return Promise.resolve(desa(dades));
       if (e.metode !== 8 || typeof DecompressionStream === "undefined"){ problemes.push(curt + ": aquest navegador no el pot descomprimir"); return Promise.resolve(); }
       return new Response(new Blob([dades]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).arrayBuffer()
-        .then(function(b){ fets[ix] = {nom:curt, text:text(new Uint8Array(b))}; }, function(){ problemes.push(curt + ": no es pot descomprimir"); });
+        .then(function(b){ return desa(new Uint8Array(b)); }, function(){ problemes.push(curt + ": no es pot descomprimir"); });
     });
-    Promise.all(feines).then(function(){ ok({fitxers:fets.filter(Boolean), problemes:problemes, entrades:entrades.length}); }, ko);
+    Promise.all(feines).then(function(){ ok({fitxers:[].concat.apply([], fets.filter(Boolean)), problemes:problemes, entrades:entrades.length}); }, ko);
   } catch(err){ ko(new Error("no es pot llegir aquest .zip")); } });
 }
 
@@ -8464,6 +8564,7 @@ return {
   VERSIO:VERSIO, ergoValida:ergoValida, primeraErgo:primeraErgo, coherencia:coherencia, auditaSessions:auditaSessions, motiu:motiu, MOTIUS:MOTIUS,
   llegeixZip:llegeixZip, setmanesDe:setmanesDe, resumClasse:resumClasse, dillunsDe:dillunsDe,
   fitxaText:fitxaText, nomFitxer:nomFitxer, llegeixFitxa:llegeixFitxa, segell:segell, fusiona:fusiona,
+  liniesDeDades:liniesDeDades, textDeDocx:textDeDocx, aplega:aplega,
   ordenaSessions:ordenaSessions, agregat:agregat, ranking:ranking, consells:consells,
   minutsText:minutsText, nomTipus:nomTipus, fmt:fmt, PREFIX:PREFIX,
   DITS:DITS, FILES:FILES, MAPA:MAPA, ditDeTecla:ditDeTecla, codiDitDeTecla:codiDitDeTecla, comEsFa:comEsFa,
@@ -8796,17 +8897,19 @@ function baixa(nom, contingut, tipus){
 }
 /* llegeix fitxes .txt i, si n'hi ha, .zip (el que baixa el Drive d'una tasca del Classroom).
    nomesFitxes: d'una carpeta, només els .txt i els .zip (la resta s'ignora sense queixar-se) */
-function esZip(f){ return /\.zip$/i.test(f.name || "") || /zip/.test(f.type || ""); }
+/* un .zip o un Word (.docx: la fitxa que el Drive ha convertit en un document de Google i s'ha baixat així) */
+function esZip(f){ return /\.(zip|docx)$/i.test(f.name || "") || /zip|wordprocessingml/.test(f.type || ""); }
 function llegeixFitxers(llista, fet, nomesFitxes){
   var v = Array.prototype.slice.call(llista || []), out = [], problemes = [];
-  if (nomesFitxes) v = v.filter(function(f){ return /\.txt$/i.test(f.name || "") || esZip(f); });
+  if (nomesFitxes) v = v.filter(function(f){ return /\.(txt|csv)$/i.test(f.name || "") || esZip(f); });
   var pend = v.length;
   if (!pend) return fet([], nomesFitxes && llista && llista.length ? ["Aquí no hi ha cap fitxa .txt ni cap .zip."] : []);
   var acaba = function(){ if (--pend === 0) fet([].concat.apply([], out.filter(Boolean)), problemes); };
   v.forEach(function(f, i){
     if (esZip(f)){
+      var docx = /\.docx$/i.test(f.name || "");
       f.arrayBuffer().then(N.llegeixZip).then(function(r){
-        out[i] = r.fitxers;
+        out[i] = r.fitxers.map(function(x){ return docx && x.nom === "document.xml" ? {nom:f.name, text:x.text} : x; });
         r.problemes.forEach(function(p){ problemes.push(f.name + " \u203a " + p); });
         if (!r.fitxers.length) problemes.push(f.name + ": no hi ha cap fitxa .txt a dins.");
         acaba();
@@ -9301,8 +9404,12 @@ function fitxaHTML(p){
     '<div class="fitxa-text">' + cap + "</div>" +
     '<div class="fitxa-botons">' +
       '<button class="boto ' + (e.pendents || e.buida ? "primari" : "secundari") + '" type="button" data-accio="desa"' + (e.buida ? " disabled" : "") + '>Descarrega la fitxa</button>' +
-      '<button class="boto secundari" type="button" data-accio="carrega">Carrega una fitxa</button>' +
-      '<button class="enllac" type="button" data-accio="csv"' + (e.buida ? " disabled" : "") + '>Exporta a Excel</button></div>';
+      '<button class="boto secundari" type="button" data-accio="carrega">Carrega fitxes</button>' +
+      '<button class="enllac" type="button" data-accio="csv"' + (e.buida ? " disabled" : "") + '>Exporta a Excel</button></div>' +
+    '<details class="com-es-fa"><summary>Com guardo i recupero el progrés?</summary><ol>' +
+      "<li><b>En acabar:</b> descarrega la fitxa i <b>puja-la ara mateix</b> a la teva carpeta del Drive (o lliura-la al Classroom): la carpeta de baixades de l'institut s'esborra.</li>" +
+      "<li><b>En començar:</b> baixa del Drive la fitxa més nova (o totes) i clica <b>Carrega fitxes</b>. Pots triar-ne diverses alhora.</li>" +
+      "<li><b>Si no s'obre:</b> obre-la al Drive, Ctrl+A, Ctrl+C, i <button class=\"enllac\" type=\"button\" data-accio=\"enganxa\">enganxa-la aquí</button>.</li></ol></details>";
 }
 
 function pintaInici(){
@@ -11190,7 +11297,7 @@ function descarregaFitxa(){
   if (ergoFeta(p)) p.ergoEnFitxa = true;
   desa();
   pintaEstatFitxa();
-  toast('<span class="toast-ico" aria-hidden="true"></span><span><b>Fitxa descarregada.</b> És a la carpeta de baixades: <code>' + esc(nom) + "</code>. Ara lliura-la al Classroom.</span>");
+  toast('<span class="toast-ico" aria-hidden="true"></span><span><b>Fitxa descarregada.</b> És a la carpeta de baixades: <code>' + esc(nom) + "</code>. Ara puja-la al teu Drive o lliura-la al Classroom: les baixades de l'institut s'esborren.</span>", 9000);
   if (PANTALLA === "p-inici") pintaInici();
   if (PANTALLA === "p-resultat") pintaDesa();
 }
@@ -11251,47 +11358,94 @@ function csvPerfil(){
   N.ordenaSessions(p.sessions).forEach(function(s){
     files.push([s.data, s.hora, N.nomTipus(s), blocsDeSessio(s), s.ll || "", Math.round((s.act || 0) / 60), csvNum(s.ppm), csvNum(s.prec), csvNum(s.ritme), csvNum(s.enc), csvNum(s.err), s.tipus === "llico" ? (s.estrelles || 0) : ""]);
   });
+  /* a sota, les mateixes dades que la fitxa: així la taula també serveix per recuperar el progrés */
+  files.push([], [], ["Dades per tornar a carregar el progrés a Tecla a tecla. No les toquis."]);
+  N.liniesDeDades(p, new Date()).forEach(function(l){ files.push([l]); });
   baixa(N.nomFitxer(p, new Date()).replace(/\.txt$/, ".csv"), csv(files), "text/csv");
 }
 
-function carregaFitxa(fitxer){
-  llegeixFitxers([fitxer], function(v){
-    if (!v.length){ AVIS_INICI = {tipus:"mal", html:"Aquest fitxer no és una fitxa de Tecla a tecla."}; return tornaAInici(); }
-    var r = N.llegeixFitxa(v[0].text);
-    var eraBuit = !perfilActiu();
-    if (r.nom) r.nom = identifica(r.nom);
-    if (AULA && r.grup === "" ) r.grup = AULA.grup || "";
-    if (r.format === "desconegut" || !r.nom){
-      AVIS_INICI = {tipus:"mal", html:"Aquest fitxer no és una fitxa de Tecla a tecla."};
-      return tornaAInici();
-    }
-    var actual = perfilActiu();
-    if (actual && N.clauNom(r.nom) !== MAG.actiu){
-      if (!confirm("Aquesta fitxa és de " + r.nom + ", no de " + actual.nom + ". La vols obrir igualment?")) return;
-    }
-    var p = obrePerfil(r.nom, r.grup, null);
-    var abans = p.sessions.length;
-    if (r.segellOk === false) r.sessions.forEach(function(s){ s.dubte = true; });
-    p.sessions = N.fusiona(p.sessions, r.sessions);
-    if (r.ll && (eraBuit || abans === 0)) p.llengua = r.ll;
-    if (r.blocs && (eraBuit || String(p.blocs) === "variats")) p.blocs = r.blocs;
-    /* la lliçó d'ergonomia: si la fitxa la porta, ja està feta (compta la primera vegada) i ja és a la fitxa */
-    if (r.ergo && r.segellOk !== false){
-      p.ergo = N.primeraErgo(p.ergo, r.ergo);
-      if (JSON.stringify(N.ergoValida(p.ergo)) === JSON.stringify(N.ergoValida(r.ergo))) p.ergoEnFitxa = true;
-    }
-    /* el jardí triat viatja amb la fitxa: si aquí encara no se n'havia triat cap, el de la fitxa */
-    if (r.jardi && !N.JARDI[p.jardi]) p.jardi = r.jardi;
-    var noves = p.sessions.length - abans;
-    var darrera = p.sessions[p.sessions.length - 1];
-    if (darrera && r.sessions.some(function(s){ return s.id === darrera.id; })){ p.desadaId = darrera.id; p.desadaData = darrera.data; }
-    desa();
-    AVIS_INICI = {tipus:r.segellOk === false ? "or" : "be", html:
-      "Fitxa carregada: " + (noves ? noves + (noves === 1 ? " sessió nova" : " sessions noves") : "ja tenies totes aquestes sessions") + "." +
-      (r.format === "v1" ? " És la prova inicial: queda com a primera marca." : "") +
-      (r.segellOk === false ? " <b>Compte: les dades d'aquesta fitxa s'han modificat a mà.</b>" : "")};
-    tornaAInici();
-  });
+/* l'alumne carrega el que té: una fitxa o diverses alhora (.txt, la taula .csv, el .zip o el Word que dona el Drive),
+   o el text enganxat. Tot el que és seu s'ajunta sense repetir res; el que no serveix, es diu per què. */
+function carregaFitxes(llista){
+  llegeixFitxers(llista, function(v, problemes){ carregaLlegits(v, problemes); });
+}
+function carregaLlegits(v, problemes){
+  var actual = perfilActiu();
+  var a = N.aplega(v, actual ? MAG.actiu : null, identifica);
+  var noFa = [];
+  if (a.taules.length) noFa.push("<b>" + esc(a.taules.join(", ")) + "</b>: és la taula per a l'Excel d'abans, que no porta el progrés. Busca la fitxa <code>.txt</code> del mateix dia.");
+  if (a.dolents.length) noFa.push("<b>" + esc(a.dolents.join(", ")) + "</b>: no " + (a.dolents.length === 1 ? "és" : "són") + " cap fitxa de Tecla a tecla.");
+  (problemes || []).forEach(function(p){ noFa.push(esc(p)); });
+  a.altres.forEach(function(o){ noFa.push("<b>" + esc(o.fitxers.join(", ")) + "</b>: " + (o.fitxers.length === 1 ? "és " : "són ") + de(o.persona) + ". Carrega només les teves."); });
+  if (!a.perfil){
+    return avisaCarrega("mal", "No s'ha pogut carregar res. " + (noFa.length ? noFa.join(" ") : "") + " " + AJUDA_CURTA);
+  }
+  var r = a.perfil;
+  if (AULA && !r.grup) r.grup = AULA.grup || "";
+  /* qui ja era obert amb un altre nom (l'alumne ha escrit el nom abans de carregar la fitxa): les sessions d'ara, a la seva fitxa */
+  var portar = [];
+  if (actual && a.clau !== MAG.actiu){
+    var e = estatFitxa(actual), ids = {};
+    r.sessions.forEach(function(s){ ids[s.id] = 1; });
+    var seves = actual.sessions.filter(function(s){ return !ids[s.id]; });
+    if (e.pendents && seves.length && confirm("Ara mateix és obert «" + actual.nom + "», amb " + seves.length + (seves.length === 1 ? " sessió" : " sessions") +
+        " que no " + (seves.length === 1 ? "és" : "són") + " a cap fitxa.\n\nSi ets tu (" + r.nom + "), clica D'acord i s'afegeixen a la teva fitxa. Si no, Cancel·la.")) portar = seves;
+  }
+  var eraBuit = !actual;
+  var p = obrePerfil(r.nom, r.grup, null);
+  var abans = p.sessions.length;
+  p.sessions = N.fusiona(p.sessions, r.sessions.concat(portar));
+  if (r.ll && (eraBuit || abans === 0)) p.llengua = r.ll;
+  if (r.blocs && (eraBuit || abans === 0 || String(p.blocs) === "variats")) p.blocs = r.blocs;
+  /* la lliçó d'ergonomia: si la fitxa la porta, ja està feta (compta la primera vegada) i ja és a la fitxa */
+  if (r.ergo){
+    p.ergo = N.primeraErgo(p.ergo, r.ergo);
+    if (JSON.stringify(N.ergoValida(p.ergo)) === JSON.stringify(N.ergoValida(r.ergo))) p.ergoEnFitxa = true;
+  }
+  /* el jardí triat viatja amb la fitxa: si aquí encara no se n'havia triat cap, el de la fitxa més nova */
+  if (r.jardi && !N.JARDI[p.jardi]) p.jardi = r.jardi;
+  var noves = p.sessions.length - abans;
+  /* desada fins a la darrera sessió que ja porta la fitxa: el que hi hagi després (les d'ara) queda per desar */
+  var aFitxa = {}, darrera = null;
+  r.sessions.forEach(function(s){ aFitxa[s.id] = 1; });
+  p.sessions.forEach(function(s){ if (aFitxa[s.id]) darrera = s; });
+  if (darrera && (!p.desadaId || p.sessions.findIndex(function(s){ return s.id === p.desadaId; }) < p.sessions.indexOf(darrera))){ p.desadaId = darrera.id; p.desadaData = darrera.data; }
+  desa();
+  var ag = N.agregat(p.sessions);
+  avisaCarrega(a.modificades.length ? "or" : (noFa.length ? "or" : "be"),
+    "<b>" + (a.fitxes === 1 ? "Fitxa carregada" : a.fitxes + " fitxes carregades") + ", " + de(p.nom) + ".</b> " +
+    (noves ? noves + (noves === 1 ? " sessió nova" : " sessions noves") + ". " : (abans ? "Ja tenies totes aquestes sessions. " : "")) +
+    "Ara portes " + p.sessions.length + (p.sessions.length === 1 ? " sessió" : " sessions") + " i " + N.minutsText(ag.act) + " de pràctica." +
+    (portar.length ? (portar.length === 1 ? " S'hi ha afegit la d'ara." : " S'hi han afegit les " + portar.length + " d'ara.") : "") +
+    (r.format === "v1" ? " La prova inicial queda com a primera marca." : "") +
+    (a.modificades.length ? " <b>Compte: " + esc(a.modificades.join(", ")) + (a.modificades.length === 1 ? " s'ha" : " s'han") + " modificat a mà.</b>" : "") +
+    (noFa.length ? '<span class="carrega-no">No s\'ha carregat: ' + noFa.join(" ") + "</span>" : ""));
+}
+/* «de Laia», «d'Exemple», «d'Helena» */
+function de(nom){ return (/^[aeiouàèéíïòóúüh]/i.test(String(nom)) ? "d'" : "de ") + esc(nom); }
+var AJUDA_CURTA = "La fitxa és el fitxer <code>TECLA-A-TECLA-…txt</code> que vas descarregar en acabar. Si no s'obre, obre-la al Drive, copia'n tot el text i clica <b>Enganxa-la</b>.";
+/* el missatge del resultat, sempre a la vista: a la pantalla d'inici si ja hi ha algú obert; si no, a la de «qui ets» */
+function avisaCarrega(tipus, html){
+  if (perfilActiu()){ AVIS_INICI = {tipus:tipus, html:html}; return tornaAInici(); }
+  var el = $("qui-avis");
+  el.className = "avis " + tipus; el.innerHTML = html; el.hidden = false;
+  if (PANTALLA !== "p-qui") mostra("p-qui");
+  el.scrollIntoView({block:"nearest"});
+}
+/* el pla B: enganxar el text de la fitxa (obert al Drive, Ctrl+A, Ctrl+C) */
+function obreEnganxa(){
+  var c = $("capa-enganxa"), t = $("t-enganxa");
+  t.value = ""; $("enganxa-error").hidden = true; c.hidden = false;
+  setTimeout(function(){ t.focus(); }, 30);
+}
+function enganxa(){
+  var t = $("t-enganxa").value;
+  if (!/TAT1\||DADES;v1;/.test(t)){
+    $("enganxa-error").textContent = "Aquí no hi ha les dades d'una fitxa. Obre la fitxa, prem Ctrl+A per seleccionar-ho tot, Ctrl+C per copiar i aquí Ctrl+V.";
+    $("enganxa-error").hidden = false; return;
+  }
+  $("capa-enganxa").hidden = true;
+  carregaLlegits([{nom:"el text enganxat", text:t}], []);
 }
 function tornaAInici(){ if (PANTALLA === "p-progres") obreProgres(); else mostra("p-inici"); }
 
@@ -11689,7 +11843,7 @@ function lligaArrossega(){
     if (ambFitxers(e)) e.preventDefault();
     if (!val(e)) return;
     e.preventDefault(); n = 0; capa.hidden = true;
-    var f = e.dataTransfer.files; if (f && f[0]) carregaFitxa(f[0]);
+    fitxersDeDrop(e.dataTransfer).then(function(v){ if (v.length) carregaFitxes(v); });
   });
 }
 
@@ -11809,7 +11963,12 @@ function lliga(){
   $("ini-avis").addEventListener("click", function(e){ var b = e.target.closest("[data-accio]"); if (b && b.getAttribute("data-accio") === "desa") descarregaFitxa(); });
   document.querySelectorAll('input[name="durada"]').forEach(function(r){ r.onchange = function(){ MAG.durada = +this.value; desa(); }; });
   $("ini-llengua").onchange = function(){ var p = perfilActiu(); if (p){ p.llengua = this.value; desa(); } };
-  $("i-fitxa").onchange = function(){ if (this.files && this.files[0]) carregaFitxa(this.files[0]); this.value = ""; };
+  $("i-fitxa").onchange = function(){ if (this.files && this.files.length) carregaFitxes(this.files); this.value = ""; };
+  $("b-qui-enganxa").onclick = obreEnganxa;
+  $("b-enganxa-si").onclick = enganxa;
+  $("b-enganxa-no").onclick = function(){ $("capa-enganxa").hidden = true; };
+  $("capa-enganxa").addEventListener("keydown", function(e){ if (e.key === "Escape") $("capa-enganxa").hidden = true; });
+  $("ini-fitxa").addEventListener("click", function(e){ var b = e.target.closest("[data-accio='enganxa']"); if (b) obreEnganxa(); });
 
   /* la caixa d'escriure */
   var caixa = $("e-caixa");
