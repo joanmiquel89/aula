@@ -7029,9 +7029,12 @@ function fitxaText(perfil, ara){
   return L.concat(dades).join("\r\n");
 }
 
+/* el dia, l'hora i el minut van al nom (des del 25-10-2026): al Drive, la més nova és la de data i hora més altes,
+   i per ordre alfabètic queda l'última (any-mes-dia i l'hora amb dues xifres) */
 function nomFitxer(perfil, ara){
+  ara = ara || new Date();
   var net = function(s){ return nfc(String(s||"")).normalize("NFD").replace(COMBINANTS, "").replace(/[^A-Za-z0-9]+/g, "-").replace(/^-+|-+$/g, ""); };
-  return "TECLA-A-TECLA-" + (net(perfil.nom) || "sense-nom") + (perfil.grup ? "-" + net(perfil.grup) : "") + "-" + dataLocal(ara || new Date()) + ".txt";
+  return "TECLA-A-TECLA-" + (net(perfil.nom) || "sense-nom") + (perfil.grup ? "-" + net(perfil.grup) : "") + "-" + dataLocal(ara) + "-" + dosXifres(ara.getHours()) + "h" + dosXifres(ara.getMinutes()) + ".txt";
 }
 
 /* una línia de dades tal com pot arribar després de passar per l'Excel o el Google Docs:
