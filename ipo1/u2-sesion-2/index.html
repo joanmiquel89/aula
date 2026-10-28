@@ -134,6 +134,49 @@ th{background:#f3ecdf}
 .org.apoya{background:#1f7a4d}
 @media (max-width:700px){.cuadro4,.mapa .f4,.mapa .f3{grid-template-columns:1fr 1fr}.nueve{grid-template-columns:repeat(3,1fr)}.rama{grid-template-columns:1fr}}
 .encls{font-size:14px;color:var(--suau);font-style:italic}
+/* solucions per passos (JM, 28-10): un toc = una idea, poques paraules i grans; projectant, cada → en destapa una */
+.pas{display:flow-root;margin:.5em 0}
+.porque .pas:first-child{margin-top:0}
+p.si{display:flex;align-items:center;gap:.45em;font-size:1.35em;font-weight:800;line-height:1.15;margin:.1em 0 .4em}
+p.si i,.nop i{flex:none;font-style:normal;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#fff}
+p.si i{width:1.4em;height:1.4em;font-size:.75em;background:var(--verd)}
+.nop{display:flex;align-items:center;gap:.5em;margin:.2em 0;color:var(--suau)}
+.nop i{width:1.35em;height:1.35em;font-size:.7em;background:var(--vermell)}
+.idea{display:inline-flex;flex-direction:column;border-left:.35em solid var(--mostassa);background:var(--mostassaclar);border-radius:.4em;padding:.35em .85em;margin:.15em 0 .45em}
+.idea b{font-size:1.12em}
+.fil{display:flex;flex-wrap:wrap;align-items:center;gap:.4em;margin:.3em 0 .55em}
+.fil span{background:#fff;border:2px solid var(--tinta);border-radius:.5em;padding:.35em .8em;font-weight:700;line-height:1.25}
+.fil i{font-style:normal;font-weight:800;color:var(--suau);font-size:1.25em}
+.fil.escala{align-items:flex-end}
+.fil.escala span:nth-of-type(2){margin-bottom:1.1em}
+.fil.escala span:nth-of-type(3){margin-bottom:2.2em}
+.fil.escala span:nth-of-type(4){margin-bottom:3.3em}
+.fil.escala span:last-of-type{background:#ffd66b}
+.gran{display:inline-flex;flex-direction:column;vertical-align:top;min-width:6.5em;margin:.2em .7em .45em 0;padding:.35em .9em;border-radius:.55em;background:#fff;border:2px solid var(--linia)}
+.gran b{font-size:2.2em;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.gran span{color:var(--suau);font-size:.85em;line-height:1.3}
+.foto{float:right;width:38%;margin:0 0 .6em 1.1em}
+.foto img{display:block;width:100%;height:auto;border-radius:.55em}
+.foto figcaption{font-size:.6em;color:var(--suau);margin-top:.25em;line-height:1.3}
+.parell{display:grid;grid-template-columns:1fr 1fr;gap:.6em;margin:.2em 0 .5em}
+.parell .foto{float:none;width:auto;margin:0}
+.llegeix{margin:.6em 0 0;font-size:.95em}
+.llegeix summary{cursor:pointer;font-weight:700;color:var(--verd)}
+.llegeix>div{margin-top:.4em}
+/* ✂ el tall (JM, 28-10): fins aquí, la d'avui; el que ve després és de la sessió següent i porta la cinta */
+.tallsessio{text-align:center;background:#1d1a16;color:#fff;border:0}
+.tallsessio .kicker{color:#ffd66b}
+.tallsessio h2{font-size:2.6em}
+.tisora{display:flex;align-items:center;justify-content:center;gap:.6em;margin:.6em 0 .9em;font-weight:800;font-size:1.3em}
+.tisora span{padding:.3em 1em;border-radius:.5em;background:#fff;color:var(--tinta)}
+.tisora span+i+span{background:transparent;color:#ffd66b;border:2px dashed #ffd66b}
+.tisora i{font-style:normal;font-size:1.6em;color:#ffd66b}
+.cinta{display:inline-block;font-size:.72em;font-weight:800;text-transform:uppercase;letter-spacing:.1em;background:var(--tinta);color:#ffd66b;padding:.25em .9em;border-radius:99px;margin:0 0 .5em}
+.p.dema{border:2px dashed var(--suau)}
+.dalt nav a.dema{background:transparent;border:1px dashed rgba(255,255,255,.55)}
+.dalt nav a.dema:hover,.dalt nav a.dema.ara{background:#ffd66b;color:var(--tinta)}
+#passos{letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.65);border-radius:8px;padding:6px 10px;font-size:14px}
+#passos:empty{display:none}
 textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
 textarea.resp:focus{outline:2px solid var(--tinta)}
 .boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
@@ -152,6 +195,19 @@ body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
 body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
   padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
 body.proj .p.actual{display:block}
+body.proj .pas:not(.vist){display:none}
+body.proj .pas.vist:not(.ara){opacity:.6}
+body.proj .fil{font-size:1.08em}
+body.proj .foto{width:32%}
+body.proj .pas.ara{animation:destapa .35s ease-out}
+@keyframes destapa{from{opacity:0;transform:translateY(.5em)}to{opacity:1;transform:none}}
+body.proj .voto.fet .opc button.dolenta{opacity:.6}
+body.proj .voto.fet:has(.pas) .opc button:not(.bona):not(.dolenta){display:none}
+body.proj .foto img{max-height:30vh;object-fit:cover}
+body.proj .parell .foto{width:auto}
+body.proj .parell .foto img{height:30vh;max-height:none}
+body.proj .tallsessio.actual{display:flex;flex-direction:column;justify-content:center;background:#1d1a16}
+body.proj .p.dema{border-top:.6vh dashed var(--tinta)}
 body.proj .p h2{font-size:2.1em}
 body.proj .p h3{font-size:1.2em}
 body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
@@ -206,14 +262,14 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
 <section class="p" id="inicio" data-titol="Inicio">
   <p class="kicker">Sesión 2 · una hora</p>
   <h2>El reto de la gestoría y el riesgo eléctrico</h2>
-  <p style="font-size:1.15em">Terminamos lo que quedó del viernes 23 (el reto de la gestoría) y seguimos con el libro: el riesgo eléctrico, con un accidente real y tres descargas para resolver. Hoy, <b>dos ratos en parejas</b>.</p>
-  <div class="cadena"><span class="fet">Los nombres de los riesgos (tabla 2.1) y el despacho de Roberto y Julia (tabla 2.2)</span><i>→</i><span class="avui">El reto de la gestoría, corregido</span><i>→</i><span class="avui">Riesgo eléctrico: contacto directo e indirecto (págs. 30-31)</span><i>→</i><span>Equipos de trabajo e incendio (págs. 29 y 31-32): si da tiempo, hoy; si no, el viernes 6</span></div>
+  <p style="font-size:1.15em">Terminamos el reto de la gestoría del viernes 23 y seguimos con el libro: el riesgo eléctrico, con un accidente real y tres descargas. Hoy, <b>dos ratos en parejas</b>.</p>
+  <div class="cadena"><span class="fet">Riesgos y despacho de Roberto y Julia (tablas 2.1 y 2.2)</span><i>→</i><span class="avui">El reto de la gestoría, corregido</span><i>→</i><span class="avui">Riesgo eléctrico (págs. 30-31)</span><i>→</i><span>Equipos e incendio (págs. 29 y 31-32): si da tiempo</span></div>
   <div class="plan"><div><b>Hoy</b><ol start="1"><li>Dos preguntas para recordar la tabla 2.2 del viernes 23 <small>· 4 min</small></li><li>En parejas, el reto que quedó del viernes 23: ¿cuántas personas caben en una gestoría? <small>· 12 min</small></li><li>Un accidente real y los dos contactos eléctricos (pág. 30); qué cambia con la piel mojada <small>· 8 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>En parejas, con la tabla 2.7 y la figura 2.3: tres descargas, qué contacto es y qué se tenía que hacer <small>· 18 min</small></li><li>Si sobra tiempo: qué es un equipo de trabajo y cuándo puede ponerse en marcha (pág. 29), con un accidente real de Mallorca <small>· ➕ si da tiempo</small></li><li>Si sobra tiempo: por qué empieza un fuego, cómo se apaga y de qué clase es (págs. 31-32), con un incendio real de Mallorca <small>· ➕ si da tiempo</small></li></ol><p style="margin:8px 0 0"><b>Para salir:</b> 2 preguntas en voz alta.</p></div></div>
   <h3 class="noproj">Cómo usar esta página</h3>
   <p class="noproj">En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
   <div class="refs"><span class="ref libro">Libro · págs. 27-28, 30-31 y 53 (si da tiempo, 29 y 32)</span></div>
     <p class="nota noproj">Azul: el libro. Amarillo: lo que escribes en esta página.</p>
-  <div class="clau"><b>Hoy, el libro por las <span style="white-space:nowrap">págs. 27, 28, 30, 31 y 53</span></b> (y, si da tiempo, las <span style="white-space:nowrap">29 y 32</span>), y dos ratos de trabajo en parejas. Si hoy no lo tienes, comparte el de tu pareja; esta página te sirve para repasar, en <b>joanmiquel89.github.io/aula</b>, sin contraseña.</div>
+  <div class="clau"><b>Hoy, el libro por las <span style="white-space:nowrap">págs. 27, 28, 30, 31 y 53</span></b> (y, si da tiempo, las <span style="white-space:nowrap">29 y 32</span>), y dos ratos en parejas. Sin libro, comparte el de tu pareja. Para repasar: <b>joanmiquel89.github.io/aula</b>, sin contraseña.</div>
 </section>
 
 <section class="p" id="entrar" data-titol="1 · Para entrar">
@@ -247,7 +303,7 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
   <h2>¿Cuántas personas caben en esta gestoría?</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 27 · tabla 2.2, filas «Espacios de trabajo» (altura, superficie, volumen)</span><span class="ref ficha">El cálculo, en la libreta o en el móvil</span></div>
   <div class="caso"><p>Una gestoría de Palma va a alquilar un local para su oficina y quiere poner <b>nueve puestos</b>. Antes de firmar, la gerente os pide que lo comprobéis con la tabla 2.2.</p><p class="fuente"><span class="inventat">· ejemplo inventado</span></p></div>
-<svg viewBox="0 0 600 350" style="width:100%;max-height:36vh;display:block;margin:.3em 0" role="img" aria-label="Plano del local de la gestoría: 6 por 5 metros, con los muebles en gris" font-family="inherit" font-size="15">
+<svg viewBox="0 0 600 350" style="width:100%;max-height:30vh;display:block;margin:.3em 0" role="img" aria-label="Plano del local de la gestoría: 6 por 5 metros, con los muebles en gris" font-family="inherit" font-size="15">
 <rect x="70" y="30" width="360" height="300" fill="#fffdf8" stroke="#5d5850" stroke-width="3"/>
 <g fill="#d9d0bf" stroke="#5d5850" stroke-width="1.5">
 <rect x="80" y="40" width="240" height="40"/><rect x="330" y="40" width="90" height="100"/>
@@ -268,26 +324,37 @@ body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta
 <text x="445" y="80">techo:</text><text x="445" y="100" fill="#0B5CAD" font-weight="700">2,7 m</text>
 <text x="445" y="140">muebles (gris):</text><text x="445" y="160" fill="#0B5CAD" font-weight="700">12 m² de suelo</text><text x="445" y="180" fill="#0B5CAD" font-weight="700">y 9 m³</text>
 </g></svg>
-<div class="clau"><ol>
-<li>¿Cuántas personas pueden trabajar ahí <b>a la vez, como máximo</b>? Mirad las tres medidas de «Espacios de trabajo» de la tabla 2.2 (altura, superficie libre y aire sin ocupar) y escribid el cálculo con las cifras (el plano es orientativo).</li>
-<li>Si el viernes lo empezasteis, seguid donde lo dejasteis. Si acabáis antes, comparad vuestro cálculo con el de la pareja de al lado.</li>
-<li>¿Le caben los nueve puestos? Al final, votamos. Hoy no cuenta.</li>
-</ol></div>
+<div class="cuadro4" style="grid-template-columns:repeat(3,1fr)"><div><h4>① A la vez, como máximo</h4><p>¿Cuántas personas?</p><small>altura, superficie libre y aire sin ocupar (tabla 2.2); el cálculo, con las cifras</small></div><div><h4>② Si el viernes empezasteis</h4><p>Seguid</p><small>si acabáis antes, comparad con la pareja de al lado</small></div><div><h4>③ ¿Caben los nueve?</h4><p>Al final, votamos</p><small>hoy no cuenta</small></div></div>
 </section>
 
-<section class="p" id="reto-voto" data-min="9">
+<section class="p" id="reto-voto">
   <p class="kicker">2 · Corrección · el reto de la gestoría</p>
   <h2>¿Caben los nueve puestos?</h2>
-  <div class="voto" data-ok="d"><p class="q">En el local de la gestoría, ¿cuántas personas pueden trabajar a la vez, como máximo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">15</button><button data-v="b">9</button><button data-v="c">8</button><button data-v="d">7</button></div><div class="porque"><b>Siete: manda el aire.</b> Así se resuelve, medida a medida:
+  <div class="voto" data-ok="d"><p class="q">En el local de la gestoría, ¿cuántas personas pueden trabajar a la vez, como máximo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">15</button><button data-v="b">9</button><button data-v="c">8</button><button data-v="d">7</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>D · Siete: manda el aire</span></p>
+<p class="nop"><i>✗</i><span>15: no has restado los muebles</span></p>
+<p class="nop"><i>✗</i><span>8: el aire, sin restar el de los muebles</span></p>
+<p class="nop"><i>✗</i><span>9: solo has mirado el suelo</span></p>
+<span class="ley">RD 486/1997 · anexo I.A.2.1.º</span> <span class="ref libro">Libro · pág. 27 · tabla 2.2, «Espacios de trabajo»</span></div></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 27 · tabla 2.2, filas «Espacios de trabajo»</span></div>
+</section>
+
+<section class="p" id="reto-2" data-min="9">
+  <p class="kicker">2 · Corrección · el reto de la gestoría · la solución, 2 de 2</p>
+  <h2>Medida a medida</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 27 · tabla 2.2, filas «Espacios de trabajo» (altura, superficie, volumen)</span></div>
+  <div class="pas"><div class="gran"><b>2,7 m</b><span>de techo · una oficina pide 2,5 m: cumple</span></div></div>
+<div class="pas"><p class="nota">Superficie libre = suelo − muebles; 2 m² por persona:</p><div class="fil"><span>6 × 5 = 30 m²</span><i>→</i><span>30 − 12 = 18 m²</span><i>→</i><span>18 ÷ 2 = 9 personas</span></div></div>
+<div class="pas"><p class="nota">Aire sin ocupar = volumen − muebles; 10 m³ por persona:</p><div class="fil"><span>30 × 2,7 = 81 m³</span><i>→</i><span>81 − 9 = 72 m³</span><i>→</i><span>72 ÷ 10 = 7,2 → 7</span></div><p class="nota">La octava ya no tendría sus 10 m³.</p></div>
+<div class="pas"><p class="si"><i>✓</i><span>Manda el más pequeño: 9 por el suelo, 7 por el aire → 7</span></p></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Siete: manda el aire.</b> Así se resuelve, medida a medida:
 <ol class="pasos"><li><b>Altura:</b> 2,7 m frente a 2,5 m de una oficina → cumple. No deja fuera a nadie.</li><li><b>Superficie libre</b> = suelo total − muebles: <span class="formula">6 × 5 = 30 m²</span> <span class="formula">30 − 12 = 18 m²</span> A 2 m² por persona: <span class="formula">18 ÷ 2 = 9 personas</span></li><li><b>Aire sin ocupar</b> = volumen total − muebles: <span class="formula">30 m² × 2,7 m = 81 m³</span> <span class="formula">81 − 9 = 72 m³</span> A 10 m³ por persona: <span class="formula">72 ÷ 10 = 7,2 → 7 personas</span> (la octava ya no tendría sus 10 m³: no se redondea hacia arriba).</li><li><b>Manda el número más pequeño:</b> hay que cumplir las dos cosas a la vez. Por el suelo caben 9 y por el aire, 7: manda el aire → <b>7</b>.</li></ol>
 <div class="cuadro4" style="grid-template-columns:repeat(3,1fr)">
 <div class="si"><h4>Altura</h4><p>2,7 m</p><small>oficina: 2,5 m como mínimo · cumple</small></div>
 <div class="alt"><h4>Superficie libre</h4><p>30 − 12 = 18 m²</p><small>2 m² por persona: 9 personas</small></div>
 <div class="si"><h4>Aire sin ocupar · manda</h4><p>30 × 2,7 = 81 m³ − 9 = 72 m³</p><small>10 m³ por persona: 7 personas</small></div>
 </div>
-Con <b>15</b> no has restado los muebles; con <b>8</b>, has contado todo el aire sin restar el que ocupan los muebles; con <b>9</b>, solo has mirado el suelo. Los nueve puestos no caben: siete.<span class="ley">RD 486/1997 · anexo I.A.2.1.º</span> <span class="ref libro">Libro · pág. 27 · tabla 2.2, las tres filas de «Espacios de trabajo» (altura, superficie, volumen)</span></div></div>
-
-  <div class="refs despres"><span class="ref libro">Libro · pág. 27 · tabla 2.2, filas «Espacios de trabajo»</span></div>
+Con <b>15</b> no has restado los muebles; con <b>8</b>, has contado todo el aire sin restar el que ocupan los muebles; con <b>9</b>, solo has mirado el suelo. Los nueve puestos no caben: siete.<span class="ley">RD 486/1997 · anexo I.A.2.1.º</span> <span class="ref libro">Libro · pág. 27 · tabla 2.2, las tres filas de «Espacios de trabajo» (altura, superficie, volumen)</span></div></details>
 </section>
 
 <section class="p" id="bendinat" data-titol="3 · Riesgo eléctrico">
@@ -307,11 +374,23 @@ Con <b>15</b> no has restado los muebles; con <b>8</b>, has contado todo el aire
 <section class="p" id="agua">
   <p class="kicker">3 · Libro, pág. 30 · tabla 2.6 y figura 2.2</p>
   <h2>Misma tensión, ¿misma corriente?</h2>
-  <div class="voto" data-ok="b"><p class="q">Mismo aparato, mismo enchufe, misma tensión. ¿Cuándo pasa más corriente por el cuerpo si hay un contacto?</p><div class="opc"><button data-v="a">Con las manos secas</button><button data-v="b">Con las manos mojadas</button><button data-v="c">Igual: la tensión es la misma</button></div><div class="porque"><b>Con las manos mojadas.</b> Así se razona:
-<ol class="pasos"><li><b>La ley de Ohm</b> (figura 2.2, pág. 30, en dibujo; escrita, en el caso resuelto 2.2 de la pág. 31): <span class="formula">V = I × R</span>. Despejando: <span class="formula">I = V ÷ R</span></li><li><b>La tensión (V)</b> la pone el enchufe: no cambia.</li><li><b>La resistencia (R)</b> del cuerpo depende de la humedad de la piel («Sabías que…», pág. 30): mojada, <b>menos resistencia</b>.</li><li>Misma V dividida entre una R más pequeña → <b>más intensidad (I)</b>. Y la intensidad, con el tiempo de contacto, es lo que más influye en el daño (tabla 2.6).</li></ol>
-Por eso, donde hay agua, la norma pide más cuidado: lo veréis en el caso C.<span class="ref libro">Libro · pág. 30 · tabla 2.6, filas «Intensidad», «Resistencia» y «Tiempo de contacto»; figura 2.2 y «Sabías que…» · pág. 31 · caso práctico resuelto 2.2 (la fórmula escrita)</span></div></div>
+  <div class="voto" data-ok="b"><p class="q">Mismo aparato, mismo enchufe, misma tensión. ¿Cuándo pasa más corriente por el cuerpo si hay un contacto?</p><div class="opc"><button data-v="a">Con las manos secas</button><button data-v="b">Con las manos mojadas</button><button data-v="c">Igual: la tensión es la misma</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Con las manos mojadas</span></p>
+<div class="idea"><b>Ley de Ohm: I = V ÷ R</b><span>misma tensión y menos resistencia → más corriente</span></div>
+<span class="ref libro">Libro · pág. 30 · tabla 2.6 y figura 2.2</span></div></div></div>
 
   <div class="refs despres"><span class="ref libro">Libro · pág. 30 · tabla 2.6 y figura 2.2 (ley de Ohm)</span></div>
+</section>
+
+<section class="p" id="agua-2">
+  <p class="kicker">3 · Libro, pág. 30 · la solución, 2 de 2</p>
+  <h2>Por qué pasa más corriente</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 30 · tabla 2.6, figura 2.2 y «Sabías que…» · pág. 31 · caso resuelto 2.2</span></div>
+  <div class="pas"><div class="fil"><span>V = I × R</span><i>→</i><span>I = V ÷ R</span></div><p class="nota">Figura 2.2 (pág. 30), en dibujo; escrita, en el caso resuelto 2.2 (pág. 31).</p></div>
+<div class="pas"><div class="tres"><div><b>V · tensión</b><span>la pone el enchufe: no cambia</span></div><div><b>R · resistencia</b><span>con la piel mojada, baja («Sabías que…», pág. 30)</span></div><div><b>I · intensidad</b><span>sube; con el tiempo, es lo que más daña (tabla 2.6)</span></div></div></div>
+<div class="pas"><p class="nota">Por eso, donde hay agua, la norma pide más cuidado: lo veréis en el caso C.</p></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Con las manos mojadas.</b> Así se razona:
+<ol class="pasos"><li><b>La ley de Ohm</b> (figura 2.2, pág. 30, en dibujo; escrita, en el caso resuelto 2.2 de la pág. 31): <span class="formula">V = I × R</span>. Despejando: <span class="formula">I = V ÷ R</span></li><li><b>La tensión (V)</b> la pone el enchufe: no cambia.</li><li><b>La resistencia (R)</b> del cuerpo depende de la humedad de la piel («Sabías que…», pág. 30): mojada, <b>menos resistencia</b>.</li><li>Misma V dividida entre una R más pequeña → <b>más intensidad (I)</b>. Y la intensidad, con el tiempo de contacto, es lo que más influye en el daño (tabla 2.6).</li></ol>
+Por eso, donde hay agua, la norma pide más cuidado: lo veréis en el caso C.<span class="ref libro">Libro · pág. 30 · tabla 2.6, filas «Intensidad», «Resistencia» y «Tiempo de contacto»; figura 2.2 y «Sabías que…» · pág. 31 · caso práctico resuelto 2.2 (la fórmula escrita)</span></div></details>
 </section>
 
 <section class="p" id="descargas" data-titol="4 · Tres descargas">
@@ -331,67 +410,144 @@ Por eso, donde hay agua, la norma pide más cuidado: lo veréis en el caso C.<sp
 <section class="p" id="pedro-voto">
   <p class="kicker">4 · Corrección · A · Pedro (actividad final 2.6)</p>
   <h2>Pedro y el cable</h2>
-  <div class="voto" data-ok="a"><p class="q">Pedro toca un cable pelado. ¿Qué contacto es?</p><div class="opc"><button data-v="a">Directo</button><button data-v="b">Indirecto</button><button data-v="c">No es un contacto eléctrico: es un golpe</button></div><div class="porque"><b>Directo:</b> el cable pelado es una parte que <b>lleva corriente</b> y está sin aislar. Así se resuelve:
+  <div class="voto" data-ok="a"><p class="q">Pedro toca un cable pelado. ¿Qué contacto es?</p><div class="opc"><button data-v="a">Directo</button><button data-v="b">Indirecto</button><button data-v="c">No es un contacto eléctrico: es un golpe</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>A · Directo</span></p>
+<div class="idea"><b>Contacto directo</b><span>tocar una parte que lleva corriente: el cable pelado, sin aislar</span></div>
+<span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Directo»</span></div> <span class="fuente">Fuente: Libro, actividad final 2.6 (pág. 53), adaptada.</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Directo»</span></div>
+</section>
+
+<section class="p" id="pedro-2">
+  <p class="kicker">4 · Corrección · A · Pedro · la solución, 2 de 2</p>
+  <h2>Qué se tenía que hacer</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Directo»</span></div>
+  <div class="pas"><div class="fil"><span>¿Qué tocó? El cable, sin aislante</span><i>→</i><span>¿Lleva corriente normalmente? Sí</span><i>→</i><span>Contacto directo</span></div></div>
+<div class="pas"><div class="tres"><div><b>Alejar u obstáculos</b><span>un cuadro cerrado · tabla 2.7</span></div><div><b>Recubrir</b><span>lo pelado · tabla 2.7</span></div><div><b>Sin tensión antes de tocar</b><span>desconectar, que no se reconecte y comprobar (RD 614/2001, art. 4.2)</span></div></div></div>
+<div class="pas"><p class="nop"><i>✗</i><span>Guantes y herramientas aislantes: la última barrera</span></p><p class="nota">La protección colectiva va antes que la individual (LPRL, art. 15.1.h).</p></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Directo:</b> el cable pelado es una parte que <b>lleva corriente</b> y está sin aislar. Así se resuelve:
 <ol class="pasos"><li><b>¿Qué tocó?</b> El conductor del cable, sin su aislante.</li><li><b>¿Lleva corriente normalmente?</b> Sí: es el cable. → contacto <b>directo</b> (pág. 30, letra a).</li><li><b>Medidas:</b> las tres de la tabla 2.7, fila «Directo» (vale cualquiera), y lo que añade la ley:</li></ol>
 <div class="tcalc-w"><table class="tcalc"><tr><th>Medida</th><th>De dónde sale</th></tr>
 <tr><td><b>Alejar</b> las partes con corriente, o <b>poner obstáculos</b> (un cuadro eléctrico cerrado)</td><td>tabla 2.7, fila «Directo»</td></tr>
 <tr><td><b>Recubrir</b> lo pelado (cables aislados)</td><td>tabla 2.7, fila «Directo»</td></tr>
 <tr><td>Antes de tocar, <b>dejarlo sin tensión</b>: desconectar, impedir que se vuelva a conectar y comprobar que no hay tensión (los tres primeros de cinco pasos)</td><td>RD 614/2001, art. 4.2 y anexo II.A</td></tr>
 <tr><td>Guantes y herramientas aislantes: la última barrera, porque la protección colectiva va antes que la individual</td><td>LPRL, art. 15.1.h</td></tr></table></div>
-<span class="ley">RD 614/2001 · art. 4.2</span> <span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Directo» (recubrimiento de partes activas)</span> <span class="fuente">Fuente: Libro, actividad final 2.6 (pág. 53), adaptada.</span></div></div>
-
-  <div class="refs despres"><span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Directo»</span></div>
+<span class="ley">RD 614/2001 · art. 4.2</span> <span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Directo» (recubrimiento de partes activas)</span></div></details>
 </section>
 
 <section class="p" id="alicia-voto">
   <p class="kicker">4 · Corrección · B · Alicia (actividad final 2.7)</p>
   <h2>Alicia y la fotocopiadora</h2>
-  <div class="voto" data-ok="b"><p class="q">Alicia toca la carcasa de la fotocopiadora y le da calambre. ¿Qué contacto es?</p><div class="opc"><button data-v="a">Directo</button><button data-v="b">Indirecto</button><button data-v="c">No es un contacto eléctrico: es la electricidad estática</button></div><div class="porque"><b>Indirecto:</b> la carcasa es metálica y <b>no debería llevar corriente</b>; la lleva por un <b>fallo de aislamiento</b>, y la tierra, que tendría que desviarla, falla.
-<ol class="pasos"><li><b>¿Qué tocó?</b> La carcasa: una parte metálica de fuera.</li><li><b>¿Lleva corriente normalmente?</b> No. Si la lleva, es por un fallo → contacto <b>indirecto</b>.</li><li><b>Medidas</b> (tabla 2.7, «Indirecto»): <b>puesta a tierra con interruptores diferenciales</b> (la tierra se lleva la corriente y el diferencial corta) y aparatos de <b>doble aislamiento</b> (dos capas de aislante: aunque falle una, lo que tocas no queda en tensión); además, revisar la instalación. Vale también cualquier otra de su fila.</li><li><b>Y Alicia:</b> si un aparato da calambre, se avisa (LPRL, art. 29.2.4.º) y no se usa hasta que lo revisen (RD 1215/1997, anexo II.1.4).</li></ol>
-<span class="ley">LPRL · art. 29.2.4.º</span> <span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Indirecto»</span> <span class="fuente">Fuente: Libro, actividad final 2.7 (pág. 53), adaptada.</span></div></div>
+  <div class="voto" data-ok="b"><p class="q">Alicia toca la carcasa de la fotocopiadora y le da calambre. ¿Qué contacto es?</p><div class="opc"><button data-v="a">Directo</button><button data-v="b">Indirecto</button><button data-v="c">No es un contacto eléctrico: es la electricidad estática</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Indirecto</span></p>
+<div class="idea"><b>Contacto indirecto</b><span>una carcasa metálica que no debería llevar corriente y la lleva por un fallo de aislamiento</span></div>
+<span class="ref libro">Libro · pág. 30 · tabla 2.7, fila «Indirecto»</span></div> <span class="fuente">Fuente: Libro, actividad final 2.7 (pág. 53), adaptada.</span></div></div>
 
   <div class="refs despres"><span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Indirecto»</span></div>
 </section>
 
-<section class="p" id="lavado-voto" data-min="12">
+<section class="p" id="alicia-2">
+  <p class="kicker">4 · Corrección · B · Alicia · la solución, 2 de 2</p>
+  <h2>Qué se tenía que hacer</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Indirecto»</span></div>
+  <div class="pas"><div class="fil"><span>¿Qué tocó? La carcasa</span><i>→</i><span>¿Lleva corriente normalmente? No</span><i>→</i><span>Contacto indirecto</span></div></div>
+<div class="pas"><div class="tres"><div><b>Tierra con diferenciales</b><span>la tierra se lleva la corriente y el diferencial corta</span></div><div><b>Doble aislamiento</b><span>dos capas: aunque falle una, no queda en tensión</span></div><div><b>Revisar</b><span>la instalación</span></div></div></div>
+<div class="pas"><div class="idea"><b>Y Alicia</b><span>avisar (LPRL, art. 29.2.4.º) y no usarla hasta que la revisen (RD 1215/1997, anexo II.1.4)</span></div></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Indirecto:</b> la carcasa es metálica y <b>no debería llevar corriente</b>; la lleva por un <b>fallo de aislamiento</b>, y la tierra, que tendría que desviarla, falla.
+<ol class="pasos"><li><b>¿Qué tocó?</b> La carcasa: una parte metálica de fuera.</li><li><b>¿Lleva corriente normalmente?</b> No. Si la lleva, es por un fallo → contacto <b>indirecto</b>.</li><li><b>Medidas</b> (tabla 2.7, «Indirecto»): <b>puesta a tierra con interruptores diferenciales</b> (la tierra se lleva la corriente y el diferencial corta) y aparatos de <b>doble aislamiento</b> (dos capas de aislante: aunque falle una, lo que tocas no queda en tensión); además, revisar la instalación. Vale también cualquier otra de su fila.</li><li><b>Y Alicia:</b> si un aparato da calambre, se avisa (LPRL, art. 29.2.4.º) y no se usa hasta que lo revisen (RD 1215/1997, anexo II.1.4).</li></ol>
+<span class="ley">LPRL · art. 29.2.4.º</span> <span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Indirecto»</span></div></details>
+</section>
+
+<section class="p" id="lavado-voto">
   <p class="kicker">4 · Corrección · C · el túnel de lavado</p>
   <h2>¿Qué lámpara?</h2>
-  <div class="voto" data-ok="b"><p class="q">Caso C: ¿cuál de las dos tiene que comprar? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">La de 50 V: da más luz</button><button data-v="b">La de 24 V</button><button data-v="c">Cualquiera de las dos: son tensiones de seguridad</button></div><div class="porque"><b>La de 24 V.</b> Así se resuelve:
-<ol class="pasos"><li><b>¿Cómo es el sitio?</b> Mojado.</li><li><b>Busca la cifra</b> en la figura 2.3 (pág. 31): tensiones de seguridad (tan bajas que se consideran seguras en ese sitio): <b>24 V</b> en emplazamientos húmedos o mojados y <b>50 V</b> en locales secos.</li><li><b>¿Por qué menos?</b> Con la piel mojada el cuerpo ofrece menos resistencia: con la misma tensión pasaría más corriente (lo de antes, la ley de Ohm).</li></ol>
-Los 50 V son seguros en un local seco, no aquí.<span class="ref libro">Libro · pág. 31 · figura 2.3 (pie: «las tensiones de seguridad son de 24 V… y 50 V…»)</span></div></div>
+  <div class="voto" data-ok="b"><p class="q">Caso C: ¿cuál de las dos tiene que comprar? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">La de 50 V: da más luz</button><button data-v="b">La de 24 V</button><button data-v="c">Cualquiera de las dos: son tensiones de seguridad</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · La de 24 V</span></p>
+<p class="nop"><i>✗</i><span>50 V: es segura en un local seco, no en uno mojado</span></p>
+<span class="ref libro">Libro · pág. 31 · figura 2.3</span></div></div></div>
 
   <div class="refs despres"><span class="ref libro">Libro · pág. 31 · figura 2.3</span></div>
 </section>
 
-<section class="p" id="equipo" data-titol="5 · ➕ Equipos de trabajo">
+<section class="p" id="lavado-2" data-min="12">
+  <p class="kicker">4 · Corrección · C · el túnel de lavado · la solución, 2 de 2</p>
+  <h2>Las tensiones de seguridad</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 31 · figura 2.3</span></div>
+  <div class="pas"><div class="gran"><b>24 V</b><span>sitios húmedos o mojados</span></div><div class="gran"><b>50 V</b><span>locales secos</span></div><p class="nota">Tan bajas que se consideran seguras en ese sitio (figura 2.3, pág. 31).</p></div>
+<div class="pas"><div class="idea"><b>¿Por qué menos donde hay agua?</b><span>piel mojada → menos resistencia → con la misma tensión, más corriente (la ley de Ohm de antes)</span></div></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>La de 24 V.</b> Así se resuelve:
+<ol class="pasos"><li><b>¿Cómo es el sitio?</b> Mojado.</li><li><b>Busca la cifra</b> en la figura 2.3 (pág. 31): tensiones de seguridad (tan bajas que se consideran seguras en ese sitio): <b>24 V</b> en emplazamientos húmedos o mojados y <b>50 V</b> en locales secos.</li><li><b>¿Por qué menos?</b> Con la piel mojada el cuerpo ofrece menos resistencia: con la misma tensión pasaría más corriente (lo de antes, la ley de Ohm).</li></ol>
+Los 50 V son seguros en un local seco, no aquí.<span class="ref libro">Libro · pág. 31 · figura 2.3 (pie: «las tensiones de seguridad son de 24 V… y 50 V…»)</span></div></details>
+</section>
+
+<section class="p tallsessio" id="tall" data-titol="✂ Hasta aquí">
+  <p class="kicker">✂ Fin de la sesión de hoy</p>
+  <h2>Hasta aquí, la de hoy</h2>
+  <div class="tisora"><span>hoy</span><i>✂</i><span>viernes 6</span></div>
+  <p>Si sobra tiempo, seguimos con el principio de lo que toca viernes 6. Lo que hagamos aquí, la próxima sesión no lo repite.</p>
+</section>
+
+<section class="p dema" id="equipo" data-titol="5 · ➕ Equipos de trabajo">
+  <p class="cinta">Esto ya es de viernes 6</p>
   <p class="kicker">5 · ➕ Si da tiempo · Un accidente real en Mallorca · libro, pág. 29</p>
   <h2>La motosierra que se escapa</h2>
   <div class="caso"><p><b>Febrero de 2025, hacia las 11 h.</b> Un trabajador del Ayuntamiento de Marratxí poda árboles en unos viveros de Santa Maria del Camí. La motosierra se le escapa y se hace cortes profundos en la mano. Lo llevan a Son Llàtzer y lo operan de urgencia.</p><p class="fuente">Fuente: Mallorca Magazin, 10-02-2025 (a partir de Ultima Hora): mallorcamagazin.com/nachrichten/lokales/2025/02/10/133093/rathausmitarbeiter-sagt-sich-auf-mallorca-fast-die-ganze-hand-ab.html.</p></div>
-<div class="voto" data-ok="c"><p class="q">Para la ley, la motosierra es un «equipo de trabajo». ¿Y estos otros: el taladro de un taller, el ordenador de una oficina y la carretilla de una nave?</p><div class="opc"><button data-v="a">Solo el taladro y la carretilla: son máquinas</button><button data-v="b">Solo el ordenador: es el que se usa todo el día</button><button data-v="c">Los tres</button></div><div class="porque"><b>Los tres.</b> La definición (pág. 29) tiene <b>dos condiciones</b>: ser una máquina, aparato, instrumento o instalación, y <b>usarse en el trabajo</b>. Se comprueban las dos con cada uno:
+<div class="voto" data-ok="c"><p class="q">Para la ley, la motosierra es un «equipo de trabajo». ¿Y estos otros: el taladro de un taller, el ordenador de una oficina y la carretilla de una nave?</p><div class="opc"><button data-v="a">Solo el taladro y la carretilla: son máquinas</button><button data-v="b">Solo el ordenador: es el que se usa todo el día</button><button data-v="c">Los tres</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Los tres</span></p>
+<div class="idea"><b>Equipo de trabajo</b><span>máquina, aparato, instrumento o instalación, y que se use en el trabajo</span></div>
+<span class="ley">RD 1215/1997 · art. 2</span> <span class="ref libro">Libro · pág. 29 · apartado 2.1.2</span></div></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 29 · apartado 2.1.2 «Equipos de trabajo», 1.er párrafo</span></div>
+</section>
+
+<section class="p dema" id="equipo-2">
+  <p class="cinta">Esto ya es de viernes 6</p>
+  <p class="kicker">5 · Libro, pág. 29 · la solución, 2 de 2</p>
+  <h2>Las dos condiciones, una a una</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 29 · apartado 2.1.2, 1.er y 3.er párrafos</span></div>
+  <div class="pas"><div class="cuadro4"><div class="si"><h4>Motosierra</h4><p>Sí</p><small>máquina · para trabajar</small></div><div class="si"><h4>Taladro</h4><p>Sí</p><small>máquina · para trabajar</small></div><div class="si"><h4>Ordenador</h4><p>Sí</p><small>aparato · para trabajar</small></div><div class="si"><h4>Carretilla</h4><p>Sí</p><small>máquina · para trabajar</small></div></div></div>
+<div class="pas"><div class="idea"><b>No hace falta que sea grande ni peligrosa</b><span>y «usarlo» también es ponerlo en marcha, pararlo, transportarlo, mantenerlo y limpiarlo (pág. 29, 3.er párrafo)</span></div></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Los tres.</b> La definición (pág. 29) tiene <b>dos condiciones</b>: ser una máquina, aparato, instrumento o instalación, y <b>usarse en el trabajo</b>. Se comprueban las dos con cada uno:
 <div class="tcalc-w"><table class="tcalc"><tr><th></th><th>¿Máquina, aparato, instrumento o instalación?</th><th>¿Se usa para trabajar?</th><th>¿Equipo de trabajo?</th></tr>
 <tr><td>Motosierra (Marratxí)</td><td>máquina ✓</td><td>✓</td><td class="ok">Sí</td></tr>
 <tr><td>Taladro del taller</td><td>máquina ✓</td><td>✓</td><td class="ok">Sí</td></tr>
 <tr><td>Ordenador de la oficina</td><td>aparato ✓</td><td>✓</td><td class="ok">Sí</td></tr>
 <tr><td>Carretilla de la nave</td><td>máquina ✓</td><td>✓</td><td class="ok">Sí</td></tr></table></div>
-No hace falta que sea grande ni peligrosa: el ordenador también cuenta. Y «usarlo» no es solo trabajar con él: también ponerlo en marcha, pararlo, transportarlo, mantenerlo y limpiarlo (pág. 29, 3.er párrafo).<span class="ley">RD 1215/1997 · art. 2</span> <span class="ref libro">Libro · pág. 29 · apartado 2.1.2 «Equipos de trabajo», 1.er párrafo (la definición entre comillas) y 3.er párrafo («La utilización…»)</span></div></div>
-
-  <div class="refs despres"><span class="ref libro">Libro · pág. 29 · apartado 2.1.2 «Equipos de trabajo», 1.er párrafo</span></div>
+No hace falta que sea grande ni peligrosa: el ordenador también cuenta. Y «usarlo» no es solo trabajar con él: también ponerlo en marcha, pararlo, transportarlo, mantenerlo y limpiarlo (pág. 29, 3.er párrafo).<span class="ley">RD 1215/1997 · art. 2</span> <span class="ref libro">Libro · pág. 29 · apartado 2.1.2 «Equipos de trabajo», 1.er párrafo (la definición entre comillas) y 3.er párrafo («La utilización…»)</span></div></details>
 </section>
 
-<section class="p" id="arranque">
+<section class="p dema" id="arranque">
+  <p class="cinta">Esto ya es de viernes 6</p>
   <p class="kicker">5 · Libro, pág. 29 · tabla 2.5 · fila «Accionamiento»</p>
   <h2>Vuelve la luz y la amasadora arranca</h2>
-  <div class="voto" data-ok="b"><p class="q">En una panadería hay un corte de luz. Cuando vuelve la corriente, la amasadora, que estaba encendida, se pone en marcha sin que nadie pulse nada. ¿Cumple el equipo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Sí: si se para sola cuando se va la luz, ya es segura</button><button data-v="b">No: solo puede ponerse en marcha cuando alguien lo decide, también después de una parada</button><button data-v="c">Sí, si tiene una señal de peligro bien visible</button></div><div class="porque"><b>No cumple.</b> Así se resuelve:
-<ol class="pasos"><li><b>Busca la regla:</b> tabla 2.5 (pág. 29), fila «Accionamiento», 2.º punto: la puesta en marcha solo con una <b>acción voluntaria</b>, es decir, que alguien lo decida y pulse el mando.</li><li><b>Mira el caso:</b> ¿alguien pulsa algo cuando vuelve la luz? <b>No</b>: arranca sola.</li><li><b>Compara:</b> sin acción voluntaria → <b>no cumple</b>. La norma lo pide también <b>después de una parada, sea cual sea la causa</b>: un corte de luz también (solo hay excepción si arrancar no supone ningún riesgo).</li><li><b>Qué tendría que pasar:</b> al volver la luz, la amasadora se queda parada hasta que alguien pulse el mando. Si arranca sola, puede pillar a quien tiene las manos dentro.</li></ol><span class="ley">RD 1215/1997 · anexo I.1.2</span> <span class="ref libro">Libro · pág. 29 · tabla 2.5, fila «Accionamiento», 2.º punto («La puesta en marcha solo se podrá efectuar con una acción voluntaria»)</span></div></div>
+  <div class="voto" data-ok="b"><p class="q">En una panadería hay un corte de luz. Cuando vuelve la corriente, la amasadora, que estaba encendida, se pone en marcha sin que nadie pulse nada. ¿Cumple el equipo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Sí: si se para sola cuando se va la luz, ya es segura</button><button data-v="b">No: solo puede ponerse en marcha cuando alguien lo decide, también después de una parada</button><button data-v="c">Sí, si tiene una señal de peligro bien visible</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · No cumple</span></p>
+<div class="idea"><b>Accionamiento (tabla 2.5)</b><span>solo arranca con una acción voluntaria, también después de una parada</span></div>
+<span class="ley">RD 1215/1997 · anexo I.1.2</span> <span class="ref libro">Libro · pág. 29 · tabla 2.5</span></div></div></div>
 
   <div class="refs despres"><span class="ref libro">Libro · pág. 29 · tabla 2.5, fila «Accionamiento», 2.º punto</span></div>
 </section>
 
-<section class="p" id="picafort" data-titol="6 · ➕ Incendio">
+<section class="p dema" id="arranque-2">
+  <p class="cinta">Esto ya es de viernes 6</p>
+  <p class="kicker">5 · Libro, pág. 29 · la solución, 2 de 2</p>
+  <h2>Así se resuelve</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 29 · tabla 2.5, fila «Accionamiento», 2.º punto</span></div>
+  <div class="pas"><div class="fil"><span>La regla: acción voluntaria</span><i>→</i><span>¿Alguien pulsa al volver la luz? No</span><i>→</i><span>No cumple</span></div></div>
+<div class="pas"><div class="idea"><b>Después de una parada, sea cual sea la causa</b><span>un corte de luz también; solo hay excepción si arrancar no supone ningún riesgo</span></div></div>
+<div class="pas"><p class="si"><i>✓</i><span>Al volver la luz, se queda parada hasta que alguien pulse el mando</span></p><p class="nota">Si arranca sola, puede pillar a quien tiene las manos dentro.</p></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>No cumple.</b> Así se resuelve:
+<ol class="pasos"><li><b>Busca la regla:</b> tabla 2.5 (pág. 29), fila «Accionamiento», 2.º punto: la puesta en marcha solo con una <b>acción voluntaria</b>, es decir, que alguien lo decida y pulse el mando.</li><li><b>Mira el caso:</b> ¿alguien pulsa algo cuando vuelve la luz? <b>No</b>: arranca sola.</li><li><b>Compara:</b> sin acción voluntaria → <b>no cumple</b>. La norma lo pide también <b>después de una parada, sea cual sea la causa</b>: un corte de luz también (solo hay excepción si arrancar no supone ningún riesgo).</li><li><b>Qué tendría que pasar:</b> al volver la luz, la amasadora se queda parada hasta que alguien pulse el mando. Si arranca sola, puede pillar a quien tiene las manos dentro.</li></ol><span class="ley">RD 1215/1997 · anexo I.1.2</span> <span class="ref libro">Libro · pág. 29 · tabla 2.5, fila «Accionamiento», 2.º punto («La puesta en marcha solo se podrá efectuar con una acción voluntaria»)</span></div></details>
+</section>
+
+<section class="p dema" id="picafort" data-titol="6 · ➕ Incendio">
+  <p class="cinta">Esto ya es de viernes 6</p>
   <p class="kicker">6 · ➕ Si da tiempo · Un incendio real en Mallorca · libro, pág. 31</p>
   <h2>Una tienda que arde en Can Picafort</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 31 · apartado 2.1.4 «Incendio» y figura 2.4 «Teoría del fuego»</span></div>
   <div class="caso"><p><b>Can Picafort (Santa Margalida), lunes 24-8-2026, 10.45 h.</b> Sale humo de una tienda de deportes, en los bajos de un edificio de apartamentos. Enseguida es un humo muy negro y el fuego sube. Un policía y un guardia civil rescatan a una mujer y a cuatro niños atrapados en uno de los pisos; los bomberos evacuan otro. Acuden los bomberos de Alcúdia y Artà; uno de ellos recibe una descarga eléctrica y lo llevan al hospital de Muro. A las 17.40, casi siete horas después, dan el fuego por apagado. Se cree que empezó en el enchufe de un aparato de aire acondicionado.</p><p class="fuente">Fuente: Majorca Daily Bulletin, 25-08-2026: majorcadailybulletin.com/news/local/2026/08/25/145231.</p></div>
-<svg viewBox="0 0 600 300" style="width:100%;max-height:30vh;display:block;margin:.3em auto" role="img" aria-label="Triángulo del fuego: combustible, comburente y calor, con la reacción en cadena en el centro" font-family="inherit" font-size="17">
+</section>
+
+<section class="p dema" id="picafort-voto">
+  <p class="cinta">Esto ya es de viernes 6</p>
+  <p class="kicker">6 · Un incendio real en Mallorca · libro, pág. 31 · figura 2.4</p>
+  <h2>¿Qué lado puso el enchufe?</h2>
+  <svg viewBox="0 0 600 300" style="width:100%;max-height:17vh;display:block;margin:.3em auto" role="img" aria-label="Triángulo del fuego: combustible, comburente y calor, con la reacción en cadena en el centro" font-family="inherit" font-size="17">
 <polygon points="300,20 500,270 100,270" fill="#fffdf8" stroke="#5d5850" stroke-width="3"/>
 <circle cx="300" cy="185" r="48" fill="#f6d7b8" stroke="#c4581c" stroke-width="2"/>
 <g text-anchor="middle" font-weight="700">
@@ -404,35 +560,77 @@ No hace falta que sea grande ni peligrosa: el ordenador también cuenta. Y «usa
 <text x="115" y="150">(oxígeno)</text>
 <text x="490" y="150">(energía de activación)</text>
 </g></svg>
-<div class="voto" data-ok="c"><p class="q">Para que haya fuego hacen falta los tres lados del triángulo (figura 2.4). Si empezó en el enchufe, como se cree, ¿qué lado del triángulo puso el enchufe?</p><div class="opc"><button data-v="a">El combustible</button><button data-v="b">El comburente</button><button data-v="c">El calor</button></div><div class="porque"><b>El calor:</b> el enchufe daría la energía que enciende el fuego. La noticia no dice cómo (si se calentó o hizo chispa), y de la causa solo dice que «se cree». Los tres lados, con este caso:
+<div class="voto" data-ok="c"><p class="q">Si empezó en el enchufe, como se cree, ¿qué lado del triángulo puso el enchufe?</p><div class="opc"><button data-v="a">El combustible</button><button data-v="b">El comburente</button><button data-v="c">El calor</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · El calor</span></p>
+<div class="idea"><b>El enchufe</b><span>daría la energía que lo enciende (si fue él: la noticia dice «se cree»)</span></div>
+<span class="ref libro">Libro · pág. 31 · figura 2.4</span></div> <span class="fuente">Fuente: Majorca Daily Bulletin, 25-08-2026 (la noticia de antes).</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 31 · figura 2.4 «Teoría del fuego»</span></div>
+</section>
+
+<section class="p dema" id="picafort-2">
+  <p class="cinta">Esto ya es de viernes 6</p>
+  <p class="kicker">6 · Libro, pág. 31 · la solución, 2 de 2</p>
+  <h2>Los tres lados, en Can Picafort</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 31 · figura 2.4 · pág. 30 · letra d) · pág. 26 · tabla 2.1 · pág. 32 · figura 2.5</span></div>
+  <div class="pas"><div class="tres"><div><b>Combustible</b><span>lo que había en la tienda (la noticia no dice qué)</span></div><div><b>Comburente</b><span>el oxígeno del aire</span></div><div><b>Calor</b><span>el enchufe del aire acondicionado</span></div></div></div>
+<div class="pas"><div class="idea"><b>Quita un lado y el fuego se apaga</b><span>de ahí salen los métodos de extinción: lo vemos ahora</span></div></div>
+<div class="pas"><p class="nota">Y en la noticia, más del libro:</p><div class="tres"><div><b>Incendio</b><span>el riesgo, tabla 2.1 (pág. 26)</span></div><div><b>Contacto eléctrico</b><span>el bombero de la descarga</span></div><div><b>Convección</b><span>el calor sube con el humo; la noticia no dice cómo subió</span></div></div></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>El calor:</b> el enchufe daría la energía que enciende el fuego. La noticia no dice cómo (si se calentó o hizo chispa), y de la causa solo dice que «se cree». Los tres lados, con este caso:
 <div class="tcalc-w"><table class="tcalc"><tr><th>Lado</th><th>En Can Picafort</th></tr>
 <tr><td><b>Combustible</b> (lo que arde)</td><td>lo que había en la tienda (la noticia no dice qué)</td></tr>
 <tr><td><b>Comburente</b></td><td>el oxígeno del aire</td></tr>
 <tr class="marca"><td><b>Calor</b> (energía de activación)</td><td>el enchufe del aire acondicionado</td></tr></table></div>
-Quita uno de los tres y el fuego se apaga: de ahí salen los métodos de extinción (lo vemos ahora). Y fíjate: un incendio que empieza en un enchufe, el libro lo cuenta dentro del riesgo eléctrico (pág. 30, letra d: «incendios o explosiones originados por la electricidad»); en la tabla 2.1 (pág. 26) el riesgo se llama <b>incendio</b>. Y el bombero que recibe una descarga: eso es <b>contacto eléctrico</b>. El fuego subió hacia los pisos, y la noticia no explica cómo; una de las formas de propagación del libro es justo esa, el calor que sube con el humo y los gases calientes: la <b>convección</b> (figura 2.5, pág. 32).<span class="ref libro">Libro · pág. 31 · figura 2.4 «Teoría del fuego» · pág. 30 · apartado 2.1.3, letra d) · pág. 26 · tabla 2.1, filas «Incendio» y «Contacto eléctrico» · pág. 32 · figura 2.5 «Formas de propagación»</span> <span class="fuente">Fuente: Majorca Daily Bulletin, 25-08-2026 (la noticia de arriba).</span></div></div>
-
-  <div class="refs despres"><span class="ref libro">Libro · pág. 31 · apartado 2.1.4 «Incendio» y figura 2.4 «Teoría del fuego»</span></div>
+Quita uno de los tres y el fuego se apaga: de ahí salen los métodos de extinción (lo vemos ahora). Y fíjate: un incendio que empieza en un enchufe, el libro lo cuenta dentro del riesgo eléctrico (pág. 30, letra d: «incendios o explosiones originados por la electricidad»); en la tabla 2.1 (pág. 26) el riesgo se llama <b>incendio</b>. Y el bombero que recibe una descarga: eso es <b>contacto eléctrico</b>. El fuego subió hacia los pisos, y la noticia no explica cómo; una de las formas de propagación del libro es justo esa, el calor que sube con el humo y los gases calientes: la <b>convección</b> (figura 2.5, pág. 32).<span class="ref libro">Libro · pág. 31 · figura 2.4 «Teoría del fuego» · pág. 30 · apartado 2.1.3, letra d) · pág. 26 · tabla 2.1, filas «Incendio» y «Contacto eléctrico» · pág. 32 · figura 2.5 «Formas de propagación»</span></div></details>
 </section>
 
-<section class="p" id="apagar">
+<section class="p dema" id="apagar">
+  <p class="cinta">Esto ya es de viernes 6</p>
   <p class="kicker">6 · Libro, pág. 32 · figura 2.5 «Métodos de extinción»</p>
   <h2>¿Qué lado le quitas?</h2>
-  <div class="voto" data-ok="b"><p class="q">En una oficina empieza a arder el papel de una papelera metálica. Una compañera la tapa con una bandeja de metal y el fuego se apaga. ¿Qué lado del triángulo le ha quitado? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">El combustible: el papel ya no está</button><button data-v="b">El comburente: el oxígeno del aire</button><button data-v="c">El calor: la bandeja lo enfría</button></div><div class="porque"><b>El comburente.</b> El papel sigue ahí, pero tapada ya no le llega aire: sin oxígeno, el fuego se ahoga. Es la <b>sofocación</b>. Cada cosa que le quitas (uno de los tres lados, o la reacción en cadena del centro, que es lo que mantiene vivo el fuego una vez empezado) es un método de extinción:
+  <div class="voto" data-ok="b"><p class="q">En una oficina empieza a arder el papel de una papelera metálica. Una compañera la tapa con una bandeja de metal y el fuego se apaga. ¿Qué lado del triángulo le ha quitado? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">El combustible: el papel ya no está</button><button data-v="b">El comburente: el oxígeno del aire</button><button data-v="c">El calor: la bandeja lo enfría</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · El comburente</span></p>
+<div class="idea"><b>Sofocación</b><span>tapada, ya no le llega aire: sin oxígeno, el fuego se ahoga</span></div>
+<span class="ref libro">Libro · pág. 32 · figura 2.5</span></div></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 32 · figura 2.5, «Métodos de extinción»</span></div>
+</section>
+
+<section class="p dema" id="apagar-2">
+  <p class="cinta">Esto ya es de viernes 6</p>
+  <p class="kicker">6 · Libro, pág. 32 · la solución, 2 de 2</p>
+  <h2>Cuatro maneras de apagar un fuego</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 32 · figura 2.5 «Métodos de extinción»</span></div>
+  <div class="pas"><div class="cuadro4"><div><h4>Quitas el calor</h4><p>Enfriamiento</p><small>agua con la manguera</small></div><div class="si"><h4>Quitas el oxígeno</h4><p>Sofocación</p><small>tapar el bidón</small></div><div><h4>Quitas el combustible</h4><p>Eliminación del combustible</p><small>cerrar la llave</small></div><div><h4>Cortas la reacción</h4><p>Eliminación de la reacción</p><small>el extintor</small></div></div></div>
+<div class="pas"><p class="nota">La reacción en cadena, en el centro del triángulo, es lo que mantiene vivo el fuego una vez empezado.</p></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>El comburente.</b> El papel sigue ahí, pero tapada ya no le llega aire: sin oxígeno, el fuego se ahoga. Es la <b>sofocación</b>. Cada cosa que le quitas (uno de los tres lados, o la reacción en cadena del centro, que es lo que mantiene vivo el fuego una vez empezado) es un método de extinción:
 <div class="tcalc-w"><table class="tcalc"><tr><th>Lado que quitas</th><th>Método (figura 2.5)</th><th>Lo que se ve en la figura</th></tr>
 <tr><td>Calor</td><td><b>Enfriamiento</b></td><td>agua con la manguera</td></tr>
 <tr class="marca"><td>Comburente (oxígeno)</td><td><b>Sofocación</b></td><td>tapar el bidón</td></tr>
 <tr><td>Combustible</td><td><b>Eliminación del combustible</b></td><td>cerrar la llave que lo alimenta</td></tr>
 <tr><td>Reacción en cadena</td><td><b>Eliminación de la reacción</b></td><td>el extintor</td></tr></table></div>
-<span class="ref libro">Libro · pág. 32 · figura 2.5 «Métodos de extinción» (los cuatro dibujos) · pág. 31 · figura 2.4 «Teoría del fuego»</span></div></div>
-
-  <div class="refs despres"><span class="ref libro">Libro · pág. 32 · figura 2.5, «Métodos de extinción»</span></div>
+<span class="ref libro">Libro · pág. 32 · figura 2.5 «Métodos de extinción» (los cuatro dibujos) · pág. 31 · figura 2.4 «Teoría del fuego»</span></div></details>
 </section>
 
-<section class="p" id="freidora">
+<section class="p dema" id="freidora">
+  <p class="cinta">Esto ya es de viernes 6</p>
   <p class="kicker">6 · Libro, pág. 53 · actividad final 2.8 · con la figura 2.4 de la pág. 31</p>
   <h2>La freidora y el agua</h2>
   <div class="caso"><p>En una cocina industrial, el aceite de una freidora se incendia. Un empleado intenta apagarlo con agua y las llamas se extienden.</p></div>
-<div class="voto" data-ok="c"><p class="q">Con la figura 2.4 (pág. 31): ¿de qué clase es ese fuego y cómo había que apagarlo?</p><div class="opc"><button data-v="a">Clase B, de líquidos: tapando la freidora, nunca con agua</button><button data-v="b">Clase F, de aceites de cocina: con agua, pero poca cada vez</button><button data-v="c">Clase F, de aceites de cocina: tapando la freidora, nunca con agua</button></div><div class="porque"><b>Clase F, y sin agua.</b> Así se resuelve:
+<div class="voto" data-ok="c"><p class="q">Con la figura 2.4 (pág. 31): ¿de qué clase es ese fuego y cómo había que apagarlo?</p><div class="opc"><button data-v="a">Clase B, de líquidos: tapando la freidora, nunca con agua</button><button data-v="b">Clase F, de aceites de cocina: con agua, pero poca cada vez</button><button data-v="c">Clase F, de aceites de cocina: tapando la freidora, nunca con agua</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Clase F: tapando, nunca con agua</span></p>
+<p class="nop"><i>✗</i><span>B: el aceite es líquido, pero el de cocina tiene clase propia</span></p>
+<p class="nop"><i>✗</i><span>Agua, ni mucha ni poca: propaga el fuego</span></p>
+<span class="ley">RD 513/2017 · anexo I</span> <span class="ref libro">Libro · pág. 31 · figura 2.4, fila F</span></div> <span class="fuente">Fuente: Libro, actividad final 2.8 (pág. 53), adaptada.</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 53 · actividad final 2.8</span><span class="ref libro">Libro · pág. 31 · figura 2.4 «Clases de fuego»</span></div>
+</section>
+
+<section class="p dema" id="freidora-2">
+  <p class="cinta">Esto ya es de viernes 6</p>
+  <p class="kicker">6 · Libro, pág. 53 · actividad final 2.8 · la solución, 2 de 2</p>
+  <h2>Las clases de fuego</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 31 · figura 2.4 «Clases de fuego» · pág. 32 · figura 2.5</span></div>
+  <div class="pas"><div class="fil"><span>¿Qué arde? Aceite de cocinar</span><i>→</i><span>Figura 2.4: clase F</span><i>→</i><span>Sofocación: tapar o extintor de clase F</span></div><p class="nota">Y desconectar la freidora, si se puede sin riesgo.</p></div>
+<div class="pas"><div class="cuadro4" style="grid-template-columns:repeat(6,1fr)"><div><h4>A</h4><p>sólidos</p><small>madera, papel</small></div><div><h4>B</h4><p>líquidos</p><small>gasolina, pintura</small></div><div><h4>C</h4><p>gases</p><small>butano</small></div><div><h4>D</h4><p>metales</p><small>sodio, magnesio</small></div><div class="si"><h4>F</h4><p>cocina</p><small>grasas y aceites</small></div><div class="alt"><h4>L</h4><p>baterías</p><small>de iones de litio</small></div></div></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Clase F, y sin agua.</b> Así se resuelve:
 <ol class="pasos"><li><b>¿Qué arde?</b> Aceite de cocinar, en un aparato de cocina.</li><li><b>Busca la clase</b> en la figura 2.4: la F, «fuegos derivados de ingredientes de cocina: grasas y aceites de cocina». El aceite es un líquido, pero los de cocina tienen su propia fila: no es la B.</li><li><b>¿Por qué no agua?</b> Lo dice el propio caso: al echarla, las llamas se extienden. El solucionario del libro lo confirma: sobre el aceite ardiendo, el agua propaga el fuego. Ni mucha ni poca.</li><li><b>Cómo se apaga:</b> quitándole el oxígeno, la <b>sofocación</b> de la papelera: tapar el recipiente, o un extintor para clase F. Y desconectar la freidora si se puede sin riesgo.</li></ol>
 <div class="tcalc-w"><table class="tcalc"><tr><th>Clase</th><th>Qué arde (ejemplos de la figura 2.4)</th></tr>
 <tr><td><b>A</b></td><td>sólidos: madera, papel, cartón, tela, plástico</td></tr>
@@ -441,19 +639,31 @@ Quita uno de los tres y el fuego se apaga: de ahí salen los métodos de extinci
 <tr><td><b>D</b></td><td>metales: sodio, potasio, magnesio, aluminio, titanio</td></tr>
 <tr class="marca"><td><b>F</b></td><td>grasas y aceites de cocina</td></tr>
 <tr><td><b>L</b></td><td>baterías de iones de litio</td></tr></table></div>
-<span class="ley">RD 513/2017 · anexo I, sección 1.ª, 4.5.e</span> <span class="ref libro">Libro · pág. 31 · figura 2.4 «Clases de fuego», fila F · pág. 32 · figura 2.5 «Métodos de extinción» (sofocación) · pág. 53 · actividad final 2.8</span> <span class="fuente">Fuente: Libro, actividad final 2.8 (pág. 53), adaptada.</span></div></div>
-
-  <div class="refs despres"><span class="ref libro">Libro · pág. 53 · actividad final 2.8</span><span class="ref libro">Libro · pág. 31 · figura 2.4 «Clases de fuego»</span></div>
+<span class="ley">RD 513/2017 · anexo I, sección 1.ª, 4.5.e</span> <span class="ref libro">Libro · pág. 31 · figura 2.4 «Clases de fuego», fila F · pág. 32 · figura 2.5 «Métodos de extinción» (sofocación) · pág. 53 · actividad final 2.8</span></div></details>
 </section>
 
-<section class="p" id="extintor">
+<section class="p dema" id="extintor">
+  <p class="cinta">Esto ya es de viernes 6</p>
   <p class="kicker">6 · Libro, pág. 32 · figura 2.5 «Utilización de extintor»</p>
   <h2>El extintor, en cuatro pasos</h2>
-  <div class="voto" data-ok="b"><p class="q">Ya has descolgado el extintor y le has quitado la anilla de seguridad. Antes de presionar la palanca, ¿hacia dónde apuntas?</p><div class="opc"><button data-v="a">A la parte alta de las llamas, que es la más grande</button><button data-v="b">A la base de la llama</button><button data-v="c">Al humo, para poder ver</button></div><div class="porque"><b>A la base de la llama:</b> abajo está lo que arde, el combustible. Los cuatro pasos de la figura 2.5:
-<ol class="pasos"><li><b>Descolgar</b> el extintor.</li><li><b>Quitar la anilla</b> de seguridad.</li><li><b>Presionar la palanca.</b></li><li><b>Dirigir la descarga a la base de la llama.</b></li></ol>
-Y no solo hay extintores portátiles: también carros, mangueras fijas en la pared (las BIE, bocas de incendio equipadas) y sistemas fijos, como los rociadores automáticos (figura 2.5, «Medios de extinción»). En una empresa, quien actúa contra un incendio no improvisa: la empresa designa a esas personas y les da formación y material (LPRL, art. 20).<span class="ley">LPRL · art. 20</span><span class="ref libro">Libro · pág. 32 · figura 2.5 «Utilización de extintor» (pasos 1 a 4) y «Medios de extinción»</span></div></div>
+  <div class="voto" data-ok="b"><p class="q">Ya has descolgado el extintor y le has quitado la anilla de seguridad. Antes de presionar la palanca, ¿hacia dónde apuntas?</p><div class="opc"><button data-v="a">A la parte alta de las llamas, que es la más grande</button><button data-v="b">A la base de la llama</button><button data-v="c">Al humo, para poder ver</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · A la base de la llama</span></p>
+<div class="idea"><b>¿Por qué abajo?</b><span>ahí está lo que arde: el combustible</span></div>
+<span class="ref libro">Libro · pág. 32 · figura 2.5</span></div></div></div>
 
   <div class="refs despres"><span class="ref libro">Libro · pág. 32 · figura 2.5, «Utilización de extintor»</span></div>
+</section>
+
+<section class="p dema" id="extintor-2">
+  <p class="cinta">Esto ya es de viernes 6</p>
+  <p class="kicker">6 · Libro, pág. 32 · la solución, 2 de 2</p>
+  <h2>El extintor, en cuatro pasos</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 32 · figura 2.5 «Utilización de extintor» y «Medios de extinción»</span></div>
+  <div class="pas"><div class="fil"><span>① Descolgar</span><i>→</i><span>② Quitar la anilla</span><i>→</i><span>③ Presionar la palanca</span><i>→</i><span>④ A la base de la llama</span></div></div>
+<div class="pas"><div class="tres"><div><b>Extintores</b><span>portátiles, y también carros</span></div><div><b>BIE</b><span>bocas de incendio equipadas: mangueras fijas en la pared</span></div><div><b>Rociadores</b><span>sistemas fijos y automáticos</span></div></div></div>
+<div class="pas"><div class="idea"><b>En una empresa, nadie improvisa</b><span>la empresa designa a quien actúa contra un incendio y le da formación y material (LPRL, art. 20)</span></div></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>A la base de la llama:</b> abajo está lo que arde, el combustible. Los cuatro pasos de la figura 2.5:
+<ol class="pasos"><li><b>Descolgar</b> el extintor.</li><li><b>Quitar la anilla</b> de seguridad.</li><li><b>Presionar la palanca.</b></li><li><b>Dirigir la descarga a la base de la llama.</b></li></ol>
+Y no solo hay extintores portátiles: también carros, mangueras fijas en la pared (las BIE, bocas de incendio equipadas) y sistemas fijos, como los rociadores automáticos (figura 2.5, «Medios de extinción»). En una empresa, quien actúa contra un incendio no improvisa: la empresa designa a esas personas y les da formación y material (LPRL, art. 20).<span class="ley">LPRL · art. 20</span><span class="ref libro">Libro · pág. 32 · figura 2.5 «Utilización de extintor» (pasos 1 a 4) y «Medios de extinción»</span></div></details>
 </section>
 
 <section class="p" id="cierre" data-titol="Cierre">
@@ -468,7 +678,7 @@ Y no solo hay extintores portátiles: también carros, mangueras fijas en la par
 <div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
 </main>
 
-<div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
+<div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="passos"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
 
 <script>
 (function(){
@@ -486,8 +696,9 @@ Y no solo hay extintores portátiles: también carros, mangueras fijas en la par
   var nav = document.getElementById("index");
   pant.forEach(function(s){
     var t = s.getAttribute("data-titol");
-    if (!t || !/^\d|^Inicio|^Cierre|^Para casa/.test(t)) return;
+    if (!t || !/^\d|^Inicio|^Cierre|^Para casa|^✂/.test(t)) return;
     var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    if (s.classList.contains("dema") || s.classList.contains("tallsessio")) a.classList.add("dema");
     a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
     nav.appendChild(a);
   });
@@ -508,6 +719,7 @@ Y no solo hay extintores portátiles: también carros, mangueras fijas en la par
     var ok = v.getAttribute("data-ok");
     v.classList.add("fet");
     b.classList.add("triat");
+    var p0 = v.querySelector(".pas"); if (p0) destapa(p0);
     var sec = v.closest("section");   // «on ho estudies» surt quan tots els vots de la pantalla estan fets
     if (sec && !sec.querySelector(".voto:not(.fet)")) sec.classList.add("votat");
     if (ok) {
@@ -528,7 +740,33 @@ Y no solo hay extintores portátiles: también carros, mangueras fijas en la par
       v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
     });
     document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    document.querySelectorAll(".pas").forEach(function(p){ p.classList.remove("vist", "ara"); });
     encerts = 0; vots = 0; pinta();
+    if (document.body.classList.contains("proj")) mostra(i);
+  }
+
+  /* passos (JM, 28-10): projectant, cada → destapa el pas següent de la pantalla i, quan no en queden, passa a la
+     pantalla següent; ← tapa l'últim. Els punts (●●○) diuen quants en queden. Llegint sol, es veuen tots. */
+  var passosEl = document.getElementById("passos");
+  function disponibles(s){
+    return Array.prototype.filter.call(s.querySelectorAll(".pas"), function(p){ var v = p.closest(".voto"); return !v || v.classList.contains("fet"); });
+  }
+  function marca(s){
+    var tots = s.querySelectorAll(".pas"), vists = s.querySelectorAll(".pas.vist");
+    Array.prototype.forEach.call(tots, function(p){ p.classList.remove("ara"); });
+    if (vists.length) vists[vists.length - 1].classList.add("ara");
+    passosEl.textContent = tots.length > 1 ? Array.prototype.map.call(tots, function(p){ return p.classList.contains("vist") ? "●" : "○"; }).join("") : "";
+  }
+  function destapa(p){ p.classList.add("vist"); var s = p.closest("section"); if (s && s === pant[i]) marca(s); }
+  function endavant(){
+    var q = disponibles(pant[i]).filter(function(p){ return !p.classList.contains("vist"); });
+    if (!q.length) { mostra(i + 1); return; }
+    destapa(q[0]); encaixa(); q[0].scrollIntoView({ block: "nearest" });
+  }
+  function enrere(){
+    var v = disponibles(pant[i]).filter(function(p){ return p.classList.contains("vist"); });
+    if (v.length < 2) { mostra(i - 1); return; }   // el primer pas no es tapa: ← torna a la pantalla anterior
+    v[v.length - 1].classList.remove("vist"); marca(pant[i]); encaixa();
   }
 
   /* solucions i respostes que es revelen (botó o tecla S) */
@@ -586,6 +824,9 @@ Y no solo hay extintores portátiles: también carros, mangueras fijas en la par
     i = Math.max(0, Math.min(pant.length - 1, n));
     pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
     pant[i].scrollTop = 0;
+    var d = disponibles(pant[i]);
+    if (d.length && !pant[i].querySelector(".pas.vist")) d[0].classList.add("vist");
+    marca(pant[i]);
     alcada(); encaixa();
     compte(pant[i].classList.contains("flash") ? pant[i] : null);
     pos.textContent = (i + 1) + " / " + pant.length;
@@ -612,8 +853,8 @@ Y no solo hay extintores portátiles: también carros, mangueras fijas en la par
     pant[i].scrollIntoView();
   }
   document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
-  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
-  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("ant").addEventListener("click", enrere);
+  document.getElementById("seg").addEventListener("click", endavant);
   document.getElementById("surt").addEventListener("click", surt);
   document.addEventListener("keydown", function(ev){
     var t = ev.target.tagName;
@@ -621,8 +862,8 @@ Y no solo hay extintores portátiles: también carros, mangueras fijas en la par
     var proj = document.body.classList.contains("proj");
     if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
     if (!proj) return;
-    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
-    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); endavant(); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); enrere(); }
     else if (ev.key === "Escape") surt();
     else if (ev.key === "t" || ev.key === "T") { if (pant[i].classList.contains("flash")) compte(pant[i]); else rellotge(+pant[i].getAttribute("data-min") || 0); }
     else if (ev.key === "s" || ev.key === "S") {
