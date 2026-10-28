@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>El reto de la gestoría y el riesgo eléctrico · Sesión 2</title>
+<!-- Generat per sistema/tools/sessio_aula.py des de fitxa-sesion-02.toml. No l'editis a mà: edita la fitxa. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.voto~.refs,.grup~.refs{margin:12px 0 0}
+.refs.despres{display:none}
+.votat .refs.despres{display:flex}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:.9em;border:1.5px solid currentColor;text-decoration:none;white-space:normal;overflow-wrap:anywhere;max-width:100%;display:inline-block}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px;background:var(--blauclar);border:2px solid var(--blau)}
+.dos>div+div{background:var(--verdclar);border-color:var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+ol.dosc{columns:2;column-gap:28px;margin:6px 0 10px}ol.dosc li{break-inside:avoid}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+/* soluciones visuales (JM, 16-10): respuesta grande, pocas palabras y la página donde está el apoyo; todo en em */
+.resp{display:flex;align-items:center;gap:.5em;font-size:1.3em;font-weight:800;line-height:1.15;margin:0 0 .35em}
+.resp i{flex:none;font-style:normal;width:1.45em;height:1.45em;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.8em;color:#fff;background:var(--verd)}
+.resp.no i{background:var(--vermell)}
+.ley{display:inline-block;font-size:.8em;font-weight:700;border:1.5px solid var(--tinta);border-radius:99px;padding:.05em .65em;margin:0 .3em .3em 0;background:#fff;white-space:nowrap}
+.flujo{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.25em 0 .5em}
+.flujo span{padding:.18em .7em;border-radius:.5em;background:#fff;border:1.5px solid var(--verd)}
+.flujo i{font-style:normal;font-weight:800;color:var(--suau)}
+.cuadro4{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em;margin:.35em 0 .5em}
+.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff}
+.cuadro4 h4{margin:0 0 .2em;font-size:.72em;text-transform:uppercase;letter-spacing:.05em;color:var(--suau)}
+.cuadro4 p{margin:0 0 .15em;font-weight:700}
+.cuadro4 small{display:block;font-weight:400;color:var(--suau)}
+.cuadro4 .si{border-color:var(--verd);background:#f3faf6}
+.cuadro4 .alt{border-style:dashed;opacity:.9}
+.cuadro4 .no{border-color:var(--vermell);background:#fbeeec}
+.cuadro4.cinc{grid-template-columns:repeat(5,1fr)}
+@media (max-width:700px){.cuadro4.cinc{grid-template-columns:1fr 1fr}}
+.nueve{display:grid;grid-template-columns:repeat(9,1fr);gap:.3em;margin:.35em 0 .5em}
+.nueve>div{border:1.5px solid #bdb39d;border-radius:.45em;padding:.2em .15em;text-align:center;font-size:.72em;line-height:1.15;background:#fff;color:var(--suau)}
+.nueve b{display:block;font-size:1.6em;color:var(--tinta)}
+.nueve .no{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.nueve .no b{color:#fff}
+.rama{display:grid;grid-template-columns:1fr 1fr;gap:.5em;margin:.35em 0 .5em}
+.rama>div{border-radius:.5em;padding:.35em .6em;border:2px solid var(--verd);background:#f3faf6}
+.rama>div+div{border-color:var(--mostassa);background:var(--mostassaclar)}
+.rama small{display:block;font-weight:400;color:var(--suau)}
+.donde{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.5em 0 0;padding-top:.4em;border-top:1.5px dashed rgba(31,122,77,.4)}
+.donde .dl,.porque .dl{font-size:.75em;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--suau)}
+.ref.otra{color:var(--mostassa);background:var(--mostassaclar)}
+.mapa{margin:.2em 0}
+.mapa .cap{font-size:.72em;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--suau);margin:.45em 0 .2em}
+.mapa .f{display:grid;gap:.45em}
+.mapa .f4{grid-template-columns:repeat(4,1fr)}
+.mapa .f3{grid-template-columns:repeat(3,1fr)}
+.mapa .leyenda{display:flex;flex-wrap:wrap;gap:.2em .9em;font-size:.8em;font-weight:700;margin:.1em 0 .2em}
+.org{border-radius:.6em;padding:.4em .55em;color:#fff;line-height:1.2}
+.org b{display:block;font-size:1.1em;letter-spacing:.04em}
+.org .sg{display:block;font-weight:800;font-size:1.05em;margin:.05em 0}
+.org small{display:block;font-size:.72em}
+.org.manda{background:#b3321f}
+.org.sabe{background:#1f5596}
+.org.apoya{background:#1f7a4d}
+@media (max-width:700px){.cuadro4,.mapa .f4,.mapa .f3{grid-template-columns:1fr 1fr}.nueve{grid-template-columns:repeat(3,1fr)}.rama{grid-template-columns:1fr}}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+.cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
+.compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
+.compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
+.compte .barra{flex:1;height:14px;border-radius:99px;background:#e6dccb;overflow:hidden}
+.compte .barra i{display:block;height:100%;width:100%;background:var(--vermell);transform-origin:left}
+.compte.zero .xifra{color:var(--verd)}
+body.proj .compte{display:flex}
+body.proj .cas-flash{font-size:1.55em}
+.rellotge{display:none;font-weight:800;font-variant-numeric:tabular-nums}
+body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta);border-radius:8px;padding:6px 12px;font-size:20px}
+.rellotge.fi{background:var(--vermell)!important;color:#fff!important}
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  ol.dosc{columns:1}
+  .dalt nav,.dalt .nom small{display:none}
+  .opc button{flex:1 1 100%;text-align:left}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  .refs.despres{display:flex!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+</style>
+</head>
+<body>
+
+<header class="dalt">
+  <span class="nom">IPO I · Unidad 2 · Sesión 2<small>El reto de la gestoría y el riesgo eléctrico</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
+  <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
+</header>
+
+<main>
+
+<section class="p" id="inicio" data-titol="Inicio">
+  <p class="kicker">Sesión 2 · una hora</p>
+  <h2>El reto de la gestoría y el riesgo eléctrico</h2>
+  <p style="font-size:1.15em">Terminamos lo que quedó del viernes 23 (el reto de la gestoría) y seguimos con el libro: el riesgo eléctrico, con un accidente real y tres descargas para resolver. Hoy, <b>dos ratos en parejas</b>.</p>
+  <div class="cadena"><span class="fet">Los nombres de los riesgos (tabla 2.1) y el despacho de Roberto y Julia (tabla 2.2)</span><i>→</i><span class="avui">El reto de la gestoría, corregido</span><i>→</i><span class="avui">Riesgo eléctrico: contacto directo e indirecto (págs. 30-31)</span><i>→</i><span>Equipos de trabajo e incendio (págs. 29 y 31-32): si da tiempo, hoy; si no, el viernes 6</span></div>
+  <div class="plan"><div><b>Hoy</b><ol start="1"><li>Dos preguntas para recordar la tabla 2.2 del viernes 23 <small>· 4 min</small></li><li>En parejas, el reto que quedó del viernes 23: ¿cuántas personas caben en una gestoría? <small>· 12 min</small></li><li>Un accidente real y los dos contactos eléctricos (pág. 30); qué cambia con la piel mojada <small>· 8 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>En parejas, con la tabla 2.7 y la figura 2.3: tres descargas, qué contacto es y qué se tenía que hacer <small>· 18 min</small></li><li>Si sobra tiempo: qué es un equipo de trabajo y cuándo puede ponerse en marcha (pág. 29), con un accidente real de Mallorca <small>· ➕ si da tiempo</small></li><li>Si sobra tiempo: por qué empieza un fuego, cómo se apaga y de qué clase es (págs. 31-32), con un incendio real de Mallorca <small>· ➕ si da tiempo</small></li></ol><p style="margin:8px 0 0"><b>Para salir:</b> 2 preguntas en voz alta.</p></div></div>
+  <h3 class="noproj">Cómo usar esta página</h3>
+  <p class="noproj">En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
+  <div class="refs"><span class="ref libro">Libro · págs. 27-28, 30-31 y 53 (si da tiempo, 29 y 32)</span></div>
+    <p class="nota noproj">Azul: el libro. Amarillo: lo que escribes en esta página.</p>
+  <div class="clau"><b>Hoy, el libro por las <span style="white-space:nowrap">págs. 27, 28, 30, 31 y 53</span></b> (y, si da tiempo, las <span style="white-space:nowrap">29 y 32</span>), y dos ratos de trabajo en parejas. Si hoy no lo tienes, comparte el de tu pareja; esta página te sirve para repasar, en <b>joanmiquel89.github.io/aula</b>, sin contraseña.</div>
+</section>
+
+<section class="p" id="entrar" data-titol="1 · Para entrar">
+  <p class="kicker">1 · Lo del viernes 23 · para empezar</p>
+  <h2>Dos preguntas, con la tabla 2.2</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 27 · tabla 2.2, filas «Puertas» y «Vías de circulación»</span></div>
+  <style>
+/* 23-10 (JM): soluciones con el procedimiento, paso a paso y visuales */
+.pasos{list-style:none;counter-reset:p;margin:.35em 0 .5em;padding:0}
+.pasos>li{counter-increment:p;position:relative;padding:.12em 0 .32em 2em;line-height:1.35}
+.pasos>li::before{content:counter(p);position:absolute;left:0;top:.12em;width:1.45em;height:1.45em;border-radius:50%;background:var(--verd);color:#fff;font-weight:800;font-size:.85em;display:flex;align-items:center;justify-content:center}
+.tcalc-w{overflow-x:auto;margin:.3em 0 .5em}
+.tcalc{width:100%;border-collapse:collapse;font-size:.86em;background:#fff}
+.tcalc th{background:#efe9dc;text-align:left;font-size:.78em;text-transform:uppercase;letter-spacing:.04em}
+.tcalc th,.tcalc td{border:1px solid #bdb39d;padding:.25em .45em;vertical-align:top}
+.tcalc td.ok{background:#f3faf6;color:#1f7a4d;font-weight:800}
+.tcalc td.ko{background:#fbeeec;color:#b3261e;font-weight:800}
+.tcalc tr.marca td{font-weight:700}
+.formula{display:inline-block;background:#fff;border:1.5px dashed #bdb39d;border-radius:.4em;padding:.05em .5em;margin:.1em 0;font-weight:700}
+</style>
+<div class="preg"><span class="n">1</span> La puerta que da a la calle en una tienda tiene 70 cm de ancho. ¿Llega al mínimo de la tabla 2.2? <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>No: le faltan 10 cm</span></div><span class="ley">RD 486/1997 · anexo I.A.5.3.º</span>
+<ol class="pasos"><li><b>Busca la fila:</b> tabla 2.2 (pág. 27), «Puertas» → «Anchura mínima».</li><li><b>Lee el mínimo:</b> 80 cm, para las puertas exteriores. Esta da a la calle: es exterior.</li><li><b>Compara:</b> <span class="formula">70 cm &lt; 80 cm</span> → no cumple.</li></ol>
+<div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 27 · apartado 2.1.1 · tabla 2.2, fila «Puertas · Anchura mínima»</span></div></div></div>
+<div class="preg"><span class="n">2</span> En una nave industrial, los pasillos miden 1 m y por ellos pasan a la vez carretillas y personas. ¿Basta con ese metro? <span class="encls">(Adaptada del libro, pág. 53, actividad final 2.2)</span> <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>No basta</span></div><span class="ley">RD 486/1997 · anexo I.A.5.4.º</span>
+<ol class="pasos"><li><b>Busca la fila:</b> tabla 2.2, «Vías de circulación». Hay tres: pasillo principal, secundario y <b>con vehículos</b>. Aquí pasan carretillas: es la tercera.</li><li><b>Lee el mínimo:</b> anchura máxima de la carga <b>+ 1 m</b>. El metro solo es para las personas; falta el sitio de la carretilla.</li><li><b>Lo que pide la ley:</b> que vehículos y personas puedan pasar a la vez con una separación de seguridad suficiente. Con 1 m, imposible. Mejor aún: separar el paso de carretillas y el de personas.</li></ol>
+<div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 27 · tabla 2.2, fila «Vías de circulación · Con vehículos»</span></div></div></div>
+</section>
+
+<section class="p" id="reto" data-titol="2 · Reto de la gestoría">
+  <p class="kicker">2 · En parejas · el reto que quedó del viernes 23</p>
+  <h2>¿Cuántas personas caben en esta gestoría?</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 27 · tabla 2.2, filas «Espacios de trabajo» (altura, superficie, volumen)</span><span class="ref ficha">El cálculo, en la libreta o en el móvil</span></div>
+  <div class="caso"><p>Una gestoría de Palma va a alquilar un local para su oficina y quiere poner <b>nueve puestos</b>. Antes de firmar, la gerente os pide que lo comprobéis con la tabla 2.2.</p><p class="fuente"><span class="inventat">· ejemplo inventado</span></p></div>
+<svg viewBox="0 0 600 350" style="width:100%;max-height:36vh;display:block;margin:.3em 0" role="img" aria-label="Plano del local de la gestoría: 6 por 5 metros, con los muebles en gris" font-family="inherit" font-size="15">
+<rect x="70" y="30" width="360" height="300" fill="#fffdf8" stroke="#5d5850" stroke-width="3"/>
+<g fill="#d9d0bf" stroke="#5d5850" stroke-width="1.5">
+<rect x="80" y="40" width="240" height="40"/><rect x="330" y="40" width="90" height="100"/>
+<rect x="95" y="130" width="90" height="50"/><rect x="215" y="130" width="90" height="50"/>
+<rect x="95" y="230" width="90" height="50"/><rect x="215" y="230" width="90" height="50"/><rect x="325" y="190" width="90" height="50"/>
+</g>
+<line x1="370" y1="330" x2="420" y2="330" stroke="#fffdf8" stroke-width="5"/>
+<g fill="#0B5CAD" font-weight="700">
+<text x="250" y="22" text-anchor="middle">6 m</text>
+<text x="40" y="185" text-anchor="middle">5 m</text>
+</g>
+<g fill="#1d1a16" font-size="13">
+<text x="395" y="346" text-anchor="middle">entrada</text>
+<text x="200" y="65" text-anchor="middle">armarios</text>
+<text x="70" y="346" fill="#5d5850" font-size="12">plano orientativo</text>
+</g>
+<g fill="#1d1a16" font-size="16">
+<text x="445" y="80">techo:</text><text x="445" y="100" fill="#0B5CAD" font-weight="700">2,7 m</text>
+<text x="445" y="140">muebles (gris):</text><text x="445" y="160" fill="#0B5CAD" font-weight="700">12 m² de suelo</text><text x="445" y="180" fill="#0B5CAD" font-weight="700">y 9 m³</text>
+</g></svg>
+<div class="clau"><ol>
+<li>¿Cuántas personas pueden trabajar ahí <b>a la vez, como máximo</b>? Mirad las tres medidas de «Espacios de trabajo» de la tabla 2.2 (altura, superficie libre y aire sin ocupar) y escribid el cálculo con las cifras (el plano es orientativo).</li>
+<li>Si el viernes lo empezasteis, seguid donde lo dejasteis. Si acabáis antes, comparad vuestro cálculo con el de la pareja de al lado.</li>
+<li>¿Le caben los nueve puestos? Al final, votamos. Hoy no cuenta.</li>
+</ol></div>
+</section>
+
+<section class="p" id="reto-voto" data-min="9">
+  <p class="kicker">2 · Corrección · el reto de la gestoría</p>
+  <h2>¿Caben los nueve puestos?</h2>
+  <div class="voto" data-ok="d"><p class="q">En el local de la gestoría, ¿cuántas personas pueden trabajar a la vez, como máximo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">15</button><button data-v="b">9</button><button data-v="c">8</button><button data-v="d">7</button></div><div class="porque"><b>Siete: manda el aire.</b> Así se resuelve, medida a medida:
+<ol class="pasos"><li><b>Altura:</b> 2,7 m frente a 2,5 m de una oficina → cumple. No deja fuera a nadie.</li><li><b>Superficie libre</b> = suelo total − muebles: <span class="formula">6 × 5 = 30 m²</span> <span class="formula">30 − 12 = 18 m²</span> A 2 m² por persona: <span class="formula">18 ÷ 2 = 9 personas</span></li><li><b>Aire sin ocupar</b> = volumen total − muebles: <span class="formula">30 m² × 2,7 m = 81 m³</span> <span class="formula">81 − 9 = 72 m³</span> A 10 m³ por persona: <span class="formula">72 ÷ 10 = 7,2 → 7 personas</span> (la octava ya no tendría sus 10 m³: no se redondea hacia arriba).</li><li><b>Manda el número más pequeño:</b> hay que cumplir las dos cosas a la vez. Por el suelo caben 9 y por el aire, 7: manda el aire → <b>7</b>.</li></ol>
+<div class="cuadro4" style="grid-template-columns:repeat(3,1fr)">
+<div class="si"><h4>Altura</h4><p>2,7 m</p><small>oficina: 2,5 m como mínimo · cumple</small></div>
+<div class="alt"><h4>Superficie libre</h4><p>30 − 12 = 18 m²</p><small>2 m² por persona: 9 personas</small></div>
+<div class="si"><h4>Aire sin ocupar · manda</h4><p>30 × 2,7 = 81 m³ − 9 = 72 m³</p><small>10 m³ por persona: 7 personas</small></div>
+</div>
+Con <b>15</b> no has restado los muebles; con <b>8</b>, has contado todo el aire sin restar el que ocupan los muebles; con <b>9</b>, solo has mirado el suelo. Los nueve puestos no caben: siete.<span class="ley">RD 486/1997 · anexo I.A.2.1.º</span> <span class="ref libro">Libro · pág. 27 · tabla 2.2, las tres filas de «Espacios de trabajo» (altura, superficie, volumen)</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 27 · tabla 2.2, filas «Espacios de trabajo»</span></div>
+</section>
+
+<section class="p" id="bendinat" data-titol="3 · Riesgo eléctrico">
+  <p class="kicker">3 · Un accidente real en Mallorca · libro, pág. 30</p>
+  <h2>Una descarga en una obra de Bendinat</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 30 · apartado 2.1.3 «Riesgo eléctrico», letra a)</span></div>
+  <div class="caso"><p><b>Bendinat (Calvià), martes 13-9-2022, por la mañana.</b> Un obrero recibe una descarga eléctrica mientras trabaja en una obra y sufre una parada cardiorrespiratoria (se le paran el corazón y la respiración). Tras más de 50 minutos de reanimación, fallece. Investigan la Guardia Civil y la Inspección de Trabajo.</p><p class="fuente">Fuente: majorcadailybulletin.com/news/local/2022/09/13/105781 (13-09-2022).</p></div>
+<div class="preg"><span class="n">1</span> El libro (pág. 30, letra a) distingue dos contactos eléctricos: directo e indirecto. ¿Qué datos nos faltan para decir cuál fue el de Bendinat? <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Qué tocó: algo que lleva corriente, o algo que no debería llevarla</span></div>
+<div class="tcalc-w"><table class="tcalc"><tr><th>Contacto</th><th>Qué tocas</th></tr>
+<tr><td><b>Directo</b></td><td>Una parte que <b>lleva corriente</b> («elementos en tensión»)</td></tr>
+<tr><td><b>Indirecto</b></td><td>Una parte metálica que <b>no debería llevarla</b> y la lleva por accidente («masas puestas accidentalmente en tensión»)</td></tr></table></div>
+<p class="nota">Cada contacto tiene sus medidas: están en la tabla 2.7, y las vais a usar ahora en parejas.</p>
+<p class="nota">Sin saber qué tocó, no se puede decir: eso es lo que investigan. Hoy, solo lo que cuenta la noticia.</p>
+<div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 30 · apartado 2.1.3 «Riesgo eléctrico», letra a)</span></div></div></div>
+</section>
+
+<section class="p" id="agua">
+  <p class="kicker">3 · Libro, pág. 30 · tabla 2.6 y figura 2.2</p>
+  <h2>Misma tensión, ¿misma corriente?</h2>
+  <div class="voto" data-ok="b"><p class="q">Mismo aparato, mismo enchufe, misma tensión. ¿Cuándo pasa más corriente por el cuerpo si hay un contacto?</p><div class="opc"><button data-v="a">Con las manos secas</button><button data-v="b">Con las manos mojadas</button><button data-v="c">Igual: la tensión es la misma</button></div><div class="porque"><b>Con las manos mojadas.</b> Así se razona:
+<ol class="pasos"><li><b>La ley de Ohm</b> (figura 2.2, pág. 30, en dibujo; escrita, en el caso resuelto 2.2 de la pág. 31): <span class="formula">V = I × R</span>. Despejando: <span class="formula">I = V ÷ R</span></li><li><b>La tensión (V)</b> la pone el enchufe: no cambia.</li><li><b>La resistencia (R)</b> del cuerpo depende de la humedad de la piel («Sabías que…», pág. 30): mojada, <b>menos resistencia</b>.</li><li>Misma V dividida entre una R más pequeña → <b>más intensidad (I)</b>. Y la intensidad, con el tiempo de contacto, es lo que más influye en el daño (tabla 2.6).</li></ol>
+Por eso, donde hay agua, la norma pide más cuidado: lo veréis en el caso C.<span class="ref libro">Libro · pág. 30 · tabla 2.6, filas «Intensidad», «Resistencia» y «Tiempo de contacto»; figura 2.2 y «Sabías que…» · pág. 31 · caso práctico resuelto 2.2 (la fórmula escrita)</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 30 · tabla 2.6 y figura 2.2 (ley de Ohm)</span></div>
+</section>
+
+<section class="p" id="descargas" data-titol="4 · Tres descargas">
+  <p class="kicker">4 · En parejas · actividades finales 2.6 y 2.7 del libro y un caso más · unos doce minutos</p>
+  <h2>Tres descargas</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 53 · actividades finales 2.6 y 2.7</span><span class="ref libro">Libro · pág. 30 · tabla 2.7</span><span class="ref libro">Libro · pág. 31 · figura 2.3</span><span class="ref ficha">Apuntadlo en la libreta o en el móvil</span></div>
+  <div class="caso"><p><b>A · Pedro</b> trabaja en una obra. Manipula un cable pelado sin guantes ni herramientas aislantes y recibe una descarga.</p></div>
+<div class="caso"><p><b>B · Alicia</b> trabaja en una oficina. Recibe una descarga al tocar la carcasa metálica de la fotocopiadora, porque falla su conexión a tierra.</p></div>
+<div class="caso"><p><b>C · Un túnel de lavado de coches.</b> El suelo siempre está mojado. Para mirar los bajos de los coches, los empleados usan lámparas de mano. La empresa duda entre un modelo de <b>50 V</b> y otro de <b>24 V</b>.</p><p class="fuente"><span class="inventat">· ejemplo inventado</span></p></div>
+<div class="clau"><ol>
+<li><b>A y B:</b> ¿qué tocó? ¿Contacto <b>directo</b> o <b>indirecto</b> (pág. 30, letra a)? Y dos medidas que lo habrían evitado: las de su fila en la tabla 2.7 (pág. 30).</li>
+<li><b>C:</b> ¿qué lámpara elegís y por qué? (figura 2.3, pág. 31).</li>
+<li>Una línea por caso en la libreta o en el móvil. Al final, votamos los tres. Hoy no cuenta.</li>
+</ol></div>
+</section>
+
+<section class="p" id="pedro-voto">
+  <p class="kicker">4 · Corrección · A · Pedro (actividad final 2.6)</p>
+  <h2>Pedro y el cable</h2>
+  <div class="voto" data-ok="a"><p class="q">Pedro toca un cable pelado. ¿Qué contacto es?</p><div class="opc"><button data-v="a">Directo</button><button data-v="b">Indirecto</button><button data-v="c">No es un contacto eléctrico: es un golpe</button></div><div class="porque"><b>Directo:</b> el cable pelado es una parte que <b>lleva corriente</b> y está sin aislar. Así se resuelve:
+<ol class="pasos"><li><b>¿Qué tocó?</b> El conductor del cable, sin su aislante.</li><li><b>¿Lleva corriente normalmente?</b> Sí: es el cable. → contacto <b>directo</b> (pág. 30, letra a).</li><li><b>Medidas:</b> las tres de la tabla 2.7, fila «Directo» (vale cualquiera), y lo que añade la ley:</li></ol>
+<div class="tcalc-w"><table class="tcalc"><tr><th>Medida</th><th>De dónde sale</th></tr>
+<tr><td><b>Alejar</b> las partes con corriente, o <b>poner obstáculos</b> (un cuadro eléctrico cerrado)</td><td>tabla 2.7, fila «Directo»</td></tr>
+<tr><td><b>Recubrir</b> lo pelado (cables aislados)</td><td>tabla 2.7, fila «Directo»</td></tr>
+<tr><td>Antes de tocar, <b>dejarlo sin tensión</b>: desconectar, impedir que se vuelva a conectar y comprobar que no hay tensión (los tres primeros de cinco pasos)</td><td>RD 614/2001, art. 4.2 y anexo II.A</td></tr>
+<tr><td>Guantes y herramientas aislantes: la última barrera, porque la protección colectiva va antes que la individual</td><td>LPRL, art. 15.1.h</td></tr></table></div>
+<span class="ley">RD 614/2001 · art. 4.2</span> <span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Directo» (recubrimiento de partes activas)</span> <span class="fuente">Fuente: Libro, actividad final 2.6 (pág. 53), adaptada.</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Directo»</span></div>
+</section>
+
+<section class="p" id="alicia-voto">
+  <p class="kicker">4 · Corrección · B · Alicia (actividad final 2.7)</p>
+  <h2>Alicia y la fotocopiadora</h2>
+  <div class="voto" data-ok="b"><p class="q">Alicia toca la carcasa de la fotocopiadora y le da calambre. ¿Qué contacto es?</p><div class="opc"><button data-v="a">Directo</button><button data-v="b">Indirecto</button><button data-v="c">No es un contacto eléctrico: es la electricidad estática</button></div><div class="porque"><b>Indirecto:</b> la carcasa es metálica y <b>no debería llevar corriente</b>; la lleva por un <b>fallo de aislamiento</b>, y la tierra, que tendría que desviarla, falla.
+<ol class="pasos"><li><b>¿Qué tocó?</b> La carcasa: una parte metálica de fuera.</li><li><b>¿Lleva corriente normalmente?</b> No. Si la lleva, es por un fallo → contacto <b>indirecto</b>.</li><li><b>Medidas</b> (tabla 2.7, «Indirecto»): <b>puesta a tierra con interruptores diferenciales</b> (la tierra se lleva la corriente y el diferencial corta) y aparatos de <b>doble aislamiento</b> (dos capas de aislante: aunque falle una, lo que tocas no queda en tensión); además, revisar la instalación. Vale también cualquier otra de su fila.</li><li><b>Y Alicia:</b> si un aparato da calambre, se avisa (LPRL, art. 29.2.4.º) y no se usa hasta que lo revisen (RD 1215/1997, anexo II.1.4).</li></ol>
+<span class="ley">LPRL · art. 29.2.4.º</span> <span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Indirecto»</span> <span class="fuente">Fuente: Libro, actividad final 2.7 (pág. 53), adaptada.</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Indirecto»</span></div>
+</section>
+
+<section class="p" id="lavado-voto" data-min="12">
+  <p class="kicker">4 · Corrección · C · el túnel de lavado</p>
+  <h2>¿Qué lámpara?</h2>
+  <div class="voto" data-ok="b"><p class="q">Caso C: ¿cuál de las dos tiene que comprar? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">La de 50 V: da más luz</button><button data-v="b">La de 24 V</button><button data-v="c">Cualquiera de las dos: son tensiones de seguridad</button></div><div class="porque"><b>La de 24 V.</b> Así se resuelve:
+<ol class="pasos"><li><b>¿Cómo es el sitio?</b> Mojado.</li><li><b>Busca la cifra</b> en la figura 2.3 (pág. 31): tensiones de seguridad (tan bajas que se consideran seguras en ese sitio): <b>24 V</b> en emplazamientos húmedos o mojados y <b>50 V</b> en locales secos.</li><li><b>¿Por qué menos?</b> Con la piel mojada el cuerpo ofrece menos resistencia: con la misma tensión pasaría más corriente (lo de antes, la ley de Ohm).</li></ol>
+Los 50 V son seguros en un local seco, no aquí.<span class="ref libro">Libro · pág. 31 · figura 2.3 (pie: «las tensiones de seguridad son de 24 V… y 50 V…»)</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 31 · figura 2.3</span></div>
+</section>
+
+<section class="p" id="equipo" data-titol="5 · ➕ Equipos de trabajo">
+  <p class="kicker">5 · ➕ Si da tiempo · Un accidente real en Mallorca · libro, pág. 29</p>
+  <h2>La motosierra que se escapa</h2>
+  <div class="caso"><p><b>Febrero de 2025, hacia las 11 h.</b> Un trabajador del Ayuntamiento de Marratxí poda árboles en unos viveros de Santa Maria del Camí. La motosierra se le escapa y se hace cortes profundos en la mano. Lo llevan a Son Llàtzer y lo operan de urgencia.</p><p class="fuente">Fuente: Mallorca Magazin, 10-02-2025 (a partir de Ultima Hora): mallorcamagazin.com/nachrichten/lokales/2025/02/10/133093/rathausmitarbeiter-sagt-sich-auf-mallorca-fast-die-ganze-hand-ab.html.</p></div>
+<div class="voto" data-ok="c"><p class="q">Para la ley, la motosierra es un «equipo de trabajo». ¿Y estos otros: el taladro de un taller, el ordenador de una oficina y la carretilla de una nave?</p><div class="opc"><button data-v="a">Solo el taladro y la carretilla: son máquinas</button><button data-v="b">Solo el ordenador: es el que se usa todo el día</button><button data-v="c">Los tres</button></div><div class="porque"><b>Los tres.</b> La definición (pág. 29) tiene <b>dos condiciones</b>: ser una máquina, aparato, instrumento o instalación, y <b>usarse en el trabajo</b>. Se comprueban las dos con cada uno:
+<div class="tcalc-w"><table class="tcalc"><tr><th></th><th>¿Máquina, aparato, instrumento o instalación?</th><th>¿Se usa para trabajar?</th><th>¿Equipo de trabajo?</th></tr>
+<tr><td>Motosierra (Marratxí)</td><td>máquina ✓</td><td>✓</td><td class="ok">Sí</td></tr>
+<tr><td>Taladro del taller</td><td>máquina ✓</td><td>✓</td><td class="ok">Sí</td></tr>
+<tr><td>Ordenador de la oficina</td><td>aparato ✓</td><td>✓</td><td class="ok">Sí</td></tr>
+<tr><td>Carretilla de la nave</td><td>máquina ✓</td><td>✓</td><td class="ok">Sí</td></tr></table></div>
+No hace falta que sea grande ni peligrosa: el ordenador también cuenta. Y «usarlo» no es solo trabajar con él: también ponerlo en marcha, pararlo, transportarlo, mantenerlo y limpiarlo (pág. 29, 3.er párrafo).<span class="ley">RD 1215/1997 · art. 2</span> <span class="ref libro">Libro · pág. 29 · apartado 2.1.2 «Equipos de trabajo», 1.er párrafo (la definición entre comillas) y 3.er párrafo («La utilización…»)</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 29 · apartado 2.1.2 «Equipos de trabajo», 1.er párrafo</span></div>
+</section>
+
+<section class="p" id="arranque">
+  <p class="kicker">5 · Libro, pág. 29 · tabla 2.5 · fila «Accionamiento»</p>
+  <h2>Vuelve la luz y la amasadora arranca</h2>
+  <div class="voto" data-ok="b"><p class="q">En una panadería hay un corte de luz. Cuando vuelve la corriente, la amasadora, que estaba encendida, se pone en marcha sin que nadie pulse nada. ¿Cumple el equipo? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Sí: si se para sola cuando se va la luz, ya es segura</button><button data-v="b">No: solo puede ponerse en marcha cuando alguien lo decide, también después de una parada</button><button data-v="c">Sí, si tiene una señal de peligro bien visible</button></div><div class="porque"><b>No cumple.</b> Así se resuelve:
+<ol class="pasos"><li><b>Busca la regla:</b> tabla 2.5 (pág. 29), fila «Accionamiento», 2.º punto: la puesta en marcha solo con una <b>acción voluntaria</b>, es decir, que alguien lo decida y pulse el mando.</li><li><b>Mira el caso:</b> ¿alguien pulsa algo cuando vuelve la luz? <b>No</b>: arranca sola.</li><li><b>Compara:</b> sin acción voluntaria → <b>no cumple</b>. La norma lo pide también <b>después de una parada, sea cual sea la causa</b>: un corte de luz también (solo hay excepción si arrancar no supone ningún riesgo).</li><li><b>Qué tendría que pasar:</b> al volver la luz, la amasadora se queda parada hasta que alguien pulse el mando. Si arranca sola, puede pillar a quien tiene las manos dentro.</li></ol><span class="ley">RD 1215/1997 · anexo I.1.2</span> <span class="ref libro">Libro · pág. 29 · tabla 2.5, fila «Accionamiento», 2.º punto («La puesta en marcha solo se podrá efectuar con una acción voluntaria»)</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 29 · tabla 2.5, fila «Accionamiento», 2.º punto</span></div>
+</section>
+
+<section class="p" id="picafort" data-titol="6 · ➕ Incendio">
+  <p class="kicker">6 · ➕ Si da tiempo · Un incendio real en Mallorca · libro, pág. 31</p>
+  <h2>Una tienda que arde en Can Picafort</h2>
+  <div class="caso"><p><b>Can Picafort (Santa Margalida), lunes 24-8-2026, 10.45 h.</b> Sale humo de una tienda de deportes, en los bajos de un edificio de apartamentos. Enseguida es un humo muy negro y el fuego sube. Un policía y un guardia civil rescatan a una mujer y a cuatro niños atrapados en uno de los pisos; los bomberos evacuan otro. Acuden los bomberos de Alcúdia y Artà; uno de ellos recibe una descarga eléctrica y lo llevan al hospital de Muro. A las 17.40, casi siete horas después, dan el fuego por apagado. Se cree que empezó en el enchufe de un aparato de aire acondicionado.</p><p class="fuente">Fuente: Majorca Daily Bulletin, 25-08-2026: majorcadailybulletin.com/news/local/2026/08/25/145231.</p></div>
+<svg viewBox="0 0 600 300" style="width:100%;max-height:30vh;display:block;margin:.3em auto" role="img" aria-label="Triángulo del fuego: combustible, comburente y calor, con la reacción en cadena en el centro" font-family="inherit" font-size="17">
+<polygon points="300,20 500,270 100,270" fill="#fffdf8" stroke="#5d5850" stroke-width="3"/>
+<circle cx="300" cy="185" r="48" fill="#f6d7b8" stroke="#c4581c" stroke-width="2"/>
+<g text-anchor="middle" font-weight="700">
+<text x="300" y="181" font-size="13" fill="#8a3a10">REACCIÓN</text><text x="300" y="198" font-size="13" fill="#8a3a10">EN CADENA</text>
+<text x="115" y="130" fill="#0B5CAD">COMBURENTE</text>
+<text x="490" y="130" fill="#b3261e">CALOR</text>
+<text x="300" y="294" fill="#1f7a4d">COMBUSTIBLE</text>
+</g>
+<g text-anchor="middle" font-size="13" fill="#1d1a16">
+<text x="115" y="150">(oxígeno)</text>
+<text x="490" y="150">(energía de activación)</text>
+</g></svg>
+<div class="voto" data-ok="c"><p class="q">Para que haya fuego hacen falta los tres lados del triángulo (figura 2.4). Si empezó en el enchufe, como se cree, ¿qué lado del triángulo puso el enchufe?</p><div class="opc"><button data-v="a">El combustible</button><button data-v="b">El comburente</button><button data-v="c">El calor</button></div><div class="porque"><b>El calor:</b> el enchufe daría la energía que enciende el fuego. La noticia no dice cómo (si se calentó o hizo chispa), y de la causa solo dice que «se cree». Los tres lados, con este caso:
+<div class="tcalc-w"><table class="tcalc"><tr><th>Lado</th><th>En Can Picafort</th></tr>
+<tr><td><b>Combustible</b> (lo que arde)</td><td>lo que había en la tienda (la noticia no dice qué)</td></tr>
+<tr><td><b>Comburente</b></td><td>el oxígeno del aire</td></tr>
+<tr class="marca"><td><b>Calor</b> (energía de activación)</td><td>el enchufe del aire acondicionado</td></tr></table></div>
+Quita uno de los tres y el fuego se apaga: de ahí salen los métodos de extinción (lo vemos ahora). Y fíjate: un incendio que empieza en un enchufe, el libro lo cuenta dentro del riesgo eléctrico (pág. 30, letra d: «incendios o explosiones originados por la electricidad»); en la tabla 2.1 (pág. 26) el riesgo se llama <b>incendio</b>. Y el bombero que recibe una descarga: eso es <b>contacto eléctrico</b>. El fuego subió hacia los pisos, y la noticia no explica cómo; una de las formas de propagación del libro es justo esa, el calor que sube con el humo y los gases calientes: la <b>convección</b> (figura 2.5, pág. 32).<span class="ref libro">Libro · pág. 31 · figura 2.4 «Teoría del fuego» · pág. 30 · apartado 2.1.3, letra d) · pág. 26 · tabla 2.1, filas «Incendio» y «Contacto eléctrico» · pág. 32 · figura 2.5 «Formas de propagación»</span> <span class="fuente">Fuente: Majorca Daily Bulletin, 25-08-2026 (la noticia de arriba).</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 31 · apartado 2.1.4 «Incendio» y figura 2.4 «Teoría del fuego»</span></div>
+</section>
+
+<section class="p" id="apagar">
+  <p class="kicker">6 · Libro, pág. 32 · figura 2.5 «Métodos de extinción»</p>
+  <h2>¿Qué lado le quitas?</h2>
+  <div class="voto" data-ok="b"><p class="q">En una oficina empieza a arder el papel de una papelera metálica. Una compañera la tapa con una bandeja de metal y el fuego se apaga. ¿Qué lado del triángulo le ha quitado? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">El combustible: el papel ya no está</button><button data-v="b">El comburente: el oxígeno del aire</button><button data-v="c">El calor: la bandeja lo enfría</button></div><div class="porque"><b>El comburente.</b> El papel sigue ahí, pero tapada ya no le llega aire: sin oxígeno, el fuego se ahoga. Es la <b>sofocación</b>. Cada cosa que le quitas (uno de los tres lados, o la reacción en cadena del centro, que es lo que mantiene vivo el fuego una vez empezado) es un método de extinción:
+<div class="tcalc-w"><table class="tcalc"><tr><th>Lado que quitas</th><th>Método (figura 2.5)</th><th>Lo que se ve en la figura</th></tr>
+<tr><td>Calor</td><td><b>Enfriamiento</b></td><td>agua con la manguera</td></tr>
+<tr class="marca"><td>Comburente (oxígeno)</td><td><b>Sofocación</b></td><td>tapar el bidón</td></tr>
+<tr><td>Combustible</td><td><b>Eliminación del combustible</b></td><td>cerrar la llave que lo alimenta</td></tr>
+<tr><td>Reacción en cadena</td><td><b>Eliminación de la reacción</b></td><td>el extintor</td></tr></table></div>
+<span class="ref libro">Libro · pág. 32 · figura 2.5 «Métodos de extinción» (los cuatro dibujos) · pág. 31 · figura 2.4 «Teoría del fuego»</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 32 · figura 2.5, «Métodos de extinción»</span></div>
+</section>
+
+<section class="p" id="freidora">
+  <p class="kicker">6 · Libro, pág. 53 · actividad final 2.8 · con la figura 2.4 de la pág. 31</p>
+  <h2>La freidora y el agua</h2>
+  <div class="caso"><p>En una cocina industrial, el aceite de una freidora se incendia. Un empleado intenta apagarlo con agua y las llamas se extienden.</p></div>
+<div class="voto" data-ok="c"><p class="q">Con la figura 2.4 (pág. 31): ¿de qué clase es ese fuego y cómo había que apagarlo?</p><div class="opc"><button data-v="a">Clase B, de líquidos: tapando la freidora, nunca con agua</button><button data-v="b">Clase F, de aceites de cocina: con agua, pero poca cada vez</button><button data-v="c">Clase F, de aceites de cocina: tapando la freidora, nunca con agua</button></div><div class="porque"><b>Clase F, y sin agua.</b> Así se resuelve:
+<ol class="pasos"><li><b>¿Qué arde?</b> Aceite de cocinar, en un aparato de cocina.</li><li><b>Busca la clase</b> en la figura 2.4: la F, «fuegos derivados de ingredientes de cocina: grasas y aceites de cocina». El aceite es un líquido, pero los de cocina tienen su propia fila: no es la B.</li><li><b>¿Por qué no agua?</b> Lo dice el propio caso: al echarla, las llamas se extienden. El solucionario del libro lo confirma: sobre el aceite ardiendo, el agua propaga el fuego. Ni mucha ni poca.</li><li><b>Cómo se apaga:</b> quitándole el oxígeno, la <b>sofocación</b> de la papelera: tapar el recipiente, o un extintor para clase F. Y desconectar la freidora si se puede sin riesgo.</li></ol>
+<div class="tcalc-w"><table class="tcalc"><tr><th>Clase</th><th>Qué arde (ejemplos de la figura 2.4)</th></tr>
+<tr><td><b>A</b></td><td>sólidos: madera, papel, cartón, tela, plástico</td></tr>
+<tr><td><b>B</b></td><td>líquidos o sólidos licuables (que se funden): pintura, gasolina, petróleo</td></tr>
+<tr><td><b>C</b></td><td>gases: butano, metano, gas ciudad</td></tr>
+<tr><td><b>D</b></td><td>metales: sodio, potasio, magnesio, aluminio, titanio</td></tr>
+<tr class="marca"><td><b>F</b></td><td>grasas y aceites de cocina</td></tr>
+<tr><td><b>L</b></td><td>baterías de iones de litio</td></tr></table></div>
+<span class="ley">RD 513/2017 · anexo I, sección 1.ª, 4.5.e</span> <span class="ref libro">Libro · pág. 31 · figura 2.4 «Clases de fuego», fila F · pág. 32 · figura 2.5 «Métodos de extinción» (sofocación) · pág. 53 · actividad final 2.8</span> <span class="fuente">Fuente: Libro, actividad final 2.8 (pág. 53), adaptada.</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 53 · actividad final 2.8</span><span class="ref libro">Libro · pág. 31 · figura 2.4 «Clases de fuego»</span></div>
+</section>
+
+<section class="p" id="extintor">
+  <p class="kicker">6 · Libro, pág. 32 · figura 2.5 «Utilización de extintor»</p>
+  <h2>El extintor, en cuatro pasos</h2>
+  <div class="voto" data-ok="b"><p class="q">Ya has descolgado el extintor y le has quitado la anilla de seguridad. Antes de presionar la palanca, ¿hacia dónde apuntas?</p><div class="opc"><button data-v="a">A la parte alta de las llamas, que es la más grande</button><button data-v="b">A la base de la llama</button><button data-v="c">Al humo, para poder ver</button></div><div class="porque"><b>A la base de la llama:</b> abajo está lo que arde, el combustible. Los cuatro pasos de la figura 2.5:
+<ol class="pasos"><li><b>Descolgar</b> el extintor.</li><li><b>Quitar la anilla</b> de seguridad.</li><li><b>Presionar la palanca.</b></li><li><b>Dirigir la descarga a la base de la llama.</b></li></ol>
+Y no solo hay extintores portátiles: también carros, mangueras fijas en la pared (las BIE, bocas de incendio equipadas) y sistemas fijos, como los rociadores automáticos (figura 2.5, «Medios de extinción»). En una empresa, quien actúa contra un incendio no improvisa: la empresa designa a esas personas y les da formación y material (LPRL, art. 20).<span class="ley">LPRL · art. 20</span><span class="ref libro">Libro · pág. 32 · figura 2.5 «Utilización de extintor» (pasos 1 a 4) y «Medios de extinción»</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 32 · figura 2.5, «Utilización de extintor»</span></div>
+</section>
+
+<section class="p" id="cierre" data-titol="Cierre">
+  <p class="kicker">Cierre · 2 preguntas para salir</p>
+  <h2>Para salir</h2>
+  
+  <p>Si sabes responderlas en voz alta, has entendido la sesión:</p>
+  <ol><li>En una fábrica, los aseos no tienen espejos y las toallas para secarse son compartidas. ¿Qué tiene que cambiar la empresa? <span class='encls'>(Adaptada del libro, pág. 53, actividad final 2.4)</span></li><li>Un empleado de oficina que va en silla de ruedas no puede usar la fotocopiadora: está en una zona elevada. ¿Qué tendría que hacer la empresa? <span class='encls'>(Adaptada del libro, pág. 53, actividad final 2.5)</span></li></ol>
+  <p class="nota">Próxima sesión (viernes 6 de noviembre): los equipos de trabajo y el incendio, si hoy no da tiempo (libro, págs. 29 y 31-32), y cómo se protege un edificio del fuego (tabla 2.8, pág. 32).</p>
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
+</main>
+
+<div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
+
+<script>
+(function(){
+  "use strict";
+  var TX = {"clau": "ipo1-u2-u2-sesion-2-v1", "la_classe": "La clase: ", "dits": "¡Dedos!", "temps": "⏱ ¡Tiempo!", "proj": "▶ Proyectar", "surt": "✕ Salir", "esborra": "¿Borrar los votos y el marcador para empezar con otro grupo?", "hash": "proyectar", "escriu_nom": "Escribe tu nombre y apellidos antes de descargar.", "escriu_nom_alert": "Escribe tu nombre y apellidos en la primera pantalla y vuelve a pulsar el botón.", "cap_resp": "Sesión 2 · El reto de la gestoría y el riesgo eléctrico · mis respuestas (IPO I, unidad 2)", "qui": "Alumno/a", "grup": "Grupo", "amb_qui": "Con quién he trabajado", "ningu": "(nadie)", "data": "Fecha", "sense_resp": "(sin respuesta)", "fitxer": "RESPUESTAS-S2", "fet_baixa": "Hecho: se ha descargado <b>{f}</b>. Guárdalo para repasar; no se entrega.", "no_baixa": "Este navegador no ha dejado descargar el fichero."};
+  var CLAU = TX.clau;
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inicio|^Cierre|^Para casa/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions: la resposta (el perquè) només surt després de votar */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? TX.la_classe + encerts + " / " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    var sec = v.closest("section");   // «on ho estudies» surt quan tots els vots de la pantalla estan fets
+    if (sec && !sec.querySelector(".voto:not(.fet)")) sec.classList.add("votat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    encerts = 0; vots = 0; pinta();
+  }
+
+  /* solucions i respostes que es revelen (botó o tecla S) */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+      if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
+    });
+  });
+
+  /* ronda ràpida: compte enrere en entrar a la targeta (tecla T el torna a engegar) */
+  var tCompte = null;
+  function compte(s){
+    clearInterval(tCompte);
+    var c = s && s.querySelector(".compte"); if (!c) return;
+    var tot = +c.getAttribute("data-seg") || 15, ini = Date.now(), x = c.querySelector(".xifra"), b = c.querySelector(".barra i");
+    c.classList.remove("zero");
+    function pas(){
+      var q = Math.max(0, tot - (Date.now() - ini) / 1000);
+      x.textContent = q > 0 ? Math.ceil(q) : TX.dits;
+      b.style.transform = "scaleX(" + (q / tot).toFixed(3) + ")";
+      if (q <= 0) { clearInterval(tCompte); c.classList.add("zero"); }
+    }
+    pas(); tCompte = setInterval(pas, 100);
+  }
+  /* rellotge de feina: tecla T en una pantalla amb data-min; segueix encara que canviïs de pantalla */
+  var rel = document.getElementById("rellotge"), tRel = null;
+  function rellotge(min){
+    clearInterval(tRel);
+    if (!min || rel.classList.contains("on")) { rel.classList.remove("on", "fi"); return; }
+    var fi = Date.now() + min * 60000;
+    rel.classList.add("on"); rel.classList.remove("fi");
+    function pas(){
+      var q = Math.max(0, Math.round((fi - Date.now()) / 1000));
+      rel.textContent = "⏱ " + Math.floor(q / 60) + ":" + dos(q % 60);
+      if (!q) { clearInterval(tRel); rel.classList.add("fi"); rel.textContent = TX.temps; }
+    }
+    pas(); tRel = setInterval(pas, 500);
+  }
+
+  /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    alcada(); encaixa();
+    compte(pant[i].classList.contains("flash") ? pant[i] : null);
+    pos.textContent = (i + 1) + " / " + pant.length;
+    var segs = nav.querySelectorAll("a");
+    segs.forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(segs, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = -1;
+    pant.forEach(function(s, j){ if (s.id === h) k = j; });
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.surt;
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.proj;
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", function(){ mostra(i - 1); });
+  document.getElementById("seg").addEventListener("click", function(){ mostra(i + 1); });
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); mostra(i + 1); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); mostra(i - 1); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "t" || ev.key === "T") { if (pant[i].classList.contains("flash")) compte(pant[i]); else rellotge(+pant[i].getAttribute("data-min") || 0); }
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm(TX.esborra)) reinicia(); }
+    else if (/^[1-8]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+
+  /* respostes de l'alumnat: es desen al navegador i es baixen en un .txt (no s'entreguen) */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup"), parella = document.getElementById("parella");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || ""; parella.value = estat.__parella || "";
+    [nom, grup, parella].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  var msg = document.getElementById("missatge");
+  function baixa(){
+    if (!nom || !net(nom.value)) {
+      if (msg) { msg.hidden = false; msg.textContent = TX.escriu_nom; }
+      try { document.getElementById("inicio").scrollIntoView(); if (nom) nom.focus(); alert(TX.escriu_nom_alert); } catch (e) {}
+      return;
+    }
+    var d = new Date();
+    var L = [TX.cap_resp, TX.qui + ": " + net(nom.value), TX.grup + ": " + net(grup.value), TX.amb_qui + ": " + (net(parella.value) || TX.ningu),
+      TX.data + ": " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || TX.sense_resp); L.push("");
+    });
+    var f = TX.fitxer + "-" + net(nom.value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      if (msg) { msg.hidden = false; msg.innerHTML = TX.fet_baixa.replace("{f}", f); }
+    } catch (e) { if (msg) { msg.hidden = false; msg.textContent = TX.no_baixa; } }
+  }
+  ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
+
+  if (location.hash === "#" + TX.hash) entra();
+})();
+</script>
+</body>
+</html>
