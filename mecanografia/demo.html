@@ -1151,6 +1151,126 @@ tr.revisar td{background:color-mix(in srgb, var(--or-suau) 70%, transparent)}
 .nou-tag{font-style:normal; font-family:var(--mono); font-size:.6rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; padding:1px 7px; border-radius:99px; background:var(--accent-suau); color:var(--accent-text); margin-left:4px; vertical-align:2px}
 @media (max-width:560px){ .pla-treball{padding:18px 16px} .pla-diag{padding:14px} .pla-botons .boto{width:100%} }
 
+/* ---------- la ruta d'avui (01-11-2026): sempre un pas següent i un sol botó ---------- */
+.ruta{margin:0 0 22px}
+.ruta:empty{display:none}
+.ruta-cap{display:flex; align-items:baseline; justify-content:space-between; gap:6px 16px; flex-wrap:wrap; margin:0 2px 12px}
+.ruta-passos{list-style:none; margin:0 0 14px; padding:0; display:grid; grid-template-columns:repeat(auto-fit, minmax(120px, 1fr)); gap:8px}
+.ruta-passos li{position:relative; display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:14px; border:1px solid var(--linia); background:var(--sup); overflow:hidden; min-width:0}
+.ruta-passos li::after{content:""; position:absolute; left:0; bottom:0; height:3px; width:calc(var(--f, 0) * 100%); background:var(--accent); transition:width .6s var(--corba)}
+.rp-n{flex:none; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:.8rem; font-weight:500;
+  border:1.5px solid var(--linia-f); color:var(--suau); background:var(--sup)}
+.rp-text{display:flex; flex-direction:column; min-width:0; line-height:1.2}
+.rp-text b{font-size:.92rem; font-weight:650; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.rp-text small{font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--suau)}
+.ruta-passos li.fet{background:var(--be-suau); border-color:color-mix(in srgb, var(--be) 35%, transparent)}
+.ruta-passos li.fet .rp-n{background:var(--be); border-color:var(--be); color:var(--sup)}
+.ruta-passos li.fet small{color:var(--be)}
+.ruta-passos li.ara{border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-suau)}
+.ruta-passos li.ara .rp-n{background:var(--accent); border-color:var(--accent); color:var(--sobre-accent)}
+.ruta-passos li.ara small{color:var(--accent-text)}
+.ruta-ara{display:grid; grid-template-columns:auto minmax(0, 1fr); gap:20px 26px; align-items:center; padding:26px 30px; border-radius:var(--radi); background:var(--sup);
+  border:1.5px solid color-mix(in srgb, var(--accent) 50%, var(--linia)); box-shadow:0 0 0 6px var(--accent-suau), var(--ombra-alta); position:relative; overflow:hidden}
+.ruta-ara::before{content:""; position:absolute; right:-80px; top:-120px; width:320px; height:320px; border-radius:50%; pointer-events:none;
+  background:radial-gradient(closest-side, var(--llum1), transparent); opacity:.9}
+.ruta-ara > *{position:relative}
+.ra-icona{width:84px; height:84px; border-radius:26px; display:flex; align-items:center; justify-content:center; color:var(--sobre-accent);
+  background:linear-gradient(140deg, var(--accent), color-mix(in srgb, var(--accent) 70%, #000)); box-shadow:0 14px 30px -14px var(--accent)}
+.ra-num{position:absolute; right:-6px; bottom:-6px; width:30px; height:30px; border-radius:50%; background:var(--sup); color:var(--tinta); border:1.5px solid var(--linia-f);
+  display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:.8rem; font-weight:500}
+.ra-icona.fet{background:linear-gradient(140deg, var(--be), color-mix(in srgb, var(--be) 70%, #000)); box-shadow:0 14px 30px -14px var(--be); color:var(--sup)}
+.ra-dibuix{width:min(260px, 30vw)}
+.ra-dibuix img, .ra-dibuix svg{display:block; width:100%; height:auto}
+.ra-text h2{font-family:var(--serif); font-weight:400; font-size:clamp(1.8rem, 1.3rem + 1.4vw, 2.5rem); letter-spacing:-.02em; margin:8px 0 8px}
+.ra-text > p{max-width:62ch; color:var(--suau)}
+.ra-text .etiqueta{color:var(--accent-text)}
+.ruta-ara.feta .etiqueta{color:var(--be)}
+.ruta-ara.feta{border-color:color-mix(in srgb, var(--be) 50%, var(--linia)); box-shadow:0 0 0 6px var(--be-suau), var(--ombra-alta)}
+.ra-botons{display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px; margin-top:18px}
+.ra-botons .boto.primari{animation:crida 2.8s var(--corba) 1.2s infinite}
+@keyframes crida{0%, 70%, 100%{box-shadow:0 0 0 0 color-mix(in srgb, var(--primari) 0%, transparent)} 35%{box-shadow:0 0 0 8px color-mix(in srgb, var(--primari) 14%, transparent)}}
+.ra-barra{height:6px; border-radius:99px; background:var(--sup2); margin:12px 0 6px; max-width:360px; overflow:hidden}
+.ra-barra i{display:block; height:100%; border-radius:inherit; background:var(--accent)}
+.ra-classroom{margin-top:10px}
+.ruta-desa{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:12px 4px 0; font-size:.95rem}
+.ruta-resultat{margin:4px 0 22px}
+@media (max-width:640px){
+  .ruta-ara{grid-template-columns:1fr; padding:22px 18px}
+  .ra-icona{width:64px; height:64px; border-radius:20px}
+  .ra-dibuix{width:100%; max-width:280px}
+  .ra-botons .boto.primari{width:100%}
+  .ruta-passos{grid-template-columns:repeat(2, minmax(0, 1fr))}
+}
+.tria-tu{margin:30px 2px 14px}
+.tria-tu h2{font-family:var(--serif); font-weight:400; font-size:1.7rem; letter-spacing:-.02em}
+.tria-tu p{margin-top:4px; font-size:.95rem}
+.ruta-pindola{display:inline-block; margin-left:10px; padding:2px 10px; border-radius:99px; background:var(--accent-suau); color:var(--accent-text);
+  font-family:var(--mono); font-size:.66rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; vertical-align:1px}
+.missatge.guia{color:var(--tinta); background:var(--accent-suau); border:1px solid color-mix(in srgb, var(--accent) 40%, transparent); border-radius:12px; padding:8px 14px;
+  animation:apareix .45s var(--corba)}
+.missatge.guia kbd{font-size:.95em}
+
+/* ---------- el botó «Què faig?» i la seva finestra ---------- */
+.ajuda-flota{position:fixed; right:18px; bottom:18px; z-index:35; display:inline-flex; align-items:center; gap:10px; padding:10px 18px 10px 10px; border-radius:99px; cursor:pointer;
+  background:var(--primari); color:var(--sobre-primari); border:0; font-weight:650; box-shadow:0 18px 36px -16px rgba(19,19,22,.55); transition:transform .2s var(--corba)}
+.ajuda-flota:hover{transform:translateY(-2px)}
+.ajuda-flota:focus-visible{outline:3px solid var(--accent); outline-offset:3px}
+.ajuda-ico{width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--accent); color:var(--sobre-accent); font-family:var(--serif); font-size:1.3rem; line-height:1}
+.capa .targeta.ajuda{max-width:720px; text-align:left; align-items:stretch; max-height:calc(100vh - 32px); overflow:auto; padding:30px 28px}
+.targeta.ajuda .ruta-passos{margin-bottom:12px}
+.targeta.ajuda .ruta-ara{box-shadow:0 0 0 4px var(--accent-suau); padding:20px 22px}
+.targeta.ajuda .ruta-ara .ra-icona{width:64px; height:64px; border-radius:20px}
+.targeta.ajuda .ra-dibuix{width:180px}
+.targeta.ajuda .ra-text h2{font-size:1.7rem}
+.tanca-x{position:absolute; top:14px; right:14px; width:38px; height:38px; border-radius:50%; border:1px solid var(--linia); background:var(--sup); color:var(--tinta); font-size:1.4rem; line-height:1; cursor:pointer}
+.tanca-x:hover{border-color:var(--tinta)}
+.ajuda-faq{display:grid; gap:8px}
+.ajuda-faq details{border:1px solid var(--linia); border-radius:14px; background:var(--sup2); padding:0 16px}
+.ajuda-faq summary{cursor:pointer; padding:12px 0; font-weight:600}
+.ajuda-faq details[open] summary{border-bottom:1px solid var(--linia); margin-bottom:10px}
+.ajuda-faq details p{padding:0 0 14px; line-height:1.55}
+.ajuda-faq .enllac{padding:2px 6px; text-decoration:underline}
+.ajuda-qui{margin:0; padding-left:20px; display:grid; gap:10px; line-height:1.5}
+.ajuda-pausa{width:100%; text-align:left; border-top:1px solid var(--linia); padding-top:12px}
+.ajuda-pausa summary{cursor:pointer; font-weight:600; color:var(--suau); text-align:center}
+.ajuda-pausa ul{margin:10px 0 0; padding-left:20px; display:grid; gap:6px; font-size:.95rem; line-height:1.45}
+
+/* ---------- la benvinguda: així funciona cada dia ---------- */
+.capa .targeta.benvinguda{max-width:600px}
+.benv-passos{list-style:none; margin:0; padding:0; width:100%; display:grid; gap:8px; text-align:left}
+.benv-passos li{display:grid; grid-template-columns:auto minmax(0, 1fr) auto; gap:12px; align-items:center; padding:12px 14px; border-radius:14px; border:1px solid var(--linia); background:var(--sup2);
+  animation:apareix .5s var(--corba) both}
+.benv-passos li:nth-child(2){animation-delay:.08s}
+.benv-passos li:nth-child(3){animation-delay:.16s}
+.benv-passos li:nth-child(4){animation-delay:.24s}
+.benv-passos li:nth-child(5){animation-delay:.32s}
+.bp-icona{width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; background:var(--accent-suau); color:var(--accent-text)}
+.benv-passos small{font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--suau); white-space:nowrap}
+@media print{ .ajuda-flota, .ruta{display:none !important} }
+@media (max-width:640px){ .ajuda-flota{right:12px; bottom:12px} .benv-passos li{grid-template-columns:auto minmax(0, 1fr)} .benv-passos small{grid-column:2} }
+
+/* la barra de baix del resultat: el pas següent, sempre a la vista */
+.barra-seguent{position:fixed; left:50%; bottom:16px; z-index:34; width:min(760px, calc(100% - 32px)); transform:translate(-50%, 140%); opacity:0; pointer-events:none;
+  display:flex; align-items:center; justify-content:space-between; gap:12px 20px; padding:12px 12px 12px 22px; border-radius:22px;
+  background:var(--sup); border:1.5px solid color-mix(in srgb, var(--accent) 50%, var(--linia)); box-shadow:0 0 0 5px var(--accent-suau), var(--ombra-alta);
+  transition:transform .35s var(--corba), opacity .25s ease}
+.barra-seguent.visible{transform:translate(-50%, 0); opacity:1; pointer-events:auto}
+.bs-text{display:flex; flex-direction:column; min-width:0}
+.bs-text .etiqueta{color:var(--accent-text)}
+.bs-text b{font-size:1.02rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+body.amb-barra-seguent .ajuda-flota{bottom:104px}
+body.amb-barra-seguent .toast{bottom:108px}
+@media (max-width:640px){ .barra-seguent{padding:10px; border-radius:18px} .barra-seguent .boto kbd{display:none} body.amb-barra-seguent .ajuda-flota{bottom:96px} }
+@media print{ .barra-seguent{display:none !important} }
+
+/* gairebé tothom ja té progrés: la fitxa, abans que res (01-11) */
+.ruta-fitxa{display:flex; align-items:center; justify-content:space-between; gap:12px 20px; flex-wrap:wrap; margin:0 0 16px; padding:16px 20px; border-radius:18px;
+  background:var(--or-suau); border:1.5px solid color-mix(in srgb, var(--or) 50%, transparent)}
+.ruta-fitxa > div:first-child{max-width:68ch; line-height:1.5}
+.rf-botons{display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px}
+.qui-primera{display:block; margin-bottom:12px}
+.capa .targeta.primera p b{color:var(--tinta)}
+
 .demo-nav{position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:85; display:flex; align-items:center; gap:2px; flex-wrap:wrap; justify-content:center;
   padding:6px 6px 6px 16px; border-radius:99px; background:#131316; color:#F4F2EC; box-shadow:0 20px 50px -20px rgba(0,0,0,.7); width:max-content; max-width:calc(100vw - 24px)}
 .demo-nav .etiqueta{color:#B0ADA5; margin-right:8px; letter-spacing:.08em}
@@ -1215,6 +1335,7 @@ main{padding-bottom:110px}
         </details>
       </div>
       <form class="targeta" id="f-qui" autocomplete="off" novalidate>
+        <span class="etiqueta qui-primera">Només si és la primera vegada</span>
         <label class="camp"><span>Com et dius?</span>
           <input id="i-nom" type="text" maxlength="40" placeholder="El teu nom" spellcheck="false" autocapitalize="words"></label>
         <p class="ajuda">Escriu-lo sempre igual. Si a classe n'hi ha dos d'iguals, afegeix-hi la inicial del llinatge.</p>
@@ -1265,8 +1386,10 @@ main{padding-bottom:110px}
     <p class="suau" id="ini-resum"></p>
   </div>
   <div id="ini-avis"></div>
+  <section class="ruta" id="ini-ruta" aria-label="La teva ruta d'avui"></section>
   <div id="ini-ergo"></div>
   <div id="ini-hero"></div>
+  <div class="tria-tu" id="ini-tria"><h2>O tria tu què vols fer</h2><p class="suau">Per si vols canviar els gèneres, la durada o fer un altre repte. Si no, segueix la ruta de dalt.</p></div>
   <div class="accions-inici" id="ini-accions">
     <article class="targeta accio invers practica">
       <div><span class="etiqueta">Practica</span><h2>Sessió de pràctica</h2></div>
@@ -1332,7 +1455,7 @@ main{padding-bottom:110px}
 <section class="pantalla" id="p-escriu" aria-label="Escriu">
   <div class="escriu-cap">
     <div class="escriu-que">
-      <span class="etiqueta" id="e-tipus">Text</span>
+      <span class="etiqueta" id="e-tipus">Text</span><span class="ruta-pindola" id="e-ruta" hidden></span>
       <h2 id="e-titol">&nbsp;</h2>
     </div>
     <div class="escriu-xifres" aria-live="off">
@@ -1389,8 +1512,17 @@ main{padding-bottom:110px}
     <div class="targeta" role="dialog" aria-modal="true" aria-labelledby="menu-titol">
       <h2 id="menu-titol">En pausa</h2>
       <p class="suau" id="menu-diu"></p>
-      <button class="boto primari gran" id="b-menu-segueix" type="button">Continua</button>
+      <button class="boto primari gran" id="b-menu-segueix" type="button">Continua <kbd>Esc</kbd></button>
       <button class="boto secundari" id="b-menu-acaba" type="button">Acaba la sessió</button>
+      <details class="ajuda-pausa">
+        <summary>No avança o no sé què fer</summary>
+        <ul>
+          <li><b>No surt res quan escric:</b> clica sobre el text i torna-hi.</li>
+          <li><b>La lletra no passa:</b> has d'escriure la que està marcada. L'errada compta, però no cal esborrar res.</li>
+          <li><b>Les lletres no compten:</b> mira si tens el <b>Bloq Maj</b> encès i apaga'l.</li>
+          <li><b>No trobo una tecla:</b> mira el teclat de baix: la tecla brilla i el color et diu quin dit la fa.</li>
+        </ul>
+      </details>
     </div>
   </div>
 </section>
@@ -1404,6 +1536,7 @@ main{padding-bottom:110px}
   </div>
   <div id="r-record"></div>
   <div class="xifres4" id="r-xifres"></div>
+  <section class="ruta ruta-resultat" id="r-ruta" aria-label="El teu pas següent"></section>
   <section class="desa-progres" id="r-desa" aria-label="Desa el teu progrés" aria-live="polite"></section>
   <div id="r-joc"></div>
   <section class="r-jardi" id="r-jardi" aria-label="El teu jardí"></section>
@@ -1516,6 +1649,44 @@ main{padding-bottom:110px}
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<div class="barra-seguent" id="r-barra-seguent"></div>
+<button class="ajuda-flota" id="b-ajuda" type="button" aria-haspopup="dialog" hidden><span class="ajuda-ico" aria-hidden="true">?</span><span>Què faig?</span></button>
+<div class="capa" id="capa-ajuda" hidden>
+  <div class="targeta ajuda" role="dialog" aria-modal="true" aria-labelledby="ajuda-titol">
+    <button class="tanca-x" id="b-ajuda-tanca" type="button" aria-label="Tanca">×</button>
+    <span class="etiqueta">Abans d'aixecar la mà</span>
+    <h2 id="ajuda-titol">Què faig ara?</h2>
+    <div id="ajuda-pas"></div>
+    <div class="ajuda-faq">
+      <details><summary>Ja havia practicat i no veig el que vaig fer</summary><p>Ve d'un altre dia o d'un altre ordinador: <b>carrega la teva fitxa</b>. Baixa-la del Drive o del Classroom (la més nova, o totes) i clica <button class="enllac" type="button" data-accio="carrega">Carrega fitxes</button>. Si no s'obre, <button class="enllac" type="button" data-accio="enganxa">enganxa-la</button>.</p></details>
+      <details><summary>Com guardo el que he fet?</summary><p>Clica <b>Desa la fitxa</b> (a dalt a la dreta). Va a Baixades: <b>puja-la ara mateix</b> a la tasca del Classroom o al teu Drive, perquè les baixades de l'institut s'esborren. Només cal la més nova: porta tot l'historial.</p></details>
+      <details><summary>Quan escric no passa res</summary><p>Clica sobre el text i torna a escriure. Si les lletres no compten, apaga el <b>Bloq Maj</b>. Has d'escriure la lletra marcada: si t'equivoques, l'errada compta, però no cal esborrar.</p></details>
+      <details><summary>Com plego d'una sessió?</summary><p>Prem <kbd>Esc</kbd> i tria <b>Acaba la sessió</b>. El que has escrit es desa; després, desa la fitxa.</p></details>
+      <details><summary>Per què em fa repetir la lliçó?</summary><p>Per superar-la cal un 95 % de precisió: dues o tres estrelles. Ves més a poc a poc i mira la pantalla, no les mans. Si avui ja l'has provat dues vegades, la ruta passa a la pràctica i demà hi tornes.</p></details>
+      <details><summary>Què és el jardí i els punts?</summary><p>El teu progrés, fet dibuix: cada 10 minuts d'escriure hi creix una planta i cada repte superat hi planta un arbre. Res no es mor.</p></details>
+    </div>
+  </div>
+</div>
+<div class="capa" id="capa-primera" hidden>
+  <div class="targeta primera" role="alertdialog" aria-modal="true" aria-labelledby="primera-titol" aria-describedby="primera-text">
+    <div class="avis-icona" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M6 2.5h8l4.5 4.5v14.5H6z"/><path d="M14 2.5V7h4.5M12 17.5v-6M9.2 14.3l2.8-2.8 2.8 2.8"/></svg></div>
+    <h2 id="primera-titol">Ja havies practicat?</h2>
+    <p class="suau" id="primera-text"></p>
+    <button class="boto primari gran" id="b-primera-carrega" type="button">Sí: carrega la meva fitxa</button>
+    <button class="boto secundari" id="b-primera-nou" type="button">No, és la primera vegada</button>
+    <button class="enllac" id="b-primera-enganxa" type="button">La fitxa no s'obre? Enganxa-la</button>
+  </div>
+</div>
+<div class="capa" id="capa-benvinguda" hidden>
+  <div class="targeta benvinguda" role="dialog" aria-modal="true" aria-labelledby="benv-titol">
+    <span class="etiqueta" id="benv-etiqueta">Així funciona, cada dia</span>
+    <h2 id="benv-titol">&nbsp;</h2>
+    <ol class="benv-passos" id="benv-passos"></ol>
+    <p class="suau">No has de triar res: la ruta et diu sempre el pas següent. Si et perds, el botó <b>Què faig?</b> de baix a la dreta.</p>
+    <button class="boto primari gran" id="b-benv-si" type="button">Som-hi: pas 1 <kbd>Enter</kbd></button>
+    <button class="enllac" id="b-benv-no" type="button">Primer ho miro</button>
+  </div>
+</div>
 <div class="capa" id="e-previ" hidden>
   <div class="targeta previ" role="dialog" aria-modal="true" aria-labelledby="previ-titol">
     <span class="etiqueta">Repte d'aguant</span>
@@ -9089,6 +9260,72 @@ function etiquetaRemeiId(id){
   return r ? "Remei: " + titolCurtClau(r.clau) : null;
 }
 
+/* =====================================================================
+   12. LA RUTA D'AVUI (01-11-2026): què toca ara, en un sol pas
+   Una classe sempre té la mateixa forma: (la primera vegada, com seure) · escalfa amb la lliçó del camí
+   (o, amb el camí fet, el remei del pla de treball) · la pràctica · el repte de 3 minuts · desar la fitxa.
+   Cada pas es dona per fet amb les sessions d'avui, i el següent és el primer que no ho és: l'alumne
+   no ha de triar res per saber què fa ara. Una lliçó suspesa dues vegades el mateix dia no bloqueja la
+   ruta (es reprèn demà). Les opcions: {ergo, durada (minuts de pràctica), pendents (de la fitxa), avui}.
+   ===================================================================== */
+function rutaAvui(sessions, o){
+  o = o || {};
+  var avui = o.avui || dataLocal(new Date()), durada = +o.durada > 0 ? +o.durada : 30;
+  var totes = sessions || [], ss = totes.filter(function(s){ return s && s.data === avui && s.tipus !== "ut0"; });
+  var passos = [];
+  if (!o.ergo) passos.push({id:"ergo", nom:"Com seure", titol:"Com seure per escriure",
+    diu:"La cadira, els braços, la pantalla i on van les mans. Es fa una sola vegada.", min:3, fet:false});
+  /* 1. escalfa: la lliçó següent del camí, o el remei, o res (el camí fet i cap error amb nom) */
+  var cami = estatLlicons(totes), llAvui = ss.filter(function(s){ return s.tipus === "llico"; });
+  var remAvui = ss.filter(function(s){ return !!sessioRemei(s); });
+  if (cami.seguent || llAvui.length){
+    var bona = llAvui.filter(function(s){ return s.estrelles >= 2; }).pop();
+    var L = cami.seguent, fetLl = !!bona || llAvui.length >= 2 || !L;
+    var n = fetLl ? (bona || llAvui[llAvui.length - 1]).llico : L.n, nomL = LLICONS[n - 1].nom;
+    passos.push({id:"llico", nom:"Escalfa", llico:n, min:3, fet:fetLl,
+      titol:"Lliçó " + n + " · " + nomL,
+      diu:fetLl ? (bona ? "Superada avui." : "Avui ja l'has provat dues vegades: demà hi tornes, més a poc a poc.")
+                : (llAvui.length ? "Torna-hi: per superar-la cal un 95 % de precisió. Ves a poc a poc i mira la pantalla, no les mans."
+                                 : LLICONS[n - 1].diu)});
+  } else {
+    var pl = pla(totes), d = pl.prou && pl.actius.length ? pl.actius[0] : null;
+    if (d || remAvui.length){
+      var clau = remAvui.length ? sessioRemei(remAvui[remAvui.length - 1]).clau : d.clau;
+      passos.push({id:"remei", nom:"Escalfa", clau:clau, min:3, fet:remAvui.length > 0,
+        titol:"Remei: " + titolCurtClau(clau),
+        diu:"Tres minuts amb l'error que més et costa ara, amb paraules i frases reals."});
+    }
+  }
+  /* 2. la pràctica: compten els minuts d'avui (no els remeis); es dona per feta amb el 80 % o una sessió completa */
+  var minutsAvui = 0, completa = false;
+  ss.forEach(function(s){
+    if (s.tipus !== "practica" || sessioRemei(s)) return;
+    minutsAvui += (s.act || 0) / 60;
+    if (s.complet && (s.min || 0) >= durada) completa = true;
+  });
+  var fetPr = completa || minutsAvui >= durada * 0.8;
+  var queden = fetPr ? 0 : Math.max(5, Math.round((durada - minutsAvui) / 5) * 5);
+  if (queden > durada) queden = durada;
+  passos.push({id:"practica", nom:"Practica", min:queden || durada, minuts:queden || durada, fet:fetPr,
+    progres:Math.min(1, minutsAvui / durada), fets:Math.round(minutsAvui),
+    titol:fetPr ? "Pràctica feta" : (minutsAvui >= 1 ? "Acaba la pràctica: " + queden + " minuts més" : "Sessió de pràctica de " + queden + " minuts"),
+    diu:fetPr ? "Avui ja has escrit " + Math.round(minutsAvui) + " minuts."
+              : "Textos dels gèneres que tens triats. El rellotge només corre mentre escrius: si t'atures, no perds temps."});
+  /* 3. el repte de 3 minuts: la marca del dia */
+  var fetRe = ss.some(function(s){ return s.tipus === "repte"; });
+  passos.push({id:"repte", nom:"Repte", min:3, fet:fetRe,
+    titol:fetRe ? "Repte fet" : "Repte de 3 minuts",
+    diu:fetRe ? "La marca d'avui ja és a la teva fitxa." : "Un text nou i 3 minuts de rellotge des de la primera tecla. És la marca que compta per al rànquing."});
+  /* 4. desar: la fitxa al dia, i almenys una cosa feta avui */
+  var pend = +o.pendents || 0, fetDe = ss.length > 0 && pend === 0;
+  passos.push({id:"desa", nom:"Desa", min:1, fet:fetDe,
+    titol:fetDe ? "Fitxa desada" : "Desa la fitxa i lliura-la",
+    diu:fetDe ? "La teva fitxa ja porta tot el d'avui." : "Descarrega la fitxa i puja-la a la tasca del Classroom: si no, el que has fet avui es queda en aquest ordinador."});
+  var seguent = null, fets = 0, queda = 0;
+  passos.forEach(function(p, i){ p.i = i + 1; if (p.fet) fets++; else { queda += p.min; if (!seguent) seguent = p; } });
+  return {avui:avui, passos:passos, seguent:seguent, fets:fets, total:passos.length, tot:!seguent, minutsQueden:queda};
+}
+
 return {
   CONFIG:CONFIG, banda:banda, nfc:nfc, esMorta:esMorta, mediana:mediana, arrodoneix:arrodoneix,
   dataLocal:dataLocal, horaLocal:horaLocal, clauNom:clauNom, nomBonic:nomBonic, clauGrup:clauGrup,
@@ -9114,7 +9351,7 @@ return {
   LLICONS:LLICONS, teclesFins:teclesFins, generaLlico:generaLlico, estrelles:estrelles, estatLlicons:estatLlicons, perBloc:perBloc,
   triaTextSenseRepetir:triaTextSenseRepetir, totsElsBlocs:tots, DIAG:DIAG, pla:pla, classeDiag:classeDiag, mesuraClau:mesuraClau, sessionsDiag:sessionsDiag, finestraDe:finestraDe, agregaDiag:agregaDiag, estatClau:estatClau,
   generaRemei:generaRemei, etiquetaRemeiId:etiquetaRemeiId, parseRemei:parseRemei, idRemei:idRemei, titolClau:titolClau, titolCurtClau:titolCurtClau,
-  sessioRemei:sessioRemei, clauValida:clauValida, senseRemei:senseRemei, sonVeines:sonVeines, parseConf:parseConf, llicoDe:llicoDe, NOM_GRUP:NOM_GRUP, EXPLICA_DOCENT:EXPLICA_DOCENT, nomsPropis:nomsPropis, candidates:candidates, remeisDe:remeisDe
+  sessioRemei:sessioRemei, clauValida:clauValida, senseRemei:senseRemei, sonVeines:sonVeines, parseConf:parseConf, llicoDe:llicoDe, NOM_GRUP:NOM_GRUP, EXPLICA_DOCENT:EXPLICA_DOCENT, nomsPropis:nomsPropis, candidates:candidates, remeisDe:remeisDe, rutaAvui:rutaAvui
 };
 })();
 if (typeof module !== "undefined" && module.exports) module.exports = NUCLI;
@@ -9561,7 +9798,12 @@ var PANTALLA = null;
 function mostra(id){
   tancaExplora();
   if (PANTALLA !== id) tres.alliberaTot();      /* cap escena 3D viva fora de la seva pantalla */
-  PANTALLA = id;
+  PANTALLA = id; T_PANTALLA = Date.now();
+  /* el pas de la ruta, a la pantalla d'escriure (només si s'hi ha arribat des de la ruta) */
+  if (id === "p-escriu"){ $("e-ruta").hidden = !RUTA_PAS; $("e-ruta").textContent = RUTA_PAS ? "Ruta d'avui · pas " + RUTA_PAS.i + " de " + RUTA_PAS.total : ""; RUTA_PAS = null; }
+  $("b-ajuda").hidden = id === "p-escriu" || id === "p-docent" || id === "p-ergo";      /* la lliçó de com seure ja porta el seu «Endavant» a baix a la dreta */
+  tancaAjuda(); $("capa-benvinguda").hidden = true;
+  if (id !== "p-resultat"){ $("r-barra-seguent").classList.remove("visible"); document.body.classList.remove("amb-barra-seguent"); }
   ["p-qui","p-ergo","p-inici","p-cami","p-escriu","p-resultat","p-progres","p-docent"].forEach(function(x){ $(x).classList.toggle("activa", x === id); });
   var p = perfilActiu();
   var ambNom = !!p && id !== "p-qui" && id !== "p-docent";
@@ -9664,9 +9906,30 @@ function enviaQui(e){
   }
   var ll = (document.querySelector('input[name="ll"]:checked') || {}).value || "ca";
   if (MAG.perfils[N.clauNom(nom)]) ll = null;          /* qui ja existia conserva la seva llengua */
-  obrePerfil(nom, $("i-grup").value.replace(/[^A-Za-z0-9\u00c0-\u00ff .-]/g, "").replace(/\s+/g, " ").trim().slice(0, 20), ll);
-  $("i-nom").value = ""; $("i-grup").value = "";
-  mostra("p-inici");
+  var grup = $("i-grup").value.replace(/[^A-Za-z0-9\u00c0-\u00ff .-]/g, "").replace(/\s+/g, " ").trim().slice(0, 20);
+  preguntaPrimera(nom, function(){
+    obrePerfil(nom, grup, ll);
+    $("i-nom").value = ""; $("i-grup").value = "";
+    mostra("p-inici");
+  });
+}
+/* GAIREB\u00c9 TOTHOM JA T\u00c9 PROGR\u00c9S (01-11): qui escriu un nom que aquest navegador no coneix, abans de comen\u00e7ar de zero
+   (i de tornar a fer la lli\u00e7\u00f3 de com seure), ha de dir si \u00e9s la primera vegada o si ha de carregar la fitxa */
+var PRIMERA = null;
+function preguntaPrimera(nom, fes){
+  if (MAG.perfils[N.clauNom(nom)]) return fes();
+  PRIMERA = fes;
+  $("primera-text").innerHTML = "Si ja has fet servir Tecla a tecla (a classe o a casa), <b>el teu progr\u00e9s \u00e9s a la teva fitxa</b>: carrega-la i continues on ho vas deixar. " +
+    "Si entres com a <b>" + esc(nomVisual(nom)) + "</b> sense la fitxa, comen\u00e7ar\u00e0s de zero i haur\u00e0s de tornar a fer la lli\u00e7\u00f3 de com seure.";
+  $("capa-primera").hidden = false;
+  setTimeout(function(){ $("b-primera-carrega").focus(); }, 30);
+}
+function tancaPrimera(accio){
+  var fes = PRIMERA; PRIMERA = null;
+  $("capa-primera").hidden = true;
+  if (accio === "nou" && fes) fes();
+  else if (accio === "carrega") $("i-fitxa").click();
+  else if (accio === "enganxa") obreEnganxa();
 }
 
 /* ---------------------------------------------------------------------
@@ -9970,24 +10233,18 @@ function pintaInici(){
   $("ini-resum").textContent = p.sessions.length
     ? "Portes " + p.sessions.length + (p.sessions.length === 1 ? " sessió" : " sessions") + " i " + N.minutsText(ag.act) + " de pràctica" +
       (setmana.minuts ? " · aquesta setmana, " + setmana.minuts + " min." : ".")
-    : (!ergoFeta(p) ? "Primera vegada per aquí. Comença per la lliçó de com seure: són tres minuts, i després ja pots escriure."
-                    : "Ja saps com seure. Si encara mires el teclat, comença pel camí de tecles; si no, per una sessió de pràctica.");
+    : (!ergoFeta(p) ? "Primera vegada per aquí. No has de triar res: segueix la ruta d'avui, pas a pas."
+                    : "Ja saps com seure. Ara, la ruta d'avui: el botó gran et porta al pas següent.");
 
-  var avis = "", ef = estatFitxa(p);
+  var avis = "";
   if (AVIS_INICI){ avis += '<div class="avis ' + AVIS_INICI.tipus + '">' + AVIS_INICI.html + '</div>'; AVIS_INICI = null; }
-  /* el recordatori de desar, a dalt de tot mentre hi hagi res per desar */
-  if (ef.pendents && p.sessions.length) avis += '<div class="avis or recorda"><span class="recorda-ico" aria-hidden="true"></span><span><b>' + esc(queFalta(ef)) + "</b> encara no " + (ef.pendents === 1 ? "és" : "són") +
-    ' a la teva fitxa. Descarrega-la i lliura-la al Classroom.</span><button class="boto primari" type="button" data-accio="desa">Descarrega la fitxa</button></div>';
+  /* el recordatori de desar ara va dins la ruta (un sol lloc on mirar) */
   $("ini-avis").innerHTML = avis;
-  /* la lliçó d'ergonomia, primer de tot: fins que no es fa, és l'únic camí que s'obre */
+  /* la lliçó d'ergonomia, primer de tot: fins que no es fa, és l'únic camí que s'obre (i és el pas 1 de la ruta) */
   var feta = ergoFeta(p);
-  var imE = ERGO_IMG[temaErgo()];
-  if (!feta && !imE && tres.pot()) ergoImatges().then(function(){ if (PANTALLA === "p-inici") pintaInici(); }, function(){});
-  $("ini-ergo").innerHTML = feta ? "" :
-    '<article class="targeta ergo-porta"><div class="ergo-porta-dibuix">' + (imE && imE.seure ? '<img src="' + imE.seure.url + '" alt="Com seure per escriure" width="' + imE.seure.w + '" height="' + imE.seure.h + '">' : ERGO.escena({anota:null, aria:"Com seure per escriure"})) + "</div>" +
-    '<div class="ergo-porta-text"><span class="etiqueta">Primer pas · obligatori · uns 3 minuts</span><h2>Abans d\'escriure, com seure</h2>' +
-    '<p class="suau">La cadira, els braços, la pantalla i on van les mans. Cinc passos amb dibuixos i tres preguntes. Es fa una vegada i queda a la teva fitxa.</p>' +
-    '<button class="boto primari gran" type="button" data-accio="ergo">Comença la lliçó</button></div></article>';
+  if (!feta && !ERGO_IMG[temaErgo()] && tres.pot()) ergoImatges().then(function(){ if (PANTALLA === "p-inici") pintaInici(); }, function(){});
+  $("ini-ergo").innerHTML = "";
+  pintaRuta($("ini-ruta"), p, {lloc:"inici"});
   $("ini-accions").classList.toggle("en-espera", !feta);
 
   document.querySelectorAll('input[name="durada"]').forEach(function(r){ r.checked = (+r.value === +MAG.durada); });
@@ -10018,6 +10275,180 @@ function pintaInici(){
       '<p class="suau petit" style="margin-top:6px">' + esc(b.diu) + (seg ? " Següent nivell, <b>" + esc(seg.nom) + "</b>, a " + seg.min + " pulsacions: et falten " + (seg.min - ref) + "." : "") + '</p></div>';
     $("ini-nivell").hidden = false;
   } else $("ini-nivell").hidden = true;
+  ofereixBenvinguda(p);
+}
+
+/* ---------------------------------------------------------------------
+   LA RUTA D'AVUI (01-11-2026). Pensada per a qui es perd: a l'inici, al resultat i al botó «Què faig?»
+   hi ha sempre UN pas següent i UN botó (també amb Enter). Els passos surten de N.rutaAvui (nucli, §12).
+   --------------------------------------------------------------------- */
+var ICONA_PAS = {
+  ergo:'<path d="M9 5.5a2 2 0 1 0 0-.01M8 9.5v6h6l2 5M8 13h5"/><path d="M4 21h16"/>',
+  llico:'<rect x="3" y="7" width="18" height="11" rx="2.5"/><path d="M7 11h.01M10.5 11h.01M14 11h.01M17.5 11h.01M8 14.5h8"/>',
+  remei:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4.5"/>',
+  practica:'<path d="M5 5h14v14H5z" opacity=".001"/><path d="M6 6.5h12M6 10.5h12M6 14.5h8M6 18.5h5"/>',
+  repte:'<circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l2.5 2.5M9.5 2.5h5M12 2.5v3"/>',
+  desa:'<path d="M6 2.5h8l4.5 4.5v14.5H6z"/><path d="M14 2.5V7h4.5M12 10.5v6M9.2 14l2.8 2.8 2.8-2.8"/>'
+};
+function iconaPas(id, mida){ return '<svg viewBox="0 0 24 24" width="' + (mida || 22) + '" height="' + (mida || 22) + '" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + (ICONA_PAS[id] || "") + "</svg>"; }
+var ICONA_OK = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+function rutaDe(p){ return N.rutaAvui(p.sessions, {ergo:ergoFeta(p), durada:+MAG.durada || 30, pendents:estatFitxa(p).pendents}); }
+function minutsPas(x){ return x.id === "desa" ? "1 min" : "≈ " + x.min + " min"; }
+/* la tira dels passos: fets (✓), el d'ara i els que vénen */
+function passosHTML(r){
+  return '<ol class="ruta-passos">' + r.passos.map(function(x){
+    var ara = r.seguent && x.id === r.seguent.id;
+    var progres = x.id === "practica" && !x.fet && x.progres > 0 ? ' style="--f:' + x.progres.toFixed(3) + '"' : "";
+    return '<li class="' + (x.fet ? "fet" : (ara ? "ara" : "")) + '"' + (ara ? ' aria-current="step"' : "") + progres + '>' +
+      '<span class="rp-n">' + (x.fet ? ICONA_OK : x.i) + "</span>" +
+      '<span class="rp-text"><b>' + esc(x.nom) + "</b><small>" + (x.fet ? "fet" : esc(minutsPas(x))) + "</small></span></li>";
+  }).join("") + "</ol>";
+}
+/* el pas d'ara: què és, per què i el botó */
+function pasHTML(r, o){
+  o = o || {};
+  var x = r.seguent;
+  if (!x){
+    var p = perfilActiu(), e = N.escalaReptes(p.sessions), seg = e.escala.filter(function(q){ return q.oberta && !q.aprovat && q.min > 3; })[0];
+    return '<div class="ruta-ara feta">' +
+      '<div class="ra-icona fet" aria-hidden="true">' + ICONA_OK.replace(/width="14" height="14"/, 'width="30" height="30"') + "</div>" +
+      '<div class="ra-text"><span class="etiqueta">Ruta d\'avui feta</span><h2>Tot fet, ' + esc(p.nom) + ".</h2>" +
+      '<p class="suau">Si encara et queda temps, segueix escrivint: cada minut fa créixer el jardí i suma per a la setmana.</p>' +
+      '<div class="ra-botons"><button class="boto primari gran" type="button" data-ruta="mes">Una altra sessió de pràctica <kbd>Enter</kbd></button>' +
+      (seg ? '<button class="boto secundari" type="button" data-ruta="repte-' + seg.min + '">Repte d\'aguant de ' + seg.min + " minuts</button>" : "") +
+      "</div></div></div>";
+  }
+  var dibuix = "";
+  if (x.id === "ergo"){
+    var imE = ERGO_IMG[temaErgo()];
+    dibuix = '<div class="ra-dibuix">' + (imE && imE.seure ? '<img src="' + imE.seure.url + '" alt="" width="' + imE.seure.w + '" height="' + imE.seure.h + '">' : ERGO.escena({anota:null, aria:"Com seure per escriure"})) + "</div>";
+  } else dibuix = '<div class="ra-icona" aria-hidden="true">' + iconaPas(x.id, 30) + '<span class="ra-num">' + x.i + "</span></div>";
+  var boto = x.id === "desa" ? "Descarrega la fitxa" : (x.id === "ergo" ? "Comença la lliçó" : (r.fets ? "Continua" : "Som-hi"));
+  var extra = "";
+  if (x.id === "practica" && x.fets > 0) extra = '<div class="ra-barra" role="img" aria-label="' + x.fets + " minuts fets avui" + '"><i style="width:' + Math.round(x.progres * 100) + '%"></i></div><p class="suau petit">Avui ja portes ' + x.fets + " min.</p>";
+  if (x.id === "desa") extra = '<p class="suau petit ra-classroom">Després, al Classroom: obre la tasca de mecanografia › <b>Afegeix o crea › Fitxer</b> › tria la fitxa › <b>Lliura</b>.</p>';
+  return '<div class="ruta-ara">' + dibuix +
+    '<div class="ra-text"><span class="etiqueta">Ara toca · pas ' + x.i + " de " + r.total + " · " + esc(minutsPas(x)) + "</span>" +
+    "<h2>" + esc(x.titol) + "</h2><p>" + esc(x.diu) + "</p>" + extra +
+    '<div class="ra-botons"><button class="boto primari gran" type="button" data-ruta="' + x.id + '">' + esc(boto) + " <kbd>Enter</kbd></button>" +
+    (o.lloc === "inici" ? '<button class="enllac" type="button" data-ruta="tria">Prefereixo triar jo</button>' : "") +
+    "</div></div></div>";
+}
+function pintaRuta(el, p, o){
+  if (!el || !p) return;
+  var r = rutaDe(p), ef = estatFitxa(p);
+  var cap = '<div class="ruta-cap"><span class="etiqueta">La teva ruta d\'avui</span>' +
+    '<span class="suau petit">' + r.fets + " de " + r.total + " fets" + (r.minutsQueden ? " · queden uns " + r.minutsQueden + " min" : "") + "</span></div>";
+  /* el recordatori de desar, aquí dins i petit, mentre el pas d'ara no sigui desar */
+  var desa = ef.pendents && p.sessions.length && !(r.seguent && r.seguent.id === "desa")
+    ? '<p class="ruta-desa"><span class="recorda-ico" aria-hidden="true"></span><span><b>' + esc(queFalta(ef)) + "</b> encara no " + (ef.pendents === 1 ? "és" : "són") +
+      ' a la teva fitxa.</span> <button class="enllac" type="button" data-ruta="desa">Desa-la ara</button></p>' : "";
+  el.innerHTML = fitxaOblidadaHTML(p) + cap + passosHTML(r) + pasHTML(r, o) + desa;
+  el.classList.toggle("tota-feta", r.tot);
+}
+/* un perfil sense cap sessió: gairebé segur que és algú que ja tenia progrés i no ha carregat la fitxa */
+function fitxaOblidadaHTML(p){
+  if (p.sessions.some(function(s){ return s.tipus !== "ut0"; })) return "";
+  return '<div class="ruta-fitxa"><div><b>Ja havies practicat abans?</b> <span class="suau">No comencis de zero: carrega la teva fitxa i continues on ho vas deixar (també la lliçó de com seure, si ja la tens feta).</span></div>' +
+    '<div class="rf-botons"><button class="boto primari" type="button" data-ruta="carrega">Carrega la meva fitxa</button><button class="enllac" type="button" data-ruta="enganxa">No s\'obre? Enganxa-la</button></div></div>';
+}
+/* fer un pas de la ruta (o el següent, si no se'n diu cap) */
+var RUTA_PAS = null;          /* el pas que s'acaba d'engegar des de la ruta: la pantalla d'escriure el mostra */
+function faPas(id){
+  var p = perfilActiu(); if (!p) return mostra("p-qui");
+  var r = rutaDe(p);
+  if (id === "tria"){ var t = $("ini-tria"); if (t) t.scrollIntoView({behavior:"smooth", block:"start"}); return; }
+  if (id === "mes"){ RUTA_PAS = null; return iniciaPractica(); }
+  if (id === "carrega") return $("i-fitxa").click();
+  if (id === "enganxa") return obreEnganxa();
+  if (/^repte-\d+$/.test(id || "")){ RUTA_PAS = null; return iniciaRepte(+id.split("-")[1]); }
+  var x = id ? r.passos.filter(function(q){ return q.id === id; })[0] : r.seguent;
+  if (!x) return;
+  RUTA_PAS = x.id === "desa" || x.id === "ergo" ? null : {i:x.i, total:r.total, nom:x.nom};
+  if (x.id === "ergo") return obreErgo(null);
+  if (x.id === "llico") return iniciaLlico(x.llico);
+  if (x.id === "remei") return iniciaRemei(x.clau);
+  if (x.id === "practica") return iniciaPractica(x.minuts);
+  if (x.id === "repte") return iniciaRepte(3);
+  if (x.id === "desa") descarregaFitxa();
+}
+function clicRuta(e){ var b = e.target.closest("[data-ruta]"); if (b){ e.preventDefault(); faPas(b.getAttribute("data-ruta")); } }
+/* al resultat: on és de la ruta i el pas següent, just sota les xifres */
+function pintaRutaResultat(){
+  var p = perfilActiu(), el = $("r-ruta");
+  if (!p || !ULTIM_DESADA){ el.hidden = true; el.innerHTML = ""; return; }
+  el.hidden = false;
+  pintaRuta(el, p, {lloc:"resultat"});
+  /* mentre hi hagi res per desar, ho diu la ruta (el pas «Desa» o la línia de sota): el tauler gran de desar
+     només surt quan ja s'ha descarregat, per dir com es lliura al Classroom */
+  if (estatFitxa(p).pendents) $("r-desa").hidden = true;
+  /* la barra de baix: el mateix pas, sempre a la vista mentre el botó gran no s'hi veu */
+  var r = rutaDe(p), x = r.seguent, b = $("r-barra-seguent");
+  b.innerHTML = '<span class="bs-text"><span class="etiqueta">' + (x ? "Ara toca · pas " + x.i + " de " + r.total : "Ruta d'avui feta") + "</span><b>" + esc(x ? x.titol : "Si et queda temps, una altra sessió") + "</b></span>" +
+    '<button class="boto primari gran" type="button" data-ruta="' + (x ? x.id : "mes") + '" tabindex="-1">' + (x && x.id === "desa" ? "Descarrega la fitxa" : "Continua") + " <kbd>Enter</kbd></button>";
+  vigilaBarra();
+}
+var OBS_BARRA = null;
+function vigilaBarra(){
+  var b = $("r-barra-seguent"), boto = $("r-ruta").querySelector(".ruta-ara .boto.primari");
+  if (OBS_BARRA) OBS_BARRA.disconnect();
+  b.classList.remove("visible");
+  if (!boto || !("IntersectionObserver" in window)) return;
+  OBS_BARRA = new IntersectionObserver(function(v){
+    var amagat = !v[0].isIntersecting && PANTALLA === "p-resultat" && v[0].boundingClientRect.top > 0;
+    b.classList.toggle("visible", amagat);
+    document.body.classList.toggle("amb-barra-seguent", amagat);
+  });
+  OBS_BARRA.observe(boto);
+}
+/* la primera vegada que veu la ruta (després de la lliçó de com seure): què passa cada dia, i a fer el primer pas */
+/* També a qui ja tenia progrés (gairebé tothom): surt fins que té una sessió d'un dia anterior des que la ruta és a
+   l'aula. Així no torna a sortir cada dia encara que el navegador de l'aula s'esborri (la fitxa no porta cap marca). */
+var RUTA_DES_DE = "2026-10-31";       /* el dia que la ruta va arribar a l'aula (versió 8, publicada el 31-10) */
+function ofereixBenvinguda(p){
+  if (!p || !ergoFeta(p) || p.rutaVista || PANTALLA !== "p-inici" || !$("capa-primera").hidden) return;
+  var ss = p.sessions.filter(function(s){ return s.tipus !== "ut0"; });
+  var avui = N.dataLocal(new Date());
+  if (ss.some(function(s){ return s.data >= RUTA_DES_DE && s.data < avui; })){ p.rutaVista = 1; desa(); return; }
+  var r = rutaDe(p), quants = ["", "un pas", "dos passos", "tres passos", "quatre passos", "cinc passos"][r.total];
+  $("benv-titol").textContent = ss.length ? "Novetat, " + p.nom + ": ara l'app et diu què toca." : "Hola, " + p.nom + ". Cada dia, " + quants + ".";
+  $("benv-etiqueta").textContent = ss.length ? "El teu progrés ja és aquí · cada dia, " + quants : "Així funciona, cada dia";
+  $("benv-passos").innerHTML = r.passos.map(function(x){
+    return '<li><span class="bp-icona" aria-hidden="true">' + iconaPas(x.id, 20) + '</span><span><b>' + esc(x.nom) + "</b> · " + esc(x.titol) + '</span><small>' + esc(minutsPas(x)) + "</small></li>";
+  }).join("");
+  $("b-benv-si").innerHTML = (r.seguent ? "Som-hi: pas " + r.seguent.i : "Som-hi") + " <kbd>Enter</kbd>";
+  $("capa-benvinguda").hidden = false;
+  setTimeout(function(){ $("b-benv-si").focus(); }, 30);
+}
+function tancaBenvinguda(fes){
+  var p = perfilActiu();
+  $("capa-benvinguda").hidden = true;
+  if (p){ p.rutaVista = 1; desa(); }
+  if (fes) faPas(); else $("ini-ruta").scrollIntoView({block:"start"});
+}
+/* EL BOTÓ «QUÈ FAIG?»: el pas d'ara i les sis preguntes que fan aixecar la mà */
+function obreAjuda(){
+  var p = perfilActiu(), h;
+  if (!p) h = '<ol class="ajuda-qui"><li><b>Ja havies practicat un altre dia?</b> Primer, <button class="enllac" type="button" data-accio="carrega">carrega la teva fitxa</button> (la baixes del Drive o del Classroom).</li>' +
+    "<li><b>És la primera vegada?</b> Escriu el teu nom, tria la llengua i clica <b>Endavant</b>.</li></ol>";
+  else { var r = rutaDe(p); h = fitxaOblidadaHTML(p) + passosHTML(r) + pasHTML(r, {lloc:"ajuda"}); }
+  $("ajuda-pas").innerHTML = h;
+  $("ajuda-titol").textContent = p ? "Què faig ara?" : "Per on començo?";
+  $("capa-ajuda").querySelectorAll("details").forEach(function(d){ d.open = false; });
+  $("capa-ajuda").hidden = false;
+  setTimeout(function(){ var b = $("ajuda-pas").querySelector(".boto.primari") || $("b-ajuda-tanca"); b.focus(); }, 30);
+}
+function tancaAjuda(){ $("capa-ajuda").hidden = true; }
+/* Enter fa el pas següent a l'inici i al resultat (si no s'és dins d'un camp ni d'una finestra) */
+var T_PANTALLA = 0;
+function enterRuta(e){
+  if (e.key !== "Enter" || e.repeat || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+  if (PANTALLA !== "p-inici" && PANTALLA !== "p-resultat") return;
+  if (enUnControl(e) || document.querySelector(".capa:not([hidden])") || Date.now() - T_PANTALLA < 1200) return;
+  if (PANTALLA === "p-resultat" && $("r-ruta").hidden) return;
+  e.preventDefault();
+  var p = perfilActiu(); if (!p) return;
+  faPas(rutaDe(p).seguent ? null : "mes");
 }
 
 /* ---------------------------------------------------------------------
@@ -10368,9 +10799,10 @@ function nouId(d){
   return N.dataLocal(d).replace(/-/g, "") + "-" + N.horaLocal(d).replace(":", "") + "-" + Math.random().toString(36).slice(2, 7);
 }
 
-function iniciaPractica(){
+function iniciaPractica(minuts){
   var p = perfilActiu(); if (!p) return mostra("p-qui");
   if (!ergoFeta(p)) return obreErgo(iniciaPractica);          /* primer, la lliçó d'ergonomia */
+  var min = typeof minuts === "number" && minuts > 0 ? minuts : MAG.durada;     /* la ruta pot demanar els minuts que queden */
   var ara = new Date();
   var febles = N.teclesFebles(N.agregaTecles(p.sessions.slice(-10)), 3);
   var blocs = N.blocsValids(p.blocs), ix = N.indexTextos(T), perBloc = {}, darrer = null;
@@ -10385,7 +10817,7 @@ function iniciaPractica(){
   });
   var torn0 = darrer && blocs.indexOf(darrer) >= 0 ? blocs.indexOf(darrer) + 1 : 0;
   S = {
-    mode:"practica", id:nouId(ara), inici:ara, objectiuMs:MAG.durada*60000, minuts:MAG.durada, ll:p.llengua,
+    mode:"practica", id:nouId(ara), inici:ara, objectiuMs:min*60000, minuts:min, ll:p.llengua,
     trams:[], actual:null, acabant:false, entre:false, pausat:false, seguent:null, darrerDesat:0,
     estat:{llengua:p.llengua, index:0, textsFets:0, blocs:blocs, torn0:torn0, perBloc:perBloc, fets:N.comptaFets(p.sessions), represes:N.represes(p.sessions), usats:{},
            nomesTextos:!!MAG.nomesTextos, febles:febles, rng:N.rngDe((Date.now() % 4294967291) + 7)}
@@ -10501,7 +10933,15 @@ function carregaTram(def){
   actualitzaXifres();
   enfoca();
   engega();
+  /* qui no sap com començar: si al cap d'uns segons encara no ha escrit res, li ho diu (només el primer tram) */
+  clearTimeout(TEMPS_ARRENCA);
+  if (!S.trams.length) TEMPS_ARRENCA = setTimeout(function(){
+    if (!S || !S.actual || S.actual.def !== def || S.actual.st.t0 || S.pausat || S.entre || PANTALLA !== "p-escriu") return;
+    var c = def.text.charAt(0), nom = c === " " ? "l'espai" : (c === "\n" ? "Retorn" : "<kbd>" + esc(c) + "</kbd>");
+    missatge("<span><b>Comença quan vulguis:</b> escriu " + nom + ", la lletra marcada. No cal clicar enlloc. Mira la pantalla, no les mans: al teclat de baix brilla la tecla i el color et diu el dit.</span>", "guia");
+  }, 6000);
 }
+var TEMPS_ARRENCA = null;
 
 function pintaText(text){
   var pista = $("e-pista"), frag = document.createDocumentFragment();
@@ -11073,6 +11513,7 @@ function mostraResultat(s, previes, desada){
   ULTIM_DESADA = desada;
   if (desada) SESSIONS_AQUI++;
   pintaDesa();
+  pintaRutaResultat();
   $("b-r-altre").textContent = esRepte || s.rep ? "Un altre repte de " + (mR || s.rep) + " minuts" : (esLlico ? "Repeteix la lliçó" : "Una altra sessió");
   pintaJardiResultat(s, previes, desada);
   pintaPlaResultat(s, desada);
@@ -11839,7 +12280,7 @@ function descarregaFitxa(){
   pintaEstatFitxa();
   toast('<span class="toast-ico" aria-hidden="true"></span><span><b>Fitxa descarregada.</b> És a la carpeta de baixades: <code>' + esc(nom) + "</code>. Ara puja-la al teu Drive o lliura-la al Classroom: les baixades de l'institut s'esborren.</span>", 9000);
   if (PANTALLA === "p-inici") pintaInici();
-  if (PANTALLA === "p-resultat") pintaDesa();
+  if (PANTALLA === "p-resultat"){ pintaDesa(); pintaRutaResultat(); }
 }
 
 /* un missatge curt a baix de la pantalla, que se'n va sol */
@@ -12391,13 +12832,34 @@ function lliga(){
   $("f-qui").addEventListener("submit", enviaQui);
   $("qui-noms").addEventListener("click", function(e){
     var b = e.target.closest("[data-nom]"); if (!b) return;
-    var clau = N.clauNom(b.getAttribute("data-nom")), abans = MAG.perfils[clau];
-    obrePerfil(b.getAttribute("data-nom"), AULA.grup || "", abans ? null : "ca");
-    mostra("p-inici");
+    var nom = b.getAttribute("data-nom"), clau = N.clauNom(nom), abans = MAG.perfils[clau];
+    preguntaPrimera(nom, function(){ obrePerfil(nom, AULA.grup || "", abans ? null : "ca"); mostra("p-inici"); });
   });
   $("b-continua").onclick = function(){ mostra("p-inici"); };
   $("b-no-soc").onclick = function(){ MAG.actiu = null; desa(); pintaQui(); $("i-nom").focus(); };
   $("b-barra-canvia").onclick = canviaAlumne;
+  /* la ruta d'avui, el botó «Què faig?» i la benvinguda */
+  $("ini-ruta").addEventListener("click", clicRuta);
+  $("r-ruta").addEventListener("click", clicRuta);
+  $("r-barra-seguent").addEventListener("click", clicRuta);
+  $("ajuda-pas").addEventListener("click", function(e){ if (e.target.closest("[data-ruta]")){ tancaAjuda(); clicRuta(e); } });
+  $("b-ajuda").onclick = obreAjuda;
+  $("b-ajuda-tanca").onclick = tancaAjuda;
+  $("capa-ajuda").addEventListener("click", function(e){
+    if (e.target === $("capa-ajuda")) return tancaAjuda();
+    var b = e.target.closest("[data-accio]"); if (!b) return;
+    var a = b.getAttribute("data-accio"); tancaAjuda();
+    if (a === "carrega") $("i-fitxa").click(); else if (a === "enganxa") obreEnganxa();
+  });
+  $("capa-ajuda").addEventListener("keydown", function(e){ if (e.key === "Escape"){ e.preventDefault(); tancaAjuda(); $("b-ajuda").focus(); } });
+  $("b-primera-carrega").onclick = function(){ tancaPrimera("carrega"); };
+  $("b-primera-nou").onclick = function(){ tancaPrimera("nou"); };
+  $("b-primera-enganxa").onclick = function(){ tancaPrimera("enganxa"); };
+  $("capa-primera").addEventListener("keydown", function(e){ if (e.key === "Escape"){ e.preventDefault(); tancaPrimera(null); } });
+  $("b-benv-si").onclick = function(){ tancaBenvinguda(true); };
+  $("b-benv-no").onclick = function(){ tancaBenvinguda(false); };
+  $("capa-benvinguda").addEventListener("keydown", function(e){ if (e.key === "Escape"){ e.preventDefault(); tancaBenvinguda(false); } });
+  document.addEventListener("keydown", enterRuta);
   $("ini-ergo").addEventListener("click", function(e){ var b = e.target.closest("[data-accio]"); if (b && b.getAttribute("data-accio") === "ergo") obreErgo(null); });
   $("b-ini-ergo").onclick = function(){ obreErgo(null); };
   /* la lliçó d'ergonomia */
