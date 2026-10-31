@@ -980,7 +980,7 @@ tr.revisar td{background:color-mix(in srgb, var(--or-suau) 70%, transparent)}
 .escena.jardi.gran{min-height:320px}
 .jardi-pla{display:flex; align-items:center; justify-content:center; min-height:inherit; padding:22px}
 .amb-3d > .jardi-pla{display:none}
-.jp-xifres{display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px; width:100%; max-width:620px}
+.jp-xifres{display:grid; grid-template-columns:repeat(auto-fit, minmax(96px, 1fr)); gap:10px; width:100%; max-width:720px}
 .jp-xifres div{background:var(--sup); border:1px solid var(--linia); border-radius:14px; padding:12px; text-align:center}
 .jp-xifres b{display:block; font-family:var(--serif); font-weight:400; font-size:2rem; line-height:1}
 .jp-xifres span{font-size:.8rem; color:var(--suau)}
@@ -2564,6 +2564,11 @@ return {suportat:suportat, carrega:carrega, teclat:teclat, muntanya:muntanya, ei
    també a la targeta mitjana, oclusió feta a mà a la base de cada peça i
    molta més herba. A l'explorador, i només allà, el jardí és viu (vent,
    papallones, pètals, neu, cuques de llum): s'atura sol si no es toca res.
+   Versió 7: hi VIUEN ANIMALS (un per cada hora d'escriure, quatre espècies
+   per estil, per torns), quiets a la targeta i, a l'explorador, caminant,
+   saltant o volant; i a l'entrada, un RÈTOL amb el nom de qui el fa créixer,
+   en l'estil del jardí. Es posen després de tota la resta, als llocs lliures:
+   no mouen res del que ja hi havia.
    API: TRES.jardi(el, {estat, colors, noves, mida, interactiu, llum, gran}) → {el, allibera, mesura, refes, zoom}
         mida: "mini" | "mitjana" | "gran" | "explora" (omple el contenidor) · llum: "dia" | "posta" | "nit" (si no, el tema)
         TRES.jardiMiniatura(tipus, {fosc, llum, amplada, alcada}) → Promise<dataURL>
@@ -3619,6 +3624,328 @@ function construeixObjecte(id, P, ex){
   return K;
 }
 
+/* ---------- 6b. els animals que hi viuen (versió 7): un per cada hora d'escriure, quatre espècies per jardí ----------
+   Fets de peces, com tot (cap model ni textura de fora), en coordenades locals: base a y = 0 (els que volen, el cos a y = 0),
+   davant cap a +z. A la targeta són quiets; a l'explorador es mouen (només allà, i mai amb «reduir moviment"):
+   caminen, salten o rastregen entre uns quants punts lliures a prop de casa seva, s'aturen i hi tornen; els que volen
+   fan voltes per sobre. L'ordre de cada llista és el de nucli.js (ANIMALS_JARDI). */
+var NEGRE = 0x1E1A18;
+function ullsA(k, x, y, z, r){ posa(k, B.esf6, NEGRE, x, y, z, r); posa(k, B.esf6, NEGRE, -x, y, z, r); }
+/* les ales d'un que vola: la dreta, de l'espatlla (x = 0) cap a +x; l'esquerra és la mateixa capgirada */
+function alaA(kw, c1, c2, L, W){ posa(kw, B.oct, c1, L * 0.5, 0, 0, L * 0.5, 0.006, W); posa(kw, B.oct, c2, L * 0.78, 0.002, -W * 0.3, L * 0.26, 0.005, W * 0.6); }
+function conillA(k, c, ventre, s, puntes){
+  posa(k, B.esf, c, 0, 0.085 * s, -0.03 * s, 0.075 * s, 0.072 * s, 0.085 * s);
+  posa(k, B.esf, c, 0, 0.1 * s, 0.04 * s, 0.055 * s, 0.06 * s, 0.06 * s);
+  posa(k, B.esf, ventre, 0, 0.078 * s, 0.065 * s, 0.038 * s, 0.04 * s, 0.03 * s);
+  posa(k, B.esf, c, 0, 0.16 * s, 0.085 * s, 0.048 * s, 0.046 * s, 0.055 * s);
+  posa(k, B.esf, ventre, 0, 0.145 * s, 0.13 * s, 0.022 * s, 0.02 * s, 0.016 * s);
+  posa(k, B.esf6, 0xD99A9A, 0, 0.156 * s, 0.143 * s, 0.008 * s);
+  [-1, 1].forEach(function(x){
+    posa(k, B.esf, c, x * 0.02 * s, 0.235 * s, 0.065 * s, 0.016 * s, 0.065 * s, 0.011 * s, -PI / 2, 0.25);
+    posa(k, B.esf, 0xE8B8B0, x * 0.02 * s, 0.235 * s, 0.072 * s, 0.009 * s, 0.05 * s, 0.005 * s, -PI / 2, 0.25);
+    if (puntes) posa(k, B.esf, NEGRE, x * 0.02 * s, 0.288 * s, 0.052 * s, 0.012 * s, 0.018 * s, 0.009 * s, -PI / 2, 0.25);
+    posa(k, B.cil, c, x * 0.025 * s, 0, 0.065 * s, 0.012 * s, 0.07 * s, 0.012 * s);
+    posa(k, B.esf, c, x * 0.045 * s, 0.014 * s, -0.025 * s, 0.022 * s, 0.015 * s, 0.05 * s);
+  });
+  posa(k, B.esf, ventre, 0, 0.1 * s, -0.115 * s, 0.03 * s);
+  ullsA(k, 0.034 * s, 0.176 * s, 0.11 * s, 0.009 * s);
+}
+function quadrupedeA(k, o){
+  var L = o.L, H = o.H, R = o.R, C = o.cap, hz = L / 2 + C * 0.4, hy = H + R * 1.9;
+  posa(k, B.esf, o.c, 0, H + R, 0, R * 0.9, R, L / 2);
+  posa(k, B.esf, o.ventre, 0, H + R * 0.72, L * 0.08, R * 0.68, R * 0.6, L * 0.36);
+  [[1, 1], [-1, 1], [1, -1], [-1, -1]].forEach(function(q){ posa(k, B.cil, o.potes, q[0] * R * 0.5, 0, q[1] * L * 0.3, R * 0.22, H + R * 0.5, R * 0.22); });
+  posa(k, B.esf, o.c, 0, hy, hz, C * 0.95, C * 0.85, C);
+  posa(k, B.con, o.ventre, 0, hy - C * 0.2, hz + C * 0.75, C * 0.42, o.morro, C * 0.34, PI / 2, PI / 2);
+  posa(k, B.esf6, NEGRE, 0, hy - C * 0.2, hz + C * 0.75 + o.morro, C * 0.13);
+  [-1, 1].forEach(function(x){
+    posa(k, B.con, o.c, x * C * 0.55, hy + C * 0.55, hz - C * 0.1, C * 0.36, C * 0.85, C * 0.14, x > 0 ? 0 : PI, 0.3);
+    if (o.orellaC) posa(k, B.con, o.orellaC, x * C * 0.69, hy + C * 1.0, hz - C * 0.1, C * 0.16, C * 0.42, C * 0.07, x > 0 ? 0 : PI, 0.3);
+  });
+  ullsA(k, C * 0.45, hy + C * 0.15, hz + C * 0.8, C * 0.12);
+  if (o.cua === "corba") posa(k, B.cil, o.c, 0, H + R * 1.2, -L * 0.42, R * 0.17, L * 0.85, R * 0.17, -PI / 2, 0.55);
+  else for (var i = 0; i < 5; i++){ var t = i / 4; posa(k, B.esf, i === 4 ? o.puntaCua : o.c, 0, H + R * (1.2 - t * 0.9), -L / 2 - t * L * 0.5, R * (0.42 + 0.28 * Math.sin(t * PI))); }
+}
+function cervolA(k, kb, o){
+  var c = o.c, cf = o.fosc;
+  posa(k, B.esf, c, 0, 0.25, 0, 0.055, 0.06, 0.12);
+  posa(k, B.esf, c, 0, 0.26, 0.07, 0.046, 0.056, 0.05);
+  posa(k, B.esf, o.ventre, 0, 0.27, -0.11, 0.032, 0.036, 0.022); posa(k, B.esf6, o.ventre, 0, 0.29, -0.126, 0.013);
+  [[1, 1], [-1, 1], [1, -1], [-1, -1]].forEach(function(q){ posa(k, B.cil, cf, q[0] * 0.03, 0, q[1] * 0.075, 0.009, 0.23, 0.009); });
+  posa(k, B.cil, c, 0, 0.28, 0.08, 0.025, 0.12, 0.022, PI / 2, 0.5);
+  posa(k, B.esf, c, 0, 0.39, 0.15, 0.028, 0.03, 0.04);
+  posa(k, B.esf, cf, 0, 0.376, 0.188, 0.018, 0.018, 0.024); posa(k, B.esf6, NEGRE, 0, 0.379, 0.211, 0.008);
+  [-1, 1].forEach(function(x){
+    posa(k, B.esf, c, x * 0.036, 0.415, 0.137, 0.022, 0.008, 0.012);
+    var kk = o.brilla ? kb : k, d = x > 0 ? 0 : PI, b0 = [x * 0.014, 0.414, 0.142], m = cap(d, 0.35, 0.05), t = cap(d, 0.35, 0.1);
+    posa(kk, B.cil, o.banyes, b0[0], b0[1], b0[2], 0.005 * o.mb, 0.1 * o.mb, 0.005 * o.mb, d, 0.35);
+    posa(kk, B.cil, o.banyes, b0[0] + m[0] * o.mb, b0[1] + m[1] * o.mb, b0[2] + m[2] * o.mb, 0.004 * o.mb, 0.05 * o.mb, 0.004 * o.mb, PI / 2, 0.5);
+    posa(kk, B.cil, o.banyes, b0[0] + t[0] * o.mb, b0[1] + t[1] * o.mb, b0[2] + t[2] * o.mb, 0.004 * o.mb, 0.04 * o.mb, 0.004 * o.mb, -PI / 2, 0.45);
+    if (o.brilla) posa(kb, B.ico, o.banyes, b0[0] + t[0] * o.mb, b0[1] + t[1] * o.mb + 0.004, b0[2] + t[2] * o.mb, 0.009);
+  });
+  ullsA(k, 0.022, 0.4, 0.175, 0.006);
+  if (o.taques) for (var i = 0; i < 12; i++){ var x2 = (i % 2 ? 1 : -1) * (0.036 + (i % 3) * 0.004), z2 = -0.09 + (i >> 1) * 0.034; posa(o.brilla ? kb : k, B.esf6, o.taques, x2, 0.283 + (i % 3) * 0.006, z2, 0.008); }
+}
+function ericoA(k, kb, o){
+  posa(k, B.esf, o.pell, 0, 0.045, -0.005, 0.07, 0.05, 0.085);
+  posa(k, B.con, o.cara, 0, 0.038, 0.058, 0.028, 0.052, 0.022, PI / 2, PI / 2 + 0.25);
+  posa(k, B.esf6, NEGRE, 0, 0.026, 0.11, 0.008);
+  ullsA(k, 0.018, 0.052, 0.08, 0.006);
+  [-1, 1].forEach(function(x){ posa(k, B.esf, o.cara, x * 0.04, 0.008, 0.04, 0.014, 0.008, 0.016); posa(k, B.esf, o.cara, x * 0.04, 0.008, -0.05, 0.014, 0.008, 0.016); });
+  for (var i = 0; i < 46; i++){
+    var u = (i + 0.5) / 46, ny = 1 - u * 0.85, r = Math.sqrt(1 - ny * ny), th = i * GA, nx = r * Math.cos(th), nz = r * Math.sin(th);
+    if (nz > 0.5 && ny < 0.7) continue;
+    var px = nx * 0.068, py = 0.045 + ny * 0.048, pz = -0.005 + nz * 0.083, dir = Math.atan2(nz, nx), inc = Math.acos(ny);
+    posa(k, B.con, i % 3 ? o.pua : o.pua2, px, py, pz, 0.011, 0.046, 0.011, dir, inc);
+    if (o.llum && i % 3 === 0){ var tq = cap(dir, inc, 0.046); posa(kb, B.ico, o.llum, px + tq[0], py + tq[1], pz + tq[2], 0.008); }
+  }
+}
+/* els ocells de terra: cos, coll (si en tenen), cap, bec, potes i cua; torna on és el cap */
+function ocellA(k, o){
+  var H = o.H, R = o.R, L = o.L, g = o.g || 1, hy, hz, inc = o.collInc || 0.25;
+  posa(k, B.esf, o.c, 0, H + R, 0, R * 0.9, R, L / 2);
+  if (o.ventre) posa(k, B.esf, o.ventre, 0, H + R * 0.82, L * 0.16, R * 0.74, R * 0.76, L * 0.3);
+  [-1, 1].forEach(function(x){ posa(k, B.cil, o.potes, x * R * 0.35, 0, 0, 0.005 * g, H + R * 0.4, 0.005 * g); });
+  if (o.coll){ posa(k, B.cil, o.cc || o.c, 0, H + R * 1.3, L * 0.3, R * 0.27, o.coll, R * 0.27, PI / 2, inc); hy = H + R * 1.3 + Math.cos(inc) * o.coll; hz = L * 0.3 + Math.sin(inc) * o.coll; }
+  else { hy = H + R * 1.75; hz = L * 0.4; }
+  var cr = o.capR;
+  posa(k, B.esf, o.capC || o.c, 0, hy, hz, cr);
+  if (o.becPla) posa(k, B.esf, o.bec, 0, hy - cr * 0.15, hz + cr + o.becL * 0.4, cr * 0.48, cr * 0.2, o.becL * 0.6);
+  else posa(k, B.con, o.bec, 0, hy - cr * 0.12, hz + cr * 0.75, cr * 0.36, o.becL, cr * 0.3, PI / 2, PI / 2 + (o.becInc || 0));
+  ullsA(k, cr * 0.62, hy + cr * 0.22, hz + cr * 0.55, cr * 0.17);
+  if (o.cua === "amunt") posa(k, B.con, o.cuaC || o.c, 0, H + R * 1.1, -L * 0.38, R * 0.55, R * 1.5, R * 0.22, -PI / 2, 0.75);
+  else if (o.cua === "llarga") posa(k, B.con, o.cuaC || o.c, 0, H + R * 1.1, -L * 0.4, R * 0.42, L * (o.cuaL || 0.9), R * 0.14, -PI / 2, 1.2);
+  else posa(k, B.con, o.cuaC || o.c, 0, H + R * 1.05, -L * 0.4, R * 0.45, L * 0.32, R * 0.16, -PI / 2, 1.1);
+  return {y:hy, z:hz, r:cr};
+}
+/* els que volen: el cos al voltant de l'origen */
+function voladorA(k, o){
+  var R = o.R, L = o.L, cr = o.capR, hy = R * 0.55, hz = L * 0.45;
+  posa(k, B.esf, o.c, 0, 0, 0, R * 0.85, R, L / 2);
+  if (o.ventre) posa(k, B.esf, o.ventre, 0, -R * 0.25, L * 0.12, R * 0.7, R * 0.7, L * 0.32);
+  posa(k, B.esf, o.capC || o.c, 0, hy, hz, cr);
+  if (o.gola) posa(k, B.esf, o.gola, 0, hy - cr * 0.55, hz + cr * 0.35, cr * 0.7, cr * 0.5, cr * 0.6);
+  posa(k, B.con, o.bec, 0, hy - cr * 0.1, hz + cr * 0.8, cr * (o.becG || 0.3), o.becL, cr * (o.becG || 0.3) * 0.85, PI / 2, PI / 2 + (o.becInc || 0));
+  if (o.anell){ posa(k, B.esf6, o.anell, cr * 0.6, hy + cr * 0.2, hz + cr * 0.5, cr * 0.3); posa(k, B.esf6, o.anell, -cr * 0.6, hy + cr * 0.2, hz + cr * 0.5, cr * 0.3); }
+  ullsA(k, cr * 0.66, hy + cr * 0.22, hz + cr * 0.6, cr * 0.17);
+  posa(k, B.con, o.cuaC || o.c, 0, 0, -L * 0.4, R * 0.55, o.cuaL, R * 0.16, -PI / 2, PI / 2);
+}
+function llangardaixA(k, o){
+  var s = o.s;
+  posa(k, B.esf, o.c, 0, 0.022 * s, 0, 0.026 * s, 0.017 * s, 0.065 * s);
+  if (o.dors) posa(k, B.esf, o.dors, 0, 0.03 * s, 0, 0.012 * s, 0.012 * s, 0.06 * s);
+  posa(k, B.con, o.c, 0, 0.02 * s, -0.05 * s, 0.016 * s, 0.13 * s, 0.011 * s, -PI / 2, PI / 2 + 0.08);
+  posa(k, B.esf, o.c, 0, 0.026 * s, 0.075 * s, 0.02 * s, 0.014 * s, 0.032 * s);
+  ullsA(k, 0.013 * s, 0.034 * s, 0.085 * s, 0.004 * s);
+  [[1, 1], [-1, 1], [1, -1], [-1, -1]].forEach(function(q){ posa(k, B.esf, o.c, q[0] * 0.038 * s, 0.008 * s, q[1] * 0.035 * s, 0.016 * s, 0.006 * s, 0.01 * s); });
+  if (o.cresta) for (var i = 0; i < 7; i++) posa(k, B.con, o.cresta, 0, 0.036 * s, (0.05 - i * 0.017) * s, 0.006 * s, 0.018 * s, 0.003 * s);
+  if (o.papada) posa(k, B.esf, o.papada, 0, 0.012 * s, 0.075 * s, 0.006 * s, 0.014 * s, 0.016 * s);
+}
+function tortugaA(k, kb, o){
+  posa(k, B.esf, o.closca, 0, 0.032, 0, 0.075, 0.056, 0.095);
+  for (var i = 0; i < 7; i++){
+    var a = i * DPI / 6, r = i ? 0.042 : 0, x = Math.cos(a) * r, z = Math.sin(a) * r * 1.2, y = 0.032 + Math.sqrt(Math.max(0, 1 - (x / 0.075) * (x / 0.075) - (z / 0.095) * (z / 0.095))) * 0.056;
+    if (o.cristall){ posa(kb, B.oct, i % 2 ? 0xC8A0FF : 0x7FFFE8, x, y - 0.004, z, 0.016, 0.03, 0.016); }
+    else posa(k, B.esf6, o.placa, x, y - 0.012, z, 0.022, 0.014, 0.022);
+  }
+  posa(k, B.esf, o.pell, 0, 0.03, 0.11, 0.024, 0.022, 0.032);
+  ullsA(k, 0.014, 0.04, 0.128, 0.005);
+  [[1, 1], [-1, 1], [1, -1], [-1, -1]].forEach(function(q){ posa(k, B.esf, o.pell, q[0] * 0.06, 0.016, q[1] * 0.06, 0.022, 0.018, 0.022); });
+  posa(k, B.con, o.pell, 0, 0.02, -0.09, 0.01, 0.03, 0.008, -PI / 2, PI / 2);
+}
+/* mou: salta · camina · llisca (rastreja, a poc a poc) · costat (el cranc) · vola (voltes) · plana (s'atura a l'aire);
+   v = velocitat; R = fins on s'allunya de casa; rad = el que ocupa a terra; alt = a quina alçada vola; pica = picoteja quan s'atura */
+var ESPECIE = {
+  bosc:[
+    {mou:"salta", v:0.42, R:0.95, rad:0.1, salt:0.05, fes:function(k){ conillA(k, 0x9C8670, 0xE6DCCB, 1, false); }},
+    {mou:"salta", v:0.75, R:1.1, rad:0.08, salt:0.035, esc:1.15, fes:function(k){
+      var c = 0xB5562E; posa(k, B.esf, c, 0, 0.08, 0, 0.04, 0.06, 0.045); posa(k, B.esf, 0xE8D2B0, 0, 0.078, 0.028, 0.027, 0.045, 0.022);
+      posa(k, B.esf, c, 0, 0.15, 0.035, 0.038); posa(k, B.esf, 0xE8D2B0, 0, 0.142, 0.068, 0.018, 0.016, 0.016); posa(k, B.esf6, NEGRE, 0, 0.145, 0.083, 0.006);
+      [-1, 1].forEach(function(x){ posa(k, B.con, c, x * 0.019, 0.178, 0.028, 0.01, 0.03, 0.008); posa(k, B.esf, c, x * 0.03, 0.025, -0.008, 0.02, 0.026, 0.036); posa(k, B.esf, c, x * 0.014, 0.075, 0.045, 0.009); });
+      ullsA(k, 0.024, 0.158, 0.06, 0.007);
+      for (var i = 0; i < 6; i++){ var t = i / 5; posa(k, B.esf, i % 2 ? 0xC2663A : c, 0, 0.05 + 0.17 * Math.sin(t * PI * 0.55), -0.055 - 0.065 * Math.sin(t * PI), 0.03 + 0.014 * Math.sin(t * PI)); }
+    }},
+    {mou:"camina", v:0.16, R:0.6, rad:0.1, fes:function(k, kb){ ericoA(k, kb, {pell:0x6B5444, esc:1.15, cara:0xC8AA8A, pua:0x4A3A30, pua2:0xD8C8B0}); }},
+    {mou:"vola", v:0.9, R:1.3, alt:1.25, rad:0, freq:16, esc:1.9, ala:[0.1, 0.035], fes:function(k){
+      voladorA(k, {R:0.026, L:0.1, c:0x2FA6B8, ventre:0x2FA6B8, capC:0x8A4A2A, capR:0.026, gola:0xF2C83A, bec:NEGRE, becL:0.045, becG:0.22, cuaC:0x2FA6B8, cuaL:0.075});
+    }, ales:function(kw){ alaA(kw, 0x4A9A6A, 0x2A5A8A, 0.1, 0.035); }}
+  ],
+  japo:[
+    {mou:"camina", v:0.18, R:0.85, rad:0.12, pica:true, fes:function(k){
+      var h = ocellA(k, {H:0.26, R:0.06, L:0.2, c:0xF4F2EC, coll:0.2, collInc:0.2, cc:0x2A2A2A, capR:0.022, capC:0xF4F2EC, bec:0x9A9A70, becL:0.055, potes:0x2A2A2A, g:1.2, cua:"curta", cuaC:0x2A2A2A});
+      posa(k, B.esf6, 0xD8343A, 0, h.y + h.r * 0.8, h.z - h.r * 0.1, h.r * 0.55); posa(k, B.esf, 0x2A2A2A, 0, 0.33, -0.1, 0.045, 0.04, 0.05);
+    }},
+    {mou:"salta", v:0.4, R:0.55, rad:0.07, salt:0.06, esc:1.35, fes:function(k){
+      var c = 0x6E9A3A; posa(k, B.esf, c, 0, 0.035, 0, 0.045, 0.03, 0.05); posa(k, B.esf, 0xD8D6A0, 0, 0.026, 0.012, 0.035, 0.018, 0.04);
+      [-1, 1].forEach(function(x){ posa(k, B.esf, c, x * 0.022, 0.064, 0.03, 0.014); posa(k, B.esf6, NEGRE, x * 0.026, 0.07, 0.041, 0.007); posa(k, B.esf, c, x * 0.046, 0.02, -0.03, 0.022, 0.016, 0.04); posa(k, B.esf, c, x * 0.03, 0.01, 0.045, 0.01, 0.012, 0.012); });
+    }},
+    {mou:"camina", v:0.28, R:1.0, rad:0.15, fes:function(k, kb){ cervolA(k, kb, {c:0xA0663A, fosc:0x6A4228, ventre:0xF2EADF, banyes:0xD8C8A8, mb:1, taques:0xF6F0E4}); }},
+    {mou:"vola", v:0.75, R:1.0, alt:1.1, rad:0, freq:20, ala:[0.07, 0.025], esc:2.1, fes:function(k){
+      voladorA(k, {R:0.02, L:0.065, c:0x8FA83A, ventre:0xD8D2A0, capC:0x8FA83A, capR:0.02, gola:0xE8D24A, anell:0xFFFFFF, bec:0x3A3A30, becL:0.016, cuaC:0x7A8F35, cuaL:0.035});
+    }, ales:function(kw){ alaA(kw, 0x7A8F35, 0x5A6A2A, 0.07, 0.025); }}
+  ],
+  desert:[
+    {mou:"llisca", v:0.6, R:0.9, rad:0.07, esc:1.35, fes:function(k){ llangardaixA(k, {s:1, c:0x9A8A4A, dors:0x6A5A30}); }},
+    {mou:"llisca", v:0.06, R:0.45, rad:0.11, esc:1.15, fes:function(k, kb){ tortugaA(k, kb, {closca:0x6B6A3A, placa:0x8A8648, pell:0x9C9470}); }},
+    {mou:"camina", v:0.7, R:1.15, rad:0.09, fes:function(k){
+      var h = ocellA(k, {H:0.11, R:0.035, L:0.1, c:0x7A6A50, ventre:0xD8CCB0, coll:0.05, collInc:0.35, capR:0.026, bec:0x3A3A3A, becL:0.045, potes:0x8A9AA0, cua:"llarga", cuaC:0x4A4038, cuaL:1.4});
+      posa(k, B.con, 0x4A4038, 0, h.y + h.r * 0.6, h.z - h.r * 0.3, h.r * 0.5, h.r * 1.6, h.r * 0.2, -PI / 2, 0.7);
+      posa(k, B.esf6, 0xE8823A, h.r * 0.5, h.y + h.r * 0.05, h.z + h.r * 0.2, h.r * 0.3); posa(k, B.esf6, 0xE8823A, -h.r * 0.5, h.y + h.r * 0.05, h.z + h.r * 0.2, h.r * 0.3);
+    }},
+    {mou:"plana", v:1.2, R:0.8, alt:0.42, rad:0, freq:46, esc:2.3, ala:[0.06, 0.018], fes:function(k){
+      voladorA(k, {R:0.015, L:0.055, c:0x2EA67A, ventre:0xE8E8E0, capC:0x2EA67A, capR:0.015, gola:0xD8344A, bec:NEGRE, becL:0.045, becG:0.16, cuaC:0x1E7A5A, cuaL:0.025});
+    }, ales:function(kw){ alaA(kw, 0x8AB8B0, 0x5A8880, 0.06, 0.018); }}
+  ],
+  hort:[
+    {mou:"camina", v:0.3, R:0.9, rad:0.09, pica:true, fes:function(k){
+      var h = ocellA(k, {H:0.05, R:0.06, L:0.15, c:0xB8642E, ventre:0xC87A44, capR:0.032, bec:0xE8B848, becL:0.025, potes:0xE0B040, g:1.3, cua:"amunt", cuaC:0x4A2A1A});
+      for (var i = -1; i <= 1; i++) posa(k, B.esf6, 0xD8343A, 0, h.y + h.r * (0.95 - Math.abs(i) * 0.12), h.z + i * h.r * 0.38, h.r * 0.33);
+      posa(k, B.esf6, 0xD8343A, 0, h.y - h.r * 0.75, h.z + h.r * 0.7, h.r * 0.28);
+    }},
+    {mou:"camina", v:0.22, R:0.8, rad:0.09, balanca:0.16, fes:function(k){
+      ocellA(k, {H:0.03, R:0.05, L:0.14, c:0xF6F4EE, coll:0.05, collInc:0.2, capR:0.03, bec:0xF0A030, becL:0.03, becPla:true, potes:0xF0A030, g:1.6, cua:"amunt", cuaC:0xF6F4EE});
+      posa(k, B.esf, 0xF0A030, 0.02, 0.004, 0.012, 0.016, 0.004, 0.022); posa(k, B.esf, 0xF0A030, -0.02, 0.004, 0.012, 0.016, 0.004, 0.022);
+    }},
+    {mou:"camina", v:0.32, R:1.0, rad:0.09, fes:function(k){ quadrupedeA(k, {L:0.17, H:0.06, R:0.045, cap:0.042, morro:0.012, c:0xD8904A, ventre:0xF0DCC0, potes:0xD8904A, cua:"corba"}); }},
+    {mou:"vola", v:0.7, R:0.9, alt:0.95, rad:0, freq:18, esc:2.0, ala:[0.075, 0.028], fes:function(k){
+      voladorA(k, {R:0.025, L:0.07, c:0x7A6A4A, ventre:0xE0703A, capC:0x7A6A4A, capR:0.022, gola:0xE0703A, bec:0x3A3028, becL:0.014, cuaC:0x6A5A3A, cuaL:0.035});
+    }, ales:function(kw){ alaA(kw, 0x6A5A3A, 0x4A3E2A, 0.075, 0.028); }}
+  ],
+  tropical:[
+    {mou:"camina", v:0.14, R:0.75, rad:0.1, pica:true, fes:function(k){
+      var h = ocellA(k, {H:0.28, R:0.05, L:0.14, c:0xF09AA0, coll:0.16, collInc:0.3, capR:0.02, bec:0x2A2A2A, becL:0.04, becInc:0.9, potes:0xE8909A, g:1, cua:"curta"});
+      posa(k, B.esf, 0xE07A84, 0, 0.32, -0.02, 0.046, 0.03, 0.06);
+    }},
+    {mou:"costat", v:0.28, R:0.6, rad:0.08, esc:1.35, fes:function(k){
+      var c = 0xD8502A; posa(k, B.esf, c, 0, 0.032, 0, 0.05, 0.02, 0.035);
+      [-1, 1].forEach(function(x){
+        posa(k, B.cil, c, x * 0.015, 0.04, 0.022, 0.003, 0.025, 0.003); posa(k, B.esf6, NEGRE, x * 0.015, 0.066, 0.022, 0.006);
+        posa(k, B.cil, c, x * 0.04, 0.03, 0.03, 0.005, 0.03, 0.005, x > 0 ? 0.6 : PI - 0.6, 1.2); posa(k, B.esf, c, x * 0.064, 0.036, 0.048, 0.022, 0.014, 0.017);
+        for (var j = -1; j <= 1; j++) posa(k, B.cil, 0xB8401E, x * 0.035, 0.03, j * 0.018, 0.004, 0.05, 0.004, x > 0 ? 0 : PI, 2.0);
+      });
+    }},
+    {mou:"llisca", v:0.18, R:0.8, rad:0.1, fes:function(k){ llangardaixA(k, {s:1.55, c:0x5A9A4A, dors:0x4A8A3A, cresta:0x3A7A30, papada:0x7AAA5A}); }},
+    {mou:"vola", v:0.85, R:1.4, alt:1.5, rad:0, freq:9, esc:1.6, ala:[0.13, 0.045], fes:function(k){
+      voladorA(k, {R:0.035, L:0.12, c:0xD8342A, capC:0xD8342A, capR:0.03, anell:0xF4F0E8, bec:0xE8E0D0, becL:0.03, becG:0.5, becInc:0.7, cuaC:0xC82A22, cuaL:0.15});
+    }, ales:function(kw){ alaA(kw, 0x2E6AD8, 0xF4C430, 0.13, 0.045); }}
+  ],
+  flors:[
+    {mou:"camina", v:0.16, R:0.85, rad:0.16, pica:true, fes:function(k){
+      var h = ocellA(k, {H:0.1, R:0.05, L:0.14, c:0x2A5AB8, coll:0.1, collInc:0.15, capR:0.024, bec:0x9A9A9A, becL:0.02, potes:0x8A8A8A, cua:"curta", cuaC:0x6A7A4A});
+      for (var i = -1; i <= 1; i++){ posa(k, B.pal, 0x2A5AB8, i * 0.008, h.y + h.r * 0.7, h.z - 0.005, 0.0025, 0.035, 0.0025, i > 0 ? 0 : PI, Math.abs(i) * 0.25); posa(k, B.esf6, 0x3A8AD0, i * 0.017, h.y + h.r * 0.7 + 0.034, h.z - 0.005, 0.006); }
+      posa(k, B.esf, 0x2A6A4A, 0, 0.27, -0.1, 0.2, 0.16, 0.008);
+      for (var j = -6; j <= 6; j++){
+        var a = j * 0.22, x = Math.sin(a) * 0.23, y = 0.15 + Math.cos(a) * 0.23;
+        posa(k, B.esf, 0x2E7A50, x, y, -0.094, 0.03, 0.05, 0.008, 0, a);
+        posa(k, B.esf6, 0xC8A040, x * 1.02, y + 0.012, -0.087, 0.013, 0.013, 0.004); posa(k, B.esf6, 0x1A3AA0, x * 1.02, y + 0.012, -0.084, 0.008, 0.008, 0.004);
+      }
+    }},
+    {mou:"llisca", v:0.03, R:0.3, rad:0.06, esc:1.6, fes:function(k){
+      posa(k, B.esf, 0xC8B898, 0, 0.012, 0.005, 0.018, 0.012, 0.06);
+      posa(k, B.esf, 0xA0703A, 0, 0.045, -0.008, 0.032, 0.034, 0.03); posa(k, B.esf, 0xC8904A, 0.008, 0.058, -0.004, 0.02, 0.022, 0.031); posa(k, B.esf, 0xE0B070, 0.013, 0.067, -0.002, 0.011, 0.012, 0.032);
+      [-1, 1].forEach(function(x){ posa(k, B.cil, 0xC8B898, x * 0.008, 0.015, 0.055, 0.003, 0.035, 0.003, x > 0 ? 0.3 : PI - 0.3, 0.35); posa(k, B.esf6, NEGRE, x * 0.012, 0.048, 0.062, 0.004); });
+    }},
+    {mou:"salta", v:0.45, R:0.9, rad:0.07, salt:0.025, pica:true, esc:1.35, fes:function(k){
+      var h = ocellA(k, {H:0.04, R:0.03, L:0.085, c:0x1E1E22, capR:0.022, bec:0xE8A030, becL:0.02, potes:0x3A3030, cua:"llarga", cuaL:0.8});
+      posa(k, B.esf6, 0xE8A030, h.r * 0.62, h.y + h.r * 0.22, h.z + h.r * 0.5, h.r * 0.26); posa(k, B.esf6, 0xE8A030, -h.r * 0.62, h.y + h.r * 0.22, h.z + h.r * 0.5, h.r * 0.26);
+    }},
+    {mou:"vola", v:0.7, R:1.0, alt:1.05, rad:0, freq:20, ala:[0.07, 0.026], esc:2.1, fes:function(k){
+      voladorA(k, {R:0.022, L:0.065, c:0x7A9A5A, ventre:0xE8CC3A, capC:0x3A7AD0, capR:0.021, gola:0xF6F4EE, bec:NEGRE, becL:0.012, cuaC:0x5A80C0, cuaL:0.035});
+    }, ales:function(kw){ alaA(kw, 0x5A80C0, 0x3A5A90, 0.07, 0.026); }}
+  ],
+  neu:[
+    {mou:"camina", v:0.42, R:1.15, rad:0.11, fes:function(k){ quadrupedeA(k, {L:0.22, H:0.1, R:0.05, cap:0.045, morro:0.05, c:0xC8642A, ventre:0xF2EADF, potes:0x2A2220, orellaC:0x2A2220, cua:"plomall", puntaCua:0xF6F2EC}); }},
+    {mou:"salta", v:0.62, R:1.1, rad:0.11, salt:0.06, fes:function(k){ conillA(k, 0xF2F2F0, 0xFFFFFF, 1.15, true); }},
+    {mou:"camina", v:0.26, R:1.0, rad:0.15, fes:function(k, kb){ cervolA(k, kb, {c:0x8A6A4A, fosc:0x5A4430, ventre:0xF6F2EC, banyes:0xC8B8A0, mb:0.6}); }},
+    {mou:"vola", v:0.5, R:1.2, alt:1.45, rad:0, freq:5, plana:true, esc:1.6, ala:[0.1, 0.04], fes:function(k){
+      posa(k, B.esf, 0xA89070, 0, 0, 0, 0.042, 0.05, 0.04); posa(k, B.esf, 0xD8C8A8, 0, 0.018, 0.028, 0.032, 0.03, 0.014);
+      [-1, 1].forEach(function(x){ posa(k, B.esf6, 0xF2C83A, x * 0.013, 0.024, 0.039, 0.011); posa(k, B.esf6, NEGRE, x * 0.013, 0.024, 0.047, 0.006); posa(k, B.con, 0x8A7458, x * 0.022, 0.042, 0.008, 0.009, 0.026, 0.006, x > 0 ? 0 : PI, 0.3); });
+      posa(k, B.con, 0x6A5A40, 0, 0.012, 0.044, 0.006, 0.014, 0.005, PI / 2, PI / 2 + 0.9);
+      for (var i = 0; i < 6; i++) posa(k, B.esf6, 0xF4ECDC, (i % 3 - 1) * 0.018, -0.012 - (i >> 1) * 0.01, 0.035 - (i >> 1) * 0.004, 0.004);
+    }, ales:function(kw){ alaA(kw, 0x8A7458, 0x6A5A40, 0.1, 0.04); }}
+  ],
+  encantat:[
+    {mou:"camina", v:0.24, R:1.0, rad:0.15, fes:function(k, kb){ cervolA(k, kb, {c:0x4A3A7A, fosc:0x2E2450, ventre:0xB8A8E8, banyes:0x7FFFE8, mb:1.2, taques:0xC8A0FF, brilla:true}); }},
+    {mou:"camina", v:0.15, R:0.6, rad:0.1, fes:function(k, kb){ ericoA(k, kb, {pell:0x3A4A3A, esc:1.15, cara:0x8A9A7A, pua:0x4A7A4A, pua2:0x6A9A5A, llum:0xA8FF7A}); }},
+    {mou:"llisca", v:0.05, R:0.45, rad:0.11, esc:1.15, fes:function(k, kb){ tortugaA(k, kb, {closca:0x3A3458, pell:0x6A5A9A, cristall:true}); }},
+    {mou:"vola", v:0.4, R:1.0, alt:0.85, rad:0, freq:7, esc:1.8, ala:[0.1, 0.06], alesBrillen:true, fes:function(k){
+      posa(k, B.esf, 0xE8F0D8, 0, 0, 0, 0.012, 0.012, 0.032);
+      [-1, 1].forEach(function(x){ posa(k, B.con, 0xD8E8C8, x * 0.006, 0.006, 0.03, 0.006, 0.03, 0.002, x > 0 ? 0.6 : PI - 0.6, 0.9); });
+    }, ales:function(kw){
+      posa(kw, B.oct, 0xB8F0C8, 0.05, 0, 0.01, 0.05, 0.003, 0.04); posa(kw, B.oct, 0x9FE0B8, 0.035, 0.001, -0.045, 0.03, 0.003, 0.05);
+      posa(kw, B.esf6, 0xF2D47A, 0.055, 0.004, 0.008, 0.011, 0.002, 0.011); posa(kw, B.esf6, 0x6A5A9A, 0.055, 0.006, 0.008, 0.005, 0.002, 0.005);
+    }}
+  ]
+};
+function especieDe(tipus, esp){ var l = ESPECIE[tipus] || ESPECIE.bosc; return l[((esp | 0) % l.length + l.length) % l.length]; }
+
+/* ---------- 6c. el rètol de l'entrada: el nom de qui fa créixer el jardí, en l'estil del jardí (versió 7) ---------- */
+var ESTIL_ROTUL = {
+  bosc:{fons:"#C89A62", veta:"rgba(110,70,40,.22)", vora:"#6A4A2E", tinta:"#3A2618", lletra:"Georgia, 'Times New Roman', serif"},
+  japo:{fons:"#3A2A22", veta:"rgba(0,0,0,.18)", vora:"#9A2A22", tinta:"#F2E8D8", lletra:"Georgia, 'Times New Roman', serif", segell:"#C8342A"},
+  desert:{fons:"#D8B47E", veta:"rgba(122,58,30,.14)", vora:"#9A6A3E", tinta:"#7A3A1E", lletra:"'Trebuchet MS', Verdana, sans-serif", majuscules:true},
+  hort:{fons:"#F4F0E6", veta:null, vora:"#4A7A3A", tinta:"#3A6A2E", lletra:"Georgia, 'Times New Roman', serif"},
+  tropical:{fons:"#E2C88A", veta:"rgba(120,90,30,.2)", vertical:true, vora:"#8A6A2A", tinta:"#1E5A4A", lletra:"'Trebuchet MS', Verdana, sans-serif"},
+  flors:{fons:"#F6F0E4", veta:null, vora:"#B05A7A", doble:true, tinta:"#8A3A5A", lletra:"Georgia, 'Times New Roman', serif", italica:true},
+  neu:{fons:"#5A4636", veta:"rgba(0,0,0,.16)", vora:"#3A2C22", tinta:"#F4F8FC", lletra:"Georgia, 'Times New Roman', serif"},
+  encantat:{fons:"#2E2A4A", veta:null, vora:"#7FFFE8", tinta:"#9FFFF0", lletra:"Georgia, 'Times New Roman', serif", brilla:true}
+};
+function textRotul(linies, tipus){
+  var e = ESTIL_ROTUL[tipus] || ESTIL_ROTUL.bosc, c = document.createElement("canvas"); c.width = 512; c.height = 232;
+  var x = c.getContext("2d"), i;
+  x.fillStyle = e.fons; x.fillRect(0, 0, 512, 232);
+  if (e.veta){ x.fillStyle = e.veta; for (i = 0; i < 9; i++){ if (e.vertical) x.fillRect(20 + i * 58, 0, 4, 232); else x.fillRect(0, 14 + i * 26 + (i % 3) * 3, 512, 2 + (i % 2)); } }
+  x.strokeStyle = e.vora; x.lineWidth = 9; x.strokeRect(9, 9, 494, 214);
+  if (e.doble){ x.lineWidth = 3; x.strokeRect(22, 22, 468, 188); }
+  if (e.segell){ x.fillStyle = e.segell; x.fillRect(452, 160, 34, 34); }
+  x.textAlign = "center"; x.textBaseline = "middle"; x.fillStyle = e.tinta;
+  if (e.brilla){ x.shadowColor = e.tinta; x.shadowBlur = 16; }
+  var l1 = e.majuscules ? linies[0].toUpperCase() : linies[0], l2 = linies[1] || "";
+  var est = (e.italica ? "italic " : "") + "700 ";
+  x.font = est + "40px " + e.lletra; x.fillText(l1, 256, 70);
+  var mida = 68; x.font = est + mida + "px " + e.lletra;
+  while (mida > 28 && x.measureText(l2).width > 440){ mida -= 2; x.font = est + mida + "px " + e.lletra; }
+  x.fillText(l2, 256, 148);
+  var t = new T3.CanvasTexture(c); if (T3.SRGBColorSpace) t.colorSpace = T3.SRGBColorSpace; t.anisotropy = 4;
+  return t;
+}
+/* el pal, el marc i el que hi té cada estil; la cara del rètol (0,96 × 0,44) és a y = 0,42, davant cap a +z */
+function rotulA(k, kb, tipus, P){
+  var W = 0.96, H = 0.44, Y = 0.42, fusta = P.fusta || 0x9A6A3E, fustaF = P.fustaF || 0x6A4A2E, i;
+  function pals(hex, alt, r){ posa(k, B.cil, hex, -0.42, 0, -0.035, r, alt, r); posa(k, B.cil, hex, 0.42, 0, -0.035, r, alt, r); }
+  function taula(hex){ posa(k, B.caixa, hex, 0, Y, 0, W + 0.04, H + 0.04, 0.05); }
+  if (tipus === "japo"){
+    pals(0x9A2A22, 0.82, 0.03); taula(0x2E221C);
+    posa(k, B.caixa, 0x2A2420, 0, 0.8, -0.035, 1.18, 0.05, 0.08); posa(k, B.caixa, 0x9A2A22, 0, 0.72, -0.035, 1.02, 0.04, 0.06);
+  } else if (tipus === "desert"){
+    posa(k, B.cil6, fustaF, -0.42, 0, -0.035, 0.03, 0.7, 0.03, 0, 0.04); posa(k, B.cil6, fustaF, 0.42, 0, -0.035, 0.03, 0.66, 0.03, PI, 0.05); taula(0xB8905E);
+    posa(k, B.roca[0], P.roca || 0xB07A50, -0.45, 0.02, 0.02, 0.07, 0.05, 0.06); posa(k, B.roca[1], P.pedra || 0xC89A70, 0.47, 0.02, 0.03, 0.06);
+  } else if (tipus === "hort"){
+    pals(0x4A7A3A, 0.7, 0.025); taula(0x4A7A3A);
+    for (i = 0; i < 4; i++){ var xs = -0.32 + i * 0.21; posa(k, B.caixa, 0xF2EEE4, xs, 0.08, 0.04, 0.05, 0.16, 0.015); posa(k, B.piram, 0xF2EEE4, xs, 0.16, 0.04, 0.035, 0.03, 0.01); }
+    posa(k, B.caixa, 0xF2EEE4, 0, 0.1, 0.04, 0.7, 0.025, 0.012);
+  } else if (tipus === "tropical"){
+    [-0.42, 0.42].forEach(function(xp){ for (var j = 0; j < 5; j++){ posa(k, B.cil, 0xC8B060, xp, j * 0.15, -0.035, 0.026, 0.145, 0.026); posa(k, B.cil, 0x9A8440, xp, j * 0.15 + 0.14, -0.035, 0.03, 0.012, 0.03); } });
+    taula(0xB89A50);
+    for (i = 0; i < 5; i++){ var a = -0.9 + i * 0.45; posa(k, B.con3, 0x3E8A3A, 0.42, 0.74, -0.035, 0.07, 0.3, 0.012, a > 0 ? 0 : PI, Math.abs(a) + 0.6, i); }
+  } else if (tipus === "flors"){
+    pals(0x2A3A34, 0.72, 0.013); taula(0xE8DCC8);
+    for (i = 0; i <= 10; i++){ var b = PI * i / 10, xa = Math.cos(b) * 0.46, ya = 0.66 + Math.sin(b) * 0.2; posa(k, B.esf6, 0x2A3A34, xa, ya, -0.035, 0.01); posa(k, B.ico, (P.flors || [0xE87AA0])[i % (P.flors || [0]).length], xa, ya, -0.01, 0.028); if (i % 2) posa(k, B.bloc0[i % 3], 0x5E9A44, xa, ya - 0.03, -0.015, 0.03, 0.02, 0.02); }
+  } else if (tipus === "neu"){
+    pals(0x4A3A2E, 0.72, 0.03); taula(0x3A2C22);
+    posa(k, B.caixa, 0xF6F9FD, 0, Y + H / 2 + 0.035, 0, W + 0.1, 0.04, 0.1); posa(k, B.esf, 0xF6F9FD, -0.42, 0.74, -0.035, 0.05, 0.03, 0.05); posa(k, B.esf, 0xF6F9FD, 0.42, 0.74, -0.035, 0.05, 0.03, 0.05);
+    posa(k, B.esf, 0xF6F9FD, -0.4, 0, 0, 0.12, 0.05, 0.1); posa(k, B.esf, 0xF6F9FD, 0.38, 0, 0.01, 0.1, 0.04, 0.09);
+  } else if (tipus === "encantat"){
+    posa(k, B.caixa, 0x2A2640, 0, Y - 0.03, -0.01, W + 0.12, H + 0.5, 0.09); posa(k, B.roca[0], 0x3A3456, -0.5, 0.03, 0.03, 0.09, 0.07, 0.07); posa(k, B.roca[1], 0x3A3456, 0.5, 0.03, 0.02, 0.08);
+    posa(kb, B.oct, 0x7FFFE8, -0.5, 0.16, 0.03, 0.035, 0.09, 0.035); posa(kb, B.oct, 0xC8A0FF, 0.51, 0.13, 0.02, 0.03, 0.07, 0.03); posa(kb, B.oct, 0x7FFFE8, 0.36, 0.72, 0, 0.025, 0.06, 0.025);
+  } else {
+    posa(k, B.tronc, fustaF, -0.42, 0, -0.035, 0.035, 0.7, 0.035); posa(k, B.tronc, fustaF, 0.42, 0, -0.035, 0.035, 0.7, 0.035); taula(fusta);
+    posa(k, B.caixa, fustaF, 0, Y + H / 2 + 0.04, -0.01, W + 0.14, 0.035, 0.08);
+    for (i = 0; i < 5; i++) posa(k, B.bloc0[i % 3], 0x5E8A3A, -0.42 + (i % 2) * 0.02, 0.18 + i * 0.1, 0.0, 0.035, 0.03, 0.03);
+  }
+  return {W:W, H:H, Y:Y, z:tipus === "encantat" ? 0.04 : 0.027};      /* la llosa de pedra és més gruixuda que la fusta */
+}
+
 /* ---------- 7. la disposició: on va cada cosa ---------- */
 var RP = 1.85;                       /* radi de la plaça del mig */
 var AX = 1.3, AZ = 0.77;             /* el jardí és una el·lipse més ampla que fonda (les pantalles són apaïsades) */
@@ -3808,6 +4135,53 @@ function disposa(est, radiArbre){
     var tx = fiR.x - ini.x, tz = fiR.z - ini.z; pont.rot = Math.atan2(tx, tz);
   }
   L.arc = perId.arcsantmarti || null;
+
+  /* el rètol i els animals (versió 7): després de la silueta i als llocs lliures, perquè no moguin res del que ja hi era */
+  var ocu = graella(0.7);
+  L.plantes.concat(L.proximes).forEach(function(x){ ocu.afegeix({x:x.x, z:x.z, rad:0.2}); });
+  L.arbres.forEach(function(x){ ocu.afegeix({x:x.x, z:x.z, rad:x.rad * 0.5}); });
+  L.objectes.forEach(function(x){ ocu.afegeix({x:x.x, z:x.z, rad:Math.min(1.2, x.rad)}); });
+  L.objectes.forEach(function(o){ if (o.id !== "cascada" || !o.ex) return; for (var u = 0; u <= o.ex.vora + 0.3; u += 0.18) ocu.afegeix({x:o.x + Math.sin(o.rot) * u, z:o.z + Math.cos(o.rot) * u, rad:0.32}); });   /* el canal de la cascada fins a la vora */
+  if (L.rierol){ var rp = L.rierol.punts; for (var sg = 0; sg < rp.length - 1; sg++){ var ls = Math.hypot(rp[sg + 1].x - rp[sg].x, rp[sg + 1].z - rp[sg].z), ns = Math.max(2, Math.ceil(ls / 0.18)); for (var u = 0; u <= ns; u++) ocu.afegeix({x:rp[sg].x + (rp[sg + 1].x - rp[sg].x) * u / ns, z:rp[sg].z + (rp[sg + 1].z - rp[sg].z) * u / ns, rad:0.3}); } }
+  function dinsIlla(x, z, marge){ return radUV(x, z) < envA(L.contorn, angUV(x, z)) - marge; }
+  if (est.rotul){
+    var qS = camiPunt(L.cami.tSortida), aS = angUV(qS.x, qS.z), OFF = [0.5, -0.5, 0.65, -0.65, 0.8, -0.8, 1.0, -1.0, 1.2, -1.2, 1.45, -1.45];
+    for (var o2 = 0; o2 < OFF.length && !L.rotul; o2++){
+      var aR = aS + OFF[o2], qR = aMon(aR, envA(L.contorn, aR) - 0.3), nx = qR.x / (AX * AX), nz = qR.z / (AZ * AZ), ln = Math.hypot(nx, nz) || 1;
+      nx /= ln; nz /= ln;
+      var rR = Math.atan2(nx, nz) * 0.75, cx = Math.cos(rR), cz = -Math.sin(rR);      /* cap on va la taula, ja girada */
+      var bo = [-0.46, -0.23, 0, 0.23, 0.46].every(function(f){ var px = qR.x + cx * f, pz = qR.z + cz * f; return !ocu.xoca(px, pz, 0.14) && distCami(px, pz) > 0.42 && dinsIlla(px, pz, 0.04); });
+      if (bo){ L.rotul = {x:qR.x, z:qR.z, rot:rR, rad:0.5}; ocu.afegeix({x:qR.x, z:qR.z, rad:0.5}); }
+    }
+  }
+  var tipusA = PAL[est.tipus] ? est.tipus : "bosc", llocsA = [], cases = [];
+  for (var kq = 0; kq < 2400; kq++){
+    var rq = 0.3 * Math.sqrt(kq + 0.5), aq = kq * GA + soroll(LL, 5) * DPI;
+    aq = ((aq + PI) % DPI + DPI) % DPI - PI;
+    if (rq > envA(L.contorn, aq) - 0.25) continue;
+    var qq2 = aMon(aq, rq); qq2.o = soroll(LL, 7000 + kq); llocsA.push(qq2);
+  }
+  llocsA.sort(function(u, w){ return u.o - w.o; });
+  L.animals = [];
+  (est.animals || []).forEach(function(d){
+    var EA = especieDe(tipusA, d.esp), ra = atzar(hashText(est.llavor + "|" + d.id + "|" + tipusA)), vola = EA.mou === "vola" || EA.mou === "plana", rad = (EA.rad || 0.1) * (EA.esc || 1), casa = null;
+    for (var n = 0; n < llocsA.length && !casa; n++){
+      var c = llocsA[n];
+      if (cases.some(function(h){ return Math.hypot(h.x - c.x, h.z - c.z) < 0.45; })) continue;
+      if (!vola && ocu.xoca(c.x, c.z, rad + 0.04)) continue;
+      casa = c;
+    }
+    if (!casa) return;
+    cases.push(casa);
+    var punts = [{x:casa.x, z:casa.z}];
+    for (var w = 0; !vola && w < 16 && punts.length < 6; w++){
+      var a2 = ra() * DPI, dd = EA.R * (0.35 + 0.65 * ra()), px = casa.x + Math.sin(a2) * dd, pz = casa.z + Math.cos(a2) * dd, lliure = dinsIlla(px, pz, 0.12) && !ocu.xoca(px, pz, rad);
+      for (var f = 1; lliure && f <= 4; f++) if (ocu.xoca(casa.x + (px - casa.x) * f / 5, casa.z + (pz - casa.z) * f / 5, rad * 0.8)) lliure = false;
+      if (lliure) punts.push({x:px, z:pz});
+    }
+    L.animals.push({tipus:"animal", d:d, esp:d.esp | 0, E:EA, vola:vola, x:casa.x, y:vola ? EA.alt : 0, z:casa.z, hx:casa.x, hz:casa.z, rot:ra() * DPI,
+                    s:Math.max(0.5, +d.creix || 1) * (0.92 + ra() * 0.16) * (EA.esc || 1), rad:Math.max(0.12, rad * 1.4), alt:vola ? EA.alt + 0.1 : 0.3, punts:punts, llavor:hashText(est.llavor + "|" + d.id)});
+  });
   return L;
 }
 
@@ -4206,6 +4580,53 @@ function construeix(est, o){
       arrel.add(m); S.picables.push(m); mallesObj[c] = m;
     });
 
+    /* --- els animals (versió 7): per espècie, una malla instanciada (el cos, el que fa llum i les ales) i una ombra per a tots.
+       Es mouen, així que no fan ombra al mapa (que no es refà): una taca a terra que els segueix --- */
+    if (L.animals.length){
+      var perEsp = {}, esfera = new T3.Sphere(new T3.Vector3(0, 0, 0), 60);
+      function esferaGran(m){ m.computeBoundingSphere = function(){ this.boundingSphere = esfera.clone(); }; m.computeBoundingSphere(); }
+      L.animals.forEach(function(it){ (perEsp[it.esp] = perEsp[it.esp] || []).push(it); });
+      var gOm = new T3.PlaneGeometry(1, 1); gOm.rotateX(-PI / 2);
+      var tOm = degradat(20, 30, 10, 1); S.textures.push(tOm);
+      var mOm = new T3.InstancedMesh(gOm, new T3.MeshBasicMaterial({map:tOm, transparent:true, depthWrite:false, opacity:fosc ? 0.36 : 0.26, polygonOffset:true, polygonOffsetFactor:-2}), L.animals.length);
+      mOm.frustumCulled = false; mOm.renderOrder = 1; esferaGran(mOm); arrel.add(mOm); S.instancies.push(mOm);
+      L.animals.forEach(function(it, j){ it.ombra = {m:mOm, j:j}; });
+      Object.keys(perEsp).forEach(function(e){
+        var llista = perEsp[e], EA = llista[0].E, ka = kit(), kab = kit();
+        EA.fes(ka, kab);
+        if (!llista[0].vola) ombreja(ka, 0.1, 0.25);
+        var ga = geometria(ka), bba = ga.boundingBox;
+        EA._at = [Math.max(-bba.min.x, bba.max.x) * 0.7, bba.max.y * 0.25, 0];
+        var m = new T3.InstancedMesh(ga, mat.o, llista.length); m.frustumCulled = false; m.userData.items = llista; esferaGran(m);
+        arrel.add(m); S.picables.push(m); S.instancies.push(m);
+        var gab = geometria(kab), mb = gab ? new T3.InstancedMesh(gab, mat.b, llista.length) : null;
+        if (mb){ mb.frustumCulled = false; mb.userData.items = llista; esferaGran(mb); arrel.add(mb); S.picables.push(mb); S.instancies.push(mb); }
+        var mw = null;
+        if (EA.ales){
+          var kw = kit(); EA.ales(kw);
+          mw = new T3.InstancedMesh(geometria(kw), EA.alesBrillen ? new T3.MeshBasicMaterial({vertexColors:true, side:T3.DoubleSide}) : new T3.MeshLambertMaterial({vertexColors:true, flatShading:true, side:T3.DoubleSide}), llista.length * 2);
+          mw.frustumCulled = false; esferaGran(mw); arrel.add(mw); S.instancies.push(mw);
+        }
+        llista.forEach(function(it, j){ it.malla = m; it.j = j; it.malla2 = mb; it.ales = mw; it.an = null; });
+      });
+      S.items = S.items.concat(L.animals);
+      if (explora && !QUIET) S.anima = animaAnimals(L.animals);
+    }
+
+    /* --- el rètol de l'entrada, amb el nom (versió 7) --- */
+    if (L.rotul && est.rotul && !mini){
+      var kR = kit(), kRb = kit(), R0 = rotulA(kR, kRb, tipus, P);
+      ombreja(kR, 0.2, 0.25);
+      var gR = new T3.Group(); gR.position.set(L.rotul.x, 0, L.rotul.z); gR.rotation.y = L.rotul.rot;
+      var itR = {tipus:"rotul", d:{id:"rotul", diu:est.rotul.join(" ").replace("d' ", "d'")}, x:L.rotul.x, y:0, z:L.rotul.z, rad:0.5, alt:0.75, grup:gR};
+      var mR = new T3.Mesh(geometria(kR), mat.o); mR.castShadow = true; mR.receiveShadow = true; mR.userData.item = itR; gR.add(mR); S.picables.push(mR);
+      var gRb = geometria(kRb); if (gRb){ var mRb = new T3.Mesh(gRb, mat.b); mRb.userData.item = itR; gR.add(mRb); S.picables.push(mRb); }
+      var tR = textRotul(est.rotul, tipus); S.textures.push(tR);
+      var matR = ESTIL_ROTUL[tipus].brilla ? new T3.MeshBasicMaterial({map:tR}) : new T3.MeshLambertMaterial({map:tR, emissive:0xFFFFFF, emissiveMap:tR, emissiveIntensity:fosc ? 0.5 : 0.2});
+      var cara = new T3.Mesh(new T3.PlaneGeometry(R0.W, R0.H), matR); cara.position.set(0, R0.Y, R0.z); cara.userData.item = itR; gR.add(cara); S.picables.push(cara);
+      arrel.add(gR); S.items.push(itR);
+    }
+
     /* --- l'arc de Sant Martí: darrere el jardí, de banda a banda --- */
     if (L.arc){
       var minZ = 0, minX = 0, maxX = 0;
@@ -4245,7 +4666,7 @@ function construeix(est, o){
     /* --- herbes i còdols on no hi ha res (decoració, no compta) --- */
     (function(){
       var ocup = graella(1.2);
-      L.plantes.concat(L.proximes, L.arbres, L.objectes, L.pedres).forEach(function(x){ ocup.afegeix({x:x.x, z:x.z, rad:(x.rad || 0.2) + 0.08}); });
+      L.plantes.concat(L.proximes, L.arbres, L.objectes, L.pedres, L.rotul ? [L.rotul] : []).forEach(function(x){ ocup.afegeix({x:x.x, z:x.z, rad:(x.rad || 0.2) + 0.08}); });
       /* com més gran es veu, més herba (a l'explorador, una catifa) */
       var dens = mini ? 0.5 : gran ? (explora ? 4.2 : 2.6) : 1.5, sostre = mini ? 50 : gran ? (explora ? 900 : 520) : 240;
       var n = Math.round(lim(L.radiMitja * L.radiMitja * dens, 18, sostre)), ra = atzar(hashText("deco:" + est.llavor)), herbes = [], codols = [], floretes = [];
@@ -4416,8 +4837,75 @@ function construeix(est, o){
   } finally { alliberaPrimitives(B); B = null; }
 }
 
+/* un animal: el cos (girat cap on va, amb el cap avall si picoteja i el balanceig si camina), les ales i la seva ombra */
+var _eA = null, _mA = null, _mA2 = null, _qA = null, _vA = null, _sA = null;
+function aplicaAnimal(it, g, puja){
+  if (!_eA){ _eA = new T3.Euler(); _mA = new T3.Matrix4(); _mA2 = new T3.Matrix4(); _qA = new T3.Quaternion(); _vA = new T3.Vector3(); _sA = new T3.Vector3(); }
+  var an = it.an, s = Math.max(0.0001, it.s * g * (puja ? 1.15 : 1));
+  _eA.set(an ? an.pit : 0, an ? an.rumb + an.ond : it.rot, an ? an.rol : 0, "YXZ"); _q.setFromEuler(_eA);
+  _m.compose(_v.set(it.x, it.y, it.z), _q, _s.set(s, s, s));
+  it.malla.setMatrixAt(it.j, _m);
+  if (it.malla2) it.malla2.setMatrixAt(it.j, _m);
+  if (it.ales){
+    var at = it.E._at, fl = an ? an.ala : 0.35;
+    for (var c = 0; c < 2; c++){ var cara = c ? -1 : 1; _qA.setFromAxisAngle(EZ, cara * fl); _mA2.compose(_vA.set(cara * at[0], at[1], at[2]), _qA, _sA.set(cara, 1, 1)); _mA.multiplyMatrices(_m, _mA2); it.ales.setMatrixAt(it.j * 2 + c, _mA); }
+  }
+  if (it.ombra){ var so = (it.vola ? 0.13 : it.rad * 1.5) * it.s * Math.max(0.0001, g); _m.compose(_v.set(it.x, 0.018, it.z), _q.identity(), _s.set(so, 1, so)); it.ombra.m.setMatrixAt(it.ombra.j, _m); }
+}
+/* el moviment dels animals a l'explorador: torna una funció (t, dt, sobre) que els mou un pas.
+   Els de terra van de casa a un dels seus punts lliures i tornen (el camí de casa a cada punt és lliure), s'aturen una estona
+   i hi tornen; els que volen fan voltes per sobre de casa; el colibrí s'atura a l'aire i canvia de lloc d'una revolada. */
+function animaAnimals(llista){
+  var malles = [];
+  llista.forEach(function(it){ [it.malla, it.malla2, it.ales, it.ombra && it.ombra.m].forEach(function(m){ if (m && malles.indexOf(m) < 0) malles.push(m); }); });
+  function gira(an, cap, dt, f){ var dif = ((cap - an.rumb + PI) % DPI + DPI) % DPI - PI; an.rumb += dif * Math.min(1, dt * f); return dif; }
+  return function(t, dt, sobre){
+    llista.forEach(function(it){
+      var EA = it.E, an = it.an;
+      if (!an){ var ra = atzar(it.llavor); an = it.an = {ra:ra, mode:"para", t:0.3 + ra() * 2.5, cur:0, tx:it.hx, tz:it.hz, rumb:it.rot, pit:0, rol:0, ond:0, ala:0.35, fase:0, w:ra() * DPI, ph:ra() * DPI}; }
+      if (EA.mou === "vola"){
+        var Rv = EA.R * 0.6;
+        an.w += dt * EA.v / Rv;
+        it.x = it.hx + Math.cos(an.w) * Rv; it.z = it.hz + Math.sin(an.w) * Rv * 0.8; it.y = EA.alt + Math.sin(t * 0.9 + an.ph) * 0.08;
+        an.rumb = Math.atan2(-Math.sin(an.w), Math.cos(an.w) * 0.8); an.rol = -0.3; an.pit = 0;
+        an.ala = EA.plana && Math.sin(t * 0.45 + an.ph) > -0.25 ? 0.12 + Math.sin(t * 1.7) * 0.05 : Math.sin(t * EA.freq + an.ph) * 0.75 + 0.15;
+      } else if (EA.mou === "plana"){
+        if (an.mode === "para"){
+          an.t -= dt;
+          if (an.t <= 0){ var a2 = an.ra() * DPI, d2 = EA.R * (0.3 + 0.7 * an.ra()); an.tx = it.hx + Math.sin(a2) * d2; an.tz = it.hz + Math.cos(a2) * d2; an.mode = "va"; }
+        } else {
+          var dxp = an.tx - it.x, dzp = an.tz - it.z, lp = Math.hypot(dxp, dzp);
+          gira(an, Math.atan2(dxp, dzp), dt, 8);
+          if (lp < 0.02){ an.mode = "para"; an.t = 0.8 + an.ra() * 2.2; } else { var sp = Math.min(lp, EA.v * dt); it.x += dxp / lp * sp; it.z += dzp / lp * sp; }
+        }
+        it.y = EA.alt + Math.sin(t * 3 + an.ph) * 0.02; an.ala = Math.sin(t * EA.freq) * 0.6 + 0.1; an.pit = an.mode === "va" ? 0.2 : -0.15;
+      } else if (an.mode === "para"){
+        an.t -= dt; it.y = 0; an.rol *= 0.85; an.ond = 0;
+        an.pit = EA.pica ? Math.pow(Math.max(0, Math.sin(t * 2.6 + an.ph)), 6) * 0.55 : 0;
+        if (an.t <= 0){
+          var np = it.punts.length;
+          if (np < 2) an.t = 2;
+          else { an.cur = an.cur === 0 ? 1 + Math.floor(an.ra() * (np - 1)) : 0; an.tx = it.punts[an.cur].x; an.tz = it.punts[an.cur].z; an.mode = "va"; }
+        }
+      } else {
+        var dx = an.tx - it.x, dz = an.tz - it.z, l = Math.hypot(dx, dz), costat = EA.mou === "costat";
+        var dif = gira(an, Math.atan2(dx, dz) + (costat ? PI / 2 : 0), dt, 5), st = Math.min(l, EA.v * dt * (costat ? 1 : Math.max(0, Math.cos(dif))));
+        if (l > 1e-6){ it.x += dx / l * st; it.z += dz / l * st; }
+        an.fase += st; an.pit = 0; it.y = 0;
+        if (EA.mou === "salta"){ var ph2 = an.fase / (EA.salt * 3.2); it.y = Math.abs(Math.sin(ph2 * PI)) * EA.salt; an.pit = -Math.cos(ph2 * PI) * 0.15; }
+        else if (EA.mou === "camina"){ var ph3 = an.fase / 0.05; it.y = Math.abs(Math.sin(ph3 * PI)) * 0.004; an.rol = Math.sin(ph3 * PI) * (EA.balanca || 0.04); }
+        else if (EA.mou === "llisca") an.ond = Math.sin(an.fase * 45) * 0.12;
+        if (l < 0.015){ an.mode = "para"; an.t = 1 + an.ra() * (EA.v < 0.1 ? 6 : 3.5); it.y = 0; an.ond = 0; }
+      }
+      aplicaAnimal(it, it.g === undefined ? 1 : it.g, it === sobre);
+    });
+    malles.forEach(function(m){ m.instanceMatrix.needsUpdate = true; });
+  };
+}
+
 /* la matriu de cada element instanciat (g = com de crescut, 0-1 i una mica més pel rebot) */
 function aplicaItem(it, g, puja){
+  if (it.tipus === "animal"){ aplicaAnimal(it, g, puja); return; }
   var s = it.s * g * (puja ? 1.12 : 1);
   _q.setFromAxisAngle(EY, it.rot || 0);
   if (it.ix || it.iz){ _q2.setFromEuler(new T3.Euler(it.ix || 0, 0, it.iz || 0)); _q.premultiply(_q2); }
@@ -4589,7 +5077,7 @@ TRES.jardi = function(el, d){
     if (pasCamera(dt)){ segueix = true; brut = true; }
     if (ambient && S.viu && !document.hidden && performance.now() - ultimToc < REPOS){
       var ts = t / 1000;
-      S.viu(ts, dt); S.vent.temps.value = ts; S.vent.planta.value = 0.14; S.vent.arbre.value = 0.011;
+      S.viu(ts, dt); if (S.anima) S.anima(ts, dt, sobre); S.vent.temps.value = ts; S.vent.planta.value = 0.14; S.vent.arbre.value = 0.011;
       if (S.nuvols) S.nuvols.rotation.y += dt * 0.008;
       if (S.illots) S.illots.position.y = Math.sin(ts * 0.5) * 0.07;
       segueix = true; brut = true;
@@ -4793,7 +5281,7 @@ TRES.jardi = function(el, d){
       n = n || 30; var gl = renderer.getContext(), px = new Uint8Array(4);
       dibuixa(); gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
       var t = performance.now();
-      for (var i = 0; i < n; i++){ orb.yaw += 0.001; if (ambOmbres && S.ombres) renderer.shadowMap.needsUpdate = true; if (S.viu && ambient) S.viu(i / 60, 1 / 60); dibuixa(); }
+      for (var i = 0; i < n; i++){ orb.yaw += 0.001; if (ambOmbres && S.ombres) renderer.shadowMap.needsUpdate = true; if (S.viu && ambient) S.viu(i / 60, 1 / 60); if (S.anima && ambient) S.anima(i / 60, 1 / 60, null); dibuixa(); }
       gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
       var ms = (performance.now() - t) / n;
       return {ms:Math.round(ms * 100) / 100, crides:renderer.info.render.calls, triangles:renderer.info.render.triangles, amplada:W, alcada:H, ombres:!!S.ombres, resolucio:renderer.getPixelRatio()};
@@ -4810,7 +5298,8 @@ function exemple(tipus){
                 tropical:["font", "cabana", "estany", "far"], flors:["font", "glorieta", "arc", "banc"], neu:["font", "cabana", "fanal", "estany"], encantat:["font", "estany", "fanal", "glorieta"]};
   var objectes = (MOSTRA[tipus] || MOSTRA.bosc).map(function(id){ return {id:id, diu:""}; });
   var setmanes = [1, 1, 0, 1, 1, 0].map(function(f, i){ return {feta:!!f, actual:i === 5, diu:""}; });
-  return {tipus:tipus, llavor:hashText("mostra-" + tipus) % 0xFFFFFF, plantes:plantes, arbres:arbres, objectes:objectes, setmanes:setmanes, ratxa:2, set:false};
+  var animals = [0, 1, 2, 3].map(function(e){ return {id:"b" + (e + 1), esp:e, creix:1, diu:""}; });
+  return {tipus:tipus, llavor:hashText("mostra-" + tipus) % 0xFFFFFF, plantes:plantes, arbres:arbres, objectes:objectes, setmanes:setmanes, ratxa:2, set:false, animals:animals};
 }
 var CUA = Promise.resolve();
 TRES.jardiMiniatura = function(tipus, o){
@@ -6205,6 +6694,7 @@ var CONFIG = {
   reptePrecisio: 80,      /* ...i amb un 80 % de precisió o més (mantenir una tecla premuda no és escriure) */
   objectiuSetmana: 60,    /* minuts de pràctica per setmana: la setmana «rodona» */
   minutsPerPlanta: 10,    /* el jardí: una planta per cada 10 minuts d'escriure */
+  minutsPerAnimal: 60,    /* ...i un animal que hi viu per cada hora (versió 7) */
   precisioRanking: 90,    /* per sota d'aquesta precisió, el repte no entra al podi de velocitat */
   minutsConstancia: 10,   /* mínim de pràctica per entrar al podi de precisió */
   bandes: [
@@ -7748,7 +8238,9 @@ function insigniesDe(sessions){
    - un ARBRE per cada repte superat, més gran com més llarg (3 minuts, un arbret; 30, el més gran);
    - un OBJECTE per cada insígnia (la font, el pont, l'estany…);
    - una PEDRA del camí per cada setmana; il·luminada si va ser rodona (els minuts de l'objectiu);
+   - un ANIMAL que hi viu per cada hora d'escriure (versió 7): quatre espècies per estil, per torns;
    - si fa 7 dies o més que no practica, el jardí «té set» (es veu una mica sec, fins a la sessió següent).
+   I a l'entrada, un rètol amb el nom de qui el fa créixer, en l'estil del jardí (versió 7).
    El que és nou és petit i creix els dies següents (14 dies fins a la mida plena). */
 var JARDINS = [
   {id:"bosc",   nom:"Bosc mediterrani", diu:"Pins, alzines, romaní, lavanda i roselles."},
@@ -7763,6 +8255,27 @@ var JARDINS = [
 ];
 var JARDI = Object.create(null);
 JARDINS.forEach(function(j){ JARDI[j.id] = j; });
+/* els animals de cada estil (versió 7), en l'ordre en què arriben: el primer a la primera hora, i torna a començar.
+   L'ordre és el de jardi.js (ESPECIE): si se'n canvia un, s'ha de canviar als dos llocs. */
+var ANIMALS_JARDI = {
+  bosc:["un conill", "un esquirol", "un eriçó", "un abellerol"],
+  japo:["una grua", "una granota", "un cérvol", "un ullblanc"],
+  desert:["un llangardaix", "una tortuga", "un correcamins", "un colibrí"],
+  hort:["una gallina", "un ànec", "un gat", "un pit-roig"],
+  tropical:["un flamenc", "un cranc", "una iguana", "un lloro"],
+  flors:["un paó", "un cargol", "una merla", "una mallerenga"],
+  neu:["una guineu", "una llebre", "un cabirol", "un mussol"],
+  encantat:["un cérvol de llum", "un eriçó de molsa", "una tortuga de cristall", "una arna de lluna"]
+};
+function nomAnimal(tipus, esp){ var l = ANIMALS_JARDI[tipus]; if (!l) return "Animal"; var n = l[esp % l.length].replace(/^una? /, ""); return n.charAt(0).toUpperCase() + n.slice(1); }
+/* el rètol de l'entrada: «El bosc / de Daisy» (només el nom de pila; «d'» davant de vocal, però no davant d'una i o una u que fan de consonant) */
+var ROTUL_JARDI = {bosc:"El bosc", japo:"El jardí zen", desert:"L'oasi", hort:"L'hort", tropical:"L'illa", flors:"El jardí", neu:"El refugi", encantat:"El bosc màgic"};
+function rotulJardi(tipus, nom){
+  var n = nomBonic(nom || "").split(" ")[0];
+  if (!ROTUL_JARDI[tipus] || !n) return null;
+  var d = /^h?[aeiouàáèéíïòóúü]/i.test(n) && !/^h?[iu][aeiouàáèéíòóú]/i.test(n) ? "d'" : "de ";
+  return [ROTUL_JARDI[tipus], d + n];
+}
 /* l'objecte de cada insígnia */
 var OBJECTE_INSIGNIA = {
   comenca:["banc", "Banc"], repte1:["bandera", "Banderola"], p100:["font", "Font"], p150:["pont", "Pont"],
@@ -7787,10 +8300,16 @@ function jardiDe(sessions, o){
   /* només el que és de debò: ni les sessions per revisar ni les d'una fitxa tocada a mà */
   var ss = ordenaSessions((sessions || []).filter(function(s){ return s.tipus !== "ut0" && !s.dubte && !audit[s.id] && s.data && s.data <= avui; }));
   var llavor = llavorJardi(o.nom);
-  var plantes = [], arbres = [], seg = 0, PAS = CONFIG.minutsPerPlanta * 60;
+  var plantes = [], arbres = [], animals = [], seg = 0, PAS = CONFIG.minutsPerPlanta * 60, PAS_A = CONFIG.minutsPerAnimal * 60;
+  var tipus = JARDI[o.tipus] ? o.tipus : null;
   ss.forEach(function(s){
-    var abans = Math.floor(seg / PAS);
+    var abans = Math.floor(seg / PAS), abansA = Math.floor(seg / PAS_A);
     seg += s.act || 0;
+    for (var h = abansA + 1; h <= Math.floor(seg / PAS_A); h++){
+      var edatA = diesEntre(s.data, avui), esp = (h - 1) % 4;
+      animals.push({id:"b" + h, data:s.data, edat:edatA, creix:creixDe(edatA), esp:esp, nom:nomAnimal(tipus, esp),
+                    diu:nomAnimal(tipus, esp) + " · " + h + (h === 1 ? " hora" : " hores") + " d'escriure · " + dm(s.data)});
+    }
     for (var k = abans + 1; k <= Math.floor(seg / PAS); k++){
       var edat = diesEntre(s.data, avui);
       plantes.push({id:"p" + k, data:s.data, edat:edat, creix:creixDe(edat), variant:(Math.imul(llavor ^ (k * 0x9E37), 0x45D9F3B) >>> 0) % 5,
@@ -7813,15 +8332,16 @@ function jardiDe(sessions, o){
                 (w.feta ? " · rodona" : (w.actual ? " · en falten " + (OBJECTIU_SETMANA - w.minuts) : ""))};
   });
   var ultima = ss.length ? ss[ss.length - 1].data : null, sense = ultima ? diesEntre(ultima, avui) : 0;
-  return {tipus:JARDI[o.tipus] ? o.tipus : null, llavor:llavor, avui:avui, plantes:plantes, arbres:arbres, objectes:objectes,
+  return {tipus:tipus, llavor:llavor, avui:avui, plantes:plantes, arbres:arbres, objectes:objectes,
           setmanes:setmanes, ratxa:sr.ratxa, millorRatxa:sr.millor, set:!!ultima && sense >= 7, diesSense:sense,
-          minuts:Math.round(seg / 60), seguentPlanta:PAS - (seg % PAS)};
+          minuts:Math.round(seg / 60), seguentPlanta:PAS - (seg % PAS),
+          animals:animals, seguentAnimal:PAS_A - (seg % PAS_A), rotul:rotulJardi(tipus, o.nom)};
 }
 /* el que hi ha de nou d'un jardí a l'altre (per fer-ho créixer en pantalla) */
 function novesDelJardi(abans, ara){
   var vist = {};
-  [].concat(abans.plantes, abans.arbres, abans.objectes).forEach(function(x){ vist[x.id] = 1; });
-  return [].concat(ara.plantes, ara.arbres, ara.objectes).filter(function(x){ return !vist[x.id]; }).map(function(x){ return x.id; });
+  [].concat(abans.plantes, abans.arbres, abans.objectes, abans.animals || []).forEach(function(x){ vist[x.id] = 1; });
+  return [].concat(ara.plantes, ara.arbres, ara.objectes, ara.animals || []).filter(function(x){ return !vist[x.id]; }).map(function(x){ return x.id; });
 }
 
 /* ---- píndoles: un consell curt, concret i amable ---- */
@@ -8588,7 +9108,7 @@ return {
   puntsSessio:puntsSessio, puntsTotals:puntsTotals, nivell:nivell, ratxa:ratxa, setmana:setmana, setmanesRodones:setmanesRodones, sessionsSetmana:sessionsSetmana,
   INSIGNIES:INSIGNIES, insigniesDe:insigniesDe, pindoles:pindoles,
   minRepte:minRepte, esMarca:esMarca, repteSuperat:repteSuperat, escalaReptes:escalaReptes,
-  JARDINS:JARDINS, JARDI:JARDI, OBJECTE_INSIGNIA:OBJECTE_INSIGNIA, jardiDe:jardiDe, novesDelJardi:novesDelJardi, llavorJardi:llavorJardi, dm:dm,
+  JARDINS:JARDINS, JARDI:JARDI, OBJECTE_INSIGNIA:OBJECTE_INSIGNIA, jardiDe:jardiDe, novesDelJardi:novesDelJardi, ANIMALS_JARDI:ANIMALS_JARDI, rotulJardi:rotulJardi, llavorJardi:llavorJardi, dm:dm,
   BLOCS:BLOCS, BLOC:BLOC, blocsValids:blocsValids, indexTextos:indexTextos, comptaFets:comptaFets, triaText:triaText,
   represes:represes, puntDeRepresa:puntDeRepresa, netejaSessio:netejaSessio,
   LLICONS:LLICONS, teclesFins:teclesFins, generaLlico:generaLlico, estrelles:estrelles, estatLlicons:estatLlicons, perBloc:perBloc,
@@ -9608,8 +10128,9 @@ function jardiActual(p, avui){
   return N.jardiDe(p.sessions, {tipus:p.jardi, nom:p.nom, avui:avui || N.dataLocal(new Date())});
 }
 function fraseJardi(j){
-  var n = j.plantes.length, a = j.arbres.length, o = j.objectes.length;
+  var n = j.plantes.length, a = j.arbres.length, o = j.objectes.length, b = (j.animals || []).length;
   var parts = [n + (n === 1 ? " planta" : " plantes"), a + (a === 1 ? " arbre" : " arbres"), o + (o === 1 ? " objecte" : " objectes")];
+  if (b) parts.push(b + (b === 1 ? " animal" : " animals"));
   var seg = Math.ceil(j.seguentPlanta / 60);
   return parts.join(" · ") + ". La pròxima planta, d'aquí a " + seg + (seg === 1 ? " minut" : " minuts") + " d'escriure.";
 }
@@ -9639,7 +10160,7 @@ function pintaJardiInici(p){
   if (!N.JARDI[p.jardi]){
     el.className = "targeta jardi-inici tria";
     el.innerHTML = '<div class="jardi-cap"><div><span class="etiqueta">Nou · el teu jardí</span><h2>Tria l\'estil del jardí que vols fer créixer</h2>' +
-      '<p class="suau">Cada 10 minuts d\'escriure hi creix una planta; cada repte superat hi planta un arbre; cada insígnia hi posa un objecte; i cada setmana amb els ' + N.CONFIG.objectiuSetmana + ' minuts fets, una pedra il·luminada al camí. Res no es mor: si un temps no practiques, només té set. ' +
+      '<p class="suau">Cada 10 minuts d\'escriure hi creix una planta; cada hora hi arriba un animal que hi viu; cada repte superat hi planta un arbre; cada insígnia hi posa un objecte; i cada setmana amb els ' + N.CONFIG.objectiuSetmana + ' minuts fets, una pedra il·luminada al camí. Res no es mor: si un temps no practiques, només té set. ' +
       (p.sessions.length ? "<b>Ja hi tens el que has fet fins ara.</b>" : "") + "</p></div></div>" + triaJardiHTML(null);
     pintaMiniatures(el);
     return;
@@ -9657,7 +10178,8 @@ function pintaJardiInici(p){
 function jardiPlaHTML(j){
   return '<div class="jardi-pla"><div class="jp-xifres">' +
     "<div><b>" + j.plantes.length + "</b><span>plantes</span></div><div><b>" + j.arbres.length + "</b><span>arbres</span></div>" +
-    "<div><b>" + j.objectes.length + "</b><span>objectes</span></div><div><b>" + j.setmanes.filter(function(w){ return w.feta; }).length + "</b><span>setmanes rodones</span></div></div></div>";
+    "<div><b>" + j.objectes.length + "</b><span>objectes</span></div><div><b>" + (j.animals || []).length + "</b><span>animals</span></div>" +
+    "<div><b>" + j.setmanes.filter(function(w){ return w.feta; }).length + "</b><span>setmanes rodones</span></div></div></div>";
 }
 function muntaJardi(el, j, o){
   if (!el) return;
@@ -10580,6 +11102,8 @@ function pintaJardiResultat(s, previes, desada){
   var guany = [];
   if (np) guany.push("+" + np + (np === 1 ? " planta" : " plantes"));
   ara.arbres.filter(function(x){ return noves.indexOf(x.id) >= 0; }).forEach(function(x){ guany.push("un arbre de " + x.min + " minuts"); });
+  var nousA = (ara.animals || []).filter(function(x){ return noves.indexOf(x.id) >= 0; }).map(function(x){ return (N.ANIMALS_JARDI[ara.tipus] || [])[x.esp] || "un animal"; });
+  if (nousA.length) guany.push((nousA.length === 1 ? "hi ha arribat " : "hi han arribat ") + (nousA.length > 1 ? nousA.slice(0, -1).join(", ") + " i " + nousA[nousA.length - 1] : nousA[0]));
   if (no){
     var obs = ara.objectes.filter(function(o){ return noves.indexOf(o.id) >= 0; }).map(function(o){ return o.nom.toLowerCase(); });
     guany.push((obs.length === 1 ? "objecte nou: " : "objectes nous: ") + (obs.length > 1 ? obs.slice(0, -1).join(", ") + " i " + obs[obs.length - 1] : obs[0]));
