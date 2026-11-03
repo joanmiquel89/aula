@@ -1271,6 +1271,83 @@ body.amb-barra-seguent .toast{bottom:108px}
 .qui-primera{display:block; margin-bottom:12px}
 .capa .targeta.primera p b{color:var(--tinta)}
 
+/* ---------- versió 9 (03-11-2026): primer, la fitxa ---------- */
+.ja-tens.primer{border:1.5px solid color-mix(in srgb, var(--accent) 55%, var(--linia)); border-style:solid; background:var(--sup);
+  box-shadow:0 0 0 6px var(--accent-suau), var(--ombra-alta); padding:24px 26px; gap:10px}
+.ja-tens.primer .etiqueta{color:var(--accent-text)}
+.qui-carrega-titol{font-family:var(--serif); font-weight:400; font-size:clamp(2rem, 1.5rem + 1.6vw, 2.7rem); letter-spacing:-.02em; line-height:1.05; margin:0}
+.ja-tens.primer p{color:var(--suau)}
+.ja-tens.primer p b{color:var(--tinta)}
+.ja-tens.primer .ja-tens-botons .boto.primari{animation:crida 2.8s var(--corba) 1.2s infinite}
+.continua p{max-width:56ch; font-size:.95rem; line-height:1.5}
+.continua p b{color:var(--tinta)}
+.continua .fila-botons{margin-top:0}
+.qui-nou{margin:6px 0 0}
+.qui-nou > summary{cursor:pointer; color:var(--suau); font-weight:600; padding:8px 2px; list-style-position:inside}
+.qui-nou > summary:hover{color:var(--tinta)}
+.qui-nou[open] > summary{color:var(--tinta); margin-bottom:10px}
+.qui-nou-avis{display:block; line-height:1.5}
+@media print{ .qui-nou{display:none !important} }
+
+/* la càrrega: on és ara (lliçons i reptes oberts) */
+.carrega-on{display:block; margin-top:6px; font-size:.92rem}
+.carrega-on.suau{color:var(--suau)}
+
+/* ---------- la prova de la profe ---------- */
+.prova-pindola{display:inline-block; margin-left:10px; padding:3px 12px; border-radius:99px; background:var(--or-suau); color:var(--tinta);
+  border:1px solid color-mix(in srgb, var(--or) 45%, transparent); font-family:var(--mono); font-size:.72rem; font-weight:500; letter-spacing:.06em; vertical-align:1px}
+.prova-pindola.passada{background:var(--mal-suau); border-color:color-mix(in srgb, var(--mal) 55%, transparent); font-weight:600}
+.ruta-prova{display:flex; align-items:center; gap:8px 10px; flex-wrap:wrap; margin:12px 4px 0; font-size:.95rem}
+.ruta-prova .rp-ico{flex:none; width:26px; height:26px; border-radius:8px; display:inline-flex; align-items:center; justify-content:center; background:var(--or-suau); color:var(--or); font-size:.95rem}
+.ruta-prova .enllac{text-decoration:underline; text-underline-offset:3px}
+.ruta-prova.activa{padding:10px 14px; border-radius:14px; background:var(--or-suau); border:1px solid color-mix(in srgb, var(--or) 40%, transparent)}
+.ruta-prova.activa .rp-ico{background:var(--sup)}
+.prova-intents{list-style:none; margin:12px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:8px}
+.prova-intents li{display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:99px; border:1px solid var(--linia-f); background:var(--sup2); font-size:.88rem}
+.prova-intents li span{font-family:var(--mono); font-size:.66rem; letter-spacing:.08em; text-transform:uppercase; color:var(--suau)}
+.prova-intents li.bo{background:var(--be-suau); border-color:color-mix(in srgb, var(--be) 45%, transparent)}
+.prova-intents li.bo svg{color:var(--be)}
+.prova-intents li.no{background:var(--mal-suau); border-color:color-mix(in srgb, var(--mal) 40%, transparent)}
+.prova-intents li.no i{font-style:normal; color:var(--mal); font-weight:700}
+.capa .targeta.prova-profe{text-align:left; align-items:stretch; max-width:560px}
+.capa .targeta.prova-profe h2{margin:0}
+.capa .targeta.prova-profe .camp{display:block}
+.capa .targeta.prova-profe select, .capa .targeta.prova-profe input[type=number]{width:100%; padding:12px 14px; border-radius:14px; border:1px solid var(--linia-f);
+  background:var(--sup); color:var(--tinta); min-height:50px; font-size:1.02rem}
+.capa .targeta.prova-profe input[type=number]{max-width:160px}
+.capa .targeta.prova-profe select:focus, .capa .targeta.prova-profe input:focus{outline:0; border-color:var(--accent); box-shadow:0 0 0 4px var(--accent-suau)}
+.capa .targeta.prova-profe .boto, .capa .targeta.prova-profe .enllac{align-self:flex-start}
+.capa .targeta.prova-profe .avis{margin:0}
+
+/* al resultat: el veredicte, el primer que es veu */
+.prova-resultat{margin:6px 0 22px}
+.prova-veredicte{display:grid; grid-template-columns:auto minmax(0, 1fr); gap:16px 24px; align-items:center; padding:22px 26px; border-radius:var(--radi); border:1.5px solid}
+.prova-veredicte.bo{background:var(--be-suau); border-color:color-mix(in srgb, var(--be) 50%, transparent)}
+.prova-veredicte.no{background:var(--mal-suau); border-color:color-mix(in srgb, var(--mal) 50%, transparent)}
+.pv-xifra{display:flex; flex-direction:column; align-items:center; min-width:96px}
+.pv-xifra b{font-family:var(--serif); font-weight:400; font-size:4rem; line-height:1; font-variant-numeric:tabular-nums}
+.pv-xifra small{font-family:var(--mono); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; color:var(--suau)}
+.prova-veredicte.bo .pv-xifra b{color:var(--be)}
+.prova-veredicte.no .pv-xifra b{color:var(--mal)}
+.pv-text p{margin-top:6px; line-height:1.5}
+.pv-text p b{font-size:1.05rem}
+@media (max-width:560px){ .prova-veredicte{grid-template-columns:1fr; padding:18px} .pv-xifra{align-items:flex-start} }
+
+/* reptes: el que s'acaba d'obrir, o el que hi falta */
+.record.obre, .record.falta{color:var(--tinta); box-shadow:none; margin-top:10px; font-weight:500}
+.record.obre{background:var(--be-suau); border-color:color-mix(in srgb, var(--be) 45%, transparent)}
+.record.falta{background:var(--or-suau); border-color:color-mix(in srgb, var(--or) 45%, transparent)}
+.record.obre svg, .record.falta svg{flex:none; width:22px; height:22px}
+.record.obre svg{color:var(--be)}
+.record.falta svg{color:var(--or)}
+
+/* docent: les proves de la profe */
+.prova-docent > h2{font-size:1.6rem}
+.pi{display:inline-block; min-width:2.2em; text-align:center; padding:2px 8px; border-radius:99px; font-variant-numeric:tabular-nums; font-size:.88rem; border:1px solid}
+.pi.bo{background:var(--be-suau); border-color:color-mix(in srgb, var(--be) 45%, transparent)}
+.pi.no{background:var(--mal-suau); border-color:color-mix(in srgb, var(--mal) 40%, transparent)}
+tr.sense-prova td{color:var(--suau)}
+
 .demo-nav{position:fixed; left:50%; bottom:18px; transform:translateX(-50%); z-index:85; display:flex; align-items:center; gap:2px; flex-wrap:wrap; justify-content:center;
   padding:6px 6px 6px 16px; border-radius:99px; background:#131316; color:#F4F2EC; box-shadow:0 20px 50px -20px rgba(0,0,0,.7); width:max-content; max-width:calc(100vw - 24px)}
 .demo-nav .etiqueta{color:#B0ADA5; margin-right:8px; letter-spacing:.08em}
@@ -1307,20 +1384,14 @@ main{padding-bottom:110px}
     <div class="qui-text">
       <p class="pre-titol">Mecanografia · Ofimàtica 3002</p>
       <h1 class="titol-app" id="qui-titol">Tecla <em>a</em> tecla</h1>
-      <p class="entrada">Aprèn a escriure sense mirar el teclat. Tria què vols escriure —una novel·la, notícies, correus de feina— i les teves marques es guarden i es comparen amb les teves.</p>
-      <div id="qui-aula" hidden>
-        <h2 class="qui-clica">Clica el teu nom</h2>
-        <div class="noms" id="qui-noms"></div>
-      </div>
-      <div class="continua" id="qui-continua" hidden>
-        <button class="boto primari gran" id="b-continua" type="button">Continua com a <span id="qui-ultim"></span></button>
-        <button class="enllac" id="b-no-soc" type="button">No sóc jo</button>
-      </div>
-      <div class="ja-tens" id="qui-ja-tens">
-        <span class="etiqueta">Ja havies practicat? Primer, això</span>
-        <p>Carrega la teva fitxa (<code>TECLA-A-TECLA-….txt</code>) <b>abans d'escriure el nom</b> i continues on ho vas deixar. Si en tens diverses, tria-les totes alhora: s'ajunten soles. També les pots arrossegar a qualsevol lloc de la pàgina.</p>
+      <!-- PRIMER, LA FITXA (03-11-2026): gairebé tothom ja té progrés, i qui escriu un nom nou comença de zero
+           (i la profe no veu el que havia fet). Per això, a l'entrada, l'únic camí destacat és carregar la fitxa. -->
+      <div class="ja-tens primer" id="qui-ja-tens">
+        <span class="etiqueta">Primer de tot, cada dia</span>
+        <h2 class="qui-carrega-titol">Carrega la teva fitxa</h2>
+        <p>És el fitxer <code>TECLA-A-TECLA-el-teu-nom-….txt</code> (o el <code>.csv</code>) que vas desar al Drive o al Classroom l'últim dia. <b>Si en tens diverses, tria-les totes</b> (amb Ctrl): s'ajunten soles, sense repetir res, i no et falta cap lliçó ni cap repte.</p>
         <div class="ja-tens-botons">
-          <button class="boto primari" id="b-qui-carrega" type="button">Carrega les meves fitxes</button>
+          <button class="boto primari gran" id="b-qui-carrega" type="button">Carrega la meva fitxa</button>
           <button class="enllac" id="b-qui-enganxa" type="button">No s'obre? Enganxa-la</button>
         </div>
         <p class="avis" id="qui-avis" role="status" hidden></p>
@@ -1328,12 +1399,26 @@ main{padding-bottom:110px}
           <summary>Com guardo i recupero el progrés?</summary>
           <ol>
             <li><b>En acabar:</b> clica <b>Descarrega la fitxa</b>. Va a la carpeta de baixades, que a l'institut s'esborra: <b>puja-la ara mateix</b> a la teva carpeta del Drive (o lliura-la al Classroom).</li>
-            <li><b>En començar el dia següent:</b> baixa del Drive la fitxa més nova (o totes, no passa res) i clica <b>Carrega les meves fitxes</b>. Pots triar-ne diverses alhora, amb Ctrl o Maj.</li>
+            <li><b>En començar el dia següent:</b> baixa del Drive les teves fitxes (la més nova, o totes: no passa res) i clica <b>Carrega la meva fitxa</b>. Pots triar-ne diverses alhora, amb Ctrl o Maj.</li>
             <li><b>Si no s'obre:</b> obre la fitxa al Drive, prem Ctrl+A i Ctrl+C, clica <b>Enganxa-la</b> i prem Ctrl+V.</li>
           </ol>
           <p class="suau">Serveixen la fitxa <code>.txt</code>, la taula per a l'Excel <code>.csv</code> (les de després del 25-10), el <code>.zip</code> que fa el Drive si en baixes diverses i el Word si el Drive l'ha convertit.</p>
         </details>
       </div>
+      <div class="continua" id="qui-continua" hidden>
+        <p class="suau" id="qui-continua-diu"></p>
+        <div class="fila-botons">
+          <button class="boto secundari" id="b-continua" type="button">Continua com a <span id="qui-ultim"></span></button>
+          <button class="enllac" id="b-no-soc" type="button">No sóc jo</button>
+        </div>
+      </div>
+      <div id="qui-aula" hidden>
+        <h2 class="qui-clica">Si no tens fitxa, clica el teu nom</h2>
+        <div class="noms" id="qui-noms"></div>
+      </div>
+      <details class="qui-nou" id="qui-nou">
+        <summary>És la primera vegada que fas servir Tecla a tecla?</summary>
+        <p class="avis or qui-nou-avis"><span><b>Només si no has practicat mai.</b> Si ja ho havies fet, no escriguis el nom: <b>carrega la teva fitxa</b>. Amb un nom nou començaràs de zero (com seure, la lliçó 1, el repte de 3 minuts) i la profe no veurà el que havies fet.</span></p>
       <form class="targeta" id="f-qui" autocomplete="off" novalidate>
         <span class="etiqueta qui-primera">Només si és la primera vegada</span>
         <label class="camp"><span>Com et dius?</span>
@@ -1350,8 +1435,9 @@ main{padding-bottom:110px}
           </div>
         </fieldset>
         <p class="avis mal" id="qui-error" hidden></p>
-        <button class="boto primari gran" type="submit">Endavant</button>
+        <button class="boto secundari gran" type="submit">Endavant: començo de zero</button>
       </form>
+      </details>
     </div>
     <figure class="qui-3d" id="qui-3d">
       <div class="lloc-3d" id="qui-3d-lloc" aria-hidden="true">
@@ -1455,7 +1541,7 @@ main{padding-bottom:110px}
 <section class="pantalla" id="p-escriu" aria-label="Escriu">
   <div class="escriu-cap">
     <div class="escriu-que">
-      <span class="etiqueta" id="e-tipus">Text</span><span class="ruta-pindola" id="e-ruta" hidden></span>
+      <span class="etiqueta" id="e-tipus">Text</span><span class="ruta-pindola" id="e-ruta" hidden></span><span class="prova-pindola" id="e-prova" role="status" hidden></span>
       <h2 id="e-titol">&nbsp;</h2>
     </div>
     <div class="escriu-xifres" aria-live="off">
@@ -1535,6 +1621,7 @@ main{padding-bottom:110px}
     <p class="suau" id="r-sub"></p>
   </div>
   <div id="r-record"></div>
+  <section class="prova-resultat" id="r-prova" aria-label="La prova de la profe" hidden></section>
   <div class="xifres4" id="r-xifres"></div>
   <section class="ruta ruta-resultat" id="r-ruta" aria-label="El teu pas següent"></section>
   <section class="desa-progres" id="r-desa" aria-label="Desa el teu progrés" aria-live="polite"></section>
@@ -1585,7 +1672,7 @@ main{padding-bottom:110px}
     <input type="file" id="i-d-carpeta" multiple webkitdirectory hidden>
   </div>
   <details class="targeta enllac-classe" id="d-enllac">
-    <summary><b>Enllaç per a la classe</b> <span class="suau">· tria gèneres, llengua i durada, i copia l'adreça per al Classroom</span></summary>
+    <summary><b>Enllaç per a la classe</b> <span class="suau">· tria gèneres, llengua, durada o la prova de la profe del dia, i copia l'adreça per al Classroom</span></summary>
     <div id="d-enllac-cos"></div>
   </details>
   <div id="d-estat"></div>
@@ -1603,6 +1690,7 @@ main{padding-bottom:110px}
       <button role="tab" aria-selected="false" data-p="ranking" type="button">Rànquing</button>
       <button role="tab" aria-selected="false" data-p="dies" type="button">Per dies</button>
       <button role="tab" aria-selected="false" data-p="alumnes" type="button">Alumnes</button>
+      <button role="tab" aria-selected="false" data-p="proves" type="button">Proves de la profe</button>
       <button role="tab" aria-selected="false" data-p="sessions" type="button">Totes les sessions</button>
     </div>
     <div id="d-cos"></div>
@@ -1658,11 +1746,12 @@ main{padding-bottom:110px}
     <h2 id="ajuda-titol">Què faig ara?</h2>
     <div id="ajuda-pas"></div>
     <div class="ajuda-faq">
-      <details><summary>Ja havia practicat i no veig el que vaig fer</summary><p>Ve d'un altre dia o d'un altre ordinador: <b>carrega la teva fitxa</b>. Baixa-la del Drive o del Classroom (la més nova, o totes) i clica <button class="enllac" type="button" data-accio="carrega">Carrega fitxes</button>. Si no s'obre, <button class="enllac" type="button" data-accio="enganxa">enganxa-la</button>.</p></details>
-      <details><summary>Com guardo el que he fet?</summary><p>Clica <b>Desa la fitxa</b> (a dalt a la dreta). Va a Baixades: <b>puja-la ara mateix</b> a la tasca del Classroom o al teu Drive, perquè les baixades de l'institut s'esborren. Només cal la més nova: porta tot l'historial.</p></details>
+      <details><summary>Ja havia practicat i no veig el que vaig fer</summary><p>Ve d'un altre dia o d'un altre ordinador: <b>carrega la teva fitxa</b>. Baixa-la del Drive o del Classroom i clica <button class="enllac" type="button" data-accio="carrega">Carrega fitxes</button>. Si no s'obre, <button class="enllac" type="button" data-accio="enganxa">enganxa-la</button>.</p><p><b>Si et falten reptes o lliçons d'un dia</b>, és que un altre dia vas començar sense carregar la fitxa i la d'aquell dia va néixer buida. Carrega-les <b>totes</b> alhora (amb Ctrl): s'ajunten soles. Després, descarrega-la: la nova ja ho portarà tot.</p></details>
+      <details><summary>Com guardo el que he fet?</summary><p>Clica <b>Desa la fitxa</b> (a dalt a la dreta). Va a Baixades: <b>puja-la ara mateix</b> a la tasca del Classroom o al teu Drive, perquè les baixades de l'institut s'esborren. La més nova porta tot l'historial, si en començar vas carregar la d'abans.</p></details>
+      <details><summary>La profe ha dit una prova (una lliçó i un màxim d'errades)</summary><p>A la ruta, clica <b>La profe ha posat una prova?</b>, tria la lliçó o el repte i escriu el màxim d'errades. L'app te la fa repetir fins que surti bé (acabada i sense passar de les errades) i cada intent queda a la teva fitxa, perquè la profe el vegi.</p></details>
       <details><summary>Quan escric no passa res</summary><p>Clica sobre el text i torna a escriure. Si les lletres no compten, apaga el <b>Bloq Maj</b>. Has d'escriure la lletra marcada: si t'equivoques, l'errada compta, però no cal esborrar.</p></details>
       <details><summary>Com plego d'una sessió?</summary><p>Prem <kbd>Esc</kbd> i tria <b>Acaba la sessió</b>. El que has escrit es desa; després, desa la fitxa.</p></details>
-      <details><summary>Per què em fa repetir la lliçó?</summary><p>Per superar-la cal un 95 % de precisió: dues o tres estrelles. Ves més a poc a poc i mira la pantalla, no les mans. Si avui ja l'has provat dues vegades, la ruta passa a la pràctica i demà hi tornes.</p></details>
+      <details><summary>Per què em fa repetir la lliçó?</summary><p>Per superar-la cal un 95 % de precisió: dues o tres estrelles. Ves més a poc a poc i mira la pantalla, no les mans. Si avui ja l'has provat dues vegades, la ruta passa a la pràctica i demà hi tornes. <b>Si és la prova de la profe</b>, la repeteixes fins que la facis sense passar de les errades que ha dit.</p></details>
       <details><summary>Què és el jardí i els punts?</summary><p>El teu progrés, fet dibuix: cada 10 minuts d'escriure hi creix una planta i cada repte superat hi planta un arbre. Res no es mor.</p></details>
     </div>
   </div>
@@ -1673,9 +1762,25 @@ main{padding-bottom:110px}
     <h2 id="primera-titol">Ja havies practicat?</h2>
     <p class="suau" id="primera-text"></p>
     <button class="boto primari gran" id="b-primera-carrega" type="button">Sí: carrega la meva fitxa</button>
-    <button class="boto secundari" id="b-primera-nou" type="button">No, és la primera vegada</button>
     <button class="enllac" id="b-primera-enganxa" type="button">La fitxa no s'obre? Enganxa-la</button>
+    <button class="boto secundari" id="b-primera-nou" type="button">No, és la primera vegada: començo de zero</button>
   </div>
+</div>
+<!-- LA PROVA DE LA PROFE (03-11-2026): «avui, la lliçó dels accents, i no més de 10 errades» -->
+<div class="capa" id="capa-prova" hidden>
+  <form class="targeta prova-profe" id="f-prova" role="dialog" aria-modal="true" aria-labelledby="prova-titol" novalidate>
+    <span class="etiqueta">Prova de la profe</span>
+    <h2 id="prova-titol">Quina prova ha dit la profe?</h2>
+    <label class="camp"><span>Què has de fer</span>
+      <select id="prova-act"></select></label>
+    <label class="camp"><span>Màxim d'errades</span>
+      <input id="prova-max" type="number" min="0" max="500" step="1" value="10" inputmode="numeric"></label>
+    <p class="suau">Fins que no la facis sense passar d'aquestes errades, l'app no et passa a res més. Cada intent queda a la teva fitxa, amb les errades i les xifres: la profe ho veurà.</p>
+    <p class="avis mal" id="prova-error" hidden></p>
+    <button class="boto primari gran" id="b-prova-si" type="submit">Comença la prova</button>
+    <button class="boto secundari" id="b-prova-treu" type="button" hidden>Treu la prova</button>
+    <button class="enllac" id="b-prova-no" type="button">Cancel·la</button>
+  </form>
 </div>
 <div class="capa" id="capa-benvinguda" hidden>
   <div class="targeta benvinguda" role="dialog" aria-modal="true" aria-labelledby="benv-titol">
@@ -7569,7 +7674,8 @@ function perBloc(sessions, textos){
    --------------------------------------------------------------------- */
 var PREFIX = "TAT1|";
 var SAL = "tecla-a-tecla · 3002 · no toquis les dades";
-var VERSIO = "4";     /* la versió de l'aplicació que ha escrit la fitxa (la 4, des de l'11-10-2026) */
+var VERSIO = "5";     /* la versió de l'aplicació que ha escrit la fitxa (la 5, des del 03-11-2026: hi pot anar la prova de la profe;
+                         les dades tenen la mateixa forma i una versió anterior la llegeix igual) */
 
 /* la lliçó d'ergonomia: {data, hora, v, s (segons)}; qualsevol altra cosa, com si no s'hagués fet */
 function ergoValida(e){
@@ -7658,45 +7764,27 @@ function ordenaSessions(v){
   return v.slice().sort(function(a,b){ return clauOrdre(a) < clauOrdre(b) ? -1 : 1; });
 }
 
-function fitxaText(perfil, ara){
+/* textos (opcional): el catàleg, per posar el títol dels reptes de 3 minuts a la part que es llegeix */
+function fitxaText(perfil, ara, textos){
   ara = ara || new Date();
   var ss = ordenaSessions(perfil.sessions || []);
-  var L = [];
-  L.push("TECLA A TECLA · FITXA DE MECANOGRAFIA");
-  L.push("Mòdul 3002 Aplicacions bàsiques d'ofimàtica");
-  L.push("");
-  L.push("Nom:   " + perfil.nom);
-  L.push("Grup:  " + (perfil.grup || "-"));
-  L.push("Desada: " + dataLocal(ara) + " " + horaLocal(ara));
-  var ergo = ergoValida(perfil.ergo);
-  L.push("Ergonomia: " + (ergo ? "lliçó feta el " + ergo.data : "encara no s'ha fet la lliçó"));
-  if (JARDI[perfil.jardi]) L.push("Jardí: " + JARDI[perfil.jardi].nom);
-  L.push("");
-  var ag = agregat(ss), sr = setmanesRodones(ss, ara), er = escalaReptes(ss);
-  L.push("ACUMULAT");
-  L.push("  Sessions ................ " + ss.length + "  (" + ag.dies + " dies diferents)");
-  L.push("  Temps de pràctica ....... " + minutsText(ag.act));
-  L.push("  Millor repte ............ " + (ag.millorRepte ? ag.millorRepte.ppm + " pulsacions netes/min (" + ag.millorRepte.data + ")" : "encara cap"));
-  if (ag.base) L.push("  Primera marca ........... " + ag.base.ppm + " pulsacions netes/min (" + ag.base.data + ", " + nomTipus(ag.base).toLowerCase() + ")");
-  L.push("  Repte més llarg superat . " + (er.mesLlarg ? er.mesLlarg + " minuts" : "encara cap"));
-  L.push("  Setmanes rodones ........ " + sr.rodones + " (" + OBJECTIU_SETMANA + " minuts o més) · ara, " + sr.ratxa + " seguides");
-  L.push("");
-  L.push("SESSIONS (de la més nova a la més antiga)");
-  L.push("  Data        Hora   Tipus          Minuts  Puls./min  Precisió  Ritme");
-  ss.slice().reverse().forEach(function(s){
-    L.push("  " + s.data + "  " + s.hora + "  " + (nomTipus(s) + "              ").slice(0, 14) + " " +
-      ("     " + Math.round((s.act||0)/60)).slice(-6) + "  " + ("         " + fmt(s.ppm)).slice(-9) + "  " +
-      ("       " + fmt(s.prec, 1) + " %").slice(-9) + "  " + ("     " + fmt(s.ritme)).slice(-5));
-  });
+  /* a dalt, el que es llegeix (secció 14): tot el que ha fet, de la més nova a la més antiga */
+  var L = fitxaLlegible(perfil, ara, textos);
   L.push("");
   L.push("Aquesta fitxa porta tot el teu historial. Per continuar en un altre ordinador,");
   L.push("obre Tecla a tecla i carrega-la. No en toquis res de sota: si es modifica, es nota.");
   L.push("");
   L.push("==== DADES ====");
-  /* «desada», «ergo» i «jardi» van dins el segell; una versió anterior de l'aplicació els ignora sense queixar-se */
+  /* «desada», «ergo», «jardi» i, des de la versió 5, «baixades» i «prova» van dins el segell;
+     una versió anterior de l'aplicació els ignora sense queixar-se */
+  var ergo = ergoValida(perfil.ergo);
   var pl = {nom:perfil.nom, grup:perfil.grup || "", ll:perfil.llengua || "ca", blocs:blocsValids(perfil.blocs), app:VERSIO, desada:dataLocal(ara) + " " + horaLocal(ara)};
   if (ergo) pl.ergo = ergo;
   if (JARDI[perfil.jardi]) pl.jardi = perfil.jardi;
+  var bx = baixadesDe(perfil.baixades);
+  if (bx.length) pl.baixades = bx;
+  var pr = provaValida(perfil.prova, dataLocal(ara));          /* la prova de la profe, només la d'avui */
+  if (pr) pl.prova = pr;
   var dades = [PREFIX + "P|" + JSON.stringify(pl)];
   ss.forEach(function(s){ dades.push(PREFIX + "S|" + JSON.stringify(s)); });
   dades.push(PREFIX + "SEGELL|" + segell(dades));
@@ -7752,7 +7840,10 @@ function llegeixFitxa(text){
           var eg = ergoValida(o.ergo); if (eg) r.ergo = eg;
           if (JARDI[o.jardi]) r.jardi = o.jardi;
           if (/^\d{4}-\d{2}-\d{2} \d{1,2}:\d{2}$/.test(String(o.desada || ""))) r.desada = String(o.desada);
-          if (o.app !== undefined) r.app = cadena(o.app, /^[\w.-]{1,12}$/); }
+          if (o.app !== undefined) r.app = cadena(o.app, /^[\w.-]{1,12}$/);
+          /* versió 5: quan s'ha descarregat (les darreres vegades) i la prova de la profe del dia */
+          var bx = baixadesDe(o.baixades); if (bx.length) r.baixades = bx;
+          var pv = provaValida(o.prova); if (pv) r.prova = pv; }
         else if (tipus === "S" && o && o.id && o.data){ var ns = netejaSessio(o); if (ns) r.sessions.push(ns); }
       } catch(e){ r.problemes.push("una línia de dades no es pot llegir"); }
     });
@@ -7792,6 +7883,11 @@ function netejaSessio(o){
   ["act","dur","ppm","prec","ritme","enc","err","atur","cb","min","rep","llico","estrelles","ppmDades","ppmGlobal"].forEach(function(k){ if (o[k] !== undefined) s[k] = nombre(o[k]); });
   ["complet","acabat","interrompuda","dubte"].forEach(function(k){ if (o[k] !== undefined) s[k] = !!o[k]; });
   if (o.text !== undefined) s.text = cadena(o.text, /^[\w.-]{1,40}$/);
+  /* versió 5: l'intent es va fer amb la prova de la profe posada (el límit d'errades que havia dit) */
+  if (o.prova && typeof o.prova === "object"){
+    var mx = nombre(o.prova.max);
+    if (mx !== null && mx >= 0 && mx <= MAX_ERRADES_PROVA) s.prova = {max:Math.round(mx)};
+  }
   /* un repte llarg sempre s'acaba quan s'acaba el temps (si no, es desa com a pràctica): si una versió
      anterior de l'aplicació li ha tret el temps de rellotge, és el de la seva durada */
   if (s.tipus === "repte" && s.min > 3 && s.dur === undefined && CONFIG.reptesMinuts.indexOf(s.min) >= 0) s.dur = s.min * 60;
@@ -7832,17 +7928,40 @@ function aplega(llegits, clauActual, identifica){
   var tria = clauActual && grups[clauActual] ? clauActual : ordre.slice().sort(function(a, b){ return grups[b].length - grups[a].length; })[0];
   var desada = function(x){ return x.r.desada || ""; };
   var v = grups[tria].slice().sort(function(a, b){ return desada(a) < desada(b) ? -1 : (desada(a) > desada(b) ? 1 : 0); });
-  var nova = v[v.length - 1].r, sessions = [], ergo = null, jardi = null, modificades = [];
+  var nova = v[v.length - 1].r, sessions = [], ergo = null, jardi = null, modificades = [], baixades = [], prova = null;
   v.forEach(function(x){
     if (x.r.segellOk === false){ modificades.push(x.nom); x.r.sessions.forEach(function(s){ s.dubte = true; }); }
     sessions = fusiona(sessions, x.r.sessions);
     if (x.r.ergo && x.r.segellOk !== false) ergo = primeraErgo(ergo, x.r.ergo);
     if (x.r.jardi) jardi = x.r.jardi;              /* el de la fitxa més nova que en porti */
+    baixades = baixades.concat(x.r.baixades || []);
+    if (x.r.prova && (!prova || x.r.prova.dia >= prova.dia)) prova = x.r.prova;
   });
+  /* LA FITXA QUE NO HO PORTAVA TOT (03-11): un dia que no es va carregar la fitxa en començar, la d'aquell dia
+     va néixer buida. Si la més nova no porta sessions que sí que porten les altres, ajuntades ja hi són, però cap
+     fitxa no les porta totes: cal tornar-la a descarregar (l'aplicació ho demana). */
+  var aLaNova = Object.create(null);
+  nova.sessions.forEach(function(s){ aLaNova[s.id] = 1; });
+  var falten = sessions.filter(function(s){ return !aLaNova[s.id]; }).length;
   var p = {nom:nova.nom, grup:nova.grup || "", ll:nova.ll || null, blocs:nova.blocs || null, sessions:sessions, ergo:ergo, jardi:jardi,
-           format:v.some(function(x){ return x.r.format === "v1"; }) ? "v1" : "tat1", desada:nova.desada || null};
+           format:v.some(function(x){ return x.r.format === "v1"; }) ? "v1" : "tat1", desada:nova.desada || null,
+           baixades:baixadesDe(baixades), prova:prova};
   var altres = ordre.filter(function(k){ return k !== tria; }).map(function(k){ return {persona:grups[k][0].r.nom, fitxers:grups[k].map(function(x){ return x.nom; })}; });
-  return {perfil:p, clau:tria, fitxes:v.length, fitxers:v.map(function(x){ return x.nom; }), taules:taules, dolents:dolents, altres:altres, modificades:modificades};
+  return {perfil:p, clau:tria, fitxes:v.length, fitxers:v.map(function(x){ return x.nom; }), taules:taules, dolents:dolents, altres:altres, modificades:modificades,
+          falten:v.length > 1 ? falten : 0, nova:{desada:nova.desada || null, ids:Object.keys(aLaNova)}};
+}
+/* el moment en què va començar una sessió, «AAAA-MM-DD HH:MM» (per comparar-lo amb el «desada» d'una fitxa) */
+function momentDe(s){
+  var p = String(s.hora || "").split(":");
+  return s.data + " " + ("0" + (p[0] || "0")).slice(-2) + ":" + ("0" + (p[1] || "0")).slice(-2);
+}
+/* LA FITXA MÉS NOVA, JA NO HO PORTA TOT? sessions que ja hi havia quan es va desar (començades abans) i que no hi són:
+   les va fer en un altre ordinador o un dia que no la va carregar. Cal descarregar-ne una de nova (la que ho porta tot). */
+function forats(sessions, nova){
+  if (!nova || !nova.ids) return 0;
+  var hi = Object.create(null);
+  nova.ids.forEach(function(id){ hi[id] = 1; });
+  return (sessions || []).filter(function(s){ return s && !hi[s.id] && (!nova.desada || momentDe(s) <= nova.desada); }).length;
 }
 
 /* uneix sessions sense repetir-ne cap (la mateixa sessió pot venir de dos fitxers) */
@@ -9275,10 +9394,21 @@ function rutaAvui(sessions, o){
   var passos = [];
   if (!o.ergo) passos.push({id:"ergo", nom:"Com seure", titol:"Com seure per escriure",
     diu:"La cadira, els braços, la pantalla i on van les mans. Es fa una sola vegada.", min:3, fet:false});
-  /* 1. escalfa: la lliçó següent del camí, o el remei, o res (el camí fet i cap error amb nom) */
+  /* 1. escalfa: la lliçó següent del camí, o el remei, o res (el camí fet i cap error amb nom).
+     Si la profe ha dit una prova avui (secció 13), la prova és aquest pas i la ruta no passa a res més fins que
+     un intent surt bé: acabat i sense passar de les errades que ha dit. Mai no es dona per feta per haver-ho provat. */
   var cami = estatLlicons(totes), llAvui = ss.filter(function(s){ return s.tipus === "llico"; });
   var remAvui = ss.filter(function(s){ return !!sessioRemei(s); });
-  if (cami.seguent || llAvui.length){
+  var prova = provaValida(o.prova, avui), ep = prova ? estatProva(totes, prova) : null;
+  if (ep){
+    var ni = ep.intents.length, darrer = ep.intents[ni - 1], mR = /^repte-(\d+)$/.exec(prova.act);
+    passos.push({id:"prova", nom:"Prova", act:prova.act, max:prova.max, min:mR ? +mR[1] : 3, fet:ep.superada, intents:ni,
+      titol:"Prova de la profe: " + ep.nom,
+      diu:ep.superada ? "Superada a l'intent " + ep.intentBo + " amb " + ep.bona.err + (ep.bona.err === 1 ? " errada" : " errades") + " (màxim " + prova.max + ")."
+        : (ni ? "Intent " + ni + ": " + (intentAcabat(darrer) ? darrer.err + (darrer.err === 1 ? " errada" : " errades") : "a mitges") + ". El màxim és " + prova.max +
+                ": torna-hi, més a poc a poc, i mira la pantalla, no les mans."
+              : "Màxim " + prova.max + (prova.max === 1 ? " errada" : " errades") + ". Si en fas més, la tornes a fer. Cada intent queda a la teva fitxa.")});
+  } else if (cami.seguent || llAvui.length){
     var bona = llAvui.filter(function(s){ return s.estrelles >= 2; }).pop();
     var L = cami.seguent, fetLl = !!bona || llAvui.length >= 2 || !L;
     var n = fetLl ? (bona || llAvui[llAvui.length - 1]).llico : L.n, nomL = LLICONS[n - 1].nom;
@@ -9326,6 +9456,272 @@ function rutaAvui(sessions, o){
   return {avui:avui, passos:passos, seguent:seguent, fets:fets, total:passos.length, tot:!seguent, minutsQueden:queda};
 }
 
+/* =====================================================================
+   13. LA PROVA DE LA PROFE (03-11-2026)
+   La profe diu en veu alta «avui, la lliçó dels accents, i no més de 10 errades». L'alumne la posa a l'app
+   (o ja ve a l'enllaç de la classe) i queda com una consigna del dia: {act:"llico-12", max:10, dia}. La ruta
+   la posa primer i no passa a res més fins que un intent surt bé (acabat i sense passar de les errades). Cada
+   intent porta prova:{max} a la fitxa: la profe veu després, a la mateixa fitxa, cada intent amb les errades,
+   la precisió, la velocitat i el temps. Cap tipus nou de sessió: una versió anterior llegeix la fitxa igual.
+   ===================================================================== */
+var MAX_ERRADES_PROVA = 500;
+/* l'activitat d'una sessió tal com la diu una consigna: «llico-12», «repte-3»
+   (un repte llarg deixat a mitges es desa com a pràctica, però és un intent d'aquell repte) */
+function actDe(s){
+  if (!s) return null;
+  if (s.tipus === "llico" && s.llico) return "llico-" + s.llico;
+  if (s.tipus === "repte") return "repte-" + minRepte(s);
+  if (s.tipus === "practica" && s.rep) return "repte-" + s.rep;
+  return null;
+}
+function actValida(act){
+  var m = /^(llico|repte)-(\d{1,2})$/.exec(String(act || ""));
+  if (!m) return null;
+  var n = +m[2];
+  if (m[1] === "llico" && n >= 1 && n <= LLICONS.length) return m[1] + "-" + n;
+  if (m[1] === "repte" && CONFIG.reptesMinuts.indexOf(n) >= 0) return m[1] + "-" + n;
+  return null;
+}
+/* una consigna ben formada; amb «avui», només si és d'avui (la d'un altre dia ja no mana) */
+function provaValida(o, avui){
+  if (!o || typeof o !== "object") return null;
+  var act = actValida(o.act), max = nombre(o.max), dia = cadena(o.dia, /^\d{4}-\d{2}-\d{2}$/);
+  if (!act || max === null || max < 0 || max > MAX_ERRADES_PROVA || !dia) return null;
+  if (avui && dia !== avui) return null;
+  return {act:act, max:Math.round(max), dia:dia};
+}
+function nomAct(act){
+  var m = /^(llico|repte)-(\d+)$/.exec(String(act || ""));
+  if (!m) return "";
+  if (m[1] === "llico"){ var L = LLICONS[+m[2] - 1]; return L ? "Lliçó " + L.n + " · " + L.nom : ""; }
+  return "Repte de " + m[2] + " minuts";
+}
+/* un intent acabat: la lliçó fins al final; el repte, superat (arribar al final escrivint de debò) */
+function intentAcabat(s){
+  if (!s) return false;
+  if (s.tipus === "llico") return (s.estrelles || 0) >= 1;
+  if (s.tipus === "repte") return repteSuperat(s);
+  return false;
+}
+/* l'intent compleix la consigna: acabat i sense passar de les errades (max: el límit; si no, el que porta la sessió) */
+function provaFeta(s, max){
+  if (!s) return false;
+  var m = max !== undefined && max !== null ? max : (s.prova ? s.prova.max : null);
+  return m !== null && intentAcabat(s) && typeof s.err === "number" && s.err <= m;
+}
+/* els intents d'una consigna (els que es van fer amb ella posada), del primer a l'últim */
+function intentsProva(sessions, c){
+  return ordenaSessions((sessions || []).filter(function(s){ return s && s.prova && s.data === c.dia && actDe(s) === c.act && s.prova.max === c.max; }));
+}
+function estatProva(sessions, c){
+  c = provaValida(c);
+  if (!c) return null;
+  var v = intentsProva(sessions, c), bona = null;
+  v.forEach(function(s){ if (!bona && provaFeta(s)) bona = s; });
+  return {consigna:c, nom:nomAct(c.act), intents:v, superada:!!bona, bona:bona, intentBo:bona ? v.indexOf(bona) + 1 : null};
+}
+/* totes les proves de la profe d'un historial: una per dia, activitat i límit, de la més nova a la més antiga */
+function provesDe(sessions){
+  var g = Object.create(null), ordre = [];
+  ordenaSessions(sessions || []).forEach(function(s){
+    if (!s || !s.prova || !actDe(s)) return;
+    var k = s.data + "|" + actDe(s) + "|" + s.prova.max;
+    if (!g[k]){ g[k] = {dia:s.data, act:actDe(s), max:s.prova.max}; ordre.push(k); }
+  });
+  return ordre.reverse().map(function(k){ return estatProva(sessions, g[k]); }).filter(Boolean);
+}
+/* les vegades que s'ha descarregat la fitxa («AAAA-MM-DD HH:MM»): sense repetir, en ordre, les 40 darreres */
+function baixadesDe(v){
+  if (!Array.isArray(v)) return [];
+  var o = Object.create(null);
+  v.forEach(function(x){ x = String(x || ""); if (/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}$/.test(x)) o[x] = 1; });
+  return Object.keys(o).sort().slice(-40);
+}
+
+/* =====================================================================
+   14. LA FITXA, LLEGIBLE (03-11-2026)
+   A dalt de la fitxa .txt i a la taula .csv: tot el que ha fet, de la més nova a la més antiga. Cada activitat
+   amb el nom (quina lliçó i quines tecles, quin repte i quin text, quins gèneres), les xifres (velocitat,
+   precisió, errades de quantes pulsacions, temps), el resultat, les tecles on s'ha equivocat i, si n'hi havia,
+   la prova de la profe. Qui obre la darrera fitxa d'un alumne (o la cinquena que ha baixat aquell dia) ho veu
+   tot sense l'aplicació. Les dades de sota (les que es carreguen) no canvien de forma.
+   ===================================================================== */
+var DIES_SETMANA = ["diumenge", "dilluns", "dimarts", "dimecres", "dijous", "divendres", "dissabte"];
+function dataCurta(data){ var p = String(data || "").split("-"); return p.length === 3 ? (+p[2]) + "-" + (+p[1]) + "-" + p[0] : String(data || ""); }
+function dataLlarga(data){ var d = new Date(data + "T12:00:00"); return (isNaN(d) ? "" : DIES_SETMANA[d.getDay()] + " ") + dataCurta(data); }
+function mmssDe(seg){ seg = Math.max(0, Math.round(seg || 0)); return Math.floor(seg / 60) + ":" + dosXifres(seg % 60); }
+function nomCar(c){ return c === " " ? "espai" : (c === "\n" ? "Retorn" : (c === "\t" ? "Tab" : c)); }
+function nomLl(ll){ return ll === "es" ? "castellà" : (ll === "mix" ? "català i castellà" : "català"); }
+function estrellesText(n){ var t = ""; for (var i = 1; i <= 3; i++) t += i <= n ? "★" : "☆"; return t; }
+/* les tecles on s'ha equivocat més en una sessió: «é (4)», «espai (2)» */
+function teclesAmbErrades(s, n){
+  var tk = (s && s.tecles) || {};
+  return Object.keys(tk).filter(function(k){ return tk[k][1] > 0; })
+    .sort(function(a, b){ return tk[b][1] - tk[a][1] || (a < b ? -1 : 1); })
+    .slice(0, n || 6).map(function(k){ return nomCar(k) + " (" + tk[k][1] + ")"; });
+}
+function teclesDeLlico(L){ return L.maj ? "Maj + lletra" : L.noves.split("").map(nomCar).join(" "); }
+function generesDe(s){
+  var v = [];
+  (s.trams || []).forEach(function(t){ if (t.k === "text" && t.b && BLOC[t.b] && v.indexOf(BLOC[t.b].curt) < 0) v.push(BLOC[t.b].curt); });
+  return v;
+}
+function titolRepte(s, textos){
+  if (!textos || !s.text) return "";
+  var ll = textos[s.ll] || textos.ca, t = ll && ll.repte ? ll.repte.filter(function(x){ return x.id === s.text; })[0] : null;
+  return t ? t.titol : "";
+}
+/* una sessió en paraules: què era (tipus i activitat), les xifres, el resultat, la prova de la profe i les tecles */
+function descriuSessio(s, textos){
+  var o = {tipus:nomTipus(s), que:"", resultat:"", prova:"", provaRes:"", tecles:teclesAmbErrades(s, 6)};
+  if (s.tipus === "ut0") o.que = "Prova inicial (la del començament de curs)";
+  else if (s.tipus === "llico"){
+    var L = LLICONS[(s.llico || 1) - 1];
+    o.tipus = "Lliçó " + s.llico;
+    o.que = "Lliçó " + s.llico + (L ? " · " + L.nom + " (tecles: " + teclesDeLlico(L) + ")" : "") + " · " + nomLl(s.ll);
+    o.resultat = s.estrelles >= 2 ? "superada " + estrellesText(s.estrelles) : (s.estrelles === 1 ? "no superada (cal un 95 % de precisió) " + estrellesText(1) : "a mitges: no l'ha acabada");
+  }
+  else if (s.tipus === "repte"){
+    var m = minRepte(s), tr = (s.trams || []).length, gg = generesDe(s), tt = titolRepte(s, textos);
+    o.tipus = "Repte " + m + " min";
+    o.que = "Repte de " + m + " minuts · " + (m === 3 ? (tt ? "«" + tt + "» · " : "") + nomLl(s.ll)
+                                                  : tr + (tr === 1 ? " text" : " textos") + (gg.length ? " (" + gg.join(", ") + ")" : ""));
+    o.resultat = !repteSuperat(s) ? "no superat (cal escriure el " + Math.round(CONFIG.repteActiu * 100) + " % del temps amb un " + CONFIG.reptePrecisio + " % de precisió)"
+      : (typeof s.prec === "number" && s.prec >= CONFIG.precisioRanking ? "superat" : "superat, però amb menys del " + CONFIG.precisioRanking + " %: no obre el següent");
+    if (m === 3 && s.acabat) o.resultat += " · text acabat abans dels 3 minuts";
+  }
+  else {
+    var rem = sessioRemei(s);
+    if (rem){ o.tipus = "Remei"; o.que = "Exercici de remei · " + titolCurtClau(rem.clau) + " · " + nomLl(s.ll); o.resultat = "fet"; }
+    else if (s.rep){ o.tipus = "Repte " + s.rep + " min a mitges"; o.que = "Repte de " + s.rep + " minuts deixat a mitges (compta com a pràctica)"; o.resultat = "a mitges"; }
+    else {
+      var nt = 0, caps = [], altres = [];
+      (s.trams || []).forEach(function(t){
+        if (t.k === "text"){ nt++; if (t.cap) caps.push(t.cap); }
+        else if (t.k === "dades" && altres.indexOf("dades d'oficina") < 0) altres.push("dades d'oficina");
+        else if (t.k === "febles" && altres.indexOf("tecles que costen") < 0) altres.push("tecles que costen");
+        else if (t.k === "escalfament" && altres.indexOf("escalfament") < 0) altres.push("escalfament");
+      });
+      var gs = generesDe(s);
+      o.que = "Pràctica" + (s.min ? " de " + s.min + " minuts" : "") + " · " + nt + (nt === 1 ? " text" : " textos") +
+        (gs.length ? " (" + gs.join(", ") + (caps.length ? "; novel·la, cap. " + caps.join(", ") : "") + ")" : "") +
+        (altres.length ? " + " + altres.join(" + ") : "") + " · " + nomLl(s.ll);
+      o.resultat = s.complet ? "completa" : "acabada abans del temps triat";
+    }
+  }
+  if (s.interrompuda) o.resultat += (o.resultat ? " · " : "") + "es va tancar a mitges i es va desar sola";
+  if (s.prova){
+    var feta = provaFeta(s);
+    o.prova = "màxim " + s.prova.max + (s.prova.max === 1 ? " errada" : " errades");
+    o.provaRes = (intentAcabat(s) ? s.err + (s.err === 1 ? " errada" : " errades") : "a mitges") + ": " + (feta ? "SUPERADA" : "NO SUPERADA");
+  }
+  return o;
+}
+function xifresText(s){
+  var v = [];
+  if (s.ppm !== null && s.ppm !== undefined) v.push(s.ppm + " puls./min");
+  if (s.prec !== null && s.prec !== undefined) v.push(fmt(s.prec, 1) + " % de precisió");
+  if (typeof s.err === "number" && typeof s.enc === "number") v.push(s.err + (s.err === 1 ? " errada" : " errades") + " en " + (s.enc + s.err) + " pulsacions");
+  var t = s.tipus === "repte" && typeof s.dur === "number" ? s.dur : s.act;
+  if (t) v.push(mmssDe(t) + (s.tipus === "repte" ? " de rellotge" : " escrivint"));
+  return v.join(" · ");
+}
+/* la part de dalt de la fitxa: qui és, on és ara, les proves de la profe i tot el que ha fet (de la més nova a la més antiga) */
+function fitxaLlegible(perfil, ara, textos){
+  ara = ara || new Date();
+  var ss = ordenaSessions(perfil.sessions || []), avui = dataLocal(ara), L = [];
+  var audit = auditaSessions(ss, null), ergo = ergoValida(perfil.ergo);
+  /* la capçalera, amb les mateixes línies que les versions anteriors (Nom, Grup, Desada, Ergonomia, Jardí) */
+  L.push("TECLA A TECLA · FITXA DE MECANOGRAFIA");
+  L.push("Mòdul 3002 Aplicacions bàsiques d'ofimàtica");
+  L.push("");
+  L.push("Nom:   " + perfil.nom);
+  L.push("Grup:  " + (perfil.grup || "-"));
+  L.push("Desada: " + avui + " " + horaLocal(ara));
+  var bx = baixadesDe(perfil.baixades).filter(function(b){ return b.slice(0, 10) === avui; });
+  L.push("        " + dataLlarga(avui) + " a les " + horaLocal(ara) +
+         (bx.length > 1 ? " · avui s'ha descarregat " + bx.length + " vegades (" + bx.map(function(b){ return b.slice(11); }).join(", ") + "): aquesta és la més nova i porta tot el de les d'abans" : ""));
+  L.push("Ergonomia: " + (ergo ? "lliçó feta el " + ergo.data : "encara no s'ha fet la lliçó"));
+  if (JARDI[perfil.jardi]) L.push("Jardí: " + JARDI[perfil.jardi].nom);
+  var dies = {}; ss.forEach(function(s){ dies[s.data] = 1; });
+  L.push("Porta: " + (ss.length ? ss.length + (ss.length === 1 ? " activitat" : " activitats") + ", del " + dataCurta(ss[0].data) + " al " + dataCurta(ss[ss.length - 1].data) +
+                      " (" + Object.keys(dies).length + (Object.keys(dies).length === 1 ? " dia" : " dies") + ")" : "encara cap activitat"));
+  L.push("");
+  /* on és ara */
+  var ag = agregat(ss), sr = setmanesRodones(ss, ara), er = escalaReptes(ss), cami = estatLlicons(ss), set = setmana(ss, ara);
+  L.push("ON ÉS ARA");
+  L.push("  Camí de tecles .......... " + cami.superades + " de " + LLICONS.length + " lliçons superades" +
+         (cami.seguent ? " · la següent: lliçó " + cami.seguent.n + ", " + cami.seguent.nom : " · camí fet"));
+  L.push("  Reptes .................. " + er.escala.map(function(q){
+    return q.min + " min " + (q.aprovat ? "✓" : (q.superat ? "superat (<" + CONFIG.precisioRanking + " %)" : (q.oberta ? "obert" : "tancat")));
+  }).join(" · "));
+  L.push("                            (✓ = superat amb un " + CONFIG.precisioRanking + " % de precisió o més: obre el següent)");
+  L.push("  Millor repte ............ " + (ag.millorRepte ? ag.millorRepte.ppm + " pulsacions netes/min (" + dataCurta(ag.millorRepte.data) + ", el de 3 minuts)" : "encara cap"));
+  if (ag.base) L.push("  Primera marca ........... " + ag.base.ppm + " pulsacions netes/min (" + dataCurta(ag.base.data) + ", " + nomTipus(ag.base).toLowerCase() + ")");
+  L.push("  Temps de pràctica ....... " + minutsText(ag.act) + " · aquesta setmana, " + set.minuts + " de " + OBJECTIU_SETMANA + " min");
+  L.push("  Setmanes rodones ........ " + sr.rodones + " (" + OBJECTIU_SETMANA + " minuts o més) · ara, " + sr.ratxa + " seguides");
+  var pv = provaValida(perfil.prova, avui);
+  if (pv) L.push("  Prova de la profe d'avui  " + nomAct(pv.act) + " · màxim " + pv.max + (pv.max === 1 ? " errada" : " errades"));
+  /* les proves de la profe, intent a intent */
+  var proves = provesDe(ss);
+  if (proves.length){
+    L.push("");
+    L.push("PROVES DE LA PROFE (de la més nova a la més antiga)");
+    proves.forEach(function(p){
+      L.push("  " + dataLlarga(p.consigna.dia) + " · " + p.nom + " · màxim " + p.consigna.max + " errades → " +
+             (p.superada ? "SUPERADA a l'intent " + p.intentBo + " (" + p.bona.err + " errades)" : "NO SUPERADA (" + p.intents.length + (p.intents.length === 1 ? " intent)" : " intents)")));
+      p.intents.slice().reverse().forEach(function(s){
+        var i = p.intents.indexOf(s) + 1;
+        L.push("      intent " + i + " · " + s.hora + " · " + (intentAcabat(s) ? s.err + (s.err === 1 ? " errada" : " errades") : "a mitges (" + (s.err || 0) + " errades)") +
+               " · " + fmt(s.prec, 1) + " % · " + fmt(s.ppm) + " puls./min · " + mmssDe(s.tipus === "repte" && s.dur ? s.dur : s.act) + " · " + (provaFeta(s) ? "dins el límit" : "NO"));
+      });
+    });
+  }
+  /* tot el que ha fet, dia a dia, de la més nova a la més antiga */
+  L.push("");
+  L.push("TOT EL QUE HA FET (de la més nova a la més antiga)");
+  if (!ss.length) L.push("  Encara res.");
+  var perDia = [];
+  ss.slice().reverse().forEach(function(s){ var d = perDia[perDia.length - 1]; if (!d || d.dia !== s.data){ d = {dia:s.data, v:[]}; perDia.push(d); } d.v.push(s); });
+  perDia.forEach(function(d){
+    var seg = d.v.reduce(function(a, s){ return a + (s.tipus === "ut0" ? 0 : (s.act || 0)); }, 0);
+    L.push("");
+    L.push("=== " + dataLlarga(d.dia) + " · " + d.v.length + (d.v.length === 1 ? " activitat" : " activitats") + " · " + minutsText(seg) + " d'escriure ===");
+    d.v.forEach(function(s){
+      var o = descriuSessio(s, textos);
+      L.push(("     " + s.hora).slice(-5) + "  " + o.que + (o.prova ? " · PROVA DE LA PROFE (" + o.prova + "): " + o.provaRes : ""));
+      L.push("       " + xifresText(s) + (o.resultat ? " · " + o.resultat : ""));
+      if (o.tecles.length) L.push("       Tecles on s'ha equivocat: " + o.tecles.join(" · "));
+      if (s.dubte) L.push("       ⚠ Ve d'una fitxa que es va modificar a mà: no compta.");
+      else if (audit[s.id]) L.push("       ⚠ No quadra (per revisar): " + audit[s.id].map(motiu).join("; ") + ".");
+    });
+  });
+  /* la taula curta de sempre (la de les versions anteriors), per a qui la llegeixi d'un cop d'ull */
+  L.push("");
+  L.push("SESSIONS (de la més nova a la més antiga)");
+  L.push("  Data        Hora   Tipus          Minuts  Puls./min  Precisió  Ritme");
+  ss.slice().reverse().forEach(function(s){
+    L.push("  " + s.data + "  " + s.hora + "  " + (nomTipus(s) + "              ").slice(0, 14) + " " +
+      ("     " + Math.round((s.act||0)/60)).slice(-6) + "  " + ("         " + fmt(s.ppm)).slice(-9) + "  " +
+      ("       " + fmt(s.prec, 1) + " %").slice(-9) + "  " + ("     " + fmt(s.ritme)).slice(-5));
+  });
+  return L;
+}
+/* la taula de l'Excel (.csv) d'un alumne: una fila per activitat, de la més nova a la més antiga, amb el mateix que la fitxa */
+var COLS_TAULA = ["dia","hora","tipus","activitat","prova_de_la_profe","resultat_prova","resultat","minuts","temps","pulsacions_netes_min","precisio",
+                  "errades","encerts","pulsacions","ritme","estrelles","tecles_on_s_equivoca","llengua","generes","alumne","grup","id"];
+function taulaFitxa(perfil, ara, textos){
+  var ss = ordenaSessions(perfil.sessions || []), files = [COLS_TAULA.slice()];
+  var num = function(x){ return x === null || x === undefined ? "" : String(x).replace(".", ","); };
+  ss.slice().reverse().forEach(function(s){
+    var o = descriuSessio(s, textos), t = s.tipus === "repte" && typeof s.dur === "number" ? s.dur : s.act;
+    files.push([s.data, s.hora, o.tipus, o.que, o.prova, o.provaRes, o.resultat, Math.round((s.act || 0) / 60), t ? mmssDe(t) : "",
+                num(s.ppm), num(s.prec), num(s.err), num(s.enc), typeof s.enc === "number" && typeof s.err === "number" ? s.enc + s.err : "", num(s.ritme),
+                s.tipus === "llico" ? (s.estrelles || 0) : "", o.tecles.join(" · "), nomLl(s.ll), generesDe(s).join(", "), perfil.nom, perfil.grup || "", s.id]);
+  });
+  return files;
+}
+
 return {
   CONFIG:CONFIG, banda:banda, nfc:nfc, esMorta:esMorta, mediana:mediana, arrodoneix:arrodoneix,
   dataLocal:dataLocal, horaLocal:horaLocal, clauNom:clauNom, nomBonic:nomBonic, clauGrup:clauGrup,
@@ -9351,7 +9747,12 @@ return {
   LLICONS:LLICONS, teclesFins:teclesFins, generaLlico:generaLlico, estrelles:estrelles, estatLlicons:estatLlicons, perBloc:perBloc,
   triaTextSenseRepetir:triaTextSenseRepetir, totsElsBlocs:tots, DIAG:DIAG, pla:pla, classeDiag:classeDiag, mesuraClau:mesuraClau, sessionsDiag:sessionsDiag, finestraDe:finestraDe, agregaDiag:agregaDiag, estatClau:estatClau,
   generaRemei:generaRemei, etiquetaRemeiId:etiquetaRemeiId, parseRemei:parseRemei, idRemei:idRemei, titolClau:titolClau, titolCurtClau:titolCurtClau,
-  sessioRemei:sessioRemei, clauValida:clauValida, senseRemei:senseRemei, sonVeines:sonVeines, parseConf:parseConf, llicoDe:llicoDe, NOM_GRUP:NOM_GRUP, EXPLICA_DOCENT:EXPLICA_DOCENT, nomsPropis:nomsPropis, candidates:candidates, remeisDe:remeisDe, rutaAvui:rutaAvui
+  sessioRemei:sessioRemei, clauValida:clauValida, senseRemei:senseRemei, sonVeines:sonVeines, parseConf:parseConf, llicoDe:llicoDe, NOM_GRUP:NOM_GRUP, EXPLICA_DOCENT:EXPLICA_DOCENT, nomsPropis:nomsPropis, candidates:candidates, remeisDe:remeisDe, rutaAvui:rutaAvui,
+  /* versió 9 (03-11-2026): la prova de la profe i la fitxa llegible */
+  MAX_ERRADES_PROVA:MAX_ERRADES_PROVA, actDe:actDe, actValida:actValida, provaValida:provaValida, nomAct:nomAct, intentAcabat:intentAcabat, provaFeta:provaFeta,
+  intentsProva:intentsProva, estatProva:estatProva, provesDe:provesDe, baixadesDe:baixadesDe, momentDe:momentDe, forats:forats,
+  dataCurta:dataCurta, dataLlarga:dataLlarga, mmssDe:mmssDe, teclesAmbErrades:teclesAmbErrades, descriuSessio:descriuSessio, xifresText:xifresText,
+  fitxaLlegible:fitxaLlegible, taulaFitxa:taulaFitxa, COLS_TAULA:COLS_TAULA
 };
 })();
 if (typeof module !== "undefined" && module.exports) module.exports = NUCLI;
@@ -9731,6 +10132,12 @@ var CLASSE = (function(){
     if (/^(ca|es|mix)$/.test(q.get("ll") || "")) o.ll = q.get("ll");
     if (/^(5|15|30)$/.test(q.get("min") || "")) o.min = +q.get("min");
     if (q.get("tema") === "fosc" || q.get("tema") === "clar") o.tema = q.get("tema");
+    /* la prova de la profe (03-11): ?prova=llico-12&errades=10 */
+    var pa = N.actValida(q.get("prova")), pe = q.get("errades") || "";
+    if (pa && /^\d{1,3}$/.test(pe) && +pe <= N.MAX_ERRADES_PROVA){
+      o.prova = {act:pa, max:+pe};
+      if (/^\d{4}-\d{2}-\d{2}$/.test(q.get("dia") || "")) o.prova.dia = q.get("dia");     /* un enllaç d'un altre dia no posa cap prova */
+    }
     return Object.keys(o).length ? o : null;
   } catch(e){ return null; }
 })();
@@ -9766,11 +10173,13 @@ function desa(){
   return magOk;
 }
 function perfilActiu(){ var p = MAG.actiu && MAG.perfils[MAG.actiu]; return (p && Array.isArray(p.sessions)) ? p : null; }
+function avuiStr(){ return N.dataLocal(new Date()); }
 function obrePerfil(nom, grup, ll){
   var clau = N.clauNom(nom);
   var p = MAG.perfils[clau];
   if (!p) p = MAG.perfils[clau] = {nom:AULA ? nomVisual(nom) : N.nomBonic(nom), grup:grup || "", llengua:ll || "ca", blocs:N.totsElsBlocs(), sessions:[], desadaId:null};
   else { if (grup) p.grup = grup; if (ll) p.llengua = ll; p.blocs = N.blocsValids(p.blocs); }
+  p.vist = avuiStr();             /* el dia que s'ha obert en aquest navegador: un altre dia, primer la fitxa */
   MAG.actiu = clau; MAG.darrer = clau;
   desa();
   return p;
@@ -9880,7 +10289,7 @@ function teclat3D(el, opcions, pla){
 function pintaQui(){
   var p = perfilActiu();
   if (AULA){
-    $("qui-aula").hidden = false; $("f-qui").hidden = true; $("qui-continua").hidden = true;
+    $("qui-aula").hidden = false; $("qui-nou").hidden = true; $("qui-continua").hidden = true;
     $("qui-noms").innerHTML = AULA.noms.map(function(n){
       var clau = N.clauNom(n), q = MAG.perfils[clau];
       return '<button type="button" class="nom-boto' + (MAG.darrer === clau ? " ultim" : "") + '" data-nom="' + esc(n) + '">' + esc(nomVisual(n)) +
@@ -9890,8 +10299,15 @@ function pintaQui(){
     return;
   }
   teclat3D($("qui-3d-lloc"), {mode:"dits", intro:true});
+  /* el progrés que ja hi ha en aquest navegador: es pot continuar, però en segon lloc (pot ser vell) */
   $("qui-continua").hidden = !p;
-  if (p) $("qui-ultim").textContent = p.nom;
+  if (p){
+    var ss = N.ordenaSessions(p.sessions.filter(function(s){ return s.tipus !== "ut0"; })), ult = ss[ss.length - 1];
+    $("qui-ultim").textContent = p.nom;
+    $("qui-continua-diu").innerHTML = "En aquest ordinador ja hi ha el progrés " + de(p.nom) +
+      (ult ? " (" + ss.length + (ss.length === 1 ? " activitat" : " activitats") + "; l'última, " + esc(N.dataLlarga(ult.data)) + ")" : "") +
+      ". Continua sense carregar la fitxa <b>només si l'últim dia vas practicar aquí mateix</b>.";
+  }
   var grups = {};
   Object.keys(MAG.perfils).forEach(function(k){ var g = MAG.perfils[k].grup; if (g) grups[g] = 1; });
   $("grups-coneguts").innerHTML = Object.keys(grups).map(function(g){ return '<option value="' + esc(g) + '">'; }).join("");
@@ -9914,13 +10330,26 @@ function enviaQui(e){
   });
 }
 /* GAIREB\u00c9 TOTHOM JA T\u00c9 PROGR\u00c9S (01-11): qui escriu un nom que aquest navegador no coneix, abans de comen\u00e7ar de zero
-   (i de tornar a fer la lli\u00e7\u00f3 de com seure), ha de dir si \u00e9s la primera vegada o si ha de carregar la fitxa */
+   (i de tornar a fer la lli\u00e7\u00f3 de com seure), ha de dir si \u00e9s la primera vegada o si ha de carregar la fitxa.
+   Des del 03-11, tamb\u00e9 qui escriu un nom que aquest navegador ja coneix per\u00f2 no ha obert avui: el seu progr\u00e9s m\u00e9s nou
+   pot ser en una fitxa d'un altre dia o d'un altre ordinador. */
 var PRIMERA = null;
 function preguntaPrimera(nom, fes){
-  if (MAG.perfils[N.clauNom(nom)]) return fes();
+  var conegut = MAG.perfils[N.clauNom(nom)];
+  if (conegut && conegut.vist === avuiStr()) return fes();
   PRIMERA = fes;
-  $("primera-text").innerHTML = "Si ja has fet servir Tecla a tecla (a classe o a casa), <b>el teu progr\u00e9s \u00e9s a la teva fitxa</b>: carrega-la i continues on ho vas deixar. " +
-    "Si entres com a <b>" + esc(nomVisual(nom)) + "</b> sense la fitxa, comen\u00e7ar\u00e0s de zero i haur\u00e0s de tornar a fer la lli\u00e7\u00f3 de com seure.";
+  if (conegut){
+    $("primera-titol").textContent = "Primer, la fitxa de l'\u00faltim dia";
+    $("primera-text").innerHTML = "En aquest ordinador hi ha el progr\u00e9s " + de(nomVisual(nom)) + ", per\u00f2 pot ser vell: si l'\u00faltim dia vas practicar en un altre ordinador, " +
+      "<b>el que vas fer \u00e9s a la teva fitxa</b>. Carrega-la (o totes) i no et faltar\u00e0 cap lli\u00e7\u00f3 ni cap repte.";
+    $("b-primera-nou").textContent = "L'\u00faltim dia vaig practicar aqu\u00ed: continua";
+  } else {
+    $("primera-titol").textContent = "Ja havies practicat?";
+    $("primera-text").innerHTML = "Si ja has fet servir Tecla a tecla (a classe o a casa), <b>no comencis com si fossis una persona nova</b>: el teu progr\u00e9s \u00e9s a la teva fitxa. " +
+      "Adjunta la fitxa de l'\u00faltima sessi\u00f3 i continues on ho vas deixar, amb les lli\u00e7ons i els reptes que ja tenies. " +
+      "Si entres com a <b>" + esc(nomVisual(nom)) + "</b> sense la fitxa, comen\u00e7ar\u00e0s de zero: tornar\u00e0s a fer com seure i la lli\u00e7\u00f3 1, i la profe no veur\u00e0 el que havies fet.";
+    $("b-primera-nou").textContent = "No, \u00e9s la primera vegada: comen\u00e7o de zero";
+  }
   $("capa-primera").hidden = false;
   setTimeout(function(){ $("b-primera-carrega").focus(); }, 30);
 }
@@ -10176,13 +10605,17 @@ function estatFitxa(p){
   var i = -1;
   for (var k = 0; k < ss.length; k++) if (ss[k].id === p.desadaId) i = k;
   var n = ss.length - 1 - i;
-  return {buida:false, pendents:n + (ergo ? 1 : 0), sessions:n, ergo:ergo, data:p.desadaData || null};
+  /* fitxes ajuntades que no ho portaven tot en una (03-11): fins que no se'n descarrega una de nova, falta això */
+  var inc = !!p.fitxaIncompleta;
+  return {buida:false, pendents:n + (ergo ? 1 : 0) + (inc ? 1 : 0), sessions:n, ergo:ergo, incompleta:inc, data:p.desadaData || null};
 }
 /* «2 sessions i la lliçó d'ergonomia», en paraules */
+function majInicial(t){ t = String(t || ""); return t.charAt(0).toUpperCase() + t.slice(1); }
 function queFalta(e){
   var v = [];
   if (e.sessions) v.push(e.sessions + (e.sessions === 1 ? " sessió" : " sessions"));
   if (e.ergo) v.push("la lliçó d'ergonomia");
+  if (e.incompleta) v.push("l'historial de les fitxes ajuntades");
   return v.join(" i ");
 }
 function pintaEstatFitxa(){
@@ -10191,13 +10624,13 @@ function pintaEstatFitxa(){
   b.hidden = false;
   b.className = "estat-fitxa" + (e.pendents ? " pendent" : "");
   b.innerHTML = e.pendents ? "<i></i>Desa la fitxa <span class=\"n-pend\">" + e.pendents + "</span>" : "<i></i>Fitxa al dia";
-  b.title = e.pendents ? queFalta(e) + ": encara no " + (e.pendents === 1 ? "és" : "són") + " a la teva fitxa. Clica per descarregar-la." : "La teva fitxa ja ho porta tot";
+  b.title = e.pendents ? majInicial(queFalta(e)) + ": encara no " + (e.pendents === 1 ? "és" : "són") + " a la teva fitxa. Clica per descarregar-la." : "La teva fitxa ja ho porta tot";
   b.setAttribute("aria-label", e.pendents ? "Desa la fitxa: " + queFalta(e) + " per desar" : "Fitxa al dia");
 }
 function fitxaHTML(p){
   var e = estatFitxa(p);
   var cap = e.buida ? '<b>La teva fitxa</b><span class="suau">Quan acabis una sessió, descarrega-la: porta tot el teu historial.</span>'
-    : (e.pendents ? '<b class="pendent">' + esc(queFalta(e)) + " encara no " + (e.pendents === 1 ? "és" : "són") + ' a la teva fitxa</b><span class="suau">Descarrega-la i lliura-la al Classroom. La més nova porta tot l\'historial: les antigues ja no calen.</span>'
+    : (e.pendents ? '<b class="pendent">' + esc(majInicial(queFalta(e))) + " encara no " + (e.pendents === 1 ? "és" : "són") + ' a la teva fitxa</b><span class="suau">Descarrega-la i lliura-la al Classroom. La més nova porta tot l\'historial: les antigues ja no calen.</span>'
                   : '<b class="al-dia">La teva fitxa és al dia</b><span class="suau">' + (e.data ? "Desada el " + dataBonica(e.data) + ". " : "") + 'Si canvies d\'ordinador, carrega-la i continues on ho vas deixar.</span>');
   return '<div class="fitxa-icona" aria-hidden="true"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 2.5h8l4.5 4.5v14.5H6z"/><path d="M14 2.5V7h4.5M9 12h6M9 15.5h6M9 19h3.5"/></svg></div>' +
     '<div class="fitxa-text">' + cap + "</div>" +
@@ -10219,11 +10652,14 @@ function pintaInici(){
     if (CLASSE.blocs) p.blocs = CLASSE.blocs;
     if (CLASSE.ll) p.llengua = CLASSE.ll;
     if (CLASSE.min) MAG.durada = CLASSE.min;
+    var provaAvui = CLASSE.prova && (!CLASSE.prova.dia || CLASSE.prova.dia === avuiStr());
+    if (provaAvui) p.prova = {act:CLASSE.prova.act, max:CLASSE.prova.max, dia:avuiStr()};
     desa();
     var q = [];
     if (CLASSE.blocs) q.push(CLASSE.blocs.map(function(b){ return N.BLOC[b].nom; }).join(", "));
     if (CLASSE.ll) q.push("textos en " + nomLlengua(CLASSE.ll));
     if (CLASSE.min) q.push(CLASSE.min + " minuts");
+    if (provaAvui) q.push("prova de la profe: " + N.nomAct(CLASSE.prova.act) + ", màxim " + errades(CLASSE.prova.max));
     $("ini-classe").innerHTML = "<b>Preparat pel docent:</b> " + esc(q.join(" · ")) + ". Ho pots canviar.";
     $("ini-classe").hidden = !q.length;
   }
@@ -10292,7 +10728,7 @@ var ICONA_PAS = {
 };
 function iconaPas(id, mida){ return '<svg viewBox="0 0 24 24" width="' + (mida || 22) + '" height="' + (mida || 22) + '" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + (ICONA_PAS[id] || "") + "</svg>"; }
 var ICONA_OK = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.5l3 3 6-7"/></svg>';
-function rutaDe(p){ return N.rutaAvui(p.sessions, {ergo:ergoFeta(p), durada:+MAG.durada || 30, pendents:estatFitxa(p).pendents}); }
+function rutaDe(p){ return N.rutaAvui(p.sessions, {ergo:ergoFeta(p), durada:+MAG.durada || 30, pendents:estatFitxa(p).pendents, prova:provaActiva(p)}); }
 function minutsPas(x){ return x.id === "desa" ? "1 min" : "≈ " + x.min + " min"; }
 /* la tira dels passos: fets (✓), el d'ara i els que vénen */
 function passosHTML(r){
@@ -10323,8 +10759,10 @@ function pasHTML(r, o){
     var imE = ERGO_IMG[temaErgo()];
     dibuix = '<div class="ra-dibuix">' + (imE && imE.seure ? '<img src="' + imE.seure.url + '" alt="" width="' + imE.seure.w + '" height="' + imE.seure.h + '">' : ERGO.escena({anota:null, aria:"Com seure per escriure"})) + "</div>";
   } else dibuix = '<div class="ra-icona" aria-hidden="true">' + iconaPas(x.id, 30) + '<span class="ra-num">' + x.i + "</span></div>";
-  var boto = x.id === "desa" ? "Descarrega la fitxa" : (x.id === "ergo" ? "Comença la lliçó" : (r.fets ? "Continua" : "Som-hi"));
+  var boto = x.id === "desa" ? "Descarrega la fitxa" : (x.id === "ergo" ? "Comença la lliçó" :
+             (x.id === "prova" ? (x.intents ? "Torna a fer la prova · intent " + (x.intents + 1) : "Fes la prova") : (r.fets ? "Continua" : "Som-hi")));
   var extra = "";
+  if (x.id === "prova") extra = intentsProvaHTML(perfilActiu());
   if (x.id === "practica" && x.fets > 0) extra = '<div class="ra-barra" role="img" aria-label="' + x.fets + " minuts fets avui" + '"><i style="width:' + Math.round(x.progres * 100) + '%"></i></div><p class="suau petit">Avui ja portes ' + x.fets + " min.</p>";
   if (x.id === "desa") extra = '<p class="suau petit ra-classroom">Després, al Classroom: obre la tasca de mecanografia › <b>Afegeix o crea › Fitxer</b> › tria la fitxa › <b>Lliura</b>.</p>';
   return '<div class="ruta-ara">' + dibuix +
@@ -10341,9 +10779,9 @@ function pintaRuta(el, p, o){
     '<span class="suau petit">' + r.fets + " de " + r.total + " fets" + (r.minutsQueden ? " · queden uns " + r.minutsQueden + " min" : "") + "</span></div>";
   /* el recordatori de desar, aquí dins i petit, mentre el pas d'ara no sigui desar */
   var desa = ef.pendents && p.sessions.length && !(r.seguent && r.seguent.id === "desa")
-    ? '<p class="ruta-desa"><span class="recorda-ico" aria-hidden="true"></span><span><b>' + esc(queFalta(ef)) + "</b> encara no " + (ef.pendents === 1 ? "és" : "són") +
+    ? '<p class="ruta-desa"><span class="recorda-ico" aria-hidden="true"></span><span><b>' + esc(majInicial(queFalta(ef))) + "</b> encara no " + (ef.pendents === 1 ? "és" : "són") +
       ' a la teva fitxa.</span> <button class="enllac" type="button" data-ruta="desa">Desa-la ara</button></p>' : "";
-  el.innerHTML = fitxaOblidadaHTML(p) + cap + passosHTML(r) + pasHTML(r, o) + desa;
+  el.innerHTML = fitxaOblidadaHTML(p) + cap + passosHTML(r) + pasHTML(r, o) + provaLiniaHTML(p) + desa;
   el.classList.toggle("tota-feta", r.tot);
 }
 /* un perfil sense cap sessió: gairebé segur que és algú que ja tenia progrés i no ha carregat la fitxa */
@@ -10361,11 +10799,13 @@ function faPas(id){
   if (id === "mes"){ RUTA_PAS = null; return iniciaPractica(); }
   if (id === "carrega") return $("i-fitxa").click();
   if (id === "enganxa") return obreEnganxa();
+  if (id === "prova-posa") return obreProva();
   if (/^repte-\d+$/.test(id || "")){ RUTA_PAS = null; return iniciaRepte(+id.split("-")[1]); }
   var x = id ? r.passos.filter(function(q){ return q.id === id; })[0] : r.seguent;
   if (!x) return;
   RUTA_PAS = x.id === "desa" || x.id === "ergo" ? null : {i:x.i, total:r.total, nom:x.nom};
   if (x.id === "ergo") return obreErgo(null);
+  if (x.id === "prova") return iniciaAct(x.act);
   if (x.id === "llico") return iniciaLlico(x.llico);
   if (x.id === "remei") return iniciaRemei(x.clau);
   if (x.id === "practica") return iniciaPractica(x.minuts);
@@ -10385,7 +10825,7 @@ function pintaRutaResultat(){
   /* la barra de baix: el mateix pas, sempre a la vista mentre el botó gran no s'hi veu */
   var r = rutaDe(p), x = r.seguent, b = $("r-barra-seguent");
   b.innerHTML = '<span class="bs-text"><span class="etiqueta">' + (x ? "Ara toca · pas " + x.i + " de " + r.total : "Ruta d'avui feta") + "</span><b>" + esc(x ? x.titol : "Si et queda temps, una altra sessió") + "</b></span>" +
-    '<button class="boto primari gran" type="button" data-ruta="' + (x ? x.id : "mes") + '" tabindex="-1">' + (x && x.id === "desa" ? "Descarrega la fitxa" : "Continua") + " <kbd>Enter</kbd></button>";
+    '<button class="boto primari gran" type="button" data-ruta="' + (x ? x.id : "mes") + '" tabindex="-1">' + (x && x.id === "desa" ? "Descarrega la fitxa" : (x && x.id === "prova" && x.intents ? "Torna-hi" : "Continua")) + " <kbd>Enter</kbd></button>";
   vigilaBarra();
 }
 var OBS_BARRA = null;
@@ -10428,12 +10868,12 @@ function tancaBenvinguda(fes){
 }
 /* EL BOTÓ «QUÈ FAIG?»: el pas d'ara i les sis preguntes que fan aixecar la mà */
 function obreAjuda(){
-  var p = perfilActiu(), h;
-  if (!p) h = '<ol class="ajuda-qui"><li><b>Ja havies practicat un altre dia?</b> Primer, <button class="enllac" type="button" data-accio="carrega">carrega la teva fitxa</button> (la baixes del Drive o del Classroom).</li>' +
-    "<li><b>És la primera vegada?</b> Escriu el teu nom, tria la llengua i clica <b>Endavant</b>.</li></ol>";
+  var p = perfilActiu(), h, entrada = !p || PANTALLA === "p-qui";
+  if (entrada) h = '<ol class="ajuda-qui"><li><b>Ja havies practicat un altre dia?</b> Primer, <button class="enllac" type="button" data-accio="carrega">carrega la teva fitxa</button> (la baixes del Drive o del Classroom; si en tens diverses, totes alhora).</li>' +
+    "<li><b>És la primera vegada?</b> Obre <b>És la primera vegada que fas servir Tecla a tecla?</b>, escriu el teu nom i clica <b>Endavant</b>.</li></ol>";
   else { var r = rutaDe(p); h = fitxaOblidadaHTML(p) + passosHTML(r) + pasHTML(r, {lloc:"ajuda"}); }
   $("ajuda-pas").innerHTML = h;
-  $("ajuda-titol").textContent = p ? "Què faig ara?" : "Per on començo?";
+  $("ajuda-titol").textContent = entrada ? "Per on començo?" : "Què faig ara?";
   $("capa-ajuda").querySelectorAll("details").forEach(function(d){ d.open = false; });
   $("capa-ajuda").hidden = false;
   setTimeout(function(){ var b = $("ajuda-pas").querySelector(".boto.primari") || $("b-ajuda-tanca"); b.focus(); }, 30);
@@ -10449,6 +10889,84 @@ function enterRuta(e){
   e.preventDefault();
   var p = perfilActiu(); if (!p) return;
   faPas(rutaDe(p).seguent ? null : "mes");
+}
+
+/* ---------------------------------------------------------------------
+   LA PROVA DE LA PROFE (03-11-2026). La profe diu en veu alta «avui, la lliçó dels accents, i no més de 10 errades».
+   L'alumne la posa aquí (o ja ve a l'enllaç de la classe) i queda com la consigna del dia (nucli, §13): la ruta no
+   passa a res més fins que un intent surt bé, cada intent porta el límit a la fitxa i, al resultat, el que es veu
+   primer és si ha passat o no del límit (mai «la lliçó següent»).
+   --------------------------------------------------------------------- */
+function provaActiva(p){ return p ? N.provaValida(p.prova, avuiStr()) : null; }
+/* si l'activitat que comença és la de la prova d'avui: el límit que porta cada intent */
+function provaPer(p, act){ var c = provaActiva(p); return c && c.act === act ? {max:c.max} : null; }
+function iniciaAct(act){
+  var m = /^(llico|repte)-(\d+)$/.exec(act || ""); if (!m) return;
+  if (m[1] === "llico") iniciaLlico(+m[2]); else iniciaRepte(+m[2]);
+}
+function errades(n){ return n + (n === 1 ? " errada" : " errades"); }
+/* els intents d'avui, en xips: «1r · 14 errades ✗» */
+function intentsProvaHTML(p){
+  var c = provaActiva(p), ep = c ? N.estatProva(p.sessions, c) : null;
+  if (!ep || !ep.intents.length) return "";
+  return '<ol class="prova-intents" aria-label="Intents d\'avui">' + ep.intents.map(function(s, i){
+    var bo = N.provaFeta(s), acab = N.intentAcabat(s);
+    return '<li class="' + (bo ? "bo" : "no") + '"><span>Intent ' + (i + 1) + "</span><b>" + (acab ? errades(s.err) : "a mitges") + "</b>" + (bo ? ICONA_OK : '<i aria-hidden="true">✗</i>') + "</li>";
+  }).join("") + "</ol>";
+}
+/* sota la ruta: posar la prova (si la profe n'ha dit una) o canviar-la */
+function provaLiniaHTML(p){
+  var c = provaActiva(p);
+  if (!c) return '<p class="ruta-prova"><span class="rp-ico" aria-hidden="true">✎</span><button class="enllac" type="button" data-ruta="prova-posa">La profe ha posat una prova? Posa-la aquí</button></p>';
+  return '<p class="ruta-prova activa"><span class="rp-ico" aria-hidden="true">✎</span><span><b>Prova de la profe:</b> ' + esc(N.nomAct(c.act)) + " · màxim " + esc(errades(c.max)) + "</span>" +
+    '<button class="enllac" type="button" data-ruta="prova-posa">Canvia-la o treu-la</button></p>';
+}
+function opcionsProva(sel){
+  return '<optgroup label="Camí de tecles">' + N.LLICONS.map(function(L){ var v = "llico-" + L.n;
+      return '<option value="' + v + '"' + (v === sel ? " selected" : "") + ">Lliçó " + L.n + " · " + esc(L.nom) + "</option>"; }).join("") + "</optgroup>" +
+    '<optgroup label="Reptes">' + N.CONFIG.reptesMinuts.map(function(m){ var v = "repte-" + m;
+      return '<option value="' + v + '"' + (v === sel ? " selected" : "") + ">Repte de " + m + " minuts</option>"; }).join("") + "</optgroup>";
+}
+function obreProva(){
+  var p = perfilActiu(); if (!p) return;
+  var c = provaActiva(p), seg = N.estatLlicons(p.sessions).seguent;
+  $("prova-act").innerHTML = opcionsProva(c ? c.act : "llico-" + (seg ? seg.n : 1));
+  $("prova-max").value = c ? c.max : 10;
+  $("prova-error").hidden = true;
+  $("b-prova-treu").hidden = !c;
+  $("b-prova-si").textContent = c ? "Desa-la i fes-la" : "Comença la prova";
+  $("capa-prova").hidden = false;
+  setTimeout(function(){ $("prova-act").focus(); }, 30);
+}
+function tancaProva(){ $("capa-prova").hidden = true; }
+function desaProva(e){
+  if (e) e.preventDefault();
+  var p = perfilActiu(); if (!p) return tancaProva();
+  var max = $("prova-max").value.trim();
+  var c = /^\d{1,3}$/.test(max) ? N.provaValida({act:$("prova-act").value, max:+max, dia:avuiStr()}) : null;
+  if (!c){
+    $("prova-error").textContent = "Escriu el màxim d'errades que ha dit la profe: un nombre, per exemple 10.";
+    $("prova-error").hidden = false; $("prova-max").focus(); return;
+  }
+  p.prova = c; desa(); tancaProva();
+  RUTA_PAS = null;
+  iniciaAct(c.act);
+}
+function treuProva(){
+  var p = perfilActiu();
+  if (p){ delete p.prova; desa(); }
+  tancaProva();
+  if (PANTALLA === "p-inici") pintaInici();
+  else if (PANTALLA === "p-resultat") pintaRutaResultat();
+}
+/* a la pantalla d'escriure: les errades que porta, contra el màxim */
+function pintaProvaEscriu(err){
+  var el = $("e-prova");
+  if (!S || !S.prova){ el.hidden = true; return; }
+  var passat = err > S.prova.max;
+  el.hidden = false;
+  el.classList.toggle("passada", passat);
+  el.textContent = "Prova de la profe · " + err + " de " + S.prova.max + " errades" + (passat ? " · t'has passat: acaba-la i torna-hi" : "");
 }
 
 /* ---------------------------------------------------------------------
@@ -10833,7 +11351,7 @@ function iniciaLlico(n){
   var L = N.LLICONS[n - 1]; if (!L) return;
   var ll = p.llengua === "mix" ? (n % 2 ? "ca" : "es") : (p.llengua === "es" ? "es" : "ca");
   var ara = new Date();
-  S = {mode:"llico", id:nouId(ara), inici:ara, ll:ll, llico:n, trams:[], actual:null, entre:false, pausat:false, darrerDesat:0};
+  S = {mode:"llico", id:nouId(ara), inici:ara, ll:ll, llico:n, trams:[], actual:null, entre:false, pausat:false, darrerDesat:0, prova:provaPer(p, "llico-" + n)};
   mostra("p-escriu");
   carregaTram({k:"llico", ll:ll, id:"llico-" + n, titol:"Lliçó " + n + " · " + L.nom, text:N.generaLlico(T, ll, n, N.rngDe((Date.now() % 4294967291) + n)), llico:n});
 }
@@ -10847,7 +11365,8 @@ function iniciaRepte(min){
   min = +min || REPTE_MIN || 3;
   if (!ergoFeta(p)) return obreErgo(function(){ iniciaRepte(min); });
   var esglao = N.escalaReptes(p.sessions).escala.filter(function(q){ return q.min === min; })[0];
-  if (!esglao || !esglao.oberta) min = 3;
+  /* un repte tancat només es pot fer si és la prova que la profe ha dit avui (mana la profe) */
+  if ((!esglao || !esglao.oberta) && !provaPer(p, "repte-" + min)) min = 3;
   if (min > 3) return previRepte(p, min);
   var ll = p.llengua === "mix" ? (Math.random() < 0.5 ? "ca" : "es") : (p.llengua === "es" ? "es" : "ca");
   var pool = T[ll].repte, fets = {};
@@ -10858,7 +11377,7 @@ function iniciaRepte(min){
   var t = cands[Math.floor(Math.random() * cands.length)];
   var ara = new Date();
   S = {mode:"repte", min:3, id:nouId(ara), inici:ara, duradaMs:N.CONFIG.repteSegons*1000, ll:ll, textId:t.id,
-       trams:[], actual:null, entre:false, pausat:false, t0:0};
+       trams:[], actual:null, entre:false, pausat:false, t0:0, prova:provaPer(p, "repte-3")};
   mostra("p-escriu");
   carregaTram({k:"repte", ll:ll, id:t.id, titol:t.titol, text:t.text});
 }
@@ -10886,13 +11405,13 @@ function comencaRepteLlarg(){
   var p = perfilActiu(); if (!p || !min) return;
   if (!ergoFeta(p)) return obreErgo(function(){ iniciaRepte(min); });
   var esglao = N.escalaReptes(p.sessions).escala.filter(function(q){ return q.min === min; })[0];
-  if (!esglao || !esglao.oberta) return iniciaRepte(3);
+  if ((!esglao || !esglao.oberta) && !provaPer(p, "repte-" + min)) return iniciaRepte(3);
   var blocs = N.blocsValids(p.blocs), ix = N.indexTextos(T), perBloc = {}, darrer = null;
   N.ordenaSessions(p.sessions).forEach(function(s){
     (s.trams || []).forEach(function(t){ if (t.k !== "text") return; var b = t.b || (ix[t.id] && ix[t.id].bloc) || "variats"; perBloc[b] = (perBloc[b] || 0) + 1; darrer = b; });
   });
   var ara = new Date();
-  S = {mode:"repte", min:min, id:nouId(ara), inici:ara, duradaMs:min * 60000, ll:p.llengua, trams:[], actual:null, entre:false, pausat:false, t0:0,
+  S = {mode:"repte", min:min, id:nouId(ara), inici:ara, duradaMs:min * 60000, ll:p.llengua, trams:[], actual:null, entre:false, pausat:false, t0:0, prova:provaPer(p, "repte-" + min),
        estat:{llengua:p.llengua, index:0, textsFets:0, blocs:blocs, torn0:darrer && blocs.indexOf(darrer) >= 0 ? blocs.indexOf(darrer) + 1 : 0, perBloc:perBloc,
               fets:N.comptaFets(p.sessions), represes:{}, usats:{}, nomesTextos:true, febles:[], rng:N.rngDe((Date.now() % 4294967291) + 11)}};
   mostra("p-escriu");
@@ -11143,6 +11662,7 @@ function actualitzaXifres(){
   var ppm = N.ppmDe(enc, ms);
   $("e-ppm").textContent = ppm === null ? "–" : ppm;
   $("e-prec").textContent = (enc + err) ? N.fmt(N.arrodoneix(enc / (enc + err) * 100, 1), 1) + " %" : "–";
+  pintaProvaEscriu(err);
 }
 
 function engega(){
@@ -11352,6 +11872,8 @@ function construeixSessio(r, trams, motiu){
   } else {
     s.min = 3; s.text = S.textId; s.acabat = (motiu === "text"); if (r.dur !== undefined) s.dur = r.dur;
   }
+  /* un intent de la prova de la profe: porta el límit d'errades que havia dit (es veu a la fitxa i al docent) */
+  if (S.prova) s.prova = {max:S.prova.max};
   return s;
 }
 
@@ -11476,7 +11998,33 @@ function mostraResultat(s, previes, desada){
   var rec = "";
   if (desada && !esLlico && !remeiS && s.ppm !== null && mateixes.length && s.ppm > millor)
     rec = '<div class="record"><span aria-hidden="true">★</span><span>Rècord personal ' + (esRepte ? (llarg ? "al repte de " + mR + " minuts" : "de repte") : "de pràctica") + ": " + s.ppm + " pulsacions netes per minut. L'anterior era " + millor + ".</span></div>";
+  /* ELS REPTES QUE S'OBREN (03-11): dir-ho clar, i si no s'obre, per què (un «superat» amb menys del 90 % no obre el següent) */
+  if (esRepte && desada){
+    var M = N.CONFIG.reptesMinuts, eA = N.escalaReptes(previes).escala, eD = N.escalaReptes(p.sessions).escala;
+    var obertsAra = eD.filter(function(q, i){ return q.oberta && !eA[i].oberta; }).map(function(q){ return q.min; });
+    var segM = M[M.indexOf(mR) + 1];
+    if (obertsAra.length)
+      rec += '<div class="record obre">' + ICONA_FET + "<span><b>Has obert el repte de " + obertsAra.join(" i ") + " minuts.</b> Ja el tens a l'escala de reptes i queda a la teva fitxa.</span></div>";
+    else if (superat && segM && typeof s.prec === "number" && s.prec < N.CONFIG.precisioRanking && !eD[M.indexOf(segM)].oberta)
+      rec += '<div class="record falta">' + ICONA_CANDAU + "<span>Per obrir el repte de " + segM + " minuts cal un " + N.CONFIG.precisioRanking + " % de precisió: n'has fet un " + N.fmt(s.prec, 1) + " %. Ves més a poc a poc.</span></div>";
+  }
   $("r-record").innerHTML = rec;
+  /* LA PROVA DE LA PROFE: el primer que es veu és si ha passat del límit, i el pas següent és tornar-hi (no la lliçó següent) */
+  var rp = $("r-prova");
+  if (s.prova){
+    var feta = desada && N.provaFeta(s), acab = N.intentAcabat(s), act = N.actDe(s);
+    var ep = N.estatProva(p.sessions, {act:act, max:s.prova.max, dia:s.data}), nI = ep ? ep.intents.indexOf(s) + 1 : 0;
+    $("r-tipus").textContent = "Prova de la profe · " + N.nomAct(act) + (nI > 0 ? " · intent " + nI : "");
+    $("r-titol").textContent = !desada ? "Massa curt per comptar." : (feta ? "Prova superada, " + p.nom + "." : "Encara no, " + p.nom + ": torna-hi.");
+    $("r-sub").textContent = !desada ? "Hi ha poques pulsacions: aquest intent no compta. Torna-hi i acaba-la." :
+      (feta ? errades(s.err) + ": dins el màxim de " + s.prova.max + ". Queda a la teva fitxa, amb tots els intents." :
+       (acab ? errades(s.err) + " i el màxim és " + s.prova.max + ". Torna-hi més a poc a poc i mirant la pantalla, no les mans. Cada intent queda a la teva fitxa."
+             : (s.tipus === "llico" ? "No l'has acabada" : "No l'has acabat") + ": per comptar s'ha d'acabar" + (s.tipus === "llico" ? "" : " (escrivint el " + Math.round(N.CONFIG.repteActiu * 100) + " % del temps)") + " sense passar de " + errades(s.prova.max) + "."));
+    rp.innerHTML = '<div class="prova-veredicte ' + (feta ? "bo" : "no") + '"><div class="pv-xifra"><b>' + (acab ? s.err : "–") + "</b><small>" + (acab && s.err === 1 ? "errada" : "errades") + "</small></div>" +
+      '<div class="pv-text"><span class="etiqueta">Màxim de la profe: ' + s.prova.max + "</span><p><b>" + (feta ? "Dins el límit." : (acab ? "T'has passat de " + errades(s.err - s.prova.max) + "." : "Sense acabar.")) + "</b> " +
+      esc(N.xifresText(s)) + ".</p></div></div>" + intentsProvaHTML(p);
+    rp.hidden = false;
+  } else { rp.hidden = true; rp.innerHTML = ""; }
   /* punts guanyats, insígnies noves i dos consells curts */
   var insAbans = N.insigniesDe(previes), insAra = N.insigniesDe(previes.concat(desada ? [s] : []));
   var novesIns = insAra.filter(function(x, k){ return x.assolida && !insAbans[k].assolida; });
@@ -11518,7 +12066,10 @@ function mostraResultat(s, previes, desada){
   pintaJardiResultat(s, previes, desada);
   pintaPlaResultat(s, desada);
   if (remeiS) $("b-r-altre").textContent = "Un altre exercici";
-  $("b-r-seguent").hidden = !(esLlico && s.estrelles >= 2 && s.llico < N.LLICONS.length);
+  if (s.prova) $("b-r-altre").textContent = N.provaFeta(s) && desada ? "Torna-la a fer per millorar" : "Torna a fer la prova";
+  /* amb la prova de la profe pendent, cap «lliçó següent»: la profe ha dit quina toca */
+  var cP = provaActiva(p), pendent = cP && !N.estatProva(p.sessions, cP).superada;
+  $("b-r-seguent").hidden = !(esLlico && s.estrelles >= 2 && s.llico < N.LLICONS.length) || !!pendent || !!s.prova;
   if (esLlico) $("b-r-seguent").textContent = "Lliçó " + (s.llico + 1) + " · " + N.LLICONS[Math.min(s.llico, N.LLICONS.length - 1)].nom;
   $("r-detall").open = false;
   $("r-detall-cos").innerHTML = desada ? detallSessio(s) : "";
@@ -12267,15 +12818,24 @@ function obreProgres(){
 /* ---------------------------------------------------------------------
    10. LA FITXA: descarregar i carregar
    --------------------------------------------------------------------- */
-function descarregaFitxa(){
-  var p = perfilActiu(); if (!p) return;
-  var d = new Date(), nom = N.nomFitxer(p, d);
-  baixa(nom, BOM() + N.fitxaText(p, d));
+/* la fitxa ja ho porta tot: la darrera sessió, la lliçó d'ergonomia i l'historial ajuntat */
+function marcaDesada(p, d, nom){
   var ss = N.ordenaSessions(p.sessions);
   p.desadaId = ss.length ? ss[ss.length - 1].id : null;
   p.desadaData = N.dataLocal(d);
   p.ultimFitxer = nom;
+  p.fitxaIncompleta = false;
+  /* la fitxa més nova i el que porta: si després se'n carrega una de més vella, es veu si a aquesta li falta res */
+  p.fitxaNova = {desada:N.dataLocal(d) + " " + N.horaLocal(d), ids:p.sessions.map(function(s){ return s.id; })};
   if (ergoFeta(p)) p.ergoEnFitxa = true;
+}
+function descarregaFitxa(){
+  var p = perfilActiu(); if (!p) return;
+  var d = new Date(), nom = N.nomFitxer(p, d);
+  /* les vegades que s'ha descarregat avui van a la fitxa (també aquesta): el docent sap quina és la darrera */
+  p.baixades = N.baixadesDe((p.baixades || []).concat([N.dataLocal(d) + " " + N.horaLocal(d)]));
+  baixa(nom, BOM() + N.fitxaText(p, d, T));
+  marcaDesada(p, d, nom);
   desa();
   pintaEstatFitxa();
   toast('<span class="toast-ico" aria-hidden="true"></span><span><b>Fitxa descarregada.</b> És a la carpeta de baixades: <code>' + esc(nom) + "</code>. Ara puja-la al teu Drive o lliura-la al Classroom: les baixades de l'institut s'esborren.</span>", 9000);
@@ -12307,7 +12867,7 @@ function canviaAlumne(){
   var p = perfilActiu(), e = estatFitxa(p);
   var fes = function(){ MAG.actiu = null; desa(); mostra("p-qui"); try { $("i-nom").focus(); } catch(x){} };
   if (p && e.pendents) return avisAbansDe("Abans de canviar d'alumne",
-    "<b>" + esc(queFalta(e)) + "</b> de " + esc(p.nom) + " encara no " + (e.pendents === 1 ? "és" : "són") + " a la fitxa. Si no la descarregues, es queda només en aquest navegador.", fes);
+    "<b>" + esc(majInicial(queFalta(e))) + "</b> de " + esc(p.nom) + " encara no " + (e.pendents === 1 ? "és" : "són") + " a la fitxa. Si no la descarregues, es queda només en aquest navegador.", fes);
   fes();
 }
 
@@ -12332,17 +12892,22 @@ function pintaDesa(){
       '<button class="enllac" type="button" data-accio="desa">Torna-la a descarregar</button>';
   }
 }
-/* les sessions de l'alumne en una taula per a l'Excel (separador ;) */
+/* les activitats de l'alumne en una taula per a l'Excel (separador ;): una fila per activitat, de la més nova a la més
+   antiga, amb el mateix que la fitxa (què era, la prova de la profe, el resultat, les xifres i les tecles; N.taulaFitxa) */
 function csvPerfil(){
   var p = perfilActiu(); if (!p) return;
-  var files = [["dia","hora","tipus","generes","llengua","minuts_practica","pulsacions_netes_min","precisio","ritme","encerts","errades","estrelles"]];
-  N.ordenaSessions(p.sessions).forEach(function(s){
-    files.push([s.data, s.hora, N.nomTipus(s), blocsDeSessio(s), s.ll || "", Math.round((s.act || 0) / 60), csvNum(s.ppm), csvNum(s.prec), csvNum(s.ritme), csvNum(s.enc), csvNum(s.err), s.tipus === "llico" ? (s.estrelles || 0) : ""]);
-  });
-  /* a sota, les mateixes dades que la fitxa: així la taula també serveix per recuperar el progrés */
+  var d = new Date(), nom = N.nomFitxer(p, d).replace(/\.txt$/, ".csv");
+  p.baixades = N.baixadesDe((p.baixades || []).concat([N.dataLocal(d) + " " + N.horaLocal(d)]));
+  var files = N.taulaFitxa(p, d, T);
+  /* a sota, les mateixes dades que la fitxa: així la taula també serveix per recuperar el progrés (i compta com a desada) */
   files.push([], [], ["Dades per tornar a carregar el progrés a Tecla a tecla. No les toquis."]);
-  N.liniesDeDades(p, new Date()).forEach(function(l){ files.push([l]); });
-  baixa(N.nomFitxer(p, new Date()).replace(/\.txt$/, ".csv"), csv(files), "text/csv");
+  N.liniesDeDades(p, d).forEach(function(l){ files.push([l]); });
+  baixa(nom, csv(files), "text/csv");
+  marcaDesada(p, d, nom);
+  desa();
+  pintaEstatFitxa();
+  if (PANTALLA === "p-inici") pintaInici();
+  if (PANTALLA === "p-resultat"){ pintaDesa(); pintaRutaResultat(); }
 }
 
 /* l'alumne carrega el que té: una fitxa o diverses alhora (.txt, la taula .csv, el .zip o el Word que dona el Drive),
@@ -12385,22 +12950,42 @@ function carregaLlegits(v, problemes){
   }
   /* el jardí triat viatja amb la fitxa: si aquí encara no se n'havia triat cap, el de la fitxa més nova */
   if (r.jardi && !N.JARDI[p.jardi]) p.jardi = r.jardi;
+  /* versió 9: les vegades que s'ha descarregat i la prova de la profe d'avui (si s'havia posat en un altre ordinador) */
+  p.baixades = N.baixadesDe((p.baixades || []).concat(r.baixades || []));
+  if (N.provaValida(r.prova, avuiStr()) && !provaActiva(p)) p.prova = r.prova;
+  /* fitxes que no ho portaven tot en una (un dia es va començar sense carregar-la, o es va practicar en un altre ordinador):
+     ara ja hi és tot, però la fitxa més nova no ho porta, i cal descarregar-ne una de nova */
+  if (a.nova && a.nova.desada && (!p.fitxaNova || !p.fitxaNova.desada || a.nova.desada >= p.fitxaNova.desada)) p.fitxaNova = a.nova;
+  var forats = N.forats(p.sessions, p.fitxaNova);
+  if (forats) p.fitxaIncompleta = true;
   var noves = p.sessions.length - abans;
   /* desada fins a la darrera sessió que ja porta la fitxa: el que hi hagi després (les d'ara) queda per desar */
   var aFitxa = {}, darrera = null;
   r.sessions.forEach(function(s){ aFitxa[s.id] = 1; });
   p.sessions.forEach(function(s){ if (aFitxa[s.id]) darrera = s; });
   if (darrera && (!p.desadaId || p.sessions.findIndex(function(s){ return s.id === p.desadaId; }) < p.sessions.indexOf(darrera))){ p.desadaId = darrera.id; p.desadaData = darrera.data; }
+  /* ELS REPTES QUE JA TENIA (03-11): a l'escala, el que li toca ara (el primer obert que encara no ha superat), no el de 3 */
+  var escala = N.escalaReptes(p.sessions), oberts = escala.escala.filter(function(q){ return q.oberta; });
+  p.repteMin = (escala.seguent || oberts[oberts.length - 1]).min;
   desa();
-  var ag = N.agregat(p.sessions);
-  avisaCarrega(a.modificades.length ? "or" : (noFa.length ? "or" : "be"),
+  var ag = N.agregat(p.sessions), cami = N.estatLlicons(p.sessions);
+  var reals = N.ordenaSessions(p.sessions.filter(function(s){ return s.tipus !== "ut0"; }));
+  var minuts = oberts.map(function(q){ return q.min; });
+  var llistaMin = minuts.length > 1 ? minuts.slice(0, -1).join(", ") + " i " + minuts[minuts.length - 1] : String(minuts[0]);
+  avisaCarrega(a.modificades.length ? "or" : (noFa.length || forats ? "or" : "be"),
     "<b>" + (a.fitxes === 1 ? "Fitxa carregada" : a.fitxes + " fitxes carregades") + ", " + de(p.nom) + ".</b> " +
+    (a.perfil.desada ? (a.fitxes === 1 ? "És la de " : "La més nova de les que has triat és la de ") + esc(N.dataLlarga(a.perfil.desada.slice(0, 10))) + " a les " + esc(a.perfil.desada.slice(11)) + ". " : "") +
     (noves ? noves + (noves === 1 ? " sessió nova" : " sessions noves") + ". " : (abans ? "Ja tenies totes aquestes sessions. " : "")) +
-    "Ara portes " + p.sessions.length + (p.sessions.length === 1 ? " sessió" : " sessions") + " i " + N.minutsText(ag.act) + " de pràctica." +
+    "Ara portes " + p.sessions.length + (p.sessions.length === 1 ? " sessió" : " sessions") +
+    (reals.length ? " (del " + esc(N.dataCurta(reals[0].data)) + " al " + esc(N.dataCurta(reals[reals.length - 1].data)) + ")" : "") +
+    " i " + N.minutsText(ag.act) + " de pràctica." +
+    '<span class="carrega-on">Camí de tecles: <b>' + cami.superades + " de " + N.LLICONS.length + "</b> lliçons · Reptes oberts: <b>" + llistaMin + " minuts</b></span>" +
     (portar.length ? (portar.length === 1 ? " S'hi ha afegit la d'ara." : " S'hi han afegit les " + portar.length + " d'ara.") : "") +
     (r.format === "v1" ? " La prova inicial queda com a primera marca." : "") +
+    (forats ? '<span class="carrega-no"><b>Les teves fitxes no ho portaven tot en una</b> (algun dia vas començar sense carregar-la). Ara ja és tot junt: <b>descarrega la fitxa</b> (a dalt, «Desa la fitxa») i la nova ho portarà tot.</span>' : "") +
     (a.modificades.length ? " <b>Compte: " + esc(a.modificades.join(", ")) + (a.modificades.length === 1 ? " s'ha" : " s'han") + " modificat a mà.</b>" : "") +
-    (noFa.length ? '<span class="carrega-no">No s\'ha carregat: ' + noFa.join(" ") + "</span>" : ""));
+    (noFa.length ? '<span class="carrega-no">No s\'ha carregat: ' + noFa.join(" ") + "</span>" : "") +
+    (a.fitxes === 1 && !forats ? '<span class="carrega-on suau">Si et falta res d\'un dia (una lliçó o un repte), carrega també la fitxa d\'aquell dia: pots triar-ne diverses alhora.</span>' : ""));
 }
 /* «de Laia», «d'Exemple», «d'Helena» */
 function de(nom){ return (/^[aeiouàèéíïòóúüh]/i.test(String(nom)) ? "d'" : "de ") + esc(nom); }
@@ -12522,7 +13107,49 @@ function pintaPestanya(){
   else if (D.pestanya === "ranking") cos.innerHTML = rankingHTML(al, dd, false);
   else if (D.pestanya === "dies") cos.innerHTML = diesHTML(al, dd);
   else if (D.pestanya === "alumnes") cos.innerHTML = alumnesHTML(al, dd);
+  else if (D.pestanya === "proves") cos.innerHTML = provesHTML(al, dd);
   else cos.innerHTML = sessionsHTML(al, dd);
+}
+
+/* ---- LES PROVES DE LA PROFE (03-11): cada prova (dia, activitat i màxim d'errades), alumne a alumne: els intents amb
+   les errades, si l'ha superada i en quin intent. També qui va fer aquella activitat aquell dia sense posar la prova
+   (no va sentir la consigna): les seves errades, comparades amb el mateix màxim. ---- */
+function provesHTML(al, dd){
+  var g = Object.create(null), ordre = [];
+  al.forEach(function(a){
+    N.provesDe(a.sessions).forEach(function(p){
+      var c = p.consigna, k = c.dia + "|" + c.act + "|" + c.max;
+      if (dd && c.dia < dd) return;
+      if (!g[k]){ g[k] = {c:c, nom:p.nom, files:[]}; ordre.push(k); }
+    });
+  });
+  if (!ordre.length) return '<p class="buit">Cap prova de la profe en aquest període. L\'alumne la posa a la ruta («La profe ha posat una prova?») o ve posada amb l\'enllaç per a la classe.</p>';
+  ordre.sort(function(x, y){ return x < y ? 1 : -1; });
+  var cel = function(s, max){ var bo = N.provaFeta(s, max), ac = N.intentAcabat(s);
+    return '<span class="pi ' + (bo ? "bo" : "no") + '" title="' + esc(s.hora + " · " + N.xifresText(s)) + '">' + (ac ? s.err : "a mitges") + "</span>"; };
+  return ordre.map(function(k){
+    var G = g[k], c = G.c, files = [];
+    al.forEach(function(a){
+      var amb = N.estatProva(a.sessions, c);
+      var sense = N.ordenaSessions(a.sessions.filter(function(s){ return s.data === c.dia && N.actDe(s) === c.act && !s.prova; }));
+      if (!amb.intents.length && !sense.length) return;
+      files.push({a:a, amb:amb, sense:sense});
+    });
+    var sup = files.filter(function(f){ return f.amb.superada; }).length, ambP = files.filter(function(f){ return f.amb.intents.length; }).length;
+    return '<section class="bloc prova-docent"><h2>' + esc(N.dataLlarga(c.dia)) + " · " + esc(G.nom) + " · màxim " + esc(errades(c.max)) + "</h2>" +
+      '<p class="suau">L\'han superada (acabada i sense passar de les errades) ' + sup + " de " + ambP + (ambP === 1 ? " alumne" : " alumnes") + " amb la prova posada." +
+      (files.length > ambP ? " Sota, en gris, els que van fer la mateixa activitat sense posar-la." : "") + "</p>" +
+      '<div class="taula-emb"><table><thead><tr><th>Alumne</th><th>Grup</th><th class="n">Intents</th><th>Errades de cada intent (del primer a l\'últim)</th><th>Superada</th><th class="n">Millor</th><th>Últim intent</th></tr></thead><tbody>' +
+      files.sort(function(x, y){ return (y.amb.intents.length ? 1 : 0) - (x.amb.intents.length ? 1 : 0) || x.a.nom.localeCompare(y.a.nom, "ca"); }).map(function(f){
+        var v = f.amb.intents.length ? f.amb.intents : f.sense, acabats = v.filter(N.intentAcabat);
+        var millor = acabats.length ? Math.min.apply(null, acabats.map(function(s){ return s.err; })) : null, ult = v[v.length - 1];
+        var revisa = v.some(function(s){ return f.a.revisar[s.id]; });
+        return "<tr" + (f.amb.intents.length ? "" : ' class="sense-prova"') + "><td>" + esc(f.a.nom) + (revisa ? ' <span class="marca-avis" title="Alguna sessió no quadra">⚠</span>' : "") + "</td><td>" + esc(f.a.grup) +
+          '</td><td class="n">' + v.length + "</td><td>" + v.map(function(s){ return cel(s, c.max); }).join(" ") + (f.amb.intents.length ? "" : ' <span class="suau">(sense la prova posada)</span>') + "</td>" +
+          "<td>" + (f.amb.intents.length ? (f.amb.superada ? '<span class="ok-petit">✓</span> a l\'intent ' + f.amb.intentBo : "no") : (v.some(function(s){ return N.provaFeta(s, c.max); }) ? "dins el màxim" : "–")) + "</td>" +
+          '<td class="n">' + (millor === null ? "–" : millor) + "</td><td>" + esc(ult.hora) + " · " + esc(N.fmt(ult.prec, 1)) + " % · " + esc(N.fmt(ult.ppm)) + " puls./min</td></tr>";
+      }).join("") + "</tbody></table></div></section>";
+  }).join("");
 }
 
 /* ---- el resum de la classe: xifres, d'on venen i on són, les setmanes, a qui cal ajudar i la fidelitat ---- */
@@ -12721,10 +13348,11 @@ function sessionsHTML(al, dd){
   al.forEach(function(a){ a.sessions.forEach(function(s){ if (!dd || s.data >= dd) v.push({a:a, s:s}); }); });
   v.sort(function(x, y){ return (y.s.data + y.s.hora).localeCompare(x.s.data + x.s.hora); });
   if (!v.length) return '<p class="buit">No hi ha sessions en aquest període.</p>';
-  return '<div class="taula-emb"><table><thead><tr><th>Dia</th><th>Hora</th><th>Alumne</th><th>Grup</th><th>Què</th><th>Llengua</th><th class="n">Minuts</th><th class="n">Puls./min</th><th class="n">Precisió</th><th class="n">Ritme</th><th class="n">Errades</th></tr></thead><tbody>' +
+  return '<div class="taula-emb"><table><thead><tr><th>Dia</th><th>Hora</th><th>Alumne</th><th>Grup</th><th>Què</th><th>Prova de la profe</th><th>Llengua</th><th class="n">Minuts</th><th class="n">Puls./min</th><th class="n">Precisió</th><th class="n">Ritme</th><th class="n">Errades</th></tr></thead><tbody>' +
     v.map(function(x){
-      var s = x.s;
-      return "<tr" + (x.a.revisar[s.id] ? ' class="revisar" title="' + esc(x.a.revisar[s.id].map(N.motiu).join(" \u00b7 ")) + '"' : "") + "><td>" + esc(s.data) + "</td><td>" + esc(s.hora) + "</td><td>" + esc(x.a.nom) + (x.a.revisar[s.id] ? ' <span class="marca-avis">\u26a0</span>' : "") + "</td><td>" + esc(x.a.grup) + "</td><td>" + esc(N.nomTipus(s)) + (s.interrompuda ? " (a mitges)" : "") +
+      var s = x.s, o = N.descriuSessio(s, T);
+      return "<tr" + (x.a.revisar[s.id] ? ' class="revisar" title="' + esc(x.a.revisar[s.id].map(N.motiu).join(" \u00b7 ")) + '"' : "") + "><td>" + esc(s.data) + "</td><td>" + esc(s.hora) + "</td><td>" + esc(x.a.nom) + (x.a.revisar[s.id] ? ' <span class="marca-avis">\u26a0</span>' : "") + "</td><td>" + esc(x.a.grup) + "</td><td>" + esc(N.nomTipus(s)) + (s.tipus === "llico" && N.LLICONS[s.llico - 1] ? " · " + esc(N.LLICONS[s.llico - 1].nom) : "") + (s.interrompuda ? " (a mitges)" : "") +
+        "</td><td>" + (s.prova ? '<span class="pi ' + (N.provaFeta(s) ? "bo" : "no") + '">' + esc(o.prova + " → " + o.provaRes.toLowerCase()) + "</span>" : "") +
         "</td><td>" + esc(nomLlengua(s.ll)) + '</td><td class="n">' + Math.round((s.act || 0) / 60) + '</td><td class="n"><b>' + num(s.ppm) + '</b></td><td class="n">' + pct(s.prec) +
         '</td><td class="n">' + num(s.ritme) + '</td><td class="n">' + num(s.err) + "</td></tr>";
     }).join("") + "</tbody></table></div>";
@@ -12757,13 +13385,14 @@ function csvAlumnes(){
 }
 function csvSessions(){
   var dd = desDe();
-  var files = [["dia","hora","alumne","grup","tipus","generes","llengua","minuts_practica","segons_practica","durada_repte_min","segons_rellotge_repte","pulsacions_netes_min","precisio","ritme","encerts","errades","aturades","estrelles","a_mitges","completa","per_revisar","id"]];
+  var files = [["dia","hora","alumne","grup","tipus","activitat","prova_de_la_profe","resultat_prova","generes","llengua","minuts_practica","segons_practica","durada_repte_min","segons_rellotge_repte","pulsacions_netes_min","precisio","ritme","encerts","errades","aturades","estrelles","a_mitges","completa","tecles_on_s_equivoca","per_revisar","id"]];
   alumnesFiltrats().forEach(function(a){
     N.ordenaSessions(a.sessions).forEach(function(s){
       if (dd && s.data < dd) return;
-      files.push([s.data, s.hora, a.nom, a.grup, N.nomTipus(s), blocsDeSessio(s), s.ll, Math.round((s.act || 0) / 60), s.act || 0, s.tipus === "repte" ? N.minRepte(s) : (s.rep || ""), s.tipus === "repte" ? (s.dur || s.act || "") : "", csvNum(s.ppm), csvNum(s.prec), csvNum(s.ritme), csvNum(s.enc), csvNum(s.err), csvNum(s.atur), s.tipus === "llico" ? (s.estrelles || 0) : "", s.interrompuda ? "si" : "",
+      var o = N.descriuSessio(s, T);
+      files.push([s.data, s.hora, a.nom, a.grup, N.nomTipus(s), o.que, o.prova, o.provaRes, blocsDeSessio(s), s.ll, Math.round((s.act || 0) / 60), s.act || 0, s.tipus === "repte" ? N.minRepte(s) : (s.rep || ""), s.tipus === "repte" ? (s.dur || s.act || "") : "", csvNum(s.ppm), csvNum(s.prec), csvNum(s.ritme), csvNum(s.enc), csvNum(s.err), csvNum(s.atur), s.tipus === "llico" ? (s.estrelles || 0) : "", s.interrompuda ? "si" : "",
                   s.tipus === "practica" ? (s.complet ? "si" : (s.rep ? "repte deixat" : "no")) : (s.tipus === "repte" ? ((N.repteSuperat(s) ? "superat" : "no superat") + (N.minRepte(s) === 3 && s.acabat ? " (text acabat)" : "")) : ""),
-                  (a.segellMal ? "segell trencat" + (a.revisar[s.id] ? " | " : "") : "") + (a.revisar[s.id] || []).map(N.motiu).join(" | "), s.id]);
+                  o.tecles.join(" · "), (a.segellMal ? "segell trencat" + (a.revisar[s.id] ? " | " : "") : "") + (a.revisar[s.id] || []).map(N.motiu).join(" | "), s.id]);
     });
   });
   baixa("TECLA-A-TECLA-sessions-" + N.dataLocal(new Date()) + ".csv", csv(files), "text/csv");
@@ -12780,9 +13409,13 @@ function pintaEnllac(){
         return '<label class="xip-bloc"><input type="checkbox" value="' + b.id + '">' + iconaBloc(b.id) + "<span><b>" + esc(b.nom) + "</b></span></label>"; }).join("") + "</div>" +
       '<div class="fila-opcions"><label class="tria-llengua">Llengua <select id="d-e-ll"><option value="">la de cada alumne</option><option value="ca">català</option><option value="es">castellano</option><option value="mix">tots dos</option></select></label>' +
       '<label class="tria-llengua">Durada <select id="d-e-min"><option value="">la de cada alumne</option><option value="5">5 min</option><option value="15">15 min</option><option value="30">30 min</option></select></label></div>' +
+      '<div class="fila-opcions"><label class="tria-llengua">Prova de la profe <select id="d-e-prova"><option value="">cap</option>' + opcionsProva("") + "</select></label>" +
+      '<label class="tria-llengua">Màxim d\'errades <input type="number" id="d-e-errades" min="0" max="500" value="10" inputmode="numeric" style="width:5.5em"></label>' +
+      '<label class="tria-llengua">Dia <input type="date" id="d-e-dia" value="' + avuiStr() + '"></label></div>' +
       '<div class="enllac-sortida"><input type="text" id="d-e-url" readonly aria-label="Adreça per a la classe"><button class="boto primari" type="button" id="b-d-e-copia">Copia</button></div>' +
       '<p class="suau petit" id="d-e-nota"></p>';
     cos.addEventListener("change", pintaEnllac);
+    cos.addEventListener("input", function(e){ if (e.target.id === "d-e-errades") pintaEnllac(); });
     $("b-d-e-copia").onclick = function(){
       var i = $("d-e-url"); i.select();
       var fet = function(){ $("d-e-nota").textContent = "Copiada. Enganxa-la al Classroom com a enllaç."; };
@@ -12796,10 +13429,14 @@ function pintaEnllac(){
   if (bl.length) q.push("g=" + bl.join(","));
   if ($("d-e-ll").value) q.push("ll=" + $("d-e-ll").value);
   if ($("d-e-min").value) q.push("min=" + $("d-e-min").value);
+  var pe = String($("d-e-errades").value || "").trim(), ambProva = !!$("d-e-prova").value && /^\d{1,3}$/.test(pe);
+  var dia = /^\d{4}-\d{2}-\d{2}$/.test($("d-e-dia").value) ? $("d-e-dia").value : avuiStr();
+  if (ambProva) q.push("prova=" + $("d-e-prova").value, "errades=" + pe, "dia=" + dia);
   var base = location.href.split("#")[0].split("?")[0];
   $("d-e-url").value = base + (q.length ? "?" + q.join("&") : "");
   $("d-e-nota").textContent = location.protocol === "file:" ? "Compte: aquesta adreça és d'un fitxer d'aquest ordinador. Per a l'alumnat, fes-ho des de la versió web." :
-    "L'alumne hi entra, i els gèneres, la llengua i la durada ja hi són triats (els pot canviar).";
+    "L'alumne hi entra, i els gèneres, la llengua i la durada ja hi són triats (els pot canviar)." +
+    (ambProva ? " La prova de la profe hi va posada per al " + N.dataLlarga(dia) + ": «" + N.nomAct($("d-e-prova").value) + "», màxim " + pe + " errades; la ruta no passa a res més fins que la supera. Un altre dia, l'enllaç no posa cap prova." : "");
 }
 
 /* torna a muntar les escenes de la pantalla actual (canvi de tema o de 3D) */
@@ -12835,7 +13472,7 @@ function lliga(){
     var nom = b.getAttribute("data-nom"), clau = N.clauNom(nom), abans = MAG.perfils[clau];
     preguntaPrimera(nom, function(){ obrePerfil(nom, AULA.grup || "", abans ? null : "ca"); mostra("p-inici"); });
   });
-  $("b-continua").onclick = function(){ mostra("p-inici"); };
+  $("b-continua").onclick = function(){ var p = perfilActiu(); if (p){ p.vist = avuiStr(); desa(); } mostra("p-inici"); };
   $("b-no-soc").onclick = function(){ MAG.actiu = null; desa(); pintaQui(); $("i-nom").focus(); };
   $("b-barra-canvia").onclick = canviaAlumne;
   /* la ruta d'avui, el botó «Què faig?» i la benvinguda */
@@ -12971,6 +13608,11 @@ function lliga(){
   $("b-enganxa-no").onclick = function(){ $("capa-enganxa").hidden = true; };
   $("capa-enganxa").addEventListener("keydown", function(e){ if (e.key === "Escape") $("capa-enganxa").hidden = true; });
   $("ini-fitxa").addEventListener("click", function(e){ var b = e.target.closest("[data-accio='enganxa']"); if (b) obreEnganxa(); });
+  /* la prova de la profe */
+  $("f-prova").addEventListener("submit", desaProva);
+  $("b-prova-treu").onclick = treuProva;
+  $("b-prova-no").onclick = tancaProva;
+  $("capa-prova").addEventListener("keydown", function(e){ if (e.key === "Escape"){ e.preventDefault(); tancaProva(); } });
 
   /* la caixa d'escriure */
   var caixa = $("e-caixa");
@@ -13167,9 +13809,12 @@ function arrenca(){
   var rec = recuperaEnCurs();
   if (rec) AVIS_INICI = {tipus:"info", html:"La darrera sessió es va tancar a mitges: s'ha desat el que havies fet (" + N.minutsText(rec.act) + ")."};
   desa();
+  /* PRIMER, LA FITXA (03-11-2026): si el perfil d'aquest navegador no s'ha obert avui (un altre dia, potser un altre
+     ordinador entremig), es comença carregant la fitxa; «Continua com a…» hi és, però en segon lloc */
   if (typeof DEMO_FITXA === "string") return arrencaDemo();
-  mostra(perfilActiu() ? "p-inici" : "p-qui");
-  if (!perfilActiu() && !AULA) setTimeout(function(){ try { $("i-nom").focus({preventScroll:true}); } catch(e){} }, 50);
+  var p0 = perfilActiu();
+  mostra(p0 && p0.vist === avuiStr() ? "p-inici" : "p-qui");
+  if (PANTALLA === "p-qui") setTimeout(function(){ try { $("b-qui-carrega").focus({preventScroll:true}); } catch(e){} }, 50);
 }
 
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", arrenca);
