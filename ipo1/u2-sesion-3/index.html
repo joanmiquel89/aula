@@ -320,6 +320,7 @@ body.proj .opc button .k{font-size:.75em}
 .tn-fil{max-height:3.2em!important;margin:1.2em 0 .2em}
 .tn-fil line{stroke:#bdb39d;stroke-width:6}
 .tn-fil .e{fill:var(--mostassa)}
+.tn-fil.ko .e{fill:var(--vermell)}
 .tn-msg{font-weight:800}
 .tn-msg.ok{color:var(--verd)}.tn-msg.ko{color:var(--vermell)}
 .tn-regla{margin:.2em 0 0;font-weight:700}
@@ -1083,7 +1084,9 @@ Repartir tapones y poner la señal también hay que hacerlo, y desde el primer d
       w.querySelector(".tn-barra.i").classList.toggle("ko", !segur);
       msg.textContent = (segur ? "✓ " + w.getAttribute("data-ok") : "⚡ " + w.getAttribute("data-ko"));
       msg.className = "int-msg tn-msg " + (segur ? "ok" : "ko");
-      var vel = Math.max(0.25, 6 / Math.max(i, 1));
+      /* la velocitat dels punts, proporcional a la corrent: 12 → 2 s per tram · 50 → 0,5 s · 230 → 0,12 s */
+      var vel = Math.min(2.5, Math.max(0.12, 24 / Math.max(i, 1)));
+      w.querySelector(".tn-fil").classList.toggle("ko", !segur);
       w.querySelectorAll(".tn-fil .e").forEach(function(e, k){
         if (e.animate) { if (e._a) e._a.cancel(); e._a = e.animate([{ transform: "translateX(0)" }, { transform: "translateX(58px)" }], { duration: vel * 1000, iterations: Infinity }); }
       });
