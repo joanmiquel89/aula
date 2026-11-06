@@ -323,6 +323,16 @@ body.proj .opc button .k{font-size:.75em}
 .tn-msg{font-weight:800}
 .tn-msg.ok{color:var(--verd)}.tn-msg.ko{color:var(--vermell)}
 .tn-regla{margin:.2em 0 0;font-weight:700}
+.tn-ohm{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.2em .7em;margin:.2em 0 .5em;padding:.4em .6em;background:#fff;border:2px solid #e3dccb;border-radius:.7em}
+.tn-t{display:flex;flex-direction:column;align-items:center;line-height:1}
+.tn-t b{font-family:Georgia,serif;font-weight:800;line-height:1;transition:font-size .5s,color .5s}
+.tn-t small{font-size:.72em;font-weight:700;color:var(--suau);margin-top:.1em}
+.tn-t .tn-val{font-size:.8em;font-weight:800;margin-top:.1em;min-height:1.1em}
+.tn-t.tv b{color:var(--mostassa)}.tn-t.tr b{color:var(--blau)}.tn-t.ti b{color:var(--verd)}.tn-t.ti.ko b,.tn-t.ti.ko .tn-val{color:var(--vermell)}
+.tn-op{font-size:2.4em;font-weight:800}
+.tn-frac{display:flex;flex-direction:column;align-items:center}
+.tn-raya{display:block;width:100%;min-width:6em;height:4px;background:var(--tinta);margin:.15em 0;border-radius:2px}
+.tn-frase{flex-basis:100%;text-align:center;margin:.15em 0 0;font-weight:700;font-size:.9em}
 .extintor .ganxo{fill:#8c8578}
 .extintor .cos{fill:#c53a26}.extintor .etq{fill:#fff;opacity:.85}.extintor .cap{fill:#3b3b3b}
 .extintor .palanca{transform-box:fill-box;transform-origin:0% 50%;transition:transform .4s}
@@ -424,7 +434,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <h2>Tres descargas</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 53 · actividades finales 2.6 y 2.7</span><span class="ref libro">Libro · pág. 30 · tabla 2.7</span><span class="ref libro">Libro · pág. 31 · figura 2.3</span><span class="ref ficha">Apúntalo en la libreta o en el móvil</span></div>
   <div class="caso"><p><b>A · Pedro</b> trabaja en una obra. Manipula un cable pelado sin guantes ni herramientas aislantes y recibe una descarga.</p></div>
-<div class="caso"><p><b>B · Alicia</b> trabaja en una oficina. Recibe una descarga al tocar la carcasa metálica de la fotocopiadora, porque falla su conexión a tierra.</p></div>
+<div class="caso"><p><b>B · Alicia</b> trabaja en una oficina. Recibe una descarga al tocar la carcasa metálica de la fotocopiadora. Después se ve que un cable de dentro tenía el aislante gastado y que la toma de tierra de la máquina no funcionaba.</p></div>
 <div class="caso"><p><b>C · Un túnel de lavado de coches.</b> El suelo siempre está mojado. Para mirar los bajos de los coches, los empleados usan lámparas de mano. La empresa duda entre un modelo de <b>50 V</b> y otro de <b>24 V</b>.</p><p class="fuente"><span class="inventat">· ejemplo inventado</span></p></div>
 <div class="clau"><ol>
 <li><b>A y B:</b> ¿qué tocó? ¿Contacto <b>directo</b> (lo que lleva corriente) o <b>indirecto</b> (metal que la lleva por un fallo; pág. 30, letra a, como en Bendinat)? Y dos medidas que lo habrían evitado: las de su fila en la tabla 2.7 (pág. 30).</li>
@@ -468,7 +478,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <div class="voto" data-ok="b"><p class="q">Alicia toca la carcasa de la fotocopiadora y le da calambre. ¿Qué contacto es?</p><div class="opc"><button data-v="a">Directo</button><button data-v="b">Indirecto</button><button data-v="c">No es un contacto eléctrico: es la electricidad estática</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Indirecto</span></p>
 <div class="idea"><b>Contacto indirecto</b><span>una carcasa metálica que, por un fallo de aislamiento, lleva corriente</span></div>
 <p class="nop"><i>✗</i><span>Directo: la carcasa no tendría que llevar corriente</span></p>
-<p class="nop"><i>✗</i><span>Estática: aquí lo que falla es la tierra</span></p>
+<p class="nop"><i>✗</i><span>Estática: aquí la carcasa lleva la corriente de la red, por un fallo</span></p>
 <span class="ref libro">Libro · pág. 30 · tabla 2.7, fila «Indirecto»</span></div> <span class="fuente">Fuente: Libro, actividad final 2.7 (pág. 53), adaptada.</span></div></div>
 
   <div class="refs despres"><span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Indirecto»</span></div>
@@ -479,9 +489,10 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <h2>Qué se tenía que hacer</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Indirecto»</span></div>
   <div class="pas"><div class="fil"><span>¿Qué tocó? La carcasa</span><i>→</i><span>¿Lleva corriente normalmente? No</span><i>→</i><span>Contacto indirecto</span></div></div>
+<div class="pas"><div class="fil escala"><span>① Un cable de dentro pierde el aislante: la carcasa queda con corriente</span><i>→</i><span>② La tierra falla: la corriente no se va por ella</span><i>→</i><span>③ Alicia toca la carcasa: la corriente pasa por ella</span></div></div>
 <div class="pas"><div class="tres"><div><b>Tierra con diferenciales</b><span>la tierra se lleva la corriente y el diferencial corta</span></div><div><b>Doble aislamiento</b><span>dos capas: aunque falle una, no queda en tensión</span></div><div><b>Revisar</b><span>la instalación (RD 614/2001, art. 3.3)</span></div></div></div>
 <div class="pas"><div class="idea"><b>Y Alicia</b><span>avisar (LPRL, art. 29.2.4.º) y no usarla hasta que la revisen (RD 1215/1997, anexo II.1.4)</span></div></div>
-<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Indirecto:</b> la carcasa es metálica y <b>no debería llevar corriente</b>; la lleva por un <b>fallo de aislamiento</b>, y la tierra, que tendría que desviarla, falla.
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Indirecto:</b> la carcasa es metálica y <b>no debería llevar corriente</b>; la lleva por un <b>fallo de aislamiento</b>, y la tierra, que tendría que desviarla, falla. Hacen falta los dos fallos: si la tierra funcionara, la corriente se iría por el cable de tierra y el diferencial cortaría antes de que Alicia la notara. Que falle la tierra no la convierte en directo: lo que tocó sigue siendo una carcasa que <b>no tendría que llevar corriente</b>.
 <ol class="pasos"><li><b>¿Qué tocó?</b> La carcasa: una parte metálica de fuera.</li><li><b>¿Lleva corriente normalmente?</b> No. Si la lleva, es por un fallo → contacto <b>indirecto</b>.</li><li><b>Medidas</b> (tabla 2.7, «Indirecto»): <b>puesta a tierra con interruptores diferenciales</b> (la tierra se lleva la corriente y el diferencial corta) y aparatos de <b>doble aislamiento</b> (dos capas de aislante: aunque falle una, lo que tocas no queda en tensión); además, revisar la instalación. Vale también cualquier otra de su fila.</li><li><b>Y Alicia:</b> si un aparato da calambre, se avisa (LPRL, art. 29.2.4.º) y no se usa hasta que lo revisen (RD 1215/1997, anexo II.1.4).</li></ol>
 <span class="ley">LPRL · art. 29.2.4.º</span> <span class="ref libro">Libro · pág. 30 · letra a) y tabla 2.7, fila «Indirecto»</span></div></details>
 </section>
@@ -504,7 +515,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <div class="refs"><span class="ref libro">Libro · pág. 31 · figura 2.3 · pág. 30 · figura 2.2 y «Sabías que…»</span></div>
   <div class="pas"><div class="gran"><b>24 V</b><span>sitios húmedos o mojados</span></div><div class="gran"><b>50 V</b><span>locales secos</span></div><p class="nota">Tan bajas que se consideran seguras en ese sitio (figura 2.3, pág. 31).</p></div>
 <div class="pas"><div class="idea"><b>¿Por qué menos donde hay agua?</b><span>piel mojada → menos resistencia → con la misma tensión, más corriente: es la ley de Ohm (figura 2.2 y «Sabías que…», pág. 30)</span></div></div>
-<div class="pas"><div class="int tensio" data-ok="Segura en este sitio" data-ko="¡Peligro!"><div class="tn-ctrl"><div><span class="tn-l">Piel</span><button type="button" class="tn-pell on" data-r="2">☀️ Seca</button><button type="button" class="tn-pell" data-r="1">💧 Mojada</button></div><div><span class="tn-l">Tensión</span><button type="button" class="tn-v" data-v="24">24 V</button><button type="button" class="tn-v on" data-v="50">50 V</button><button type="button" class="tn-v" data-v="230">230 V</button></div></div><div class="tn-fila"><span class="tn-nom">Resistencia del cuerpo</span><span class="tn-barra r"><i></i></span></div><div class="tn-fila"><span class="tn-nom">Corriente que pasa</span><span class="tn-barra i"><i></i><em class="tn-lim"><small>límite seguro</small></em></span></div><svg class="tn-fil" viewBox="0 0 600 40" aria-hidden="true"><line x1="10" y1="20" x2="590" y2="20"/><circle class="e" cx="10" cy="20" r="7"/><circle class="e" cx="68" cy="20" r="7"/><circle class="e" cx="126" cy="20" r="7"/><circle class="e" cx="184" cy="20" r="7"/><circle class="e" cx="242" cy="20" r="7"/><circle class="e" cx="300" cy="20" r="7"/><circle class="e" cx="358" cy="20" r="7"/><circle class="e" cx="416" cy="20" r="7"/><circle class="e" cx="474" cy="20" r="7"/><circle class="e" cx="532" cy="20" r="7"/></svg><p class="int-msg tn-msg"></p><p class="int-nota">Ilustración: no son medidas reales</p></div></div>
+<div class="pas"><div class="int tensio" data-ok="Segura en este sitio" data-ko="¡Peligro!"><div class="tn-ctrl"><div><span class="tn-l">Piel</span><button type="button" class="tn-pell on" data-r="2">☀️ Seca</button><button type="button" class="tn-pell" data-r="1">💧 Mojada</button></div><div><span class="tn-l">Tensión</span><button type="button" class="tn-v" data-v="24">24 V</button><button type="button" class="tn-v on" data-v="50">50 V</button><button type="button" class="tn-v" data-v="230">230 V</button></div></div><div class="tn-ohm" data-seca="piel seca: R grande" data-mull="piel mojada: R pequeña"><div class="tn-t ti"><b>I</b><small>corriente</small><span class="tn-val"></span></div><span class="tn-op">=</span><div class="tn-frac"><div class="tn-t tv"><b>V</b><small>tensión</small><span class="tn-val"></span></div><i class="tn-raya"></i><div class="tn-t tr"><b>R</b><small>resistencia del cuerpo</small><span class="tn-val"></span></div></div><p class="tn-frase">Más V arriba o menos R abajo → más I</p></div><div class="tn-fila"><span class="tn-nom">Resistencia del cuerpo</span><span class="tn-barra r"><i></i></span></div><div class="tn-fila"><span class="tn-nom">Corriente que pasa</span><span class="tn-barra i"><i></i><em class="tn-lim"><small>límite seguro</small></em></span></div><svg class="tn-fil" viewBox="0 0 600 40" aria-hidden="true"><line x1="10" y1="20" x2="590" y2="20"/><circle class="e" cx="10" cy="20" r="7"/><circle class="e" cx="68" cy="20" r="7"/><circle class="e" cx="126" cy="20" r="7"/><circle class="e" cx="184" cy="20" r="7"/><circle class="e" cx="242" cy="20" r="7"/><circle class="e" cx="300" cy="20" r="7"/><circle class="e" cx="358" cy="20" r="7"/><circle class="e" cx="416" cy="20" r="7"/><circle class="e" cx="474" cy="20" r="7"/><circle class="e" cx="532" cy="20" r="7"/></svg><p class="int-msg tn-msg"></p><p class="int-nota">Ilustración: no son medidas reales</p></div></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>La de 24 V.</b> Así se resuelve:
 <ol class="pasos"><li><b>¿Cómo es el sitio?</b> Mojado.</li><li><b>Busca la cifra</b> en la figura 2.3 (pág. 31): tensiones de seguridad (tan bajas que se consideran seguras en ese sitio): <b>24 V</b> en emplazamientos húmedos o mojados y <b>50 V</b> en locales secos.</li><li><b>¿Por qué menos?</b> Con la piel mojada el cuerpo ofrece menos resistencia («Sabías que…», pág. 30). Es la ley de Ohm (figura 2.2): <span class="formula">I = V ÷ R</span>. Con la misma tensión (V) y menos resistencia (R), pasa más corriente (I), y la corriente, con el tiempo de contacto, es lo que más daña (tabla 2.6). El caso resuelto 2.2 (pág. 31) la usa con números: para leer, no entra.</li></ol>
 Los 50 V son seguros en un local seco, no aquí.<span class="ref libro">Libro · pág. 31 · figura 2.3 (pie: «las tensiones de seguridad son de 24 V… y 50 V…»)</span></div></details>
@@ -1057,6 +1068,16 @@ Repartir tapones y poner la señal también hay que hacerlo, y desde el primer d
     var r = 2, v = 50, msg = w.querySelector(".tn-msg");
     function pinta(){
       var i = v / r, segur = i <= 25;
+      var oh = w.querySelector(".tn-ohm");
+      if (oh) {
+        oh.querySelector(".tv b").style.fontSize = (v === 24 ? 1.7 : v === 50 ? 2.5 : 3.8) + "em";
+        oh.querySelector(".tv .tn-val").textContent = v + " V";
+        oh.querySelector(".tr b").style.fontSize = (r === 2 ? 3.4 : 1.5) + "em";
+        oh.querySelector(".tr .tn-val").textContent = oh.getAttribute(r === 2 ? "data-seca" : "data-mull");
+        oh.querySelector(".ti b").style.fontSize = Math.min(5, 1.3 + i / 12) + "em";
+        oh.querySelector(".ti .tn-val").textContent = (segur ? "✓ " : "⚡ ") + w.getAttribute(segur ? "data-ok" : "data-ko");
+        oh.querySelector(".ti").classList.toggle("ko", !segur);
+      }
       w.querySelector(".tn-barra.r i").style.width = (r === 2 ? 90 : 42) + "%";
       w.querySelector(".tn-barra.i i").style.width = Math.min(100, i * 2) + "%";
       w.querySelector(".tn-barra.i").classList.toggle("ko", !segur);
