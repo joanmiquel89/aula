@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Quemado, acosado o con la espalda cargada · Sesión 6</title>
+<!-- Generat per sistema/tools/sessio_aula.py des de fitxa-sesion-06.toml. No l'editis a mà: edita la fitxa. -->
+<style>
+:root{
+  --fons:#efe7d8; --paper:#fffdf8; --tinta:#1d1a16; --suau:#5d5850; --linia:#d9d0bf;
+  --kraft:#c9ab7e; --vermell:#c53a26; --verd:#1f7a4d; --verdclar:#e5f2ea; --blau:#1f5596; --blauclar:#e6eef8;
+  --mostassa:#b77a00; --mostassaclar:#fff2d6; --lila:#6a4c9c; --lilaclar:#efe9f7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fons);color:var(--tinta);font:17px/1.55 "Segoe UI","Helvetica Neue",Arial,sans-serif}
+a{color:var(--blau)}
+b,strong{font-weight:700}
+.dalt{position:sticky;top:0;z-index:20;background:var(--tinta);color:#fff;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:8px 16px}
+.dalt .nom{font-weight:800;letter-spacing:.02em;white-space:nowrap}
+.dalt .nom small{font-weight:500;opacity:.7;margin-left:6px}
+.dalt nav{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.dalt nav a{color:#fff;text-decoration:none;font-size:13px;padding:3px 9px;border-radius:99px;background:rgba(255,255,255,.12);white-space:nowrap}
+.dalt nav a:hover,.dalt nav a.ara{background:#fff;color:var(--tinta)}
+.dalt button{font:inherit;font-size:14px;font-weight:700;border:0;border-radius:8px;padding:6px 12px;cursor:pointer;background:#ffd66b;color:var(--tinta)}
+.marcador{font-size:13px;opacity:.9;white-space:nowrap}
+main{max-width:900px;margin:0 auto;padding:18px 16px 110px}
+.p{background:var(--paper);border:1px solid var(--linia);border-radius:14px;padding:22px 26px;margin:0 0 22px;box-shadow:0 2px 0 rgba(60,40,10,.08);scroll-margin-top:70px}
+.p h2{font-size:28px;line-height:1.15;margin:4px 0 10px;letter-spacing:-.01em}
+.p h3{font-size:19px;margin:16px 0 6px}
+.p p{margin:0 0 10px}
+.hora{display:flex;align-items:center;gap:12px;margin:34px 0 14px;font-weight:800;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--suau)}
+.hora::after{content:"";flex:1;height:2px;background:var(--linia)}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--vermell);margin:0}
+.refs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.voto~.refs,.grup~.refs{margin:12px 0 0}
+.refs.despres{display:none}
+.votat .refs.despres{display:flex}
+.ref{font-size:13px;font-weight:600;padding:3px 10px;border-radius:.9em;border:1.5px solid currentColor;text-decoration:none;white-space:normal;overflow-wrap:anywhere;max-width:100%;display:inline-block}
+.ref.hoja{color:var(--verd);background:var(--verdclar)}
+a.ref.hoja::after{content:" ↗"}
+.ref.libro{color:var(--blau);background:var(--blauclar)}
+.ref.ficha{color:var(--mostassa);background:var(--mostassaclar)}
+.caso{background:#f6efe1;border-left:6px solid var(--vermell);padding:14px 18px;border-radius:6px;margin:8px 0 12px}
+.caso p:last-child{margin:0}
+.fuente{font-size:13px;color:var(--suau)}
+.clau{background:var(--tinta);color:#fff;padding:12px 18px;border-radius:10px;font-size:19px;line-height:1.4;margin:12px 0}
+.clau b{color:#ffd66b}
+.nota{font-size:14px;color:var(--suau)}
+.inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div b{display:block;font-size:18px;margin-bottom:4px}
+.tres>div span{font-size:15px;color:var(--suau)}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.dos>div{border-radius:10px;padding:12px 16px;background:var(--blauclar);border:2px solid var(--blau)}
+.dos>div+div{background:var(--verdclar);border-color:var(--verd)}
+.dos h3{margin:0 0 6px}
+ul,ol{margin:4px 0 10px;padding-left:22px}
+ol.dosc{columns:2;column-gap:28px;margin:6px 0 10px}ol.dosc li{break-inside:avoid}
+li{margin:0 0 4px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
+th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
+th{background:#f3ecdf}
+.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+.cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
+.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
+.cadena span.avui{background:#ffd66b}
+.cadena span.fet{opacity:.55}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plan>div{background:#f6efe1;border-radius:10px;padding:12px 16px}
+.plan ol{margin:0;padding-left:20px}
+.voto{border:2px solid var(--tinta);border-radius:12px;padding:12px 16px;margin:12px 0;background:#fff}
+.voto .q{font-weight:700;font-size:18px;margin:0 0 8px}
+.opc{display:flex;flex-wrap:wrap;gap:8px}
+.opc button{font:inherit;font-weight:700;font-size:16px;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);padding:7px 16px;border-radius:9px;cursor:pointer}
+.opc button:hover{background:#fff2c2}
+.opc button .k{display:inline-block;min-width:1.4em;font-size:12px;font-weight:800;opacity:.55}
+.opc button.triat{background:var(--tinta);color:#fff}
+.opc button.bona{background:var(--verd);border-color:var(--verd);color:#fff}
+.opc button.dolenta{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.porque{display:none;margin:10px 0 0;padding:10px 14px;border-radius:8px;background:var(--verdclar);font-size:16px}
+.voto.fet .porque{display:block}
+.grup{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grup .voto{margin:0}
+.preg{border-top:1.5px dashed var(--linia);padding-top:10px;margin-top:10px}
+.preg .n{display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;border-radius:50%;background:var(--mostassa);color:#fff;font-weight:800;font-size:14px;margin-right:6px}
+.revela{font:inherit;font-size:14px;font-weight:700;border:1.5px solid var(--verd);color:var(--verd);background:#fff;border-radius:8px;padding:4px 12px;cursor:pointer;margin:4px 0}
+.sol{display:none;background:var(--verdclar);border-left:5px solid var(--verd);padding:10px 14px;border-radius:6px;margin:6px 0 10px;font-size:16px}
+.sol.obert{display:block}
+/* soluciones visuales (JM, 16-10): respuesta grande, pocas palabras y la página donde está el apoyo; todo en em */
+.resp{display:flex;align-items:center;gap:.5em;font-size:1.3em;font-weight:800;line-height:1.15;margin:0 0 .35em}
+.resp i{flex:none;font-style:normal;width:1.45em;height:1.45em;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.8em;color:#fff;background:var(--verd)}
+.resp.no i{background:var(--vermell)}
+.ley{display:inline-block;font-size:.8em;font-weight:700;border:1.5px solid var(--tinta);border-radius:99px;padding:.05em .65em;margin:0 .3em .3em 0;background:#fff;white-space:nowrap}
+.flujo{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.25em 0 .5em}
+.flujo span{padding:.18em .7em;border-radius:.5em;background:#fff;border:1.5px solid var(--verd)}
+.flujo i{font-style:normal;font-weight:800;color:var(--suau)}
+.cuadro4{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em;margin:.35em 0 .5em}
+.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff}
+.cuadro4 h4{margin:0 0 .2em;font-size:.72em;text-transform:uppercase;letter-spacing:.05em;color:var(--suau)}
+.cuadro4 p{margin:0 0 .15em;font-weight:700}
+.cuadro4 small{display:block;font-weight:400;color:var(--suau)}
+.cuadro4 .si{border-color:var(--verd);background:#f3faf6}
+.cuadro4 .alt{border-style:dashed;opacity:.9}
+.cuadro4 .no{border-color:var(--vermell);background:#fbeeec}
+.cuadro4.cinc{grid-template-columns:repeat(5,1fr)}
+@media (max-width:700px){.cuadro4.cinc{grid-template-columns:1fr 1fr}}
+.nueve{display:grid;grid-template-columns:repeat(9,1fr);gap:.3em;margin:.35em 0 .5em}
+.nueve>div{border:1.5px solid #bdb39d;border-radius:.45em;padding:.2em .15em;text-align:center;font-size:.72em;line-height:1.15;background:#fff;color:var(--suau)}
+.nueve b{display:block;font-size:1.6em;color:var(--tinta)}
+.nueve .no{background:var(--vermell);border-color:var(--vermell);color:#fff}
+.nueve .no b{color:#fff}
+.rama{display:grid;grid-template-columns:1fr 1fr;gap:.5em;margin:.35em 0 .5em}
+.rama>div{border-radius:.5em;padding:.35em .6em;border:2px solid var(--verd);background:#f3faf6}
+.rama>div+div{border-color:var(--mostassa);background:var(--mostassaclar)}
+.rama small{display:block;font-weight:400;color:var(--suau)}
+.donde{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.5em 0 0;padding-top:.4em;border-top:1.5px dashed rgba(31,122,77,.4)}
+.donde .dl,.porque .dl{font-size:.75em;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--suau)}
+.ref.otra{color:var(--mostassa);background:var(--mostassaclar)}
+.mapa{margin:.2em 0}
+.mapa .cap{font-size:.72em;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--suau);margin:.45em 0 .2em}
+.mapa .f{display:grid;gap:.45em}
+.mapa .f4{grid-template-columns:repeat(4,1fr)}
+.mapa .f3{grid-template-columns:repeat(3,1fr)}
+.mapa .leyenda{display:flex;flex-wrap:wrap;gap:.2em .9em;font-size:.8em;font-weight:700;margin:.1em 0 .2em}
+.org{border-radius:.6em;padding:.4em .55em;color:#fff;line-height:1.2}
+.org b{display:block;font-size:1.1em;letter-spacing:.04em}
+.org .sg{display:block;font-weight:800;font-size:1.05em;margin:.05em 0}
+.org small{display:block;font-size:.72em}
+.org.manda{background:#b3321f}
+.org.sabe{background:#1f5596}
+.org.apoya{background:#1f7a4d}
+@media (max-width:700px){.cuadro4,.mapa .f4,.mapa .f3{grid-template-columns:1fr 1fr}.nueve{grid-template-columns:repeat(3,1fr)}.rama{grid-template-columns:1fr}}
+.encls{font-size:14px;color:var(--suau);font-style:italic}
+/* solucions per passos (JM, 28-10): un toc = una idea, poques paraules i grans; projectant, cada → en destapa una */
+.pas{display:flow-root;margin:.5em 0}
+.porque .pas:first-child{margin-top:0}
+p.si{display:flex;align-items:center;gap:.45em;font-size:1.35em;font-weight:800;line-height:1.15;margin:.1em 0 .4em}
+p.si i,.nop i{flex:none;font-style:normal;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#fff}
+p.si i{width:1.4em;height:1.4em;font-size:.75em;background:var(--verd)}
+.nop{display:flex;align-items:center;gap:.5em;margin:.2em 0;color:var(--suau)}
+.nop i{width:1.35em;height:1.35em;font-size:.7em;background:var(--vermell)}
+.idea{display:inline-flex;flex-direction:column;border-left:.35em solid var(--mostassa);background:var(--mostassaclar);border-radius:.4em;padding:.35em .85em;margin:.15em 0 .45em}
+.idea b{font-size:1.12em}
+.fil{display:flex;flex-wrap:wrap;align-items:center;gap:.4em;margin:.3em 0 .55em}
+.fil span{background:#fff;border:2px solid var(--tinta);border-radius:.5em;padding:.35em .8em;font-weight:700;line-height:1.25}
+.fil i{font-style:normal;font-weight:800;color:var(--suau);font-size:1.25em}
+.fil.escala{align-items:flex-end}
+.fil.escala span:nth-of-type(2){margin-bottom:1.1em}
+.fil.escala span:nth-of-type(3){margin-bottom:2.2em}
+.fil.escala span:nth-of-type(4){margin-bottom:3.3em}
+.fil.escala span:last-of-type{background:#ffd66b}
+.gran{display:inline-flex;flex-direction:column;vertical-align:top;min-width:6.5em;margin:.2em .7em .45em 0;padding:.35em .9em;border-radius:.55em;background:#fff;border:2px solid var(--linia)}
+.gran b{font-size:2.2em;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.gran span{color:var(--suau);font-size:.85em;line-height:1.3}
+.foto{float:right;width:38%;margin:0 0 .6em 1.1em}
+.foto img{display:block;width:100%;height:auto;border-radius:.55em}
+.foto figcaption{font-size:.6em;color:var(--suau);margin-top:.25em;line-height:1.3}
+.parell{display:grid;grid-template-columns:1fr 1fr;gap:.6em;margin:.2em 0 .5em}
+.parell .foto{float:none;width:auto;margin:0}
+.llegeix{margin:.6em 0 0;font-size:.95em}
+.llegeix summary{cursor:pointer;font-weight:700;color:var(--verd)}
+.llegeix>div{margin-top:.4em}
+/* ✂ el tall (JM, 28-10): fins aquí, la d'avui; el que ve després és de la sessió següent i porta la cinta */
+.tallsessio{text-align:center;background:#1d1a16;color:#fff;border:0}
+.tallsessio .kicker{color:#ffd66b}
+.tallsessio h2{font-size:2.6em}
+.tisora{display:flex;align-items:center;justify-content:center;gap:.6em;margin:.6em 0 .9em;font-weight:800;font-size:1.3em}
+.tisora span{padding:.3em 1em;border-radius:.5em;background:#fff;color:var(--tinta)}
+.tisora span+i+span{background:transparent;color:#ffd66b;border:2px dashed #ffd66b}
+.tisora i{font-style:normal;font-size:1.6em;color:#ffd66b}
+.cinta{display:inline-block;font-size:.72em;font-weight:800;text-transform:uppercase;letter-spacing:.1em;background:var(--tinta);color:#ffd66b;padding:.25em .9em;border-radius:99px;margin:0 0 .5em}
+.p.dema{border:2px dashed var(--suau)}
+.dalt nav a.dema{background:transparent;border:1px dashed rgba(255,255,255,.55)}
+.dalt nav a.dema:hover,.dalt nav a.dema.ara{background:#ffd66b;color:var(--tinta)}
+#passos{letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.65);border-radius:8px;padding:6px 10px;font-size:14px}
+#passos:empty{display:none}
+textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
+textarea.resp:focus{outline:2px solid var(--tinta)}
+.boto-gran{display:inline-block;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:10px;padding:11px 20px;cursor:pointer;background:var(--tinta);color:#fff;text-decoration:none}
+.solo-web{display:none}
+.web .solo-web{display:inline-block}
+.missatge{background:var(--verdclar);border:1.5px solid var(--verd);border-radius:8px;padding:10px 14px;margin:10px 0}
+.jo{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0 12px}
+.jo label{font-size:14px;color:var(--suau);display:flex;gap:6px;align-items:center}
+.jo input{font:inherit;padding:5px 8px;border:1.5px solid var(--linia);border-radius:6px}
+.peu{text-align:center;margin:30px 0}
+.peu button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:#fff;border-radius:8px;padding:8px 16px;cursor:pointer}
+.ctrl{display:none}
+body.proj{background:var(--kraft);overflow:hidden}
+body.proj main{max-width:none;padding:0}
+body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
+body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
+  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+body.proj .p.actual{display:block}
+body.proj .pas:not(.vist){display:none}
+body.proj .pas.vist:not(.ara){opacity:.6}
+body.proj .fil{font-size:1.08em}
+body.proj .foto{width:32%}
+body.proj .pas.ara{animation:destapa .35s ease-out}
+@keyframes destapa{from{opacity:0;transform:translateY(.5em)}to{opacity:1;transform:none}}
+body.proj .voto.fet .opc button.dolenta{opacity:.6}
+body.proj .voto.fet:has(.pas) .opc button:not(.bona):not(.dolenta){display:none}
+body.proj .foto img{max-height:30vh;object-fit:cover}
+body.proj .parell .foto{width:auto}
+body.proj .parell .foto img{height:30vh;max-height:none}
+body.proj .tallsessio.actual{display:flex;flex-direction:column;justify-content:center;background:#1d1a16}
+body.proj .p.dema{border-top:.6vh dashed var(--tinta)}
+body.proj .p h2{font-size:2.1em}
+body.proj .p h3{font-size:1.2em}
+body.proj .caso,body.proj .porque,body.proj .sol,body.proj .voto .q,body.proj .opc button,body.proj .clau,
+body.proj table,body.proj .tres>div span,body.proj .tres>div b{font-size:1em}
+body.proj .clau{font-size:1.12em}
+body.proj .opc button{padding:.35em 1em}
+body.proj .ref{font-size:.72em}
+body.proj textarea.resp,body.proj .jo{display:none}
+body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
+.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
+.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+.cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
+.compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
+.compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
+.compte .barra{flex:1;height:14px;border-radius:99px;background:#e6dccb;overflow:hidden}
+.compte .barra i{display:block;height:100%;width:100%;background:var(--vermell);transform-origin:left}
+.compte.zero .xifra{color:var(--verd)}
+body.proj .compte{display:flex}
+body.proj .cas-flash{font-size:1.55em}
+.rellotge{display:none;font-weight:800;font-variant-numeric:tabular-nums}
+body.proj .rellotge.on{display:inline-block;background:#ffd66b;color:var(--tinta);border-radius:8px;padding:6px 12px;font-size:20px}
+.rellotge.fi{background:var(--vermell)!important;color:#fff!important}
+/* upgrade del 05-11 (JM: «un upgrade integral de l'estil»): notícies amb capçalera i enllaç, esquema al costat,
+   vots més grans a la projecció */
+.caso.noticia{background:#fbf7ef;border-left-width:8px}
+.cap-noticia{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.4em .8em;margin:-.2em 0 .55em!important;
+  padding-bottom:.45em;border-bottom:1.5px solid rgba(197,58,38,.25);font-size:.82em;font-weight:700;color:var(--suau);letter-spacing:.01em}
+a.font-link{display:inline-flex;align-items:center;gap:.25em;font-weight:800;font-size:.95em;color:#fff;background:var(--blau);
+  text-decoration:none;border-radius:99px;padding:.15em .8em;white-space:nowrap}
+a.font-link:hover{background:var(--tinta)}
+.fuente a.font-link{font-size:1em;margin-left:.3em}
+.caso.amb-esquema{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:.4em 1.2em;align-items:start}
+.caso.amb-esquema>.cap-noticia{grid-column:1/-1}
+.cas-text p:last-child{margin-bottom:0}
+.esquema{background:#fff;border:2px solid var(--tinta);border-radius:.7em;padding:.5em .8em .3em}
+.esq-t{margin:0 0 .35em!important;font-size:.72em;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--vermell)}
+.esquema ol{list-style:none;margin:0;padding:0}
+.esquema li{display:grid;grid-template-columns:1.6em auto 1fr;gap:.1em .45em;align-items:baseline;padding:.28em 0;border-top:1px dashed var(--linia);line-height:1.3}
+.esquema li:first-child{border-top:0}
+.esquema li i{font-style:normal;text-align:center}
+.esquema li b{white-space:nowrap}
+.esquema li span{color:var(--tinta)}
+@media (max-width:700px){.caso.amb-esquema{grid-template-columns:1fr}.esquema li{grid-template-columns:1.6em 1fr}.esquema li span{grid-column:2}}
+body.proj .caso{line-height:1.45}
+body.proj .caso.amb-esquema{font-size:.95em}
+body.proj .esquema{font-size:1.02em}
+body.proj .voto{padding:.7em 1em;border-width:3px}
+body.proj .voto .q{font-size:1.18em;line-height:1.3;margin-bottom:.55em}
+body.proj .opc{display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:.55em}
+body.proj .opc button{font-size:1.05em;padding:.55em .9em;text-align:left;border-width:2.5px;border-radius:.6em;line-height:1.25}
+body.proj .opc button .k{font-size:.75em}
+@media (max-width:700px){
+  body{font-size:16px}
+  .p{padding:16px 14px}
+  .p h2{font-size:23px}
+  .tres,.dos,.plan,.grup{grid-template-columns:1fr}
+  ol.dosc{columns:1}
+  .dalt nav,.dalt .nom small{display:none}
+  .opc button{flex:1 1 100%;text-align:left}
+}
+@media print{
+  .dalt,.ctrl,.peu,.revela,.opc,textarea.resp,.solo-web,.boto-gran{display:none!important}
+  .refs.despres{display:flex!important}
+  body{background:#fff;font-size:11pt}
+  main{max-width:none;padding:0}
+  .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
+}
+
+/* il·lustracions interactives (JM, 05-11): grans a la projecció, tocables, sense res de fora */
+.int{margin:.4em 0 .6em;padding:.6em .8em;border:2px solid var(--linia);border-radius:.8em;background:#fff}
+.int svg{display:block;width:100%;height:auto;max-height:340px;margin:0 auto}
+.int button{font:inherit;font-weight:700;border:2px solid var(--tinta);background:var(--paper);color:var(--tinta);border-radius:.55em;padding:.3em .8em;cursor:pointer}
+.int button:hover{background:#fff2c2}
+.int button.on{background:var(--tinta);color:#fff}
+.int-peu{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5em;margin-top:.35em}
+.int-msg{margin:0;font-size:1.05em;min-height:1.5em}
+.int-nota{margin:.2em 0 0;font-size:.72em;color:var(--suau)}
+.triangle .costat{cursor:pointer;outline:none}
+.triangle .hit{stroke:transparent;stroke-width:46;fill:transparent}
+.triangle line.ln{stroke:var(--c);stroke-width:12;stroke-linecap:round;transition:opacity .4s,stroke-dasharray .4s}
+.triangle circle.ln{fill:#fff7e6;stroke:var(--c);stroke-width:5;transition:opacity .4s}
+.triangle .et{font-weight:800;font-size:30px;fill:var(--c)}
+.triangle .sub{font-size:21px;fill:var(--suau)}
+.triangle .mini{font-weight:800;font-size:15px;fill:#8a5a00;letter-spacing:.04em}
+.triangle .costat:hover line.ln,.triangle .costat:focus line.ln,.triangle .costat.sel line.ln{stroke-width:20}
+.triangle .costat.sel .et{text-decoration:underline}
+.triangle .costat.fora line.ln{opacity:.25;stroke-dasharray:4 22}
+.triangle .costat.fora .et,.triangle .costat.fora .sub{opacity:.35;text-decoration:line-through}
+.triangle .centre.fora circle.ln{opacity:.3}
+.flama .f1{fill:#e8590c}.flama .f2{fill:#ffd43b}
+.flama{transform-origin:0 40px;animation:flama 1.1s ease-in-out infinite alternate;transition:transform .9s ease-in,opacity .9s}
+@keyframes flama{from{transform:scale(1,1)}to{transform:scale(1.06,.94) skewX(-2deg)}}
+.apagat .flama{animation:none;transform:scale(0);opacity:0}
+.fum circle{fill:#9a948a;opacity:0}
+.apagat .fum circle{animation:fum 1.8s ease-out .3s forwards}
+.apagat .fum circle:nth-child(2){animation-delay:.6s}.apagat .fum circle:nth-child(3){animation-delay:.9s}
+@keyframes fum{0%{opacity:0;transform:translateY(0)}30%{opacity:.6}100%{opacity:0;transform:translateY(-40px)}}
+.tensio .tn-ctrl{display:flex;flex-wrap:wrap;gap:.5em 1.4em;margin:.1em 0 .5em}
+.tensio .tn-ctrl>div{display:flex;flex-wrap:wrap;align-items:center;gap:.35em}
+.tn-l{font-weight:800;font-size:.8em;text-transform:uppercase;letter-spacing:.06em;color:var(--suau);margin-right:.2em}
+.tn-fila{display:grid;grid-template-columns:minmax(7em,11em) 1fr;align-items:center;gap:.6em;margin:.35em 0}
+.tn-nom{font-weight:700;font-size:.9em}
+.tn-barra{position:relative;height:1.3em;border-radius:99px;background:#eee6d6;overflow:visible}
+.tn-barra i{position:absolute;left:0;top:0;bottom:0;border-radius:99px;transition:width .6s,background .6s}
+.tn-barra.r i{background:var(--blau)}
+.tn-barra.i i{background:var(--verd)}
+.tn-barra.i.ko i{background:var(--vermell)}
+.tn-lim{position:absolute;left:50%;top:-.35em;bottom:-.35em;border-left:3px dashed var(--tinta);font-style:normal}
+.tn-lim small{position:absolute;left:.3em;top:100%;white-space:nowrap;font-size:.7em;font-weight:700;margin-top:.1em}
+.tn-fil{max-height:3.2em!important;margin:1.2em 0 .2em}
+.tn-fil line{stroke:#bdb39d;stroke-width:6}
+.tn-fil .e{fill:var(--mostassa)}
+.tn-fil.ko .e{fill:var(--vermell)}
+.tn-msg{font-weight:800}
+.tn-msg.ok{color:var(--verd)}.tn-msg.ko{color:var(--vermell)}
+.tn-regla{margin:.2em 0 0;font-weight:700}
+.tn-ohm{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.2em .7em;margin:.2em 0 .5em;padding:.4em .6em;background:#fff;border:2px solid #e3dccb;border-radius:.7em}
+.tn-t{display:flex;flex-direction:column;align-items:center;line-height:1}
+.tn-t b{font-family:Georgia,serif;font-weight:800;line-height:1;transition:font-size .5s,color .5s}
+.tn-t small{font-size:.72em;font-weight:700;color:var(--suau);margin-top:.1em}
+.tn-t .tn-val{font-size:.8em;font-weight:800;margin-top:.1em;min-height:1.1em}
+.tn-t.tv b{color:var(--mostassa)}.tn-t.tr b{color:var(--blau)}.tn-t.ti b{color:var(--verd)}.tn-t.ti.ko b,.tn-t.ti.ko .tn-val{color:var(--vermell)}
+.tn-op{font-size:2.4em;font-weight:800}
+.tn-frac{display:flex;flex-direction:column;align-items:center}
+.tn-raya{display:block;width:100%;min-width:6em;height:4px;background:var(--tinta);margin:.15em 0;border-radius:2px}
+.tn-frase{flex-basis:100%;text-align:center;margin:.15em 0 0;font-weight:700;font-size:.9em}
+.extintor .ganxo{fill:#8c8578}
+.extintor .cos{fill:#c53a26}.extintor .etq{fill:#fff;opacity:.85}.extintor .cap{fill:#3b3b3b}
+.extintor .palanca{transform-box:fill-box;transform-origin:0% 50%;transition:transform .4s}
+.extintor .palanca rect{fill:#555}
+.extintor .anella{transition:transform .6s,opacity .6s}
+.extintor .anella circle{fill:none;stroke:#ffd43b;stroke-width:6}.extintor .anella line{stroke:#ffd43b;stroke-width:5}
+.extintor .manega{fill:none;stroke:#222;stroke-width:9;stroke-linecap:round}
+.extintor .raig{opacity:0;transition:opacity .4s}.extintor .raig path{fill:#e9eef5;stroke:#b9c6d6;stroke-width:2}
+.extintor .terra{stroke:#8c8578;stroke-width:4}
+.extintor .ext{transition:transform .7s}
+.extintor .foc .flama{transform-origin:0 40px}
+.extintor.s1 .ext{transform:translate(150px,20px)}
+.extintor.s2 .anella{transform:translate(60px,-90px) rotate(40deg);opacity:0}
+.extintor.s3 .palanca{transform:rotate(14deg)}
+.extintor.s4 .raig{opacity:.95}
+.extintor.s4 .foc .flama{animation:none;transform:scale(0);opacity:0;transition-delay:.4s}
+.ex-passos{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em;margin:.4em 0 0}
+.ex-passos button{display:flex;align-items:center;gap:.4em;text-align:left;line-height:1.2}
+.ex-passos button b{flex:none;display:inline-flex;align-items:center;justify-content:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--tinta);color:#fff}
+.ex-passos button.fet{background:var(--verdclar);border-color:var(--verd)}
+.ex-passos button.fet b{background:var(--verd)}
+.ex-passos button.mal{animation:sacseja .4s}
+@keyframes sacseja{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.cl-q{margin:0 0 .3em;font-weight:800}
+.cl-carta{display:flex;align-items:center;justify-content:center;gap:.6em;min-height:3.2em;margin:.2em 0 .5em;padding:.4em;border-radius:.6em;background:#f6efe1}
+.cl-x{font-size:1.6em}
+.cl-n{font-size:.8em;color:var(--suau);font-variant-numeric:tabular-nums}
+.cl-grups{display:grid;grid-template-columns:repeat(auto-fit,minmax(6.5em,1fr));gap:.4em}
+.cl-grups button{display:flex;flex-direction:column;align-items:center;padding:.35em .3em}
+.cl-grups button b{font-size:1.5em;line-height:1.1}
+.cl-grups button small{font-weight:600;color:var(--suau)}
+.cl-grups button.be{background:var(--verd);border-color:var(--verd);color:#fff}
+.cl-grups button.be small{color:#fff}
+.cl-grups button.mal{background:var(--vermell);border-color:var(--vermell);color:#fff;animation:sacseja .4s}
+.cl-grups button.mal small{color:#fff}
+.cl-msg.ok{color:var(--verd);font-weight:800}.cl-msg.ko{color:var(--vermell);font-weight:800}
+body.proj .int{font-size:1em;padding:.5em 1em}
+body.proj .int svg{max-height:44vh}
+body.proj .p:has(.voto) .int svg{max-height:30vh}
+body.proj .extintor svg{max-height:36vh}
+body.proj .int-msg{font-size:1.15em}
+body.proj .pas.vist:not(.ara) .int{opacity:1}
+@media (max-width:700px){.ex-passos{grid-template-columns:1fr 1fr}.tn-fila{grid-template-columns:1fr}.triangle .et{font-size:34px}}
+@media print{.int button,.int-peu,.tn-ctrl{display:none!important}}
+</style>
+</head>
+<body>
+
+<header class="dalt">
+  <span class="nom">IPO I · Unidad 2 · Sesión 6<small>Quemado, acosado o con la espalda cargada</small></span>
+  <nav id="index"></nav>
+  <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
+  <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
+</header>
+
+<main>
+
+<section class="p" id="inicio" data-titol="Inicio">
+  <p class="kicker">Sesión 6 · una hora</p>
+  <h2>Quemado, acosado o con la espalda cargada</h2>
+  <p style="font-size:1.15em">Hoy, <b>riesgos que no vienen de una máquina sino de cómo se trabaja</b>: el estrés, el burnout, el acoso y las cargas.</p>
+  <div class="cadena"><span class="fet">Químicos y biológicos (págs. 39-40): lunes 9</span><i>→</i><span class="avui">Estrés o burnout (págs. 41-42)</span><i>→</i><span class="avui">El acoso: cada uno, dos casos (pág. 43)</span><i>→</i><span class="avui">Cargas y TME (págs. 44-45)</span><i>→</i><span>Especialidades, señales y la noticia: lunes 16</span></div>
+  <div class="plan"><div><b>Hoy</b><ol start="1"><li>Dos preguntas para recordar (lunes 9 y viernes 6) <small>· 4 min</small></li><li>Estrés o burnout, con un vídeo de 2 minutos (págs. 41-42) <small>· 11 min</small></li><li>Cada uno solo: dos casos de acoso con la tabla 2.18 (pág. 43) <small>· 14 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>Ergonómicos: los trastornos musculoesqueléticos y cómo se maneja una carga (págs. 44-45) <small>· 10 min</small></li><li>Para leer: pantallas, fatiga, adicción al trabajo, insatisfacción y tecnoestrés (págs. 42-45) <small>· 3 min</small></li><li>Si sobra tiempo: las cuatro especialidades de la prevención (pág. 48) <small>· ➕ si da tiempo</small></li></ol><p style="margin:8px 0 0"><b>Para salir:</b> 2 preguntas en voz alta.</p></div></div>
+  <h3 class="noproj">Cómo usar esta página</h3>
+  <p class="noproj">En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
+  <div class="refs"><span class="ref libro">Libro · págs. 41-45 (si da tiempo, 48)</span></div>
+    <p class="nota noproj">Azul: el libro. Amarillo: lo que escribes en esta página.</p>
+  <div class="clau"><b>Libro: <span style="white-space:nowrap">págs. 41-45</span></b> (sin libro, el del compañero de al lado). <b>Entra en el examen:</b> estrés o burnout, y en qué se distinguen · las tres clases de acoso (tabla 2.18) · qué son los TME · qué va primero con una carga y cómo se levanta (figura 2.17). <b>Para leer, no entra:</b> el vocabulario del tecnoestrés · la adicción al trabajo · la insatisfacción · la fatiga · el trabajo con pantallas (figura 2.16, ya lo visteis en la unidad 1). Repasa en <b>joanmiquel89.github.io/aula</b>.</div>
+</section>
+
+<section class="p" id="entrar" data-titol="1 · Para entrar">
+  <p class="kicker">1 · Lo del lunes 9 y el viernes 6 · para empezar</p>
+  <h2>Dos preguntas, sin mirar</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 40 · tabla 2.15</span><span class="ref libro">Libro · pág. 31 · figura 2.3</span></div>
+  <style>
+/* 23-10 (JM): soluciones con el procedimiento, paso a paso y visuales */
+.pasos{list-style:none;counter-reset:p;margin:.35em 0 .5em;padding:0}
+.pasos>li{counter-increment:p;position:relative;padding:.12em 0 .32em 2em;line-height:1.35}
+.pasos>li::before{content:counter(p);position:absolute;left:0;top:.12em;width:1.45em;height:1.45em;border-radius:50%;background:var(--verd);color:#fff;font-weight:800;font-size:.85em;display:flex;align-items:center;justify-content:center}
+.tcalc-w{overflow-x:auto;margin:.3em 0 .5em}
+.tcalc{width:100%;border-collapse:collapse;font-size:.86em;background:#fff}
+.tcalc th{background:#efe9dc;text-align:left;font-size:.78em;text-transform:uppercase;letter-spacing:.04em}
+.tcalc th,.tcalc td{border:1px solid #bdb39d;padding:.25em .45em;vertical-align:top}
+.tcalc td.ok{background:#f3faf6;color:#1f7a4d;font-weight:800}
+.tcalc td.ko{background:#fbeeec;color:#b3261e;font-weight:800}
+.tcalc tr.marca td{font-weight:700}
+.formula{display:inline-block;background:#fff;border:1.5px dashed #bdb39d;border-radius:.4em;padding:.05em .5em;margin:.1em 0;font-weight:700}
+/* 07-11: vídeo de YouTube dentro de la pantalla (16:9, cabe en 1280×720) */
+.yt{height:46vh;max-height:52vw;aspect-ratio:16/9;max-width:100%;margin:.4em auto .2em}
+.yt iframe{width:100%;height:100%;border:0;border-radius:.4em;background:#000}
+</style>
+<div class="preg"><span class="n">1</span> En un laboratorio veterinario se trabaja con una bacteria que puede causar una enfermedad, pero es poco probable que se propague y hay tratamiento. ¿En qué grupo va? <span class="encls">(Caso inventado)</span> <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>Grupo 2</span></div>
+<ol class="pasos"><li><b>¿Puede enfermar?</b> Sí: ya no es el grupo 1.</li><li><b>¿Se propaga?</b> Es poco probable: no es el 3 ni el 4.</li><li><b>Grupo 2</b> (tabla 2.15): puede causar enfermedad, poco probable que se propague, y generalmente hay tratamiento.</li></ol>
+<div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 40 · tabla 2.15</span></div></div></div>
+<div class="preg"><span class="n">2</span> Un técnico revisa el cableado bajo el falso suelo de una sala de servidores, que está seca, con una lámpara portátil. ¿Qué tensión de seguridad debería tener la lámpara, como máximo? <span class="encls">(Caso inventado)</span> <button class="revela">Ver la respuesta</button><div class="sol"><div class="resp"><span>50 V</span></div>
+<ol class="pasos"><li><b>¿Cómo es el sitio?</b> Seco.</li><li><b>Figura 2.3:</b> 50 V en locales secos; 24 V en emplazamientos húmedos o mojados, como el túnel de lavado.</li><li><b>Por qué cambia:</b> con la piel seca el cuerpo resiste más y pasa menos corriente.</li></ol>
+<div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 31 · figura 2.3 · pág. 30 · «Sabías que…»</span></div></div></div>
+</section>
+
+<section class="p" id="psico-video" data-titol="2 · Estrés o burnout">
+  <p class="kicker">2 · Vídeo · 2 minutos · Mutua Balear (10-10-2024)</p>
+  <h2>¿Te suena alguna?</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 41 · tabla 2.17, «Factores de riesgo psicosocial y consecuencias»</span></div>
+  <div class="clau">Mientras lo ves: apunta <b>dos situaciones</b> del vídeo que te podrían pasar en un trabajo de informática.</div>
+<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/yGRLr8mSlpA?rel=0" title="Riesgos psicosociales en la empresa · Mutua Balear" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+<p class="nota">Mutua Balear, «Riesgos psicosociales en la empresa» (YouTube, 10-10-2024, 2 min). Si no se ve aquí: <a href="https://www.youtube.com/watch?v=yGRLr8mSlpA" target="_blank" rel="noopener">verlo en YouTube ↗</a></p>
+<div class="pas"><p class="si"><i>✓</i><span>Interrupciones, horarios imprevisibles, no desconectar nunca…</span></p><p class="nota">Varios están en la tabla 2.17 (carga, horarios, comunicación, exigencias emocionales); todos vienen de cómo se organiza el trabajo.</p></div>
+</section>
+
+<section class="p" id="burnout">
+  <p class="kicker">2 · Libro, pág. 42 · caso práctico resuelto 2.4 · con el libro cerrado (la solución está debajo)</p>
+  <h2>¿Quién está quemado? ¿Y Nuria?</h2>
+  <div class="caso"><p><b>Martín</b> está ansioso por un plazo ajustado, pero recupera la energía al acabar el proyecto. <b>Sonia</b>, tras meses de mucha carga, tiene un cansancio que no se le va, ha perdido la motivación y trata a la gente con frialdad, como si fueran objetos. <b>Nuria</b> está tensa por conflictos con sus compañeros, pero rinde igual que antes.</p></div>
+<div class="voto" data-ok="b"><p class="q">Empieza por la más difícil: ¿qué le pasa a <b>Nuria</b>?</p><div class="opc"><button data-v="a">Burnout: lleva tiempo tensa en el trabajo</button><button data-v="b">Estrés: es una presión pasajera</button><button data-v="c">Acoso: tiene conflictos con sus compañeros</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Estrés</span></p>
+<p class="nop"><i>✗</i><span>Burnout: tensión no es agotamiento; ella rinde igual</span></p>
+<p class="nop"><i>✗</i><span>Acoso: un conflicto no es acoso (ahora lo vemos: sistemático y degradante)</span></p>
+<span class="ref libro">Libro · pág. 42 · caso práctico resuelto 2.4</span></div> <span class="fuente">Fuente: Libro, caso práctico resuelto 2.4 (pág. 42), adaptado.</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 42 · caso práctico resuelto 2.4</span><span class="ref libro">Libro · págs. 41-42 · «Estrés laboral» y «Síndrome de burnout»</span></div>
+</section>
+
+<section class="p" id="burnout-2">
+  <p class="kicker">2 · Libro, págs. 41-42 · la solución, 2 de 2</p>
+  <h2>Estrés y burnout no son lo mismo</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 41 · «Estrés laboral» · pág. 42 · «Síndrome de burnout» y figura 2.12</span></div>
+  <div class="pas"><div class="tres"><div><b>Martín · estrés</b><span>una presión con un final: al acabar, se recupera</span></div><div><b>Nuria · estrés</b><span>tensión, pero sin desgaste: rinde igual</span></div><div><b>Sonia · burnout</b><span>meses de carga: un agotamiento que no se va con un descanso</span></div></div></div>
+<div class="pas"><div class="fil escala"><span>Entusiasmo</span><i>→</i><span>Estancamiento</span><i>→</i><span>Frustración</span><i>→</i><span>Apatía</span><i>→</i><span>Quemado</span></div><p class="nota">El burnout llega poco a poco, por fases (figura 2.12).</p></div>
+<div class="pas"><div class="idea"><b>Y se previene primero en la empresa</b><span>repartir la carga, comunicación, trabajo en equipo; después, lo que hace la persona (pág. 42)</span></div></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Nuria: estrés. La quemada es Sonia.</b> El <b>estrés laboral</b> es la respuesta del cuerpo y de la mente de una persona que intenta adaptarse a unas presiones cuando cree que no tiene recursos suficientes para afrontarlas (pág. 41). El <b>burnout</b> o síndrome de estar quemado es una respuesta a un estrés <b>crónico</b>: un agotamiento físico, mental y emocional que llega poco a poco (pág. 42), por fases (figura 2.12: entusiasmo, estancamiento, frustración, apatía y quemado).
+<ol class="pasos"><li><b>Martín:</b> estrés. Hay presión (el plazo), pero al acabar recupera la energía: no hay agotamiento crónico.</li><li><b>Sonia:</b> burnout. Meses de carga, un cansancio que no se va, sin motivación y tratando a la gente con frialdad (despersonalización): desgaste prolongado.</li><li><b>Nuria:</b> estrés. Hay tensión, pero su rendimiento no ha bajado: no hay señales de un daño crónico. Y un conflicto con compañeros no es acoso: el acoso es una conducta agresiva, sistemática y que degrada a la persona (pág. 43).</li></ol>
+Para distinguirlos, tres preguntas: ¿cuánto dura?, ¿hay desgaste?, ¿se recupera al acabar el problema? Las medidas, primero en la organización y entre compañeros, antes que sobre la persona (pág. 42).<span class="ref libro">Libro · págs. 41-42 · «Estrés laboral», «Síndrome de burnout», figura 2.12 y caso práctico resuelto 2.4</span></div></details>
+</section>
+
+<section class="p" id="acoso" data-titol="3 · El acoso">
+  <p class="kicker">3 · Cada uno solo · caso práctico propuesto 2.11 y actividad final 2.19 del libro · unos nueve minutos</p>
+  <h2>Verónica y Marta</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 43 · caso práctico propuesto 2.11 y tabla 2.18, «Clases de acoso»</span><span class="ref libro">Libro · pág. 54 · actividad final 2.19</span><span class="ref ficha">Apúntalo en la libreta o en el móvil</span></div>
+  <div class="tres"><div><b>Verónica</b><span>Alfonso, su supervisor, no deja de hacerle comentarios humillantes sobre cómo trabaja y sobre su físico. Ella se ha quejado y la empresa no hace nada. <i>(Caso 2.11, pág. 43)</i></span></div><div><b>Marta</b><span>Jaime, un compañero, le hace comentarios y propuestas no deseadas sobre su aspecto físico, y el ambiente se vuelve incómodo. <i>(Final 2.19, pág. 54; no es la Marta de la unidad 1)</i></span></div><div><b>Tú</b><span>Con la <b>tabla 2.18</b> (pág. 43): discriminatorio, sexual o psicológico.</span></div></div>
+<div class="clau"><ol>
+<li>Para cada una, <b>qué tipo de acoso</b> es, con la tabla 2.18.</li>
+<li>Para cada una, <b>el dato del caso que lo decide</b>, en una frase.</li>
+<li>Verónica: <b>dos efectos</b> que puede tener en su salud (tabla 2.17, pág. 41). Al final, votamos. Hoy no cuenta.</li>
+</ol></div>
+</section>
+
+<section class="p" id="acoso-veronica">
+  <p class="kicker">3 · Corrección · caso práctico propuesto 2.11</p>
+  <h2>¿Qué acoso sufre Verónica?</h2>
+  <div class="voto" data-ok="b"><p class="q">Su supervisor no para de hacerle comentarios que la ridiculizan, sobre cómo trabaja y sobre su físico. Con la tabla 2.18: ¿qué acoso es?</p><div class="opc"><button data-v="a">Sexual: habla de su físico</button><button data-v="b">Psicológico: es su jefe y no para</button><button data-v="c">Discriminatorio: es su supervisor y tiene poder sobre ella</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Psicológico (mobbing)</span></p>
+<p class="nop"><i>✗</i><span>Sexual: hablar del físico no lo hace sexual si no tiene ese carácter</span></p>
+<p class="nop"><i>✗</i><span>Discriminatorio: el poder es del psicológico, no una característica de la lista</span></p>
+<span class="ref libro">Libro · pág. 43 · tabla 2.18 y «Importante»</span></div> <span class="fuente">Fuente: Libro, caso práctico propuesto 2.11 (pág. 43), adaptado.</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 43 · tabla 2.18 y «Importante»</span></div>
+</section>
+
+<section class="p" id="acoso-marta">
+  <p class="kicker">3 · Corrección · actividad final 2.19</p>
+  <h2>¿Y Marta?</h2>
+  <div class="voto" data-ok="c"><p class="q">Jaime le hace a Marta comentarios y propuestas sobre su aspecto que ella no quiere. ¿Qué es?</p><div class="opc"><button data-v="a">Psicológico: el ambiente se vuelve incómodo</button><button data-v="b">Nada todavía: tendría que repetirse</button><button data-v="c">Sexual: son propuestas sobre su aspecto</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Sexual: propuestas no deseadas</span></p>
+<p class="nop"><i>✗</i><span>Psicológico: el ambiente incómodo es el efecto, no la clase</span></p>
+<p class="nop"><i>✗</i><span>Repetirse: el sexual no lo necesita; una vez puede bastar</span></p>
+<span class="ref libro">Libro · pág. 43 · tabla 2.18</span></div> <span class="fuente">Fuente: Libro, actividad final 2.19 (pág. 54), adaptada.</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 43 · tabla 2.18, fila «Acoso sexual»</span></div>
+</section>
+
+<section class="p" id="acoso-2" data-min="9">
+  <p class="kicker">3 · Corrección · la solución, 2 de 2</p>
+  <h2>Tres clases y tres preguntas</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 43 · tabla 2.18, «Importante» y «Sabías que…»</span></div>
+  <div class="pas"><div class="tres"><div><b>Discriminatorio</b><span>¿va contra una característica: discapacidad, edad, origen, afiliación sindical, orientación sexual?</span></div><div><b>Sexual</b><span>¿es de carácter sexual y no deseado? Una vez puede bastar</span></div><div><b>Psicológico (mobbing)</b><span>¿es reiterado, durante tiempo, y degrada a la persona?</span></div></div></div>
+<div class="pas"><div class="idea"><b>Verónica: qué le puede pasar</b><span>estrés mantenido, ansiedad, baja autoestima, insomnio; a la larga, depresión (tabla 2.17)</span></div></div>
+<div class="pas"><p class="nota">Y la empresa, que no hace nada, falla: tiene que proteger la salud «en todos los aspectos relacionados con el trabajo» (LPRL, art. 14.2). El ciberacoso es lo mismo, con el móvil o internet.</p></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Verónica, psicológico; Marta, sexual.</b> La tabla 2.18 (pág. 43) da tres clases: <b>discriminatorio</b> (por discapacidad, edad, origen étnico, afiliación sindical u orientación sexual), <b>sexual</b> (comportamiento no deseado, verbal, no verbal o físico, de carácter sexual) y <b>psicológico o mobbing</b> (violencia psicológica degradante, reiterada y prolongada).
+<ol class="pasos"><li><b>Verónica:</b> su supervisor (hay desigualdad), comentarios humillantes (conducta agresiva), que no paran (sistemáticos) y que dañan su salud: los cuatro elementos del recuadro «Importante». Que hable de su físico no lo convierte en sexual: humilla, no tiene carácter sexual. Efectos: estrés mantenido, ansiedad, baja autoestima, insomnio y, a la larga, depresión (tabla 2.17).</li><li><b>Marta:</b> propuestas no deseadas sobre su aspecto: carácter sexual y no deseado. El sexual no tiene que repetirse: según el Convenio 190 de la OIT que cita el libro, basta con que ocurra una vez. No es discriminatorio (no se ataca ninguna característica de la lista).</li></ol>
+La empresa de Verónica no atiende sus quejas: eso agrava el caso. Debe protegerla (LPRL, art. 14.2), corregir la situación, conviene que tenga un protocolo y un canal para denunciar, y revisar la evaluación de riesgos, porque ya hay un daño. El <b>ciberacoso</b> es el mismo acoso hecho con las tecnologías («Sabías que…», pág. 43).<span class="ley">LPRL · art. 14.2</span> <span class="ref libro">Libro · pág. 43 · tabla 2.18, «Importante», «Sabías que…» y caso práctico propuesto 2.11 · pág. 54 · actividad final 2.19</span></div></details>
+</section>
+
+<section class="p" id="alfredo" data-titol="4 · Cargas y TME">
+  <p class="kicker">4 · Libro, pág. 45 · caso práctico propuesto 2.12 · con la figura 2.17</p>
+  <h2>Alfredo y el bulto</h2>
+  <div class="caso"><p><b>Alfredo</b> (no el de la unidad 1) lleva un bulto grande y pesado, cogido de un solo lado, por un pasillo estrecho. Pierde un poco el equilibrio y nota molestias en la espalda y el hombro.</p></div>
+<div class="voto" data-ok="b"><p class="q">Según la ley, ¿qué tendría que haberse hecho <b>antes que nada</b>?</p><div class="opc"><button data-v="a">Que doblara las rodillas y lo levantara con la espalda recta</button><button data-v="b">Que no lo llevara a pulso: un carro o la ayuda de otra persona</button><button data-v="c">Que llevara una faja para la espalda</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · No llevarlo a pulso, si se puede</span></p>
+<p class="nop"><i>✗</i><span>La técnica: importa, pero va después de evitar la carga</span></p>
+<p class="nop"><i>✗</i><span>La faja: no evita cargar; va después</span></p>
+<span class="ley">RD 487/1997 · art. 3.1</span> <span class="ref libro">Libro · pág. 45 · figura 2.17</span></div> <span class="fuente">Fuente: Libro, caso práctico propuesto 2.12 (pág. 45), adaptado.</span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 45 · caso práctico propuesto 2.12</span><span class="ref libro">Libro · pág. 45 · figura 2.17, «Manipulación manual de cargas»</span></div>
+</section>
+
+<section class="p" id="alfredo-2">
+  <p class="kicker">4 · Libro, págs. 44-45 · la solución, 2 de 2</p>
+  <h2>Primero, no cargar; después, cargar bien</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 44 · figura 2.15 · pág. 45 · figura 2.17, «Importante» y caso práctico propuesto 2.12</span></div>
+  <div class="pas"><div class="fil escala"><span>① Evitarla: carro, transpaleta, otra persona</span><i>→</i><span>② Si no se puede: otra ruta, partir la carga</span><i>→</i><span>③ Levantarla bien: pegada al cuerpo, piernas flexionadas, espalda recta</span></div><span class="ley">RD 487/1997 · arts. 3.1 y 3.2</span></div>
+<div class="pas"><div class="gran"><b>25 kg</b><span>hombres de 20 a 45 años</span></div><div class="gran"><b>15 kg</b><span>mujeres de menos de 20 o más de 45</span></div><p class="nota">Lo da el libro (ISO, pág. 45). La ley no fija ningún peso.</p></div>
+<div class="pas"><div class="idea"><b>Lo que le puede pasar: TME</b><span>trastornos musculoesqueléticos: dolor y lesiones de músculos, tendones y articulaciones (espalda, cuello, hombro, codo, muñeca; figura 2.15)</span></div></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Antes que nada, no llevarlo a pulso.</b> Así se resuelve:
+<ol class="pasos"><li><b>Qué ha hecho mal:</b> mover a mano algo grande y pesado en lugar de usar un medio mecánico; cogerlo de un solo lado (la carga queda lejos del tronco y le obliga a torcerse); pasar por un espacio estrecho; y hacerlo solo.</li><li><b>Lo que manda la ley, por orden</b> (RD 487/1997): primero, <b>evitar</b> la manipulación manual con medios mecánicos, como un carro o una transpaleta (art. 3.1); si no se puede, <b>organizar</b> el trabajo y dar medios para que el riesgo sea el menor posible (art. 3.2), y formar e informar (art. 4).</li><li><b>Si hay que cargarlo:</b> la técnica de la figura 2.17: pies firmes y separados, flexionar caderas y rodillas, la carga pegada al cuerpo y con las dos manos, levantarse con las piernas y la espalda recta, sin girar el tronco. Mejor empujar que arrastrar.</li></ol>
+Lo que le puede pasar son <b>trastornos musculoesqueléticos (TME)</b>: dolor y lesiones de músculos, tendones, articulaciones y nervios (figura 2.15: cuello, espalda, hombro, codo, muñeca); con las cargas, sobre todo la espalda (lumbago, ciática, hernia discal). Como ya nota molestias, tiene que decirlo (LPRL, art. 29.2) y la empresa, revisar la evaluación. Las cifras de 25 y 15 kg son de una norma técnica que cita el libro (ISO 11228-1, «Importante», pág. 45); la ley española no fija ningún peso. Y ojo: los 10 kg de pie y 3 kg sentado del mismo recuadro son para <b>embarazadas</b>.<span class="ley">RD 487/1997 · arts. 3.1, 3.2 y 4 · LPRL · art. 29.2</span> <span class="ref libro">Libro · pág. 44 · figura 2.15 · pág. 45 · figura 2.17, «Importante» y caso práctico propuesto 2.12</span></div></details>
+</section>
+
+<section class="p" id="leelo" data-titol="5 · Para leer">
+  <p class="kicker">5 · ✂ Para leer, no entra · libro, págs. 42-45</p>
+  <h2>Cinco cosas, en un minuto</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 42 · «Vocabulario» · pág. 43 · figuras 2.13 y 2.14 · págs. 44-45 · figuras 2.16 y 2.18</span></div>
+  <div class="cuadro4"><div><h4>Tecnoestrés</h4><p>y tecnofatiga</p><small>el estrés y el cansancio de usar las TIC; nomofobia: miedo a estar sin el móvil</small></div><div><h4>Adicción al trabajo</h4><p>no poder parar</p><small>lo que cuenta es la compulsión, no las horas</small></div><div><h4>Insatisfacción</h4><p>malestar</p><small>monotonía, tareas sin sentido, malas relaciones</small></div><div><h4>Fatiga</h4><p>física o mental</p><small>pasajera: se recupera descansando</small></div></div>
+<div class="clau">Y las pantallas (figura 2.16, pág. 44): lo visteis en la unidad 1. Para leer: no entra en el examen.</div>
+</section>
+
+<section class="p tallsessio" id="tall" data-titol="✂ Hasta aquí">
+  <p class="kicker">✂ Fin de la sesión de hoy</p>
+  <h2>Hasta aquí, la de hoy</h2>
+  <div class="tisora"><span>hoy</span><i>✂</i><span>lunes 16</span></div>
+  <p>Si sobra tiempo, seguimos con el principio de lo que toca lunes 16. Lo que hagamos aquí, la próxima sesión no lo repite.</p>
+</section>
+
+<section class="p dema" id="especialidad" data-titol="6 · ➕ Especialidades">
+  <p class="cinta">Esto ya es de lunes 16</p>
+  <p class="kicker">6 · ➕ Si da tiempo · Libro, pág. 48 · tabla 2.19, «Especialidades preventivas»</p>
+  <h2>¿Quién se ocupa del ruido del taller?</h2>
+  <div class="voto" data-ok="b"><p class="q">Vuelve el taller de Lorena, con sus 88 dB(A). En la tabla 2.19 (pág. 48) hay cuatro especialidades. ¿De cuál es cosa ese ruido? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Seguridad en el trabajo: es un riesgo del taller</button><button data-v="b">Higiene industrial: mide y baja el ruido</button><button data-v="c">Medicina del trabajo: el daño es en el oído</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Higiene industrial</span></p>
+<p class="nop"><i>✗</i><span>Seguridad: esa es para los accidentes (golpes, caídas, descargas)</span></p>
+<p class="nop"><i>✗</i><span>Medicina: vigila la salud de la persona, no mide el ruido</span></p>
+<div class="idea"><b>Higiene industrial</b><span>contaminantes físicos, químicos y biológicos que causan enfermedades</span></div>
+<span class="ley">RD 39/1997 · art. 34.c</span> <span class="ref libro">Libro · pág. 48 · tabla 2.19</span></div></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 48 · tabla 2.19</span></div>
+</section>
+
+<section class="p dema" id="especialidad-3">
+  <p class="cinta">Esto ya es de lunes 16</p>
+  <p class="kicker">6 · Libro, pág. 48 · tabla 2.19</p>
+  <h2>¿Y la revisión del oído?</h2>
+  <div class="voto" data-ok="c"><p class="q">En el taller de Lorena, a quienes pasan de 85 dB(A) les hacen una revisión del oído cada pocos años. ¿Qué especialidad la hace? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Higiene industrial: es por el ruido</button><button data-v="b">Ergonomía: es por cómo está el puesto</button><button data-v="c">Medicina del trabajo: es una prueba médica</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Medicina del trabajo</span></p>
+<p class="nop"><i>✗</i><span>Higiene mide y controla el ruido; la revisión es de la persona</span></p>
+<p class="nop"><i>✗</i><span>Ergonomía: el ruido no es del diseño del puesto</span></p>
+<span class="ref libro">Libro · pág. 48 · tabla 2.19</span></div></div></div>
+
+
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 48 · tabla 2.19</span></div>
+</section>
+
+<section class="p dema" id="especialidad-2">
+  <p class="cinta">Esto ya es de lunes 16</p>
+  <p class="kicker">6 · Libro, pág. 48 · la solución</p>
+  <h2>¿Qué daño quieres evitar?</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 48 · tabla 2.19</span></div>
+  <div class="pas"><div class="cuadro4"><div><h4>Seguridad</h4><p>accidentes</p><small>un cable suelto</small></div><div><h4>Higiene industrial</h4><p>contaminantes</p><small>ruido, polvo, virus</small></div><div><h4>Ergonomía y psicosociología</h4><p>puesto y organización</p><small>la silla, el estrés</small></div><div><h4>Medicina del trabajo</h4><p>la salud</p><small>las revisiones</small></div></div></div>
+
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Higiene industrial, y la revisión, medicina del trabajo.</b> La prevención la hacen cuatro especialidades (RD 39/1997, art. 34.c; tabla 2.19, pág. 48). Para saber cuál toca, pregunta qué daño quieres evitar:
+<ol class="pasos"><li><b>Un accidente</b> (golpe, caída, descarga): <b>seguridad en el trabajo</b>.</li><li><b>Una enfermedad por un contaminante</b> (ruido, polvo, vapores, virus): <b>higiene industrial</b>: los identifica, los mide y los controla.</li><li><b>Un daño por el puesto o por cómo se organiza el trabajo</b> (la espalda, la muñeca, el estrés): <b>ergonomía y psicosociología aplicada</b>.</li><li><b>Vigilar la salud de la persona</b> (las revisiones médicas, como la del oído): <b>medicina del trabajo</b>.</li></ol>
+Os harán falta más adelante: un servicio de prevención tiene que tener varias de ellas.<span class="ley">RD 39/1997 · art. 34.c y anexo VI</span> <span class="ref libro">Libro · pág. 48 · tabla 2.19</span></div></details>
+</section>
+
+<section class="p" id="cierre" data-titol="Cierre">
+  <p class="kicker">Cierre · 2 preguntas para salir</p>
+  <h2>Para salir</h2>
+  
+  <p>Si sabes responderlas en voz alta, has entendido la sesión:</p>
+  <ol><li>A una técnica de 58 años su jefe la deja sin proyectos y repite en las reuniones que «a su edad ya no aprende cosas nuevas». ¿Qué clase de acoso es? <span class='encls'>(Caso inventado)</span></li><li>Un técnico de soporte nota hormigueo y dolor en la muñeca desde hace meses. Si viene del trabajo, ¿de qué familia de riesgos es ese daño? <span class='encls'>(Caso inventado)</span></li></ol>
+  <p class="nota">Próxima sesión (lunes 16 de noviembre): las especialidades de la prevención, las señales y la noticia que cierra la unidad (libro, págs. 48-51).</p>
+</section>
+
+<div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
+</main>
+
+<div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="passos"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
+
+<script>
+(function(){
+  "use strict";
+  var TX = {"clau": "ipo1-u2-u2-sesion-6-v1", "la_classe": "La clase: ", "dits": "¡Dedos!", "temps": "⏱ ¡Tiempo!", "proj": "▶ Proyectar", "surt": "✕ Salir", "esborra": "¿Borrar los votos y el marcador para empezar con otro grupo?", "hash": "proyectar", "escriu_nom": "Escribe tu nombre y apellidos antes de descargar.", "escriu_nom_alert": "Escribe tu nombre y apellidos en la primera pantalla y vuelve a pulsar el botón.", "cap_resp": "Sesión 6 · Quemado, acosado o con la espalda cargada · mis respuestas (IPO I, unidad 2)", "qui": "Alumno/a", "grup": "Grupo", "amb_qui": "Con quién he trabajado", "ningu": "(nadie)", "data": "Fecha", "sense_resp": "(sin respuesta)", "fitxer": "RESPUESTAS-S6", "fet_baixa": "Hecho: se ha descargado <b>{f}</b>. Guárdalo para repasar; no se entrega.", "no_baixa": "Este navegador no ha dejado descargar el fichero."};
+  var CLAU = TX.clau;
+  var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
+  var estat = {};
+  try { estat = JSON.parse(localStorage.getItem(CLAU) || "{}") || {}; } catch (e) { estat = {}; }
+  function desa(){ try { localStorage.setItem(CLAU, JSON.stringify(estat)); } catch (e) {} }
+  if (/^https?:$/.test(location.protocol)) document.body.classList.add("web");
+  function dos(x){ return (x < 10 ? "0" : "") + x; }
+
+  /* índex */
+  var nav = document.getElementById("index");
+  pant.forEach(function(s){
+    var t = s.getAttribute("data-titol");
+    if (!t || !/^\d|^Inicio|^Cierre|^Para casa|^✂/.test(t)) return;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    if (s.classList.contains("dema") || s.classList.contains("tallsessio")) a.classList.add("dema");
+    a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
+    nav.appendChild(a);
+  });
+
+  /* votacions: la resposta (el perquè) només surt després de votar */
+  var marc = document.getElementById("marcador");
+  var encerts = 0, vots = 0;
+  function pinta(){ marc.textContent = vots ? TX.la_classe + encerts + " / " + vots : ""; }
+  document.querySelectorAll(".voto").forEach(function(v){
+    v.querySelectorAll(".opc button").forEach(function(b, i){
+      var k = document.createElement("span"); k.className = "k"; k.textContent = (i + 1) + " ";
+      b.insertBefore(k, b.firstChild);
+      b.addEventListener("click", function(){ vota(v, b); });
+    });
+  });
+  function vota(v, b){
+    if (v.classList.contains("fet")) return;
+    var ok = v.getAttribute("data-ok");
+    v.classList.add("fet");
+    b.classList.add("triat");
+    var p0 = v.querySelector(".pas"); if (p0) destapa(p0);
+    var sec = v.closest("section");   // «on ho estudies» surt quan tots els vots de la pantalla estan fets
+    if (sec && !sec.querySelector(".voto:not(.fet)")) sec.classList.add("votat");
+    if (ok) {
+      vots++;
+      if (b.getAttribute("data-v") === ok) encerts++;
+      v.querySelectorAll(".opc button").forEach(function(x){
+        if (x.getAttribute("data-v") === ok) x.classList.add("bona");
+        else if (x === b) x.classList.add("dolenta");
+      });
+      pinta();
+    }
+    encaixa();
+  }
+  function reinicia(){
+    document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
+    document.querySelectorAll(".voto").forEach(function(v){
+      v.classList.remove("fet");
+      v.querySelectorAll(".opc button").forEach(function(x){ x.classList.remove("triat","bona","dolenta"); });
+    });
+    document.querySelectorAll(".sol").forEach(function(s){ s.classList.remove("obert"); });
+    document.querySelectorAll(".pas").forEach(function(p){ p.classList.remove("vist", "ara"); });
+    encerts = 0; vots = 0; pinta();
+    if (document.body.classList.contains("proj")) mostra(i);
+  }
+
+  /* passos (JM, 28-10): projectant, cada → destapa el pas següent de la pantalla i, quan no en queden, passa a la
+     pantalla següent; ← tapa l'últim. Els punts (●●○) diuen quants en queden. Llegint sol, es veuen tots. */
+  var passosEl = document.getElementById("passos");
+  function disponibles(s){
+    return Array.prototype.filter.call(s.querySelectorAll(".pas"), function(p){ var v = p.closest(".voto"); return !v || v.classList.contains("fet"); });
+  }
+  function marca(s){
+    var tots = s.querySelectorAll(".pas"), vists = s.querySelectorAll(".pas.vist");
+    Array.prototype.forEach.call(tots, function(p){ p.classList.remove("ara"); });
+    if (vists.length) vists[vists.length - 1].classList.add("ara");
+    passosEl.textContent = tots.length > 1 ? Array.prototype.map.call(tots, function(p){ return p.classList.contains("vist") ? "●" : "○"; }).join("") : "";
+  }
+  function destapa(p){ p.classList.add("vist"); var s = p.closest("section"); if (s && s === pant[i]) marca(s); }
+  function endavant(){
+    var q = disponibles(pant[i]).filter(function(p){ return !p.classList.contains("vist"); });
+    if (!q.length) { mostra(i + 1); return; }
+    destapa(q[0]); encaixa(); q[0].scrollIntoView({ block: "nearest" });
+  }
+  function enrere(){
+    var v = disponibles(pant[i]).filter(function(p){ return p.classList.contains("vist"); });
+    if (v.length < 2) { mostra(i - 1); return; }   // el primer pas no es tapa: ← torna a la pantalla anterior
+    v[v.length - 1].classList.remove("vist"); marca(pant[i]); encaixa();
+  }
+
+  /* solucions i respostes que es revelen (botó o tecla S) */
+  document.querySelectorAll(".revela").forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = b.nextElementSibling;
+      while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
+      if (s) s.classList.toggle("obert");
+      encaixa();
+      if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
+    });
+  });
+
+  /* ronda ràpida: compte enrere en entrar a la targeta (tecla T el torna a engegar) */
+  var tCompte = null;
+  function compte(s){
+    clearInterval(tCompte);
+    var c = s && s.querySelector(".compte"); if (!c) return;
+    var tot = +c.getAttribute("data-seg") || 15, ini = Date.now(), x = c.querySelector(".xifra"), b = c.querySelector(".barra i");
+    c.classList.remove("zero");
+    function pas(){
+      var q = Math.max(0, tot - (Date.now() - ini) / 1000);
+      x.textContent = q > 0 ? Math.ceil(q) : TX.dits;
+      b.style.transform = "scaleX(" + (q / tot).toFixed(3) + ")";
+      if (q <= 0) { clearInterval(tCompte); c.classList.add("zero"); }
+    }
+    pas(); tCompte = setInterval(pas, 100);
+  }
+  /* rellotge de feina: tecla T en una pantalla amb data-min; segueix encara que canviïs de pantalla */
+  var rel = document.getElementById("rellotge"), tRel = null;
+  function rellotge(min){
+    clearInterval(tRel);
+    if (!min || rel.classList.contains("on")) { rel.classList.remove("on", "fi"); return; }
+    var fi = Date.now() + min * 60000;
+    rel.classList.add("on"); rel.classList.remove("fi");
+    function pas(){
+      var q = Math.max(0, Math.round((fi - Date.now()) / 1000));
+      rel.textContent = "⏱ " + Math.floor(q / 60) + ":" + dos(q % 60);
+      if (!q) { clearInterval(tRel); rel.classList.add("fi"); rel.textContent = TX.temps; }
+    }
+    pas(); tRel = setInterval(pas, 500);
+  }
+
+  /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
+  var i = 0, pos = document.getElementById("pos");
+  function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  function encaixa(){
+    if (!document.body.classList.contains("proj")) return;
+    var s = pant[i], e = 1;
+    s.style.setProperty("--escala", 1);
+    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+  }
+  window.addEventListener("resize", function(){ alcada(); encaixa(); });
+  function mostra(n){
+    i = Math.max(0, Math.min(pant.length - 1, n));
+    pant.forEach(function(s, j){ s.classList.toggle("actual", j === i); });
+    pant[i].scrollTop = 0;
+    var d = disponibles(pant[i]);
+    if (d.length && !pant[i].querySelector(".pas.vist")) d[0].classList.add("vist");
+    marca(pant[i]);
+    alcada(); encaixa();
+    compte(pant[i].classList.contains("flash") ? pant[i] : null);
+    pos.textContent = (i + 1) + " / " + pant.length;
+    var segs = nav.querySelectorAll("a");
+    segs.forEach(function(a){
+      var idx = pant.indexOf(document.getElementById(a.dataset.id));
+      a.classList.toggle("ara", idx <= i && !Array.prototype.some.call(segs, function(b){ var k = pant.indexOf(document.getElementById(b.dataset.id)); return k > idx && k <= i; }));
+    });
+    try { history.replaceState(null, "", "#" + pant[i].id); } catch (e) {}
+  }
+  function entra(){
+    document.body.classList.add("proj");
+    var h = location.hash.slice(1), k = -1;
+    pant.forEach(function(s, j){ if (s.id === h) k = j; });
+    mostra(k >= 0 ? k : 0);
+    if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.surt;
+  }
+  function surt(){
+    document.body.classList.remove("proj");
+    pant.forEach(function(s){ s.classList.remove("actual"); });
+    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function(){});
+    document.getElementById("bproj").textContent = TX.proj;
+    pant[i].scrollIntoView();
+  }
+  document.getElementById("bproj").addEventListener("click", function(){ document.body.classList.contains("proj") ? surt() : entra(); });
+  document.getElementById("ant").addEventListener("click", enrere);
+  document.getElementById("seg").addEventListener("click", endavant);
+  document.getElementById("surt").addEventListener("click", surt);
+  document.addEventListener("keydown", function(ev){
+    var t = ev.target.tagName;
+    if (t === "TEXTAREA" || t === "INPUT") return;
+    var proj = document.body.classList.contains("proj");
+    if (ev.key === "p" || ev.key === "P") { proj ? surt() : entra(); return; }
+    if (!proj) return;
+    if (ev.key === "ArrowRight" || ev.key === "PageDown" || ev.key === " ") { ev.preventDefault(); endavant(); }
+    else if (ev.key === "ArrowLeft" || ev.key === "PageUp") { ev.preventDefault(); enrere(); }
+    else if (ev.key === "Escape") surt();
+    else if (ev.key === "t" || ev.key === "T") { if (pant[i].classList.contains("flash")) compte(pant[i]); else rellotge(+pant[i].getAttribute("data-min") || 0); }
+    else if (ev.key === "s" || ev.key === "S") {
+      var b = Array.prototype.find.call(pant[i].querySelectorAll(".revela"), function(x){ var s = x.nextElementSibling; return s && !s.classList.contains("obert"); });
+      if (b) b.click();
+    }
+    else if (ev.key === "0") { if (confirm(TX.esborra)) reinicia(); }
+    else if (/^[1-8]$/.test(ev.key)) {
+      var v = Array.prototype.find.call(pant[i].querySelectorAll(".voto"), function(x){ return !x.classList.contains("fet"); });
+      if (v) { var bs = v.querySelectorAll(".opc button"); var b2 = bs[+ev.key - 1]; if (b2) vota(v, b2); }
+    }
+  });
+
+  /* respostes de l'alumnat: es desen al navegador i es baixen en un .txt (no s'entreguen) */
+  var nom = document.getElementById("nom"), grup = document.getElementById("grup"), parella = document.getElementById("parella");
+  var resp = Array.prototype.slice.call(document.querySelectorAll("textarea.resp"));
+  if (nom) {
+    nom.value = estat.__nom || ""; grup.value = estat.__grup || ""; parella.value = estat.__parella || "";
+    [nom, grup, parella].forEach(function(c){ c.addEventListener("input", function(){ estat["__" + c.id] = c.value; desa(); }); });
+  }
+  resp.forEach(function(t){
+    t.value = estat[t.dataset.clau] || "";
+    t.addEventListener("input", function(){ estat[t.dataset.clau] = t.value; desa(); });
+  });
+  function net(s){ return (s || "").replace(/\s+/g, " ").trim(); }
+  var msg = document.getElementById("missatge");
+  function baixa(){
+    if (!nom || !net(nom.value)) {
+      if (msg) { msg.hidden = false; msg.textContent = TX.escriu_nom; }
+      try { document.getElementById("inicio").scrollIntoView(); if (nom) nom.focus(); alert(TX.escriu_nom_alert); } catch (e) {}
+      return;
+    }
+    var d = new Date();
+    var L = [TX.cap_resp, TX.qui + ": " + net(nom.value), TX.grup + ": " + net(grup.value), TX.amb_qui + ": " + (net(parella.value) || TX.ningu),
+      TX.data + ": " + d.getFullYear() + "-" + dos(d.getMonth() + 1) + "-" + dos(d.getDate()) + " " + dos(d.getHours()) + ":" + dos(d.getMinutes()), ""];
+    resp.forEach(function(t){
+      var p = t.closest(".preg"), c = p.cloneNode(true);
+      c.querySelectorAll("textarea,button,.sol").forEach(function(x){ x.remove(); });
+      L.push("=== " + net(c.textContent) + " ==="); L.push(net(t.value) || TX.sense_resp); L.push("");
+    });
+    var f = TX.fitxer + "-" + net(nom.value).normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "-").slice(0, 40) + ".txt";
+    try {
+      var url = URL.createObjectURL(new Blob([L.join("\n")], { type: "text/plain;charset=utf-8" }));
+      var a = document.createElement("a"); a.href = url; a.download = f; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
+      if (msg) { msg.hidden = false; msg.innerHTML = TX.fet_baixa.replace("{f}", f); }
+    } catch (e) { if (msg) { msg.hidden = false; msg.textContent = TX.no_baixa; } }
+  }
+  ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
+
+  if (location.hash === "#" + TX.hash) entra();
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  function json(el, k){ try { return JSON.parse(el.getAttribute(k) || "null"); } catch (e) { return null; } }
+  function aturaTecles(el){ el.addEventListener("keydown", function(ev){ if (ev.key === "Enter" || ev.key === " ") { ev.stopPropagation(); ev.preventDefault(); ev.target.click(); } }); }
+
+  /* el triangle del foc */
+  document.querySelectorAll(".int.triangle").forEach(function(w){
+    var tx = json(w, "data-textos") || {}, msg = w.querySelector(".int-msg"), apaga = w.classList.contains("apaga"), ini = msg.innerHTML;
+    var cs = w.querySelectorAll(".costat");
+    cs.forEach(function(c){
+      aturaTecles(c);
+      c.addEventListener("click", function(){
+        var k = c.getAttribute("data-k");
+        if (apaga) {
+          if (w.classList.contains("apagat")) return;
+          c.classList.add("fora"); w.classList.add("apagat");
+        } else {
+          cs.forEach(function(x){ x.classList.toggle("sel", x === c); });
+        }
+        msg.innerHTML = tx[k] || "";
+      });
+    });
+    var t = w.querySelector(".int-torna");
+    if (t) t.addEventListener("click", function(){ w.classList.remove("apagat"); cs.forEach(function(x){ x.classList.remove("fora", "sel"); }); msg.innerHTML = ini; });
+  });
+
+  /* la tensió i la pell: I = V / R, qualitatiu */
+  document.querySelectorAll(".int.tensio").forEach(function(w){
+    var r = 2, v = 50, msg = w.querySelector(".tn-msg");
+    function pinta(){
+      var i = v / r, segur = i <= 25;
+      var oh = w.querySelector(".tn-ohm");
+      if (oh) {
+        oh.querySelector(".tv b").style.fontSize = (v === 24 ? 1.7 : v === 50 ? 2.5 : 3.8) + "em";
+        oh.querySelector(".tv .tn-val").textContent = v + " V";
+        oh.querySelector(".tr b").style.fontSize = (r === 2 ? 3.4 : 1.5) + "em";
+        oh.querySelector(".tr .tn-val").textContent = oh.getAttribute(r === 2 ? "data-seca" : "data-mull");
+        oh.querySelector(".ti b").style.fontSize = Math.min(5, 1.3 + i / 12) + "em";
+        oh.querySelector(".ti .tn-val").textContent = (segur ? "✓ " : "⚡ ") + w.getAttribute(segur ? "data-ok" : "data-ko");
+        oh.querySelector(".ti").classList.toggle("ko", !segur);
+      }
+      w.querySelector(".tn-barra.r i").style.width = (r === 2 ? 90 : 42) + "%";
+      w.querySelector(".tn-barra.i i").style.width = Math.min(100, i * 2) + "%";
+      w.querySelector(".tn-barra.i").classList.toggle("ko", !segur);
+      msg.textContent = (segur ? "✓ " + w.getAttribute("data-ok") : "⚡ " + w.getAttribute("data-ko"));
+      msg.className = "int-msg tn-msg " + (segur ? "ok" : "ko");
+      /* la velocitat dels punts, proporcional a la corrent: 12 → 2 s per tram · 50 → 0,5 s · 230 → 0,12 s */
+      var vel = Math.min(2.5, Math.max(0.12, 24 / Math.max(i, 1)));
+      w.querySelector(".tn-fil").classList.toggle("ko", !segur);
+      w.querySelectorAll(".tn-fil .e").forEach(function(e, k){
+        if (e.animate) { if (e._a) e._a.cancel(); e._a = e.animate([{ transform: "translateX(0)" }, { transform: "translateX(58px)" }], { duration: vel * 1000, iterations: Infinity }); }
+      });
+    }
+    w.querySelectorAll(".tn-pell").forEach(function(b){ b.addEventListener("click", function(){ r = +b.getAttribute("data-r"); w.querySelectorAll(".tn-pell").forEach(function(x){ x.classList.toggle("on", x === b); }); pinta(); }); });
+    w.querySelectorAll(".tn-v").forEach(function(b){ b.addEventListener("click", function(){ v = +b.getAttribute("data-v"); w.querySelectorAll(".tn-v").forEach(function(x){ x.classList.toggle("on", x === b); }); pinta(); }); });
+    pinta();
+  });
+
+  /* l'extintor: quatre passos, en ordre */
+  document.querySelectorAll(".int.extintor").forEach(function(w){
+    var msgs = json(w, "data-msgs") || [], noms = json(w, "data-noms") || [], ordre = w.getAttribute("data-ordre") || "";
+    var msg = w.querySelector(".int-msg"), ini = msg.innerHTML, fet = 0;
+    var bs = w.querySelectorAll(".ex-p");
+    bs.forEach(function(b){
+      b.addEventListener("click", function(){
+        var n = +b.getAttribute("data-n");
+        if (n <= fet) return;
+        if (n !== fet + 1) { b.classList.remove("mal"); void b.offsetWidth; b.classList.add("mal"); msg.innerHTML = ordre.replace("{p}", noms[fet] || ""); return; }
+        fet = n; w.classList.add("s" + n); b.classList.add("fet"); msg.innerHTML = msgs[n - 1] || "";
+      });
+    });
+    w.querySelector(".int-torna").addEventListener("click", function(){
+      fet = 0; [1, 2, 3, 4].forEach(function(n){ w.classList.remove("s" + n); }); bs.forEach(function(b){ b.classList.remove("fet", "mal"); }); msg.innerHTML = ini;
+    });
+  });
+
+  /* classifica: cada cosa, al seu grup */
+  document.querySelectorAll(".int.classifica").forEach(function(w){
+    var items = Array.prototype.map.call(w.querySelectorAll(".cl-items li"), function(li){ return { x: li.innerHTML, g: li.getAttribute("data-g") }; });
+    var bs = w.querySelectorAll(".cl-g"), x = w.querySelector(".cl-x"), n = w.querySelector(".cl-n"), msg = w.querySelector(".cl-msg");
+    var k = 0, bones = 0, primer = true, espera = false;
+    function nom(g){ var b = w.querySelector('.cl-g[data-g="' + g + '"]'); if (!b) return g; var sm = b.querySelector("small"); return b.querySelector("b").textContent + (sm ? " (" + sm.textContent + ")" : ""); }
+    function mostra(){
+      bs.forEach(function(b){ b.classList.remove("be", "mal"); });
+      if (k >= items.length) { x.textContent = "🏁"; n.textContent = ""; msg.textContent = w.getAttribute("data-fi").replace("{b}", bones).replace("{n}", items.length); msg.className = "int-msg cl-msg ok"; return; }
+      x.innerHTML = items[k].x; n.textContent = (k + 1) + " / " + items.length; primer = true; espera = false; msg.textContent = ""; msg.className = "int-msg cl-msg";
+    }
+    bs.forEach(function(b){
+      b.addEventListener("click", function(){
+        if (k >= items.length || espera) return;
+        var g = b.getAttribute("data-g"), bo = items[k].g;
+        if (g === bo) {
+          if (primer) bones++;
+          b.classList.add("be"); msg.textContent = "✓ " + w.getAttribute("data-be") + ": " + nom(bo); msg.className = "int-msg cl-msg ok";
+          espera = true; setTimeout(function(){ k++; mostra(); }, 1100);
+        } else {
+          primer = false; b.classList.remove("mal"); void b.offsetWidth; b.classList.add("mal");
+          msg.textContent = "✗ " + w.getAttribute("data-no") + " " + nom(bo); msg.className = "int-msg cl-msg ko";
+        }
+      });
+    });
+    w.querySelector(".int-torna").addEventListener("click", function(){ k = 0; bones = 0; mostra(); });
+    mostra();
+  });
+})();
+</script>
+</body>
+</html>
