@@ -50,7 +50,7 @@ a.ref.hoja::after{content:" ↗"}
 .nota{font-size:14px;color:var(--suau)}
 .inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
 .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
-.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff;min-width:0;overflow-wrap:break-word}
 .tres>div b{display:block;font-size:18px;margin-bottom:4px}
 .tres>div span{font-size:15px;color:var(--suau)}
 .dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
@@ -63,9 +63,14 @@ li{margin:0 0 4px}
 table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
 th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
 th{background:#f3ecdf}
-.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+/* cadenes amb fletxes (JM, 08-11: «mira com queda de malament»): la fila no es parteix mai. El que s'adapta és el text de
+   dins cada caixa; si no hi ha amplada, la cadena passa a vertical (les regles @container, generades al final del CSS) */
+.filw{container-type:inline-size}
+.cadena,.fil{display:flex;flex-wrap:nowrap;align-items:stretch}
+.cadena>span,.fil>span,.flujo>span{flex:0 1 auto;min-width:0;overflow-wrap:break-word;align-content:center}
+.cadena>i,.fil>i,.flujo>i{flex:none;align-self:center;font-style:normal;font-weight:800;color:var(--suau)}
+.cadena{gap:6px;margin:10px 0 14px}
 .cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
-.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
 .cadena span.avui{background:#ffd66b}
 .cadena span.fet{opacity:.55}
 .plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -95,10 +100,10 @@ th{background:#f3ecdf}
 .resp.no i{background:var(--vermell)}
 .ley{display:inline-block;font-size:.8em;font-weight:700;border:1.5px solid var(--tinta);border-radius:99px;padding:.05em .65em;margin:0 .3em .3em 0;background:#fff;white-space:nowrap}
 .flujo{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.25em 0 .5em}
+.flujo:has(>i){flex-wrap:nowrap;align-items:stretch}
 .flujo span{padding:.18em .7em;border-radius:.5em;background:#fff;border:1.5px solid var(--verd)}
-.flujo i{font-style:normal;font-weight:800;color:var(--suau)}
 .cuadro4{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em;margin:.35em 0 .5em}
-.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff}
+.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff;min-width:0;overflow-wrap:break-word}
 .cuadro4 h4{margin:0 0 .2em;font-size:.72em;text-transform:uppercase;letter-spacing:.05em;color:var(--suau)}
 .cuadro4 p{margin:0 0 .15em;font-weight:700}
 .cuadro4 small{display:block;font-weight:400;color:var(--suau)}
@@ -144,14 +149,14 @@ p.si i{width:1.4em;height:1.4em;font-size:.75em;background:var(--verd)}
 .nop i{width:1.35em;height:1.35em;font-size:.7em;background:var(--vermell)}
 .idea{display:inline-flex;flex-direction:column;border-left:.35em solid var(--mostassa);background:var(--mostassaclar);border-radius:.4em;padding:.35em .85em;margin:.15em 0 .45em}
 .idea b{font-size:1.12em}
-.fil{display:flex;flex-wrap:wrap;align-items:center;gap:.4em;margin:.3em 0 .55em}
+.fil{gap:.4em;margin:.3em 0 .55em}
 .fil span{background:#fff;border:2px solid var(--tinta);border-radius:.5em;padding:.35em .8em;font-weight:700;line-height:1.25}
-.fil i{font-style:normal;font-weight:800;color:var(--suau);font-size:1.25em}
-.fil.escala{align-items:flex-end}
-.fil.escala span:nth-of-type(2){margin-bottom:1.1em}
-.fil.escala span:nth-of-type(3){margin-bottom:2.2em}
-.fil.escala span:nth-of-type(4){margin-bottom:3.3em}
-.fil.escala span:last-of-type{background:#ffd66b}
+.fil i{font-size:1.25em}
+/* l'escala: columnes iguals que pugen d'esquerra a dreta; la pujada ja diu l'ordre, sense fletxes */
+.fil.escala{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:.55em;align-items:stretch}
+.fil.escala>i{display:none}
+.fil.escala>span{margin-top:calc((var(--n,1) - 1 - var(--i,0)) * 1.15em)}
+.fil.escala>span:last-of-type{background:#ffd66b}
 .gran{display:inline-flex;flex-direction:column;vertical-align:top;min-width:6.5em;margin:.2em .7em .45em 0;padding:.35em .9em;border-radius:.55em;background:#fff;border:2px solid var(--linia)}
 .gran b{font-size:2.2em;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .gran span{color:var(--suau);font-size:.85em;line-height:1.3}
@@ -175,7 +180,7 @@ p.si i{width:1.4em;height:1.4em;font-size:.75em;background:var(--verd)}
 .p.dema{border:2px dashed var(--suau)}
 .dalt nav a.dema{background:transparent;border:1px dashed rgba(255,255,255,.55)}
 .dalt nav a.dema:hover,.dalt nav a.dema.ara{background:#ffd66b;color:var(--tinta)}
-#passos{letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.65);border-radius:8px;padding:6px 10px;font-size:14px}
+#passos{letter-spacing:.12em;color:#fff}
 #passos:empty{display:none}
 textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
 textarea.resp:focus{outline:2px solid var(--tinta)}
@@ -193,10 +198,13 @@ body.proj{background:var(--kraft);overflow:hidden}
 body.proj main{max-width:none;padding:0}
 body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
 body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
-  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+  padding:2.2vh 5vw 3vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
 body.proj .p.actual{display:block}
 body.proj .pas:not(.vist){display:none}
-body.proj .pas.vist:not(.ara){opacity:.6}
+body.proj .p.mesura .pas{display:flow-root!important}
+body.proj .plan small{display:none}
+body.proj .p{scrollbar-width:none}
+body.proj .p::-webkit-scrollbar{display:none}
 body.proj .fil{font-size:1.08em}
 body.proj .foto{width:32%}
 body.proj .pas.ara{animation:destapa .35s ease-out}
@@ -216,9 +224,16 @@ body.proj .clau{font-size:1.12em}
 body.proj .opc button{padding:.35em 1em}
 body.proj .ref{font-size:.72em}
 body.proj textarea.resp,body.proj .jo{display:none}
-body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
-.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
-.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+body.proj .ctrl{display:flex;flex:none;gap:5px;align-items:center;margin-left:auto}
+.ctrl button{font:inherit;font-weight:800;font-size:15px;border:0;border-radius:8px;padding:3px 12px;cursor:pointer;background:rgba(255,255,255,.16);color:#fff}
+.ctrl button:hover{background:#fff;color:var(--tinta)}
+.ctrl span{background:rgba(255,255,255,.12);color:#fff;border-radius:8px;padding:3px 9px;font-size:13px;white-space:nowrap}
+/* projectant, una sola línia a dalt (fins ara, fins a un 22 % de la pantalla): cada bloc és el seu número i només l'actual porta el nom */
+body.proj .dalt{flex-wrap:nowrap;padding:5px 12px;gap:12px}
+body.proj .dalt .nom small,body.proj #bproj{display:none}
+body.proj .dalt nav{flex-wrap:nowrap;min-width:0;overflow:hidden}
+body.proj .dalt nav a{flex:none}
+body.proj .dalt nav a:not(.ara) span{display:none}
 .cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
 .compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
 .compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
@@ -259,6 +274,44 @@ body.proj .voto .q{font-size:1.18em;line-height:1.3;margin-bottom:.55em}
 body.proj .opc{display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:.55em}
 body.proj .opc button{font-size:1.05em;padding:.55em .9em;text-align:left;border-width:2.5px;border-radius:.6em;line-height:1.25}
 body.proj .opc button .k{font-size:.75em}
+/* el temari a la vista (JM, 08-11): «sempre hi hauria d'haver una referència clara de què s'està parlant quant al temari
+   abans de posar-nos a veure casos concrets» */
+.temari{display:flex;flex-wrap:wrap;align-items:center;gap:.1em .45em;margin:0 0 .6em;padding:.32em .8em;border-radius:.55em;
+  background:var(--blauclar);color:var(--blau);font-size:15px;font-weight:600;line-height:1.3}
+.temari i{font-style:normal;opacity:.55}
+.temari b{font-weight:800}
+.temari .t-p{margin-left:auto;padding-left:1em;font-weight:800;white-space:nowrap}
+.temari.repas{background:#efe9dc;color:var(--suau)}
+.de-que{font-size:1.28em;line-height:1.4;margin:.2em 0 .7em;padding:.6em 1em;border-left:.32em solid var(--blau);background:#f5f8fd;border-radius:.4em}
+.saber{list-style:none;counter-reset:s;display:grid;gap:.4em;margin:.3em 0 .5em;padding:0}
+.saber li{counter-increment:s;position:relative;margin:0;padding:.42em .8em .42em 2.5em;background:#fff;border:2px solid var(--linia);border-radius:.6em;font-weight:600}
+.saber li::before{content:counter(s);position:absolute;left:.65em;top:.42em;width:1.4em;height:1.4em;border-radius:50%;background:var(--blau);color:#fff;
+  font-size:.92em;font-weight:800;display:flex;align-items:center;justify-content:center}
+.mapa-t{margin:.3em 0 .9em}
+.mapa-t .cap{margin:0 0 .35em;font-size:.76em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--suau)}
+.mapa-t ol{list-style:none;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:.3em;margin:0 0 .3em;padding:0}
+.mapa-t li{margin:0;padding:.28em .5em;border-radius:.45em;border:1.5px solid var(--linia);background:#fff;font-size:.82em;line-height:1.2;color:var(--suau);min-width:0;overflow-wrap:break-word}
+.mapa-t li b{font-weight:800}
+.mapa-t li small{display:block;font-size:.88em;font-weight:700}
+.mapa-t li.passat{opacity:.55}
+.mapa-t li.ara{border-color:var(--blau);background:var(--blauclar);color:var(--blau);font-weight:700}
+.mapa-t li.avui{border:2px solid var(--tinta);background:#ffd66b;color:var(--tinta);font-weight:800}
+body.proj .temari{font-size:.84em}
+/* projectant, cap mida fixa en píxels: si no, a la pantalla gran es perden (el títol de bloc feia 13 px en un cos de 30) */
+body.proj .kicker{font-size:.66em}
+body.proj .nota{font-size:.82em}
+body.proj .fuente{font-size:.68em}
+body.proj .inventat{font-size:.62em}
+body.proj .encls{font-size:.7em}
+body.proj .obertura h2{font-size:2.5em}
+body.proj #inicio .refs{display:none}   /* les pàgines ja les diu el mapa i el requadre fosc */
+body.proj .yt{height:41vh}
+@media (max-width:700px){
+  .temari .t-p{margin-left:0;padding-left:0}
+  .mapa-t ol{grid-auto-flow:row;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .flujo:has(>i){flex-direction:column;align-items:flex-start}
+  .flujo:has(>i)>i{transform:rotate(90deg);align-self:flex-start;margin-left:.6em}
+}
 @media (max-width:700px){
   body{font-size:16px}
   .p{padding:16px 14px}
@@ -275,6 +328,10 @@ body.proj .opc button .k{font-size:.75em}
   main{max-width:none;padding:0}
   .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
 }
+@container (max-width:20em){.fil.n2,.cadena.n2{display:flex;flex-direction:column;align-items:stretch}.fil.n2>i,.cadena.n2>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n2>span,.cadena.n2>span{margin-top:0!important}}
+@container (max-width:29em){.fil.n3,.cadena.n3{display:flex;flex-direction:column;align-items:stretch}.fil.n3>i,.cadena.n3>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n3>span,.cadena.n3>span{margin-top:0!important}}
+@container (max-width:37em){.fil.n4,.cadena.n4{display:flex;flex-direction:column;align-items:stretch}.fil.n4>i,.cadena.n4>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n4>span,.cadena.n4>span{margin-top:0!important}}
+@container (max-width:45em){.fil.n5,.fil.n6,.cadena.n5,.cadena.n6{display:flex;flex-direction:column;align-items:stretch}.fil.n5>i,.fil.n6>i,.cadena.n5>i,.cadena.n6>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n5>span,.fil.n6>span,.cadena.n5>span,.cadena.n6>span{margin-top:0!important}}
 
 /* il·lustracions interactives (JM, 05-11): grans a la projecció, tocables, sense res de fora */
 .int{margin:.4em 0 .6em;padding:.6em .8em;border:2px solid var(--linia);border-radius:.8em;background:#fff}
@@ -387,6 +444,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <nav id="index"></nav>
   <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
   <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
+  <div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="passos"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
 </header>
 
 <main>
@@ -395,7 +453,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <p class="kicker">Sesión 5 · una hora</p>
   <h2>Lo que se respira y lo que contagia</h2>
   <p style="font-size:1.15em">Después del patio: <b>lo que se respira y lo que contagia</b>, con un virus que todos conocéis.</p>
-  <div class="cadena"><span class="fet">Ruido, luz y temperatura: antes del patio</span><i>→</i><span class="avui">Químicos (págs. 39-40)</span><i>→</i><span class="avui">Biológicos (pág. 40)</span><i>→</i><span class="avui">Para leer: vibraciones y radiaciones</span><i>→</i><span>Psicosociales y ergonómicos: viernes 13</span></div>
+  <div class="mapa-t"><p class="cap">Dónde estamos en el temario · Unidad 2: Prevención de riesgos laborales generales y específicos</p><ol><li class="passat"><b>2.1</b> Condiciones de seguridad</li><li class="ara"><b>2.2</b> Medioambiente de trabajo</li><li><b>2.3</b> Organización y carga de trabajo</li><li><b>2.4</b> Riesgos por sectores</li><li><b>2.5</b> Especialidades preventivas</li><li><b>2.6</b> Señalización</li></ol><ol><li class="passat"><b>2.2.1</b> Agentes físicos</li><li class="avui"><b>2.2.2</b> Agentes químicos<small>Libro · págs. 39-40</small></li><li class="avui"><b>2.2.3</b> Agentes biológicos<small>Libro · pág. 40</small></li></ol></div>
   <div class="plan"><div><b>Hoy</b><ol start="1"><li>Dos preguntas para recordar (antes del patio y viernes 23) <small>· 4 min</small></li><li>Químicos: forma y efecto (pág. 39) <small>· 8 min</small></li><li>Cada uno solo: César y su fábrica (págs. 39-40) <small>· 14 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>Biológicos: cuatro grupos y la higiene (pág. 40) <small>· 10 min</small></li><li>Para leer: vibraciones y radiaciones (págs. 33 y 35-37) <small>· 5 min</small></li><li>Si sobra tiempo: estrés o burnout (págs. 41-42) <small>· ➕ si da tiempo</small></li></ol><p style="margin:8px 0 0"><b>Para salir:</b> 2 preguntas en voz alta.</p></div></div>
   <h3 class="noproj">Cómo usar esta página</h3>
   <p class="noproj">En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
@@ -405,6 +463,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 </section>
 
 <section class="p" id="entrar" data-titol="1 · Para entrar">
+  <p class="temari repas"><b>Repaso de lo ya visto</b></p>
   <p class="kicker">1 · Lo de antes del patio y del viernes 23 · para empezar</p>
   <h2>Dos preguntas, sin mirar</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 38 · tabla 2.13</span><span class="ref libro">Libro · pág. 27 · apartado 2.1.1 «Lugares de trabajo»</span></div>
@@ -433,8 +492,18 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 <div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 27 · apartado 2.1.1 «Lugares de trabajo», 1.er párrafo</span></div></div></div>
 </section>
 
-<section class="p" id="limpiador" data-titol="2 · Químicos">
-  <p class="kicker">2 · Libro, pág. 39 · apartado 2.2.2 y tabla 2.14</p>
+<section class="p obertura" id="tema-2" data-titol="2 · Químicos">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">2 · De qué hablamos</p>
+  <h2>Agentes químicos</h2>
+  <div class="de-que">Un <b>agente químico</b> es cualquier sustancia que aparece, se usa o se vierte en el trabajo, aunque no se haya fabricado a propósito. Hay <b>exposición</b> cuando llega a la persona, normalmente al respirarla o por la piel.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Las formas en que se presenta (tabla 2.14)</li><li>Sus efectos, a grandes rasgos (tabla 2.14)</li><li>El orden de las medidas (figura 2.11)</li></ol>
+</section>
+
+<section class="p" id="limpiador">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">2 · apartado 2.2.2 y tabla 2.14</p>
   <h2>Huele, pero no se ve</h2>
   <div class="caso"><p>En un aula de informática, una técnica limpia teclados y pantallas con un <b>paño mojado en un limpiador líquido con alcohol</b>. Al rato, toda el aula huele al limpiador, aunque en el aire no se ve nada.</p><p class="fuente"><span class="inventat">· ejemplo inventado</span></p></div>
 <div class="voto" data-ok="b"><p class="q">Con la tabla 2.14 (pág. 39): ¿qué forma tiene lo que está respirando? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Gas: está en el aire y no se ve</button><button data-v="b">Vapor: viene del líquido del paño</button><button data-v="c">Niebla: son gotitas del limpiador</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Vapor: el líquido que se evapora</span></p>
@@ -446,11 +515,11 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 </section>
 
 <section class="p" id="toner-2">
-  <p class="kicker">2 · Libro, pág. 39 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">2 · la solución, 2 de 2</p>
   <h2>Forma y efecto, a grandes rasgos</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 39 · apartado 2.2.2, tabla 2.14 y «Sabías que…»</span></div>
-  <div class="pas"><div class="idea"><b>Agente químico</b><span>cualquier sustancia que se usa o aparece en el trabajo, también un limpiador; hay exposición cuando llega a la persona, sobre todo respirándola o por la piel</span></div></div>
-<div class="pas"><div class="tres"><div><b>Sólido</b><span>polvo, fibra, humo (de quemar o de metal)</span></div><div><b>Líquido</b><span>niebla, neblina: gotitas</span></div><div><b>Gaseoso</b><span>gas, vapor</span></div></div></div>
+  <div class="pas"><div class="tres"><div><b>Sólido</b><span>polvo, fibra, humo (de quemar o de metal)</span></div><div><b>Líquido</b><span>niebla, neblina: gotitas</span></div><div><b>Gaseoso</b><span>gas, vapor</span></div></div></div>
 <div class="pas"><div class="cuadro4"><div><h4>Irritante</h4><small>inflama donde toca</small></div><div><h4>Asfixiante</h4><small>quita el oxígeno</small></div><div><h4>Anestésico</h4><small>marea, adormece</small></div><div><h4>Cancerígeno</h4><small>células sin control</small></div></div><p class="nota">Efectos: cuatro de los nueve de la tabla 2.14.</p></div>
 <div class="pas"><p class="nota">Para leer, no entra: los valores límite («Sabías que…», pág. 39).</p></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Vapor.</b> Un <b>agente químico</b> es cualquier elemento o compuesto, solo o mezclado, que aparece, se usa o se vierte en el trabajo, aunque no se haya fabricado a propósito (pág. 39). Hay <b>exposición</b> cuando llega a la persona, normalmente por inhalación (respirándolo) o por la piel. La tabla 2.14 los clasifica de dos maneras:
@@ -459,6 +528,7 @@ Para leer, no entra: los <b>valores límite ambientales</b>, lo máximo que pued
 </section>
 
 <section class="p" id="cesar" data-titol="3 · César">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
   <p class="kicker">3 · Cada uno solo · caso práctico propuesto 2.9 del libro · unos nueve minutos</p>
   <h2>César y el líquido de las baterías</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 40 · caso práctico propuesto 2.9</span><span class="ref libro">Libro · pág. 39 · tabla 2.14 y figura 2.11</span><span class="ref ficha">Apúntalo en la libreta o en el móvil</span></div>
@@ -471,6 +541,7 @@ Para leer, no entra: los <b>valores límite ambientales</b>, lo máximo que pued
 </section>
 
 <section class="p" id="cesar-voto">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
   <p class="kicker">3 · Corrección · caso práctico propuesto 2.9</p>
   <h2>¿Qué efecto?</h2>
   <div class="voto" data-ok="c"><p class="q">¿Qué efecto produce el líquido que quemó a César?</p><div class="opc"><button data-v="a">Irritante</button><button data-v="b">Tóxico</button><button data-v="c">Corrosivo</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Corrosivo</span></p>
@@ -483,6 +554,7 @@ Para leer, no entra: los <b>valores límite ambientales</b>, lo máximo que pued
 </section>
 
 <section class="p" id="cesar-orden">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
   <p class="kicker">3 · Corrección · caso práctico propuesto 2.9 · con la figura 2.11</p>
   <h2>¿Por dónde empieza la fábrica?</h2>
   <div class="voto" data-ok="a"><p class="q">La fábrica quiere que a César no le vuelva a pasar. Según la ley, ¿qué tiene que intentar antes que nada?</p><div class="opc"><button data-v="a">Cambiar ese líquido por otro que no queme</button><button data-v="b">Darle guantes, gafas y ropa resistentes</button><button data-v="c">Poner extracción y ventilar la nave</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>A · Cambiar el líquido, si se puede</span></p>
@@ -494,10 +566,11 @@ Para leer, no entra: los <b>valores límite ambientales</b>, lo máximo que pued
 </section>
 
 <section class="p" id="cesar-2" data-min="9">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
   <p class="kicker">3 · Corrección · caso práctico propuesto 2.9 · la solución, 2 de 2</p>
   <h2>De la sustancia a la persona</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 39 · figura 2.11, «Medidas preventivas y de protección»</span></div>
-  <div class="pas"><div class="fil escala"><span>① Sustituir: otro líquido menos peligroso</span><i>→</i><span>② Evitar el contacto: trasvasarlo en circuito cerrado</span><i>→</i><span>③ Ventilación y protección colectiva</span><i>→</i><span>④ Protección individual: guantes, gafas, ropa</span></div><span class="ley">RD 374/2001 · art. 5.2</span></div>
+  <div class="pas"><div class="filw"><div class="fil n4 escala" style="--n:4"><span style="--i:0">① Sustituir: otro líquido menos peligroso</span><i>→</i><span style="--i:1">② Evitar el contacto: trasvasarlo en circuito cerrado</span><i>→</i><span style="--i:2">③ Ventilación y protección colectiva</span><i>→</i><span style="--i:3">④ Protección individual: guantes, gafas, ropa</span></div></div><span class="ley">RD 374/2001 · art. 5.2</span></div>
 <div class="pas"><div class="idea"><b>Como con el ruido</b><span>primero se ataca el origen; el equipo de protección individual (EPI) es la última barrera</span></div></div>
 <div class="pas"><p class="nota">Y como ya ha habido un daño, la empresa revisa su evaluación de riesgos. Qué guante exacto: lo dice la ficha de datos de seguridad (la hoja que acompaña al producto y explica sus peligros).</p></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Corrosivo, y primero sustituir.</b> Así se resuelve:
@@ -505,8 +578,18 @@ Para leer, no entra: los <b>valores límite ambientales</b>, lo máximo que pued
 Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva va antes que la individual (LPRL, art. 15.1.h).<span class="ley">RD 374/2001 · art. 5.2</span> <span class="ref libro">Libro · pág. 39 · tabla 2.14, fila «Corrosivos», y figura 2.11 · pág. 40 · caso práctico propuesto 2.9</span></div></details>
 </section>
 
-<section class="p" id="covid" data-titol="4 · Biológicos">
-  <p class="kicker">4 · Un caso real · libro, pág. 40 · tabla 2.15</p>
+<section class="p obertura" id="tema-4" data-titol="4 · Biológicos">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.3 · Agentes biológicos</b><span class="t-p">Libro · pág. 40</span></p>
+  <p class="kicker">4 · De qué hablamos</p>
+  <h2>Agentes biológicos</h2>
+  <div class="de-que">Los <b>agentes biológicos</b> son microorganismos (virus, bacterias, hongos…), cultivos celulares y parásitos internos que pueden causar una infección, una alergia o una toxicidad.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Los cuatro grupos según el riesgo de infección (tabla 2.15)</li><li>Las medidas de higiene (tabla 2.16)</li><li>El tiempo de aseo, solo donde hay riesgo biológico</li></ol>
+</section>
+
+<section class="p" id="covid">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.3 · Agentes biológicos</b><span class="t-p">Libro · pág. 40</span></p>
+  <p class="kicker">4 · Un caso real · tabla 2.15</p>
   <h2>¿En qué grupo está el virus de la COVID?</h2>
   <div class="caso"><p><b>Diciembre de 2020.</b> El Ministerio de Trabajo añade el virus de la COVID-19, el <b>SARS-CoV-2</b>, a la lista de agentes biológicos del reglamento de prevención (el Real Decreto 664/1997): la lista que dice en qué grupo va cada virus, bacteria u hongo.</p><p class="fuente">Fuente: BOE, 10-12-2020, Orden TES/1180/2020 (anexo II). <a class="font-link" href="https://boe.es/buscar/doc.php?id=BOE-A-2020-15871" target="_blank" rel="noopener">Abrir la fuente ↗</a></p></div>
 <div class="voto" data-ok="b"><p class="q">Con la tabla 2.15 (pág. 40): ¿en qué grupo lo pusieron?</p><div class="opc"><button data-v="a">Grupo 2: para la mayoría fue leve</button><button data-v="b">Grupo 3: grave y se contagia, pero hay vacunas</button><button data-v="c">Grupo 4: provocó una pandemia</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Grupo 3</span></p>
@@ -518,10 +601,11 @@ Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva
 </section>
 
 <section class="p" id="covid-2">
-  <p class="kicker">4 · Libro, pág. 40 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.3 · Agentes biológicos</b><span class="t-p">Libro · pág. 40</span></p>
+  <p class="kicker">4 · la solución, 2 de 2</p>
   <h2>Cuatro grupos, de menos a más peligroso</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 40 · tabla 2.15</span></div>
-  <div class="pas"><div class="fil escala"><span>① Poco probable que enferme</span><i>→</i><span>② Puede enfermar; casi no se propaga</span><i>→</i><span>③ Grave; puede propagarse; hay tratamiento · la COVID</span><i>→</i><span>④ Grave; se propaga mucho; sin tratamiento · el Ébola</span></div></div>
+  <div class="pas"><div class="filw"><div class="fil n4 escala" style="--n:4"><span style="--i:0">① Poco probable que enferme</span><i>→</i><span style="--i:1">② Puede enfermar; casi no se propaga</span><i>→</i><span style="--i:2">③ Grave; puede propagarse; hay tratamiento · la COVID</span><i>→</i><span style="--i:3">④ Grave; se propaga mucho; sin tratamiento · el Ébola</span></div></div></div>
 <div class="pas"><p class="nota">Tres preguntas deciden el grupo: ¿enfermedad grave? ¿Se propaga? ¿Suele haber vacuna o tratamiento? La ley dice «puede causar» donde el libro pone «probable».</p></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Grupo 3.</b> La Orden TES/1180/2020 (BOE del 10-12-2020) adaptó el Real Decreto 664/1997 y metió el <b>SARS-CoV-2</b> en el <b>grupo 3</b> de su lista (anexo II). Se decide con tres preguntas (RD 664/1997, art. 3.1, y tabla 2.15, pág. 40):
 <div class="tcalc-w"><table class="tcalc"><tr><th>Grupo</th><th>¿Enfermedad?</th><th>¿Se propaga?</th><th>¿Profilaxis o tratamiento?</th></tr>
@@ -533,7 +617,8 @@ La COVID cumple los criterios del grupo 3: puede ser grave y se propaga, pero no
 </section>
 
 <section class="p" id="aseo">
-  <p class="kicker">4 · Libro, pág. 40 · tabla 2.16 y «Sabías que…»</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.3 · Agentes biológicos</b><span class="t-p">Libro · pág. 40</span></p>
+  <p class="kicker">4 · tabla 2.16 y «Sabías que…»</p>
   <h2>El tiempo para asearse</h2>
   <div class="caso"><p>Un técnico de un laboratorio de análisis clínicos trabaja toda la jornada con muestras de sangre.</p><p class="fuente"><span class="inventat">· ejemplo inventado</span></p></div>
 <div class="voto" data-ok="a"><p class="q">¿Qué dice la ley de su tiempo para asearse? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Diez antes de comer y diez antes de salir, dentro de la jornada</button><button data-v="b">Diez antes de salir, dentro de la jornada, y nada más</button><button data-v="c">Diez y diez, como cualquier empleado, también el de una oficina</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>A · Diez y diez, dentro de la jornada</span></p>
@@ -545,7 +630,8 @@ La COVID cumple los criterios del grupo 3: puede ser grave y se propaga, pero no
 </section>
 
 <section class="p" id="aseo-2">
-  <p class="kicker">4 · Libro, pág. 40 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.3 · Agentes biológicos</b><span class="t-p">Libro · pág. 40</span></p>
+  <p class="kicker">4 · la solución, 2 de 2</p>
   <h2>Las medidas de higiene</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 40 · tabla 2.16, «Control de los agentes biológicos»</span></div>
   <div class="pas"><div class="cuadro4"><div><h4>Prohibido</h4><p>comer, beber o fumar</p><small>en la zona con riesgo</small></div><div><h4>Ropa</h4><p>de protección</p><small>la que toque</small></div><div><h4>Aseos</h4><p>lavaojos y antisépticos</p><small>para la piel</small></div><div><h4>Los EPI</h4><p>un sitio para guardarlos</p><small>limpios y revisados</small></div></div></div>
@@ -556,6 +642,7 @@ Y la ropa que se ha usado en la zona, se la quita al salir y la lava la empresa,
 </section>
 
 <section class="p" id="vibra-video" data-titol="5 · Vibraciones y radiaciones">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.1 · Agentes físicos</b><span class="t-p">Libro · págs. 33-38</span></p>
   <p class="kicker">5 · ✂ Para leer, no entra · vídeo · 2 minutos · MutuaMAC (27-01-2026)</p>
   <h2>El ruido y las vibraciones, en dos minutos</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 33 · «Vibraciones» · pág. 35 · figura 2.8</span></div>
@@ -566,7 +653,8 @@ Y la ropa que se ha usado en la zona, se la quita al salir y la lava la empresa,
 </section>
 
 <section class="p" id="leelo">
-  <p class="kicker">5 · ✂ Para leer, no entra · libro, págs. 33 y 35-37</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.1 · Agentes físicos</b><span class="t-p">Libro · págs. 33-38</span></p>
+  <p class="kicker">5 · ✂ Para leer, no entra</p>
   <h2>Vibraciones y radiaciones, en tres minutos</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 33 · «Vibraciones» · pág. 35 · figura 2.8 · pág. 36 · «Radiaciones»</span></div>
   <div class="tres"><div><b>Vibraciones</b><span>Una máquina que tiembla y pasa el temblor al cuerpo. <i>Ejemplo:</i> el martillo neumático (por las manos) o un dúmper, el camión pequeño de obra (todo el cuerpo). <i>Medida:</i> una máquina que vibre menos, amortiguadores y menos tiempo seguido (figura 2.8).</span></div><div><b>Radiaciones ionizantes</b><span>Energía capaz de alterar la materia por dentro (ionizarla). <i>Ejemplo:</i> los rayos X de una radiografía. <i>Medida:</i> menos tiempo cerca y una barrera, como el delantal de plomo de radiología.</span></div><div><b>Radiaciones no ionizantes</b><span>No ionizan, pero calientan o queman. <i>Ejemplo:</i> la ultravioleta del sol o de la soldadura; las microondas. <i>Medida:</i> proteger ojos y piel, como la careta con filtro al soldar.</span></div></div>
@@ -580,9 +668,20 @@ Y la ropa que se ha usado en la zona, se la quita al salir y la lava la empresa,
   <p>Si sobra tiempo, seguimos con el principio de lo que toca viernes 13. Lo que hagamos aquí, la próxima sesión no lo repite.</p>
 </section>
 
-<section class="p dema" id="burnout" data-titol="6 · ➕ Estrés o burnout">
+<section class="p obertura dema" id="tema-6" data-titol="6 · ➕ Estrés o burnout">
   <p class="cinta">Esto ya es de viernes 13</p>
-  <p class="kicker">6 · ➕ Si da tiempo · Libro, pág. 42 · caso práctico resuelto 2.4 · con el libro cerrado (la solución está debajo)</p>
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.1 · Riesgos psicosociales</b><span class="t-p">Libro · págs. 41-43</span></p>
+  <p class="kicker">6 · ➕ Si da tiempo · De qué hablamos</p>
+  <h2>Riesgos psicosociales</h2>
+  <div class="de-que">Los <b>riesgos psicosociales</b> vienen de cómo se diseña, se organiza y se dirige el trabajo, y de su contexto social. Pueden causar un daño psicológico, físico o social.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>El estrés y el burnout, y en qué se distinguen</li><li>Las clases de acoso (tabla 2.18)</li></ol>
+</section>
+
+<section class="p dema" id="burnout">
+  <p class="cinta">Esto ya es de viernes 13</p>
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.1 · Riesgos psicosociales</b><span class="t-p">Libro · págs. 41-43</span></p>
+  <p class="kicker">6 · caso práctico resuelto 2.4 · con el libro cerrado (la solución está debajo)</p>
   <h2>¿Quién está quemado? ¿Y Nuria?</h2>
   <div class="caso"><p><b>Martín</b> está ansioso por un plazo ajustado, pero recupera la energía al acabar el proyecto. <b>Sonia</b>, tras meses de mucha carga, tiene un cansancio que no se le va, ha perdido la motivación y trata a la gente con frialdad, como si fueran objetos. <b>Nuria</b> está tensa por conflictos con sus compañeros, pero rinde igual que antes.</p></div>
 <div class="voto" data-ok="b"><p class="q">Empieza por la más difícil: ¿qué le pasa a <b>Nuria</b>?</p><div class="opc"><button data-v="a">Burnout: lleva tiempo tensa en el trabajo</button><button data-v="b">Estrés: es una presión pasajera</button><button data-v="c">Acoso: tiene conflictos con sus compañeros</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Estrés</span></p>
@@ -595,7 +694,8 @@ Y la ropa que se ha usado en la zona, se la quita al salir y la lava la empresa,
 
 <section class="p dema" id="burnout-2">
   <p class="cinta">Esto ya es de viernes 13</p>
-  <p class="kicker">6 · Libro, págs. 41-42 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.1 · Riesgos psicosociales</b><span class="t-p">Libro · págs. 41-43</span></p>
+  <p class="kicker">6 · la solución, 2 de 2</p>
   <h2>Estrés y burnout no son lo mismo</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 41 · «Estrés laboral» · pág. 42 · «Síndrome de burnout» y figura 2.12</span></div>
   <div class="pas"><div class="tres"><div><b>Estrés</b><span>una presión y pocos recursos para afrontarla; pasa la presión y te recuperas</span></div><div><b>Burnout</b><span>estrés que no se va (crónico): agotamiento físico, mental y emocional</span></div><div><b>Llega poco a poco</b><span>entusiasmo → estancamiento → frustración → apatía → quemado</span></div></div></div>
@@ -607,7 +707,8 @@ Las medidas, primero en la organización y entre compañeros, antes que sobre la
 
 <section class="p dema" id="tecno">
   <p class="cinta">Esto ya es de viernes 13</p>
-  <p class="kicker">6 · Para leer, no entra · libro, pág. 42 · «Vocabulario»</p>
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.1 · Riesgos psicosociales</b><span class="t-p">Libro · págs. 41-43</span></p>
+  <p class="kicker">6 · Para leer, no entra · «Vocabulario»</p>
   <h2>Tres palabras que os tocan</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 42 · recuadro «Vocabulario»</span></div>
   <div class="tres"><div><b>Tecnoestrés</b><span>el estrés que viene del uso de las tecnologías (TIC)</span></div><div><b>Tecnofatiga</b><span>cansancio mental por el uso de las TIC</span></div><div><b>Nomofobia</b><span>miedo irracional a estar sin el móvil</span></div></div>
@@ -626,8 +727,6 @@ Las medidas, primero en la organización y entre compañeros, antes que sobre la
 <div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
 </main>
 
-<div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="passos"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
-
 <script>
 (function(){
   "use strict";
@@ -645,7 +744,13 @@ Las medidas, primero en la organización y entre compañeros, antes que sobre la
   pant.forEach(function(s){
     var t = s.getAttribute("data-titol");
     if (!t || !/^\d|^Inicio|^Cierre|^Para casa|^✂/.test(t)) return;
-    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.dataset.id = s.id; a.title = t;
+    var tros = t.match(/^(\d+|✂) ?(?:· )?(.*)$/);   // projectant, cada bloc és el seu número; només l'actual porta el nom
+    if (tros) {
+      var nb = document.createElement("b"), ns = document.createElement("span");
+      nb.textContent = tros[1]; ns.textContent = (tros[1] === "✂" ? " " : " · ") + tros[2];
+      a.appendChild(nb); a.appendChild(ns);
+    } else a.textContent = t;
     if (s.classList.contains("dema") || s.classList.contains("tallsessio")) a.classList.add("dema");
     a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
     nav.appendChild(a);
@@ -679,7 +784,7 @@ Las medidas, primero en la organización y entre compañeros, antes que sobre la
       });
       pinta();
     }
-    encaixa();
+    encaixa();   // en votar surt la solució: la lletra s'ajusta una vegada, ara amb la solució a la vista
   }
   function reinicia(){
     document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
@@ -709,12 +814,12 @@ Las medidas, primero en la organización y entre compañeros, antes que sobre la
   function endavant(){
     var q = disponibles(pant[i]).filter(function(p){ return !p.classList.contains("vist"); });
     if (!q.length) { mostra(i + 1); return; }
-    destapa(q[0]); encaixa(); q[0].scrollIntoView({ block: "nearest" });
+    destapa(q[0]); q[0].scrollIntoView({ block: "nearest" });
   }
   function enrere(){
     var v = disponibles(pant[i]).filter(function(p){ return p.classList.contains("vist"); });
     if (v.length < 2) { mostra(i - 1); return; }   // el primer pas no es tapa: ← torna a la pantalla anterior
-    v[v.length - 1].classList.remove("vist"); marca(pant[i]); encaixa();
+    v[v.length - 1].classList.remove("vist"); marca(pant[i]);
   }
 
   /* solucions i respostes que es revelen (botó o tecla S) */
@@ -722,8 +827,12 @@ Las medidas, primero en la organización y entre compañeros, antes que sobre la
     b.addEventListener("click", function(){
       var s = b.nextElementSibling;
       while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
-      if (s) s.classList.toggle("obert");
-      encaixa();
+      if (s) {
+        var obrir = !s.classList.contains("obert");
+        // projectant, una resposta cada vegada: així cap en pantalla, i la lletra no s'ha de fer petita per a totes alhora
+        if (obrir && document.body.classList.contains("proj")) b.closest("section").querySelectorAll(".sol.obert").forEach(function(x){ x.classList.remove("obert"); });
+        s.classList.toggle("obert", obrir);
+      }
       if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
     });
   });
@@ -761,12 +870,34 @@ Las medidas, primero en la organización y entre compañeros, antes que sobre la
   /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
   var i = 0, pos = document.getElementById("pos");
   function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  /* encaixa (JM, 08-11): la lletra es calcula per a tot el que hi pot sortir a la vista (els passos, les solucions): no balla en
+     destapar, cap pantalla es talla i les que porten poc s'aprofiten per anar més grans. Amb un vot, abans de votar mana la
+     pregunta (sense créixer gaire, perquè el salt en votar no sigui gros) i, en votar, es torna a calcular amb la solució. */
+  var ESC_MIN = 0.72, ESC_MAX = 1.35, ESC_VOT = 1.1;
+  function prova(s, e){ s.style.setProperty("--escala", e.toFixed(2)); return s.scrollHeight <= s.clientHeight + 1 && s.scrollWidth <= s.clientWidth + 1; }
+  function ajusta(s){
+    var e = 1, max = s.querySelector(".voto:not(.fet)") ? ESC_VOT : ESC_MAX;
+    if (prova(s, 1)) { while (e + 0.05 <= max && prova(s, e + 0.05)) e += 0.05; }
+    else { do { e -= 0.04; } while (e > ESC_MIN && !prova(s, e)); if (e < ESC_MIN) e = ESC_MIN; }
+    return e;
+  }
   function encaixa(){
     if (!document.body.classList.contains("proj")) return;
-    var s = pant[i], e = 1;
-    s.style.setProperty("--escala", 1);
-    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+    var s = pant[i], sols = Array.prototype.slice.call(s.querySelectorAll(".sol")), e = ESC_MAX;
+    var oberts = sols.filter(function(x){ return x.classList.contains("obert"); });
+    s.classList.add("mesura");
+    if (!sols.length) e = ajusta(s);
+    else sols.forEach(function(x){
+      sols.forEach(function(y){ y.classList.remove("obert"); });
+      x.classList.add("obert");
+      e = Math.min(e, ajusta(s));
+    });
+    sols.forEach(function(y){ y.classList.remove("obert"); });
+    oberts.forEach(function(y){ y.classList.add("obert"); });
+    s.classList.remove("mesura");
+    s.style.setProperty("--escala", e.toFixed(2));
   }
+  window.addEventListener("load", function(){ alcada(); encaixa(); });
   window.addEventListener("resize", function(){ alcada(); encaixa(); });
   function mostra(n){
     i = Math.max(0, Math.min(pant.length - 1, n));
@@ -863,6 +994,7 @@ Las medidas, primero en la organización y entre compañeros, antes que sobre la
   ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
 
   if (location.hash === "#" + TX.hash) entra();
+  window.__sessio = { mostra: mostra, encaixa: encaixa, n: pant.length };   // per a la comprovació de la maqueta (norma 45)
 })();
 </script>
 <script>
