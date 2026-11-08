@@ -50,7 +50,7 @@ a.ref.hoja::after{content:" ↗"}
 .nota{font-size:14px;color:var(--suau)}
 .inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
 .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
-.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff;min-width:0;overflow-wrap:break-word}
 .tres>div b{display:block;font-size:18px;margin-bottom:4px}
 .tres>div span{font-size:15px;color:var(--suau)}
 .dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
@@ -63,9 +63,14 @@ li{margin:0 0 4px}
 table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
 th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
 th{background:#f3ecdf}
-.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+/* cadenes amb fletxes (JM, 08-11: «mira com queda de malament»): la fila no es parteix mai. El que s'adapta és el text de
+   dins cada caixa; si no hi ha amplada, la cadena passa a vertical (les regles @container, generades al final del CSS) */
+.filw{container-type:inline-size}
+.cadena,.fil{display:flex;flex-wrap:nowrap;align-items:stretch}
+.cadena>span,.fil>span,.flujo>span{flex:0 1 auto;min-width:0;overflow-wrap:break-word;align-content:center}
+.cadena>i,.fil>i,.flujo>i{flex:none;align-self:center;font-style:normal;font-weight:800;color:var(--suau)}
+.cadena{gap:6px;margin:10px 0 14px}
 .cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
-.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
 .cadena span.avui{background:#ffd66b}
 .cadena span.fet{opacity:.55}
 .plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -95,10 +100,10 @@ th{background:#f3ecdf}
 .resp.no i{background:var(--vermell)}
 .ley{display:inline-block;font-size:.8em;font-weight:700;border:1.5px solid var(--tinta);border-radius:99px;padding:.05em .65em;margin:0 .3em .3em 0;background:#fff;white-space:nowrap}
 .flujo{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.25em 0 .5em}
+.flujo:has(>i){flex-wrap:nowrap;align-items:stretch}
 .flujo span{padding:.18em .7em;border-radius:.5em;background:#fff;border:1.5px solid var(--verd)}
-.flujo i{font-style:normal;font-weight:800;color:var(--suau)}
 .cuadro4{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em;margin:.35em 0 .5em}
-.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff}
+.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff;min-width:0;overflow-wrap:break-word}
 .cuadro4 h4{margin:0 0 .2em;font-size:.72em;text-transform:uppercase;letter-spacing:.05em;color:var(--suau)}
 .cuadro4 p{margin:0 0 .15em;font-weight:700}
 .cuadro4 small{display:block;font-weight:400;color:var(--suau)}
@@ -144,14 +149,14 @@ p.si i{width:1.4em;height:1.4em;font-size:.75em;background:var(--verd)}
 .nop i{width:1.35em;height:1.35em;font-size:.7em;background:var(--vermell)}
 .idea{display:inline-flex;flex-direction:column;border-left:.35em solid var(--mostassa);background:var(--mostassaclar);border-radius:.4em;padding:.35em .85em;margin:.15em 0 .45em}
 .idea b{font-size:1.12em}
-.fil{display:flex;flex-wrap:wrap;align-items:center;gap:.4em;margin:.3em 0 .55em}
+.fil{gap:.4em;margin:.3em 0 .55em}
 .fil span{background:#fff;border:2px solid var(--tinta);border-radius:.5em;padding:.35em .8em;font-weight:700;line-height:1.25}
-.fil i{font-style:normal;font-weight:800;color:var(--suau);font-size:1.25em}
-.fil.escala{align-items:flex-end}
-.fil.escala span:nth-of-type(2){margin-bottom:1.1em}
-.fil.escala span:nth-of-type(3){margin-bottom:2.2em}
-.fil.escala span:nth-of-type(4){margin-bottom:3.3em}
-.fil.escala span:last-of-type{background:#ffd66b}
+.fil i{font-size:1.25em}
+/* l'escala: columnes iguals que pugen d'esquerra a dreta; la pujada ja diu l'ordre, sense fletxes */
+.fil.escala{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:.55em;align-items:stretch}
+.fil.escala>i{display:none}
+.fil.escala>span{margin-top:calc((var(--n,1) - 1 - var(--i,0)) * 1.15em)}
+.fil.escala>span:last-of-type{background:#ffd66b}
 .gran{display:inline-flex;flex-direction:column;vertical-align:top;min-width:6.5em;margin:.2em .7em .45em 0;padding:.35em .9em;border-radius:.55em;background:#fff;border:2px solid var(--linia)}
 .gran b{font-size:2.2em;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .gran span{color:var(--suau);font-size:.85em;line-height:1.3}
@@ -175,7 +180,7 @@ p.si i{width:1.4em;height:1.4em;font-size:.75em;background:var(--verd)}
 .p.dema{border:2px dashed var(--suau)}
 .dalt nav a.dema{background:transparent;border:1px dashed rgba(255,255,255,.55)}
 .dalt nav a.dema:hover,.dalt nav a.dema.ara{background:#ffd66b;color:var(--tinta)}
-#passos{letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.65);border-radius:8px;padding:6px 10px;font-size:14px}
+#passos{letter-spacing:.12em;color:#fff}
 #passos:empty{display:none}
 textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
 textarea.resp:focus{outline:2px solid var(--tinta)}
@@ -193,10 +198,13 @@ body.proj{background:var(--kraft);overflow:hidden}
 body.proj main{max-width:none;padding:0}
 body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
 body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
-  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+  padding:2.2vh 5vw 3vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
 body.proj .p.actual{display:block}
 body.proj .pas:not(.vist){display:none}
-body.proj .pas.vist:not(.ara){opacity:.6}
+body.proj .p.mesura .pas{display:flow-root!important}
+body.proj .plan small{display:none}
+body.proj .p{scrollbar-width:none}
+body.proj .p::-webkit-scrollbar{display:none}
 body.proj .fil{font-size:1.08em}
 body.proj .foto{width:32%}
 body.proj .pas.ara{animation:destapa .35s ease-out}
@@ -216,9 +224,16 @@ body.proj .clau{font-size:1.12em}
 body.proj .opc button{padding:.35em 1em}
 body.proj .ref{font-size:.72em}
 body.proj textarea.resp,body.proj .jo{display:none}
-body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
-.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
-.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+body.proj .ctrl{display:flex;flex:none;gap:5px;align-items:center;margin-left:auto}
+.ctrl button{font:inherit;font-weight:800;font-size:15px;border:0;border-radius:8px;padding:3px 12px;cursor:pointer;background:rgba(255,255,255,.16);color:#fff}
+.ctrl button:hover{background:#fff;color:var(--tinta)}
+.ctrl span{background:rgba(255,255,255,.12);color:#fff;border-radius:8px;padding:3px 9px;font-size:13px;white-space:nowrap}
+/* projectant, una sola línia a dalt (fins ara, fins a un 22 % de la pantalla): cada bloc és el seu número i només l'actual porta el nom */
+body.proj .dalt{flex-wrap:nowrap;padding:5px 12px;gap:12px}
+body.proj .dalt .nom small,body.proj #bproj{display:none}
+body.proj .dalt nav{flex-wrap:nowrap;min-width:0;overflow:hidden}
+body.proj .dalt nav a{flex:none}
+body.proj .dalt nav a:not(.ara) span{display:none}
 .cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
 .compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
 .compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
@@ -259,6 +274,44 @@ body.proj .voto .q{font-size:1.18em;line-height:1.3;margin-bottom:.55em}
 body.proj .opc{display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:.55em}
 body.proj .opc button{font-size:1.05em;padding:.55em .9em;text-align:left;border-width:2.5px;border-radius:.6em;line-height:1.25}
 body.proj .opc button .k{font-size:.75em}
+/* el temari a la vista (JM, 08-11): «sempre hi hauria d'haver una referència clara de què s'està parlant quant al temari
+   abans de posar-nos a veure casos concrets» */
+.temari{display:flex;flex-wrap:wrap;align-items:center;gap:.1em .45em;margin:0 0 .6em;padding:.32em .8em;border-radius:.55em;
+  background:var(--blauclar);color:var(--blau);font-size:15px;font-weight:600;line-height:1.3}
+.temari i{font-style:normal;opacity:.55}
+.temari b{font-weight:800}
+.temari .t-p{margin-left:auto;padding-left:1em;font-weight:800;white-space:nowrap}
+.temari.repas{background:#efe9dc;color:var(--suau)}
+.de-que{font-size:1.28em;line-height:1.4;margin:.2em 0 .7em;padding:.6em 1em;border-left:.32em solid var(--blau);background:#f5f8fd;border-radius:.4em}
+.saber{list-style:none;counter-reset:s;display:grid;gap:.4em;margin:.3em 0 .5em;padding:0}
+.saber li{counter-increment:s;position:relative;margin:0;padding:.42em .8em .42em 2.5em;background:#fff;border:2px solid var(--linia);border-radius:.6em;font-weight:600}
+.saber li::before{content:counter(s);position:absolute;left:.65em;top:.42em;width:1.4em;height:1.4em;border-radius:50%;background:var(--blau);color:#fff;
+  font-size:.92em;font-weight:800;display:flex;align-items:center;justify-content:center}
+.mapa-t{margin:.3em 0 .9em}
+.mapa-t .cap{margin:0 0 .35em;font-size:.76em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--suau)}
+.mapa-t ol{list-style:none;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:.3em;margin:0 0 .3em;padding:0}
+.mapa-t li{margin:0;padding:.28em .5em;border-radius:.45em;border:1.5px solid var(--linia);background:#fff;font-size:.82em;line-height:1.2;color:var(--suau);min-width:0;overflow-wrap:break-word}
+.mapa-t li b{font-weight:800}
+.mapa-t li small{display:block;font-size:.88em;font-weight:700}
+.mapa-t li.passat{opacity:.55}
+.mapa-t li.ara{border-color:var(--blau);background:var(--blauclar);color:var(--blau);font-weight:700}
+.mapa-t li.avui{border:2px solid var(--tinta);background:#ffd66b;color:var(--tinta);font-weight:800}
+body.proj .temari{font-size:.84em}
+/* projectant, cap mida fixa en píxels: si no, a la pantalla gran es perden (el títol de bloc feia 13 px en un cos de 30) */
+body.proj .kicker{font-size:.66em}
+body.proj .nota{font-size:.82em}
+body.proj .fuente{font-size:.68em}
+body.proj .inventat{font-size:.62em}
+body.proj .encls{font-size:.7em}
+body.proj .obertura h2{font-size:2.5em}
+body.proj #inicio .refs{display:none}   /* les pàgines ja les diu el mapa i el requadre fosc */
+body.proj .yt{height:41vh}
+@media (max-width:700px){
+  .temari .t-p{margin-left:0;padding-left:0}
+  .mapa-t ol{grid-auto-flow:row;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .flujo:has(>i){flex-direction:column;align-items:flex-start}
+  .flujo:has(>i)>i{transform:rotate(90deg);align-self:flex-start;margin-left:.6em}
+}
 @media (max-width:700px){
   body{font-size:16px}
   .p{padding:16px 14px}
@@ -275,6 +328,10 @@ body.proj .opc button .k{font-size:.75em}
   main{max-width:none;padding:0}
   .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
 }
+@container (max-width:20em){.fil.n2,.cadena.n2{display:flex;flex-direction:column;align-items:stretch}.fil.n2>i,.cadena.n2>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n2>span,.cadena.n2>span{margin-top:0!important}}
+@container (max-width:29em){.fil.n3,.cadena.n3{display:flex;flex-direction:column;align-items:stretch}.fil.n3>i,.cadena.n3>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n3>span,.cadena.n3>span{margin-top:0!important}}
+@container (max-width:37em){.fil.n4,.cadena.n4{display:flex;flex-direction:column;align-items:stretch}.fil.n4>i,.cadena.n4>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n4>span,.cadena.n4>span{margin-top:0!important}}
+@container (max-width:45em){.fil.n5,.fil.n6,.cadena.n5,.cadena.n6{display:flex;flex-direction:column;align-items:stretch}.fil.n5>i,.fil.n6>i,.cadena.n5>i,.cadena.n6>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n5>span,.fil.n6>span,.cadena.n5>span,.cadena.n6>span{margin-top:0!important}}
 
 /* il·lustracions interactives (JM, 05-11): grans a la projecció, tocables, sense res de fora */
 .int{margin:.4em 0 .6em;padding:.6em .8em;border:2px solid var(--linia);border-radius:.8em;background:#fff}
@@ -387,6 +444,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <nav id="index"></nav>
   <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
   <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
+  <div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="passos"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
 </header>
 
 <main>
@@ -394,17 +452,18 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 <section class="p" id="inicio" data-titol="Inicio">
   <p class="kicker">Sesión 4 · una hora</p>
   <h2>Ruido, luz y temperatura, con números</h2>
-  <p style="font-size:1.15em">Hoy, <b>tres cosas del ambiente de trabajo que se miden</b>: el ruido, la luz y la temperatura.</p>
-  <div class="cadena"><span class="fet">Incendio (págs. 31-32)</span><i>→</i><span class="avui">Temperatura: cada uno, la oficina de Paloma (pág. 38)</span><i>→</i><span class="avui">Ruido: 80, 85 y 87 dB(A) (págs. 33-34)</span><i>→</i><span class="avui">Luz (págs. 35-36)</span><i>→</i><span>Químicos y biológicos: después del patio</span></div>
-  <div class="plan"><div><b>Hoy</b><ol start="1"><li>Dos preguntas para recordar (viernes 6 y 23) <small>· 4 min</small></li><li>Cada uno solo: la oficina de Paloma, con la tabla 2.13 (pág. 38) <small>· 14 min</small></li><li>Ruido: cuándo obliga a llevar protectores, por qué esos tres números y qué hace antes la empresa (págs. 33-34), con un vídeo de 3 minutos <small>· 15 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>Luz: cuánta según la tarea y cuándo se duplica (págs. 35-36) <small>· 9 min</small></li><li>Si sobra tiempo: químicos, forma y efecto (pág. 39) <small>· ➕ si da tiempo</small></li><li>Si sobra tiempo, cada uno solo: César y su fábrica (págs. 39-40) <small>· ➕ si da tiempo</small></li></ol><p style="margin:8px 0 0"><b>Para salir:</b> 2 preguntas en voz alta.</p></div></div>
+  <p style="font-size:1.15em">Primero, lo que quedó del viernes: <b>la motosierra</b>. Después, <b>tres cosas del ambiente de trabajo que se miden</b>: el ruido, la luz y la temperatura.</p>
+  <div class="mapa-t"><p class="cap">Dónde estamos en el temario · Unidad 2: Prevención de riesgos laborales generales y específicos</p><ol><li class="ara"><b>2.1</b> Condiciones de seguridad</li><li class="ara"><b>2.2</b> Medioambiente de trabajo</li><li><b>2.3</b> Organización y carga de trabajo</li><li><b>2.4</b> Riesgos por sectores</li><li><b>2.5</b> Especialidades preventivas</li><li><b>2.6</b> Señalización</li></ol><ol><li class="passat"><b>2.1.1</b> Lugares de trabajo</li><li class="avui"><b>2.1.2</b> Equipos de trabajo<small>Libro · pág. 29</small></li><li><b>2.1.3</b> Riesgo eléctrico</li><li><b>2.1.4</b> Incendio</li><li class="ara"><b>2.2.1</b> Agentes físicos</li><li><b>2.2.2</b> Agentes químicos</li><li><b>2.2.3</b> Agentes biológicos</li></ol><ol><li class="avui"><b>2.2.1 A</b> Ruido<small>Libro · págs. 33-34</small></li><li><b>2.2.1 B</b> Vibraciones</li><li class="avui"><b>2.2.1 C</b> Iluminación<small>Libro · págs. 35-36</small></li><li><b>2.2.1 D</b> Radiaciones</li><li class="avui"><b>2.2.1 E</b> Temperatura, humedad y aire<small>Libro · pág. 38</small></li></ol></div>
+  <div class="plan"><div><b>Hoy</b><ol start="1"><li>Dos preguntas para recordar (viernes 6 y 23) <small>· 4 min</small></li><li>Lo que quedó del viernes: la motosierra (pág. 29) <small>· 5 min</small></li><li>Cada uno solo: la oficina de Paloma, con la tabla 2.13 (pág. 38) <small>· 14 min</small></li><li>Ruido: tres niveles, su lógica y qué va primero (págs. 33-34) <small>· 12 min</small></li></ol></div><div><b>&nbsp;</b><ol start="5"><li>Luz: cuánta según la tarea y cuándo se duplica (págs. 35-36) <small>· 9 min</small></li><li>Si sobra tiempo: químicos, forma y efecto (pág. 39) <small>· ➕ si da tiempo</small></li><li>Si sobra tiempo, cada uno solo: César y su fábrica (págs. 39-40) <small>· ➕ si da tiempo</small></li></ol><p style="margin:8px 0 0"><b>Para salir:</b> 2 preguntas en voz alta.</p></div></div>
   <h3 class="noproj">Cómo usar esta página</h3>
   <p class="noproj">En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
-  <div class="refs"><span class="ref libro">Libro · págs. 33-36 y 38 (si da tiempo, 39)</span></div>
+  <div class="refs"><span class="ref libro">Libro · págs. 29, 33-36 y 38 (si da tiempo, 39)</span></div>
     <p class="nota noproj">Azul: el libro. Amarillo: lo que escribes en esta página.</p>
-  <div class="clau"><b>Libro: <span style="white-space:nowrap">págs. 33-36 y 38</span>.</b> <b>Entra en el examen:</b> 80, 85 y 87 dB(A) y qué obliga cada uno · qué va primero contra el ruido · la hipoacusia · 100, 200, 500 y 1.000 lux y cuándo se duplican · 17-27 °C (sentado), 14-25 °C (ligero) y humedad 30-70 %. <b>Para leer, no entra:</b> los equipos de trabajo (pág. 29) · la infografía de oficios y tiempos (pág. 34).</div>
+  <div class="clau"><b>Libro: <span style="white-space:nowrap">págs. 33-36 y 38</span>.</b> <b>Entra en el examen:</b> 80, 85 y 87 dB(A) y qué obliga cada uno · qué va primero contra el ruido · la hipoacusia · 100, 200, 500 y 1.000 lux y cuándo se duplican · 17-27 °C (sentado), 14-25 °C (ligero) y humedad 30-70 %. <b>Se comenta, pero no entra:</b> los equipos de trabajo (pág. 29). <b>Para leer, no entra:</b> la infografía de oficios y tiempos (pág. 34).</div>
 </section>
 
 <section class="p" id="entrar" data-titol="1 · Para entrar">
+  <p class="temari repas"><b>Repaso de lo ya visto</b></p>
   <p class="kicker">1 · Lo de los viernes 6 y 23 · para empezar</p>
   <h2>Dos preguntas, sin mirar</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 31 · figura 2.4 «Teoría del fuego» · pág. 32 · figura 2.5</span><span class="ref libro">Libro · pág. 26 · tabla 2.1</span></div>
@@ -433,8 +492,50 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 <div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 26 · tabla 2.1, fila «Caídas de objetos en manipulación»</span></div></div></div>
 </section>
 
-<section class="p" id="paloma" data-titol="2 · La oficina de Paloma">
-  <p class="kicker">2 · Cada uno solo · caso práctico propuesto 2.8 del libro · unos nueve minutos</p>
+<section class="p obertura" id="tema-2" data-titol="2 · Equipos de trabajo">
+  <p class="temari"><span>2.1 · Condiciones de seguridad</span><i>›</i><b>2.1.2 · Equipos de trabajo</b><span class="t-p">Libro · pág. 29</span></p>
+  <p class="kicker">2 · De qué hablamos</p>
+  <h2>Equipos de trabajo</h2>
+  <div class="de-que">El último punto de las condiciones de seguridad: <b>con qué se trabaja</b> y qué le exige la ley a la empresa sobre ello (RD 1215/1997). Hoy lo comentamos con un caso real; para el examen, no entra.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Qué cuenta como equipo de trabajo</li><li>Que la empresa debe darlos adecuados al trabajo, mantenerlos y formar a quien los usa</li></ol>
+</section>
+
+<section class="p" id="equipo">
+  <p class="temari"><span>2.1 · Condiciones de seguridad</span><i>›</i><b>2.1.2 · Equipos de trabajo</b><span class="t-p">Libro · pág. 29</span></p>
+  <p class="kicker">2 · Lo que quedó del viernes · un accidente real en Mallorca</p>
+  <h2>La motosierra que se escapa</h2>
+  <div class="caso noticia"><p class="cap-noticia"><span>📰 Ultima Hora, 09-02-2025</span><a class="font-link" href="https://www.ultimahora.es/sucesos/ultimas/2025/02/09/2322507/sucesos-mallorca-herido-grave-trabajador-del-ajuntament-marratxi-tras-cortarse-mano-una-motosierra.html" target="_blank" rel="noopener">Leer la noticia ↗</a></p><p><b>4 de febrero de 2025, hacia las 11 h.</b> Un operario del Ayuntamiento de Marratxí poda árboles delante de unos viveros de Santa Maria. Pierde el control de la motosierra y se hace un corte profundo en la mano. Lo operan de urgencia en Son Llàtzer.</p></div>
+<div class="voto" data-ok="c"><p class="q">Para la ley, la motosierra es un «equipo de trabajo». ¿Y estos otros: el taladro de un taller, el ordenador de una oficina y la carretilla de una nave?</p><div class="opc"><button data-v="a">Solo el taladro y la carretilla: son máquinas</button><button data-v="b">Solo el ordenador: es el que se usa todo el día</button><button data-v="c">Los tres</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Los tres</span></p>
+<p class="nop"><i>✗</i><span>Solo máquinas: un aparato también cuenta</span></p>
+<p class="nop"><i>✗</i><span>Solo el ordenador: las máquinas también lo son</span></p>
+<div class="idea"><b>Equipo de trabajo</b><span>máquina, aparato, instrumento o instalación que se usa en el trabajo</span></div>
+<span class="ley">RD 1215/1997 · art. 2</span> <span class="ref libro">Libro · pág. 29 · apartado 2.1.2</span></div></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 29 · apartado 2.1.2 «Equipos de trabajo», 1.er párrafo</span></div>
+</section>
+
+<section class="p" id="equipo-2">
+  <p class="temari"><span>2.1 · Condiciones de seguridad</span><i>›</i><b>2.1.2 · Equipos de trabajo</b><span class="t-p">Libro · pág. 29</span></p>
+  <p class="kicker">2 · la solución, 2 de 2</p>
+  <h2>Las dos condiciones, una a una</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 29 · apartado 2.1.2, 1.er y 3.er párrafos</span></div>
+  <div class="pas"><div class="cuadro4"><div class="si"><h4>Motosierra</h4><p>Sí</p><small>máquina · para trabajar</small></div><div class="si"><h4>Taladro</h4><p>Sí</p><small>máquina · para trabajar</small></div><div class="si"><h4>Ordenador</h4><p>Sí</p><small>aparato · para trabajar</small></div><div class="si"><h4>Carretilla</h4><p>Sí</p><small>máquina · para trabajar</small></div></div></div>
+<div class="pas"><div class="idea"><b>No hace falta que sea grande ni peligrosa</b><span>y «usarlo» también es ponerlo en marcha, pararlo, transportarlo, mantenerlo y limpiarlo (pág. 29, 3.er párrafo)</span></div></div>
+</section>
+
+<section class="p obertura" id="tema-3" data-titol="3 · La oficina de Paloma">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>E · Temperatura, humedad y aire</b><span class="t-p">Libro · pág. 38</span></p>
+  <p class="kicker">3 · De qué hablamos</p>
+  <h2>Temperatura, humedad y aire</h2>
+  <div class="de-que">Las <b>condiciones termohigrométricas</b> son la temperatura, la humedad y la velocidad del aire del local, más la renovación del aire si está cerrado. Las regula el RD 486/1997, anexo III.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Cuánta temperatura y humedad admite la ley (tabla 2.13)</li><li>Que depende de si el trabajo es sedentario o ligero</li><li>Las corrientes y la renovación del aire se miran en la tabla, no se aprenden</li></ol>
+</section>
+
+<section class="p" id="paloma">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>E · Temperatura, humedad y aire</b><span class="t-p">Libro · pág. 38</span></p>
+  <p class="kicker">3 · Cada uno solo · caso práctico propuesto 2.8 del libro · unos nueve minutos</p>
   <h2>La oficina de Paloma, con números</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 38 · caso práctico propuesto 2.8</span><span class="ref libro">Libro · pág. 38 · tabla 2.13</span><span class="ref ficha">Apúntalo en la libreta o en el móvil</span></div>
   <div class="caso"><p>Paloma trabaja sentada en una <b>oficina</b>. Hay <b>28 °C</b> y un <b>25 %</b> de humedad relativa (cuánta agua lleva el aire, en vapor). El aire circula a <b>0,75 m/s</b> y se renueva a <b>30 m³/h por persona</b> (metros cúbicos de aire nuevo cada hora).</p></div>
@@ -446,7 +547,8 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 </section>
 
 <section class="p" id="paloma-voto">
-  <p class="kicker">2 · Corrección · caso práctico propuesto 2.8</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>E · Temperatura, humedad y aire</b><span class="t-p">Libro · pág. 38</span></p>
+  <p class="kicker">3 · Corrección · caso práctico propuesto 2.8</p>
   <h2>¿Cuántas fallan?</h2>
   <div class="voto" data-ok="b"><p class="q">En la oficina de Paloma, ¿cuántas de las cuatro cifras fallan seguro?</p><div class="opc"><button data-v="a">Dos: la temperatura y la humedad</button><button data-v="b">Tres: también la corriente de aire</button><button data-v="c">Las cuatro: también la renovación del aire</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Tres</span></p>
 <p class="nop"><i>✗</i><span>Dos: el 0,75 es de trabajos no sedentarios con calor; Paloma está sentada</span></p>
@@ -457,7 +559,8 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 </section>
 
 <section class="p" id="paloma-2" data-min="9">
-  <p class="kicker">2 · Corrección · caso práctico propuesto 2.8 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>E · Temperatura, humedad y aire</b><span class="t-p">Libro · pág. 38</span></p>
+  <p class="kicker">3 · Corrección · caso práctico propuesto 2.8 · la solución, 2 de 2</p>
   <h2>Cifra a cifra</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 38 · tabla 2.13, «Condiciones ambientales reguladas en el Anexo III del RD 486/1997»</span></div>
   <div class="pas"><div class="cuadro4"><div class="no"><h4>Temperatura</h4><p>28 °C ✗</p><small>17-27 °C</small></div><div class="no"><h4>Humedad</h4><p>25 % ✗</p><small>30-70 %</small></div><div class="no"><h4>Corriente de aire</h4><p>0,75 m/s ✗</p><small>máx. 0,25 (0,50 con calor)</small></div><div class="alt"><h4>Aire nuevo</h4><p>30 m³/h ≈</p><small>basta sin calor; con calor, 50</small></div></div></div>
@@ -471,8 +574,18 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 La trampa es la corriente de aire: <b>0,75 m/s</b> es el máximo de otra fila (trabajos <b>no</b> sedentarios en ambientes calurosos); quien la mira dice que cumple. Y la renovación: con 28 °C, ¿es un ambiente «caluroso»? Ni el libro ni el reglamento lo definen: si no lo es, 30 basta; si lo es, hacen falta 50. Por eso «fallan seguro» tres. Cómo debería ser: entre 17 y 27 °C, humedad entre el 30 y el 70 %, corriente de 0,25 m/s como mucho (0,50 con calor) y al menos 30 m³/h por persona (50 con calor).<span class="ley">RD 486/1997 · anexo III.3</span> <span class="ref libro">Libro · pág. 38 · tabla 2.13 y caso práctico propuesto 2.8</span></div></details>
 </section>
 
-<section class="p" id="lorena" data-titol="3 · Ruido">
-  <p class="kicker">3 · Libro, pág. 33 · caso práctico propuesto 2.5 · con la figura 2.7 de la pág. 34</p>
+<section class="p obertura" id="tema-4" data-titol="4 · Ruido">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
+  <p class="kicker">4 · De qué hablamos</p>
+  <h2>Ruido</h2>
+  <div class="de-que">El <b>ruido</b> es el sonido que molesta o daña: si es fuerte y prolongado, destruye células del oído interno y la pérdida de audición no se recupera. Se mide en dB(A).</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Los tres niveles de la ley y qué obliga cada uno</li><li>Qué se hace primero contra el ruido</li><li>La hipoacusia: el daño que deja</li></ol>
+</section>
+
+<section class="p" id="lorena">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
+  <p class="kicker">4 · caso práctico propuesto 2.5 · con la figura 2.7 de la pág. 34</p>
   <h2>Lorena y las máquinas del taller</h2>
   <div class="caso"><p><b>Otra Lorena</b> (no la de la unidad 1) trabaja en un taller con máquinas. Se mide el ruido que recibe en <b>toda su jornada</b>: sale <b>más de 80 dB(A)</b> (decibelios: la unidad con que se mide el ruido), pero no llega a 85.</p></div>
 <div class="voto" data-ok="b"><p class="q">Con la tabla de la pág. 34: ¿tiene que llevar protectores para los oídos?</p><div class="opc"><button data-v="a">Sí, obligatorios: ya pasa de 80</button><button data-v="b">No obligatorios, pero la empresa se los da</button><button data-v="c">No: hasta 87 no hace falta nada</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Se los dan; llevarlos, optativo</span></p>
@@ -484,10 +597,11 @@ La trampa es la corriente de aire: <b>0,75 m/s</b> es el máximo de otra fila (t
 </section>
 
 <section class="p" id="lorena-2">
-  <p class="kicker">3 · Libro, pág. 34 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
+  <p class="kicker">4 · la solución, 2 de 2</p>
   <h2>Tres números, tres escalones</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 34 · figura 2.7, «Resumen de acciones preventivas» · pág. 33 · figura 2.6</span></div>
-  <div class="pas"><div class="fil escala"><span>80 · Aviso: informar, formar y ofrecer protectores</span><i>→</i><span>85 · Actuar: protectores obligatorios y un plan para bajar el ruido</span><i>→</i><span>87 · Tope: no se pasa nunca</span></div><p class="nota">RD 286/2006: arts. 4, 5, 7, 8 y 9.</p></div>
+  <div class="pas"><div class="filw"><div class="fil n3 escala" style="--n:3"><span style="--i:0">80 · Aviso: informar, formar y ofrecer protectores</span><i>→</i><span style="--i:1">85 · Actuar: protectores obligatorios y un plan para bajar el ruido</span><i>→</i><span style="--i:2">87 · Tope: no se pasa nunca</span></div></div><p class="nota">RD 286/2006: arts. 4, 5, 7, 8 y 9.</p></div>
 <div class="pas"><div class="idea"><b>Por qué escalones</b><span>el daño crece con el ruido: cuanto más alto, más obligaciones, antes de que llegue la sordera</span></div></div>
 <div class="pas"><div class="idea"><b>El daño: la hipoacusia</b><span>la sordera profesional: el ruido fuerte, con los años, daña para siempre el oído interno (pág. 34)</span></div></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>La empresa se los tiene que dar, pero llevarlos no es obligatorio.</b> Así se resuelve:
@@ -501,7 +615,8 @@ El daño es la <b>hipoacusia</b> o sordera profesional (figura 2.6, pág. 33): e
 </section>
 
 <section class="p" id="ruido-logica">
-  <p class="kicker">3 · La lógica de los tres números · RD 286/2006, anexo I</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
+  <p class="kicker">4 · La lógica de los tres números · RD 286/2006, anexo I</p>
   <h2>¿Un ruido de 89 ya pasa del 87?</h2>
   <div class="voto" data-ok="b"><p class="q">En el taller de Lorena, una sierra da 89 dB(A). Un compañero la usa 4 horas al día y el resto de la jornada trabaja en silencio. ¿Pasa del límite de 87? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Sí: 89 es más que 87</button><button data-v="b">No: la ley cuenta el ruido de toda la jornada</button><button data-v="c">Sí: 4 horas a 89 suman más de 87</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Cuenta la jornada entera</span></p>
 <p class="nop"><i>✗</i><span>89 es la sierra, no lo que recibe en el día</span></p>
@@ -513,11 +628,12 @@ El daño es la <b>hipoacusia</b> o sordera profesional (figura 2.6, pág. 33): e
 </section>
 
 <section class="p" id="ruido-logica-2">
-  <p class="kicker">3 · La lógica de los tres números · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
+  <p class="kicker">4 · La lógica de los tres números · la solución, 2 de 2</p>
   <h2>Por qué se mide así</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 33 · apartado 2.2.1 «Ruido»</span></div>
   <div class="pas"><div class="gran"><b>+3 dB</b><span>el doble de energía sonora: 85 no es «un poco más» que 80, es unas tres veces más</span></div></div>
-<div class="pas"><div class="fil"><span>Sierra a 89 dB(A) · 4 horas</span><i>→</i><span>La mitad de tiempo: 3 dB menos</span><i>→</i><span>Unos 86 en la jornada: protectores obligatorios, sin pasar de 87</span></div></div>
+<div class="pas"><div class="filw"><div class="fil n3" style="--n:3"><span style="--i:0">Sierra a 89 dB(A) · 4 horas</span><i>→</i><span style="--i:1">La mitad de tiempo: 3 dB menos</span><i>→</i><span style="--i:2">Unos 86 en la jornada: protectores obligatorios, sin pasar de 87</span></div></div></div>
 <div class="pas"><div class="idea"><b>Por qué el protector solo cuenta en el 87</b><span>el 80 y el 85 miden el ruido del puesto, el que la empresa tiene que bajar; el 87, lo que llega de verdad al oído</span></div></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>No pasa del límite.</b> La lógica, en tres ideas:
 <ol class="pasos"><li><b>Nivel y tiempo, juntos.</b> El oído se daña por lo fuerte que es el ruido y por el rato que dura. Por eso la ley no mira el ruido de una máquina, sino el <b>nivel diario equivalente</b>: todo lo que una persona recibe en el día, llevado a una jornada de 8 horas (RD 286/2006, art. 5.1 y anexo I).</li><li><b>Los decibelios no suman como los kilos.</b> Cada 3 dB más es el doble de energía sonora; cada 10 dB, diez veces más. Por eso, para la misma dosis, cada 3 dB más es la mitad de tiempo: la sierra de 89 dB(A) durante 4 horas da unos 86 dB(A) en la jornada. Pasa de 85 (protectores obligatorios) pero no de 87. Si la usara las 8 horas, serían 89: por encima del límite sin protector; con un protector bien puesto, lo que llega al oído podría quedar por debajo (en el 87 se mira lo que llega al oído).</li><li><b>Por qué el protector solo cuenta en el 87</b> (art. 5.2). El 80 y el 85 miden el ruido del puesto: lo que la empresa tiene que bajar. Si contaran los tapones, bastaría con repartirlos para no tener que hacer nada más. El 87 mide lo que llega de verdad al oído de la persona, con su protector puesto: es el tope que no se pasa nunca.</li></ol>
@@ -525,7 +641,8 @@ No hace falta hacer cuentas en el examen: basta saber que nivel y tiempo van jun
 </section>
 
 <section class="p" id="ruido-orden">
-  <p class="kicker">3 · Libro, pág. 34 · figura 2.7</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
+  <p class="kicker">4 · figura 2.7</p>
   <h2>Con tapones le llega 80: ¿ya cumple?</h2>
   <div class="voto" data-ok="c"><p class="q">Ahora, en el taller de Lorena, las máquinas dan <b>88 dB(A)</b> en la jornada. La empresa reparte tapones a todos, los hace obligatorios y pone la señal. Con los tapones puestos, al oído le llegan <b>80</b>. ¿Ya cumple la ley? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Sí: con los tapones queda por debajo de 87, el límite</button><button data-v="b">Sí: tapones obligatorios y señal es lo que se pide desde 85</button><button data-v="c">No: también tiene que bajar el ruido de las máquinas</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · No: falta bajar el ruido en su origen</span></p>
 <p class="nop"><i>✗</i><span>El 87 sí cuenta el tapón, pero solo dice si se pasa el límite</span></p>
@@ -536,10 +653,11 @@ No hace falta hacer cuentas en el examen: basta saber que nivel y tiempo van jun
 </section>
 
 <section class="p" id="ruido-orden-2">
-  <p class="kicker">3 · Libro, pág. 34 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
+  <p class="kicker">4 · la solución, 2 de 2</p>
   <h2>De la máquina a la persona</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 34 · figura 2.7, «Métodos de reducción del ruido»</span></div>
-  <div class="pas"><div class="fil escala"><span>① En la máquina: otra más silenciosa, aislarla</span><i>→</i><span>② Entre la máquina y la persona: pantallas, cabinas</span><i>→</i><span>③ En la persona: los protectores</span></div><span class="ley">RD 286/2006 · arts. 4.1 y 7.1</span></div>
+  <div class="pas"><div class="filw"><div class="fil n3 escala" style="--n:3"><span style="--i:0">① En la máquina: otra más silenciosa, aislarla</span><i>→</i><span style="--i:1">② Entre la máquina y la persona: pantallas, cabinas</span><i>→</i><span style="--i:2">③ En la persona: los protectores</span></div></div><span class="ley">RD 286/2006 · arts. 4.1 y 7.1</span></div>
 <div class="pas"><div class="idea"><b>Por qué este orden</b><span>bajar el ruido protege a todos sin depender de nadie; el protector, solo a quien lo lleva bien puesto toda la jornada</span></div></div>
 <div class="pas"><p class="nota">Desde 85, mientras se baja el ruido, también: protectores obligatorios y señal (arts. 4.3 y 7.1.b). Hacen falta, pero no sustituyen a bajar el ruido.</p></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>No cumple: falta bajar el ruido en su origen.</b> Así se razona:
@@ -548,7 +666,8 @@ Repartir tapones y poner la señal también hay que hacerlo, y desde el primer d
 </section>
 
 <section class="p" id="ruido-video">
-  <p class="kicker">3 · Vídeo · 3 minutos · Previlabor, servicio de prevención (15-02-2023)</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
+  <p class="kicker">4 · Vídeo · 3 minutos · si da tiempo · Previlabor, servicio de prevención (15-02-2023)</p>
   <h2>Dónde se actúa contra el ruido</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 34 · figura 2.7, «Métodos de reducción del ruido»</span></div>
   <div class="clau">Mientras lo ves: ¿en qué <b>tres sitios</b> se puede actuar contra el ruido? ¿Cuál va primero?</div>
@@ -557,8 +676,18 @@ Repartir tapones y poner la señal también hay que hacerlo, y desde el primer d
 <div class="pas"><p class="si"><i>✓</i><span>Máquina, lo de en medio y, al final, la persona</span></p><p class="nota">«Receptor» es la persona; el vídeo pone allí las cabinas.</p></div>
 </section>
 
-<section class="p" id="lidia" data-titol="4 · Luz">
-  <p class="kicker">4 · Libro, pág. 36 · caso práctico resuelto 2.3 · con la tabla 2.10 de la pág. 35</p>
+<section class="p obertura" id="tema-5" data-titol="5 · Luz">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>C · Iluminación</b><span class="t-p">Libro · págs. 35-36</span></p>
+  <p class="kicker">5 · De qué hablamos</p>
+  <h2>Iluminación</h2>
+  <div class="de-que">La luz de cada zona se adapta a lo que se hace en ella: cuanto más hay que afinar la vista (las <b>exigencias visuales</b> de la tarea), más luz. Se mide en <b>lux</b>.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Los cuatro mínimos (tabla 2.10)</li><li>Cuándo hace falta más luz que el mínimo</li></ol>
+</section>
+
+<section class="p" id="lidia">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>C · Iluminación</b><span class="t-p">Libro · págs. 35-36</span></p>
+  <p class="kicker">5 · caso práctico resuelto 2.3 · con la tabla 2.10 de la pág. 35</p>
   <h2>¿Cuánta luz en el taller de Lidia?</h2>
   <div class="caso"><p>En el taller de Lidia hay <b>200 lux</b> (el lux es la unidad con que se mide la luz que llega a la mesa). Las exigencias visuales de la tarea <b>no son altas</b> (el libro las toma como <b>moderadas</b>), pero el técnico de prevención cree que <b>un error al ver mal</b> podría provocar un accidente.</p></div>
 <div class="voto" data-ok="b"><p class="q">Con la tabla 2.10 (pág. 35), y con la solución del libro tapada (está debajo del caso): ¿qué nivel debería tener?</p><div class="opc"><button data-v="a">200 lux: ya tiene el mínimo de su fila</button><button data-v="b">400 lux: por el riesgo de un error al ver</button><button data-v="c">1.000 lux: con riesgo, el nivel más alto</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · 400 lux: el doble de 200</span></p>
@@ -570,7 +699,8 @@ Repartir tapones y poner la señal también hay que hacerlo, y desde el primer d
 </section>
 
 <section class="p" id="lidia-2">
-  <p class="kicker">4 · Libro, pág. 35 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>C · Iluminación</b><span class="t-p">Libro · págs. 35-36</span></p>
+  <p class="kicker">5 · la solución, 2 de 2</p>
   <h2>Los mínimos de luz</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 35 · tabla 2.10 y «Los niveles mínimos deberán duplicarse…» · pág. 36 · caso práctico resuelto 2.3</span></div>
   <div class="pas"><div class="cuadro4"><div><h4>Exigencias bajas</h4><p>100 lux</p></div><div><h4>Moderadas</h4><p>200 lux</p></div><div><h4>Altas</h4><p>500 lux</p></div><div><h4>Muy altas</h4><p>1.000 lux</p></div></div><p class="nota">Zonas donde se hace la tarea, según lo que exige ver (tabla 2.10).</p></div>
@@ -587,9 +717,20 @@ Los mínimos se duplican en tres casos (pág. 35): a) cuando en los locales o en
   <p>Si sobra tiempo, seguimos con el principio de lo que toca la próxima sesión. Lo que hagamos aquí, la próxima sesión no lo repite.</p>
 </section>
 
-<section class="p dema" id="limpiador" data-titol="5 · ➕ Químicos">
+<section class="p obertura dema" id="tema-6" data-titol="6 · ➕ Químicos">
   <p class="cinta">Esto ya es de la próxima sesión</p>
-  <p class="kicker">5 · ➕ Si da tiempo · Libro, pág. 39 · apartado 2.2.2 y tabla 2.14</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">6 · ➕ Si da tiempo · De qué hablamos</p>
+  <h2>Agentes químicos</h2>
+  <div class="de-que">Un <b>agente químico</b> es cualquier sustancia que aparece, se usa o se vierte en el trabajo, aunque no se haya fabricado a propósito. Hay <b>exposición</b> cuando llega a la persona, normalmente al respirarla o por la piel.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Las formas en que se presenta (tabla 2.14)</li><li>Sus efectos, a grandes rasgos (tabla 2.14)</li><li>El orden de las medidas (figura 2.11)</li></ol>
+</section>
+
+<section class="p dema" id="limpiador">
+  <p class="cinta">Esto ya es de la próxima sesión</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">6 · apartado 2.2.2 y tabla 2.14</p>
   <h2>Huele, pero no se ve</h2>
   <div class="caso"><p>En un aula de informática, una técnica limpia teclados y pantallas con un <b>paño mojado en un limpiador líquido con alcohol</b>. Al rato, toda el aula huele al limpiador, aunque en el aire no se ve nada.</p><p class="fuente"><span class="inventat">· ejemplo inventado</span></p></div>
 <div class="voto" data-ok="b"><p class="q">Con la tabla 2.14 (pág. 39): ¿qué forma tiene lo que está respirando? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Gas: está en el aire y no se ve</button><button data-v="b">Vapor: viene del líquido del paño</button><button data-v="c">Niebla: son gotitas del limpiador</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Vapor: el líquido que se evapora</span></p>
@@ -602,11 +743,11 @@ Los mínimos se duplican en tres casos (pág. 35): a) cuando en los locales o en
 
 <section class="p dema" id="toner-2">
   <p class="cinta">Esto ya es de la próxima sesión</p>
-  <p class="kicker">5 · Libro, pág. 39 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">6 · la solución, 2 de 2</p>
   <h2>Forma y efecto, a grandes rasgos</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 39 · apartado 2.2.2, tabla 2.14 y «Sabías que…»</span></div>
-  <div class="pas"><div class="idea"><b>Agente químico</b><span>cualquier sustancia que se usa o aparece en el trabajo, también un limpiador; hay exposición cuando llega a la persona, sobre todo respirándola o por la piel</span></div></div>
-<div class="pas"><div class="tres"><div><b>Sólido</b><span>polvo, fibra, humo (de quemar o de metal)</span></div><div><b>Líquido</b><span>niebla, neblina: gotitas</span></div><div><b>Gaseoso</b><span>gas, vapor</span></div></div></div>
+  <div class="pas"><div class="tres"><div><b>Sólido</b><span>polvo, fibra, humo (de quemar o de metal)</span></div><div><b>Líquido</b><span>niebla, neblina: gotitas</span></div><div><b>Gaseoso</b><span>gas, vapor</span></div></div></div>
 <div class="pas"><div class="cuadro4"><div><h4>Irritante</h4><small>inflama donde toca</small></div><div><h4>Asfixiante</h4><small>quita el oxígeno</small></div><div><h4>Anestésico</h4><small>marea, adormece</small></div><div><h4>Cancerígeno</h4><small>células sin control</small></div></div><p class="nota">Efectos: cuatro de los nueve de la tabla 2.14.</p></div>
 <div class="pas"><p class="nota">Para leer, no entra: los valores límite («Sabías que…», pág. 39).</p></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Vapor.</b> Un <b>agente químico</b> es cualquier elemento o compuesto, solo o mezclado, que aparece, se usa o se vierte en el trabajo, aunque no se haya fabricado a propósito (pág. 39). Hay <b>exposición</b> cuando llega a la persona, normalmente por inhalación (respirándolo) o por la piel. La tabla 2.14 los clasifica de dos maneras:
@@ -614,9 +755,10 @@ Los mínimos se duplican en tres casos (pág. 35): a) cuando en los locales o en
 Para leer, no entra: los <b>valores límite ambientales</b>, lo máximo que puede haber en el aire que se respira, de media en una jornada de 8 horas o en 15 minutos («Sabías que…», pág. 39).<span class="ley">RD 374/2001 · art. 2</span> <span class="ref libro">Libro · pág. 39 · apartado 2.2.2, tabla 2.14 y «Sabías que…»</span></div></details>
 </section>
 
-<section class="p dema" id="cesar" data-titol="6 · ➕ César">
+<section class="p dema" id="cesar" data-titol="7 · ➕ César">
   <p class="cinta">Esto ya es de la próxima sesión</p>
-  <p class="kicker">6 · ➕ Si da tiempo · Cada uno solo · caso práctico propuesto 2.9 del libro · unos nueve minutos</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">7 · ➕ Si da tiempo · Cada uno solo · caso práctico propuesto 2.9 del libro · unos nueve minutos</p>
   <h2>César y el líquido de las baterías</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 40 · caso práctico propuesto 2.9</span><span class="ref libro">Libro · pág. 39 · tabla 2.14 y figura 2.11</span><span class="ref ficha">Apúntalo en la libreta o en el móvil</span></div>
   <div class="caso"><p><b>César</b> trabaja en una fábrica de baterías. Al manipular un líquido de la producción, sufre <b>quemaduras graves en la piel</b>.</p></div>
@@ -629,7 +771,8 @@ Para leer, no entra: los <b>valores límite ambientales</b>, lo máximo que pued
 
 <section class="p dema" id="cesar-voto">
   <p class="cinta">Esto ya es de la próxima sesión</p>
-  <p class="kicker">6 · Corrección · caso práctico propuesto 2.9</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">7 · Corrección · caso práctico propuesto 2.9</p>
   <h2>¿Qué efecto?</h2>
   <div class="voto" data-ok="c"><p class="q">¿Qué efecto produce el líquido que quemó a César?</p><div class="opc"><button data-v="a">Irritante</button><button data-v="b">Tóxico</button><button data-v="c">Corrosivo</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Corrosivo</span></p>
 <div class="idea"><b>Corrosivo</b><span>destruye el tejido que toca</span></div>
@@ -642,7 +785,8 @@ Para leer, no entra: los <b>valores límite ambientales</b>, lo máximo que pued
 
 <section class="p dema" id="cesar-orden">
   <p class="cinta">Esto ya es de la próxima sesión</p>
-  <p class="kicker">6 · Corrección · caso práctico propuesto 2.9 · con la figura 2.11</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">7 · Corrección · caso práctico propuesto 2.9 · con la figura 2.11</p>
   <h2>¿Por dónde empieza la fábrica?</h2>
   <div class="voto" data-ok="a"><p class="q">La fábrica quiere que a César no le vuelva a pasar. Según la ley, ¿qué tiene que intentar antes que nada?</p><div class="opc"><button data-v="a">Cambiar ese líquido por otro que no queme</button><button data-v="b">Darle guantes, gafas y ropa resistentes</button><button data-v="c">Poner extracción y ventilar la nave</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>A · Cambiar el líquido, si se puede</span></p>
 <p class="nop"><i>✗</i><span>Guantes y gafas: empieza por la última barrera</span></p>
@@ -654,10 +798,11 @@ Para leer, no entra: los <b>valores límite ambientales</b>, lo máximo que pued
 
 <section class="p dema" id="cesar-2">
   <p class="cinta">Esto ya es de la próxima sesión</p>
-  <p class="kicker">6 · Corrección · caso práctico propuesto 2.9 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><b>2.2.2 · Agentes químicos</b><span class="t-p">Libro · págs. 39-40</span></p>
+  <p class="kicker">7 · Corrección · caso práctico propuesto 2.9 · la solución, 2 de 2</p>
   <h2>De la sustancia a la persona</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 39 · figura 2.11, «Medidas preventivas y de protección»</span></div>
-  <div class="pas"><div class="fil escala"><span>① Sustituir: otro líquido menos peligroso</span><i>→</i><span>② Evitar el contacto: trasvasarlo en circuito cerrado</span><i>→</i><span>③ Ventilación y protección colectiva</span><i>→</i><span>④ Protección individual: guantes, gafas, ropa</span></div><span class="ley">RD 374/2001 · art. 5.2</span></div>
+  <div class="pas"><div class="filw"><div class="fil n4 escala" style="--n:4"><span style="--i:0">① Sustituir: otro líquido menos peligroso</span><i>→</i><span style="--i:1">② Evitar el contacto: trasvasarlo en circuito cerrado</span><i>→</i><span style="--i:2">③ Ventilación y protección colectiva</span><i>→</i><span style="--i:3">④ Protección individual: guantes, gafas, ropa</span></div></div><span class="ley">RD 374/2001 · art. 5.2</span></div>
 <div class="pas"><div class="idea"><b>Como con el ruido</b><span>primero se ataca el origen; el equipo de protección individual (EPI) es la última barrera</span></div></div>
 <div class="pas"><p class="nota">Y como ya ha habido un daño, la empresa revisa su evaluación de riesgos. Qué guante exacto: lo dice la ficha de datos de seguridad (la hoja que acompaña al producto y explica sus peligros).</p></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Corrosivo, y primero sustituir.</b> Así se resuelve:
@@ -677,8 +822,6 @@ Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva
 <div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
 </main>
 
-<div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="passos"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
-
 <script>
 (function(){
   "use strict";
@@ -696,7 +839,13 @@ Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva
   pant.forEach(function(s){
     var t = s.getAttribute("data-titol");
     if (!t || !/^\d|^Inicio|^Cierre|^Para casa|^✂/.test(t)) return;
-    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.dataset.id = s.id; a.title = t;
+    var tros = t.match(/^(\d+|✂) ?(?:· )?(.*)$/);   // projectant, cada bloc és el seu número; només l'actual porta el nom
+    if (tros) {
+      var nb = document.createElement("b"), ns = document.createElement("span");
+      nb.textContent = tros[1]; ns.textContent = (tros[1] === "✂" ? " " : " · ") + tros[2];
+      a.appendChild(nb); a.appendChild(ns);
+    } else a.textContent = t;
     if (s.classList.contains("dema") || s.classList.contains("tallsessio")) a.classList.add("dema");
     a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
     nav.appendChild(a);
@@ -730,7 +879,7 @@ Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva
       });
       pinta();
     }
-    encaixa();
+    encaixa();   // en votar surt la solució: la lletra s'ajusta una vegada, ara amb la solució a la vista
   }
   function reinicia(){
     document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
@@ -760,12 +909,12 @@ Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva
   function endavant(){
     var q = disponibles(pant[i]).filter(function(p){ return !p.classList.contains("vist"); });
     if (!q.length) { mostra(i + 1); return; }
-    destapa(q[0]); encaixa(); q[0].scrollIntoView({ block: "nearest" });
+    destapa(q[0]); q[0].scrollIntoView({ block: "nearest" });
   }
   function enrere(){
     var v = disponibles(pant[i]).filter(function(p){ return p.classList.contains("vist"); });
     if (v.length < 2) { mostra(i - 1); return; }   // el primer pas no es tapa: ← torna a la pantalla anterior
-    v[v.length - 1].classList.remove("vist"); marca(pant[i]); encaixa();
+    v[v.length - 1].classList.remove("vist"); marca(pant[i]);
   }
 
   /* solucions i respostes que es revelen (botó o tecla S) */
@@ -773,8 +922,12 @@ Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva
     b.addEventListener("click", function(){
       var s = b.nextElementSibling;
       while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
-      if (s) s.classList.toggle("obert");
-      encaixa();
+      if (s) {
+        var obrir = !s.classList.contains("obert");
+        // projectant, una resposta cada vegada: així cap en pantalla, i la lletra no s'ha de fer petita per a totes alhora
+        if (obrir && document.body.classList.contains("proj")) b.closest("section").querySelectorAll(".sol.obert").forEach(function(x){ x.classList.remove("obert"); });
+        s.classList.toggle("obert", obrir);
+      }
       if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
     });
   });
@@ -812,12 +965,34 @@ Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva
   /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
   var i = 0, pos = document.getElementById("pos");
   function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  /* encaixa (JM, 08-11): la lletra es calcula per a tot el que hi pot sortir a la vista (els passos, les solucions): no balla en
+     destapar, cap pantalla es talla i les que porten poc s'aprofiten per anar més grans. Amb un vot, abans de votar mana la
+     pregunta (sense créixer gaire, perquè el salt en votar no sigui gros) i, en votar, es torna a calcular amb la solució. */
+  var ESC_MIN = 0.72, ESC_MAX = 1.35, ESC_VOT = 1.1;
+  function prova(s, e){ s.style.setProperty("--escala", e.toFixed(2)); return s.scrollHeight <= s.clientHeight + 1 && s.scrollWidth <= s.clientWidth + 1; }
+  function ajusta(s){
+    var e = 1, max = s.querySelector(".voto:not(.fet)") ? ESC_VOT : ESC_MAX;
+    if (prova(s, 1)) { while (e + 0.05 <= max && prova(s, e + 0.05)) e += 0.05; }
+    else { do { e -= 0.04; } while (e > ESC_MIN && !prova(s, e)); if (e < ESC_MIN) e = ESC_MIN; }
+    return e;
+  }
   function encaixa(){
     if (!document.body.classList.contains("proj")) return;
-    var s = pant[i], e = 1;
-    s.style.setProperty("--escala", 1);
-    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+    var s = pant[i], sols = Array.prototype.slice.call(s.querySelectorAll(".sol")), e = ESC_MAX;
+    var oberts = sols.filter(function(x){ return x.classList.contains("obert"); });
+    s.classList.add("mesura");
+    if (!sols.length) e = ajusta(s);
+    else sols.forEach(function(x){
+      sols.forEach(function(y){ y.classList.remove("obert"); });
+      x.classList.add("obert");
+      e = Math.min(e, ajusta(s));
+    });
+    sols.forEach(function(y){ y.classList.remove("obert"); });
+    oberts.forEach(function(y){ y.classList.add("obert"); });
+    s.classList.remove("mesura");
+    s.style.setProperty("--escala", e.toFixed(2));
   }
+  window.addEventListener("load", function(){ alcada(); encaixa(); });
   window.addEventListener("resize", function(){ alcada(); encaixa(); });
   function mostra(n){
     i = Math.max(0, Math.min(pant.length - 1, n));
@@ -914,6 +1089,7 @@ Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva
   ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
 
   if (location.hash === "#" + TX.hash) entra();
+  window.__sessio = { mostra: mostra, encaixa: encaixa, n: pant.length };   // per a la comprovació de la maqueta (norma 45)
 })();
 </script>
 <script>
