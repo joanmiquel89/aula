@@ -50,7 +50,7 @@ a.ref.hoja::after{content:" ↗"}
 .nota{font-size:14px;color:var(--suau)}
 .inventat{font-size:12px;font-weight:700;color:var(--suau);text-transform:uppercase;letter-spacing:.08em}
 .tres{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:10px 0}
-.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff}
+.tres>div{border:2px solid var(--tinta);border-radius:10px;padding:12px;background:#fff;min-width:0;overflow-wrap:break-word}
 .tres>div b{display:block;font-size:18px;margin-bottom:4px}
 .tres>div span{font-size:15px;color:var(--suau)}
 .dos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
@@ -63,9 +63,14 @@ li{margin:0 0 4px}
 table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 12px}
 th,td{border:1px solid var(--linia);padding:6px 9px;text-align:left;vertical-align:top}
 th{background:#f3ecdf}
-.cadena{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 14px}
+/* cadenes amb fletxes (JM, 08-11: «mira com queda de malament»): la fila no es parteix mai. El que s'adapta és el text de
+   dins cada caixa; si no hi ha amplada, la cadena passa a vertical (les regles @container, generades al final del CSS) */
+.filw{container-type:inline-size}
+.cadena,.fil{display:flex;flex-wrap:nowrap;align-items:stretch}
+.cadena>span,.fil>span,.flujo>span{flex:0 1 auto;min-width:0;overflow-wrap:break-word;align-content:center}
+.cadena>i,.fil>i,.flujo>i{flex:none;align-self:center;font-style:normal;font-weight:800;color:var(--suau)}
+.cadena{gap:6px;margin:10px 0 14px}
 .cadena span{padding:7px 13px;border-radius:8px;background:#fff;border:2px solid var(--tinta);font-weight:700}
-.cadena i{font-style:normal;font-weight:800;color:var(--suau)}
 .cadena span.avui{background:#ffd66b}
 .cadena span.fet{opacity:.55}
 .plan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -95,10 +100,10 @@ th{background:#f3ecdf}
 .resp.no i{background:var(--vermell)}
 .ley{display:inline-block;font-size:.8em;font-weight:700;border:1.5px solid var(--tinta);border-radius:99px;padding:.05em .65em;margin:0 .3em .3em 0;background:#fff;white-space:nowrap}
 .flujo{display:flex;flex-wrap:wrap;align-items:center;gap:.35em;margin:.25em 0 .5em}
+.flujo:has(>i){flex-wrap:nowrap;align-items:stretch}
 .flujo span{padding:.18em .7em;border-radius:.5em;background:#fff;border:1.5px solid var(--verd)}
-.flujo i{font-style:normal;font-weight:800;color:var(--suau)}
 .cuadro4{display:grid;grid-template-columns:repeat(4,1fr);gap:.4em;margin:.35em 0 .5em}
-.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff}
+.cuadro4>div{border:2px solid #bdb39d;border-radius:.5em;padding:.3em .5em;background:#fff;min-width:0;overflow-wrap:break-word}
 .cuadro4 h4{margin:0 0 .2em;font-size:.72em;text-transform:uppercase;letter-spacing:.05em;color:var(--suau)}
 .cuadro4 p{margin:0 0 .15em;font-weight:700}
 .cuadro4 small{display:block;font-weight:400;color:var(--suau)}
@@ -144,14 +149,14 @@ p.si i{width:1.4em;height:1.4em;font-size:.75em;background:var(--verd)}
 .nop i{width:1.35em;height:1.35em;font-size:.7em;background:var(--vermell)}
 .idea{display:inline-flex;flex-direction:column;border-left:.35em solid var(--mostassa);background:var(--mostassaclar);border-radius:.4em;padding:.35em .85em;margin:.15em 0 .45em}
 .idea b{font-size:1.12em}
-.fil{display:flex;flex-wrap:wrap;align-items:center;gap:.4em;margin:.3em 0 .55em}
+.fil{gap:.4em;margin:.3em 0 .55em}
 .fil span{background:#fff;border:2px solid var(--tinta);border-radius:.5em;padding:.35em .8em;font-weight:700;line-height:1.25}
-.fil i{font-style:normal;font-weight:800;color:var(--suau);font-size:1.25em}
-.fil.escala{align-items:flex-end}
-.fil.escala span:nth-of-type(2){margin-bottom:1.1em}
-.fil.escala span:nth-of-type(3){margin-bottom:2.2em}
-.fil.escala span:nth-of-type(4){margin-bottom:3.3em}
-.fil.escala span:last-of-type{background:#ffd66b}
+.fil i{font-size:1.25em}
+/* l'escala: columnes iguals que pugen d'esquerra a dreta; la pujada ja diu l'ordre, sense fletxes */
+.fil.escala{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:.55em;align-items:stretch}
+.fil.escala>i{display:none}
+.fil.escala>span{margin-top:calc((var(--n,1) - 1 - var(--i,0)) * 1.15em)}
+.fil.escala>span:last-of-type{background:#ffd66b}
 .gran{display:inline-flex;flex-direction:column;vertical-align:top;min-width:6.5em;margin:.2em .7em .45em 0;padding:.35em .9em;border-radius:.55em;background:#fff;border:2px solid var(--linia)}
 .gran b{font-size:2.2em;line-height:1.05;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
 .gran span{color:var(--suau);font-size:.85em;line-height:1.3}
@@ -175,7 +180,7 @@ p.si i{width:1.4em;height:1.4em;font-size:.75em;background:var(--verd)}
 .p.dema{border:2px dashed var(--suau)}
 .dalt nav a.dema{background:transparent;border:1px dashed rgba(255,255,255,.55)}
 .dalt nav a.dema:hover,.dalt nav a.dema.ara{background:#ffd66b;color:var(--tinta)}
-#passos{letter-spacing:.12em;color:#fff;background:rgba(0,0,0,.65);border-radius:8px;padding:6px 10px;font-size:14px}
+#passos{letter-spacing:.12em;color:#fff}
 #passos:empty{display:none}
 textarea.resp{display:block;width:100%;min-height:74px;margin:6px 0 12px;padding:9px 11px;font:inherit;font-size:16px;border:1.5px solid var(--linia);border-radius:8px;background:#fffdf3;resize:vertical}
 textarea.resp:focus{outline:2px solid var(--tinta)}
@@ -193,10 +198,13 @@ body.proj{background:var(--kraft);overflow:hidden}
 body.proj main{max-width:none;padding:0}
 body.proj .hora,body.proj .peu,body.proj .noproj{display:none}
 body.proj .p{display:none;position:fixed;inset:var(--dalt,56px) 0 0 0;margin:0;border-radius:0;border:0;overflow:auto;
-  padding:2.2vh 5vw 9vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
+  padding:2.2vh 5vw 3vh;font-size:calc(min(1.55vw,2.9vh) * var(--escala,1));background:var(--paper)}
 body.proj .p.actual{display:block}
 body.proj .pas:not(.vist){display:none}
-body.proj .pas.vist:not(.ara){opacity:.6}
+body.proj .p.mesura .pas{display:flow-root!important}
+body.proj .plan small{display:none}
+body.proj .p{scrollbar-width:none}
+body.proj .p::-webkit-scrollbar{display:none}
 body.proj .fil{font-size:1.08em}
 body.proj .foto{width:32%}
 body.proj .pas.ara{animation:destapa .35s ease-out}
@@ -216,9 +224,16 @@ body.proj .clau{font-size:1.12em}
 body.proj .opc button{padding:.35em 1em}
 body.proj .ref{font-size:.72em}
 body.proj textarea.resp,body.proj .jo{display:none}
-body.proj .ctrl{display:flex;position:fixed;right:14px;bottom:12px;z-index:30;gap:6px;align-items:center}
-.ctrl button{font:inherit;font-weight:800;font-size:18px;border:0;border-radius:8px;padding:6px 14px;cursor:pointer;background:var(--tinta);color:#fff}
-.ctrl span{background:rgba(0,0,0,.65);color:#fff;border-radius:8px;padding:6px 10px;font-size:14px}
+body.proj .ctrl{display:flex;flex:none;gap:5px;align-items:center;margin-left:auto}
+.ctrl button{font:inherit;font-weight:800;font-size:15px;border:0;border-radius:8px;padding:3px 12px;cursor:pointer;background:rgba(255,255,255,.16);color:#fff}
+.ctrl button:hover{background:#fff;color:var(--tinta)}
+.ctrl span{background:rgba(255,255,255,.12);color:#fff;border-radius:8px;padding:3px 9px;font-size:13px;white-space:nowrap}
+/* projectant, una sola línia a dalt (fins ara, fins a un 22 % de la pantalla): cada bloc és el seu número i només l'actual porta el nom */
+body.proj .dalt{flex-wrap:nowrap;padding:5px 12px;gap:12px}
+body.proj .dalt .nom small,body.proj #bproj{display:none}
+body.proj .dalt nav{flex-wrap:nowrap;min-width:0;overflow:hidden}
+body.proj .dalt nav a{flex:none}
+body.proj .dalt nav a:not(.ara) span{display:none}
 .cas-flash{font-size:24px;line-height:1.35;font-weight:600;margin:10px 0 14px}
 .compte{display:none;align-items:center;gap:14px;margin:6px 0 12px}
 .compte .xifra{font-size:2.6em;font-weight:800;font-variant-numeric:tabular-nums;min-width:2.2ch}
@@ -259,6 +274,44 @@ body.proj .voto .q{font-size:1.18em;line-height:1.3;margin-bottom:.55em}
 body.proj .opc{display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:.55em}
 body.proj .opc button{font-size:1.05em;padding:.55em .9em;text-align:left;border-width:2.5px;border-radius:.6em;line-height:1.25}
 body.proj .opc button .k{font-size:.75em}
+/* el temari a la vista (JM, 08-11): «sempre hi hauria d'haver una referència clara de què s'està parlant quant al temari
+   abans de posar-nos a veure casos concrets» */
+.temari{display:flex;flex-wrap:wrap;align-items:center;gap:.1em .45em;margin:0 0 .6em;padding:.32em .8em;border-radius:.55em;
+  background:var(--blauclar);color:var(--blau);font-size:15px;font-weight:600;line-height:1.3}
+.temari i{font-style:normal;opacity:.55}
+.temari b{font-weight:800}
+.temari .t-p{margin-left:auto;padding-left:1em;font-weight:800;white-space:nowrap}
+.temari.repas{background:#efe9dc;color:var(--suau)}
+.de-que{font-size:1.28em;line-height:1.4;margin:.2em 0 .7em;padding:.6em 1em;border-left:.32em solid var(--blau);background:#f5f8fd;border-radius:.4em}
+.saber{list-style:none;counter-reset:s;display:grid;gap:.4em;margin:.3em 0 .5em;padding:0}
+.saber li{counter-increment:s;position:relative;margin:0;padding:.42em .8em .42em 2.5em;background:#fff;border:2px solid var(--linia);border-radius:.6em;font-weight:600}
+.saber li::before{content:counter(s);position:absolute;left:.65em;top:.42em;width:1.4em;height:1.4em;border-radius:50%;background:var(--blau);color:#fff;
+  font-size:.92em;font-weight:800;display:flex;align-items:center;justify-content:center}
+.mapa-t{margin:.3em 0 .9em}
+.mapa-t .cap{margin:0 0 .35em;font-size:.76em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--suau)}
+.mapa-t ol{list-style:none;display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:.3em;margin:0 0 .3em;padding:0}
+.mapa-t li{margin:0;padding:.28em .5em;border-radius:.45em;border:1.5px solid var(--linia);background:#fff;font-size:.82em;line-height:1.2;color:var(--suau);min-width:0;overflow-wrap:break-word}
+.mapa-t li b{font-weight:800}
+.mapa-t li small{display:block;font-size:.88em;font-weight:700}
+.mapa-t li.passat{opacity:.55}
+.mapa-t li.ara{border-color:var(--blau);background:var(--blauclar);color:var(--blau);font-weight:700}
+.mapa-t li.avui{border:2px solid var(--tinta);background:#ffd66b;color:var(--tinta);font-weight:800}
+body.proj .temari{font-size:.84em}
+/* projectant, cap mida fixa en píxels: si no, a la pantalla gran es perden (el títol de bloc feia 13 px en un cos de 30) */
+body.proj .kicker{font-size:.66em}
+body.proj .nota{font-size:.82em}
+body.proj .fuente{font-size:.68em}
+body.proj .inventat{font-size:.62em}
+body.proj .encls{font-size:.7em}
+body.proj .obertura h2{font-size:2.5em}
+body.proj #inicio .refs{display:none}   /* les pàgines ja les diu el mapa i el requadre fosc */
+body.proj .yt{height:41vh}
+@media (max-width:700px){
+  .temari .t-p{margin-left:0;padding-left:0}
+  .mapa-t ol{grid-auto-flow:row;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .flujo:has(>i){flex-direction:column;align-items:flex-start}
+  .flujo:has(>i)>i{transform:rotate(90deg);align-self:flex-start;margin-left:.6em}
+}
 @media (max-width:700px){
   body{font-size:16px}
   .p{padding:16px 14px}
@@ -275,6 +328,10 @@ body.proj .opc button .k{font-size:.75em}
   main{max-width:none;padding:0}
   .p{break-inside:avoid-page;box-shadow:none;border:1px solid #bbb}
 }
+@container (max-width:20em){.fil.n2,.cadena.n2{display:flex;flex-direction:column;align-items:stretch}.fil.n2>i,.cadena.n2>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n2>span,.cadena.n2>span{margin-top:0!important}}
+@container (max-width:29em){.fil.n3,.cadena.n3{display:flex;flex-direction:column;align-items:stretch}.fil.n3>i,.cadena.n3>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n3>span,.cadena.n3>span{margin-top:0!important}}
+@container (max-width:37em){.fil.n4,.cadena.n4{display:flex;flex-direction:column;align-items:stretch}.fil.n4>i,.cadena.n4>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n4>span,.cadena.n4>span{margin-top:0!important}}
+@container (max-width:45em){.fil.n5,.fil.n6,.cadena.n5,.cadena.n6{display:flex;flex-direction:column;align-items:stretch}.fil.n5>i,.fil.n6>i,.cadena.n5>i,.cadena.n6>i{display:block;align-self:center;transform:rotate(90deg);line-height:1}.fil.n5>span,.fil.n6>span,.cadena.n5>span,.cadena.n6>span{margin-top:0!important}}
 
 /* il·lustracions interactives (JM, 05-11): grans a la projecció, tocables, sense res de fora */
 .int{margin:.4em 0 .6em;padding:.6em .8em;border:2px solid var(--linia);border-radius:.8em;background:#fff}
@@ -387,6 +444,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <nav id="index"></nav>
   <span class="marcador" id="marcador" title="Aciertos de la clase en las votaciones"></span>
   <button id="bproj" title="Pantalla completa para proyectar (tecla P)">▶ Proyectar</button>
+  <div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="passos"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
 </header>
 
 <main>
@@ -395,7 +453,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <p class="kicker">Sesión 6 · una hora</p>
   <h2>Quemado, acosado o con la espalda cargada</h2>
   <p style="font-size:1.15em">Hoy, <b>riesgos que no vienen de una máquina sino de cómo se trabaja</b>: el estrés, el burnout, el acoso y las cargas.</p>
-  <div class="cadena"><span class="fet">Químicos y biológicos (págs. 39-40): lunes 9</span><i>→</i><span class="avui">Estrés o burnout (págs. 41-42)</span><i>→</i><span class="avui">El acoso: cada uno, dos casos (pág. 43)</span><i>→</i><span class="avui">Cargas y TME (págs. 44-45)</span><i>→</i><span>Especialidades, señales y la noticia: lunes 16</span></div>
+  <div class="mapa-t"><p class="cap">Dónde estamos en el temario · Unidad 2: Prevención de riesgos laborales generales y específicos</p><ol><li class="passat"><b>2.1</b> Condiciones de seguridad</li><li class="passat"><b>2.2</b> Medioambiente de trabajo</li><li class="ara"><b>2.3</b> Organización y carga de trabajo</li><li><b>2.4</b> Riesgos por sectores</li><li><b>2.5</b> Especialidades preventivas</li><li><b>2.6</b> Señalización</li></ol><ol><li class="avui"><b>2.3.1</b> Riesgos psicosociales<small>Libro · págs. 41-43</small></li><li class="avui"><b>2.3.2</b> Riesgos ergonómicos<small>Libro · págs. 44-45</small></li></ol></div>
   <div class="plan"><div><b>Hoy</b><ol start="1"><li>Dos preguntas para recordar (lunes 9 y viernes 6) <small>· 4 min</small></li><li>Estrés o burnout, con un vídeo de 2 minutos (págs. 41-42) <small>· 11 min</small></li><li>Cada uno solo: dos casos de acoso con la tabla 2.18 (pág. 43) <small>· 14 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>Ergonómicos: los trastornos musculoesqueléticos y cómo se maneja una carga (págs. 44-45) <small>· 10 min</small></li><li>Para leer: pantallas, fatiga, adicción al trabajo, insatisfacción y tecnoestrés (págs. 42-45) <small>· 3 min</small></li><li>Si sobra tiempo: las cuatro especialidades de la prevención (pág. 48) <small>· ➕ si da tiempo</small></li></ol><p style="margin:8px 0 0"><b>Para salir:</b> 2 preguntas en voz alta.</p></div></div>
   <h3 class="noproj">Cómo usar esta página</h3>
   <p class="noproj">En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
@@ -405,6 +463,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 </section>
 
 <section class="p" id="entrar" data-titol="1 · Para entrar">
+  <p class="temari repas"><b>Repaso de lo ya visto</b></p>
   <p class="kicker">1 · Lo del lunes 9 y el viernes 6 · para empezar</p>
   <h2>Dos preguntas, sin mirar</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 40 · tabla 2.15</span><span class="ref libro">Libro · pág. 31 · figura 2.3</span></div>
@@ -433,7 +492,17 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 <div class="donde"><span class="dl">Dónde lo estudias</span><span class="ref libro">Libro · pág. 31 · figura 2.3 · pág. 30 · «Sabías que…»</span></div></div></div>
 </section>
 
-<section class="p" id="psico-video" data-titol="2 · Estrés o burnout">
+<section class="p obertura" id="tema-2" data-titol="2 · Estrés o burnout">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.1 · Riesgos psicosociales</b><span class="t-p">Libro · págs. 41-43</span></p>
+  <p class="kicker">2 · De qué hablamos</p>
+  <h2>Riesgos psicosociales</h2>
+  <div class="de-que">Los <b>riesgos psicosociales</b> vienen de cómo se diseña, se organiza y se dirige el trabajo, y de su contexto social. Pueden causar un daño psicológico, físico o social.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>El estrés y el burnout, y en qué se distinguen</li><li>Las clases de acoso (tabla 2.18)</li></ol>
+</section>
+
+<section class="p" id="psico-video">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.1 · Riesgos psicosociales</b><span class="t-p">Libro · págs. 41-43</span></p>
   <p class="kicker">2 · Vídeo · 2 minutos · Mutua Balear (10-10-2024)</p>
   <h2>¿Te suena alguna?</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 41 · tabla 2.17, «Factores de riesgo psicosocial y consecuencias»</span></div>
@@ -444,7 +513,8 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 </section>
 
 <section class="p" id="burnout">
-  <p class="kicker">2 · Libro, pág. 42 · caso práctico resuelto 2.4 · con el libro cerrado (la solución está debajo)</p>
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.1 · Riesgos psicosociales</b><span class="t-p">Libro · págs. 41-43</span></p>
+  <p class="kicker">2 · caso práctico resuelto 2.4 · con el libro cerrado (la solución está debajo)</p>
   <h2>¿Quién está quemado? ¿Y Nuria?</h2>
   <div class="caso"><p><b>Martín</b> está ansioso por un plazo ajustado, pero recupera la energía al acabar el proyecto. <b>Sonia</b>, tras meses de mucha carga, tiene un cansancio que no se le va, ha perdido la motivación y trata a la gente con frialdad, como si fueran objetos. <b>Nuria</b> está tensa por conflictos con sus compañeros, pero rinde igual que antes.</p></div>
 <div class="voto" data-ok="b"><p class="q">Empieza por la más difícil: ¿qué le pasa a <b>Nuria</b>?</p><div class="opc"><button data-v="a">Burnout: lleva tiempo tensa en el trabajo</button><button data-v="b">Estrés: es una presión pasajera</button><button data-v="c">Acoso: tiene conflictos con sus compañeros</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Estrés</span></p>
@@ -456,18 +526,29 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 </section>
 
 <section class="p" id="burnout-2">
-  <p class="kicker">2 · Libro, págs. 41-42 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.1 · Riesgos psicosociales</b><span class="t-p">Libro · págs. 41-43</span></p>
+  <p class="kicker">2 · la solución, 2 de 2</p>
   <h2>Estrés y burnout no son lo mismo</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 41 · «Estrés laboral» · pág. 42 · «Síndrome de burnout» y figura 2.12</span></div>
   <div class="pas"><div class="tres"><div><b>Martín · estrés</b><span>una presión con un final: al acabar, se recupera</span></div><div><b>Nuria · estrés</b><span>tensión, pero sin desgaste: rinde igual</span></div><div><b>Sonia · burnout</b><span>meses de carga: un agotamiento que no se va con un descanso</span></div></div></div>
-<div class="pas"><div class="fil escala"><span>Entusiasmo</span><i>→</i><span>Estancamiento</span><i>→</i><span>Frustración</span><i>→</i><span>Apatía</span><i>→</i><span>Quemado</span></div><p class="nota">El burnout llega poco a poco, por fases (figura 2.12).</p></div>
+<div class="pas"><div class="filw"><div class="fil n5 escala" style="--n:5"><span style="--i:0">Entusiasmo</span><i>→</i><span style="--i:1">Estancamiento</span><i>→</i><span style="--i:2">Frustración</span><i>→</i><span style="--i:3">Apatía</span><i>→</i><span style="--i:4">Quemado</span></div></div><p class="nota">El burnout llega poco a poco, por fases (figura 2.12).</p></div>
 <div class="pas"><div class="idea"><b>Y se previene primero en la empresa</b><span>repartir la carga, comunicación, trabajo en equipo; después, lo que hace la persona (pág. 42)</span></div></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Nuria: estrés. La quemada es Sonia.</b> El <b>estrés laboral</b> es la respuesta del cuerpo y de la mente de una persona que intenta adaptarse a unas presiones cuando cree que no tiene recursos suficientes para afrontarlas (pág. 41). El <b>burnout</b> o síndrome de estar quemado es una respuesta a un estrés <b>crónico</b>: un agotamiento físico, mental y emocional que llega poco a poco (pág. 42), por fases (figura 2.12: entusiasmo, estancamiento, frustración, apatía y quemado).
 <ol class="pasos"><li><b>Martín:</b> estrés. Hay presión (el plazo), pero al acabar recupera la energía: no hay agotamiento crónico.</li><li><b>Sonia:</b> burnout. Meses de carga, un cansancio que no se va, sin motivación y tratando a la gente con frialdad (despersonalización): desgaste prolongado.</li><li><b>Nuria:</b> estrés. Hay tensión, pero su rendimiento no ha bajado: no hay señales de un daño crónico. Y un conflicto con compañeros no es acoso: el acoso es una conducta agresiva, sistemática y que degrada a la persona (pág. 43).</li></ol>
 Para distinguirlos, tres preguntas: ¿cuánto dura?, ¿hay desgaste?, ¿se recupera al acabar el problema? Las medidas, primero en la organización y entre compañeros, antes que sobre la persona (pág. 42).<span class="ref libro">Libro · págs. 41-42 · «Estrés laboral», «Síndrome de burnout», figura 2.12 y caso práctico resuelto 2.4</span></div></details>
 </section>
 
-<section class="p" id="acoso" data-titol="3 · El acoso">
+<section class="p obertura" id="tema-3" data-titol="3 · El acoso">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
+  <p class="kicker">3 · De qué hablamos</p>
+  <h2>Violencia y acoso</h2>
+  <div class="de-que">La <b>violencia y el acoso</b> son comportamientos inaceptables, o amenazas de ellos, una vez o repetidos, que pretenden, causan o pueden causar un daño a la persona (Convenio 190 de la OIT).</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Las tres clases de acoso (tabla 2.18)</li><li>Qué hace falta para hablar de acoso (recuadro «Importante»)</li></ol>
+</section>
+
+<section class="p" id="acoso">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
   <p class="kicker">3 · Cada uno solo · caso práctico propuesto 2.11 y actividad final 2.19 del libro · unos nueve minutos</p>
   <h2>Verónica y Marta</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 43 · caso práctico propuesto 2.11 y tabla 2.18, «Clases de acoso»</span><span class="ref libro">Libro · pág. 54 · actividad final 2.19</span><span class="ref ficha">Apúntalo en la libreta o en el móvil</span></div>
@@ -480,6 +561,7 @@ Para distinguirlos, tres preguntas: ¿cuánto dura?, ¿hay desgaste?, ¿se recup
 </section>
 
 <section class="p" id="acoso-veronica">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
   <p class="kicker">3 · Corrección · caso práctico propuesto 2.11</p>
   <h2>¿Qué acoso sufre Verónica?</h2>
   <div class="voto" data-ok="b"><p class="q">Su supervisor no para de hacerle comentarios que la ridiculizan, sobre cómo trabaja y sobre su físico. Con la tabla 2.18: ¿qué acoso es?</p><div class="opc"><button data-v="a">Sexual: habla de su físico</button><button data-v="b">Psicológico: es su jefe y no para</button><button data-v="c">Discriminatorio: es su supervisor y tiene poder sobre ella</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Psicológico (mobbing)</span></p>
@@ -491,6 +573,7 @@ Para distinguirlos, tres preguntas: ¿cuánto dura?, ¿hay desgaste?, ¿se recup
 </section>
 
 <section class="p" id="acoso-marta">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
   <p class="kicker">3 · Corrección · actividad final 2.19</p>
   <h2>¿Y Marta?</h2>
   <div class="voto" data-ok="c"><p class="q">Jaime le hace a Marta comentarios y propuestas sobre su aspecto que ella no quiere. ¿Qué es?</p><div class="opc"><button data-v="a">Psicológico: el ambiente se vuelve incómodo</button><button data-v="b">Nada todavía: tendría que repetirse</button><button data-v="c">Sexual: son propuestas sobre su aspecto</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Sexual: propuestas no deseadas</span></p>
@@ -502,6 +585,7 @@ Para distinguirlos, tres preguntas: ¿cuánto dura?, ¿hay desgaste?, ¿se recup
 </section>
 
 <section class="p" id="acoso-2" data-min="9">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
   <p class="kicker">3 · Corrección · la solución, 2 de 2</p>
   <h2>Tres clases y tres preguntas</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 43 · tabla 2.18, «Importante» y «Sabías que…»</span></div>
@@ -513,8 +597,18 @@ Para distinguirlos, tres preguntas: ¿cuánto dura?, ¿hay desgaste?, ¿se recup
 La empresa de Verónica no atiende sus quejas: eso agrava el caso. Debe protegerla (LPRL, art. 14.2), corregir la situación, conviene que tenga un protocolo y un canal para denunciar, y revisar la evaluación de riesgos, porque ya hay un daño. El <b>ciberacoso</b> es el mismo acoso hecho con las tecnologías («Sabías que…», pág. 43).<span class="ley">LPRL · art. 14.2</span> <span class="ref libro">Libro · pág. 43 · tabla 2.18, «Importante», «Sabías que…» y caso práctico propuesto 2.11 · pág. 54 · actividad final 2.19</span></div></details>
 </section>
 
-<section class="p" id="alfredo" data-titol="4 · Cargas y TME">
-  <p class="kicker">4 · Libro, pág. 45 · caso práctico propuesto 2.12 · con la figura 2.17</p>
+<section class="p obertura" id="tema-4" data-titol="4 · Cargas y TME">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.2 · Riesgos ergonómicos</b><span class="t-p">Libro · págs. 44-45</span></p>
+  <p class="kicker">4 · De qué hablamos</p>
+  <h2>Riesgos ergonómicos</h2>
+  <div class="de-que">La <b>ergonomía</b> es adaptar el trabajo a la persona. Si no se adapta, llegan la fatiga y los <b>trastornos musculoesqueléticos (TME)</b>: dolor y otras alteraciones de músculos, tendones, articulaciones y nervios.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Qué son los TME</li><li>Qué va primero con una carga y cómo se levanta (figura 2.17)</li></ol>
+</section>
+
+<section class="p" id="alfredo">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.2 · Riesgos ergonómicos</b><span class="t-p">Libro · págs. 44-45</span></p>
+  <p class="kicker">4 · caso práctico propuesto 2.12 · con la figura 2.17</p>
   <h2>Alfredo y el bulto</h2>
   <div class="caso"><p><b>Alfredo</b> (no el de la unidad 1) lleva un bulto grande y pesado, cogido de un solo lado, por un pasillo estrecho. Pierde un poco el equilibrio y nota molestias en la espalda y el hombro.</p></div>
 <div class="voto" data-ok="b"><p class="q">Según la ley, ¿qué tendría que haberse hecho <b>antes que nada</b>?</p><div class="opc"><button data-v="a">Que doblara las rodillas y lo levantara con la espalda recta</button><button data-v="b">Que no lo llevara a pulso: un carro o la ayuda de otra persona</button><button data-v="c">Que llevara una faja para la espalda</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · No llevarlo a pulso, si se puede</span></p>
@@ -526,10 +620,11 @@ La empresa de Verónica no atiende sus quejas: eso agrava el caso. Debe proteger
 </section>
 
 <section class="p" id="alfredo-2">
-  <p class="kicker">4 · Libro, págs. 44-45 · la solución, 2 de 2</p>
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><b>2.3.2 · Riesgos ergonómicos</b><span class="t-p">Libro · págs. 44-45</span></p>
+  <p class="kicker">4 · la solución, 2 de 2</p>
   <h2>Primero, no cargar; después, cargar bien</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 44 · figura 2.15 · pág. 45 · figura 2.17, «Importante» y caso práctico propuesto 2.12</span></div>
-  <div class="pas"><div class="fil escala"><span>① Evitarla: carro, transpaleta, otra persona</span><i>→</i><span>② Si no se puede: otra ruta, partir la carga</span><i>→</i><span>③ Levantarla bien: pegada al cuerpo, piernas flexionadas, espalda recta</span></div><span class="ley">RD 487/1997 · arts. 3.1 y 3.2</span></div>
+  <div class="pas"><div class="filw"><div class="fil n3 escala" style="--n:3"><span style="--i:0">① Evitarla: carro, transpaleta, otra persona</span><i>→</i><span style="--i:1">② Si no se puede: otra ruta, partir la carga</span><i>→</i><span style="--i:2">③ Levantarla bien: pegada al cuerpo, piernas flexionadas, espalda recta</span></div></div><span class="ley">RD 487/1997 · arts. 3.1 y 3.2</span></div>
 <div class="pas"><div class="gran"><b>25 kg</b><span>hombres de 20 a 45 años</span></div><div class="gran"><b>15 kg</b><span>mujeres de menos de 20 o más de 45</span></div><p class="nota">Lo da el libro (ISO, pág. 45). La ley no fija ningún peso.</p></div>
 <div class="pas"><div class="idea"><b>Lo que le puede pasar: TME</b><span>trastornos musculoesqueléticos: dolor y lesiones de músculos, tendones y articulaciones (espalda, cuello, hombro, codo, muñeca; figura 2.15)</span></div></div>
 <details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Antes que nada, no llevarlo a pulso.</b> Así se resuelve:
@@ -538,7 +633,8 @@ Lo que le puede pasar son <b>trastornos musculoesqueléticos (TME)</b>: dolor y 
 </section>
 
 <section class="p" id="leelo" data-titol="5 · Para leer">
-  <p class="kicker">5 · ✂ Para leer, no entra · libro, págs. 42-45</p>
+  <p class="temari"><b>2.3 · Organización y carga de trabajo</b><span class="t-p">Libro · págs. 41-45</span></p>
+  <p class="kicker">5 · ✂ Para leer, no entra</p>
   <h2>Cinco cosas, en un minuto</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 42 · «Vocabulario» · pág. 43 · figuras 2.13 y 2.14 · págs. 44-45 · figuras 2.16 y 2.18</span></div>
   <div class="cuadro4"><div><h4>Tecnoestrés</h4><p>y tecnofatiga</p><small>el estrés y el cansancio de usar las TIC; nomofobia: miedo a estar sin el móvil</small></div><div><h4>Adicción al trabajo</h4><p>no poder parar</p><small>lo que cuenta es la compulsión, no las horas</small></div><div><h4>Insatisfacción</h4><p>malestar</p><small>monotonía, tareas sin sentido, malas relaciones</small></div><div><h4>Fatiga</h4><p>física o mental</p><small>pasajera: se recupera descansando</small></div></div>
@@ -552,9 +648,20 @@ Lo que le puede pasar son <b>trastornos musculoesqueléticos (TME)</b>: dolor y 
   <p>Si sobra tiempo, seguimos con el principio de lo que toca lunes 16. Lo que hagamos aquí, la próxima sesión no lo repite.</p>
 </section>
 
-<section class="p dema" id="especialidad" data-titol="6 · ➕ Especialidades">
+<section class="p obertura dema" id="tema-6" data-titol="6 · ➕ Especialidades">
   <p class="cinta">Esto ya es de lunes 16</p>
-  <p class="kicker">6 · ➕ Si da tiempo · Libro, pág. 48 · tabla 2.19, «Especialidades preventivas»</p>
+  <p class="temari"><b>2.5 · Especialidades preventivas</b><span class="t-p">Libro · pág. 48</span></p>
+  <p class="kicker">6 · ➕ Si da tiempo · De qué hablamos</p>
+  <h2>Especialidades preventivas</h2>
+  <div class="de-que">La prevención es interdisciplinar: el trabajo se reparte en <b>cuatro especialidades</b>, y cada una mira un tipo de daño.</div>
+  <h3>Lo que tienes que saber</h3>
+  <ol class="saber"><li>Cuáles son las cuatro (tabla 2.19)</li><li>Qué daño quiere evitar cada una</li></ol>
+</section>
+
+<section class="p dema" id="especialidad">
+  <p class="cinta">Esto ya es de lunes 16</p>
+  <p class="temari"><b>2.5 · Especialidades preventivas</b><span class="t-p">Libro · pág. 48</span></p>
+  <p class="kicker">6 · tabla 2.19, «Especialidades preventivas»</p>
   <h2>¿Quién se ocupa del ruido del taller?</h2>
   <div class="voto" data-ok="b"><p class="q">Vuelve el taller de Lorena, con sus 88 dB(A). En la tabla 2.19 (pág. 48) hay cuatro especialidades. ¿De cuál es cosa ese ruido? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Seguridad en el trabajo: es un riesgo del taller</button><button data-v="b">Higiene industrial: mide y baja el ruido</button><button data-v="c">Medicina del trabajo: el daño es en el oído</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Higiene industrial</span></p>
 <p class="nop"><i>✗</i><span>Seguridad: esa es para los accidentes (golpes, caídas, descargas)</span></p>
@@ -567,7 +674,8 @@ Lo que le puede pasar son <b>trastornos musculoesqueléticos (TME)</b>: dolor y 
 
 <section class="p dema" id="especialidad-3">
   <p class="cinta">Esto ya es de lunes 16</p>
-  <p class="kicker">6 · Libro, pág. 48 · tabla 2.19</p>
+  <p class="temari"><b>2.5 · Especialidades preventivas</b><span class="t-p">Libro · pág. 48</span></p>
+  <p class="kicker">6 · tabla 2.19</p>
   <h2>¿Y la revisión del oído?</h2>
   <div class="voto" data-ok="c"><p class="q">En el taller de Lorena, a quienes pasan de 85 dB(A) les hacen una revisión del oído cada pocos años. ¿Qué especialidad la hace? <span class="inventat">· ejemplo inventado</span></p><div class="opc"><button data-v="a">Higiene industrial: es por el ruido</button><button data-v="b">Ergonomía: es por cómo está el puesto</button><button data-v="c">Medicina del trabajo: es una prueba médica</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Medicina del trabajo</span></p>
 <p class="nop"><i>✗</i><span>Higiene mide y controla el ruido; la revisión es de la persona</span></p>
@@ -581,7 +689,8 @@ Lo que le puede pasar son <b>trastornos musculoesqueléticos (TME)</b>: dolor y 
 
 <section class="p dema" id="especialidad-2">
   <p class="cinta">Esto ya es de lunes 16</p>
-  <p class="kicker">6 · Libro, pág. 48 · la solución</p>
+  <p class="temari"><b>2.5 · Especialidades preventivas</b><span class="t-p">Libro · pág. 48</span></p>
+  <p class="kicker">6 · la solución</p>
   <h2>¿Qué daño quieres evitar?</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 48 · tabla 2.19</span></div>
   <div class="pas"><div class="cuadro4"><div><h4>Seguridad</h4><p>accidentes</p><small>un cable suelto</small></div><div><h4>Higiene industrial</h4><p>contaminantes</p><small>ruido, polvo, virus</small></div><div><h4>Ergonomía y psicosociología</h4><p>puesto y organización</p><small>la silla, el estrés</small></div><div><h4>Medicina del trabajo</h4><p>la salud</p><small>las revisiones</small></div></div></div>
@@ -603,8 +712,6 @@ Os harán falta más adelante: un servicio de prevención tiene que tener varias
 <div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
 </main>
 
-<div class="ctrl"><span class="rellotge" id="rellotge" title="Tiempo de trabajo (tecla T)"></span><span id="passos"></span><span id="pos"></span><button id="ant" title="Anterior (←)">←</button><button id="seg" title="Siguiente (→ o espacio)">→</button><button id="surt" title="Salir (Esc)">✕</button></div>
-
 <script>
 (function(){
   "use strict";
@@ -622,7 +729,13 @@ Os harán falta más adelante: un servicio de prevención tiene que tener varias
   pant.forEach(function(s){
     var t = s.getAttribute("data-titol");
     if (!t || !/^\d|^Inicio|^Cierre|^Para casa|^✂/.test(t)) return;
-    var a = document.createElement("a"); a.href = "#" + s.id; a.textContent = t; a.dataset.id = s.id;
+    var a = document.createElement("a"); a.href = "#" + s.id; a.dataset.id = s.id; a.title = t;
+    var tros = t.match(/^(\d+|✂) ?(?:· )?(.*)$/);   // projectant, cada bloc és el seu número; només l'actual porta el nom
+    if (tros) {
+      var nb = document.createElement("b"), ns = document.createElement("span");
+      nb.textContent = tros[1]; ns.textContent = (tros[1] === "✂" ? " " : " · ") + tros[2];
+      a.appendChild(nb); a.appendChild(ns);
+    } else a.textContent = t;
     if (s.classList.contains("dema") || s.classList.contains("tallsessio")) a.classList.add("dema");
     a.addEventListener("click", function(ev){ if (document.body.classList.contains("proj")) { ev.preventDefault(); mostra(pant.indexOf(s)); } });
     nav.appendChild(a);
@@ -656,7 +769,7 @@ Os harán falta más adelante: un servicio de prevención tiene que tener varias
       });
       pinta();
     }
-    encaixa();
+    encaixa();   // en votar surt la solució: la lletra s'ajusta una vegada, ara amb la solució a la vista
   }
   function reinicia(){
     document.querySelectorAll("section.votat").forEach(function(s){ s.classList.remove("votat"); });
@@ -686,12 +799,12 @@ Os harán falta más adelante: un servicio de prevención tiene que tener varias
   function endavant(){
     var q = disponibles(pant[i]).filter(function(p){ return !p.classList.contains("vist"); });
     if (!q.length) { mostra(i + 1); return; }
-    destapa(q[0]); encaixa(); q[0].scrollIntoView({ block: "nearest" });
+    destapa(q[0]); q[0].scrollIntoView({ block: "nearest" });
   }
   function enrere(){
     var v = disponibles(pant[i]).filter(function(p){ return p.classList.contains("vist"); });
     if (v.length < 2) { mostra(i - 1); return; }   // el primer pas no es tapa: ← torna a la pantalla anterior
-    v[v.length - 1].classList.remove("vist"); marca(pant[i]); encaixa();
+    v[v.length - 1].classList.remove("vist"); marca(pant[i]);
   }
 
   /* solucions i respostes que es revelen (botó o tecla S) */
@@ -699,8 +812,12 @@ Os harán falta más adelante: un servicio de prevención tiene que tener varias
     b.addEventListener("click", function(){
       var s = b.nextElementSibling;
       while (s && !s.classList.contains("sol")) s = s.nextElementSibling;
-      if (s) s.classList.toggle("obert");
-      encaixa();
+      if (s) {
+        var obrir = !s.classList.contains("obert");
+        // projectant, una resposta cada vegada: així cap en pantalla, i la lletra no s'ha de fer petita per a totes alhora
+        if (obrir && document.body.classList.contains("proj")) b.closest("section").querySelectorAll(".sol.obert").forEach(function(x){ x.classList.remove("obert"); });
+        s.classList.toggle("obert", obrir);
+      }
       if (s && s.classList.contains("obert") && document.body.classList.contains("proj")) s.scrollIntoView({ block: "nearest" });
     });
   });
@@ -738,12 +855,34 @@ Os harán falta más adelante: un servicio de prevención tiene que tener varias
   /* mode projectar: una pantalla per bloc, el mateix número que el full de classe */
   var i = 0, pos = document.getElementById("pos");
   function alcada(){ document.documentElement.style.setProperty("--dalt", document.querySelector(".dalt").offsetHeight + "px"); }
+  /* encaixa (JM, 08-11): la lletra es calcula per a tot el que hi pot sortir a la vista (els passos, les solucions): no balla en
+     destapar, cap pantalla es talla i les que porten poc s'aprofiten per anar més grans. Amb un vot, abans de votar mana la
+     pregunta (sense créixer gaire, perquè el salt en votar no sigui gros) i, en votar, es torna a calcular amb la solució. */
+  var ESC_MIN = 0.72, ESC_MAX = 1.35, ESC_VOT = 1.1;
+  function prova(s, e){ s.style.setProperty("--escala", e.toFixed(2)); return s.scrollHeight <= s.clientHeight + 1 && s.scrollWidth <= s.clientWidth + 1; }
+  function ajusta(s){
+    var e = 1, max = s.querySelector(".voto:not(.fet)") ? ESC_VOT : ESC_MAX;
+    if (prova(s, 1)) { while (e + 0.05 <= max && prova(s, e + 0.05)) e += 0.05; }
+    else { do { e -= 0.04; } while (e > ESC_MIN && !prova(s, e)); if (e < ESC_MIN) e = ESC_MIN; }
+    return e;
+  }
   function encaixa(){
     if (!document.body.classList.contains("proj")) return;
-    var s = pant[i], e = 1;
-    s.style.setProperty("--escala", 1);
-    while (s.scrollHeight > s.clientHeight + 2 && e > 0.8) { e -= 0.04; s.style.setProperty("--escala", e.toFixed(2)); }
+    var s = pant[i], sols = Array.prototype.slice.call(s.querySelectorAll(".sol")), e = ESC_MAX;
+    var oberts = sols.filter(function(x){ return x.classList.contains("obert"); });
+    s.classList.add("mesura");
+    if (!sols.length) e = ajusta(s);
+    else sols.forEach(function(x){
+      sols.forEach(function(y){ y.classList.remove("obert"); });
+      x.classList.add("obert");
+      e = Math.min(e, ajusta(s));
+    });
+    sols.forEach(function(y){ y.classList.remove("obert"); });
+    oberts.forEach(function(y){ y.classList.add("obert"); });
+    s.classList.remove("mesura");
+    s.style.setProperty("--escala", e.toFixed(2));
   }
+  window.addEventListener("load", function(){ alcada(); encaixa(); });
   window.addEventListener("resize", function(){ alcada(); encaixa(); });
   function mostra(n){
     i = Math.max(0, Math.min(pant.length - 1, n));
@@ -840,6 +979,7 @@ Os harán falta más adelante: un servicio de prevención tiene que tener varias
   ["baixa", "baixa2"].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener("click", baixa); });
 
   if (location.hash === "#" + TX.hash) entra();
+  window.__sessio = { mostra: mostra, encaixa: encaixa, n: pant.length };   // per a la comprovació de la maqueta (norma 45)
 })();
 </script>
 <script>
