@@ -111,6 +111,15 @@ th{background:#f3ecdf}
 .cuadro4 .alt{border-style:dashed;opacity:.9}
 .cuadro4 .no{border-color:var(--vermell);background:#fbeeec}
 .cuadro4.cinc{grid-template-columns:repeat(5,1fr)}
+/* dos per dos, amb context (JM, 09-11): dalt, el que frena; a sota, el que ajuda */
+.cuadro4.dues{grid-template-columns:1fr 1fr}
+.cuadro4>.pas{margin:0}
+.cuadro4.dues>div{padding:.45em .7em}
+.cuadro4.dues>div:nth-child(-n+2){border-color:var(--vermell);background:#fbeeec}
+.cuadro4.dues>div:nth-child(n+3){border-color:var(--verd);background:#f3faf6}
+.cuadro4.dues h4{font-size:.78em;color:var(--tinta)}
+.cuadro4.dues p{font-size:1.2em;line-height:1.2}
+.cuadro4.dues small{font-size:.9em;line-height:1.25;color:var(--tinta)}
 @media (max-width:700px){.cuadro4.cinc{grid-template-columns:1fr 1fr}}
 .nueve{display:grid;grid-template-columns:repeat(9,1fr);gap:.3em;margin:.35em 0 .5em}
 .nueve>div{border:1.5px solid #bdb39d;border-radius:.45em;padding:.2em .15em;text-align:center;font-size:.72em;line-height:1.15;background:#fff;color:var(--suau)}
@@ -427,13 +436,88 @@ body.proj .yt{height:41vh}
 .cl-grups button.mal{background:var(--vermell);border-color:var(--vermell);color:#fff;animation:sacseja .4s}
 .cl-grups button.mal small{color:#fff}
 .cl-msg.ok{color:var(--verd);font-weight:800}.cl-msg.ko{color:var(--vermell);font-weight:800}
+.vx-top{display:flex;flex-wrap:wrap;gap:.4em;margin-bottom:.4em}
+.vx-grid{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1fr);gap:.8em;align-items:center}
+.vaixell svg{border-radius:.5em}
+.vaixell .l2{display:none}
+.vaixell.came .l1{display:none}
+.vaixell.came text.l2{display:inline}
+.vaixell.came span.l2{display:flex}
+.vx-cel{fill:#e6f1f8}.vx-mar{fill:#a7cfe5}
+.vx-zona{fill:#fffaf0;fill-opacity:.78;stroke:var(--tinta);stroke-width:3;stroke-dasharray:11 8}
+.vx-zt{font-weight:800;font-size:22px;fill:var(--tinta)}
+.vx-zs{font-size:19px;font-weight:600;fill:var(--tinta)}
+.vx-pal{stroke:#5b3a1e;stroke-width:8;stroke-linecap:round}
+.vx-v{fill:#fff;stroke:var(--tinta);stroke-width:3;transition:fill .4s,stroke .4s}
+.vx-v2{fill:#f2ece0;stroke:var(--tinta);stroke-width:2}
+.vx-casc{fill:#8a5a33;stroke:#5b3a1e;stroke-width:3}
+.vx-fe{fill:#16222b;stroke:var(--vermell);stroke-width:4}
+.vx-gotes circle{fill:#2f7fb3;animation:vx-gota 1.4s ease-in infinite}
+.vx-gotes circle:nth-child(2){animation-delay:.45s}.vx-gotes circle:nth-child(3){animation-delay:.9s}
+@keyframes vx-gota{0%{opacity:0;transform:translateY(-10px)}35%{opacity:1}100%{opacity:0;transform:translateY(10px)}}
+.vx-pegat{fill:#e6c98f;stroke:#5b3a1e;stroke-width:3;opacity:0;transition:opacity .5s}
+.vx-cus{stroke:#5b3a1e;stroke-width:4;stroke-linecap:round;stroke-dasharray:3 5;opacity:0;transition:opacity .5s}
+.vx-nuvol{fill:#58616b;stroke:#39414a;stroke-width:3}
+.vx-llamp{fill:#ffd43b;stroke:#b77a00;stroke-width:2;animation:vx-llamp 2.2s steps(1) infinite}
+@keyframes vx-llamp{0%,62%,78%{opacity:1}70%,86%,100%{opacity:.25}}
+.vx-ones path{fill:none;stroke:var(--verd);stroke-width:7;stroke-linecap:round;stroke-dasharray:34 14;animation:vx-vent 1.8s linear infinite}
+@keyframes vx-vent{to{stroke-dashoffset:-48}}
+.vx-punta{fill:var(--verd)}
+.vx-escut{fill:none;stroke:var(--blau);stroke-width:11;stroke-linecap:round;opacity:0;transition:opacity .6s}
+.vx-brill{opacity:0;transition:opacity .5s}.vx-brill path{fill:#ffd43b;stroke:#b77a00;stroke-width:2}
+.vx-ins{fill:var(--tinta);stroke:#fff;stroke-width:3}
+.vx-lt{font-weight:800;font-size:27px;fill:#fff;pointer-events:none}
+.vaixell .vx-top .int-torna{margin-left:auto}
+.vaixell .int-msg{margin-top:.3em}
+.vx-et{font-weight:800;font-size:21px;paint-order:stroke;stroke:#fff;stroke-width:6px;stroke-linejoin:round;pointer-events:none}
+.vx-et.fr{fill:var(--vermell)}.vx-et.aj{fill:var(--verd)}
+.vx-h{fill:transparent}
+.vx-o{cursor:pointer;outline:none}
+.vx-o:hover .vx-ins,.vx-o:focus .vx-ins{fill:var(--mostassa)}
+.vx-o.sel .vx-ins,.vx-barca .vx-o.sel~.vx-ins{fill:var(--mostassa)}
+.vx-o.sel .vx-v{stroke:var(--mostassa);stroke-width:6}
+.vx-o.sel .vx-fe{stroke:var(--mostassa);stroke-width:6}
+.vx-o.sel .vx-nuvol{stroke:var(--mostassa);stroke-width:6}
+.vx-barca{transition:transform 1s ease-in-out}
+.vx-bob{animation:vx-bob 3s ease-in-out infinite;transform-origin:335px 300px}
+@keyframes vx-bob{0%,100%{transform:rotate(-1.2deg) translateY(0)}50%{transform:rotate(1.2deg) translateY(-3px)}}
+.fet-d .vx-pegat,.fet-d .vx-cus{opacity:1}
+.fet-d .vx-gotes{display:none}
+.fet-f .vx-v{fill:#fff4cf}
+.fet-f .vx-brill{opacity:1}
+.fet-a .vx-escut{opacity:1}
+.fet-a .vx-llamp{animation:none;opacity:.25}
+.fet-o .vx-ones path{animation-duration:.55s}
+.fet-o .vx-barca{transform:translateX(24px)}
+.vx-mx{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1fr);gap:.3em;align-items:stretch}
+.vx-cap{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:.72em;line-height:1.15}
+.vx-cap small{font-weight:600;font-size:.85em;color:var(--suau)}
+.vx-cap.fr{color:var(--vermell)}.vx-cap.aj{color:var(--verd)}
+.int .vx-c{padding:.35em .2em;min-height:4.4em;min-width:0}
+.vx-c span{display:flex;flex-direction:column;align-items:center;line-height:1.05}
+.vx-c b{font-size:2em}
+.vx-c small{font-size:.68em;font-weight:700;overflow-wrap:anywhere}
+.int .vx-c.fr{background:#fbeeec;border-color:var(--vermell)}
+.int .vx-c.aj{background:#f3faf6;border-color:var(--verd)}
+.int .vx-c.sel{background:var(--mostassa);border-color:var(--tinta)}
+.vaixell .int-msg{min-height:3em}
+.cent .cn-punts{display:grid;grid-template-columns:repeat(20,1fr);gap:.28em;max-width:38em}
+.cn-punts i{display:block;aspect-ratio:1;border-radius:50%;background:#d9d1bf}
+.cn-punts i.on{background:var(--vermell)}
+.cn-l{display:flex;flex-wrap:wrap;align-items:center;gap:.35em .5em;margin:.45em 0 0}
+.cn-m{display:inline-block;width:.9em;height:.9em;border-radius:50%;background:var(--vermell)}
+.cn-m.buit{background:#d9d1bf;margin-left:.7em}
 body.proj .int{font-size:1em;padding:.5em 1em}
 body.proj .int svg{max-height:44vh}
 body.proj .p:has(.voto) .int svg{max-height:30vh}
 body.proj .extintor svg{max-height:36vh}
+body.proj .vaixell svg{max-height:40vh}
+body.proj .vaixell .int-msg{min-height:2.4em;font-size:1.05em}
+body.proj .vaixell{padding:.35em .8em}
+body.proj .vaixell .vx-top{margin-bottom:.25em}
 body.proj .int-msg{font-size:1.15em}
 body.proj .pas.vist:not(.ara) .int{opacity:1}
-@media (max-width:700px){.ex-passos{grid-template-columns:1fr 1fr}.tn-fila{grid-template-columns:1fr}.triangle .et{font-size:34px}}
+@media (max-width:700px){.vx-grid{grid-template-columns:1fr}.cent .cn-punts{gap:.18em}.ex-passos{grid-template-columns:1fr 1fr}.tn-fila{grid-template-columns:1fr}.triangle .et{font-size:34px}}
 @media print{.int button,.int-peu,.tn-ctrl{display:none!important}}
 </style>
 </head>
@@ -454,12 +538,12 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <h2>La DAFO i la CAME del teu projecte</h2>
   <p style="font-size:1.15em">Dijous vam començar a mirar el que passa al voltant del teu projecte (el PESTEL i els competidors). Avui el mires per dins i per fora amb una sola eina, la DAFO, i la converteixes en accions amb la CAME. Tot al ⑤ de la fitxa 3.</p>
   <div class="mapa-t"><p class="cap">On som del temari · Unitat 6: Construeix el teu model de negoci</p><ol><li class="passat"><b>6.1</b> Crear, mesurar i aprendre</li><li class="passat"><b>6.2</b> Identificació del públic objectiu</li><li class="ara"><b>6.3</b> Creació d'un model de negoci</li></ol><ol><li class="passat"><b>6.3.1</b> Definir i idear</li><li class="ara"><b>6.3.2</b> Entorn general i específic</li><li><b>6.3.3</b> Model de negoci</li><li><b>6.3.4</b> Propietat intel·lectual i industrial</li></ol><ol><li class="passat"><b>6.3.2 A</b> PESTEL i entorn específic</li><li class="avui"><b>6.3.2 B</b> DAFO i CAME<small>Full d'estudi · pàg. 20-22</small></li></ol></div>
-  <div class="plan"><div><b>Avui</b><ol start="1"><li>Una pregunta de dijous 5 <small>· 3 min</small></li><li>Uns minuts per a qui té la fitxa 3 a mitges <small>· 5 min</small></li><li>La DAFO i la CAME: el projecte, per dins i per fora <small>· 10 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>Sol, al ⑤ de la fitxa 3: la DAFO del teu projecte <small>· 12 min</small></li><li>Si hi arribes: una acció de la CAME per a cada casella <small>· ➕ si hi ha temps</small></li></ol></div></div>
+  <div class="plan"><div><b>Avui</b><ol start="1"><li>Una pregunta de dijous 5 <small>· 3 min</small></li><li>Uns minuts per a qui té la fitxa 3 a mitges <small>· 5 min</small></li><li>La DAFO i la CAME: el projecte, per dins i per fora <small>· 13 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>Sol, al ⑤ de la fitxa 3: la DAFO del teu projecte <small>· 12 min</small></li><li>Si hi arribes: una acció de la CAME per a cada casella <small>· ➕ si hi ha temps</small></li></ol></div></div>
   <h3 class="noproj">Com fer servir aquesta pàgina</h3>
   <p class="noproj">A classe la projectem. A casa et serveix per estudiar: cada bloc et diu <b>on és al full d'estudi</b> (el botó verd l'obre a la pàgina exacta).</p>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=20" target="_blank">Full d'estudi · pàg. 20-22</a></div>
     <p class="nota noproj">Verd: el full d'estudi (s'obre a la pàgina exacta).</p>
-  <div class="clau"><b>Dijous 12, la prova.</b> Entra: les tècniques per idear (6.1.2, taula 6.4, pàg. 7-8), les entrevistes de problema (6.2.1, pàg. 12-14), definir el problema i idear, sense el Metaplan (6.3.1, pàg. 17-18), i l'entorn, DAFO i CAME inclosos (6.3.2, <span style="white-space:nowrap">pàg. 18-22</span>). A casa, només llegir; si vols practicar, els requadres «Comprova que ho saps» 5 (pàg. 12), 10, 11 i 13 (pàg. 16) i 15, 16 i 17 (pàg. 29). No entra: el bucle i el PMV, empatitzar, el Metaplan, el model de negoci i la propietat intel·lectual.</div>
+  <div class="clau"><b>Dijous 12, la prova.</b> Entra: les tècniques per idear (6.1.2, taula 6.4, pàg. 7-8), les entrevistes de problema (6.2.1, pàg. 12-14), definir el problema i idear, sense el Metaplan (6.3.1, pàg. 17-18), i l'entorn, DAFO i CAME inclosos (6.3.2, <span style="white-space:nowrap">pàg. 18-22</span>). A casa, només llegir; si vols practicar, els requadres «Comprova que ho saps» 5 (pàg. 12), 10, 11 i 13 (pàg. 16) i 15, 16 i 17 (pàg. 29). No entra: el bucle i el PMV, empatitzar (6.2.2), el Metaplan, el model de negoci i la propietat intel·lectual.</div>
 </section>
 
 <section class="p" id="record" data-titol="1 · Record">
@@ -486,32 +570,69 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <p class="temari"><span>6.3 · Creació d'un model de negoci</span><i>›</i><span>6.3.2 · Entorn general i específic</span><i>›</i><b>B · DAFO i CAME</b><span class="t-p">Full d'estudi · pàg. 20-22</span></p>
   <p class="kicker">3 · De què parlem</p>
   <h2>DAFO i CAME</h2>
-  <div class="de-que">La DAFO analitza un projecte: què té de bo i de dolent per dins i què li arriba de l'entorn. La CAME converteix cada casella en una acció concreta.</div>
+  <div class="de-que">La DAFO és la foto d'un projecte: què té de bo i de dolent per dins i què li arriba de l'entorn. La CAME és el pla: converteix cada casella en una acció concreta.</div>
   <h3>El que has de saber</h3>
   <ol class="saber"><li>Quatre caselles: debilitats i fortaleses (internes), amenaces i oportunitats (externes)</li><li>La pregunta que ho resol: «depèn de mi o de l'entorn?»</li><li>CAME: corregir, afrontar, mantenir, explotar</li></ol>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=20" target="_blank">Full d'estudi · pàg. 20-22</a></div>
 </section>
 
+<section class="p" id="vaixell">
+  <p class="temari"><span>6.3 · Creació d'un model de negoci</span><i>›</i><span>6.3.2 · Entorn general i específic</span><i>›</i><b>B · DAFO i CAME</b><span class="t-p">Full d'estudi · pàg. 20-22</span></p>
+  <p class="kicker">3 · La idea, en un dibuix</p>
+  <h2>El teu projecte és un vaixell</h2>
+  <div class="int vaixell" data-textos="{&quot;dafo&quot;: {&quot;ajuda&quot;: &quot;👆 Toca el forat, la vela, la tempesta o el vent&quot;, &quot;d&quot;: &quot;&lt;b&gt;D · Debilitat.&lt;/b&gt; El forat és del teu vaixell, i et frena. Al teu projecte: poc temps, pocs diners, poca experiència.&quot;, &quot;a&quot;: &quot;&lt;b&gt;A · Amenaça.&lt;/b&gt; La tempesta no la portes tu, i et pot fer mal. Al teu projecte: més competència, lleis que restringeixen.&quot;, &quot;f&quot;: &quot;&lt;b&gt;F · Fortalesa.&lt;/b&gt; La vela és teva, i t&#x27;empeny. Al teu projecte: habilitats, recursos únics, bona reputació.&quot;, &quot;o&quot;: &quot;&lt;b&gt;O · Oportunitat.&lt;/b&gt; El vent no és teu, però et pot portar lluny. Al teu projecte: tendències, canvis de lleis, avenços.&quot;}, &quot;came&quot;: {&quot;ajuda&quot;: &quot;👆 I ara, què hi fas amb cada cosa? Toca-la&quot;, &quot;d&quot;: &quot;&lt;b&gt;C · Corregir&lt;/b&gt; la debilitat. Tapes el forat.&quot;, &quot;a&quot;: &quot;&lt;b&gt;A · Afrontar&lt;/b&gt; l&#x27;amenaça. No pots aturar la tempesta, però hi fas front: et prepares abans que arribi.&quot;, &quot;f&quot;: &quot;&lt;b&gt;M · Mantenir&lt;/b&gt; la fortalesa. Cuides la vela perquè et continuï empenyent.&quot;, &quot;o&quot;: &quot;&lt;b&gt;E · Explotar&lt;/b&gt; l&#x27;oportunitat. El vent és de tothom: avança qui orienta la vela.&quot;}}"><div class="vx-top"><button type="button" class="vx-m on" data-m="dafo">① DAFO · què hi ha</button><button type="button" class="vx-m" data-m="came">② CAME · què hi faig</button><button type="button" class="int-torna">↺ Una altra vegada</button></div><div class="vx-grid"><svg viewBox="0 0 660 376" role="img" aria-label="Debilitat, Amenaça, Fortalesa, Oportunitat"><rect class="vx-cel" width="660" height="264"/><rect class="vx-mar" y="264" width="660" height="112"/><rect class="vx-zona" x="184" y="34" width="306" height="338" rx="30"/><text class="vx-zt" x="337" y="26" text-anchor="middle">DINS · depèn de tu</text><text class="vx-zt" x="10" y="28">FORA</text><text class="vx-zs" x="10" y="52">arriba de l'entorn</text><g class="vx-barca"><g class="vx-bob"><line class="vx-pal" x1="335" y1="72" x2="335" y2="264"/><path class="vx-v2" d="M325,104 L325,246 L254,246 Z"/><g class="vx-o" data-k="f" tabindex="0" role="button" aria-label="Fortalesa"><path class="vx-v" d="M345,86 C412,130 444,190 454,246 L345,246 Z"/><circle class="vx-ins" cx="392" cy="200" r="22"/><text class="vx-lt l1" x="392" y="209" text-anchor="middle">F</text><text class="vx-lt l2" x="392" y="209" text-anchor="middle">M</text><g class="vx-brill"><path d="M428,120 l6,16 16,6 -16,6 -6,16 -6,-16 -16,-6 16,-6Z"/></g></g><path class="vx-casc" d="M214,262 H458 L422,334 H250 Z"/><g class="vx-o" data-k="d" tabindex="0" role="button" aria-label="Debilitat"><rect class="vx-h" x="240" y="266" width="96" height="72"/><ellipse class="vx-fe" cx="284" cy="298" rx="24" ry="15"/><g class="vx-gotes"><circle cx="276" cy="322" r="4"/><circle cx="292" cy="330" r="4"/><circle cx="284" cy="340" r="4"/></g><rect class="vx-pegat" x="254" y="281" width="60" height="34" rx="6"/><line class="vx-cus" x1="262" y1="288" x2="262" y2="308"/><line class="vx-cus" x1="306" y1="288" x2="306" y2="308"/></g><circle class="vx-ins" cx="350" cy="298" r="22"/><text class="vx-lt l1" x="350" y="307" text-anchor="middle">D</text><text class="vx-lt l2" x="350" y="307" text-anchor="middle">C</text></g></g><path class="vx-escut" d="M486,62 Q522,160 486,258"/><g class="vx-o" data-k="a" tabindex="0" role="button" aria-label="Amenaça"><rect class="vx-h" x="505" y="30" width="150" height="150"/><path class="vx-nuvol" d="M520,108 a26,26 0 0 1 8,-50 a36,36 0 0 1 66,-10 a30,30 0 0 1 40,60 Z"/><path class="vx-llamp" d="M586,106 L566,146 H584 L570,182 L610,134 H590 L604,106 Z"/><circle class="vx-ins" cx="578" cy="78" r="22"/><text class="vx-lt l1" x="578" y="87" text-anchor="middle">A</text><text class="vx-lt l2" x="578" y="87" text-anchor="middle">A</text></g><g class="vx-o" data-k="o" tabindex="0" role="button" aria-label="Oportunitat"><rect class="vx-h" x="8" y="104" width="160" height="124"/><g class="vx-ones"><path d="M16,150 H120 q22,0 22,-16"/><path d="M16,180 H150"/><path d="M16,210 H120 q22,0 22,16"/></g><path class="vx-punta" d="M150,170 L172,180 L150,190 Z"/><circle class="vx-ins" cx="82" cy="130" r="22"/><text class="vx-lt l1" x="82" y="139" text-anchor="middle">O</text><text class="vx-lt l2" x="82" y="139" text-anchor="middle">E</text></g><text class="vx-et aj l1" x="88" y="256" text-anchor="middle">vent a favor</text><text class="vx-et aj l2" x="88" y="256" text-anchor="middle">aprofitar-lo</text><text class="vx-et fr l1" x="576" y="208" text-anchor="middle">la tempesta</text><text class="vx-et fr l2" x="576" y="208" text-anchor="middle">fer-hi front</text><text class="vx-et aj l1" x="400" y="62" text-anchor="middle">la vela</text><text class="vx-et aj l2" x="400" y="62" text-anchor="middle">cuidar-la</text><text class="vx-et fr l1" x="285" y="364" text-anchor="middle">un forat</text><text class="vx-et fr l2" x="285" y="364" text-anchor="middle">tapar-lo</text></svg><div class="vx-mx"><span></span><p class="vx-cap">DINS<small>depèn de tu</small></p><p class="vx-cap">FORA<small>arriba de l'entorn</small></p><p class="vx-cap fr">ET FRENA</p><button type="button" class="vx-c fr" data-k="d"><span class="l1"><b>D</b><small>Debilitat</small></span><span class="l2"><b>C</b><small>Corregir</small></span></button><button type="button" class="vx-c fr" data-k="a"><span class="l1"><b>A</b><small>Amenaça</small></span><span class="l2"><b>A</b><small>Afrontar</small></span></button><p class="vx-cap aj">T'AJUDA</p><button type="button" class="vx-c aj" data-k="f"><span class="l1"><b>F</b><small>Fortalesa</small></span><span class="l2"><b>M</b><small>Mantenir</small></span></button><button type="button" class="vx-c aj" data-k="o"><span class="l1"><b>O</b><small>Oportunitat</small></span><span class="l2"><b>E</b><small>Explotar</small></span></button></div></div><p class="int-msg">👆 Toca el forat, la vela, la tempesta o el vent</p></div>
+<div class="clau">Primer mires què hi ha: <b>DAFO</b>. Després decideixes què hi fas: <b>CAME</b></div>
+</section>
+
+<section class="p" id="duolingo-qui">
+  <p class="temari"><span>6.3 · Creació d'un model de negoci</span><i>›</i><span>6.3.2 · Entorn general i específic</span><i>›</i><b>B · DAFO i CAME</b><span class="t-p">Full d'estudi · pàg. 20-22</span></p>
+  <p class="kicker">3 · Un cas real · qui és Duolingo</p>
+  <h2>Una app gratis que ha de guanyar diners</h2>
+  <div class="tres"><div><b>L'app</b><span>Aprens idiomes amb lliçons curtes, com un joc</span></div><div><b>Gratis</b><span>Veus un anunci en acabar cada lliçó</span></div><div><b>Si pagues</b><span>Sense anuncis i amb més funcions</span></div></div>
+<div class="pas"><div class="int cent" role="img" aria-label="8 / 100"><div class="cn-punts"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><p class="cn-l"><span class="cn-m"></span><b>Unes 8 de cada 100 paguen</b><span class="cn-m buit"></span>La resta, gratis</p></div><p class="nota">Finals del 2024: 9,5 milions de subscriptors, de 116,7 milions de persones que l'obren cada mes.</p></div>
+<div class="pas"><div class="gran"><b>81 %</b><span>dels diners que va ingressar el 2024 van venir de les subscripcions</span></div><div class="clau">Uns pocs paguen la major part del negoci</div></div>
+<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>Dades de l'<a href="https://www.sec.gov/Archives/edgar/data/1562088/000156208825000042/duol-20241231.htm" target="_blank" rel="noopener">informe anual del 2024 de Duolingo (10-K)</a>: 607,5 dels 748,0 milions de dòlars d'ingressos van ser de subscripcions; la resta, sobretot publicitat, l'examen d'anglès i compres dins l'app. El «8 de cada 100» i el «81 %» són càlculs fets amb aquestes xifres; l'informe mateix parla d'aproximadament un 9 % d'usuaris de pagament.</p></div></details>
+</section>
+
 <section class="p" id="duolingo">
   <p class="temari"><span>6.3 · Creació d'un model de negoci</span><i>›</i><span>6.3.2 · Entorn general i específic</span><i>›</i><b>B · DAFO i CAME</b><span class="t-p">Full d'estudi · pàg. 20-22</span></p>
-  <p class="kicker">3 · La DAFO · un cas real</p>
+  <p class="kicker">3 · La DAFO · el vot</p>
   <h2>Duolingo i la IA</h2>
-  <div class="caso"><p>L'abril del 2025, Duolingo va treure 148 cursos nous fets amb IA generativa en menys d'un any. Per als primers 100 n'havia necessitat uns 12 anys.</p></div>
-<div class="voto" data-ok="b"><p class="q">A la DAFO de Duolingo, a quina casella va la IA generativa?</p><div class="opc"><button data-v="a">Una fortalesa</button><button data-v="b">Una oportunitat</button><button data-v="c">Una amenaça</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Una oportunitat: és de l'entorn i l'ajuda</span></p>
+  <div class="caso"><p>Abans, fer un curs nou d'un idioma podia costar anys. L'abril del 2025, Duolingo va treure 148 cursos nous fets amb IA generativa (la que crea textos, com ChatGPT) en menys d'un any. Per als primers 100 n'havia necessitat uns 12 anys.</p><p class="fuente">Font: Duolingo, 30-4-2025 (full d'estudi, pàg. 22). <a class="font-link" href="https://investors.duolingo.com/news-releases/news-release-details/duolingo-launches-148-new-language-courses" target="_blank" rel="noopener">Obre la font ↗</a></p></div>
+<div class="voto" data-ok="b"><p class="q">En aquest cas, a quina casella de la DAFO va la IA generativa?</p><div class="opc"><button data-v="a">Una fortalesa</button><button data-v="b">Una oportunitat</button><button data-v="c">Una amenaça</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Una oportunitat: és de l'entorn i l'ajuda</span></p>
 <p class="nop"><i>✗</i><span>A: fer-la servir no la fa teva; està a l'abast de tothom</span></p>
-<p class="nop"><i>✗</i><span>C: aquí l'aprofita; amenaça, si la fan servir altres</span></p>
+<p class="nop"><i>✗</i><span>C: seria amenaça si la perjudiqués; aquí l'ajuda</span></p>
 <span class="ref hoja">Full d'estudi · pàg. 21-22</span></div> <span class="fuente">Font: Duolingo, 30-4-2025 (full d'estudi, pàg. 22).</span></div></div>
 </section>
 
 <section class="p" id="duolingo2">
   <p class="temari"><span>6.3 · Creació d'un model de negoci</span><i>›</i><span>6.3.2 · Entorn general i específic</span><i>›</i><b>B · DAFO i CAME</b><span class="t-p">Full d'estudi · pàg. 20-22</span></p>
-  <p class="kicker">3 · La solució, 2 de 2</p>
-  <h2>La DAFO de Duolingo, i la CAME</h2>
+  <p class="kicker">3 · La solució, 2 de 3</p>
+  <h2>La DAFO de Duolingo</h2>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=22" target="_blank">Full d'estudi · pàg. 22 · dibuix 4</a></div>
-  <div class="pas"><div class="cuadro4"><div><h4>Debilitats</h4><p>Paguen 9,5 de 116,7 milions al mes</p><small>Corregir</small></div><div><h4>Amenaces</h4><p>Un model d'OpenAI fa sol una app</p><small>Afrontar</small></div><div><h4>Fortaleses</h4><p>40,5 milions cada dia (2024)</p><small>Mantenir</small></div><div><h4>Oportunitats</h4><p>IA: 148 cursos nous</p><small>Explotar</small></div></div></div>
+  <div class="cuadro4 dues">
+<div class="pas"><h4>Debilitat · és seva, i la frena</h4><p>Només paguen unes 8 de cada 100</p><small>I d'aquests pocs ve el 81 % dels ingressos</small></div>
+<div class="pas"><h4>Amenaça · és de fora, i la perjudica</h4><p>La IA pot fer apps d'idiomes</p><small>Agost 2025: OpenAI ensenya GPT-5 fent en minuts una app de francès. Qui pagarà, si te la fas tu?</small></div>
+<div class="pas"><h4>Fortalesa · és seva, i l'ajuda</h4><p>40,5 milions l'obren cada dia</p><small>Finals del 2024: un hàbit diari de molta gent</small></div>
+<div class="pas"><h4>Oportunitat · és de fora, i l'ajuda</h4><p>La IA fa cursos molt de pressa</p><small>148 cursos en menys d'un any; els primers 100, en uns 12 anys</small></div>
+</div>
 <div class="pas"><div class="idea"><b>La mateixa IA, a dues caselles</b><span>si t'ajuda, oportunitat; si et perjudica, amenaça. Totes dues vénen de l'entorn</span></div></div>
-<div class="pas"><div class="clau">CAME: cada casella, <b>un verb i una acció</b>. Fer els cursos amb IA és <b>explotar</b> una oportunitat</div></div>
-<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>Dades del full d'estudi (pàg. 22), amb les seves fonts: Duolingo, informe anual del 2024 (40,5 milions de persones cada dia i 116,7 cada mes; 9,5 milions de subscriptors de pagament) · Duolingo, 30-4-2025 (els 148 cursos) · StockStory, 12-8-2025 (les accions van caure un 5 % en un dia, que una anàlisi de borsa va atribuir a això i a vendes després d'una pujada). La classificació a les caselles és del full d'estudi.</p></div></details>
+<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>Dades del full d'estudi (pàg. 22), amb les seves fonts: <a href="https://www.sec.gov/Archives/edgar/data/1562088/000156208825000042/duol-20241231.htm" target="_blank" rel="noopener">Duolingo, informe anual del 2024</a> (40,5 milions de persones cada dia i 116,7 cada mes; 9,5 milions de subscriptors de pagament) · <a href="https://investors.duolingo.com/news-releases/news-release-details/duolingo-launches-148-new-language-courses" target="_blank" rel="noopener">Duolingo, 30-4-2025</a> (els 148 cursos) · <a href="https://finviz.com/news/137504/why-duolingo-duol-shares-are-plunging-today" target="_blank" rel="noopener">StockStory, 12-8-2025</a> (les accions van caure un 5 % en un dia, que una anàlisi de borsa va atribuir a això i a vendes després d'una pujada). La demostració d'OpenAI, de l'agost del 2025, va ser una presentació: no és cap producte per aprendre idiomes. La classificació a les caselles és del full d'estudi.</p></div></details>
+</section>
+
+<section class="p" id="duolingo3">
+  <p class="temari"><span>6.3 · Creació d'un model de negoci</span><i>›</i><span>6.3.2 · Entorn general i específic</span><i>›</i><b>B · DAFO i CAME</b><span class="t-p">Full d'estudi · pàg. 20-22</span></p>
+  <p class="kicker">3 · La solució, 3 de 3</p>
+  <h2>I ara, què en fa? La CAME</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=22" target="_blank">Full d'estudi · pàg. 22 · dibuix 4</a></div>
+  <div class="cuadro4 dues">
+<div class="pas"><h4>Corregir la debilitat</h4><p>Més maneres de pagar</p><small>Pla familiar (2021) i Max (2023), més car i amb IA</small></div>
+<div class="pas"><h4>Afrontar l'amenaça</h4><p>I tu, què hi faries?</p><small>Si qualsevol es pot fer una app, què té Duolingo que no es pugui copiar?</small></div>
+<div class="pas"><h4>Mantenir la fortalesa</h4><p>Ratxes i punts, per tornar-hi cada dia</p><small>Finals del 2024: uns 10 milions portaven un any o més seguit</small></div>
+<div class="pas"><h4>Explotar l'oportunitat</h4><p>Cursos fets amb IA</p><small>Els 148 de l'abril del 2025</small></div>
+</div>
+<div class="pas"><div class="clau">CAME: cada casella, <b>un verb i una acció</b>. Així passes de la foto al pla</div></div>
+<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>El pla familiar, el Max i les ratxes surten de l'<a href="https://www.sec.gov/Archives/edgar/data/1562088/000156208825000042/duol-20241231.htm" target="_blank" rel="noopener">informe anual del 2024 de Duolingo</a>. Que cada cosa vagi a cada verb és una classificació nostra: l'empresa no ha publicat cap CAME.</p></div></details>
 </section>
 
 <section class="p" id="netflix" data-titol="Si cal: Netflix">
@@ -519,7 +640,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <p class="kicker">3 · Només si cal un cas més · dins el marge</p>
   <h2>Blockbuster, el rei del mercat</h2>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U6.pdf#page=22" target="_blank">Full d'estudi · pàg. 22 · dibuix 4</a></div>
-  <div class="caso"><p>Menys de dos minuts de vídeo: del 3:36 al 4:56 i del 7:10 al 7:30.</p><p class="fuente">Font: Platzi, 2023, «Cómo Netflix aplastó a Blockbuster». <a class="font-link" href="https://www.youtube.com/watch?v=sdnin-z_Rdg&amp;amp;t=216s" target="_blank" rel="noopener">Obre la font ↗</a></p></div>
+  <div class="caso"><p>Blockbuster era la cadena més gran de videoclubs: unes 9.000 botigues on anaves a llogar pel·lícules. El 1997 va néixer Netflix, que al principi llogava DVD per correu. Blockbuster va fer fallida el 2010.</p><p>Menys de dos minuts de vídeo: del 3:36 al 4:56 i del 7:10 al 7:30.</p><p class="fuente">Font: Platzi, 2023, «Cómo Netflix aplastó a Blockbuster». <a class="font-link" href="https://www.youtube.com/watch?v=sdnin-z_Rdg&amp;amp;t=216s" target="_blank" rel="noopener">Obre la font ↗</a></p></div>
 <div class="preg"><span class="n">1</span> Blockbuster era el rei del mercat. Què li podia fer mal, i a quines caselles de la DAFO va? <button class="revela">Veure la resposta</button><div class="sol">Una amenaça de l'entorn (la T del PESTEL: el streaming) i una debilitat de dins (no innovar). La lletra de la CAME que no va fer: afrontar.</div></div>
 </section>
 
@@ -527,9 +648,9 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <p class="temari"><span>6.3 · Creació d'un model de negoci</span><i>›</i><span>6.3.2 · Entorn general i específic</span><i>›</i><b>B · DAFO i CAME</b><span class="t-p">Full d'estudi · pàg. 20-22</span></p>
   <p class="kicker">4 · Sol · al ⑤ de la fitxa 3 · 12 minuts</p>
   <h2>La DAFO del teu projecte</h2>
-  <div class="cuadro4"><div><h4>Debilitats</h4><p>Dues</p><small>què et frena, i és teu</small></div><div><h4>Amenaces</h4><p>Dues</p><small>què et frena, i arriba de l'entorn</small></div><div><h4>Fortaleses</h4><p>Dues</p><small>què t'ajuda, i és teu</small></div><div><h4>Oportunitats</h4><p>Dues</p><small>què t'ajuda, i arriba de l'entorn</small></div></div>
+  <div class="cuadro4 dues"><div><h4>Debilitats · dues</h4><p>Què et frena, i és teu?</p><small>Poc temps, pocs diners, poca experiència…</small></div><div><h4>Amenaces · dues</h4><p>Què et frena, i arriba de l'entorn?</p><small>Més competència, lleis que restringeixen…</small></div><div><h4>Fortaleses · dues</h4><p>Què t'ajuda, i és teu?</p><small>Habilitats, recursos únics, bona reputació…</small></div><div><h4>Oportunitats · dues</h4><p>Què t'ajuda, i arriba de l'entorn?</p><small>Tendències, canvis de lleis, avenços…</small></div></div>
 <div class="clau">Sol · <b>12 minuts</b> · Si només fas això, la sessió ja ha anat bé</div>
-<p class="nota">Mira el teu PESTEL i els competidors: les amenaces i les oportunitats solen sortir d'allà.</p>
+<p class="nota">Les amenaces i les oportunitats solen sortir del teu PESTEL i dels competidors. Compte: «faré una web» no és una oportunitat, és una cosa que faràs tu.</p>
 </section>
 
 <section class="p tallsessio" id="tall" data-titol="✂ Fins aquí">
@@ -544,7 +665,8 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <p class="temari"><span>6.3 · Creació d'un model de negoci</span><i>›</i><span>6.3.2 · Entorn general i específic</span><i>›</i><b>B · DAFO i CAME</b><span class="t-p">Full d'estudi · pàg. 20-22</span></p>
   <p class="kicker">5 · ➕ Si hi ha temps · Al mateix full · si hi arribes</p>
   <h2>Una acció per a cada casella</h2>
-  <div class="cuadro4"><div><h4>Corregir</h4><p>una debilitat</p></div><div><h4>Afrontar</h4><p>una amenaça</p></div><div><h4>Mantenir</h4><p>una fortalesa</p></div><div><h4>Explotar</h4><p>una oportunitat</p></div></div>
+  <div class="cuadro4 dues"><div><h4>Corregir</h4><p>una debilitat</p><small>Què faràs perquè deixi de frenar-te?</small></div><div><h4>Afrontar</h4><p>una amenaça</p><small>Com et prepararàs?</small></div><div><h4>Mantenir</h4><p>una fortalesa</p><small>Què faràs per no perdre-la?</small></div><div><h4>Explotar</h4><p>una oportunitat</p><small>Com l'aprofitaràs?</small></div></div>
+<p class="nota">Cada acció comença amb un verb i surt d'una casella. Model: «Tinc poc temps» → <b>Corregir:</b> reservar-hi dues hores fixes cada setmana.</p>
 <div class="preg"><span class="n">1</span> Per pensar-hi: si demà una empresa gran oferís gratis el mateix que el teu projecte, a quina casella aniria i què faries segons la CAME? <button class="revela">Veure la resposta</button><div class="sol">Una amenaça: arriba de l'entorn i et perjudica. CAME: afrontar-la, amb una acció concreta que surti d'aquesta casella.</div></div>
 </section>
 
@@ -552,7 +674,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <p class="kicker">Tancament</p>
   <h2>Dijous 12, la prova: què hi entra</h2>
   <div class="filw"><div class="cadena n5"><span>U6 · El problema i la idea</span><i>→</i><span>U6 · Entrevistes i opinions reals</span><i>→</i><span>U6 · Definir, idear i l'entorn</span><i>→</i><span>U6 · DAFO i CAME (avui)</span><i>→</i><span>Dijous 12 · la prova</span></div></div>
-  <div class="clau"><b>Entra</b> (full d'estudi): les tècniques per idear, pàg. 7-8 · les entrevistes de problema, pàg. 12-14 · definir el problema i idear, pàg. 17-18 · l'entorn, DAFO i CAME inclosos, pàg. 18-22.<br><b>No entra:</b> el bucle i el PMV · empatitzar · el Metaplan · el model de negoci · la propietat intel·lectual.<br><b>En paper, sobre un cas nou.</b> Del teu projecte no se't demanarà res.<br><b>Les fitxes, a la pila</b>, tal com estiguin.</div>
+  <div class="clau"><b>Entra</b> (full d'estudi): les tècniques per idear, pàg. 7-8 · les entrevistes de problema, pàg. 12-14 · definir el problema i idear, pàg. 17-18 · l'entorn, DAFO i CAME inclosos, pàg. 18-22.<br><b>No entra:</b> el bucle i el PMV · empatitzar (6.2.2) · el Metaplan · el model de negoci · la propietat intel·lectual.<br><b>En paper, sobre un cas nou.</b> Del teu projecte no se't demanarà res.<br><b>Les fitxes, a la pila</b>, tal com estiguin.</div>
   <p class="nota">Propera sessió (dijous 12 de novembre): la <b>prova de la unitat 6</b>, en paper, sobre un cas nou. A casa, només llegir el que entra.</p>
 </section>
 
@@ -904,6 +1026,30 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
     w.querySelector(".int-torna").addEventListener("click", function(){
       fet = 0; [1, 2, 3, 4].forEach(function(n){ w.classList.remove("s" + n); }); bs.forEach(function(b){ b.classList.remove("fet", "mal"); }); msg.innerHTML = ini;
     });
+  });
+
+  /* el vaixell: primer què hi ha (DAFO), després què hi fas (CAME) */
+  document.querySelectorAll(".int.vaixell").forEach(function(w){
+    var tx = json(w, "data-textos") || {}, msg = w.querySelector(".int-msg"), mode = "dafo";
+    var objs = w.querySelectorAll("[data-k]"), ms = w.querySelectorAll(".vx-m");
+    function tria(k){
+      objs.forEach(function(x){ x.classList.toggle("sel", x.getAttribute("data-k") === k); });
+      msg.innerHTML = (tx[mode] || {})[k] || "";
+      if (mode === "came") w.classList.add("fet-" + k);
+    }
+    function posa(m){
+      mode = m; w.classList.toggle("came", m === "came");
+      ["d", "a", "f", "o"].forEach(function(k){ w.classList.remove("fet-" + k); });
+      objs.forEach(function(x){ x.classList.remove("sel"); });
+      ms.forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-m") === m); });
+      msg.innerHTML = (tx[m] || {}).ajuda || "";
+    }
+    objs.forEach(function(o){
+      o.addEventListener("keydown", function(ev){ if (ev.key === "Enter" || ev.key === " ") { ev.stopPropagation(); ev.preventDefault(); tria(o.getAttribute("data-k")); } });
+      o.addEventListener("click", function(){ tria(o.getAttribute("data-k")); });
+    });
+    ms.forEach(function(b){ aturaTecles(b); b.addEventListener("click", function(){ posa(b.getAttribute("data-m")); }); });
+    var t = w.querySelector(".int-torna"); aturaTecles(t); t.addEventListener("click", function(){ posa("dafo"); });
   });
 
   /* classifica: cada cosa, al seu grup */
