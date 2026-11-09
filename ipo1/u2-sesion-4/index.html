@@ -427,13 +427,41 @@ body.proj .yt{height:41vh}
 .cl-grups button.mal{background:var(--vermell);border-color:var(--vermell);color:#fff;animation:sacseja .4s}
 .cl-grups button.mal small{color:#fff}
 .cl-msg.ok{color:var(--verd);font-weight:800}.cl-msg.ko{color:var(--vermell);font-weight:800}
+.decibels .db-cap{display:flex;flex-wrap:wrap;align-items:center;gap:.4em .8em;margin:.05em 0 .45em}
+.decibels .db-pas{font-size:1.2em;white-space:nowrap}
+.decibels .db-mes{background:var(--tinta);color:#fff}
+.decibels .db-mes:hover{background:#000}
+.decibels button:disabled{opacity:.3;cursor:default}
+.db-num{display:flex;align-items:baseline;justify-content:center;gap:.25em;min-width:5.6em}
+.db-num b{font-family:Georgia,serif;font-size:2.7em;line-height:1;font-variant-numeric:tabular-nums}
+.db-num span{font-weight:800;color:var(--suau)}
+.db-chips{display:flex;flex-wrap:wrap;gap:.25em;margin-left:auto}
+.db-chips button{padding:.15em .5em;font-variant-numeric:tabular-nums}
+.db-fila{display:grid;grid-template-columns:minmax(8em,12.5em) 1fr 5.4em;align-items:center;gap:.7em;margin:.4em 0}
+.db-nom{font-weight:700;font-size:.92em;line-height:1.15}
+.db-nom small{display:block;font-weight:500;font-size:.78em;color:var(--suau);margin-top:.1em}
+.db-v{font-size:1.4em;font-weight:800;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.db-barra,.db-hores{position:relative;display:block;background:#eee6d6;overflow:hidden}
+.db-barra{height:1em;border-radius:99px}
+.db-hores{height:1.7em;border-radius:.4em}
+.db-barra i,.db-hores i{position:absolute;left:0;top:0;bottom:0;transition:width .55s,background .55s}
+.db-barra i{background:var(--blau)}
+.db-hores::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(12.5% - 2px),#fff calc(12.5% - 2px),#fff 12.5%)}
+.db-maq{display:grid;grid-template-columns:repeat(16,1fr);gap:.1em .15em;color:var(--vermell)}
+.int .db-maq svg{width:100%;max-height:none;opacity:.13;filter:grayscale(1);transition:opacity .35s,filter .35s}
+.int .db-maq svg.on{opacity:1;filter:none}
+.db-maq rect{fill:currentColor}.db-maq .d{fill:#fff}.db-maq .o{fill:none;stroke:currentColor;stroke-width:3.4;stroke-linecap:round}
+.db-maq svg.nou{animation:db-pop .4s ease-out}
+@keyframes db-pop{from{transform:scale(.4)}60%{transform:scale(1.2)}to{transform:scale(1)}}
+.db-msg{font-size:1.05em;line-height:1.25;flex:1 1 20em}
+body.proj .db-msg{font-size:1.08em}
 body.proj .int{font-size:1em;padding:.5em 1em}
 body.proj .int svg{max-height:44vh}
 body.proj .p:has(.voto) .int svg{max-height:30vh}
 body.proj .extintor svg{max-height:36vh}
 body.proj .int-msg{font-size:1.15em}
 body.proj .pas.vist:not(.ara) .int{opacity:1}
-@media (max-width:700px){.ex-passos{grid-template-columns:1fr 1fr}.tn-fila{grid-template-columns:1fr}.triangle .et{font-size:34px}}
+@media (max-width:700px){.db-fila{grid-template-columns:1fr auto}.db-nom{grid-column:1/-1}.db-chips{margin-left:0}.ex-passos{grid-template-columns:1fr 1fr}.tn-fila{grid-template-columns:1fr}.triangle .et{font-size:34px}}
 @media print{.int button,.int-peu,.tn-ctrl{display:none!important}}
 </style>
 </head>
@@ -627,9 +655,20 @@ El daño es la <b>hipoacusia</b> o sordera profesional (figura 2.6, pág. 33): e
   <div class="refs despres"><span class="ref libro">Libro · pág. 33 · apartado 2.2.1 «Ruido»</span></div>
 </section>
 
+<section class="p" id="ruido-escala">
+  <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
+  <p class="kicker">4 · La lógica de los tres números · tócalo</p>
+  <h2>+3 dB: parece poco, y es el doble</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 33 · apartado 2.2.1 «Ruido»</span></div>
+  <div class="int decibels" data-nivells="[{&quot;db&quot;: 85, &quot;x&quot;: 1, &quot;h&quot;: 8, &quot;t&quot;: &quot;8 h&quot;, &quot;m&quot;: &quot;&lt;b&gt;Punto de partida:&lt;/b&gt; una máquina a 85 dB(A), 8 horas. Pulsa &lt;b&gt;+3&lt;/b&gt;.&quot;}, {&quot;db&quot;: 88, &quot;x&quot;: 2, &quot;h&quot;: 4, &quot;t&quot;: &quot;4 h&quot;, &quot;m&quot;: &quot;&lt;b&gt;+3 dB, el doble de energía.&lt;/b&gt; Dos máquinas iguales de 85 no hacen 170: hacen 88. La misma dosis, en 4 horas.&quot;}, {&quot;db&quot;: 91, &quot;x&quot;: 4, &quot;h&quot;: 2, &quot;t&quot;: &quot;2 h&quot;, &quot;m&quot;: &quot;Otra vez +3, otra vez el doble. El número sube lo mismo; la energía, no. La misma dosis, en 2 horas.&quot;}, {&quot;db&quot;: 94, &quot;x&quot;: 8, &quot;h&quot;: 1, &quot;t&quot;: &quot;1 h&quot;, &quot;m&quot;: &quot;No te suena ocho veces más fuerte, pero al oído le llega &lt;b&gt;ocho veces más energía&lt;/b&gt;. La misma dosis, en 1 hora.&quot;}, {&quot;db&quot;: 97, &quot;x&quot;: 16, &quot;h&quot;: 0.5, &quot;t&quot;: &quot;30 min&quot;, &quot;m&quot;: &quot;Dieciséis veces más: en &lt;b&gt;media hora&lt;/b&gt;, la dosis de toda una jornada a 85.&quot;}, {&quot;db&quot;: 100, &quot;x&quot;: 32, &quot;h&quot;: 0.25, &quot;t&quot;: &quot;15 min&quot;, &quot;m&quot;: &quot;De 85 a 100 el número sube poco; la energía, &lt;b&gt;32 veces&lt;/b&gt;. Eso es una escala logarítmica: cada escalón igual &lt;b&gt;multiplica&lt;/b&gt;, no suma.&quot;}]"><div class="db-cap"><button type="button" class="db-pas db-menys" disabled>− 3 dB</button><div class="db-num"><b>85</b><span>dB(A)</span></div><button type="button" class="db-pas db-mes">+ 3 dB</button><div class="db-chips"><button type="button" class="db-chip on" data-k="0">85</button><button type="button" class="db-chip" data-k="1">88</button><button type="button" class="db-chip" data-k="2">91</button><button type="button" class="db-chip" data-k="3">94</button><button type="button" class="db-chip" data-k="4">97</button><button type="button" class="db-chip" data-k="5">100</button></div></div><div class="db-fila"><span class="db-nom">Lo que sube el número</span><span class="db-barra"><i></i></span><b class="db-v v-n"></b></div><div class="db-fila"><span class="db-nom">La energía que llega al oído<small>como varias máquinas iguales a la vez</small></span><div class="db-maq"><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg><svg viewBox="0 0 44 36" aria-hidden="true"><rect x="2" y="9" width="26" height="24" rx="4"/><circle class="d" cx="15" cy="21" r="7"/><path class="o" d="M33 13q5 8 0 16M38 8q8 13 0 26"/></svg></div><b class="db-v v-e"></b></div><div class="db-fila"><span class="db-nom">Tiempo para la misma dosis<small>la barra entera: 8 horas</small></span><span class="db-hores"><i></i></span><b class="db-v v-t"></b></div><div class="int-peu"><p class="int-msg db-msg"></p><button type="button" class="int-torna">↺ Otra vez</button></div><p class="int-nota">dB(A): decibelios medidos «como oye el oído». Cada tiempo da la misma dosis que 8 h a 85 dB(A), redondeado (RD 286/2006, anexo I).</p></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Por qué los decibelios no funcionan como los kilos.</b>
+<ol class="pasos"><li><b>Qué es dB(A).</b> El decibelio mide lo fuerte que es un sonido. La A quiere decir que el aparato lo mide parecido a como lo oye el oído humano, que capta peor los sonidos muy graves.</li><li><b>Por qué una escala tan rara.</b> Entre lo más flojo que oímos y un ruido que hace daño hay una diferencia de billones de veces en energía. Con una escala normal harían falta números enormes. Con decibelios cabe todo entre 0 y unos 140: cada escalón igual <b>multiplica</b> la energía en lugar de sumarle algo. A eso se le llama escala logarítmica.</li><li><b>Las dos reglas.</b> Cada 3 dB más, el doble de energía; cada 10 dB más, diez veces más. Por eso dos máquinas iguales de 85 dB(A) no hacen 170: hacen 88.</li><li><b>El oído engaña.</b> Para que un ruido te suene el doble de fuerte hacen falta unos 10 dB más. Con solo 3 dB más casi no notas la diferencia, pero tu oído recibe el doble de energía. El daño va por la energía, no por lo que te parece.</li><li><b>Nivel y tiempo.</b> Para recibir la misma dosis, cada 3 dB más deja la mitad de tiempo: 8 horas a 85, 4 a 88, 2 a 91, 1 a 94, media hora a 97 y un cuarto de hora a 100. Esos tiempos no son un permiso: dicen cuándo se llega a la dosis de 8 horas a 85, el nivel desde el que los protectores son obligatorios.</li></ol>
+No hace falta hacer cuentas en el examen.<span class="ley">RD 286/2006 · art. 5.1 y anexo I</span> <span class="ref libro">Libro · pág. 33 · apartado 2.2.1 «Ruido»</span></div></details>
+</section>
+
 <section class="p" id="ruido-logica-2">
   <p class="temari"><span>2.2 · Medioambiente de trabajo</span><i>›</i><span>2.2.1 · Agentes físicos</span><i>›</i><b>A · Ruido</b><span class="t-p">Libro · págs. 33-34</span></p>
-  <p class="kicker">4 · La lógica de los tres números · la solución, 2 de 2</p>
+  <p class="kicker">4 · La lógica de los tres números · la solución, en limpio</p>
   <h2>Por qué se mide así</h2>
   <div class="refs"><span class="ref libro">Libro · pág. 33 · apartado 2.2.1 «Ruido»</span></div>
   <div class="pas"><div class="gran"><b>+3 dB</b><span>el doble de energía sonora: 85 no es «un poco más» que 80, es unas tres veces más</span></div></div>
@@ -1167,6 +1206,35 @@ Es la misma idea que con el ruido y que en la unidad 1: la protección colectiva
     w.querySelector(".int-torna").addEventListener("click", function(){
       fet = 0; [1, 2, 3, 4].forEach(function(n){ w.classList.remove("s" + n); }); bs.forEach(function(b){ b.classList.remove("fet", "mal"); }); msg.innerHTML = ini;
     });
+  });
+
+  /* decibels: cada +3 dB, el doble d'energia i la meitat de temps */
+  document.querySelectorAll(".int.decibels").forEach(function(w){
+    var N = json(w, "data-nivells") || [], k = 0;
+    var num = w.querySelector(".db-num b"), bn = w.querySelector(".db-barra i"), bh = w.querySelector(".db-hores i");
+    var vn = w.querySelector(".v-n"), ve = w.querySelector(".v-e"), vt = w.querySelector(".v-t"), msg = w.querySelector(".db-msg");
+    var maq = w.querySelectorAll(".db-maq svg"), menys = w.querySelector(".db-menys"), mes = w.querySelector(".db-mes"), chips = w.querySelectorAll(".db-chip");
+    var colors = ["var(--verd)", "var(--verd)", "var(--mostassa)", "var(--mostassa)", "var(--vermell)", "var(--vermell)"];
+    function pinta(){
+      var n = N[k];
+      num.textContent = n.db; bn.style.width = n.db + "%"; vn.textContent = "+" + (n.db - 85);
+      ve.textContent = "×" + n.x; vt.textContent = n.t; msg.innerHTML = n.m;
+      bh.style.width = (n.h / 8 * 100) + "%"; bh.style.background = colors[k];
+      maq.forEach(function(s, i){
+        var ara = i < n.x, abans = s.classList.contains("on");
+        s.classList.toggle("on", ara); s.classList.remove("nou");
+        if (ara && !abans) { void s.getBoundingClientRect(); s.classList.add("nou"); }
+      });
+      menys.disabled = k === 0; mes.disabled = k === N.length - 1;
+      chips.forEach(function(c, i){ c.classList.toggle("on", i === k); });
+    }
+    function ves(x){ k = Math.max(0, Math.min(N.length - 1, x)); pinta(); }
+    w.querySelectorAll("button").forEach(aturaTecles);
+    menys.addEventListener("click", function(){ ves(k - 1); });
+    mes.addEventListener("click", function(){ ves(k + 1); });
+    chips.forEach(function(c){ c.addEventListener("click", function(){ ves(+c.getAttribute("data-k")); }); });
+    w.querySelector(".int-torna").addEventListener("click", function(){ ves(0); });
+    pinta();
   });
 
   /* classifica: cada cosa, al seu grup */
