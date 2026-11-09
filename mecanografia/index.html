@@ -984,7 +984,7 @@ tr.revisar td{background:color-mix(in srgb, var(--or-suau) 70%, transparent)}
 .jp-xifres div{background:var(--sup); border:1px solid var(--linia); border-radius:14px; padding:12px; text-align:center}
 .jp-xifres b{display:block; font-family:var(--serif); font-weight:400; font-size:2rem; line-height:1}
 .jp-xifres span{font-size:.8rem; color:var(--suau)}
-.jardi-set{margin:0 0 12px}
+.jardi-set{margin:0 0 12px; display:block}      /* un sol paràgraf: com a «flex» (el de .avis), la negreta partia la frase en tres trossos */
 .tria-jardi{display:grid; grid-template-columns:repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap:12px}
 @media (min-width:900px){ .tria-jardi{grid-template-columns:repeat(4, minmax(0, 1fr))} }
 .opcio-jardi{display:flex; flex-direction:column; align-items:flex-start; gap:4px; text-align:left; padding:10px 10px 14px; border-radius:16px; cursor:pointer; font:inherit; color:var(--tinta);
@@ -1348,6 +1348,211 @@ body.amb-barra-seguent .toast{bottom:108px}
 .pi.no{background:var(--mal-suau); border-color:color-mix(in srgb, var(--mal) 40%, transparent)}
 tr.sense-prova td{color:var(--suau)}
 
+/* =====================================================================
+   VERSIÓ 10 (09-11-2026): el jardí a dalt de tot, al costat de la ruta; què ve ara; avui has fet;
+   l'explorador amb cronologia, passeig, àlbum i foto; i que no s'oblidi la fitxa
+   ===================================================================== */
+.avui-graella{display:grid; grid-template-columns:minmax(0, 1fr); gap:18px; margin:0 0 18px}
+.avui-graella > .ruta{margin:0; min-width:0}
+@media (min-width:1020px){
+  .avui-graella{grid-template-columns:minmax(0, 1.22fr) minmax(0, 1fr); align-items:stretch}
+  .avui-graella .ruta-ara{padding:22px 24px; gap:16px 20px}
+  .avui-graella .ra-icona{width:68px; height:68px; border-radius:22px}
+  .avui-graella .ra-text h2{font-size:clamp(1.55rem, 1.1rem + 1vw, 2.05rem)}
+  .avui-graella .ra-dibuix{width:min(170px, 16vw)}
+  .avui-graella .ruta-passos{grid-template-columns:repeat(auto-fit, minmax(104px, 1fr)); gap:6px}
+  .avui-graella .ruta-passos li{padding:9px 8px; gap:7px}
+  .avui-graella .rp-n{width:24px; height:24px; font-size:.72rem}
+  .avui-graella .rp-text b{font-size:.85rem}
+  .avui-graella .rp-text small{font-size:.6rem; letter-spacing:.05em}
+}
+/* el jardí de l'inici: una targeta que omple l'alçada de la ruta, amb l'escena viva al mig */
+.jardi-hero{margin:0; padding:16px 16px 14px; display:flex; flex-direction:column; gap:12px; min-width:0}
+.jardi-hero .jardi-cap{margin-bottom:2px}
+.jardi-hero .jardi-cap h2{font-size:1.5rem}
+.jh-cap{display:flex; align-items:flex-start; justify-content:space-between; gap:10px 14px; padding:2px 4px 0}
+.jh-titol{min-width:0}
+.jh-titol h2{font-family:var(--serif); font-weight:400; font-size:1.34rem; letter-spacing:-.015em; line-height:1.18; margin-top:5px}
+.jh-estat{display:inline-block; margin-left:8px; padding:2px 9px; border-radius:99px; font-size:.7rem; font-weight:650; letter-spacing:.03em; vertical-align:1px; cursor:help}
+.jh-estat.florit{background:var(--be-suau); color:var(--be)}
+.jh-estat.set{background:var(--or-suau); color:var(--or)}
+.jh-gran{flex:none; padding:7px 15px; min-height:38px; font-size:.9rem}
+.jardi-hero > .escena.jardi{flex:1 1 auto; min-height:250px; margin:0}
+.escena.jardi.omple.amb-3d{min-height:250px}
+.escena.jardi.omple .canvas-3d{position:absolute; inset:0; width:100%; height:100%}
+.jardi-hero .jardi-set{margin:0}
+/* l'etiqueta de damunt l'escena: la data que passa mentre torna a créixer, o el que acaba de néixer */
+.jh-crono{position:absolute; left:12px; top:12px; z-index:4; display:flex; flex-direction:column; gap:1px; padding:8px 14px 9px; border-radius:14px; pointer-events:none; max-width:calc(100% - 24px);
+  background:color-mix(in srgb, var(--sup) 86%, transparent); border:1px solid color-mix(in srgb, var(--linia-f) 55%, transparent);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px); box-shadow:var(--ombra); transition:opacity .5s}
+.jh-crono[hidden]{display:none}
+.jh-crono b{font-family:var(--serif); font-weight:400; font-size:1.45rem; line-height:1.05; letter-spacing:-.01em}
+.jh-crono span{font-size:.8rem; color:var(--suau); font-variant-numeric:tabular-nums}
+.jh-crono.fi{opacity:0}
+.jh-peu{display:flex; align-items:center; justify-content:space-between; gap:8px 14px; flex-wrap:wrap; padding:0 2px}
+.jh-seg{display:flex; align-items:center; gap:12px; min-width:0; flex:1 1 210px}
+.jh-brot{flex:none; width:38px; height:38px; border-radius:12px; display:grid; place-items:center; background:var(--be-suau); color:var(--be)}
+.jh-seg > div{min-width:0; flex:1; display:grid; gap:1px}
+.jh-seg b{font-size:.95rem; font-weight:650; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.jh-seg span{font-size:.84rem; color:var(--suau)}
+.jh-enllacos{display:flex; gap:2px; flex:none}
+.jh-enllacos .enllac{font-size:.88rem; padding:6px 9px}
+.va-barra{display:block; position:relative; height:6px; border-radius:99px; background:var(--sup2); border:1px solid var(--linia); overflow:hidden; margin-top:5px}
+.va-barra::after{content:""; position:absolute; left:0; top:0; bottom:0; width:calc(var(--f, 0) * 100%); border-radius:99px; background:var(--be); transition:width .8s var(--corba)}
+/* la tria del jardí, dins la targeta de dalt: vuit miniatures petites */
+.jardi-hero.tria .tria-jardi, .jardi-hero .tria-jardi{grid-template-columns:repeat(4, minmax(0, 1fr)); gap:8px}
+.jardi-hero .opcio-jardi{padding:6px 6px 9px; border-radius:13px; gap:2px}
+.jardi-hero .opcio-jardi small{display:none}
+.jardi-hero .opcio-jardi b{font-size:.8rem; line-height:1.15; margin:5px 2px 0}
+.jardi-hero .mini-jardi{border-radius:9px}
+@media (max-width:520px){ .jardi-hero .tria-jardi{grid-template-columns:repeat(2, minmax(0, 1fr))} }
+
+/* l'avís de «fitxa carregada», més curt: la ruta i el jardí han de quedar a la vista */
+.avis.carrega{row-gap:3px; padding:11px 16px; font-size:.92rem; margin-bottom:14px}
+.avis.carrega .carrega-on, .avis.carrega .carrega-no{margin-top:0; width:100%}
+
+/* AVUI HAS FET: una tira amb les activitats d'avui */
+.avui-fet{margin:0 0 20px; padding:12px 16px 14px; border-radius:18px; background:var(--sup); border:1px solid var(--linia); box-shadow:var(--ombra)}
+.avui-fet[hidden]{display:none}
+.af-cap{display:flex; align-items:baseline; gap:6px 14px; flex-wrap:wrap; margin-bottom:9px}
+.af-pend{color:var(--or); font-weight:650}
+.af-xips{display:flex; gap:8px; flex-wrap:wrap}
+.af-xip{position:relative; display:grid; grid-template-columns:auto auto; column-gap:8px; align-items:baseline; text-align:left; padding:7px 13px 7px 11px; border-radius:13px; cursor:pointer; font:inherit; color:var(--tinta);
+  background:var(--sup2); border:1px solid var(--linia); border-left:3px solid var(--be); transition:border-color .2s, transform .15s}
+.af-xip:hover{transform:translateY(-1px); border-color:var(--linia-f); border-left-color:var(--be)}
+.af-xip:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.af-xip.no{border-left-color:var(--or)}
+.af-xip small{grid-row:1 / 3; align-self:center; font-family:var(--mono); font-size:.68rem; color:var(--suau)}
+.af-xip b{font-size:.9rem; font-weight:650}
+.af-xip span{grid-column:2; font-size:.8rem; color:var(--suau)}
+.af-xip .estrelles{font-size:.8rem}
+.af-xip.pendent::after{content:""; position:absolute; right:-4px; top:-4px; width:11px; height:11px; border-radius:50%; background:var(--or); border:2px solid var(--sup)}
+
+/* QUÈ VE ARA AL TEU JARDÍ */
+.ve-ara{margin:0 0 22px; padding:22px 24px}
+.ve-ara[hidden]{display:none}
+.va-cap{display:flex; align-items:flex-start; justify-content:space-between; gap:8px 20px; flex-wrap:wrap; margin-bottom:14px}
+.va-cap h2{font-family:var(--serif); font-weight:400; font-size:1.6rem; letter-spacing:-.02em; margin-top:5px}
+.va-graella{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:10px}
+.va{display:flex; gap:12px; align-items:flex-start; padding:13px 14px; border-radius:16px; border:1px solid var(--linia); background:var(--sup2); min-width:0}
+.va-ico{flex:none; width:40px; height:40px; border-radius:13px; display:grid; place-items:center; background:var(--be-suau); color:var(--be)}
+.va-animal .va-ico{background:var(--or-suau); color:var(--or)}
+.va-objecte .va-ico{background:var(--accent-suau); color:var(--accent-text)}
+.va-pedra .va-ico{background:color-mix(in srgb, #E9C46A 30%, var(--sup)); color:var(--or)}
+.va-text{min-width:0; flex:1; display:grid; gap:2px}
+.va-text b{font-size:.96rem; font-weight:650}
+.va-text span{font-size:.85rem; color:var(--suau); line-height:1.35}
+.va-animal .va-barra::after{background:var(--or)}
+.va-objecte .va-barra::after{background:var(--accent)}
+.va-pedra .va-barra::after{background:#D9A93C}
+.va-nota{margin-top:12px}
+
+/* LA FINESTRA DE DESAR i el detall d'una activitat */
+.capa .targeta.desa-avis{max-width:560px}
+.capa .targeta.desa-avis p b{color:var(--tinta)}
+.desa-porta{width:100%; padding:11px 14px; border-radius:14px; background:var(--be-suau); border:1px solid color-mix(in srgb, var(--be) 40%, transparent); font-size:.92rem; text-align:left; line-height:1.45}
+.desa-porta[hidden]{display:none}
+.capa .targeta.activitat{text-align:left; align-items:stretch; max-width:560px; gap:10px}
+.capa .targeta.activitat h2{font-size:1.8rem; margin:0 44px 0 0}
+.capa .targeta.activitat p{margin:0}
+.act-xifres{padding:10px 14px; border-radius:14px; background:var(--sup2); border:1px solid var(--linia); font-variant-numeric:tabular-nums}
+.act-fitxa{font-size:.9rem; font-weight:600; padding-left:18px; position:relative}
+.act-fitxa::before{content:""; position:absolute; left:0; top:.45em; width:10px; height:10px; border-radius:50%; background:var(--be)}
+.act-fitxa.pendent{color:var(--or)}
+.act-fitxa.pendent::before{background:var(--or)}
+.act-fitxa.desada{color:var(--be)}
+.capa .targeta.activitat .boto{align-self:flex-start}
+
+/* entre text i text: el jardí */
+.entre-jardi{display:flex; align-items:center; gap:10px; justify-content:center; margin:0; padding:9px 14px; border-radius:14px; background:var(--be-suau); font-size:.9rem; text-align:left; width:100%}
+.entre-jardi:empty{display:none}
+.ej-ico{flex:none; color:var(--be); display:grid; place-items:center}
+
+/* el resultat: la nota del jardí i, a dalt de tot, la novetat (un clic hi porta) */
+.r-jardi-peu{margin:10px 2px 0}
+.r-jardi-nou{display:flex; align-items:center; gap:12px; width:100%; margin:0 0 16px; padding:11px 16px; border-radius:16px; cursor:pointer; font:inherit; text-align:left; color:var(--tinta);
+  background:var(--be-suau); border:1px solid color-mix(in srgb, var(--be) 40%, transparent); transition:transform .15s, border-color .2s}
+.r-jardi-nou[hidden]{display:none}
+.r-jardi-nou:hover{transform:translateY(-1px); border-color:var(--be)}
+.r-jardi-nou:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.r-jardi-nou > span:nth-child(2){flex:1; min-width:0}
+.rjn-ico{flex:none; width:34px; height:34px; border-radius:11px; display:grid; place-items:center; background:var(--sup); color:var(--be)}
+.rjn-ves{flex:none; font-size:.86rem; font-weight:600; color:var(--be); white-space:nowrap}
+
+/* EL PROGRÉS: l'índex, sempre a la vista */
+.pr-index{position:sticky; top:66px; z-index:20; display:flex; align-items:center; gap:2px 4px; flex-wrap:wrap; margin:0 0 16px; padding:7px 12px; border-radius:16px;
+  background:color-mix(in srgb, var(--sup) 88%, transparent); border:1px solid var(--linia); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); box-shadow:var(--ombra)}
+.pr-index[hidden]{display:none}
+.pr-index .etiqueta{margin-right:6px}
+.pr-index .enllac{font-size:.86rem; padding:5px 10px}
+#pr-cos h2{scroll-margin-top:140px}
+
+/* ELS JARDINS DE LA CLASSE (vista docent) */
+.jardins-classe{display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:14px; margin-top:14px}
+.jc{display:flex; flex-direction:column; gap:3px; text-align:left; padding:8px 8px 12px; border-radius:18px; border:1px solid var(--linia); background:var(--sup); box-shadow:var(--ombra);
+  cursor:pointer; font:inherit; color:var(--tinta); transition:transform .15s, box-shadow .2s}
+.jc:hover:not(:disabled){transform:translateY(-3px); box-shadow:var(--ombra-alta)}
+.jc:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.jc:disabled{cursor:default; opacity:.72}
+.jc-img{display:block; aspect-ratio:13 / 8; border-radius:12px; overflow:hidden; background:var(--sup2); margin-bottom:6px}
+.jc-img img, .jc-img svg{display:block; width:100%; height:100%; object-fit:cover}
+.jc b{font-size:1rem; margin:0 4px}
+.jc small{font-size:.8rem; color:var(--suau); margin:0 4px; line-height:1.35}
+.jc em{font-style:normal; font-weight:650}
+.jc em.set{color:var(--or)}
+.jc em.florit{color:var(--be)}
+
+/* L'EXPLORADOR: les accions, el rètol del mig i l'àlbum */
+.ex-accions{position:absolute; left:16px; bottom:58px; z-index:3; display:flex; flex-direction:column; gap:6px}
+.ex-accions button{display:flex; align-items:center; gap:9px; padding:9px 15px 9px 11px; border-radius:14px; cursor:pointer; font:inherit; font-size:.9rem; font-weight:600; color:var(--tinta);
+  background:color-mix(in srgb, var(--sup) 80%, transparent); border:1px solid color-mix(in srgb, var(--linia-f) 55%, transparent); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  box-shadow:0 10px 26px -16px rgba(0,0,0,.5); transition:transform .15s, background .2s}
+.ex-accions button:hover{transform:translateX(2px); background:var(--sup)}
+.ex-accions button:focus-visible, .ex-album button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.ex-accions button svg{width:19px; height:19px; flex:none}
+.ex-accions button.actiu, .ex-accions button[aria-pressed="true"]{background:var(--tinta); color:var(--fons); border-color:var(--tinta)}
+.ex-rotul{position:absolute; left:50%; top:92px; z-index:3; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:2px; padding:10px 20px 11px; border-radius:18px; pointer-events:none;
+  text-align:center; max-width:min(640px, calc(100% - 32px)); background:color-mix(in srgb, var(--sup) 84%, transparent); border:1px solid color-mix(in srgb, var(--linia-f) 55%, transparent);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); box-shadow:0 16px 40px -22px rgba(0,0,0,.6); animation:ex-entra .3s ease-out}
+.ex-rotul[hidden]{display:none}
+.ex-rotul b{font-family:var(--serif); font-weight:400; font-size:1.5rem; line-height:1.15; letter-spacing:-.01em}
+.ex-rotul span{font-size:.84rem; color:var(--suau); font-variant-numeric:tabular-nums}
+.ex-album{position:absolute; right:16px; top:84px; bottom:112px; z-index:4; width:min(340px, calc(100% - 32px)); overflow-y:auto; padding:16px 16px 18px; border-radius:20px;
+  background:color-mix(in srgb, var(--sup) 92%, transparent); border:1px solid color-mix(in srgb, var(--linia-f) 55%, transparent); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  box-shadow:0 24px 60px -30px rgba(0,0,0,.7); animation:ex-entra .3s ease-out}
+.ex-album[hidden]{display:none}
+.al-cap{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+.al-cap b{display:block; font-family:var(--serif); font-weight:400; font-size:1.9rem; line-height:1.1; margin-top:3px}
+.al-tanca{flex:none; width:34px; height:34px; border-radius:50%; border:1px solid var(--linia); background:var(--sup); color:var(--tinta); font-size:1.3rem; line-height:1; cursor:pointer}
+.al-tanca:hover{border-color:var(--tinta)}
+.al-total{margin:10px 0 10px; height:8px}
+.ex-album h3{font-size:.78rem; font-family:var(--mono); font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--suau); margin:16px 0 7px; display:flex; justify-content:space-between; align-items:baseline}
+.ex-album h3 small{font-size:.74rem; letter-spacing:.04em}
+.al-llista{list-style:none; margin:0; padding:0; display:grid; gap:5px}
+.al-llista li > button, .al-llista li > div{display:grid; gap:1px; width:100%; text-align:left; padding:8px 11px; border-radius:12px; border:1px solid var(--linia); background:var(--sup); font:inherit; color:var(--tinta)}
+.al-llista li > button{cursor:pointer; border-left:3px solid var(--be); transition:transform .15s, border-color .2s}
+.al-llista li > button:hover{transform:translateX(2px); border-color:var(--linia-f); border-left-color:var(--be)}
+.al-llista b{font-size:.9rem; font-weight:650}
+.al-llista span{font-size:.78rem; color:var(--suau); line-height:1.35}
+.al-llista li.no > div{background:transparent; border-style:dashed}
+.al-llista li.no b{color:var(--suau)}
+.explora.amb-album .jardi-ctrl{right:calc(min(340px, 100% - 32px) + 28px)}
+@media (max-width:760px){
+  .ex-accions{flex-direction:row; flex-wrap:wrap; left:10px; right:10px; bottom:150px}
+  .ex-accions button{padding:8px 11px; font-size:.82rem}
+  .ex-accions button span{display:none}
+  .ex-rotul{top:118px}
+  .ex-rotul b{font-size:1.2rem}
+  .ex-album{left:10px; right:10px; top:auto; bottom:10px; width:auto; max-height:62%}
+  .explora.amb-album .jardi-ctrl{right:16px}
+  .avui-fet{padding:11px 12px 12px}
+  .ve-ara{padding:18px 16px}
+  .pr-index{position:static}
+}
+@media (max-height:700px){ .ex-accions{bottom:54px} .ex-accions button{padding:7px 12px 7px 9px} }
+@media (prefers-reduced-motion:reduce){ .ex-rotul, .ex-album{animation:none} .jh-crono, .va-barra::after{transition:none} }
+@media print{ .avui-fet, .ve-ara, .pr-index, .jh-crono, .jh-peu, .jh-gran{display:none !important} }
+
 </style>
 </head>
 <body>
@@ -1460,9 +1665,15 @@ tr.sense-prova td{color:var(--suau)}
     <p class="suau" id="ini-resum"></p>
   </div>
   <div id="ini-avis"></div>
-  <section class="ruta" id="ini-ruta" aria-label="La teva ruta d'avui"></section>
+  <!-- versió 10: a dalt de tot, les dues coses que importen: què toca ara (la ruta) i el que ja has fet créixer (el jardí) -->
+  <div class="avui-graella" id="ini-avui">
+    <section class="ruta" id="ini-ruta" aria-label="La teva ruta d'avui"></section>
+    <section class="targeta jardi-inici jardi-hero" id="ini-jardi" aria-label="El teu jardí"></section>
+  </div>
+  <div class="avui-fet" id="ini-avui-fet" hidden></div>
   <div id="ini-ergo"></div>
   <div id="ini-hero"></div>
+  <section class="targeta ve-ara" id="ini-ve-ara" aria-label="Què ve ara al teu jardí" hidden></section>
   <div class="tria-tu" id="ini-tria"><h2>O tria tu què vols fer</h2><p class="suau">Per si vols canviar els gèneres, la durada o fer un altre repte. Si no, segueix la ruta de dalt.</p></div>
   <div class="accions-inici" id="ini-accions">
     <article class="targeta accio invers practica">
@@ -1502,7 +1713,6 @@ tr.sense-prova td{color:var(--suau)}
     </article>
   </div>
   <section class="targeta pla-treball" id="ini-pla" aria-label="El teu pla de treball"></section>
-  <section class="targeta jardi-inici" id="ini-jardi" aria-label="El teu jardí"></section>
   <section class="targeta la-fitxa" id="ini-fitxa" aria-label="La teva fitxa"></section>
   <div class="targeta nivell" id="ini-nivell"></div>
   <div id="ini-insignies"></div>
@@ -1570,6 +1780,7 @@ tr.sense-prova td{color:var(--suau)}
       <div class="xifres3" id="entre-xifres"></div>
       <div id="entre-pindola"></div>
       <p class="suau" id="entre-seguent"></p>
+      <p class="entre-jardi" id="entre-jardi"></p>
       <button class="boto primari gran" id="b-entre-segueix" type="button">Continua <kbd>Enter</kbd></button>
       <button class="enllac" id="b-entre-acaba" type="button">Acaba aquí la sessió</button>
     </div>
@@ -1609,6 +1820,7 @@ tr.sense-prova td{color:var(--suau)}
     <p class="suau" id="r-sub"></p>
   </div>
   <div id="r-record"></div>
+  <button class="r-jardi-nou" id="r-jardi-nou" type="button" hidden></button>
   <section class="prova-resultat" id="r-prova" aria-label="La prova de la profe" hidden></section>
   <div class="xifres4" id="r-xifres"></div>
   <section class="ruta ruta-resultat" id="r-ruta" aria-label="El teu pas següent"></section>
@@ -1642,6 +1854,7 @@ tr.sense-prova td{color:var(--suau)}
       <button class="boto primari" id="b-pr-torna" type="button">Torna</button>
     </div>
   </div>
+  <nav class="pr-index" id="pr-index" aria-label="Apartats del progrés" hidden></nav>
   <div id="pr-cos"></div>
 </section>
 
@@ -1678,6 +1891,7 @@ tr.sense-prova td{color:var(--suau)}
       <button role="tab" aria-selected="false" data-p="ranking" type="button">Rànquing</button>
       <button role="tab" aria-selected="false" data-p="dies" type="button">Per dies</button>
       <button role="tab" aria-selected="false" data-p="alumnes" type="button">Alumnes</button>
+      <button role="tab" aria-selected="false" data-p="jardins" type="button">Jardins</button>
       <button role="tab" aria-selected="false" data-p="proves" type="button">Proves de la profe</button>
       <button role="tab" aria-selected="false" data-p="sessions" type="button">Totes les sessions</button>
     </div>
@@ -1724,6 +1938,27 @@ tr.sense-prova td{color:var(--suau)}
     <button class="enllac" id="b-avis-no" type="button">Ara no</button>
   </div>
 </div>
+<!-- versió 10: QUE NO S'OBLIDI LA FITXA. Surt quan el ratolí se'n va cap a dalt (a tancar la pestanya), quan fa una estona que
+     no es toca res o quan s'acaba la classe, sempre que hi hagi res per desar. -->
+<div class="capa" id="capa-desa" hidden>
+  <div class="targeta desa-avis" role="alertdialog" aria-modal="true" aria-labelledby="desa-titol" aria-describedby="desa-text">
+    <div class="avis-icona" aria-hidden="true"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"><path d="M6 2.5h8l4.5 4.5v14.5H6z"/><path d="M14 2.5V7h4.5M12 10.5v6M9.2 14l2.8 2.8 2.8-2.8"/></svg></div>
+    <span class="etiqueta" id="desa-etiqueta">Abans de plegar</span>
+    <h2 id="desa-titol">Descarrega la teva fitxa</h2>
+    <p class="suau" id="desa-text"></p>
+    <div class="desa-porta" id="desa-porta"></div>
+    <button class="boto primari gran" id="b-desa-si" type="button">Descarrega la fitxa <kbd>Enter</kbd></button>
+    <button class="enllac" id="b-desa-no" type="button">Encara no plego: segueixo practicant</button>
+  </div>
+</div>
+<div class="capa" id="capa-activitat" hidden>
+  <div class="targeta activitat" role="dialog" aria-modal="true" aria-labelledby="act-titol">
+    <button class="tanca-x" id="b-act-tanca" type="button" aria-label="Tanca">×</button>
+    <span class="etiqueta" id="act-etiqueta">Avui</span>
+    <h2 id="act-titol">&nbsp;</h2>
+    <div id="act-cos"></div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <div class="barra-seguent" id="r-barra-seguent"></div>
 <button class="ajuda-flota" id="b-ajuda" type="button" aria-haspopup="dialog" hidden><span class="ajuda-ico" aria-hidden="true">?</span><span>Què faig?</span></button>
@@ -1740,7 +1975,7 @@ tr.sense-prova td{color:var(--suau)}
       <details><summary>Quan escric no passa res</summary><p>Clica sobre el text i torna a escriure. Si les lletres no compten, apaga el <b>Bloq Maj</b>. Has d'escriure la lletra marcada: si t'equivoques, l'errada compta, però no cal esborrar.</p></details>
       <details><summary>Com plego d'una sessió?</summary><p>Prem <kbd>Esc</kbd> i tria <b>Acaba la sessió</b>. El que has escrit es desa; després, desa la fitxa.</p></details>
       <details><summary>Per què em fa repetir la lliçó?</summary><p>Per superar-la cal un 95 % de precisió: dues o tres estrelles. Ves més a poc a poc i mira la pantalla, no les mans. Si avui ja l'has provat dues vegades, la ruta passa a la pràctica i demà hi tornes. <b>Si és la prova de la profe</b>, la repeteixes fins que la facis sense passar de les errades que ha dit.</p></details>
-      <details><summary>Què és el jardí i els punts?</summary><p>El teu progrés, fet dibuix: cada 10 minuts d'escriure hi creix una planta i cada repte superat hi planta un arbre. Res no es mor.</p></details>
+      <details><summary>Què és el jardí i com el faig créixer?</summary><p>El teu progrés, fet dibuix: cada <b>10 minuts</b> d'escriure hi neix una planta; cada <b>hora</b>, hi ve a viure un animal; cada <b>repte superat</b> hi planta un arbre; cada <b>insígnia</b> hi posa un objecte, i amb <b>60 minuts en una setmana</b> el jardí floreix. Res no es mor. A l'inici, <b>Què ve ara al teu jardí</b> et diu quant falta per a cada cosa; a <b>Mira'l gran</b> hi tens l'àlbum, el passeig i la foto.</p><p><b>El jardí viu a la teva fitxa:</b> si un dia no la carregues, aquell dia el jardí comença buit. Carrega-la sempre en començar i descarrega-la en acabar.</p></details>
     </div>
   </div>
 </div>
@@ -4295,7 +4530,13 @@ function disposa(est, radiArbre){
       var d = plantes[i], ra = atzar(hashText(est.llavor + "|" + d.id));
       L.plantes.push({tipus:"planta", d:d, x:c0.x, y:0.02, z:c0.z, rot:ra() * DPI, s:Math.max(0.35, +d.creix || 1) * (0.92 + ra() * 0.16), rad:0.21, v:((d.variant | 0) % 5 + 5) % 5});
       maxZ = Math.max(maxZ, c0.z);
-    } else L.proximes.push({tipus:"proxima", d:{diu:"Terra preparada · aquí creixerà la teva pròxima planta (10 minuts més d'escriure)"}, x:c0.x, y:0, z:c0.z, rot:0, s:1, rad:0.21});
+    } else {
+      /* versió 10: la primera terra preparada ja diu quina planta hi naixerà i quant falta (i hi treu un brot: vegeu «el brot») */
+      var pp0 = i === nP && est.properaPlanta && est.seguentPlanta > 0 ? est.properaPlanta : null, mF = pp0 ? Math.max(1, Math.ceil(est.seguentPlanta / 60)) : 0;
+      L.proximes.push({tipus:"proxima", primera:i === nP, x:c0.x, y:0, z:c0.z, rot:0, s:1, rad:0.21,
+        d:{diu:pp0 ? "Aquí naixerà la teva pròxima planta" + (est.tipus && pp0.nom ? " (" + String(pp0.nom).toLowerCase() + ")" : "") + " · " + mF + (mF === 1 ? " minut" : " minuts") + " més d'escriure"
+                   : "Terra preparada · aquí creixerà una de les teves pròximes plantes (10 minuts d'escriure cada una)"}});
+    }
     marca(env, c0.x, c0.z, 0.24);
   }
 
@@ -4492,8 +4733,14 @@ var VOLA = {
 };
 var COLORS_PAPALLONA = {bosc:[0xF59A3A, 0xF4D03F, 0xFFFFFF, 0x6FB0F0], desert:[0xF59A3A, 0xFFFFFF], hort:[0xFFFFFF, 0xF4D03F, 0xF59A3A],
                         tropical:[0x2E7BF0, 0xF5822A, 0xF4D03F, 0xE84A8A, 0x2EC4B0], flors:[0xF7A8C4, 0xFFFFFF, 0xB08FE0, 0xF4D03F]};
-function viu(S, L, P, tipus, hora, rs, arrel){
-  var quins = (VOLA[tipus] || VOLA.bosc)[hora] || [], ra = atzar(hashText("viu:" + tipus + hora)), sistemes = [], tP = degradat(255, 255, 255, 1), cc = new T3.Color();
+/* versió 10: el jardí segueix el calendari de debò. A la tardor (octubre i novembre) cauen fulles als jardins de fulla caduca
+   (al japonès, vermelles, com els aurons); a la primavera, pètals al bosc i a l'hort. Només és el que vola: res del que hi ha canvia. */
+var VOLA_MES = {10:{bosc:"fulles", hort:"fulles", flors:"fulles", japo:"fulles"}, 11:{bosc:"fulles", hort:"fulles", flors:"fulles", japo:"fulles"},
+                3:{bosc:"petals", hort:"petals"}, 4:{bosc:"petals", hort:"petals"}, 5:{bosc:"petals", hort:"petals"}};
+function viu(S, L, P, tipus, hora, rs, arrel, mes){
+  var quins = ((VOLA[tipus] || VOLA.bosc)[hora] || []).slice(), ra = atzar(hashText("viu:" + tipus + hora)), sistemes = [], tP = degradat(255, 255, 255, 1), cc = new T3.Color();
+  var delMes = (VOLA_MES[mes] || {})[tipus];
+  if (delMes && quins.indexOf(delMes) < 0) quins.push(delMes);
   S.textures.push(tP);
   function dins(marge){ for (var i = 0; i < 40; i++){ var x = (ra() * 2 - 1) * rs * marge, z = (ra() * 2 - 1) * rs * marge * 0.8; if (radUV(x, z) < envA(L.contorn, angUV(x, z)) * marge) return {x:x, z:z}; } return {x:0, z:0}; }
   function sistema(n, cols, mida, additiu, opacitat, inicia, mou){
@@ -4510,6 +4757,9 @@ function viu(S, L, P, tipus, hora, rs, arrel){
     if (q === "petals") sistema(70, tipus === "japo" ? [0xF8C4D4, 0xFFE4EC, 0xF29AB8] : [0xF7A8C4, 0xFFFFFF, 0xF4C430], 0.1, false, 0.95,
       function(d, primer){ var w = dins(1.05); d.x = w.x; d.z = w.z; d.y = primer ? ra() * alt : alt * (0.8 + ra() * 0.4); d.v = 0.18 + ra() * 0.12; d.a = 1; },
       function(d, t, dt){ d.y -= d.v * dt; d.x += (Math.sin(t * 0.9 + d.ph) * 0.25 + 0.1) * dt; d.z += Math.cos(t * 0.7 + d.ph) * 0.16 * dt; return d.y < 0.02; });
+    if (q === "fulles") sistema(44, tipus === "japo" ? [0xD8402E, 0xE8672E, 0xF0A03A] : [0xD9822B, 0xC2571A, 0xE0B03A, 0x9A6B2B], 0.11, false, 0.95,
+      function(d, primer){ var w = dins(1.05); d.x = w.x; d.z = w.z; d.y = primer ? ra() * alt : alt * (0.7 + ra() * 0.4); d.v = 0.2 + ra() * 0.16; d.a = 1; },
+      function(d, t, dt){ d.y -= d.v * dt; d.x += (Math.sin(t * 1.3 + d.ph) * 0.34 + 0.14) * dt; d.z += Math.cos(t * 0.9 + d.ph) * 0.22 * dt; return d.y < 0.02; });
     if (q === "neu") sistema(260, [0xFFFFFF, 0xF2F6FF], hora === "nit" ? 0.07 : 0.075, false, 0.95,
       function(d, primer){ d.x = (ra() * 2 - 1) * rs * 1.4; d.z = (ra() * 2 - 1) * rs * 1.1; d.y = primer ? -L.prof * 2 + ra() * (alt + L.prof * 2) : alt + ra(); d.v = 0.3 + ra() * 0.2; d.a = 1; },
       function(d, t, dt){ d.y -= d.v * dt; d.x += Math.sin(t * 0.8 + d.ph) * 0.12 * dt; d.z += Math.cos(t * 0.6 + d.ph) * 0.08 * dt; return d.y < -L.prof * 2.2; });
@@ -4568,8 +4818,11 @@ function construeix(est, o){
   T3 = E.T3(); temporals();
   var tipus = PAL[est.tipus] ? est.tipus : "bosc", P = PAL[tipus], hora = horaDe(o.hora, o.fosc), LL = llumDe(tipus, hora), fosc = hora === "nit", posta = hora === "posta";
   var mida = o.mida || "mitjana", explora = mida === "explora", gran = mida === "gran" || explora, mini = mida === "mini";
+  /* versió 10: «viu» (vent, el que vola i els animals que es mouen) també a les targetes que ho demanen, no només a l'explorador;
+     «crono»: cada objecte per separat, perquè pugui créixer el dia que toca quan el jardí es torna a fer davant dels ulls */
+  var ambVida = (explora || !!o.viu) && !mini, crono = !!o.crono && !mini, mes = +String(est.avui || "").slice(5, 7) || 0;
   P.japo = tipus === "japo";
-  var set = !!est.set, noves = {}, NEU = P.neu ? new T3.Color(0xF6F9FD) : null;
+  var set = !!est.set, florit = !!est.florit && !set, noves = {}, NEU = P.neu ? new T3.Color(0xF6F9FD) : null;
   (o.noves || []).forEach(function(id){ noves[id] = 1; });
   var lletra = (getComputedStyle(document.documentElement).getPropertyValue("--lletra") || "sans-serif").trim() || "sans-serif";
   B = primitives();
@@ -4586,7 +4839,7 @@ function construeix(est, o){
       planta:new T3.MeshLambertMaterial({vertexColors:true, flatShading:true}),
       arbre:new T3.MeshLambertMaterial({vertexColors:true, flatShading:true})
     };
-    if (explora){ ambVent(mat.planta, S.vent.temps, S.vent.planta); ambVent(mat.arbre, S.vent.temps, S.vent.arbre); }
+    if (ambVida){ ambVent(mat.planta, S.vent.temps, S.vent.planta); ambVent(mat.arbre, S.vent.temps, S.vent.arbre); }
     S.mat = mat;
     var kBrilla = kit();      /* peces soltes amb llum pròpia (les puntes de les arrels de l'encantat) */
 
@@ -4751,6 +5004,25 @@ function construeix(est, o){
       arrel.add(m); S.picables.push(m); S.instancies.push(m); S.items = S.items.concat(llista);
     });
 
+    /* --- versió 10: EL BROT de la pròxima planta (creix a mesura que s'hi acosta: de 0 a 10 minuts) i L'ANELL D'AVUI
+       (daurat, sota cada planta i cada arbre nascuts avui: d'un cop d'ull, el que s'ha fet créixer aquesta classe) --- */
+    if (L.proximes.length && est.seguentPlanta > 0 && !mini){
+      var q0 = L.proximes[0], fr = lim(1 - est.seguentPlanta / 600, 0, 1), sb = 0.55 + 1.0 * fr, kbr = kit(), cb1 = P.neu ? 0x7E9A76 : (P.brilla ? 0x7FE8C8 : 0x7CB850);
+      posa(kbr, B.pal, cb1, 0, 0.02, 0, 0.007, 0.075, 0.007);
+      posa(kbr, B.oct, cb1, 0.028, 0.092, 0, 0.034, 0.008, 0.019, 0, -0.5); posa(kbr, B.oct, cb1, -0.028, 0.092, 0, 0.034, 0.008, 0.019, 0, 0.5);
+      if (fr > 0.5) posa(kbr, B.oct, cb1, 0, 0.11, 0.022, 0.016, 0.006, 0.026, PI / 2, -0.6);
+      var mBrot = new T3.Mesh(geometria(kbr), mat.planta); mBrot.position.set(q0.x, 0.02, q0.z); mBrot.scale.setScalar(sb); mBrot.rotation.y = soroll(hashText("jardi:" + est.llavor), 71) * DPI;
+      mBrot.userData.item = q0; arrel.add(mBrot); S.picables.push(mBrot);
+    }
+    var dAvui = L.plantes.concat(L.arbres).filter(function(it){ return est.avui && it.d && it.d.data === est.avui; }).slice(0, 60);
+    if (dAvui.length && !mini){
+      var gAv = new T3.RingGeometry(0.8, 1, 30); gAv.rotateX(-PI / 2);
+      var mAv = new T3.InstancedMesh(gAv, new T3.MeshBasicMaterial({color:0xFFC53A, transparent:true, opacity:fosc ? 0.95 : 0.85, depthWrite:false}), dAvui.length);
+      mAv.frustumCulled = false; mAv.renderOrder = 3;
+      dAvui.forEach(function(it, j){ it.anellAvui = {m:mAv, j:j, r:Math.max(0.27, (it.rad || 0.21) * (it.tipus === "arbre" ? 1.05 : 1.3))}; });
+      arrel.add(mAv); S.instancies.push(mAv); S.avui = dAvui;
+    }
+
     /* --- les pedres de les setmanes --- */
     var pedres = L.pedres, fetes = pedres.filter(function(p){ return p.feta; }), normals = pedres.filter(function(p){ return !p.feta; });
     var rP = L.cami.rPedra;
@@ -4809,7 +5081,7 @@ function construeix(est, o){
       ombreja(K.o, 0.4, 0.22);
       if (NEU) neva(K.o, P.neu, NEU);
       if (P.aigua) tinta(K.a, P.aigua[0], P.aigua[1]);
-      if (noves[it.d.id] && !QUIET && !mini){
+      if ((noves[it.d.id] || crono) && !QUIET && !mini){
         var gr = new T3.Group(); gr.position.set(it.x, 0, it.z); gr.rotation.y = it.rot;
         ["o", "b", "a", "v"].forEach(function(c){ var g = geometria(K[c]); if (!g) return; var mm = new T3.Mesh(g, mat[c]); mm.userData.item = it; mm.castShadow = c === "o"; gr.add(mm); S.picables.push(mm); });
         gr.scale.setScalar(0.001); arrel.add(gr); it.grup = gr;
@@ -4873,7 +5145,7 @@ function construeix(est, o){
         llista.forEach(function(it, j){ it.malla = m; it.j = j; it.malla2 = mb; it.ales = mw; it.an = null; });
       });
       S.items = S.items.concat(L.animals);
-      if (explora && !QUIET) S.anima = animaAnimals(L.animals);
+      if (ambVida && !QUIET) S.anima = animaAnimals(L.animals);
     }
 
     /* --- el rètol de l'entrada, amb el nom (versió 7) --- */
@@ -4906,7 +5178,7 @@ function construeix(est, o){
       var marc = new T3.Mesh(geometria(ka), new T3.MeshBasicMaterial({vertexColors:true, transparent:true, opacity:fosc ? 0.42 : 0.55, depthWrite:false, side:T3.DoubleSide}));
       var it0 = {tipus:"objecte", d:L.arc, id:"arcsantmarti", x:0, y:-0.2, z:minZ * 0.8, rot:0, s:1, rad:0, alt:R0};
       marc.position.set(it0.x, -0.2, it0.z); marc.rotation.x = -0.45; marc.renderOrder = 0; marc.userData.item = it0;
-      arrel.add(marc); S.picables.push(marc); S.items.push(it0); it0.grup = noves.arcsantmarti && !QUIET && !mini ? marc : null; if (it0.grup) marc.scale.setScalar(0.001);
+      arrel.add(marc); S.picables.push(marc); S.items.push(it0); it0.grup = (noves.arcsantmarti || crono) && !QUIET && !mini ? marc : null; if (it0.grup) marc.scale.setScalar(0.001);
       S.punts.push(new T3.Vector3(it0.x, -0.2 + R0 * Math.cos(0.45), it0.z - R0 * Math.sin(0.45)));
     }
 
@@ -4938,6 +5210,16 @@ function construeix(est, o){
         if (q.x * q.x + q.z * q.z < Math.pow(RP + 0.25, 2) || distCami(q.x, q.z) < Math.max(0.24, L.cami.rPedra * 1.65) + 0.08 || ocup.xoca(q.x, q.z, 0.06)) continue;
         var u = ra();
         (u < 0.66 ? herbes : u < 0.8 ? codols : floretes).push({x:q.x, z:q.z, r:ra() * DPI, s:0.7 + ra() * 0.6});
+      }
+      /* versió 10: EL JARDÍ FLORIT (la ratxa de setmanes rodones viva): moltes més flors, i més grosses, per tota la gespa.
+         Amb un altre atzar, perquè l'herba i els còdols de sempre no canviïn de lloc. */
+      if (florit && !mini){
+        var rf = atzar(hashText("florit:" + est.llavor)), nf = Math.round(lim(n * 0.9, 24, gran ? 420 : 200));
+        for (var e2 = 0, posades = 0; e2 < nf * 4 && posades < nf; e2++){
+          var af = rf() * DPI - PI, ff = Math.sqrt(rf()) * 0.95, qf = aMon(af, envA(L.contorn, af) * ff);
+          if (qf.x * qf.x + qf.z * qf.z < Math.pow(RP + 0.2, 2) || distCami(qf.x, qf.z) < Math.max(0.24, L.cami.rPedra * 1.65) + 0.06 || ocup.xoca(qf.x, qf.z, 0.05)) continue;
+          floretes.push({x:qf.x, z:qf.z, r:rf() * DPI, s:1.25 + rf() * 0.9}); posades++;
+        }
       }
       function inst(llista, geo, material){
         if (!llista.length) return;
@@ -5066,7 +5348,7 @@ function construeix(est, o){
     }
 
     /* --- el jardí viu (només a l'explorador i sense «reduir moviment»): el que vola segons l'estil i l'hora --- */
-    if (explora && !QUIET) S.viu = viu(S, L, P, tipus, hora, rs, arrel);
+    if (ambVida && !QUIET) S.viu = viu(S, L, P, tipus, hora, rs, arrel, mes);
 
     /* --- espurnes (les noves) i cuques de llum (de nit) --- */
     var novesItems = S.items.filter(function(it){ return it.d && it.d.id && noves[it.d.id]; });
@@ -5179,6 +5461,7 @@ function aplicaItem(it, g, puja){
   if (it.flor){ var gf = Math.max(0.0001, g); _m.compose(_v.set(it.flor.x, 0.01, it.flor.z), _q.setFromAxisAngle(EY, it.rot), _s.set(gf, gf, gf)); it.flor.m.setMatrixAt(it.flor.j, _m); }
   if (it.halo){ var gh = Math.max(0.0001, g) * it.sx * 4.2; _m.compose(_v.set(it.x, 0.02, it.z), _q.identity(), _s.set(gh, 1, gh)); it.halo.m.setMatrixAt(it.halo.j, _m); }
   if (it.papallona){ var p = it.papallona, gp = Math.max(0.0001, lim((g - 0.6) / 0.4, 0, 1)); _m.compose(_v.set(it.x + p.dx, p.dy * (0.6 + 0.4 * gp), it.z), _q.setFromAxisAngle(EY, p.rot), _s.set(gp * 1.2, gp * 1.2, gp * 1.2)); p.m.setMatrixAt(p.j, _m); }
+  if (it.anellAvui){ var ga = Math.max(0.0001, lim(g, 0, 1)) * it.anellAvui.r; _m.compose(_v.set(it.x, 0.034, it.z), _q.identity(), _s.set(ga, 1, ga)); it.anellAvui.m.setMatrixAt(it.anellAvui.j, _m); }
 }
 
 /* ---------- 10. TRES.jardi: l'escena viva ---------- */
@@ -5223,9 +5506,14 @@ TRES.jardi = function(el, d){
   var C = d.colors || {}, mida = d.mida || "mitjana", mini = mida === "mini", explora = mida === "explora";
   var interactiu = d.interactiu !== undefined ? !!d.interactiu : !mini;
   var estat = d.estat || {}, hora = horaDe(d.llum, C.fosc);
-  var S = construeix(estat, {hora:hora, mida:mida, noves:d.noves || [], colors:C});
+  /* versió 10: viu (el jardí es mou també a la targeta), crono (torna a créixer dia a dia: {dies, alDia, alFinal}),
+     enfoca (la càmera va a veure néixer el que és nou) i velCam (la càmera va més a poc a poc quan es mou tota sola) */
+  var ambVida = (explora || !!d.viu) && !mini, crono = d.crono && d.crono.dies && d.crono.dies.length ? d.crono : null, cr = null;
+  var usuari = false, velCam = 9, temps = [], enfocat = null, passeig = null, aLaVista = true;
+  var S = construeix(estat, {hora:hora, mida:mida, noves:d.noves || [], colors:C, viu:ambVida, crono:!!crono});
+  var omple = !!d.omple && !explora && !mini;
   var W = el.clientWidth || (mida === "gran" ? 1100 : mini ? 320 : 600), H = alcada();
-  function alcada(){ return explora ? Math.max(240, el.clientHeight || window.innerHeight) : rati(mida, W); }
+  function alcada(){ return explora ? Math.max(240, el.clientHeight || window.innerHeight) : (omple && el.clientHeight > 140 ? el.clientHeight : rati(mida, W)); }
   var renderer = E.renderitzador(el), pr = Math.min(window.devicePixelRatio || 1, explora ? 2 : mini ? 1.5 : 1.75);
   renderer.setPixelRatio(pr); renderer.setSize(W, H, false); tons(renderer);
   function ombres(){ if (S.ombres){ renderer.shadowMap.enabled = true; renderer.shadowMap.type = T3.PCFSoftShadowMap; renderer.shadowMap.autoUpdate = false; renderer.shadowMap.needsUpdate = true; } }
@@ -5254,7 +5542,7 @@ TRES.jardi = function(el, d){
   function copia(){ orb.yaw = obj.yaw; orb.pitch = obj.pitch; orb.dist = obj.dist; orb.centre.set(obj.cx, yDe(obj.dist), obj.cz); }
   /* un pas de la càmera: torna true si encara es mou */
   function pasCamera(dt){
-    var k = QUIET ? 1 : 1 - Math.exp(-dt * 9), mou = false;
+    var k = QUIET ? 1 : 1 - Math.exp(-dt * velCam), mou = false;
     function cap(a, b){ var dd = b - a; if (Math.abs(dd) > 1e-4){ mou = true; return a + dd * k; } return b; }
     orb.yaw = cap(orb.yaw, obj.yaw); orb.pitch = cap(orb.pitch, obj.pitch);
     var ld = cap(Math.log(orb.dist), Math.log(obj.dist)); orb.dist = Math.exp(ld);
@@ -5264,9 +5552,11 @@ TRES.jardi = function(el, d){
   ajusta();
 
   /* l'estat inicial de cada element (l'entrada: l'illa puja, tot creix des del mig, les noves al final i amb rebot) */
-  var animat = !QUIET && !mini, tots, maxD, ordreNoves, fiCreix, fiTot;
+  var animat = !QUIET && !mini, tots, maxD, ordreNoves, fiCreix, fiTot, iniNoves = 1.0;
   function preparaItems(entrada){
-    tots = S.items; maxD = 1; ordreNoves = 0;
+    tots = S.items; maxD = 1; ordreNoves = 0; cr = null; enfocat = null;
+    /* si la càmera hi ha d'anar, el que és nou neix quan ja hi és (uns dos segons després de començar) */
+    iniNoves = d.enfoca && entrada && animat && S.noves.length && !crono ? 2.0 : 1.0;
     tots.forEach(function(it){ it.dist = Math.hypot(it.x, it.z); maxD = Math.max(maxD, it.dist); });
     tots.forEach(function(it){
       it.nova = entrada && !!(it.d && it.d.id && S.noves.indexOf(it) >= 0) && animat;
@@ -5274,12 +5564,29 @@ TRES.jardi = function(el, d){
       else it.ini = 0.1 + 0.55 * it.dist / maxD;
       it.g = entrada && animat ? 0 : 1;
     });
-    tots.forEach(function(it){ if (it.nova){ it.ini = 1.0 + Math.min(0.9, ordreNoves++ * 0.09); } });
+    tots.forEach(function(it){ if (it.nova){ it.ini = iniNoves + Math.min(0.9, ordreNoves++ * 0.09); } });
+    /* LA CRONOLOGIA: cada cosa neix el dia que va néixer (les pedres, el primer dia de la seva setmana), i el temps passa
+       de pressa: de 2,6 a 10 segons per a tot el curs, segons els dies que hi ha */
+    if (entrada && animat && crono){
+      var dies = crono.dies, nD = dies.length, Tc = lim(nD * 0.26, 2.6, 10), per = {};
+      dies.forEach(function(x, i){ per[x.data] = i; });
+      cr = {T:Tc, n:nD, dia:-1};
+      tots.forEach(function(it, j){
+        var da = it.d ? (it.d.data || it.d.dilluns || null) : null, k = 0;
+        if (da && per[da] !== undefined) k = per[da];
+        else if (da){ k = nD - 1; for (var q = 0; q < nD; q++){ if (dies[q].data >= da){ k = q; break; } } }
+        it.nova = false; it.dia = k;
+        it.ini = 0.6 + Tc * (nD > 1 ? k / (nD - 1) : 0) + (j % 9) * 0.02;
+      });
+    }
     aplicaTots();
     S.instancies.forEach(function(m){ m.computeBoundingSphere(); });
     if (entrada && animat){ tots.forEach(function(it){ if (it.malla) aplicaItem(it, 1, false); }); S.instancies.forEach(function(m){ m.computeBoundingSphere(); }); aplicaTots(); }
-    fiCreix = Math.max(1.3, ordreNoves ? 1.0 + Math.min(0.9, (ordreNoves - 1) * 0.09) + 1.45 : 0); fiTot = Math.max(fiCreix, S.anellActual ? 3.8 : 0);
+    fiCreix = Math.max(1.3, ordreNoves ? iniNoves + Math.min(0.9, (ordreNoves - 1) * 0.09) + 1.45 : 0);
+    if (cr) fiCreix = 0.6 + cr.T + 0.2 + 0.8;
+    fiTot = Math.max(fiCreix, S.anellActual ? 3.8 : 0);
     if (!(entrada && animat) && S.halos) S.halos.visible = true;
+    if (crono && !(entrada && animat) && crono.alFinal){ var fiC = crono.alFinal; temps.push(setTimeout(function(){ try { fiC(); } catch(e){} }, 0)); }
   }
   function aplicaTots(){
     tots.forEach(function(it){ if (it.malla) aplicaItem(it, it.g, it === sobre); else if (it.grup) it.grup.scale.setScalar(Math.max(0.001, it.g)); });
@@ -5290,7 +5597,10 @@ TRES.jardi = function(el, d){
 
   /* el bucle: corre mentre hi ha entrada, la càmera es mou o (a l'explorador) el jardí és viu; després, res */
   var viu = true, raf = 0, tAnt = 0, brut = true, t0 = null, entrant = animat, ultimToc = performance.now(), ambient = !!S.viu, qualitat = {n:0, suma:0, pas:0};
-  var REPOS = 45000;      /* l'explorador s'atura sol si fa 45 s que no es toca res */
+  /* versió 10: en una targeta, l'entrada no comença fins que es veu (si és més avall de la pantalla, espera): el que neix,
+     la cronologia i la càmera que hi va són per ser vistos */
+  var vist = explora || !animat || !("IntersectionObserver" in window);
+  var REPOS = explora ? 45000 : 22000;      /* l'explorador s'atura sol si fa 45 s que no es toca res; una targeta viva, als 22 s */
   function dibuixa(){
     E.posaCamera(cam, orb);
     S.cupula.position.copy(cam.position); if (S.estels) S.estels.position.copy(cam.position);
@@ -5303,11 +5613,30 @@ TRES.jardi = function(el, d){
     if (t0 === null) t0 = t;
     var seg = (t - t0) / 1000;
     S.arrel.position.y = -0.45 * (1 - surt(seg / 1.0));
-    if (!tocat){ obj.yaw = orb.yaw = yaw0 - 0.28 * (1 - surt(seg / 1.3)); }
+    if (!tocat){ obj.yaw = orb.yaw = yaw0 - (cr ? 0.8 : 0.28) * (1 - surt(seg / (cr ? cr.T + 1.4 : 1.3))); }
     if (seg < fiCreix + 0.1){
-      tots.forEach(function(it){ var u = (seg - it.ini) / (it.nova ? 1.25 : 0.5); it.g = it.nova ? (u <= 0 ? 0 : rebot(u, 2.6)) : (u <= 0 ? 0 : rebot(u, 1.2)); });
+      tots.forEach(function(it){ var u = (seg - it.ini) / (it.nova ? 1.25 : (cr ? 0.62 : 0.5)); it.g = it.nova ? (u <= 0 ? 0 : rebot(u, 2.6)) : (u <= 0 ? 0 : rebot(u, cr ? 1.9 : 1.2)); });
       aplicaTots();
       if (S.ombres) renderer.shadowMap.needsUpdate = true;
+    }
+    /* la cronologia: avisa de cada dia que passa (la data i el recompte, a la pantalla) */
+    if (cr){
+      var kd = seg < 0.6 ? -1 : lim(Math.floor((seg - 0.6) / cr.T * Math.max(1, cr.n - 1) + 0.001), 0, cr.n - 1);
+      if (kd !== cr.dia){ cr.dia = kd; if (kd >= 0 && crono && crono.alDia) try { crono.alDia(kd, crono.dies[kd]); } catch(e0){} }
+    }
+    /* la càmera va a veure néixer el que és nou (el més valuós: objecte, arbre, animal, planta) i després torna */
+    if (d.enfoca && !cr && !enfocat && !usuari && S.noves.length && seg > 0.85){
+      var ordreV = {objecte:0, arbre:1, animal:2, planta:3}, cand = S.noves.slice().sort(function(a, b){ return (ordreV[a.tipus] === undefined ? 9 : ordreV[a.tipus]) - (ordreV[b.tipus] === undefined ? 9 : ordreV[b.tipus]); })[0];
+      if (cand && cand.rad !== undefined){
+        enfocat = cand; tocat = true; velCam = 2.3;
+        var m2 = Math.max(cand.alt || 0.4, (cand.rad || 0.25) * 1.6);
+        obj.cx = cand.x; obj.cz = cand.z; obj.dist = lim(Math.max(inici.dist * 0.3, 1.9 + m2 * 3.3), LIM.minD, LIM.maxD); obj.pitch = lim(0.52, LIM.minP, LIM.maxP); limita(obj);
+        if (d.alEnfocar) try { d.alEnfocar(cand.d, cand.tipus); } catch(e1){}
+        temps.push(setTimeout(function(){ if (!viu || !enfocat) return;
+          if (d.alEnfocar) try { d.alEnfocar(null); } catch(e2){}      /* el rètol «Acaba de néixer» se'n va sempre, també si l'usuari ja ha agafat la càmera */
+          if (usuari) return; velCam = 1.7; obj.yaw = yaw0; obj.pitch = pitch0; obj.dist = inici.dist; obj.cx = inici.cx; obj.cz = inici.cz; desperta();
+          temps.push(setTimeout(function(){ velCam = 9; }, 2600)); }, Math.round((fiCreix + 1.5 - seg) * 1000)));
+      }
     }
     if (S.espurnes){
       var e = S.espurnes, nv = S.noves;
@@ -5328,17 +5657,22 @@ TRES.jardi = function(el, d){
     if (seg >= fiTot){
       tots.forEach(function(it){ it.g = 1; }); aplicaTots(); if (S.espurnes) S.espurnes.pts.visible = false; S.arrel.position.y = 0;
       if (S.ombres) renderer.shadowMap.needsUpdate = true; if (S.halos) S.halos.visible = true;
+      if (cr){
+        var fiCr = crono; cr = null;
+        if (fiCr && fiCr.alDia) try { fiCr.alDia(fiCr.dies.length - 1, fiCr.dies[fiCr.dies.length - 1]); } catch(e3){}
+        if (fiCr && fiCr.alFinal) try { fiCr.alFinal(); } catch(e4){}
+      }
       entrant = false; return false;
     }
     return true;
   }
   function frame(t){
     raf = 0; if (!viu) return;
-    var dt = tAnt ? Math.min(0.1, (t - tAnt) / 1000) : 1 / 60; tAnt = t;
+    var dt = tAnt ? Math.max(0, Math.min(0.1, (t - tAnt) / 1000)) : 1 / 60; tAnt = t;      /* mai enrere: un pas negatiu faria fugir la càmera */
     var segueix = false;
-    if (entrant){ if (pasEntrada(t)) segueix = true; brut = true; }
+    if (entrant && vist){ if (pasEntrada(t)) segueix = true; brut = true; }
     if (pasCamera(dt)){ segueix = true; brut = true; }
-    if (ambient && S.viu && !document.hidden && performance.now() - ultimToc < REPOS){
+    if (ambient && S.viu && !document.hidden && aLaVista && performance.now() - ultimToc < REPOS){
       var ts = t / 1000;
       S.viu(ts, dt); if (S.anima) S.anima(ts, dt, sobre); S.vent.temps.value = ts; S.vent.planta.value = 0.14; S.vent.arbre.value = 0.011;
       if (S.nuvols) S.nuvols.rotation.y += dt * 0.008;
@@ -5387,8 +5721,10 @@ TRES.jardi = function(el, d){
   var punters = {}, nP = 0, gest = null, arrossegant = false, r = interactiu ? E.retol(el) : null;
   function rel(e){ var rc = canvas.getBoundingClientRect(); return {x:(e.clientX - rc.left) * W / rc.width, y:(e.clientY - rc.top) * H / rc.height}; }
   function dos(){ var ids = Object.keys(punters), a = punters[ids[0]], b = punters[ids[1]]; return {d:Math.hypot(a.x - b.x, a.y - b.y), x:(a.x + b.x) / 2, y:(a.y + b.y) / 2}; }
+  function mana(){ usuari = true; velCam = 9; if (passeig) aturaPasseig(false); }
   function pd(e){
     if (e.pointerType === "mouse" && e.button > 2) return;
+    mana();
     var q = rel(e); punters[e.pointerId] = q; nP = Object.keys(punters).length;
     try { canvas.setPointerCapture(e.pointerId); } catch(x){}
     if (nP === 1) gest = {mode:(e.button === 2 || e.button === 1 || e.shiftKey) ? "mou" : "gira", x:q.x, y:q.y, mogut:false, tot:0};
@@ -5429,11 +5765,11 @@ TRES.jardi = function(el, d){
   }
   function roda(e){
     if (!explora && !e.ctrlKey && !e.metaKey){ avisa(d.gran ? "Per apropar-te: Ctrl + roda, els botons + i −, o obre'l en gran" : "Per apropar-te: Ctrl + roda o els botons + i −"); return; }
-    e.preventDefault();
+    e.preventDefault(); mana();
     var dy = e.deltaY * (e.deltaMode === 1 ? 33 : e.deltaMode === 2 ? 400 : 1), q = rel(e);
     zoom(Math.exp(lim(dy, -240, 240) * 0.0016), q.x, q.y);
   }
-  function doble(e){ var it = quin(e); if (it) vesHi(it); else { var q = rel(e); zoom(0.5, q.x, q.y); } }
+  function doble(e){ mana(); var it = quin(e); if (it) vesHi(it); else { var q = rel(e); zoom(0.5, q.x, q.y); } }
   function menu(e){ e.preventDefault(); }
 
   /* passar per sobre o tocar: el rètol amb el que diu cada cosa */
@@ -5466,7 +5802,7 @@ TRES.jardi = function(el, d){
     var rc = canvas.getBoundingClientRect();
     if (it){ r.textContent = it.d.diu; r.hidden = false; r.style.left = (e.clientX - rc.left) + "px"; r.style.top = (e.clientY - rc.top) + "px"; } else r.hidden = true;
   }
-  function passa(e){ if (gest || e.pointerType === "touch") return; var it = quin(e); marcaSobre(it); mostra(e, it); if (explora){ ultimToc = performance.now(); if (ambient) demana(); } }
+  function passa(e){ if (gest || e.pointerType === "touch") return; if (passeig) return; var it = quin(e); marcaSobre(it); mostra(e, it); if (ambVida){ ultimToc = performance.now(); if (ambient) demana(); } }
   function fora(){ marcaSobre(null); if (r) r.hidden = true; }
 
   /* els botons: apropa, allunya, la vista de sempre i (a la targeta) en gran */
@@ -5479,7 +5815,7 @@ TRES.jardi = function(el, d){
       (d.gran ? '<button type="button" data-z="gran" aria-label="Mira\'l en gran, a tota la pantalla" title="Mira\'l en gran">' + ICONA.gran + "</button>" : "");
     barra.addEventListener("click", function(e){
       var b = e.target.closest("[data-z]"); if (!b) return;
-      var z = b.getAttribute("data-z");
+      var z = b.getAttribute("data-z"); mana();
       if (z === "mes") zoom(0.62); else if (z === "menys") zoom(1.6); else if (z === "inici") aInici(); else if (z === "gran" && d.gran) d.gran();
     });
     el.appendChild(barra);
@@ -5492,16 +5828,61 @@ TRES.jardi = function(el, d){
   } else canvas.style.cursor = "default";
 
   var ro = new ResizeObserver(function(){
-    var w = el.clientWidth, h = explora ? el.clientHeight : null;
-    if (!w || (Math.abs(w - W) < 2 && (!explora || Math.abs(h - H) < 2))) return;
+    var ple = explora || omple, w = el.clientWidth, h = ple ? alcada() : null;
+    if (!w || (Math.abs(w - W) < 2 && (!ple || Math.abs(h - H) < 2))) return;
     W = w; H = alcada(); renderer.setSize(W, H, false); ajusta(true); demana();
   });
   ro.observe(el);
+  /* una targeta viva només es mou mentre es veu: fora de la pantalla, quieta; quan hi torna, es desperta una estona.
+     I l'entrada comença quan se'n veu almenys un terç. */
+  var io = null;
+  if (!explora && "IntersectionObserver" in window){
+    io = new IntersectionObserver(function(v){
+      var e = v[v.length - 1], abans = aLaVista;
+      aLaVista = !!e.isIntersecting;
+      if (!vist && e.isIntersecting && e.intersectionRatio >= 0.33){ vist = true; ultimToc = performance.now(); demana(); }
+      else if (aLaVista && !abans && vist) desperta();
+    }, {threshold:[0, 0.33, 0.6]});
+    io.observe(el);
+    /* per si el navegador triga a dir-ho: si al cap d'un segon i mig la targeta és a la pantalla, endavant */
+    temps.push(setTimeout(function(){
+      if (vist || !viu || document.hidden) return;
+      var rc = el.getBoundingClientRect(), a = Math.min(rc.bottom, window.innerHeight) - Math.max(rc.top, 0);
+      if (rc.height > 0 && a / rc.height >= 0.33){ vist = true; ultimToc = performance.now(); demana(); }
+    }, 1500));
+  }
+
+  /* EL PASSEIG (versió 10): la càmera va d'una cosa a l'altra (les que es diuen, per id) i s'hi atura; qualsevol gest l'atura */
+  function itemDe(id){ for (var i = 0; i < S.items.length; i++){ var it = S.items[i]; if (it.d && it.d.id === id && it.rad !== undefined) return it; } return null; }
+  function aturaPasseig(acabat){
+    if (!passeig) return;
+    var t = passeig; passeig = null; clearTimeout(t.tmr); velCam = 9; marcaSobre(null);
+    if (t.alFinal) try { t.alFinal(!!acabat); } catch(e){}
+  }
+  function seguentPasseig(){
+    if (!passeig || !viu) return;
+    passeig.i++;
+    if (passeig.i >= passeig.llista.length){
+      var t = passeig; passeig = null; marcaSobre(null);
+      velCam = 1.5; obj.yaw = orb.yaw + ((yaw0 - orb.yaw) % DPI + DPI + PI) % DPI - PI; obj.pitch = pitch0; obj.dist = inici.dist; obj.cx = inici.cx; obj.cz = inici.cz; desperta();
+      temps.push(setTimeout(function(){ if (!passeig) velCam = 9; }, 2800));
+      if (t.alFinal) try { t.alFinal(true); } catch(e){}
+      return;
+    }
+    var it = passeig.llista[passeig.i], m2 = Math.max(it.alt || 0.4, (it.rad || 0.25) * 1.6);
+    velCam = 1.6; tocat = true;
+    obj.cx = it.x; obj.cz = it.z; obj.dist = lim(1.9 + m2 * 3.5, LIM.minD, LIM.maxD); obj.pitch = lim(0.5, LIM.minP, LIM.maxP); obj.yaw += 0.5; limita(obj);
+    marcaSobre(it);
+    if (passeig.alPas) try { passeig.alPas(it.d, passeig.i, passeig.llista.length, it.tipus); } catch(e){}
+    passeig.tmr = setTimeout(seguentPasseig, QUIET ? 4200 : 3600); temps.push(passeig.tmr);
+    desperta();
+  }
 
   return {
     el:el,
     allibera:function(){
-      viu = false; if (raf) cancelAnimationFrame(raf); raf = 0; ro.disconnect();
+      viu = false; if (raf) cancelAnimationFrame(raf); raf = 0; ro.disconnect(); if (io) io.disconnect();
+      temps.forEach(function(t){ clearTimeout(t); }); temps = []; passeig = null;
       canvas.removeEventListener("pointerdown", pd); canvas.removeEventListener("pointermove", pm); canvas.removeEventListener("pointerup", pu); canvas.removeEventListener("pointercancel", pu);
       canvas.removeEventListener("pointermove", passa); canvas.removeEventListener("pointerleave", fora);
       canvas.removeEventListener("wheel", roda); canvas.removeEventListener("dblclick", doble); canvas.removeEventListener("contextmenu", menu);
@@ -5517,27 +5898,72 @@ TRES.jardi = function(el, d){
       if (o2.estat) estat = o2.estat;
       if (o2.llum !== undefined) hora = horaDe(o2.llum, C.fosc);
       marcaSobre(null); if (r) r.hidden = true;
+      if (passeig) aturaPasseig(false);
       buida(S);
-      S = construeix(estat, {hora:hora, mida:mida, noves:[], colors:C});
-      t0 = null; entrant = false; S.arrel.position.y = 0;
-      preparaItems(false);
+      /* o2.crono: el mateix jardí tornant a créixer dia a dia, des de la vista de sempre */
+      crono = o2.crono && o2.crono.dies && o2.crono.dies.length ? o2.crono : null;
+      S = construeix(estat, {hora:hora, mida:mida, noves:[], colors:C, viu:ambVida, crono:!!crono});
+      t0 = null; entrant = !!crono && animat; S.arrel.position.y = 0;
+      if (crono){ tocat = false; usuari = false; velCam = 9; }
+      preparaItems(entrant);
       renderer.shadowMap.enabled = false; ombres();
-      ajusta(true); ambient = !!S.viu && qualitat.pas < 2; desperta();
+      ajusta(!crono); ambient = !!S.viu && qualitat.pas < 2; desperta();
     },
+    /* versió 10: el passeig per una llista de coses (ids), anar a una de sola i la foto del jardí sencer */
+    passeig:function(ids, alPas, alFinal){
+      if (passeig) aturaPasseig(false);
+      var llista = (ids || []).map(itemDe).filter(Boolean);
+      if (!llista.length){ if (alFinal) alFinal(false); return 0; }
+      usuari = false; passeig = {llista:llista, i:-1, alPas:alPas, alFinal:alFinal, tmr:0};
+      seguentPasseig();
+      return llista.length;
+    },
+    aturaPasseig:function(){ aturaPasseig(false); },
+    passejant:function(){ return !!passeig; },
+    vesA:function(id){ var it = itemDe(id); if (!it) return null; mana(); vesHi(it); marcaSobre(it); return it.d; },
+    foto:function(w, h){
+      w = Math.max(320, w | 0 || 1600); h = Math.max(200, h | 0 || 1000);
+      var prA = renderer.getPixelRatio(), o3 = {yaw:orb.yaw, pitch:lim(orb.pitch, 0.45, 0.9), dist:40, centre:new T3.Vector3()}, url = null;
+      try {
+        renderer.setPixelRatio(1); renderer.setSize(w, h, false);
+        encaixa(cam, o3, S.punts, w, h, [0.86, 0.8]);
+        S.cupula.position.copy(cam.position); if (S.estels) S.estels.position.copy(cam.position);
+        if (S.escena.fog){ S.escena.fog.near = o3.dist + S.radi * 1.4; S.escena.fog.far = o3.dist + S.radi * 6.5; }
+        S.sobre.visible = false;
+        if (S.ombres) renderer.shadowMap.needsUpdate = true;
+        renderer.render(S.escena, cam);
+        url = renderer.domElement.toDataURL("image/png");
+      } catch(e){ url = null; }
+      renderer.setPixelRatio(prA); renderer.setSize(W, H, false); cam.aspect = W / H; cam.updateProjectionMatrix();
+      dibuixa();
+      return url;
+    },
+    viu:function(){ return {ambient:ambient, vida:ambVida, aLaVista:aLaVista, vist:vist, entrant:entrant, crono:!!cr, enfocat:enfocat ? enfocat.d.id : null}; },
     zoom:function(f){ zoom(f); }, inici:aInici, escena:function(){ return S; }, camera:function(){ return {orb:orb, obj:obj, inici:inici, LIM:LIM}; }, renderitzador:function(){ return renderer; },
     /* proves: fa córrer el bucle a mà (amb la pestanya amagada, el navegador no en dona cap fotograma) */
-    avanca:function(seg, pas){ pas = pas || 1000 / 60; var t = tAnt || performance.now(); for (var i = 0; i < seg * 1000 / pas; i++){ t += pas; if (raf){ cancelAnimationFrame(raf); raf = 0; } frame(t); } if (raf){ cancelAnimationFrame(raf); raf = 0; } dibuixa(); },
+    avanca:function(seg, pas){
+      pas = pas || 1000 / 60;
+      /* el rellotge de les proves és a part del de debò: el temps simulat se suma al que ja portava l'entrada, i en acabar es
+         torna al rellotge real (si no, el primer fotograma de debò aniria «enrere») */
+      var t = tAnt || performance.now();
+      vist = true;
+      for (var i = 0; i < seg * 1000 / pas; i++){ t += pas; if (raf){ cancelAnimationFrame(raf); raf = 0; } frame(t); }
+      if (raf){ cancelAnimationFrame(raf); raf = 0; }
+      if (t0 !== null && entrant) t0 = performance.now() - (t - t0);
+      tAnt = 0; dibuixa(); if (entrant || (ambient && S.viu)) demana();
+    },
     gest:function(tipus, a, b, c){ if (tipus === "zoom") zoom(a, b, c); else if (tipus === "mou") desplaca(a, b); else if (tipus === "gira"){ obj.yaw -= a * 0.006; obj.pitch = lim(obj.pitch + b * 0.005, LIM.minP, LIM.maxP); } else if (tipus === "ves"){ vesHi(a); } tocat = true; limita(obj); desperta(); },
     /* les tecles de l'explorador: fletxes (girar i inclinar), + i − (apropar), 0 (la vista de sempre) */
     tecla:function(e){
       var k = e.key;
+      if (/^(\+|=|Add|-|Subtract)$/.test(k)) mana();
       if (k === "ArrowLeft" || k === "ArrowRight"){ obj.yaw += (k === "ArrowLeft" ? 0.16 : -0.16); }
       else if (k === "ArrowUp" || k === "ArrowDown"){ obj.pitch = lim(obj.pitch + (k === "ArrowUp" ? 0.08 : -0.08), LIM.minP, LIM.maxP); }
       else if (k === "+" || k === "=" || k === "Add"){ zoom(0.75); return true; }
       else if (k === "-" || k === "Subtract"){ zoom(1.33); return true; }
-      else if (k === "0" || k === "Home"){ aInici(); return true; }
+      else if (k === "0" || k === "Home"){ mana(); aInici(); return true; }
       else return false;
-      tocat = true; desperta(); return true;
+      mana(); tocat = true; desperta(); return true;
     },
     /* diagnosi: ms per fotograma (n fotogrames seguits), crides de dibuix i triangles; ambOmbres = refent el mapa d'ombres cada fotograma */
     mesura:function(n, ambOmbres){
@@ -5586,6 +6012,38 @@ TRES.jardiMiniatura = function(tipus, o){
       if (S.escena.fog){ S.escena.fog.near = orb.dist + S.radi * 1.4; S.escena.fog.far = orb.dist + S.radi * 6.5; }
       renderer.render(S.escena, cam);
       return renderer.domElement.toDataURL("image/png");
+    } finally {
+      S.instancies.forEach(function(m){ m.dispose(); });
+      S.textures.forEach(function(t){ t.dispose(); });
+      E.allibera(S.escena, renderer);
+    }
+  });
+  CUA = feina.catch(function(){});
+  return feina;
+};
+/* versió 10: la imatge d'un jardí DE DEBÒ (la galeria «Jardins» del docent): el mateix que la miniatura, amb l'estat d'un alumne
+   i les ombres de la targeta. Una darrere l'altra (la mateixa cua), un context temporal cada vegada. */
+TRES.jardiImatge = function(estat, o){
+  o = o || {};
+  var feina = CUA.then(function(){ return TRES.carrega(); }).then(function(){
+    if (!TRES.suportat()) throw new Error("Sense WebGL");
+    T3 = E.T3();
+    var W = Math.max(160, o.amplada | 0 || 520), H = Math.max(100, o.alcada | 0 || 320);
+    var S = construeix(estat || {}, {hora:horaDe(o.llum, !!o.fosc), mida:"mitjana", noves:[]});
+    var renderer = new T3.WebGLRenderer({antialias:true, alpha:true, powerPreference:"low-power", preserveDrawingBuffer:true});
+    try {
+      renderer.setPixelRatio(1); renderer.setSize(W, H, false); tons(renderer);
+      if (S.ombres){ renderer.shadowMap.enabled = true; renderer.shadowMap.type = T3.PCFSoftShadowMap; }
+      var cam = new T3.PerspectiveCamera(28, W / H, 0.1, 400);
+      var orb = {yaw:0.3, pitch:0.7, dist:40, centre:new T3.Vector3()};
+      encaixa(cam, orb, S.punts, W, H, [0.95, 0.9]);
+      S.items.forEach(function(it){ if (it.malla) aplicaItem(it, 1, false); });
+      S.instancies.forEach(function(m){ m.instanceMatrix.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; });
+      if (S.halos) S.halos.visible = true;
+      S.cupula.position.copy(cam.position); if (S.estels) S.estels.position.copy(cam.position);
+      if (S.escena.fog){ S.escena.fog.near = orb.dist + S.radi * 1.4; S.escena.fog.far = orb.dist + S.radi * 6.5; }
+      renderer.render(S.escena, cam);
+      return renderer.domElement.toDataURL("image/jpeg", 0.88);
     } finally {
       S.instancies.forEach(function(m){ m.dispose(); });
       S.textures.forEach(function(t){ t.dispose(); });
@@ -7661,8 +8119,8 @@ function perBloc(sessions, textos){
    --------------------------------------------------------------------- */
 var PREFIX = "TAT1|";
 var SAL = "tecla-a-tecla · 3002 · no toquis les dades";
-var VERSIO = "5";     /* la versió de l'aplicació que ha escrit la fitxa (la 5, des del 03-11-2026: hi pot anar la prova de la profe;
-                         les dades tenen la mateixa forma i una versió anterior la llegeix igual) */
+var VERSIO = "6";     /* la versió de l'aplicació que ha escrit la fitxa (la 5, des del 03-11-2026: hi pot anar la prova de la profe;
+                         la 6, des del 09-11-2026: cap camp nou; les dades tenen la mateixa forma i una versió anterior la llegeix igual) */
 
 /* la lliçó d'ergonomia: {data, hora, v, s (segons)}; qualsevol altra cosa, com si no s'hagués fet */
 function ergoValida(e){
@@ -8568,14 +9026,40 @@ function diesEntre(a, b){ return Math.round((new Date(b + "T12:00:00") - new Dat
 function creixDe(edat){ return arrodoneix(Math.max(0.4, Math.min(1, 0.4 + 0.6 * Math.max(0, edat) / 14)), 2); }
 /* la llavor del jardí: del nom (el mateix jardí a qualsevol ordinador) */
 function llavorJardi(nom){ return parseInt(fnv(clauNom(nom || "jardí"), 2166136261).slice(0, 7), 16); }
+/* LES ESPÈCIES (versió 10): cada planta i cada arbre té nom, perquè el jardí es pugui llegir («Lavanda · planta 18»)
+   i col·leccionar (l'àlbum). L'ordre és el de jardi.js (PLANTA i ARBRE): si se'n canvia un, s'ha de canviar als dos llocs. */
+var ESPECIES_JARDI = {
+  bosc:{plantes:["Romaní", "Lavanda", "Estepa", "Roselles", "Ginesta"], arbres:["Pi blanc", "Alzina", "Ullastre"]},
+  japo:{plantes:["Azalea", "Falguera", "Molsa", "Lliris", "Bambú"], arbres:["Cirerer en flor", "Auró vermell", "Pi retorçat"]},
+  desert:{plantes:["Echeveria", "Cactus bola", "Cactus columna", "Àloe", "Suculenta"], arbres:["Saguaro", "Atzavara", "Figuera de moro"]},
+  hort:{plantes:["Tomaquera", "Enciam", "Carabassera", "Gira-sol", "Maduixera"], arbres:["Taronger", "Llimoner", "Ametller en flor"]},
+  tropical:{plantes:["Hibisc", "Ocell del paradís", "Monstera", "Bromèlia", "Helicònia"], arbres:["Cocoter", "Platanera", "Flamboyant"]},
+  flors:{plantes:["Roser", "Tulipes", "Hortènsia", "Didaleres", "Margarides"], arbres:["Magnòlia", "Salze ploraner", "Arbre esculpit"]},
+  neu:{plantes:["Avet petit", "Bolets vermells", "Grèvol", "Nabius", "Lliris de neu"], arbres:["Avet", "Bedoll", "Pi negre"]},
+  encantat:{plantes:["Bolets de llum", "Flor de llum", "Cristalls", "Falguera de rínxols", "Lliri de lluna"], arbres:["Arbre de cristall", "Bolet gegant", "Arbre de les ànimes"]}
+};
+function variantPlanta(llavor, k){ return (Math.imul(llavor ^ (k * 0x9E37), 0x45D9F3B) >>> 0) % 5; }
+function nomPlanta(tipus, v){ var e = ESPECIES_JARDI[tipus]; return e ? e.plantes[((v | 0) % 5 + 5) % 5] : "Planta"; }
+function nomArbre(tipus, esp){ var e = ESPECIES_JARDI[tipus]; return e ? e.arbres[((esp | 0) % 3 + 3) % 3] : "Arbre"; }
+/* l'espècie de cada arbre la tria jardi.js amb el seu atzar (llavor i id de l'arbre): aquí, el MATEIX càlcul, lletra per lletra
+   (hashText i el primer número d'atzar), perquè el nom que es llegeix sigui el de l'arbre que es veu. Ho vigila prova_jardi.js. */
+function hashJardi(s){ s = String(s); var h = 0x811c9dc5; for (var i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193); } return h >>> 0; }
+function primerAtzar(llavor){ var a = llavor >>> 0; a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 65536 / 65536; }
+function especieArbre(llavor, id){ return Math.floor(primerAtzar(hashJardi(llavor + "|" + id)) * 3); }
 
+/* les sessions que fan créixer el jardí: només el que és de debò (ni la prova inicial, ni les sessions per revisar, ni les d'una
+   fitxa tocada a mà, ni res amb data posterior a avui). El jardí, «Què ve ara» i l'àlbum parteixen d'aquesta mateixa llista:
+   si no, l'àlbum donava per tinguts objectes que al jardí no hi eren (revisió del 09-11). */
+function sessionsDelJardi(sessions, avui, finsA){
+  var audit = auditaSessions(sessions || [], finsA || null);
+  return ordenaSessions((sessions || []).filter(function(s){ return s.tipus !== "ut0" && !s.dubte && !audit[s.id] && s.data && s.data <= avui; }));
+}
 /* o: {tipus, nom, avui ("AAAA-MM-DD"), finsA (data de la fitxa, per a la fidelitat)} */
 function jardiDe(sessions, o){
   o = o || {};
   var avui = o.avui || dataLocal(new Date());
-  var audit = auditaSessions(sessions || [], o.finsA || null);
   /* només el que és de debò: ni les sessions per revisar ni les d'una fitxa tocada a mà */
-  var ss = ordenaSessions((sessions || []).filter(function(s){ return s.tipus !== "ut0" && !s.dubte && !audit[s.id] && s.data && s.data <= avui; }));
+  var ss = sessionsDelJardi(sessions, avui, o.finsA);
   var llavor = llavorJardi(o.nom);
   var plantes = [], arbres = [], animals = [], seg = 0, PAS = CONFIG.minutsPerPlanta * 60, PAS_A = CONFIG.minutsPerAnimal * 60;
   var tipus = JARDI[o.tipus] ? o.tipus : null;
@@ -8588,14 +9072,14 @@ function jardiDe(sessions, o){
                     diu:nomAnimal(tipus, esp) + " · " + h + (h === 1 ? " hora" : " hores") + " d'escriure · " + dm(s.data)});
     }
     for (var k = abans + 1; k <= Math.floor(seg / PAS); k++){
-      var edat = diesEntre(s.data, avui);
-      plantes.push({id:"p" + k, data:s.data, edat:edat, creix:creixDe(edat), variant:(Math.imul(llavor ^ (k * 0x9E37), 0x45D9F3B) >>> 0) % 5,
-                    diu:"Planta · " + CONFIG.minutsPerPlanta + " minuts d'escriure · " + dm(s.data)});
+      var edat = diesEntre(s.data, avui), vr = variantPlanta(llavor, k), nP = nomPlanta(tipus, vr);
+      plantes.push({id:"p" + k, data:s.data, edat:edat, creix:creixDe(edat), variant:vr, nom:nP, num:k,
+                    diu:(tipus ? nP + " · planta " + k : "Planta") + " · " + CONFIG.minutsPerPlanta + " minuts d'escriure · " + dm(s.data)});
     }
     if (repteSuperat(s)){
-      var e2 = diesEntre(s.data, avui), m = minRepte(s);
-      arbres.push({id:"a-" + s.id, data:s.data, edat:e2, creix:creixDe(e2), min:m, ppm:s.ppm,
-                   diu:"Arbre del repte de " + m + " minuts · " + dm(s.data) + (s.ppm ? " · " + s.ppm + " puls./min" : "")});
+      var e2 = diesEntre(s.data, avui), m = minRepte(s), espA = especieArbre(llavor, "a-" + s.id), nA = nomArbre(tipus, espA);
+      arbres.push({id:"a-" + s.id, data:s.data, edat:e2, creix:creixDe(e2), min:m, ppm:s.ppm, esp:espA, nom:nA,
+                   diu:(tipus ? nA + " · arbre" : "Arbre") + " del repte de " + m + " minuts · " + dm(s.data) + (s.ppm ? " · " + s.ppm + " puls./min" : "")});
     }
   });
   var objectes = insigniesDe(ss).filter(function(i){ return i.assolida && OBJECTE_INSIGNIA[i.id]; }).map(function(i){
@@ -8608,17 +9092,148 @@ function jardiDe(sessions, o){
             diu:(w.actual ? "Aquesta setmana" : "Setmana del " + dm(w.dilluns)) + " · " + w.minuts + " de " + OBJECTIU_SETMANA + " min" +
                 (w.feta ? " · rodona" : (w.actual ? " · en falten " + (OBJECTIU_SETMANA - w.minuts) : ""))};
   });
-  var ultima = ss.length ? ss[ss.length - 1].data : null, sense = ultima ? diesEntre(ultima, avui) : 0;
+  var ultima = ss.length ? ss[ss.length - 1].data : null, sense = ultima ? diesEntre(ultima, avui) : 0, set = !!ultima && sense >= 7;
+  /* versió 10: FLORIT mentre es manté la ratxa de setmanes rodones (la d'ara o la d'abans, fetes): el premi de la setmana es veu
+     a tot el jardí, no només a una pedra; i la pròxima planta ja té nom (se sap quina serà) */
+  var kSeg = plantes.length + 1;
   return {tipus:tipus, llavor:llavor, avui:avui, plantes:plantes, arbres:arbres, objectes:objectes,
-          setmanes:setmanes, ratxa:sr.ratxa, millorRatxa:sr.millor, set:!!ultima && sense >= 7, diesSense:sense,
+          setmanes:setmanes, ratxa:sr.ratxa, millorRatxa:sr.millor, set:set, diesSense:sense,
           minuts:Math.round(seg / 60), seguentPlanta:PAS - (seg % PAS),
-          animals:animals, seguentAnimal:PAS_A - (seg % PAS_A), rotul:rotulJardi(tipus, o.nom)};
+          animals:animals, seguentAnimal:PAS_A - (seg % PAS_A), rotul:rotulJardi(tipus, o.nom),
+          florit:sr.ratxa >= 1 && !set, segons:seg,
+          properaPlanta:{num:kSeg, variant:variantPlanta(llavor, kSeg), nom:nomPlanta(tipus, variantPlanta(llavor, kSeg))},
+          properAnimal:{num:animals.length + 1, esp:animals.length % 4, nom:nomAnimal(tipus, animals.length % 4)}};
 }
 /* el que hi ha de nou d'un jardí a l'altre (per fer-ho créixer en pantalla) */
 function novesDelJardi(abans, ara){
   var vist = {};
   [].concat(abans.plantes, abans.arbres, abans.objectes, abans.animals || []).forEach(function(x){ vist[x.id] = 1; });
   return [].concat(ara.plantes, ara.arbres, ara.objectes, ara.animals || []).filter(function(x){ return !vist[x.id]; }).map(function(x){ return x.id; });
+}
+
+/* ---- EL JARDÍ, VERSIÓ 10: la cronologia, el que ve ara i l'àlbum ----
+   Tot surt del mateix jardiDe (i, per tant, de les sessions): cap dada nova a la fitxa. */
+/* LA CRONOLOGIA: dia a dia, què hi va aparèixer i quant n'hi havia (per fer-lo tornar a créixer en pantalla, amb la data) */
+function cronoJardi(j){
+  var dies = Object.create(null);
+  function posa(data, camp){ if (!/^\d{4}-\d{2}-\d{2}$/.test(String(data || ""))) return; var d = dies[data] || (dies[data] = {data:data, plantes:0, arbres:0, objectes:0, animals:0}); d[camp]++; }
+  (j.plantes || []).forEach(function(x){ posa(x.data, "plantes"); });
+  (j.arbres || []).forEach(function(x){ posa(x.data, "arbres"); });
+  (j.objectes || []).forEach(function(x){ posa(x.data, "objectes"); });
+  (j.animals || []).forEach(function(x){ posa(x.data, "animals"); });
+  var ac = {plantes:0, arbres:0, objectes:0, animals:0};
+  return Object.keys(dies).sort().map(function(k){
+    var d = dies[k];
+    ["plantes", "arbres", "objectes", "animals"].forEach(function(c){ ac[c] += d[c]; });
+    return {data:k, nous:{plantes:d.plantes, arbres:d.arbres, objectes:d.objectes, animals:d.animals}, total:{plantes:ac.plantes, arbres:ac.arbres, objectes:ac.objectes, animals:ac.animals}};
+  });
+}
+/* QUANT FALTA PER A CADA INSÍGNIA (i, per tant, per a cada objecte del jardí): la fracció feta (0-1; null si no es pot mesurar)
+   i una frase amb les xifres d'ara. Es calcula amb les mateixes regles que insigniesDe. */
+function progresInsignies(sessions, ara){
+  var totes = (sessions || []).filter(function(s){ return s && !s.dubte; });
+  var ss = ordenaSessions(totes.filter(function(s){ return s.tipus !== "ut0"; }));
+  var ins = insigniesDe(sessions), ag = agregat(totes), set = setmana(ss, ara), sr = setmanesRodones(ss, ara), cami = estatLlicons(ss), er = escalaReptes(ss), r = ratxa(ss);
+  var maxPpm = 0, totalAct = 0, blocs = {}, caps = {}, maxSessio = 0, millorPrec = null, millorRitme = null, reptes3 = 0;
+  ss.forEach(function(s){
+    totalAct += s.act || 0;
+    if (s.tipus !== "llico" && !sessioRemei(s) && typeof s.ppm === "number" && s.ppm > maxPpm) maxPpm = s.ppm;
+    if (s.tipus === "practica" && (s.act || 0) > maxSessio) maxSessio = s.act || 0;
+    if (typeof s.prec === "number" && (s.enc + s.err) >= 200 && (millorPrec === null || s.prec > millorPrec)) millorPrec = s.prec;
+    if (typeof s.ritme === "number" && s.tipus !== "llico" && (millorRitme === null || s.ritme > millorRitme)) millorRitme = s.ritme;
+    if (esMarca(s)) reptes3++;
+    (s.trams || []).forEach(function(t){
+      if (t.k !== "text" || !t.tot || t.fet < t.tot * 0.9) return;
+      var b = t.b || "variats"; blocs[b] = 1;
+      if (b === "fantasia" && t.cap) caps[t.cap] = 1;
+    });
+  });
+  var nB = Object.keys(blocs).length, nC = Object.keys(caps).length, min = Math.round(totalAct / 60), M = CONFIG.reptesMinuts, iLlarg = M.indexOf(er.mesLlarg) + 1;
+  function f(x){ return Math.max(0, Math.min(1, x)); }
+  function ppm(n){ return {f:f(maxPpm / n), t:maxPpm ? "La teva velocitat més alta: " + maxPpm + " pulsacions. En falten " + Math.max(1, n - maxPpm) + "." : "Encara no tens cap marca de velocitat."}; }
+  var Q = {
+    comenca:{f:0, t:"Fes la primera sessió."},
+    repte1:{f:0, t:"Fes el repte de 3 minuts."},
+    p100:ppm(100), p150:ppm(150), p250:ppm(250), p350:ppm(350),
+    precisa:{f:millorPrec === null ? 0 : f((millorPrec - 85) / 13), t:millorPrec === null ? "Cal una sessió de 200 pulsacions o més amb un 98 % de precisió." : "La teva sessió més precisa: " + fmt(millorPrec, 1) + " %. Cal un 98 %."},
+    ritme:{f:millorRitme === null ? 0 : f(millorRitme / 80), t:millorRitme === null ? "Cal una sessió amb el ritme per damunt de 80." : "El teu millor ritme: " + millorRitme + " sobre 100. Cal passar de 80."},
+    tramnet:{f:null, t:"Acaba un text llarg sense cap errada: a poc a poc i mirant la pantalla."},
+    mitjahora:{f:f(maxSessio / 1740), t:"La teva sessió més llarga: " + Math.round(maxSessio / 60) + " min. Fes-ne una de 30."},
+    tresdies:{f:f(r.millor / 3), t:"Has practicat " + r.millor + (r.millor === 1 ? " dia seguit" : " dies seguits") + " com a màxim. En calen 3."},
+    /* la insígnia compta segons (3.600) i la setmana, minuts arrodonits: amb 59 min 35 s deia «60 de 60» sense tenir-la */
+    setmana:{f:f(set.minuts / OBJECTIU_SETMANA), t:set.minuts >= OBJECTIU_SETMANA ? "Aquesta setmana et falta menys d'un minut per arribar als " + OBJECTIU_SETMANA + "." : "Aquesta setmana portes " + set.minuts + " de " + OBJECTIU_SETMANA + " minuts."},
+    dueshores:{f:f(totalAct / 7200), t:"Portes " + minutsText(totalAct) + " de pràctica. En falten " + Math.max(1, 120 - min) + " min."},
+    cinchores:{f:f(totalAct / 18000), t:"Portes " + minutsText(totalAct) + " de pràctica. En falten " + minutsText(Math.max(60, 18000 - totalAct)) + "."},
+    millora20:{f:ag.millora === null ? 0 : f(ag.millora / 20), t:ag.millora === null ? "Fes dos reptes de 3 minuts: el segon es compara amb el primer." : "Has pujat " + Math.max(0, ag.millora) + " pulsacions des de la primera marca. En calen 20."},
+    millora50:{f:ag.millora === null ? 0 : f(ag.millora / 50), t:ag.millora === null ? "Fes dos reptes de 3 minuts: el segon es compara amb el primer." : "Has pujat " + Math.max(0, ag.millora) + " pulsacions des de la primera marca. En calen 50."},
+    accents:{f:null, t:"Una sessió amb 20 lletres accentuades i cap errada en cap."},
+    cami:{f:f(cami.superades / LLICONS.length), t:"Camí de tecles: " + cami.superades + " de " + LLICONS.length + " lliçons superades."},
+    capitols:{f:f(nC / 10), t:"Has escrit " + nC + (nC === 1 ? " capítol" : " capítols") + " de la novel·la. En calen 10."},
+    generes:{f:f(nB / 5), t:"Has acabat textos de " + nB + (nB === 1 ? " gènere" : " gèneres") + ". En calen 5 de diferents."},
+    repte10:{f:f(iLlarg / (M.indexOf(10) + 1)), t:er.mesLlarg ? "El repte més llarg que has superat: " + er.mesLlarg + " minuts. Cal el de 10." : "Supera els reptes de 3 i de 5 minuts, i després el de 10."},
+    repte30:{f:f(iLlarg / M.length), t:er.mesLlarg ? "El repte més llarg que has superat: " + er.mesLlarg + " minuts. Cal el de 30." : "L'últim esglaó de l'escala dels reptes: 30 minuts seguits."},
+    setmanes4:{f:f(sr.ratxa / 4), t:"Portes " + sr.ratxa + (sr.ratxa === 1 ? " setmana rodona seguida" : " setmanes rodones seguides") + ". En calen 4."}
+  };
+  return ins.map(function(i){
+    var q = Q[i.id] || {f:null, t:i.diu}, ob = OBJECTE_INSIGNIA[i.id];
+    return {id:i.id, nom:i.nom, diu:i.diu, icona:i.icona, assolida:i.assolida, data:i.data, objecte:ob ? ob[1] : null, objecteId:ob ? ob[0] : null,
+            fraccio:i.assolida ? 1 : (typeof q.f === "number" ? Math.min(q.f, 0.99) : q.f), falta:i.assolida ? "" : q.t};      /* cap barra plena sense la insígnia */
+  });
+}
+/* QUÈ VE ARA AL JARDÍ: el pròxim que hi creixerà de cada mena, amb el que falta (en paraules i en fracció). L'ordre és el de
+   com de prop és: el que arriba abans, primer. accio: el que hi porta («practica», «repte-5», «llico»). */
+function properesJardi(sessions, o){
+  o = o || {};
+  var j = o.jardi || jardiDe(sessions, o), ara = o.ara || (j.avui + "T12:00:00");
+  var PAS = CONFIG.minutsPerPlanta * 60, PAS_A = CONFIG.minutsPerAnimal * 60, v = [];
+  function mins(seg){ var m = Math.max(1, Math.ceil(seg / 60)); return m + (m === 1 ? " minut" : " minuts"); }
+  var np = j.properaPlanta, na = j.properAnimal;
+  v.push({tipus:"planta", titol:"La pròxima planta" + (j.tipus ? ": " + np.nom.toLowerCase() : ""), falta:mins(j.seguentPlanta) + " d'escriure", segons:j.seguentPlanta,
+          fraccio:1 - j.seguentPlanta / PAS, accio:"practica", diu:"Cada " + CONFIG.minutsPerPlanta + " minuts d'escriure, una planta."});
+  v.push({tipus:"animal", titol:"El pròxim animal" + (j.tipus ? ": " + na.nom.toLowerCase() : ""), falta:mins(j.seguentAnimal) + " d'escriure", segons:j.seguentAnimal,
+          fraccio:1 - j.seguentAnimal / PAS_A, accio:"practica", diu:"Cada hora d'escriure, un animal ve a viure-hi."});
+  var er = escalaReptes(sessions), seg = er.seguent, fetAvui = (sessions || []).some(function(s){ return s && s.data === j.avui && repteSuperat(s); });
+  v.push({tipus:"arbre", titol:"Un arbre nou", fraccio:null, accio:"repte-3", repteLlarg:seg && seg.min > 3 ? seg.min : null,
+          falta:"supera un repte: el de 3 minuts ja en planta un" + (seg && seg.min > 3 ? "; el de " + seg.min + ", un de més gran" : ""),
+          diu:fetAvui ? "Avui ja n'has plantat un. Cada repte superat en planta un altre." : "Cada repte superat hi planta un arbre: com més llarg el repte, més gran l'arbre."});
+  var set = setmana(sessionsSetmana(sessions), ara);
+  if (!set.feta) v.push({tipus:"pedra", titol:j.florit ? "Setmana rodona: el jardí segueix florit" : "Setmana rodona: el jardí floreix", falta:set.falten + (set.falten === 1 ? " minut" : " minuts") + " més aquesta setmana", segons:set.falten * 60,
+          fraccio:set.fraccio, accio:"practica", diu:j.florit ? "El jardí és florit perquè portes " + j.ratxa + (j.ratxa === 1 ? " setmana rodona" : " setmanes rodones seguides") + ". Si aquesta setmana no arribes als " + OBJECTIU_SETMANA + " minuts, la setmana que ve ja no ho serà."
+                                                  : "Amb " + OBJECTIU_SETMANA + " minuts en una setmana, la pedra del camí s'il·lumina i el jardí s'omple de flors."});
+  /* els dos objectes més a prop (les insígnies que es poden mesurar), de més fet a menys */
+  var pi = progresInsignies(sessionsDelJardi(sessions, j.avui, o.finsA), ara).filter(function(i){ return !i.assolida && i.objecte && typeof i.fraccio === "number"; })
+    .sort(function(a, b){ return b.fraccio - a.fraccio; }).slice(0, 2);
+  pi.forEach(function(i){
+    v.push({tipus:"objecte", titol:i.objecte, falta:i.falta, fraccio:i.fraccio, insignia:i.id, diu:"Insígnia «" + i.nom + "»: " + i.diu,
+            accio:/^p\d+$|^millora/.test(i.id) ? "repte-3" : (i.id === "cami" ? "llico" : (/^repte/.test(i.id) ? "repte-" + (seg ? seg.min : 3) : "practica"))});
+  });
+  return v;
+}
+/* L'ÀLBUM: el que ja hi ha, per espècies, i el que encara no (amb el que cal). Per al tauler de col·lecció. */
+function albumJardi(sessions, o){
+  o = o || {};
+  var j = o.jardi || jardiDe(sessions, o), E = ESPECIES_JARDI[j.tipus] || null, M = CONFIG.reptesMinuts;
+  var plantes = (E ? E.plantes : ["Planta"]).map(function(nom, v){
+    var meves = j.plantes.filter(function(p){ return !E || p.variant === v; });
+    return {nom:nom, variant:v, n:meves.length, primera:meves.length ? meves[0].data : null, ids:meves.map(function(p){ return p.id; })};
+  });
+  var arbres = M.map(function(m){
+    var meus = j.arbres.filter(function(a){ return a.min === m; });
+    return {min:m, n:meus.length, primera:meus.length ? meus[0].data : null, ids:meus.map(function(a){ return a.id; }),
+            especies:meus.map(function(a){ return a.nom; }).filter(function(x, i, l){ return l.indexOf(x) === i; })};
+  });
+  var animals = (ANIMALS_JARDI[j.tipus] || []).map(function(_, e){
+    var meus = j.animals.filter(function(a){ return a.esp === e; });
+    return {nom:nomAnimal(j.tipus, e), esp:e, n:meus.length, primera:meus.length ? meus[0].data : null, ids:meus.map(function(a){ return a.id; })};
+  });
+  var objectes = progresInsignies(sessionsDelJardi(sessions, j.avui, o.finsA), o.ara || (j.avui + "T12:00:00")).filter(function(i){ return i.objecte; }).map(function(i){
+    return {id:i.objecteId, nom:i.objecte, insignia:i.nom, com:i.diu, assolit:i.assolida, data:i.data, fraccio:i.fraccio, falta:i.falta};
+  });
+  var rodones = j.setmanes.filter(function(w){ return w.feta; }).length;
+  var tinc = plantes.filter(function(x){ return x.n; }).length + arbres.filter(function(x){ return x.n; }).length + animals.filter(function(x){ return x.n; }).length + objectes.filter(function(x){ return x.assolit; }).length;
+  var total = plantes.length + arbres.length + animals.length + objectes.length;
+  return {tipus:j.tipus, plantes:plantes, arbres:arbres, animals:animals, objectes:objectes, setmanes:{rodones:rodones, total:j.setmanes.length, ratxa:j.ratxa},
+          tinc:tinc, total:total};
 }
 
 /* ---- píndoles: un consell curt, concret i amable ---- */
@@ -9629,7 +10244,12 @@ function fitxaLlegible(perfil, ara, textos){
   L.push("        " + dataLlarga(avui) + " a les " + horaLocal(ara) +
          (bx.length > 1 ? " · avui s'ha descarregat " + bx.length + " vegades (" + bx.map(function(b){ return b.slice(11); }).join(", ") + "): aquesta és la més nova i porta tot el de les d'abans" : ""));
   L.push("Ergonomia: " + (ergo ? "lliçó feta el " + ergo.data : "encara no s'ha fet la lliçó"));
-  if (JARDI[perfil.jardi]) L.push("Jardí: " + JARDI[perfil.jardi].nom);
+  if (JARDI[perfil.jardi]){
+    /* versió 10: el que hi ha crescut fins avui (surt de les sessions, com a l'aplicació) */
+    var jf = jardiDe(ss, {tipus:perfil.jardi, nom:perfil.nom, avui:avui});
+    L.push("Jardí: " + JARDI[perfil.jardi].nom + " · " + jf.plantes.length + (jf.plantes.length === 1 ? " planta" : " plantes") + ", " + jf.arbres.length + (jf.arbres.length === 1 ? " arbre" : " arbres") + ", " +
+           jf.objectes.length + (jf.objectes.length === 1 ? " objecte" : " objectes") + " i " + jf.animals.length + (jf.animals.length === 1 ? " animal" : " animals"));
+  }
   var dies = {}; ss.forEach(function(s){ dies[s.data] = 1; });
   L.push("Porta: " + (ss.length ? ss.length + (ss.length === 1 ? " activitat" : " activitats") + ", del " + dataCurta(ss[0].data) + " al " + dataCurta(ss[ss.length - 1].data) +
                       " (" + Object.keys(dies).length + (Object.keys(dies).length === 1 ? " dia" : " dies") + ")" : "encara cap activitat"));
@@ -9739,7 +10359,10 @@ return {
   MAX_ERRADES_PROVA:MAX_ERRADES_PROVA, actDe:actDe, actValida:actValida, provaValida:provaValida, nomAct:nomAct, intentAcabat:intentAcabat, provaFeta:provaFeta,
   intentsProva:intentsProva, estatProva:estatProva, provesDe:provesDe, baixadesDe:baixadesDe, momentDe:momentDe, forats:forats,
   dataCurta:dataCurta, dataLlarga:dataLlarga, mmssDe:mmssDe, teclesAmbErrades:teclesAmbErrades, descriuSessio:descriuSessio, xifresText:xifresText,
-  fitxaLlegible:fitxaLlegible, taulaFitxa:taulaFitxa, COLS_TAULA:COLS_TAULA
+  fitxaLlegible:fitxaLlegible, taulaFitxa:taulaFitxa, COLS_TAULA:COLS_TAULA,
+  /* versió 10 (09-11-2026): el jardí amb espècies, la cronologia, el que ve ara i l'àlbum */
+  ESPECIES_JARDI:ESPECIES_JARDI, nomPlanta:nomPlanta, nomArbre:nomArbre, especieArbre:especieArbre, nomAnimal:nomAnimal, variantPlanta:variantPlanta,
+  cronoJardi:cronoJardi, progresInsignies:progresInsignies, properesJardi:properesJardi, albumJardi:albumJardi, diesEntre:diesEntre
 };
 })();
 if (typeof module !== "undefined" && module.exports) module.exports = NUCLI;
@@ -10119,6 +10742,8 @@ var CLASSE = (function(){
     if (/^(ca|es|mix)$/.test(q.get("ll") || "")) o.ll = q.get("ll");
     if (/^(5|15|30)$/.test(q.get("min") || "")) o.min = +q.get("min");
     if (q.get("tema") === "fosc" || q.get("tema") === "clar") o.tema = q.get("tema");
+    /* versió 10: a quina hora s'acaba la classe (?fi=13:05): cinc minuts abans, l'app recorda de descarregar la fitxa */
+    if (/^([01]?\d|2[0-3]):[0-5]\d$/.test(q.get("fi") || "")) o.fi = q.get("fi");
     /* la prova de la profe (03-11): ?prova=llico-12&errades=10 */
     var pa = N.actValida(q.get("prova")), pe = q.get("errades") || "";
     if (pa && /^\d{1,3}$/.test(pe) && +pe <= N.MAX_ERRADES_PROVA){
@@ -10167,6 +10792,7 @@ function obrePerfil(nom, grup, ll){
   if (!p) p = MAG.perfils[clau] = {nom:AULA ? nomVisual(nom) : N.nomBonic(nom), grup:grup || "", llengua:ll || "ca", blocs:N.totsElsBlocs(), sessions:[], desadaId:null};
   else { if (grup) p.grup = grup; if (ll) p.llengua = ll; p.blocs = N.blocsValids(p.blocs); }
   p.vist = avuiStr();             /* el dia que s'ha obert en aquest navegador: un altre dia, primer la fitxa */
+  if (MAG.actiu !== clau) reiniciaRecorda();      /* un altre alumne a la mateixa pestanya: els recordatoris de desar comencen de nou */
   MAG.actiu = clau; MAG.darrer = clau;
   desa();
   return p;
@@ -10199,6 +10825,7 @@ function mostra(id){
   if (id === "p-escriu"){ $("e-ruta").hidden = !RUTA_PAS; $("e-ruta").textContent = RUTA_PAS ? "Ruta d'avui · pas " + RUTA_PAS.i + " de " + RUTA_PAS.total : ""; RUTA_PAS = null; }
   $("b-ajuda").hidden = id === "p-escriu" || id === "p-docent" || id === "p-ergo";      /* la lliçó de com seure ja porta el seu «Endavant» a baix a la dreta */
   tancaAjuda(); $("capa-benvinguda").hidden = true;
+  tancaFinestresPerfil();      /* el recordatori de desar i el detall d'una activitat són de la pantalla (i de l'alumne) d'abans */
   if (id !== "p-resultat"){ $("r-barra-seguent").classList.remove("visible"); document.body.classList.remove("amb-barra-seguent"); }
   ["p-qui","p-ergo","p-inici","p-cami","p-escriu","p-resultat","p-progres","p-docent"].forEach(function(x){ $(x).classList.toggle("activa", x === id); });
   var p = perfilActiu();
@@ -10210,6 +10837,7 @@ function mostra(id){
   window.scrollTo(0, 0);
   if (id === "p-inici") pintaInici();
   if (id === "p-qui") pintaQui();
+  if (RECORDA.classePend && id !== "p-escriu" && id !== "p-ergo"){ RECORDA.classePend = false; setTimeout(vigilaClasse, 1200); }
 }
 
 function aplicaTema(){
@@ -10247,7 +10875,14 @@ var tres = {
       } catch(e){ if (pla) pla(el); }
     }, function(){ el._muntant = false; el.classList.remove("carregant-3d"); if (pla && el.isConnected) pla(el); });
   },
-  alliberaTot: function(){ tres.vives.forEach(function(h){ try { h.allibera(); } catch(e){} }); tres.vives = []; }
+  alliberaTot: function(){ tres.vives.forEach(function(h){ try { h.allibera(); } catch(e){} }); tres.vives = []; },
+  /* només les escenes de dins d'un contenidor (el jardí de l'inici es torna a pintar sense canviar de pantalla) */
+  alliberaDins: function(cont){
+    if (!cont) return;
+    tres.vives = tres.vives.filter(function(h){ if (h.el && cont.contains(h.el)){ try { h.allibera(); } catch(e){} return false; } return true; });
+  },
+  /* l'escena viva d'un contenidor (per parlar-hi: el passeig, la foto…) */
+  de: function(cont){ for (var i = 0; i < tres.vives.length; i++) if (tres.vives[i].el && cont && cont.contains(tres.vives[i].el)) return tres.vives[i]; return null; }
 };
 function colorsTema(){
   var cs = getComputedStyle(document.documentElement), v = function(n){ return cs.getPropertyValue(n).trim(); };
@@ -10605,8 +11240,12 @@ function queFalta(e){
   if (e.incompleta) v.push("l'historial de les fitxes ajuntades");
   return v.join(" i ");
 }
+var TITOL_APP = null;
 function pintaEstatFitxa(){
   var b = $("b-barra-fitxa"), p = perfilActiu(), e = estatFitxa(p);
+  /* versió 10: el que falta desar, també al títol de la pestanya (es veu des del Classroom o des del Drive) */
+  if (TITOL_APP === null) TITOL_APP = document.title;
+  document.title = (p && !e.buida && e.pendents ? "● Desa la fitxa (" + e.pendents + ") · " : "") + TITOL_APP;
   if (!p || e.buida){ b.hidden = true; return; }
   b.hidden = false;
   b.className = "estat-fitxa" + (e.pendents ? " pendent" : "");
@@ -10681,6 +11320,7 @@ function pintaInici(){
   pintaEscala(p);
   pintaPlaInici(p);
   pintaJardiInici(p);
+  pintaAvuiFet(p);
 
   var ref = mr ? mr.ppm : (ag.base ? ag.base.ppm : null);
   $("ini-hero").innerHTML = heroHTML(p.sessions);
@@ -10833,7 +11473,7 @@ function vigilaBarra(){
    l'aula. Així no torna a sortir cada dia encara que el navegador de l'aula s'esborri (la fitxa no porta cap marca). */
 var RUTA_DES_DE = "2026-10-31";       /* el dia que la ruta va arribar a l'aula (versió 8, publicada el 31-10) */
 function ofereixBenvinguda(p){
-  if (!p || !ergoFeta(p) || p.rutaVista || PANTALLA !== "p-inici" || !$("capa-primera").hidden) return;
+  if (!p || !ergoFeta(p) || p.rutaVista || PANTALLA !== "p-inici" || document.querySelector(".capa:not([hidden])")) return;      /* mai damunt d'una altra finestra */
   var ss = p.sessions.filter(function(s){ return s.tipus !== "ut0"; });
   var avui = N.dataLocal(new Date());
   if (ss.some(function(s){ return s.data >= RUTA_DES_DE && s.data < avui; })){ p.rutaVista = 1; desa(); return; }
@@ -10851,7 +11491,8 @@ function tancaBenvinguda(fes){
   var p = perfilActiu();
   $("capa-benvinguda").hidden = true;
   if (p){ p.rutaVista = 1; desa(); }
-  if (fes) faPas(); else $("ini-ruta").scrollIntoView({block:"start"});
+  if (fes) faPas();
+  else { if (p && N.JARDI[p.jardi]){ CRONO_FET[MAG.actiu] = "torna"; pintaJardiInici(p); } $("ini-avui").scrollIntoView({block:"start"}); }
 }
 /* EL BOTÓ «QUÈ FAIG?»: el pas d'ara i les sis preguntes que fan aixecar la mà */
 function obreAjuda(){
@@ -10871,6 +11512,7 @@ var T_PANTALLA = 0;
 function enterRuta(e){
   if (e.key !== "Enter" || e.repeat || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
   if (PANTALLA !== "p-inici" && PANTALLA !== "p-resultat") return;
+  if (EXPLORA) return;      /* amb el jardí en gran obert, Enter no fa cap pas de la ruta (revisió del 09-11: el focus podia ser a la pàgina) */
   if (enUnControl(e) || document.querySelector(".capa:not([hidden])") || Date.now() - T_PANTALLA < 1200) return;
   if (PANTALLA === "p-resultat" && $("r-ruta").hidden) return;
   e.preventDefault();
@@ -11091,25 +11733,124 @@ var ICONA_JARDI = {
   neu:'<svg viewBox="0 0 64 48" aria-hidden="true"><ellipse cx="32" cy="42" rx="28" ry="5" fill="var(--sup2)" stroke="var(--linia-f)"/><path d="M22 10l-9 15h5l-7 11h22l-7-11h5z" fill="var(--be)"/><path d="M22 10l-4 7h8z" fill="var(--sup)"/><path d="M22 36v5" stroke="var(--suau)" stroke-width="2.4"/><path d="M44 41V22" stroke="var(--suau)" stroke-width="2.6"/><circle cx="44" cy="20" r="7" fill="var(--or)" opacity=".75"/><circle cx="51" cy="12" r="1.4" fill="var(--suau)"/><circle cx="36" cy="9" r="1.2" fill="var(--suau)"/></svg>',
   encantat:'<svg viewBox="0 0 64 48" aria-hidden="true"><ellipse cx="32" cy="42" rx="28" ry="5" fill="var(--accent-suau)"/><path d="M22 41V27" stroke="var(--suau)" stroke-width="3"/><ellipse cx="22" cy="25" rx="11" ry="6" fill="var(--accent)"/><circle cx="18" cy="23" r="1.6" fill="var(--sup)"/><circle cx="25" cy="22" r="1.6" fill="var(--sup)"/><path d="M44 41l-4-14 4-9 4 9z" fill="var(--d-index)" opacity=".85"/><path d="M50 41l-2-8 3-5 2 5z" fill="var(--d-petit)" opacity=".8"/><circle cx="36" cy="14" r="1.6" fill="var(--or)"/><circle cx="12" cy="17" r="1.3" fill="var(--or)"/></svg>'
 };
+/* EL JARDÍ, A DALT DE TOT (versió 10, 09-11-2026). JM: «que ja vegin des de l'inici el jardí que duen creat fins al moment
+   un cop carreguen tot el fet». És al costat de la ruta, viu (vent, animals que es mouen, el que vola) i, la primera vegada de
+   cada visita o just després de carregar la fitxa, torna a créixer dia a dia, amb la data: el que s'ha fet es veu tornar. */
+var MESOS_CURTS = ["gen.", "febr.", "març", "abr.", "maig", "juny", "jul.", "ag.", "set.", "oct.", "nov.", "des."];
+function diaMes(data){ var q = String(data || "").split("-"); return q.length === 3 ? (+q[2]) + " " + MESOS_CURTS[(+q[1] || 1) - 1] : ""; }
+function compteJardi(t){
+  var v = [t.plantes + (t.plantes === 1 ? " planta" : " plantes"), t.arbres + (t.arbres === 1 ? " arbre" : " arbres"), t.objectes + (t.objectes === 1 ? " objecte" : " objectes")];
+  if (t.animals) v.push(t.animals + (t.animals === 1 ? " animal" : " animals"));
+  return v.join(" · ");
+}
+function totalsJardi(j){ return {plantes:j.plantes.length, arbres:j.arbres.length, objectes:j.objectes.length, animals:(j.animals || []).length}; }
+var ICONA_VA = {
+  planta:'<path d="M12 21v-8M12 13c0-3.6-2.6-6.2-6.8-6.2 0 4 2.6 6.2 6.8 6.2zM12 15.2c0-3 2.3-5.3 6.2-5.3 0 3.4-2.3 5.3-6.2 5.3z"/>',
+  animal:'<circle cx="6.8" cy="10" r="1.7"/><circle cx="10.3" cy="6.6" r="1.7"/><circle cx="14.6" cy="6.6" r="1.7"/><circle cx="17.8" cy="10" r="1.7"/><path d="M8.2 16.6c0-2.4 1.7-4.6 4-4.6s4 2.2 4 4.6c0 1.5-1 2.4-2.3 2.4-.7 0-1.1-.4-1.7-.4s-1 .4-1.7.4c-1.3 0-2.3-.9-2.3-2.4z"/>',
+  arbre:'<path d="M12 21v-5M12 3.5L6.8 10.5h2.7L6 16h12l-3.5-5.5h2.7z"/>',
+  pedra:'<circle cx="12" cy="12" r="3.2"/><path d="M12 3.5v2.6M12 17.9v2.6M3.5 12h2.6M17.9 12h2.6M6 6l1.9 1.9M16.1 16.1L18 18M18 6l-1.9 1.9M7.9 16.1L6 18"/>',
+  objecte:'<path d="M12 3.8l2.4 5 5.5.8-4 3.9 1 5.5-4.9-2.6L7.1 19l1-5.5-4-3.9 5.5-.8z"/>'
+};
+function icoVA(t, mida){ return '<svg viewBox="0 0 24 24" width="' + (mida || 22) + '" height="' + (mida || 22) + '" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + (ICONA_VA[t] || "") + "</svg>"; }
+/* la cronologia a la pantalla: l'etiqueta amb la data que passa i el recompte que puja */
+var CRONO_FET = Object.create(null);      /* a qui ja se li ha ensenyat en aquesta visita («torna»: acaba de carregar la fitxa) */
+function cronoUI(etiqueta, j, alFinal){
+  var dies = N.cronoJardi(j);
+  if (!etiqueta || dies.length < 2 || j.plantes.length + j.arbres.length + j.objectes.length < 4) return null;
+  return {dies:dies,
+    alDia:function(i, d){ etiqueta.hidden = false; etiqueta.classList.remove("fi"); etiqueta.innerHTML = "<b>" + esc(diaMes(d.data)) + "</b><span>" + esc(compteJardi(d.total)) + "</span>"; },
+    alFinal:function(){ etiqueta.classList.add("fi"); setTimeout(function(){ etiqueta.hidden = true; etiqueta.classList.remove("fi"); }, 1900); if (alFinal) alFinal(); }};
+}
+/* la pròxima planta: quina serà i quant falta, amb la barra */
+function seguentHTML(pr){
+  var x = pr[0];
+  return '<div class="jh-seg" title="' + esc(x.diu) + '"><span class="jh-brot" aria-hidden="true">' + icoVA("planta", 22) + "</span><div><b>" + esc(x.titol) + "</b><span>d'aquí a " + esc(x.falta) + "</span>" +
+    '<i class="va-barra" style="--f:' + x.fraccio.toFixed(3) + '"></i></div></div>';
+}
 function pintaJardiInici(p){
   var el = $("ini-jardi");
+  tres.alliberaDins(el);
   if (!N.JARDI[p.jardi]){
-    el.className = "targeta jardi-inici tria";
-    el.innerHTML = '<div class="jardi-cap"><div><span class="etiqueta">Nou · el teu jardí</span><h2>Tria l\'estil del jardí que vols fer créixer</h2>' +
-      '<p class="suau">Cada 10 minuts d\'escriure hi creix una planta; cada hora hi arriba un animal que hi viu; cada repte superat hi planta un arbre; cada insígnia hi posa un objecte; i cada setmana amb els ' + N.CONFIG.objectiuSetmana + ' minuts fets, una pedra il·luminada al camí. Res no es mor: si un temps no practiques, només té set. ' +
+    el.className = "targeta jardi-inici jardi-hero tria";
+    el.innerHTML = '<div class="jardi-cap"><div><span class="etiqueta">Nou · el teu jardí</span><h2>Tria el jardí que vols fer créixer</h2>' +
+      '<p class="suau petit">Cada 10 minuts d\'escriure hi neix una planta; cada hora, hi ve a viure un animal; cada repte superat hi planta un arbre, i cada insígnia hi posa un objecte. Res no es mor. ' +
       (p.sessions.length ? "<b>Ja hi tens el que has fet fins ara.</b>" : "") + "</p></div></div>" + triaJardiHTML(null);
     pintaMiniatures(el);
+    pintaVeAra(p, null);
     return;
   }
-  var j = jardiActual(p), J = N.JARDI[p.jardi];
-  el.className = "targeta jardi-inici";
-  el.innerHTML = '<div class="jardi-cap"><div><span class="etiqueta">El teu jardí · ' + esc(J.nom) + '</span><h2>' + esc(fraseJardi(j).split(". ")[0]) + "</h2>" +
-      '<p class="suau">' + esc(fraseJardi(j).split(". ")[1] || "") + "</p></div>" +
-      '<div class="jardi-botons"><button class="enllac" type="button" data-accio="jardi-veure">Mira\'l gran</button> <button class="enllac" type="button" data-accio="jardi-canvia">Canvia d\'estil</button></div></div>' +
-    setJardiHTML(j) +
-    '<div class="escena jardi mitjana" data-escena="jardi">' + jardiPlaHTML(j) + "</div>";
-  muntaJardi(el.querySelector('[data-escena="jardi"]'), j, {mida:"mitjana", interactiu:true});
+  var j = jardiActual(p), J = N.JARDI[p.jardi], pr = N.properesJardi(p.sessions, {jardi:j});
+  var estat = j.set ? '<span class="jh-estat set" title="Fa ' + j.diesSense + ' dies que no practiques: amb deu minuts torna a reverdir.">té set</span>'
+    : (j.florit ? '<span class="jh-estat florit" title="' + j.ratxa + (j.ratxa === 1 ? " setmana rodona seguida" : " setmanes rodones seguides") + ': mentre mantinguis la ratxa, el jardí és florit.">florit</span>' : "");
+  el.className = "targeta jardi-inici jardi-hero";
+  el.innerHTML = '<div class="jh-cap"><div class="jh-titol"><span class="etiqueta">El teu jardí · ' + esc(J.nom) + "</span>" + estat + "<h2>" + esc(compteJardi(totalsJardi(j))) + "</h2></div>" +
+      '<button class="boto secundari jh-gran" type="button" data-accio="jardi-veure">Mira\'l gran</button></div>' +
+    '<div class="escena jardi mitjana omple" data-escena="jardi">' + jardiPlaHTML(j) + '<div class="jh-crono" hidden></div></div>' +
+    '<div class="jh-peu">' + seguentHTML(pr) + '<div class="jh-enllacos"><button class="enllac" type="button" data-accio="jardi-album">Àlbum</button>' +
+      '<button class="enllac" type="button" data-accio="jardi-canvia">Canvia d\'estil</button></div></div>' +
+    (j.set ? setJardiHTML(j) : "");
+  var primer = CRONO_FET[MAG.actiu] === undefined || CRONO_FET[MAG.actiu] === "torna";
+  CRONO_FET[MAG.actiu] = 1;
+  muntaJardi(el.querySelector('[data-escena="jardi"]'), j, {mida:"mitjana", omple:true, viu:true, interactiu:true, crono:primer ? cronoUI(el.querySelector(".jh-crono"), j) : null});
+  pintaVeAra(p, pr);
 }
+/* QUÈ VE ARA AL TEU JARDÍ: el pròxim de cada mena i quant falta (N.properesJardi). Només informa: creix seguint la ruta. */
+function pintaVeAra(p, pr){
+  var el = $("ini-ve-ara");
+  if (!pr || !pr.length){ el.hidden = true; el.innerHTML = ""; return; }
+  el.hidden = false;
+  el.innerHTML = '<div class="va-cap"><div><span class="etiqueta">Què ve ara al teu jardí</span><h2>El que hi creixerà, i quant falta</h2></div>' +
+      '<button class="enllac" type="button" data-accio="jardi-album">Obre l\'àlbum</button></div>' +
+    '<div class="va-graella">' + pr.map(function(x){
+      return '<div class="va va-' + x.tipus + '" title="' + esc(x.diu) + '"><span class="va-ico" aria-hidden="true">' + icoVA(x.tipus) + '</span><div class="va-text"><b>' + esc(x.titol) + "</b><span>" + esc(majInicial(x.falta)) + "</span>" +
+        (typeof x.fraccio === "number" ? '<i class="va-barra" role="img" aria-label="' + Math.round(x.fraccio * 100) + ' % fet" style="--f:' + x.fraccio.toFixed(3) + '"></i>' : "") + "</div></div>";
+    }).join("") + "</div>" +
+    '<p class="suau petit va-nota">No has de fer res d\'especial: tot això creix sol mentre segueixes la ruta d\'avui. I viatja amb la teva fitxa: carrega-la en començar i descarrega-la en acabar.</p>';
+}
+/* AVUI HAS FET: les activitats d'avui, una per xip, amb el resultat; un clic n'ensenya el detall. El punt taronja: encara no és a la fitxa. */
+function sessionsPendents(p){
+  var ss = N.ordenaSessions(p.sessions).filter(function(s){ return s.tipus !== "ut0"; }), i = -1, o = Object.create(null);
+  ss.forEach(function(s, k){ if (s.id === p.desadaId) i = k; });
+  ss.slice(i + 1).forEach(function(s){ o[s.id] = 1; });
+  return o;
+}
+function xipSessio(s, pend){
+  var rem = remeiDeSessio(s), b, d, be = true;
+  if (s.tipus === "llico"){ b = "Lliçó " + s.llico; d = '<span class="estrelles">' + estrellesHTML(s.estrelles || 0) + "</span>"; be = (s.estrelles || 0) >= 2; }
+  else if (s.tipus === "repte"){ b = "Repte " + N.minRepte(s) + "′"; be = N.repteSuperat(s); d = num(s.ppm) + " puls. · " + (be ? "superat" : "no superat"); }
+  else if (rem){ b = "Remei"; d = esc(N.minutsText(s.act)); }
+  else if (s.rep){ b = "Repte " + s.rep + "′ a mitges"; d = esc(N.minutsText(s.act)); }
+  else { b = "Pràctica"; d = esc(N.minutsText(s.act)) + (s.ppm ? " · " + s.ppm + " puls." : ""); }
+  if (s.prova) be = N.provaFeta(s);
+  return '<button type="button" class="af-xip' + (be ? " be" : " no") + (pend[s.id] ? " pendent" : "") + '" data-sessio="' + esc(s.id) + '" title="' + (pend[s.id] ? "Encara no és a la teva fitxa. " : "") + 'Clica per veure com va anar">' +
+    "<small>" + esc(s.hora) + "</small><b>" + esc(b) + (s.prova ? " · prova" : "") + "</b><span>" + d + "</span></button>";
+}
+function pintaAvuiFet(p){
+  var el = $("ini-avui-fet"), avui = avuiStr();
+  var ss = N.ordenaSessions(p.sessions.filter(function(s){ return s.data === avui && s.tipus !== "ut0"; }));
+  if (!ss.length){ el.hidden = true; el.innerHTML = ""; return; }
+  var seg = ss.reduce(function(a, s){ return a + (s.act || 0); }, 0), pend = sessionsPendents(p), nP = ss.filter(function(s){ return pend[s.id]; }).length;
+  el.hidden = false;
+  el.innerHTML = '<div class="af-cap"><span class="etiqueta">Avui has fet</span><span class="suau petit">' + ss.length + (ss.length === 1 ? " activitat" : " activitats") + " · " + esc(N.minutsText(seg)) + " d'escriure" +
+      (nP ? ' · <b class="af-pend">' + nP + (nP === 1 ? " encara no és" : " encara no són") + " a la fitxa</b>" : " · tot és a la fitxa") + "</span></div>" +
+    '<div class="af-xips">' + ss.map(function(s){ return xipSessio(s, pend); }).join("") + "</div>";
+}
+function obreActivitat(id){
+  var p = perfilActiu(); if (!p) return;
+  var s = p.sessions.filter(function(x){ return x.id === id; })[0]; if (!s) return;
+  var o = N.descriuSessio(s, T), pend = sessionsPendents(p)[s.id];
+  $("act-etiqueta").textContent = N.dataLlarga(s.data) + " · " + s.hora;
+  $("act-titol").textContent = o.tipus;
+  $("act-cos").innerHTML = "<p>" + esc(o.que) + '.</p><p class="act-xifres">' + esc(N.xifresText(s)) + "</p>" +
+    (o.resultat ? "<p><b>Resultat:</b> " + esc(o.resultat) + ".</p>" : "") +
+    (o.prova ? "<p><b>Prova de la profe</b> (" + esc(o.prova) + "): " + esc(o.provaRes) + ".</p>" : "") +
+    (o.tecles.length ? "<p><b>On t'has equivocat més:</b> " + esc(o.tecles.join(" · ")) + "</p>" : '<p class="suau">Cap tecla amb errades.</p>') +
+    '<p class="act-fitxa ' + (pend ? "pendent" : "desada") + '">' + (pend ? "Encara no és a la teva fitxa: descarrega-la abans de plegar." : "Ja és a la teva fitxa.") + "</p>" +
+    (pend ? '<button class="boto primari" type="button" data-accio="desa">Descarrega la fitxa</button>' : "");
+  $("capa-activitat").hidden = false;
+  setTimeout(function(){ try { $("b-act-tanca").focus(); } catch(e){} }, 30);
+}
+function tancaActivitat(){ $("capa-activitat").hidden = true; }
 /* la versió sense 3D: el mateix que diu el jardí, en xifres i en una tira de setmanes */
 function jardiPlaHTML(j){
   return '<div class="jardi-pla"><div class="jp-xifres">' +
@@ -11121,8 +11862,9 @@ function muntaJardi(el, j, o){
   if (!el) return;
   o = o || {};
   tres.munta(el, "jardi", {estat:j, colors:colorsTema(), noves:o.noves || [], mida:o.mida || "mitjana", interactiu:o.interactiu !== false, llum:MAG.llumJardi || null,
+    viu:!!o.viu, omple:!!o.omple, crono:o.crono || null, enfoca:!!o.enfoca, alEnfocar:o.alEnfocar || null,
     gran:function(){ obreExplora(j, o.qui || {propi:true}); }},
-    function(){ /* sense 3D: ja hi ha la versió pla */ });
+    function(){ /* sense 3D: ja hi ha la versió pla */ if (o.crono && o.crono.alFinal) o.crono.alFinal(); });
 }
 
 /* L'EXPLORADOR: el jardí a tota la pantalla. S'hi gira del tot, s'hi apropa fins a les plantes, s'hi desplaça i, si és
@@ -11145,6 +11887,13 @@ function obreExplora(j, qui){
     (qui.propi ? '<div class="ex-estils" role="radiogroup" aria-label="L\'estil del teu jardí">' + N.JARDINS.map(function(J){
         return '<button type="button" role="radio" data-estil="' + J.id + '" aria-checked="' + (J.id === j.tipus) + '" title="' + esc(J.diu) + '"><span class="mini-jardi" data-mini="' + J.id + '">' + ICONA_JARDI[J.id] + "</span><b>" + esc(J.nom) + "</b></button>";
       }).join("") + "</div>" : "") +
+    '<div class="ex-accions" role="toolbar" aria-label="Què vols fer al jardí">' +
+      '<button type="button" data-ex="creix" title="El jardí torna a créixer, dia a dia, des del primer dia">' + ICO_EX.creix + "<span>Mira com ha crescut</span></button>" +
+      '<button type="button" data-ex="passeig" title="La càmera et porta a veure el que hi tens">' + ICO_EX.passeig + "<span>Passeig</span></button>" +
+      (qui.propi ? '<button type="button" data-ex="album" aria-pressed="false" title="Tot el que hi tens i el que encara no">' + ICO_EX.album + "<span>Àlbum</span></button>" : "") +
+      '<button type="button" data-ex="foto" title="Descarrega una imatge del jardí">' + ICO_EX.foto + "<span>Foto</span></button></div>" +
+    '<div class="ex-rotul" id="ex-rotul" role="status" hidden></div>' +
+    (qui.propi ? '<aside class="ex-album" id="ex-album" aria-label="L\'àlbum del jardí" hidden></aside>' : "") +
     '<p class="ex-ajuda">' + (tactil ? "Un dit per girar-lo · dos dits per apropar-te i desplaçar-te · toca una cosa per saber d'on ha sortit"
       : "Arrossega per girar-lo · roda per apropar-te · botó dret (o Maj) per desplaçar-te · doble clic per anar a una cosa · fletxes, + i −") + "</p>";
   document.body.appendChild(capa);
@@ -11158,21 +11907,29 @@ function obreExplora(j, qui){
     escena.classList.add("amb-3d");
   }, function(){ escena.innerHTML = '<div class="ex-sense">No s\'ha pogut carregar el 3D (cal Internet la primera vegada).</div>'; });
   if (qui.propi) pintaMiniatures(capa);
+  if (qui.propi && qui.album) exAlbum(true);
   capa.addEventListener("click", function(e){
-    var b = e.target.closest("[data-ex], [data-llum], [data-estil]"); if (!b || !EXPLORA) return;
-    if (b.hasAttribute("data-ex")) tancaExplora();
+    var b = e.target.closest("[data-ex], [data-llum], [data-estil], [data-ves]"); if (!b || !EXPLORA) return;
+    if (b.hasAttribute("data-ves")) exVes(b.getAttribute("data-ves"));
+    else if (b.hasAttribute("data-ex")){
+      var q = b.getAttribute("data-ex");
+      if (q === "creix") exCreix(); else if (q === "passeig") exPasseig(); else if (q === "album") exAlbum(); else if (q === "foto") exFoto(); else tancaExplora();
+    }
     else if (b.hasAttribute("data-llum")){
       MAG.llumJardi = b.getAttribute("data-llum"); desa(); EXPLORA.llum = true;
       capa.querySelectorAll("[data-llum]").forEach(function(x){ x.setAttribute("aria-checked", x === b ? "true" : "false"); });
+      exRotul("");      /* si estava tornant a créixer, el canvi de llum el deixa sencer: el rètol de la data no s'hi ha de quedar */
       if (EXPLORA.h) EXPLORA.h.refes({llum:MAG.llumJardi});
     } else if (b.hasAttribute("data-estil")){
       var id = b.getAttribute("data-estil"), p = perfilActiu();
       if (!p || !N.JARDI[id] || id === EXPLORA.j.tipus) return;
       p.jardi = id; desa(); EXPLORA.canviat = true;
-      EXPLORA.j = Object.assign({}, EXPLORA.j, {tipus:id});
+      EXPLORA.j = jardiActual(p);          /* amb l'estil nou, cada planta i cada arbre té el nom de la seva espècie */
       capa.querySelectorAll("[data-estil]").forEach(function(x){ x.setAttribute("aria-checked", x === b ? "true" : "false"); });
       $("ex-nom").textContent = N.JARDI[id].nom;
+      exRotul("");
       if (EXPLORA.h) EXPLORA.h.refes({estat:EXPLORA.j});
+      if ($("ex-album") && !$("ex-album").hidden) $("ex-album").innerHTML = albumHTML(EXPLORA.j);
     }
   });
   capa.addEventListener("keydown", function(e){
@@ -11197,6 +11954,135 @@ function tancaExplora(){
   }
   if (X.focus && X.focus.isConnected) try { X.focus.focus({preventScroll:true}); } catch(e){}
 }
+/* L'EXPLORADOR, VERSIÓ 10: tornar-lo a veure créixer dia a dia, un passeig pel que s'hi té, l'àlbum (tot el que hi ha i el que
+   encara no, amb el que falta) i una foto per ensenyar-lo. */
+var ICO_EX = {
+  creix:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>',
+  passeig:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18c3-6 5-1 8-6s4-5 8-6"/><circle cx="4" cy="18" r="1.6" fill="currentColor"/><circle cx="20" cy="6" r="1.6" fill="currentColor"/></svg>',
+  album:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></svg>',
+  foto:'<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5h3.2l1.6-2.5h6.4l1.6 2.5H20v10H4z"/><circle cx="12" cy="13.2" r="3.2"/></svg>'
+};
+var T_ROTUL = null;
+function exRotul(html, ms){
+  var r = $("ex-rotul"); if (!r) return;
+  clearTimeout(T_ROTUL);
+  if (!html){ r.hidden = true; r.innerHTML = ""; return; }
+  r.innerHTML = html; r.hidden = false;
+  if (ms) T_ROTUL = setTimeout(function(){ r.hidden = true; }, ms);
+}
+function exCreix(){
+  var X = EXPLORA; if (!X || !X.h) return;
+  var dies = N.cronoJardi(X.j);
+  if (dies.length < 2){ exRotul("<b>Encara és molt jove.</b><span>Quan hi hagi coses de més d'un dia, aquí el veuràs créixer.</span>", 4200); return; }
+  X.h.refes({estat:X.j, crono:{dies:dies,
+    alDia:function(i, d){ if (EXPLORA === X) exRotul("<b>" + esc(diaMes(d.data)) + "</b><span>" + esc(compteJardi(d.total)) + "</span>"); },
+    alFinal:function(){ if (EXPLORA === X) exRotul("<b>Avui</b><span>" + esc(compteJardi(totalsJardi(X.j))) + "</span>", 3800); }}});
+}
+/* si el jardí encara està tornant a créixer («Mira com ha crescut») i es demana una altra cosa (el passeig, anar a una cosa de
+   l'àlbum, la foto), primer es deixa sencer: si no, dos rètols es trepitgen i la foto sortiria a mig créixer (revisió del 09-11) */
+function exAcabaCrono(){
+  var X = EXPLORA; if (!X || !X.h) return;
+  var v = X.h.viu();
+  if (v && v.crono){ X.h.refes({estat:X.j}); exRotul(""); }
+}
+/* el passeig: el rètol, els objectes (els dos primers i els cinc darrers), els dos arbres més grans, l'últim animal i l'última planta */
+function idsPasseig(j){
+  var v = [];
+  if (j.rotul) v.push("rotul");
+  var obs = j.objectes.slice().sort(function(a, b){ return a.data < b.data ? -1 : (a.data > b.data ? 1 : 0); });
+  if (obs.length > 7) obs = obs.slice(0, 2).concat(obs.slice(-5));
+  obs.forEach(function(o){ v.push(o.id); });
+  j.arbres.slice().sort(function(a, b){ return b.min - a.min; }).slice(0, 2).forEach(function(a){ v.push(a.id); });
+  if (j.animals && j.animals.length) v.push(j.animals[j.animals.length - 1].id);
+  if (j.plantes.length) v.push(j.plantes[j.plantes.length - 1].id);
+  return v;
+}
+function exPasseig(){
+  var X = EXPLORA; if (!X || !X.h) return;
+  var boto = X.el.querySelector('[data-ex="passeig"]');
+  if (X.h.passejant()){ X.h.aturaPasseig(); return; }
+  exAcabaCrono();
+  var n = X.h.passeig(idsPasseig(X.j),
+    function(d, i, tot){ if (EXPLORA === X) exRotul("<b>" + esc(d.diu) + "</b><span>" + (i + 1) + " de " + tot + " · toca el jardí per aturar el passeig</span>"); },
+    function(acabat){
+      if (EXPLORA !== X) return;
+      if (boto){ boto.classList.remove("actiu"); boto.querySelector("span").textContent = "Passeig"; }
+      if (acabat) exRotul("<b>Fi del passeig.</b><span>Tot això ho has fet créixer escrivint.</span>", 3600); else exRotul("");
+    });
+  if (!n){ exRotul("<b>Encara no hi ha res per visitar.</b><span>La primera planta neix als 10 minuts d'escriure.</span>", 4200); return; }
+  if (boto){ boto.classList.add("actiu"); boto.querySelector("span").textContent = "Atura el passeig"; }
+}
+function exAlbum(obre){
+  var X = EXPLORA, al = $("ex-album"); if (!X || !al) return;
+  var ob = obre === undefined ? al.hidden : !!obre, teniaFocus = al.contains(document.activeElement);
+  al.hidden = !ob;
+  var b = X.el.querySelector('[data-ex="album"]'); if (b) b.setAttribute("aria-pressed", ob ? "true" : "false");
+  X.el.classList.toggle("amb-album", ob);
+  if (ob){ al.innerHTML = albumHTML(X.j); al.scrollTop = 0; }
+  else if (teniaFocus && b) try { b.focus({preventScroll:true}); } catch(e){}      /* tancat amb la seva ×: el focus no es perd a la pàgina */
+}
+function albumHTML(j){
+  var p = perfilActiu(), a = N.albumJardi(p ? p.sessions : [], {jardi:j});
+  function fila(te, nom, sota, ves, f){
+    return '<li class="' + (te ? "te" : "no") + '">' + (te && ves ? '<button type="button" data-ves="' + esc(ves) + '" title="Ves-hi">' : "<div>") +
+      "<b>" + esc(nom) + "</b><span>" + sota + "</span>" + (typeof f === "number" && !te ? '<i class="va-barra" style="--f:' + f.toFixed(3) + '"></i>' : "") + (te && ves ? "</button>" : "</div>") + "</li>";
+  }
+  var h = '<div class="al-cap"><div><span class="etiqueta">L\'àlbum del jardí</span><b>' + a.tinc + " de " + a.total + '</b></div><button type="button" class="al-tanca" data-ex="album" aria-label="Tanca l\'àlbum">×</button></div>' +
+    '<i class="va-barra al-total" style="--f:' + (a.total ? a.tinc / a.total : 0).toFixed(3) + '"></i>' +
+    '<p class="suau petit">Toca una cosa que ja tens i la càmera hi va. El que encara no tens diu què cal.</p>';
+  h += "<h3>Plantes <small>" + j.plantes.length + '</small></h3><ul class="al-llista">' + a.plantes.map(function(x){
+    return fila(x.n > 0, x.nom, x.n ? "× " + x.n + " · la primera, el " + esc(N.dm(x.primera)) : "encara no t'ha sortit: en neix una cada 10 minuts", x.ids[x.ids.length - 1]); }).join("") + "</ul>";
+  h += "<h3>Arbres <small>" + j.arbres.length + '</small></h3><ul class="al-llista">' + a.arbres.map(function(x){
+    return fila(x.n > 0, "Del repte de " + x.min + " minuts", x.n ? "× " + x.n + " · " + esc(x.especies.join(", ").toLowerCase()) : "supera el repte de " + x.min + " minuts i el plantaràs", x.ids[x.ids.length - 1]); }).join("") + "</ul>";
+  if (a.animals.length) h += "<h3>Animals <small>" + (j.animals || []).length + '</small></h3><ul class="al-llista">' + a.animals.map(function(x, i){
+    return fila(x.n > 0, x.nom, x.n ? "× " + x.n + " · el primer, el " + esc(N.dm(x.primera)) : "arriba quan portis " + (i + 1) + (i === 0 ? " hora" : " hores") + " d'escriure", x.ids[x.ids.length - 1]); }).join("") + "</ul>";
+  var fets = a.objectes.filter(function(o){ return o.assolit; }).length;
+  var obs = a.objectes.filter(function(o){ return o.assolit; }).concat(a.objectes.filter(function(o){ return !o.assolit; }).sort(function(x, y){ return (y.fraccio || 0) - (x.fraccio || 0); }));
+  h += "<h3>Objectes <small>" + fets + " de " + a.objectes.length + '</small></h3><ul class="al-llista">' + obs.map(function(o){
+    return fila(o.assolit, o.nom, o.assolit ? "insígnia «" + esc(o.insignia) + "» · " + esc(N.dm(o.data)) : esc(o.com) + " " + esc(o.falta), o.id, o.fraccio); }).join("") + "</ul>";
+  h += '<h3>Setmanes</h3><p class="suau petit">' + a.setmanes.rodones + " de " + a.setmanes.total + " setmanes rodones (" + N.CONFIG.objectiuSetmana + " minuts o més)" +
+    (a.setmanes.ratxa ? " · ara, " + a.setmanes.ratxa + (a.setmanes.ratxa === 1 ? " seguida" : " seguides") + (j.florit ? ": per això el jardí és florit" : (j.set ? ": tornarà a florir quan deixi de tenir set" : "")) : "") + ".</p>";
+  return h;
+}
+function exVes(id){
+  var X = EXPLORA; if (!X || !X.h) return;
+  exAcabaCrono();
+  var d = X.h.vesA(id);
+  if (d) exRotul("<b>" + esc(d.diu) + "</b>", 4600);
+}
+/* la foto: el jardí sencer amb el seu nom, el que hi ha i la data. És una imatge per ensenyar: la fitxa es descarrega a part. */
+function exFoto(){
+  var X = EXPLORA; if (!X || !X.h) return;
+  exAcabaCrono();
+  var url = X.h.foto(1600, 1000);
+  if (!url){ exRotul("<b>No s'ha pogut fer la foto</b><span>en aquest ordinador.</span>", 3500); return; }
+  var img = new Image();
+  img.onload = function(){
+    var c = document.createElement("canvas"); c.width = 1600; c.height = 1000;
+    var x = c.getContext("2d"); x.drawImage(img, 0, 0, 1600, 1000);
+    var g = x.createLinearGradient(0, 740, 0, 1000); g.addColorStop(0, "rgba(14,18,32,0)"); g.addColorStop(1, "rgba(14,18,32,.8)");
+    x.fillStyle = g; x.fillRect(0, 740, 1600, 260);
+    var cs = getComputedStyle(document.documentElement), serif = (cs.getPropertyValue("--serif") || "Georgia, serif").trim(), sans = (cs.getPropertyValue("--lletra") || "sans-serif").trim();
+    var pp = perfilActiu(), nom = X.qui.propi ? (pp ? pp.nom : "") : (X.qui.nom || "");
+    var titol = X.j.rotul ? X.j.rotul.join(" ") : N.JARDI[X.j.tipus].nom;
+    x.fillStyle = "#FFFFFF"; x.textBaseline = "alphabetic";
+    x.font = "400 78px " + serif; x.fillText(titol, 64, 912);
+    x.font = "500 30px " + sans; x.fillStyle = "rgba(255,255,255,.93)";
+    x.fillText(compteJardi(totalsJardi(X.j)) + " · " + N.minutsText(X.j.segons || 0) + " d'escriure", 66, 960);
+    x.textAlign = "right"; x.font = "500 26px " + sans; x.fillStyle = "rgba(255,255,255,.86)";
+    x.fillText("Tecla a tecla · " + N.dataCurta(X.j.avui), 1536, 960);
+    var net = N.clauNom(nom).replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "jardi";
+    c.toBlob(function(b){
+      if (!b) return;
+      var u = URL.createObjectURL(b), a = document.createElement("a");
+      a.href = u; a.download = "JARDI-" + net + "-" + X.j.avui + ".png"; document.body.appendChild(a); a.click();
+      setTimeout(function(){ URL.revokeObjectURL(u); a.remove(); }, 800);
+      if (EXPLORA === X) exRotul("<b>Foto descarregada.</b><span>És una imatge per ensenyar el jardí: la fitxa es descarrega a part.</span>", 5200);
+    }, "image/png");
+  };
+  img.src = url;
+}
+
 /* les miniatures de la tria: una imatge per tipus, pintada una sola vegada (un sol context WebGL) */
 var MINIATURES = {};
 function pintaMiniatures(arrel){
@@ -11770,12 +12656,24 @@ function mostraEntre(a, seg){
   $("entre-seguent").innerHTML = "Ara: <b>" + esc(etiquetaTram(seg)) + (seg.k === "text" ? " · " + esc(seg.titol) : "") + "</b>.<br>" +
     '<span class="queda-entre"><b>' + mmssEnrere(queda) + "</b> d'escriure per acabar · el rellotge està aturat mentre llegeixes això</span>";
   var perf = perfilActiu(), vist = (perf && perf.pindolesVistes) || [];
+  $("entre-jardi").innerHTML = jardiEntreHTML(perf);
   var una = N.pindoles(r, vist, 1);
   $("entre-pindola").innerHTML = pindolesHTML(una);
   if (perf) perf.pindolesVistes = una.map(function(x){ return x.id; }).concat(vist).slice(0, 6);
   $("e-entre").hidden = false;
   setTimeout(function(){ if (S && S.entre) $("b-entre-segueix").focus(); }, 400);
   desaEnCurs();
+}
+/* versió 10: entre text i text, el jardí: les plantes que han nascut en aquesta sessió i quant falta per a la pròxima.
+   (Mai mentre s'escriu: només aquí, amb el rellotge aturat.) */
+function jardiEntreHTML(p){
+  if (!p || !S) return "";
+  if (S.jardiBase === undefined){ var jb = jardiActual(p); S.jardiBase = jb.segons || 0; S.jardiTe = !!jb.tipus; }
+  var PAS = N.CONFIG.minutsPerPlanta * 60, ara2 = S.jardiBase + actiuTotal() / 1000;
+  var nascudes = Math.floor(ara2 / PAS) - Math.floor(S.jardiBase / PAS), falta = Math.max(1, Math.ceil((PAS - ara2 % PAS) / 60));
+  return '<span class="ej-ico" aria-hidden="true">' + icoVA("planta", 18) + "</span><span>" +
+    (nascudes ? "<b>" + (nascudes === 1 ? "Ha nascut una planta" : "Han nascut " + nascudes + " plantes") + "</b> al teu jardí en aquesta sessió. " : "") +
+    "La pròxima, d'aquí a <b>" + falta + (falta === 1 ? " minut" : " minuts") + "</b> d'escriure.</span>";
 }
 function continuaEntre(){
   if (!S || !S.entre || S.ulls || !S.seguent) return;
@@ -12073,22 +12971,30 @@ function aguantDe(corba){
 /* EL MOMENT FOREST: en acabar, el que ha crescut al jardí, la setmana i el repte que s'ha obert */
 function pintaJardiResultat(s, previes, desada){
   var p = perfilActiu(), el = $("r-jardi");
-  if (!p || !desada){ el.innerHTML = ""; return; }
+  tres.alliberaDins(el);
+  if (!p || !desada){ el.innerHTML = ""; $("r-jardi-nou").hidden = true; return; }
   var avui = N.dataLocal(new Date());
   var abans = N.jardiDe(previes, {tipus:p.jardi, nom:p.nom, avui:avui}), ara = jardiActual(p, avui);
   var noves = N.novesDelJardi(abans, ara);
   var np = ara.plantes.length - abans.plantes.length, na = ara.arbres.length - abans.arbres.length, no = ara.objectes.length - abans.objectes.length;
   var guany = [];
-  if (np) guany.push("+" + np + (np === 1 ? " planta" : " plantes"));
-  ara.arbres.filter(function(x){ return noves.indexOf(x.id) >= 0; }).forEach(function(x){ guany.push("un arbre de " + x.min + " minuts"); });
+  /* versió 10: el que neix té nom («planta nova: lavanda») */
+  var plantesN = ara.plantes.filter(function(x){ return noves.indexOf(x.id) >= 0; });
+  var nomsP = plantesN.map(function(x){ return x.nom.toLowerCase(); }).filter(function(x, i, l){ return l.indexOf(x) === i; });
+  if (np) guany.push((np === 1 ? "una planta nova" : np + " plantes noves") + (ara.tipus ? " (" + (nomsP.length > 1 ? nomsP.slice(0, -1).join(", ") + " i " + nomsP[nomsP.length - 1] : nomsP[0]) + ")" : ""));
+  ara.arbres.filter(function(x){ return noves.indexOf(x.id) >= 0; }).forEach(function(x){ guany.push("un arbre nou (" + (ara.tipus ? x.nom.toLowerCase() + ", " : "") + "pel repte de " + x.min + " minuts)"); });
   var nousA = (ara.animals || []).filter(function(x){ return noves.indexOf(x.id) >= 0; }).map(function(x){ return (N.ANIMALS_JARDI[ara.tipus] || [])[x.esp] || "un animal"; });
   if (nousA.length) guany.push((nousA.length === 1 ? "hi ha arribat " : "hi han arribat ") + (nousA.length > 1 ? nousA.slice(0, -1).join(", ") + " i " + nousA[nousA.length - 1] : nousA[0]));
   if (no){
     var obs = ara.objectes.filter(function(o){ return noves.indexOf(o.id) >= 0; }).map(function(o){ return o.nom.toLowerCase(); });
-    guany.push((obs.length === 1 ? "objecte nou: " : "objectes nous: ") + (obs.length > 1 ? obs.slice(0, -1).join(", ") + " i " + obs[obs.length - 1] : obs[0]));
+    guany.push((obs.length === 1 ? "un objecte nou (" : obs.length + " objectes nous (") + (obs.length > 1 ? obs.slice(0, -1).join(", ") + " i " + obs[obs.length - 1] : obs[0]) + ")");
   }
   var seg = Math.ceil(ara.seguentPlanta / 60);
   var titol = guany.length ? "Al teu jardí: " + guany.join(" · ") + "." : "La pròxima planta, d'aquí a " + seg + (seg === 1 ? " minut" : " minuts") + " d'escriure.";
+  /* versió 10: la novetat del jardí, també a dalt de tot del resultat (el jardí és més avall): un clic hi porta */
+  var nou = $("r-jardi-nou");
+  nou.hidden = !guany.length;
+  nou.innerHTML = guany.length ? '<span class="rjn-ico" aria-hidden="true">' + icoVA("planta", 20) + "</span><span><b>Al teu jardí:</b> " + esc(guany.join(" · ")) + '.</span><span class="rjn-ves">Mira-ho ↓</span>' : "";
   /* la setmana */
   var set = N.setmana(p.sessions), setAbans = N.setmana(previes), sr = N.setmanesRodones(p.sessions);
   var frSet = set.feta ? (setAbans.feta ? "Setmana rodona (" + set.minuts + " min)." : "<b>Setmana rodona!</b> " + (sr.ratxa > 1 ? sr.ratxa + " setmanes seguides." : "La primera de la ratxa."))
@@ -12106,8 +13012,12 @@ function pintaJardiResultat(s, previes, desada){
   el.innerHTML = '<div class="targeta r-jardi-cap"><div class="jardi-cap"><div><span class="etiqueta">El teu jardí · ' + esc(N.JARDI[p.jardi].nom) + "</span><h2>" + esc(titol) + "</h2>" +
     '<p class="suau">' + frSet + "</p></div>" +
     '<div class="jardi-botons"><button class="enllac" type="button" data-accio="jardi-veure">Mira\'l gran</button></div></div>' + frRepte +
-    '<div class="escena jardi mitjana" data-escena="jardi">' + jardiPlaHTML(ara) + "</div></div>";
-  muntaJardi(el.querySelector('[data-escena="jardi"]'), ara, {mida:"mitjana", noves:noves, interactiu:true});
+    '<div class="escena jardi mitjana" data-escena="jardi">' + jardiPlaHTML(ara) + '<div class="jh-crono" hidden></div></div>' +
+    (noves.length && tres.pot() ? '<p class="suau petit r-jardi-peu">' + (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "" : "La càmera va a veure néixer el que és nou. ") + "Amb un anell daurat, el que has fet créixer avui.</p>" : "") + "</div>";
+  var etN = el.querySelector(".jh-crono");
+  muntaJardi(el.querySelector('[data-escena="jardi"]'), ara, {mida:"mitjana", noves:noves, interactiu:true, viu:true, enfoca:true,
+    alEnfocar:function(d){ if (!etN) return; if (!d){ etN.classList.add("fi"); setTimeout(function(){ etN.hidden = true; etN.classList.remove("fi"); }, 600); return; }
+      etN.hidden = false; etN.classList.remove("fi"); etN.innerHTML = "<b>Acaba de néixer</b><span>" + esc(d.diu) + "</span>"; }});
 }
 function estrellesHTML(n){ var h = ""; for (var i = 1; i <= 3; i++) h += '<i class="' + (i <= n ? "plena" : "") + '">★</i>'; return h; }
 function blocsDeSessio(s, prefix){
@@ -12657,7 +13567,7 @@ function pintaProgres(arrel, sessions, qui){
   tres.alliberaTot();
   arrel.innerHTML = progresHTML(sessions, qui);
   var jg = arrel.querySelector('[data-escena="jardi"]');
-  if (jg && qui && N.JARDI[qui.jardi]) muntaJardi(jg, N.jardiDe(sessionsJardi(sessions, qui), {tipus:qui.jardi, nom:qui.nom, finsA:qui.finsA || null}), {mida:"gran", interactiu:true, qui:{propi:!!qui.propi, nom:qui.nom}});
+  if (jg && qui && N.JARDI[qui.jardi]) muntaJardi(jg, N.jardiDe(sessionsJardi(sessions, qui), {tipus:qui.jardi, nom:qui.nom, finsA:qui.finsA || null}), {mida:"gran", interactiu:true, viu:!!qui.propi, qui:{propi:!!qui.propi, nom:qui.nom}});
   var ss = N.ordenaSessions(sessions), ag = N.agregat(ss);
   var senseLlico = ss.filter(function(s){ return s.tipus !== "llico" && !remeiDeSessio(s); });
   var f = function(){
@@ -12800,6 +13710,19 @@ function obreProgres(){
   $("pr-titol").textContent = p.nom + (p.grup ? " · " + p.grup : "");
   mostra("p-progres");
   pintaProgres($("pr-cos"), p.sessions, {jardi:p.jardi, nom:p.nom, propi:true});
+  pintaIndexProgres();
+}
+/* versió 10: l'índex del progrés (la pàgina és llarga): un botó per apartat, sempre a la vista */
+function pintaIndexProgres(){
+  var nav = $("pr-index"), hs = Array.prototype.slice.call($("pr-cos").querySelectorAll(".bloc h2, .pla-treball h2"));
+  var v = hs.map(function(h, i){
+    var t = (h.childNodes[0] && h.childNodes[0].nodeType === 3 ? h.childNodes[0].textContent : h.textContent).trim().replace(/\s+/g, " ");
+    if (!t) return "";
+    h.id = h.id || "pr-ap-" + i;
+    return '<button type="button" class="enllac" data-ap="' + h.id + '">' + esc(t) + "</button>";
+  }).filter(Boolean);
+  nav.innerHTML = '<span class="etiqueta">Ves a</span>' + v.join("");
+  nav.hidden = v.length < 3;
 }
 
 /* ---------------------------------------------------------------------
@@ -12816,6 +13739,25 @@ function marcaDesada(p, d, nom){
   p.fitxaNova = {desada:N.dataLocal(d) + " " + N.horaLocal(d), ids:p.sessions.map(function(s){ return s.id; })};
   if (ergoFeta(p)) p.ergoEnFitxa = true;
 }
+/* QUÈ PORTA LA FITXA (versió 10): quantes activitats i de quin dia a quin dia. Cada fitxa que es descarrega ho porta TOT
+   (si en començar s'ha carregat la d'abans): només cal la més nova, i es diu amb les xifres perquè es pugui comprovar. */
+function resumFitxa(p){
+  var ss = N.ordenaSessions((p && p.sessions) || []), dies = {};
+  ss.forEach(function(s){ dies[s.data] = 1; });
+  var v = Object.keys(dies).sort();
+  return {n:ss.length, dies:v, primer:v.length ? v[0] : null, ultim:v.length ? v[v.length - 1] : null};
+}
+function portaHTML(p){
+  var r = resumFitxa(p);
+  if (!r.n) return "Encara no porta cap activitat.";
+  return "Porta <b>tot</b> el que has fet: <b>" + r.n + (r.n === 1 ? " activitat" : " activitats") + "</b>" +
+    (r.dies.length > 1 ? ", del " + esc(N.dataCurta(r.primer)) + " al " + esc(N.dataCurta(r.ultim)) + " (" + r.dies.length + " dies)" : ", totes del " + esc(N.dataCurta(r.ultim))) + ".";
+}
+/* una fitxa que només porta el d'avui, d'algú que avui no n'ha carregat cap: si ja havia practicat, li falten les d'abans */
+function nomesAvui(p){
+  var r = resumFitxa(p);
+  return r.n > 0 && r.dies.length === 1 && r.dies[0] === avuiStr() && !p.haCarregat && p.primerDia !== avuiStr();
+}
 function descarregaFitxa(){
   var p = perfilActiu(); if (!p) return;
   var d = new Date(), nom = N.nomFitxer(p, d);
@@ -12825,9 +13767,125 @@ function descarregaFitxa(){
   marcaDesada(p, d, nom);
   desa();
   pintaEstatFitxa();
-  toast('<span class="toast-ico" aria-hidden="true"></span><span><b>Fitxa descarregada.</b> És a la carpeta de baixades: <code>' + esc(nom) + "</code>. Ara puja-la al teu Drive o lliura-la al Classroom: les baixades de l'institut s'esborren.</span>", 9000);
+  var abans = N.baixadesDe(p.baixades).filter(function(b){ return b.slice(0, 10) === N.dataLocal(d); }).length - 1;
+  toast('<span class="toast-ico" aria-hidden="true"></span><span><b>Fitxa descarregada.</b> ' + portaHTML(p) + " És a la carpeta de baixades: <code>" + esc(nom) + "</code>. " +
+    "<b>Ara puja-la al Classroom o al teu Drive</b>: les baixades de l'institut s'esborren." + (abans > 0 ? " Les que has baixat abans ja no calen: aquesta és la bona." : "") + "</span>", 11000);
   if (PANTALLA === "p-inici") pintaInici();
   if (PANTALLA === "p-resultat"){ pintaDesa(); pintaRutaResultat(); }
+  /* la fitxa només porta el d'avui i no n'ha carregat cap: potser en té d'altres dies sense ajuntar (es pregunta; com a molt, dues vegades) */
+  var qui = MAG.actiu;
+  if (nomesAvui(p) && (NOMES_AVUI_VIST[qui] || 0) < 2 && $("capa-desa").hidden) setTimeout(function(){
+    if (perfilActiu() !== p || !nomesAvui(p) || (NOMES_AVUI_VIST[qui] || 0) >= 2 || document.querySelector(".capa:not([hidden])") || EXPLORA || PANTALLA === "p-escriu") return;
+    /* com a molt dues vegades per visita (la segona, per a qui ha dit que en té i ha tancat el diàleg de fitxers sense triar-ne cap):
+       abans tornava a sortir a cada descàrrega, i un avís que surt massa es tanca sense llegir */
+    NOMES_AVUI_VIST[qui] = (NOMES_AVUI_VIST[qui] || 0) + 1;
+    obreCapaDesa({etiqueta:"Compte", titol:"Aquesta fitxa només porta el d'avui",
+      text:"Si <b>ja havies practicat altres dies</b>, el que vas fer és a les fitxes d'aquells dies, i ara en tindries dues de separades. " +
+           "Carrega ara les d'abans (totes alhora, amb Ctrl): s'ajunten soles i, en tornar-la a descarregar, <b>una sola fitxa ho portarà tot</b>.",
+      si:{text:"Tinc fitxes d'altres dies: les carrego", fes:function(){ $("i-fitxa").click(); }},
+      no:{text:"Avui és el meu primer dia", fes:function(){ p.primerDia = avuiStr(); desa(); }}});
+  }, 900);
+}
+
+/* LA FINESTRA DE DESAR (versió 10): la mateixa per al recordatori (plegues?, fa estona que no fas res, s'acaba la classe) i per
+   a la fitxa que només porta el d'avui. Dos botons: el que es recomana i l'altre. */
+var CAPA_DESA = null;
+var NOMES_AVUI_VIST = Object.create(null);      /* quantes vegades s'ha preguntat a cadascú, en aquesta visita, per les fitxes d'altres dies */
+function obreCapaDesa(o){
+  CAPA_DESA = o;
+  $("desa-etiqueta").textContent = o.etiqueta || "Abans de plegar";
+  $("desa-titol").textContent = o.titol || "Descarrega la teva fitxa";
+  $("desa-text").innerHTML = o.text || "";
+  $("desa-porta").innerHTML = o.porta || ""; $("desa-porta").hidden = !o.porta;
+  $("b-desa-si").innerHTML = esc(o.si.text) + " <kbd>Enter</kbd>";
+  $("b-desa-no").textContent = o.no.text;
+  $("capa-desa").hidden = false;
+  setTimeout(function(){ try { $("b-desa-si").focus(); } catch(e){} }, 30);
+}
+function tancaCapaDesa(quin){
+  var o = CAPA_DESA; CAPA_DESA = null;
+  $("capa-desa").hidden = true;
+  if (o && quin && o[quin] && o[quin].fes) o[quin].fes();      /* sense «quin» (Esc), només es tanca: no respon res per l'alumne */
+}
+/* en canviar de pantalla o d'alumne (també quan es carrega la fitxa d'un altre a sobre), aquestes dues finestres es tanquen:
+   portaven les xifres de qui hi havia abans (revisió del 09-11) */
+function tancaFinestresPerfil(){
+  CAPA_DESA = null;
+  $("capa-desa").hidden = true; $("capa-activitat").hidden = true;
+}
+/* EL RECORDATORI. JM: «el botó de descarregar la fitxa, que hauràs de fer que no se'ls oblidi mai». Mentre hi ha res per desar:
+   - si el ratolí surt per dalt de la pàgina (cap a tancar la pestanya o a canviar-ne) I ja ha acabat la ruta d'avui (només
+     li falta desar), o fa més de 35 minuts que té l'aplicació oberta, o la classe és a punt d'acabar: «Abans de plegar».
+     A mitja ruta, no: qui només va al Classroom a mirar una cosa no ha de trobar una finestra cada vegada (un avís que surt
+     massa es tanca sense llegir, i llavors no serveix quan toca);
+   - si fa tres minuts que no es toca res (i no s'està escrivint): «Has acabat per avui?»;
+   - si l'enllaç de la classe diu a quina hora s'acaba (?fi=13:05): cinc minuts abans, «S'acaba la classe».
+   Mai mentre s'escriu, mai damunt d'una altra finestra i, com a molt, un cop cada dos minuts. Sempre hi ha, a més, el
+   comptador de dalt («Desa la fitxa · 2»), el títol de la pestanya i la pregunta del navegador en tancar. */
+var RECORDA = {ultim:0, activitat:Date.now(), classe:null, classeAvis:null, classePend:false, cops:0, obert:Date.now()};
+/* tot això és de l'alumne que hi ha ara, no de la pestanya: quan n'entra un altre (canvi d'alumne, o la fitxa d'un altre),
+   comença de zero. Si no, al segon alumne d'una pestanya oberta des de la classe d'abans li sortia «Abans de plegar» a mitja
+   ruta, i no veia l'avís de final de classe si el primer ja l'havia vist (revisió del 09-11). */
+function reiniciaRecorda(){
+  RECORDA.ultim = 0; RECORDA.cops = 0; RECORDA.obert = Date.now(); RECORDA.activitat = Date.now();
+  RECORDA.classe = null; RECORDA.classeAvis = null; RECORDA.classePend = false;
+}
+function tocaSortida(p){
+  var r = rutaDe(p), m = minutsFinsFi();
+  return !r.seguent || r.seguent.id === "desa" || (Date.now() - RECORDA.obert) > 35 * 60000 || (m !== null && m <= 10 && m > -20);
+}
+function potRecordar(){
+  return !!perfilActiu() && PANTALLA !== "p-escriu" && PANTALLA !== "p-ergo" && PANTALLA !== "p-docent" && PANTALLA !== "p-qui" && !EXPLORA && !document.querySelector(".capa:not([hidden])");
+}
+function recordaDesar(motiu){
+  var p = perfilActiu(); if (!p) return false;
+  var e = estatFitxa(p);
+  if (!e.pendents || !potRecordar()) return false;
+  if (motiu === "sortida" && !tocaSortida(p)) return false;
+  var t = Date.now();
+  if (motiu !== "classe" && t - RECORDA.ultim < 120000) return false;
+  RECORDA.ultim = t; RECORDA.cops++;
+  obreCapaDesa({
+    etiqueta:motiu === "classe" ? "S'acaba la classe" : (motiu === "quiet" ? "Has acabat per avui?" : "Abans de plegar"),
+    titol:"Descarrega la teva fitxa",
+    text:"<b>" + esc(majInicial(queFalta(e))) + "</b> encara no " + (e.pendents === 1 ? "és" : "són") + " a la teva fitxa. Si tanques sense descarregar-la, el que has fet avui i el que ha crescut al teu jardí es queda en aquest ordinador.",
+    porta:(resumFitxa(p).n ? "La fitxa que baixaràs " + portaHTML(p).replace(/^Porta/, "porta") : "La fitxa que baixaràs encara no porta cap activitat" + (e.ergo ? ", però sí la lliçó de com seure." : ".")) +
+          " Després, puja-la al Classroom o al Drive.",
+    si:{text:"Descarrega la fitxa", fes:descarregaFitxa},
+    no:{text:motiu === "classe" ? "Ara acabo i la descarrego" : "Encara no plego: segueixo practicant"}});
+  return true;
+}
+function minutsFinsFi(){
+  if (!CLASSE || !CLASSE.fi) return null;
+  var d = new Date(), hm = CLASSE.fi.split(":"), fi = new Date(d.getFullYear(), d.getMonth(), d.getDate(), +hm[0], +hm[1], 0);
+  return (fi - d) / 60000;
+}
+function vigilaClasse(){
+  var m = minutsFinsFi(), clau = avuiStr() + " " + (CLASSE && CLASSE.fi);
+  if (m === null || m > 5 || m < -20 || RECORDA.classe === clau) return;
+  var p = perfilActiu(); if (!p) return;
+  var queden = Math.max(0, Math.round(m));
+  if (PANTALLA === "p-escriu"){
+    /* escrivint, només un avís curt a baix (un sol cop); la finestra, en acabar (també si és la segona activitat de la franja) */
+    RECORDA.classePend = true;
+    if (RECORDA.classeAvis !== clau){
+      RECORDA.classeAvis = clau;
+      toast("<span><b>" + (queden > 0 ? "Queden " + queden + (queden === 1 ? " minut" : " minuts") + " de classe." : "La classe s'acaba.") + "</b> Quan acabis això, descarrega la fitxa i puja-la al Classroom.</span>", 9000);
+    }
+    return;
+  }
+  if (!estatFitxa(p).pendents) return;          /* res per desar (encara): es torna a mirar d'aquí a un moment */
+  if (recordaDesar("classe")) RECORDA.classe = clau;
+}
+function iniciaRecordatoris(){
+  var toca = function(){ RECORDA.activitat = Date.now(); };
+  ["pointermove", "pointerdown", "keydown", "wheel"].forEach(function(ev){ document.addEventListener(ev, toca, {passive:true, capture:true}); });
+  /* el ratolí surt per dalt de la pàgina: va a tancar la pestanya, a canviar-ne o a la barra d'adreces */
+  document.addEventListener("mouseout", function(e){ if (!e.relatedTarget && e.clientY <= 2) recordaDesar("sortida"); });
+  setInterval(function(){
+    vigilaClasse();
+    if (Date.now() - RECORDA.activitat > 180000 && !document.hidden) recordaDesar("quiet");
+  }, 15000);
 }
 
 /* un missatge curt a baix de la pantalla, que se'n va sol */
@@ -12925,8 +13983,11 @@ function carregaLlegits(v, problemes){
         " que no " + (seves.length === 1 ? "és" : "són") + " a cap fitxa.\n\nSi ets tu (" + r.nom + "), clica D'acord i s'afegeixen a la teva fitxa. Si no, Cancel·la.")) portar = seves;
   }
   var eraBuit = !actual;
+  tancaFinestresPerfil();
   var p = obrePerfil(r.nom, r.grup, null);
   var abans = p.sessions.length;
+  /* versió 10: ha carregat fitxa (la que baixi ja no és «només la d'avui») i el jardí torna a créixer davant seu */
+  p.haCarregat = true; CRONO_FET[MAG.actiu] = "torna";
   p.sessions = N.fusiona(p.sessions, r.sessions.concat(portar));
   if (r.ll && (eraBuit || abans === 0)) p.llengua = r.ll;
   if (r.blocs && (eraBuit || abans === 0 || String(p.blocs) === "variats")) p.blocs = r.blocs;
@@ -12966,7 +14027,8 @@ function carregaLlegits(v, problemes){
     "Ara portes " + p.sessions.length + (p.sessions.length === 1 ? " sessió" : " sessions") +
     (reals.length ? " (del " + esc(N.dataCurta(reals[0].data)) + " al " + esc(N.dataCurta(reals[reals.length - 1].data)) + ")" : "") +
     " i " + N.minutsText(ag.act) + " de pràctica." +
-    '<span class="carrega-on">Camí de tecles: <b>' + cami.superades + " de " + N.LLICONS.length + "</b> lliçons · Reptes oberts: <b>" + llistaMin + " minuts</b></span>" +
+    '<span class="carrega-on">Camí de tecles: <b>' + cami.superades + " de " + N.LLICONS.length + "</b> lliçons · Reptes oberts: <b>" + llistaMin + " minuts</b>" +
+      (N.JARDI[p.jardi] && reals.length && tres.pot() ? " · El teu jardí <b>torna a créixer</b> aquí sota, amb tot el que has fet" : "") + "</span>" +
     (portar.length ? (portar.length === 1 ? " S'hi ha afegit la d'ara." : " S'hi han afegit les " + portar.length + " d'ara.") : "") +
     (r.format === "v1" ? " La prova inicial queda com a primera marca." : "") +
     (forats ? '<span class="carrega-no"><b>Les teves fitxes no ho portaven tot en una</b> (algun dia vas començar sense carregar-la). Ara ja és tot junt: <b>descarrega la fitxa</b> (a dalt, «Desa la fitxa») i la nova ho portarà tot.</span>' : "") +
@@ -12979,7 +14041,7 @@ function de(nom){ return (/^[aeiouàèéíïòóúüh]/i.test(String(nom)) ? "d'
 var AJUDA_CURTA = "La fitxa és el fitxer <code>TECLA-A-TECLA-…txt</code> que vas descarregar en acabar. Si no s'obre, obre-la al Drive, copia'n tot el text i clica <b>Enganxa-la</b>.";
 /* el missatge del resultat, sempre a la vista: a la pantalla d'inici si ja hi ha algú obert; si no, a la de «qui ets» */
 function avisaCarrega(tipus, html){
-  if (perfilActiu()){ AVIS_INICI = {tipus:tipus, html:html}; return tornaAInici(); }
+  if (perfilActiu()){ AVIS_INICI = {tipus:tipus + " carrega", html:html}; return tornaAInici(); }
   var el = $("qui-avis");
   el.className = "avis " + tipus; el.innerHTML = html; el.hidden = false;
   if (PANTALLA !== "p-qui") mostra("p-qui");
@@ -13095,7 +14157,50 @@ function pintaPestanya(){
   else if (D.pestanya === "dies") cos.innerHTML = diesHTML(al, dd);
   else if (D.pestanya === "alumnes") cos.innerHTML = alumnesHTML(al, dd);
   else if (D.pestanya === "proves") cos.innerHTML = provesHTML(al, dd);
+  else if (D.pestanya === "jardins"){ cos.innerHTML = jardinsHTML(al); pintaJardins(cos, al); }
   else cos.innerHTML = sessionsHTML(al, dd);
+}
+
+/* ---- ELS JARDINS DE LA CLASSE (versió 10): el jardí de cada alumne, tal com el veu ell, en una graella per projectar.
+   D'un cop d'ull: qui el té florit (la ratxa de setmanes rodones viva) i qui el té amb set (set dies o més sense practicar).
+   Cada imatge es pinta una sola vegada (un context temporal) i es guarda mentre no canviïn les fitxes. ---- */
+var IMATGES_JARDI = Object.create(null);
+function jardiDAlumne(a){
+  return N.jardiDe(sessionsJardi(a.sessions, {dubte:!!a.segellMal}), {tipus:a.jardi, nom:a.nom, finsA:a.desada ? a.desada.slice(0, 10) : null});
+}
+function jardinsHTML(al){
+  if (!al.length) return '<p class="suau">Encara no hi ha cap fitxa.</p>';
+  var ambJardi = al.filter(function(a){ return N.JARDI[a.jardi]; }).length;
+  return '<p class="suau">El jardí de cada alumne, tal com el veu ell: hi creix el que ha escrit de debò (les sessions per revisar i les fitxes tocades a mà no hi fan créixer res). ' +
+    "<b>Florit</b>: manté la ratxa de setmanes rodones. <b>Té set</b>: fa set dies o més que no practica. Clica'n un per obrir-lo en gran. " +
+    ambJardi + " de " + al.length + " han triat jardí.</p>" +
+    '<div class="jardins-classe">' + al.map(function(a){
+      var j = jardiDAlumne(a), k = N.clauNom(a.nom), te = !!N.JARDI[a.jardi];
+      return '<button type="button" class="jc" data-jardi-de="' + esc(k) + '"' + (te ? "" : " disabled") + '><span class="jc-img" data-img="' + esc(k) + '">' + (te ? ICONA_JARDI[a.jardi] : "") + "</span>" +
+        "<b>" + esc(a.nom) + "</b><small>" + (te ? esc(N.JARDI[a.jardi].nom) + (j.set ? ' · <em class="set">té set (' + j.diesSense + " dies)</em>" : (j.florit ? ' · <em class="florit">florit</em>' : "")) : "encara no ha triat jardí") + "</small>" +
+        "<small>" + esc(compteJardi(totalsJardi(j))) + " · " + esc(N.minutsText(j.segons || 0)) + "</small></button>";
+    }).join("") + "</div>";
+}
+var TANDA_JARDINS = 0;      /* cada repintat de la pestanya engega una tanda nova; les d'abans s'aturen (no pinten dues vegades el mateix) */
+function pintaJardins(cos, al){
+  var tanda = ++TANDA_JARDINS;
+  if (!tres.pot()) return;
+  var cua = Promise.resolve(), fosc = MAG.tema === "fosc";
+  al.forEach(function(a){
+    if (!N.JARDI[a.jardi]) return;
+    var k = N.clauNom(a.nom), clau = k + "|" + a.sessions.length + "|" + a.jardi + "|" + (a.desada || "") + "|" + MAG.tema;
+    var posa = function(u){
+      var sp = null; cos.querySelectorAll("[data-img]").forEach(function(x){ if (x.getAttribute("data-img") === k) sp = x; });
+      if (sp && u) sp.innerHTML = '<img alt="" src="' + u + '">';
+    };
+    if (IMATGES_JARDI[clau]){ posa(IMATGES_JARDI[clau]); return; }
+    cua = cua.then(function(){
+      if (tanda !== TANDA_JARDINS || PANTALLA !== "p-docent" || D.pestanya !== "jardins" || !cos.isConnected) return;
+      if (IMATGES_JARDI[clau]){ posa(IMATGES_JARDI[clau]); return; }
+      return TRES.carrega().then(function(){ return TRES.jardiImatge(jardiDAlumne(a), {fosc:fosc, amplada:520, alcada:320}); })
+        .then(function(u){ IMATGES_JARDI[clau] = u; posa(u); }, function(){});
+    });
+  });
 }
 
 /* ---- LES PROVES DE LA PROFE (03-11): cada prova (dia, activitat i màxim d'errades), alumne a alumne: els intents amb
@@ -13399,6 +14504,8 @@ function pintaEnllac(){
       '<div class="fila-opcions"><label class="tria-llengua">Prova de la profe <select id="d-e-prova"><option value="">cap</option>' + opcionsProva("") + "</select></label>" +
       '<label class="tria-llengua">Màxim d\'errades <input type="number" id="d-e-errades" min="0" max="500" value="10" inputmode="numeric" style="width:5.5em"></label>' +
       '<label class="tria-llengua">Dia <input type="date" id="d-e-dia" value="' + avuiStr() + '"></label></div>' +
+      '<div class="fila-opcions"><label class="tria-llengua">La classe s\'acaba a les <input type="time" id="d-e-fi" step="300"></label>' +
+      '<span class="suau petit">Cinc minuts abans, l\'app recorda a tothom que descarregui la fitxa (si ha fet res que no hi sigui).</span></div>' +
       '<div class="enllac-sortida"><input type="text" id="d-e-url" readonly aria-label="Adreça per a la classe"><button class="boto primari" type="button" id="b-d-e-copia">Copia</button></div>' +
       '<p class="suau petit" id="d-e-nota"></p>';
     cos.addEventListener("change", pintaEnllac);
@@ -13419,10 +14526,12 @@ function pintaEnllac(){
   var pe = String($("d-e-errades").value || "").trim(), ambProva = !!$("d-e-prova").value && /^\d{1,3}$/.test(pe);
   var dia = /^\d{4}-\d{2}-\d{2}$/.test($("d-e-dia").value) ? $("d-e-dia").value : avuiStr();
   if (ambProva) q.push("prova=" + $("d-e-prova").value, "errades=" + pe, "dia=" + dia);
+  if (/^\d{1,2}:\d{2}$/.test($("d-e-fi").value || "")) q.push("fi=" + $("d-e-fi").value);
   var base = location.href.split("#")[0].split("?")[0];
   $("d-e-url").value = base + (q.length ? "?" + q.join("&") : "");
   $("d-e-nota").textContent = location.protocol === "file:" ? "Compte: aquesta adreça és d'un fitxer d'aquest ordinador. Per a l'alumnat, fes-ho des de la versió web." :
     "L'alumne hi entra, i els gèneres, la llengua i la durada ja hi són triats (els pot canviar)." +
+    (/^\d{1,2}:\d{2}$/.test($("d-e-fi").value || "") ? " Cinc minuts abans de les " + $("d-e-fi").value + ", l'app recorda a qui tingui res per desar que descarregui la fitxa." : "") +
     (ambProva ? " La prova de la profe hi va posada per al " + N.dataLlarga(dia) + ": «" + N.nomAct($("d-e-prova").value) + "», màxim " + pe + " errades; la ruta no passa a res més fins que la supera. Un altre dia, l'enllaç no posa cap prova." : "");
 }
 
@@ -13430,10 +14539,15 @@ function pintaEnllac(){
 function repintaEscenes(){
   tres.alliberaTot();
   if (PANTALLA === "p-qui") pintaQui();
+  else if (PANTALLA === "p-inici") pintaInici();      /* versió 10: el jardí és a dalt de tot; abans, en canviar de tema o de 3D, s'hi quedaven les xifres planes */
   else if (PANTALLA === "p-progres") obreProgres();
   else if (PANTALLA === "p-cami") obreCami(CAMI_SEL);
-  else if (PANTALLA === "p-resultat" && $("r-detall").open){ $("r-detall-cos").innerHTML = detallSessio(ULTIM); llegeixDetall(); }
+  else if (PANTALLA === "p-resultat"){
+    if (ULTIM) pintaJardiResultat(ULTIM, ULTIM_PREVIES || [], ULTIM_DESADA);
+    if ($("r-detall").open){ $("r-detall-cos").innerHTML = detallSessio(ULTIM); llegeixDetall(); }
+  }
   else if (PANTALLA === "p-docent" && $("d-fitxa-alumne") && $("d-fitxa-alumne").innerHTML) pintaPestanya();
+  else if (PANTALLA === "p-docent" && D.pestanya === "jardins") pintaPestanya();      /* les imatges dels jardins són del tema d'abans */
 }
 
 /* arrossegar una fitxa a qualsevol lloc de la pàgina (fora de la vista docent i d'escriure) */
@@ -13530,6 +14644,12 @@ function lliga(){
     if (b){ triaJardi(b.getAttribute("data-jardi")); return; }
     var a = e.target.closest("[data-accio]"); if (!a) return;
     var acc = a.getAttribute("data-accio"), cont = a.closest(".jardi-inici, .bloc-jardi");
+    if (acc === "jardi-album"){
+      var pa = perfilActiu();
+      if (pa && N.JARDI[pa.jardi] && tres.pot()) obreExplora(jardiActual(pa), {propi:true, album:true});
+      else { obreProgres(); var gi = document.querySelector("#pr-cos .bloc-jardi"); if (gi) gi.scrollIntoView({block:"start"}); }
+      return;
+    }
     if (acc === "jardi-veure"){
       var pv = perfilActiu();
       if (pv && N.JARDI[pv.jardi] && tres.pot()) obreExplora(jardiActual(pv), {propi:true});
@@ -13545,6 +14665,23 @@ function lliga(){
     else if (acc === "jardi-torna"){ if (PANTALLA === "p-progres") obreProgres(); else if (PANTALLA === "p-resultat" && ULTIM) pintaJardiResultat(ULTIM, ULTIM_PREVIES || [], ULTIM_DESADA); else pintaInici(); }
   };
   $("ini-jardi").addEventListener("click", clicJardi);
+  $("ini-ve-ara").addEventListener("click", clicJardi);
+  /* avui has fet: el detall d'una activitat */
+  $("ini-avui-fet").addEventListener("click", function(e){ var b = e.target.closest("[data-sessio]"); if (b) obreActivitat(b.getAttribute("data-sessio")); });
+  $("b-act-tanca").onclick = tancaActivitat;
+  $("capa-activitat").addEventListener("click", function(e){
+    if (e.target === $("capa-activitat")) return tancaActivitat();
+    var b = e.target.closest("[data-accio]"); if (b && b.getAttribute("data-accio") === "desa"){ tancaActivitat(); descarregaFitxa(); }
+  });
+  $("capa-activitat").addEventListener("keydown", function(e){ if (e.key === "Escape"){ e.preventDefault(); tancaActivitat(); } });
+  /* el recordatori de desar i l'índex del progrés */
+  $("b-desa-si").onclick = function(){ tancaCapaDesa("si"); };
+  $("b-desa-no").onclick = function(){ tancaCapaDesa("no"); };
+  $("capa-desa").addEventListener("keydown", function(e){
+    if (e.key === "Escape"){ e.preventDefault(); e.stopPropagation(); tancaCapaDesa(null); }      /* Esc només tanca: no diu «és el meu primer dia» per ningú */
+    else if (e.key === "Enter" && e.target.id !== "b-desa-no"){ e.preventDefault(); e.stopPropagation(); tancaCapaDesa("si"); }
+  });
+  $("pr-index").addEventListener("click", function(e){ var b = e.target.closest("[data-ap]"); if (!b) return; var h = document.getElementById(b.getAttribute("data-ap")); if (h) h.scrollIntoView({behavior:"smooth", block:"start"}); });
   /* el recordatori del calendari (a la targeta «Aquesta setmana», a l'inici i al progrés) */
   ["ini-hero", "pr-cos"].forEach(function(id){ $(id).addEventListener("change", function(e){ if (e.target.closest(".recorda-cal")) actualitzaCalendari(e.target); }); });
   $("pr-cos").addEventListener("click", clicJardi);
@@ -13552,6 +14689,7 @@ function lliga(){
   $("ini-pla").addEventListener("click", clicPla);
   $("r-pla").addEventListener("click", clicPla);
   $("r-jardi").addEventListener("click", clicJardi);
+  $("r-jardi-nou").onclick = function(){ $("r-jardi").scrollIntoView({behavior:"smooth", block:"center"}); };
   /* abans d'un repte llarg */
   $("b-previ-comenca").onclick = comencaRepteLlarg;
   var tancaPrevi = function(){ $("e-previ").hidden = true; REPTE_PREVI = 0; var b = PANTALLA === "p-resultat" ? $("b-r-altre") : $("b-repte"); try { b.focus(); } catch(x){} };
@@ -13689,6 +14827,12 @@ function lliga(){
   $("d-cos").addEventListener("click", function(e){
     var o = e.target.closest("[data-ordre]");
     if (o){ var c = o.getAttribute("data-ordre"); D.ordre = {camp:c, dir:D.ordre.camp === c ? -D.ordre.dir : (c === "nom" || c === "grup" ? 1 : -1)}; pintaPestanya(); return; }
+    var jd = e.target.closest("[data-jardi-de]");
+    if (jd){
+      var aj = D.alumnes[jd.getAttribute("data-jardi-de")];
+      if (aj && N.JARDI[aj.jardi]){ if (tres.pot()) obreExplora(jardiDAlumne(aj), {propi:false, nom:aj.nom}); else toast("Per obrir-lo en gran cal el 3D: activa'l al peu de la pàgina («Amb 3D»)."); }
+      return;
+    }
     var al = e.target.closest("[data-alumne]");
     if (al){
       var a = D.alumnes[al.getAttribute("data-alumne")]; if (!a) return;
@@ -13715,6 +14859,13 @@ function lliga(){
   $("b-peu-3d").onclick = function(){ MAG.sense3d = !MAG.sense3d; desa(); aplicaTema(); repintaEscenes(); };
 
   document.addEventListener("keydown", function(e){
+    /* el jardí en gran és obert i el focus és fora (a la pàgina: després de clicar el llenç o de tancar l'àlbum):
+       Esc el tanca i les fletxes, + i − el mouen igualment; cap altra tecla no fa res per darrere */
+    if (EXPLORA && !EXPLORA.el.contains(e.target)){
+      if (e.key === "Escape"){ e.preventDefault(); tancaExplora(); }
+      else if (EXPLORA.h && !e.altKey && !e.ctrlKey && !e.metaKey && !enUnControl(e) && EXPLORA.h.tecla(e)) e.preventDefault();
+      return;
+    }
     if (e.key === "Escape" && !$("d-projecta").hidden){ tancaProjecta(); return; }
     if (e.key === "Escape" && PANTALLA === "p-escriu" && S && !S.entre && e.target !== caixa){ e.preventDefault(); if (S.pausat) tancaPausa(); else obrePausa(); return; }
     if (PANTALLA === "p-escriu" && S && S.ulls && e.key === "Enter" && e.target !== caixa){ e.preventDefault(); tancaUlls(); return; }
@@ -13742,6 +14893,7 @@ function arrenca(){
   $("c-guia").checked = !!MAG.guia;
   $("e-teclat-bloc").hidden = MAG.teclat === false;
   lliga();
+  iniciaRecordatoris();
   var rec = recuperaEnCurs();
   if (rec) AVIS_INICI = {tipus:"info", html:"La darrera sessió es va tancar a mitges: s'ha desat el que havies fet (" + N.minutsText(rec.act) + ")."};
   desa();
