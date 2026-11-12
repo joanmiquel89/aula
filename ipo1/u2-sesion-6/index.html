@@ -307,6 +307,13 @@ body.proj .opc button .k{font-size:.75em}
 .mapa-t li.passat{opacity:.55}
 .mapa-t li.ara{border-color:var(--blau);background:var(--blauclar);color:var(--blau);font-weight:700}
 .mapa-t li.avui{border:2px solid var(--tinta);background:#ffd66b;color:var(--tinta);font-weight:800}
+/* la barra del final (JM, 12-11): quant portem de la unitat, perquè sàpiguen si l'examen és a prop */
+.progres{margin:1em 0 .2em;padding:.6em .9em .5em;border:2px solid var(--linia);border-radius:.7em;background:#fff}
+.progres .cap{margin:0 0 .4em;font-size:.76em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--suau)}
+.progres .barra{position:relative;height:1.7em;border-radius:.85em;background:#efe9dc;overflow:hidden}
+.progres .barra i{position:absolute;left:0;top:0;bottom:0;border-radius:.85em;background:var(--verd)}
+.progres .barra b{position:absolute;right:.6em;top:50%;transform:translateY(-50%);font-weight:800;color:var(--tinta)}
+.progres .falta{margin:.4em 0 0;font-size:.86em;color:var(--suau)}
 body.proj .temari{font-size:.84em}
 /* projectant, cap mida fixa en píxels: si no, a la pantalla gran es perden (el títol de bloc feia 13 px en un cos de 30) */
 body.proj .kicker{font-size:.66em}
@@ -540,7 +547,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <h2>Contagios, burnout y acoso</h2>
   <p style="font-size:1.15em">Empezamos donde lo dejamos el lunes: <b>lo que contagia</b>. Después, <b>riesgos que no vienen de una máquina sino de cómo se trabaja</b>: el estrés, el burnout y el acoso.</p>
   <div class="mapa-t"><p class="cap">Dónde estamos en el temario · Unidad 2: Prevención de riesgos laborales generales y específicos</p><ol><li class="passat"><b>2.1</b> Condiciones de seguridad</li><li class="ara"><b>2.2</b> Medioambiente de trabajo</li><li class="ara"><b>2.3</b> Organización y carga de trabajo</li><li><b>2.4</b> Riesgos por sectores</li><li><b>2.5</b> Especialidades preventivas</li><li><b>2.6</b> Señalización</li></ol><ol><li class="passat"><b>2.2.1</b> Agentes físicos</li><li class="passat"><b>2.2.2</b> Agentes químicos</li><li class="avui"><b>2.2.3</b> Agentes biológicos<small>Libro · pág. 40</small></li><li class="avui"><b>2.3.1</b> Riesgos psicosociales<small>Libro · págs. 41-43</small></li><li><b>2.3.2</b> Riesgos ergonómicos</li></ol></div>
-  <div class="plan"><div><b>Hoy</b><ol start="1"><li>Dos preguntas para recordar (lunes 9 y viernes 6) <small>· 4 min</small></li><li>Biológicos: cuatro grupos y la higiene (pág. 40) <small>· 10 min</small></li><li>Estrés o burnout (págs. 41-42) <small>· 8 min</small></li><li>Cada uno solo: dos casos de acoso con la <a class="t-propia" href="../u2-tablas/#t-2-18" target="_blank" rel="noopener">tabla 2.18</a> (pág. 43) <small>· 14 min</small></li></ol></div><div><b>&nbsp;</b><ol start="5"><li>Para leer: vibraciones y radiaciones, pantallas, fatiga, adicción al trabajo, insatisfacción y tecnoestrés (págs. 33, 35-37 y 42-45) <small>· 3 min</small></li><li>Si sobra tiempo: los trastornos musculoesqueléticos y cómo se maneja una carga (págs. 44-45) <small>· ➕ si da tiempo</small></li><li>Si sobra tiempo: las cuatro especialidades de la prevención (pág. 48) <small>· ➕ si da tiempo</small></li></ol><p style="margin:8px 0 0"><b>Para salir:</b> 2 preguntas en voz alta.</p></div></div>
+  <div class="plan"><div><b>Hoy</b><ol start="1"><li>Dos preguntas para recordar (lunes 9 y viernes 6) <small>· 4 min</small></li><li>Biológicos: cuatro grupos y la higiene (pág. 40) <small>· 9 min</small></li><li>Estrés o burnout (págs. 41-42) <small>· 7 min</small></li><li>El acoso: un caso real (Iveco, 2019) y, cada uno solo, dos casos del libro con la <a class="t-propia" href="../u2-tablas/#t-2-18" target="_blank" rel="noopener">tabla 2.18</a> (pág. 43) <small>· 21 min</small></li></ol></div><div><b>&nbsp;</b><ol start="5"><li>Para leer: vibraciones y radiaciones, pantallas, fatiga, adicción al trabajo, insatisfacción y tecnoestrés (págs. 33, 35-37 y 42-45) <small>· 2 min</small></li><li>Si sobra tiempo: los trastornos musculoesqueléticos y cómo se maneja una carga (págs. 44-45) <small>· ➕ si da tiempo</small></li><li>Si sobra tiempo: las cuatro especialidades de la prevención (pág. 48) <small>· ➕ si da tiempo</small></li></ol><p style="margin:8px 0 0"><b>Para salir:</b> 2 preguntas en voz alta.</p></div></div>
   <h3 class="noproj">Cómo usar esta página</h3>
   <p class="noproj">En clase la proyectamos. En casa te sirve para estudiar: cada bloque te dice <b>dónde está en tus apuntes</b>.</p>
   <div class="refs"><span class="ref libro">Libro · págs. 40-43 (si da tiempo, 44-45 y 48)</span></div>
@@ -696,7 +703,67 @@ Para distinguirlos, tres preguntas: ¿cuánto dura?, ¿hay desgaste?, ¿se recup
   <ol class="saber"><li>Las tres clases de acoso (<a class="t-propia" href="../u2-tablas/#t-2-18" target="_blank" rel="noopener">tabla 2.18</a>)</li><li>Qué hace falta para hablar de acoso (recuadro «Importante»)</li></ol>
 </section>
 
-<section class="p" id="acoso">
+<section class="p" id="caso-video">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
+  <p class="kicker">4 · Un caso real · vídeo de laSexta sobre el caso (30-05-2019) · 1 minuto y medio</p>
+  <h2>Te llega un vídeo al grupo del trabajo</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 43 · «Sabías que…», el ciberacoso</span></div>
+  <div class="clau">Mientras lo ves: <b>¿quién tiene la culpa?</b> ¿Quien lo grabó, quien lo envió primero o quien lo reenvió?</div>
+<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/gEfyxhESCr0?rel=0" title="Grabar y difundir un vídeo íntimo es un delito · laSexta Noticias" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+<p class="nota">laSexta Noticias, «Grabar y difundir un vídeo íntimo es un delito penado con cárcel: compartirlo nos hace cómplices» (YouTube, 30-05-2019, 1:24), sobre este caso. Es un caso real y duro: si te toca de cerca, puedes salir un momento; y si lo necesitas, el 024. Si no se ve aquí: <a href="https://www.youtube.com/watch?v=gEfyxhESCr0" target="_blank" rel="noopener">verlo en YouTube ↗</a></p>
+</section>
+
+<section class="p" id="caso-iveco">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
+  <p class="kicker">4 · Un caso real · la lectura · mayo de 2019</p>
+  <h2>Lo que pasó en Iveco</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 43 · <a class="t-propia" href="../u2-tablas/#t-2-18" target="_blank" rel="noopener">tabla 2.18</a> y «Sabías que…»</span></div>
+  <div class="caso amb-esquema noticia"><p class="cap-noticia"><span>📰 Público, 29-07-2019; AEPD, resolución E/06209/2020</span><a class="font-link" href="https://www.publico.es/sociedad/iveco-abre-investigacion-interna-caso.html" target="_blank" rel="noopener">Leer la noticia ↗</a></p><div class="cas-text"><p><b>Mayo de 2019.</b> Una trabajadora de 32 años de una fábrica de Iveco, en Madrid, descubre que un vídeo íntimo suyo, grabado años antes, corre por los móviles de sus compañeros. Lo cuenta en la empresa, con el sindicato. Pocos días después, se quita la vida (un suicidio nunca tiene una sola causa).</p><p><b>2020.</b> El juzgado cierra el caso sin juicio: no se supo quién empezó a enviarlo ni quién lo reenvió, y faltaba la denuncia de la persona afectada, que la ley pide para juzgar la difusión.</p></div><div class="esquema"><p class="esq-t">Lo importante</p><ol><li><i>📅</i><b>Cuándo</b><span>mayo de 2019</span></li><li><i>🏭</i><b>Dónde</b><span>una fábrica de Iveco, en Madrid</span></li><li><i>📱</i><b>Qué</b><span>un vídeo íntimo suyo, de hacía años, en los móviles de la plantilla</span></li><li><i>⚖️</i><b>Final</b><span>2020: caso cerrado, sin juicio</span></li></ol></div></div>
+</section>
+
+<section class="p" id="caso-iveco-voto">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
+  <p class="kicker">4 · Un caso real · el voto</p>
+  <h2>¿Y hoy?</h2>
+  <div class="voto" data-ok="c"><p class="q">Hoy, en 2026, ese vídeo llega al grupo del trabajo y alguien lo reenvía. ¿Quién comete un delito?</p><div class="opc"><button data-v="a">Solo quien lo grabó con ella</button><button data-v="b">Solo quien lo envió el primero</button><button data-v="c">También quien lo reenvía al grupo</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · También quien lo reenvía</span></p>
+<p class="nop"><i>✗</i><span>Lo grabó con ella: grabarlo con permiso no es delito; difundirlo, sí</span></p>
+<p class="nop"><i>✗</i><span>Solo el primero: desde 2022, reenviarlo también es delito</span></p>
+<span class="ley">Código Penal · art. 197.7</span></div> <span class="fuente">Fuente: Código Penal, art. 197.7. <a class="font-link" href="https://www.boe.es/buscar/act.php?id=BOE-A-1995-25444#a197" target="_blank" rel="noopener">Abrir la fuente ↗</a></span></div></div>
+
+  <div class="refs despres"><span class="ref libro">Libro · pág. 43 · <a class="t-propia" href="../u2-tablas/#t-2-18" target="_blank" rel="noopener">tabla 2.18</a></span></div>
+</section>
+
+<section class="p" id="caso-iveco-2">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
+  <p class="kicker">4 · Un caso real · la solución, 2 de 3</p>
+  <h2>Si lo haces, si te pasa, si lo ves</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 41 · <a class="t-propia" href="../u2-tablas/#t-2-17" target="_blank" rel="noopener">tabla 2.17</a> · pág. 43 · «Sabías que…»</span></div>
+  <div class="tres">
+<div class="pas"><b>Si lo reenvías</b><span>Delito: una multa (desde 2022). La cárcel del vídeo es para quien lo graba sin permiso o lo difunde el primero. Si sale un menor, cárcel. Y en el trabajo, el despido.</span></div>
+<div class="pas"><b>Si te pasa a ti</b><span>No es culpa tuya. Guarda pruebas (capturas del chat), cuéntalo y denuncia: de adulto, sin tu denuncia no hay juicio. Para borrarlo: <a href="https://www.aepd.es/canalprioritario" target="_blank" rel="noopener">el canal prioritario de la AEPD ↗</a></span></div>
+<div class="pas"><b>Si lo ves</b><span>No lo reenvíes: bórralo y avisa a esa persona o a alguien de confianza. «Nunca compartir y siempre denunciar» (laSexta).</span></div>
+</div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>Delito y despido.</b> Lo que dice la ley hoy, y lo que pasó en Iveco:
+<ol class="pasos"><li><b>Quien reenvía:</b> desde el 7-10-2022 el Código Penal castiga con una <b>multa de uno a tres meses</b> a quien, «habiendo recibido» imágenes íntimas de otra persona, las difunde sin su consentimiento (art. 197.7, segundo párrafo, que añadió la Ley Orgánica 10/2022): imágenes que esa persona dejó grabar o envió en privado y cuya difusión daña gravemente su intimidad. Es un delito que solo se juzga si lo denuncia la persona afectada (art. 201.1), salvo que sea menor de edad o que afecte a muchas personas (art. 201.2). Quien las tenía porque esa persona se las dio y las difunde: prisión de tres meses a un año o multa de seis a doce meses (primer párrafo). Si la víctima es menor de edad, la pena va en su mitad superior; y un vídeo sexual de un menor es, para la ley, pornografía infantil: difundirlo, de uno a cinco años de prisión (de cinco a nueve si tiene menos de 16: art. 189.2), y solo guardarlo en el móvil, de tres meses a un año (art. 189.1.b y 189.5). Quien tiene entre 14 y 17 años responde ante la justicia de menores (Ley Orgánica 5/2000, art. 1), y su familia paga con él los daños (art. 61.3).</li><li><b>En la empresa:</b> el acoso sexual a un compañero es causa de <b>despido disciplinario</b> (Estatuto de los Trabajadores, art. 54.2.g). Y un jefe que, aprovechándose de su cargo, humilla una y otra vez a un trabajador comete un delito de acoso laboral: de seis meses a dos años de prisión (Código Penal, art. 173.1).</li><li><b>Qué es:</b> un comportamiento de carácter sexual, no deseado, hecho con el móvil: acoso sexual y ciberacoso (<a class="t-propia" href="../u2-tablas/#t-2-18" target="_blank" rel="noopener">tabla 2.18</a> y «Sabías que…», pág. 43). Y la empresa tiene que proteger la salud de su plantilla «en todos los aspectos relacionados con el trabajo» (LPRL, art. 14.2).</li><li><b>Lo que pasó:</b> en 2020 el juzgado dictó el sobreseimiento, ya firme: por la difusión del vídeo, «por falta de condición objetiva de procedibilidad» (faltaba la denuncia de la persona agraviada que pide el art. 201.1 del Código Penal), y por el acoso, «por falta de autor conocido». Ni el juzgado ni la investigación de la empresa identificaron a quien empezó a enviarlo ni a quien lo reenvió. El sindicato dijo que la empresa lo trató como «un asunto personal»; la empresa, que actuó desde el día siguiente con los sindicatos y con ella.</li></ol>
+Si un vídeo así te llega a ti: no lo reenvíes, bórralo y avisa. Si sale alguien menor de edad, avisa también a un adulto de confianza: no lo guardes.<br>
+Las fuentes: <a target="_blank" rel="noopener" href="https://www.aepd.es/documento/e-06209-2020.pdf">la resolución de la AEPD (E/06209/2020)</a> · <a target="_blank" rel="noopener" href="https://www.publico.es/sociedad/iveco-abre-investigacion-interna-caso.html">la noticia de Público (29-07-2019)</a> · <a target="_blank" rel="noopener" href="https://www.boe.es/buscar/act.php?id=BOE-A-1995-25444#a197">el Código Penal, art. 197</a> · <a target="_blank" rel="noopener" href="https://www.boe.es/buscar/act.php?id=BOE-A-2015-11430#a54">el Estatuto de los Trabajadores, art. 54</a>.<span class="ley">Código Penal · arts. 173.1, 189, 197.7 y 201 · ET · art. 54.2.g · LPRL · art. 14.2</span> <span class="ref libro">Libro · pág. 43 · <a class="t-propia" href="../u2-tablas/#t-2-18" target="_blank" rel="noopener">tabla 2.18</a> y «Sabías que…»</span></div></details>
+</section>
+
+<section class="p" id="caso-iveco-3">
+  <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
+  <p class="kicker">4 · Un caso real · la solución, 3 de 3</p>
+  <h2>No es un caso raro</h2>
+  <div class="refs"><span class="ref libro">Libro · pág. 43 · «Importante», el Convenio 190 de la OIT</span></div>
+  <div class="pas"><div class="gran"><b>1 de cada 5</b><span>personas con trabajo en el mundo lo ha sufrido alguna vez: violencia o acoso en el trabajo (OIT, 2022)</span></div></div>
+<div class="pas"><div class="gran"><b>43 %</b><span>de las mujeres de 18 a 29 años que han trabajado en España ha sufrido alguna vez acoso sexual en el trabajo (Igualdad, 2022)</span></div></div>
+<div class="pas"><div class="gran"><b>3 %</b><span>de las víctimas del último año, de todas las edades, lo denunció a la policía</span></div></div>
+<div class="pas"><div class="idea"><b>Si un día no puedes más</b><span>llama al 024: es gratis, a cualquier hora, y te atiende una persona. O habla con tu tutor o con orientación.</span></div></div>
+<details class="llegeix noproj"><summary>Léelo entero</summary><div><b>No es un caso raro.</b> Las cifras, de dos encuestas oficiales:
+<ol class="pasos"><li><b>En el mundo:</b> el 22,8 % de las personas con empleo (743 millones) ha sufrido al menos una forma de violencia o acoso en el trabajo durante su vida laboral; la más frecuente, la psicológica (17,9 %). Las personas jóvenes tienen más probabilidades, y solo algo más de la mitad (54,4 %) se lo contó a alguien (OIT, Lloyd's Register Foundation y Gallup, 2022).</li><li><b>En España:</b> el 28,4 % de las mujeres de 16 a 74 años que han trabajado alguna vez ha sufrido acoso sexual en el trabajo; entre las de 18 a 29 años, el 43,1 %. De las víctimas del último año, el 84,7 % lo habló con alguien o lo denunció, pero solo el 3,2 % lo denunció a la policía (Ministerio de Igualdad, Encuesta Europea de Violencia de Género 2022, cap. 6).</li><li><b>Ayuda:</b> el 024 es la línea de atención a la conducta suicida del Ministerio de Sanidad: gratuita, confidencial y las 24 horas, también para quien está preocupado por otra persona.</li></ol>
+Las fuentes: <a target="_blank" rel="noopener" href="https://www.ilo.org/sites/default/files/wcmsp5/groups/public/@dgreports/@gender/documents/publication/wcms_884354.pdf">OIT, «Experiencias de violencia y acoso en el trabajo» (2022)</a> · <a target="_blank" rel="noopener" href="https://violenciagenero.igualdad.gob.es/wp-content/uploads/Cp6.Acosos_sexual_en_el_trabajo.pdf">Ministerio de Igualdad, capítulo 6</a> · <a target="_blank" rel="noopener" href="https://www.sanidad.gob.es/linea024/">Línea 024</a>.<span class="ref libro">Libro · pág. 43 · «Importante»</span></div></details>
+</section>
+
+<section class="p" id="acoso" data-min="9">
   <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
   <p class="kicker">4 · Cada uno solo · caso práctico propuesto 2.11 y actividad final 2.19 del libro · unos nueve minutos</p>
   <h2>Verónica y Marta</h2>
@@ -733,7 +800,7 @@ Para distinguirlos, tres preguntas: ¿cuánto dura?, ¿hay desgaste?, ¿se recup
   <div class="refs despres"><span class="ref libro">Libro · pág. 43 · <a class="t-propia" href="../u2-tablas/#t-2-18" target="_blank" rel="noopener">tabla 2.18</a>, fila «Acoso sexual»</span></div>
 </section>
 
-<section class="p" id="acoso-2" data-min="9">
+<section class="p" id="acoso-2">
   <p class="temari"><span>2.3 · Organización y carga de trabajo</span><i>›</i><span>2.3.1 · Riesgos psicosociales</span><i>›</i><b>D · Violencia y acoso</b><span class="t-p">Libro · pág. 43</span></p>
   <p class="kicker">4 · Corrección · la solución, 2 de 2</p>
   <h2>Tres clases y tres preguntas</h2>
@@ -869,6 +936,7 @@ Os harán falta más adelante: un servicio de prevención tiene que tener varias
   <p>Si sabes responderlas en voz alta, has entendido la sesión:</p>
   <ol><li>A una técnica de 58 años su jefe la deja sin proyectos y repite en las reuniones que «a su edad ya no aprende cosas nuevas». ¿Qué clase de acoso es? <span class='encls'>(Caso inventado)</span></li><li>En una planta de alimentos, el personal no se lava bien después de tocar los productos crudos y crece el riesgo de contagiarse de bacterias. ¿Qué medidas de higiene tienen que seguir? Dos, como mínimo. <span class='encls'>(Adaptada del libro, pág. 54, actividad final 2.17)</span></li></ol>
   <p class="nota">Próxima sesión (lunes 16 de noviembre): lo que no haya dado tiempo hoy, las especialidades de la prevención, las señales y la noticia que cierra la unidad (libro, págs. 48-51).</p>
+  <div class="progres" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75"><p class="cap">Unidad 2 · lo que llevamos del temario</p><div class="barra"><i style="width:75%"></i><b>75 %</b></div><p class="falta">Falta: riesgos ergonómicos, riesgos por sectores, especialidades preventivas y señalización. Al 100 %, el examen de la unidad.</p></div>
 </section>
 
 <div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
