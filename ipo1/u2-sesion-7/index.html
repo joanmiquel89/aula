@@ -307,6 +307,13 @@ body.proj .opc button .k{font-size:.75em}
 .mapa-t li.passat{opacity:.55}
 .mapa-t li.ara{border-color:var(--blau);background:var(--blauclar);color:var(--blau);font-weight:700}
 .mapa-t li.avui{border:2px solid var(--tinta);background:#ffd66b;color:var(--tinta);font-weight:800}
+/* la barra del final (JM, 12-11): quant portem de la unitat, perquè sàpiguen si l'examen és a prop */
+.progres{margin:1em 0 .2em;padding:.6em .9em .5em;border:2px solid var(--linia);border-radius:.7em;background:#fff}
+.progres .cap{margin:0 0 .4em;font-size:.76em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--suau)}
+.progres .barra{position:relative;height:1.7em;border-radius:.85em;background:#efe9dc;overflow:hidden}
+.progres .barra i{position:absolute;left:0;top:0;bottom:0;border-radius:.85em;background:var(--verd)}
+.progres .barra b{position:absolute;right:.6em;top:50%;transform:translateY(-50%);font-weight:800;color:var(--tinta)}
+.progres .falta{margin:.4em 0 0;font-size:.86em;color:var(--suau)}
 body.proj .temari{font-size:.84em}
 /* projectant, cap mida fixa en píxels: si no, a la pantalla gran es perden (el títol de bloc feia 13 px en un cos de 30) */
 body.proj .kicker{font-size:.66em}
@@ -782,6 +789,7 @@ Bien puestas: ② prohibido el paso (prohibición, redonda roja), ③ protecció
   <p>Si sabes responderlas en voz alta, has entendido la sesión:</p>
   <ol><li>De las seis ramas de servicios de la pág. 47 (oficinas, tiendas, sanidad, hostelería, transporte, enseñanza), ¿en cuál te ves trabajando dentro de unos años? ¿Qué riesgo de los de hoy te tocaría?</li></ol>
   <p class="nota">Próxima sesión (hoy, después del patio): las señales de seguridad y la noticia que cierra la unidad (libro, págs. 49 y 51), y cómo será el examen del lunes 23.</p>
+  <div class="progres" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="95"><p class="cap">Unidad 2 · lo que llevamos del temario</p><div class="barra"><i style="width:95%"></i><b>95 %</b></div><p class="falta">Falta: señalización. Al 100 %, el examen de la unidad.</p></div>
 </section>
 
 <div class="peu"><button onclick="window.print()">Imprimir / guardar en PDF</button></div>
