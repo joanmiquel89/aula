@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Economia circular: de llençar a tornar · Sessió 1</title>
+<title>La unitat 7 en una classe: circular, ètica i ecosocial · Sessió 1</title>
 <!-- Generat per sistema/tools/sessio_aula.py des de fitxa-sessio-01.toml. No l'editis a mà: edita la fitxa. -->
 <style>
 :root{
@@ -307,6 +307,13 @@ body.proj .opc button .k{font-size:.75em}
 .mapa-t li.passat{opacity:.55}
 .mapa-t li.ara{border-color:var(--blau);background:var(--blauclar);color:var(--blau);font-weight:700}
 .mapa-t li.avui{border:2px solid var(--tinta);background:#ffd66b;color:var(--tinta);font-weight:800}
+/* la barra del final (JM, 12-11): quant portem de la unitat, perquè sàpiguen si l'examen és a prop */
+.progres{margin:1em 0 .2em;padding:.6em .9em .5em;border:2px solid var(--linia);border-radius:.7em;background:#fff}
+.progres .cap{margin:0 0 .4em;font-size:.76em;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--suau)}
+.progres .barra{position:relative;height:1.7em;border-radius:.85em;background:#efe9dc;overflow:hidden}
+.progres .barra i{position:absolute;left:0;top:0;bottom:0;border-radius:.85em;background:var(--verd)}
+.progres .barra b{position:absolute;right:.6em;top:50%;transform:translateY(-50%);font-weight:800;color:var(--tinta)}
+.progres .falta{margin:.4em 0 0;font-size:.86em;color:var(--suau)}
 body.proj .temari{font-size:.84em}
 /* projectant, cap mida fixa en píxels: si no, a la pantalla gran es perden (el títol de bloc feia 13 px en un cos de 30) */
 body.proj .kicker{font-size:.66em}
@@ -509,6 +516,34 @@ body.proj .yt{height:41vh}
 .cn-l{display:flex;flex-wrap:wrap;align-items:center;gap:.35em .5em;margin:.45em 0 0}
 .cn-m{display:inline-block;width:.9em;height:.9em;border-radius:50%;background:var(--vermell)}
 .cn-m.buit{background:#d9d1bf;margin-left:.7em}
+.decibels .db-cap{display:flex;flex-wrap:wrap;align-items:center;gap:.4em .8em;margin:.05em 0 .45em}
+.decibels .db-pas{font-size:1.2em;white-space:nowrap}
+.decibels .db-mes{background:var(--tinta);color:#fff}
+.decibels .db-mes:hover{background:#000}
+.decibels button:disabled{opacity:.3;cursor:default}
+.db-num{display:flex;align-items:baseline;justify-content:center;gap:.25em;min-width:5.6em}
+.db-num b{font-family:Georgia,serif;font-size:2.7em;line-height:1;font-variant-numeric:tabular-nums}
+.db-num span{font-weight:800;color:var(--suau)}
+.db-chips{display:flex;flex-wrap:wrap;gap:.25em;margin-left:auto}
+.db-chips button{padding:.15em .5em;font-variant-numeric:tabular-nums}
+.db-fila{display:grid;grid-template-columns:minmax(8em,12.5em) 1fr 5.4em;align-items:center;gap:.7em;margin:.4em 0}
+.db-nom{font-weight:700;font-size:.92em;line-height:1.15}
+.db-nom small{display:block;font-weight:500;font-size:.78em;color:var(--suau);margin-top:.1em}
+.db-v{font-size:1.4em;font-weight:800;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.db-barra,.db-hores{position:relative;display:block;background:#eee6d6;overflow:hidden}
+.db-barra{height:1em;border-radius:99px}
+.db-hores{height:1.7em;border-radius:.4em}
+.db-barra i,.db-hores i{position:absolute;left:0;top:0;bottom:0;transition:width .55s,background .55s}
+.db-barra i{background:var(--blau)}
+.db-hores::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(12.5% - 2px),#fff calc(12.5% - 2px),#fff 12.5%)}
+.db-maq{display:grid;grid-template-columns:repeat(16,1fr);gap:.1em .15em;color:var(--vermell)}
+.int .db-maq svg{width:100%;max-height:none;opacity:.13;filter:grayscale(1);transition:opacity .35s,filter .35s}
+.int .db-maq svg.on{opacity:1;filter:none}
+.db-maq rect{fill:currentColor}.db-maq .d{fill:#fff}.db-maq .o{fill:none;stroke:currentColor;stroke-width:3.4;stroke-linecap:round}
+.db-maq svg.nou{animation:db-pop .4s ease-out}
+@keyframes db-pop{from{transform:scale(.4)}60%{transform:scale(1.2)}to{transform:scale(1)}}
+.db-msg{font-size:1.05em;line-height:1.25;flex:1 1 20em}
+body.proj .db-msg{font-size:1.08em}
 body.proj .int{font-size:1em;padding:.5em 1em}
 body.proj .int svg{max-height:44vh}
 body.proj .p:has(.voto) .int svg{max-height:30vh}
@@ -519,14 +554,14 @@ body.proj .vaixell{padding:.35em .8em}
 body.proj .vaixell .vx-top{margin-bottom:.25em}
 body.proj .int-msg{font-size:1.15em}
 body.proj .pas.vist:not(.ara) .int{opacity:1}
-@media (max-width:700px){.vx-grid{grid-template-columns:1fr}.cent .cn-punts{gap:.18em}.ex-passos{grid-template-columns:1fr 1fr}.tn-fila{grid-template-columns:1fr}.triangle .et{font-size:34px}}
+@media (max-width:700px){.db-fila{grid-template-columns:1fr auto}.db-nom{grid-column:1/-1}.db-chips{margin-left:0}.vx-grid{grid-template-columns:1fr}.cent .cn-punts{gap:.18em}.ex-passos{grid-template-columns:1fr 1fr}.tn-fila{grid-template-columns:1fr}.triangle .et{font-size:34px}}
 @media print{.int button,.int-peu,.tn-ctrl{display:none!important}}
 </style>
 </head>
 <body>
 
 <header class="dalt">
-  <span class="nom">IPO II · Unitat 7 · Sessió 1<small>Economia circular: de llençar a tornar</small></span>
+  <span class="nom">IPO II · Unitat 7 · Sessió 1<small>La unitat 7 en una classe: circular, ètica i ecosocial</small></span>
   <nav id="index"></nav>
   <span class="marcador" id="marcador" title="Encerts de la classe a les votacions"></span>
   <button id="bproj" title="Pantalla completa per projectar (tecla P)">▶ Projectar</button>
@@ -537,44 +572,43 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 
 <section class="p" id="inicio" data-titol="Inici">
   <p class="kicker">Sessió 1 · una hora</p>
-  <h2>Economia circular: de llençar a tornar</h2>
-  <p style="font-size:1.15em">Avui, de 16.00 a 16.30, fas la prova de la unitat 6. Després comencem la unitat 7: el teu projecte, a més de funcionar, fa bé a la gent i al planeta? Avui en mires la primera part, l'economia circular: com es fa perquè les coses no acabin a les escombraries.</p>
-  <div class="mapa-t"><p class="cap">On som del temari · Unitat 7: Impacte social del projecte emprenedor</p><ol><li class="ara"><b>7.1</b> Economia circular en el teu projecte</li><li><b>7.2</b> Emprenedoria tecnològica</li><li><b>7.3</b> Estratègies de disseny per al futur sostenible</li></ol><ol><li class="avui"><b>7.1.1</b> Innovació i sostenibilitat<small>Full d'estudi · pàg. 3-7</small></li><li><b>7.1.2</b> Economia del bé comú</li></ol></div>
-  <div class="plan"><div><b>Avui</b><ol start="1"><li>Una pregunta de les unitats 5 i 6, que entra a la prova de dilluns 23 <small>· 3 min</small></li><li>L'economia circular: del model lineal a les 9R, i per què l'ordre importa <small>· 10 min</small></li></ol></div><div><b>&nbsp;</b><ol start="3"><li>Si sobra temps: com es comprova que una empresa fa RSC <small>· ➕ si hi ha temps</small></li><li>Si sobra temps: l'economia del bé comú, en quatre elements <small>· ➕ si hi ha temps</small></li></ol></div></div>
+  <h2>La unitat 7 en una classe: circular, ètica i ecosocial</h2>
+  <p style="font-size:1.15em">Avui, tota la unitat 7 en una classe: el teu projecte, a més de funcionar, fa bé a la gent i al planeta? Quatre idees curtes i, al final, la fitxa 4 i els dubtes de la prova de dijous.</p>
+  <div class="mapa-t"><p class="cap">On som del temari · Unitat 7: Impacte social del projecte emprenedor</p><ol><li class="ara"><b>7.1</b> Economia circular en el teu projecte</li><li class="avui"><b>7.2</b> Emprenedoria tecnològica<small>Full d'estudi · pàg. 9-13</small></li><li class="avui"><b>7.3</b> Estratègies de disseny per al futur sostenible<small>Full d'estudi · pàg. 13-17</small></li></ol><ol><li class="avui"><b>7.1.1</b> Innovació i sostenibilitat<small>Full d'estudi · pàg. 3-7</small></li><li class="avui"><b>7.1.2</b> Economia del bé comú<small>Full d'estudi · pàg. 7-8</small></li><li><b>7.2.1</b> Esperit emprenedor per a la innovació</li><li><b>7.2.2</b> Lideratge ètic i sostenible</li><li><b>7.2.3</b> Transformació digital</li><li class="avui"><b>7.3.1</b> Design thinking per a necessitats socials<small>Full d'estudi · pàg. 13-14</small></li><li class="ara"><b>7.3.2</b> Models de negoci ecosocials</li></ol><ol><li class="passat"><b>7.3.2 A</b> Els cinc models ecosocials</li><li class="avui"><b>7.3.2 B</b> Canvas ecosocial i ODS<small>Full d'estudi · pàg. 15-17</small></li></ol></div>
+  <div class="plan"><div><b>Avui</b><ol start="1"><li>Una pregunta de la unitat 6 i tres coses de les fitxes 3, per a la prova de dijous <small>· 5 min</small></li><li>L'economia circular: les 9R, per què l'ordre importa, i dues idees més (el balanç social i el bé comú) <small>· 8 min</small></li><li>Tres idees curtes del 7.2: la innovació social, el lideratge ètic i la tecnologia <small>· 6 min</small></li></ol></div><div><b>&nbsp;</b><ol start="4"><li>El nucli: les cinc fases amb ulls socials, el Canvas ecosocial i com s'alinea un projecte amb els ODS <small>· 9 min</small></li><li>Sol: acabes el Canvas de la fitxa 4 (la base del Canvas ecosocial) i em preguntes els dubtes de dijous <small>· 12 min</small></li><li>Si sobra temps: el teu projecte, ecosocial (②) i amb els ODS (③), al darrere de la fitxa 4 <small>· ➕ si hi ha temps</small></li></ol></div></div>
   <h3 class="noproj">Com fer servir aquesta pàgina</h3>
   <p class="noproj">A classe la projectem. A casa et serveix per estudiar: cada bloc et diu <b>on és al full d'estudi</b> (el botó verd l'obre a la pàgina exacta).</p>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=3" target="_blank">Full d'estudi · pàg. 3-8</a></div>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=3" target="_blank">Full d'estudi · pàg. 3-17</a></div>
     <p class="nota noproj">Verd: el full d'estudi (s'obre a la pàgina exacta).</p>
-  <div class="clau"><b>Avui, de 16.00 a 16.30, la prova de la U6.</b> Després, la unitat 7: l'economia circular (7.1, <span style="white-space:nowrap">pàg. 3-8</span>). <b>El 7.1 no entra a la prova de dilluns 23</b>: es pregunta a la prova de la unitat 8. <b>Dilluns 23, la prova de la U7</b>: de 16.00 a 16.30, en paper, sobre un cas nou (10 punts); del teu projecte no se't demana res. Hi entra el que fem a classe del 7.2 i el 7.3: les fases del pensament de disseny (7.3.1, <span style="white-space:nowrap">pàg. 13</span>), la innovació social, el lideratge ètic amb les vuit competències de la taula 7.5 i la indústria 4.0 i la societat 5.0 (7.2, <span style="white-space:nowrap">pàg. 9-12</span>), i el Canvas ecosocial, el greenwashing i com s'alinea un projecte amb els ODS (7.3.2, <span style="white-space:nowrap">pàg. 15-16</span>). No entra: l'efectuació i la fórmula I + V + A > R, les quatre maneres com la tecnologia fa circular la producció, els cinc models de la taula 7.6 i «Per anar més enllà». Si dijous no hi arribem tot, el que no fem no entra.</div>
+  <div class="clau"><b>Dijous 19, la prova de la U6</b> (15.10-15.55). <b>Dilluns 23, la de la U7</b> (16.00-16.30, en paper, sobre un cas nou): hi entra el que fem avui del 7.2 i el 7.3 (<span style="white-space:nowrap">pàg. 9-16</span>). <b>El 7.1</b> (<span style="white-space:nowrap">pàg. 3-8</span>) el fem avui i es pregunta a la prova de la U8 (dj 3-12). Per practicar: Comprova 8, 9, 11, 12, 15 i 16 (dl 23) i 1-5 (U8). El que avui no fem, no entra.</div>
 </section>
 
 <section class="p" id="record" data-titol="1 · Record">
   <p class="temari repas"><b>Repàs del que ja hem vist</b></p>
-  <p class="kicker">1 · Una pregunta de les unitats 5 i 6 · abans de res</p>
+  <p class="kicker">1 · Una pregunta de la unitat 6 · abans de res</p>
   <h2>Una plaça on no hi ha res per fer</h2>
   <div class="caso"><p>Un grup vol millorar una plaça d'un barri. Primer hi passa tres tardes mirant qui hi va i què hi fa, i parla amb la gent. Després escriu: «Com poden tenir els adolescents del barri un lloc on quedar sense haver de gastar diners?»</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
-<div class="voto" data-ok="b"><p class="q">L'última cosa que fa el grup, escriure aquesta pregunta: a quina fase del pensament de disseny correspon?</p><div class="opc"><button data-v="a">Empatitzar</button><button data-v="b">Definir</button><button data-v="c">Idear</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Definir: el que ha vist, en un problema curt</span></p>
-<p class="nop"><i>✗</i><span>A: empatitzar és observar i parlar, i això ja ho ha fet</span></p>
-<p class="nop"><i>✗</i><span>C: idear és buscar solucions; això encara és la pregunta</span></p>
-<span class="ref hoja">Full d'estudi · pàg. 13</span></div></div></div>
+<div class="voto" data-ok="b"><p class="q">L'última cosa que fa el grup, escriure aquesta pregunta: com se'n diu, d'aquest pas?</p><div class="opc"><button data-v="a">Empatitzar</button><button data-v="b">Definir</button><button data-v="c">Idear</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Definir: el que han vist, en un problema curt</span></p>
+<p class="nop"><i>✗</i><span>A: confons escriure el problema amb mirar i escoltar, que ja havien fet</span></p>
+<p class="nop"><i>✗</i><span>C: confons el problema amb la solució: encara no proposen res</span></p>
+<span class="ref hoja">Full d'estudi de la U6 · pàg. 17</span></div></div></div>
 </section>
 
-<section class="p" id="cinc-fases">
+<section class="p" id="fitxes3dafo">
   <p class="temari repas"><b>Repàs del que ja hem vist</b></p>
-  <p class="kicker">1 · Record · la solució, 2 de 2</p>
-  <h2>Les cinc fases, ara amb ulls socials</h2>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=13" target="_blank">Full d'estudi · pàg. 13</a></div>
-  <div class="pas"><div class="filw"><div class="fil n5" style="--n:5"><span style="--i:0">Empatitzar · observar i parlar amb la gent</span><i>→</i><span style="--i:1">Definir · el problema, clar i curt</span><i>→</i><span style="--i:2">Idear · moltes idees</span><i>→</i><span style="--i:3">Prototipar · una versió per tocar</span><i>→</i><span style="--i:4">Validar · la gent la prova</span></div></div></div>
-<div class="pas"><div class="idea"><b>Es pot tornar enrere</b><span>és un procés iteratiu: amb el que diu la gent, tornes a qualsevol fase. A la unitat 7 serveix per a necessitats socials i ambientals</span></div></div>
+  <p class="kicker">1 · Abans de la prova de dijous · el darrere de les fitxes 3</p>
+  <h2>La DAFO del teu projecte: tres coses</h2>
+  <div class="tres"><div><b>① Teu o de fora</b><span>Les F i les D són teves: el que tens o el que fas. Les O i les A vénen de fora. «Encara poca gent ho fa» o «és gratis perquè ho paga l'administració» vénen de fora: no són fortaleses teves.</span></div><div><b>② Una acció, amb el seu verb</b><span>Corregir la D, afrontar l'A, mantenir la F i explotar l'O. «Reduir costos» no diu què faràs: com, i on?</span></div><div><b>③ Què faràs diferent</b><span>Al ④, un competidor sense «què faràs diferent» deixa buit el bloc 2 del Canvas: el que tu ofereixes i els altres no.</span></div></div>
+<p class="nota">Ho he vist en més d'una fitxa: no és de ningú en concret. Qui ha respost la pregunta del final («una empresa gran ho dona gratis») l'ha encertada: és una amenaça, i la CAME diu afrontar-la. Full d'estudi de la U6, pàg. 20-22.</p>
 </section>
 
-<section class="p obertura" id="tema-2" data-titol="2 · Economia circular">
+<section class="p obertura" id="tema-2" data-titol="2 · 7.1 · Economia circular">
   <p class="temari"><span>7.1 · Economia circular en el teu projecte</span><i>›</i><b>7.1.1 · Innovació i sostenibilitat</b><span class="t-p">Full d'estudi · pàg. 3-7</span></p>
   <p class="kicker">2 · De què parlem</p>
   <h2>Innovació i sostenibilitat</h2>
   <div class="de-que">L'economia circular vol mantenir els recursos en ús el màxim de temps possible: en lloc d'extreure, fabricar, fer servir i llençar (el model lineal), els productes i els materials tornen al cicle.</div>
   <h3>El que has de saber</h3>
-  <ol class="saber"><li>El model lineal i el circular (dibuix 1, pàg. 3)</li><li>Les 9R, de rebutjar a recuperar (taula 7.1, pàg. 4)</li><li>Per què importa l'ordre de les R</li></ol>
+  <ol class="saber"><li>El model lineal i el circular (dibuix 1, pàg. 3)</li><li>Les 9R, de rebutjar a recuperar, i per què importa l'ordre (taula 7.1, pàg. 4)</li><li>El balanç social i el bé comú, en una idea cadascun (pàg. 6-7)</li></ol>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=3" target="_blank">Full d'estudi · pàg. 3-7</a></div>
 </section>
 
@@ -582,10 +616,10 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <p class="temari"><span>7.1 · Economia circular en el teu projecte</span><i>›</i><b>7.1.1 · Innovació i sostenibilitat</b><span class="t-p">Full d'estudi · pàg. 3-7</span></p>
   <p class="kicker">2 · L'economia circular · el vot</p>
   <h2>La bici que ja no fas servir</h2>
-  <div class="caso"><p>A Decathlon pots portar la bici, la pala de pàdel o la màquina de fitness que ja no fas servir. Te la compren, la revisen, la netegen i la posen a punt al seu taller, i la tornen a vendre perquè la faci servir un altre esportista.</p><p class="fuente">Font: Decathlon España, nota de premsa, 28-10-2025.</p></div>
-<div class="voto" data-ok="b"><p class="q">Quina de les 9R fa Decathlon amb aquella bici?</p><div class="opc"><button data-v="a">Reciclar</button><button data-v="b">Reutilitzar</button><button data-v="c">Recuperar</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Reutilitzar: la bici torna a fer de bici, per a una altra persona</span></p>
-<p class="nop"><i>✗</i><span>A: reciclar és fondre-la per fer una cosa nova</span></p>
-<p class="nop"><i>✗</i><span>C: recuperar és treure'n energia quan ja no serveix</span></p>
+  <div class="caso"><p>A Decathlon pots portar la bici, la pala de pàdel o la màquina de fitness que ja no fas servir. Te la compren, la revisen, la netegen i la posen a punt al seu taller, i la tornen a vendre perquè la faci servir un altre esportista.</p><p class="fuente">Font: Decathlon España, nota de premsa, 28-10-2025. <a class="font-link" href="https://saladeprensa.decathlon.es/wp-content/uploads/2025/10/NdP_El-material-deportivo-puede-tener-una-segunda-vida-con-la-Recompra-de-Decathlon.pdf" target="_blank" rel="noopener">Obre la font ↗</a></p></div>
+<div class="voto" data-ok="b"><p class="q">Quina de les 9R fa Decathlon amb aquella bici?</p><div class="opc"><button data-v="a">Reciclar</button><button data-v="b">Reutilitzar</button><button data-v="c">Reparar</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Reutilitzar: la bici torna a fer de bici</span></p>
+<p class="nop"><i>✗</i><span>A: confons reutilitzar amb reciclar: no es desfà</span></p>
+<p class="nop"><i>✗</i><span>C: et quedes amb el taller: reparar és arreglar la teva</span></p>
 <span class="ref hoja">Full d'estudi · pàg. 4, taula 7.1</span></div> <span class="fuente">Font: Decathlon España, nota de premsa, 28-10-2025.</span></div></div>
 </section>
 
@@ -595,86 +629,148 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
   <h2>Les 9R, en ordre: on és la bici?</h2>
   <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=3" target="_blank">Full d'estudi · pàg. 3-4 · dibuix 1 i taula 7.1</a></div>
   <div class="pas"><div class="filw"><div class="fil n4" style="--n:4"><span style="--i:0">Abans de tot · rebutjar, repensar, reduir</span><i>→</i><span style="--i:1">Mentre es fa servir · reutilitzar, reparar, renovar</span><i>→</i><span style="--i:2">Torna a la fàbrica · refabricar, reciclar</span><i>→</i><span style="--i:3">Al final · recuperar energia</span></div></div></div>
-<div class="pas"><div class="gran"><b>439.000</b><span>i més, productes d'esport que Decathlon va reparar o posar a punt a Espanya el 2024: una bona part torna a la venda</span></div></div>
+<div class="pas"><div class="gran"><b>439.000</b><span>i més, productes d'esport reparats o posats a punt per Decathlon a Espanya el 2024 (també de clients que se'ls quedaven)</span></div></div>
 <div class="pas"><div class="idea"><b>Com més aviat actues</b><span>menys residu queda. Reciclar és bo, però ja és dels darrers graons: abans hi ha reduir, reutilitzar i reparar</span></div></div>
-<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>La <a href="https://saladeprensa.decathlon.es/wp-content/uploads/2025/10/NdP_El-material-deportivo-puede-tener-una-segunda-vida-con-la-Recompra-de-Decathlon.pdf" target="_blank" rel="noopener">nota de premsa de Decathlon España</a> (28-10-2025) explica la Recompra: el client porta el material d'esport que ja no fa servir (bicicletes, pales de pàdel, material de fitness o de golf), un equip en fa una valoració i li paga per transferència o amb una targeta regal; als tallers, el material es revisa, es neteja i es posa a punt, i després torna a la venda als espais de Segona Vida. La mateixa nota diu que, el 2024, Decathlon va reparar i recondicionar més de 439.000 productes a tot Espanya: una part eren reparacions de clients que se'ls quedaven, i una bona part ha tornat a la venda. L'ordre de les tres R de sempre (reduir, reutilitzar, reciclar) és el del full d'estudi (pàg. 3-4); el de les nou, la mateixa lògica: com més aviat actues, menys residu queda.</p></div></details>
+<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>La <a href="https://saladeprensa.decathlon.es/wp-content/uploads/2025/10/NdP_El-material-deportivo-puede-tener-una-segunda-vida-con-la-Recompra-de-Decathlon.pdf" target="_blank" rel="noopener">nota de premsa de Decathlon España</a> (28-10-2025) explica la Recompra: el client porta el material d'esport que ja no fa servir (bicicletes, pales de pàdel, material de fitness o de golf), un equip en fa una valoració i li paga per transferència o amb una targeta regal; als tallers, el material es revisa, es neteja i es posa a punt, i després torna a la venda als espais de Segona Vida. La mateixa nota diu que, el 2024, Decathlon va reparar i recondicionar més de 439.000 productes a tot Espanya: una part eren reparacions de clients que se'ls quedaven, i una part significativa ha tornat a la venda. Tres R que no són de carrer: repensar és canviar com es dissenya un producte perquè gasti menys; renovar, posar al dia un producte vell; refabricar, desmuntar-lo a la fàbrica i tornar-lo a muntar com si fos nou (taula 7.1). L'ordre de les tres R de sempre (reduir, reutilitzar, reciclar) és el del full d'estudi (pàg. 3-4); el de les nou, la mateixa lògica: com més aviat actues, menys residu queda.</p></div></details>
 </section>
 
-<section class="p" id="carregador" data-titol="Si cal: el carregador">
-  <p class="temari"><span>7.1 · Economia circular en el teu projecte</span><i>›</i><b>7.1.1 · Innovació i sostenibilitat</b><span class="t-p">Full d'estudi · pàg. 3-7</span></p>
-  <p class="kicker">2 · Només si cal un cas més · dins el marge</p>
-  <h2>El carregador únic</h2>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=4" target="_blank">Full d'estudi · pàg. 4 · taula 7.1</a></div>
-  <div class="caso"><p>Des del 28 de desembre del 2024, a la UE, els mòbils, les tauletes, els auriculars i les consoles nous porten el mateix connector, USB-C, i es poden comprar sense carregador. Els portàtils, des del 28 d'abril del 2026.</p><p class="fuente">Font: Centre Europeu del Consumidor a Espanya (Ministeri de Consum), nota del 8-1-2025. <a class="font-link" href="https://portal-cec.consumo.gob.es/sites/default/files/documentos/NI_Cargadores_Comunes_UE_08_01_2025.pdf" target="_blank" rel="noopener">Obre la font ↗</a></p></div>
-<div class="preg"><span class="n">1</span> Quines R hi ha darrere, i per què van abans que reciclar els carregadors que sobren? <button class="revela">Veure la resposta</button><div class="sol">Reutilitzar: el carregador que ja tens serveix per als aparells nous. Reduir: es fabriquen menys carregadors. I rebutjar: compres l'aparell sense el que no et cal. Tot passa abans que el carregador sigui un residu; reciclar arriba després.</div></div>
+<section class="p" id="balanc-becomu">
+  <p class="temari"><span>7.1 · Economia circular en el teu projecte</span><i>›</i><b>7.1.2 · Economia del bé comú</b><span class="t-p">Full d'estudi · pàg. 7-8</span></p>
+  <p class="kicker">2 · El 7.1 · dues idees més</p>
+  <h2>El balanç social i el bé comú</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=6" target="_blank">Full d'estudi · pàg. 6-8 · taula 7.3</a></div>
+  <div class="pas"><div class="idea"><b>Balanç social</b><span>com actua l'empresa amb la gent i el planeta, amb dades que es poden comprovar (contractes, residus, el que aporta al barri). No és una llista de donacions ni d'anuncis</span></div></div>
+<div class="pas"><div class="cuadro4"><div><h4>Acumular d'una altra manera</h4><p>Pensant en demà</p></div><div><h4>Llibertat al servei del bé comú</h4><p>No només el màxim benefici</p></div><div><h4>Consum responsable</h4><p>Reparar i reutilitzar</p></div><div><h4>Col·laboració circular</h4><p>Els residus d'uns, recursos d'altres</p></div></div></div>
+<p class="nota">Els quatre elements del bé comú (taula 7.3). Christian Felber, 2010. Full d'estudi, pàg. 6-8.</p>
+<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>El balanç social (full d'estudi, pàg. 6) té tres trets: reflecteix el compromís de l'empresa amb l'RSC, porta indicadors que un balanç de comptes no recull (les condicions de feina, el que aporta a la comunitat, les pràctiques ambientals) i fa més fàcil la transparència davant els grups d'interès. L'economia del bé comú (pàg. 7-8) posa el benestar de les persones i del planeta per davant del rendiment econòmic: acumular béns es veu com una responsabilitat envers les generacions futures; emprendre inclou un compromís amb el planeta i la societat; el consum responsable reutilitza, repara i recicla en lloc de l'obsolescència programada (fer que un producte s'espatlli abans d'hora, a propòsit); i la col·laboració fa que els residus d'uns siguin els recursos dels altres. La va proposar l'economista austríac Christian Felber el 2010, i les empreses que la segueixen en fan un balanç, el del bé comú.</p></div></details>
+</section>
+
+<section class="p obertura" id="tema-3" data-titol="3 · 7.2 · tres idees">
+  <p class="temari"><b>7.2 · Emprenedoria tecnològica</b><span class="t-p">Full d'estudi · pàg. 9-13</span></p>
+  <p class="kicker">3 · De què parlem</p>
+  <h2>Emprenedoria tecnològica</h2>
+  <div class="de-que">El 7.2 mira tres coses de l'emprenedoria: quan una idea és innovació social, com decideix un líder ètic i per a què serveix la tecnologia.</div>
+  <h3>El que has de saber</h3>
+  <ol class="saber"><li>Què és la innovació social (pàg. 9)</li><li>Què fa un líder ètic, i les vuit competències de la taula 7.5 (pàg. 10-11)</li><li>La indústria 4.0 i la societat 5.0 no són el mateix (pàg. 11-12)</li></ol>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=9" target="_blank">Full d'estudi · pàg. 9-13</a></div>
+</section>
+
+<section class="p" id="fageda">
+  <p class="temari"><b>7.2 · Emprenedoria tecnològica</b><span class="t-p">Full d'estudi · pàg. 9-13</span></p>
+  <p class="kicker">3 · Innovació social · el vot</p>
+  <h2>La Fageda: iogurts de la Garrotxa</h2>
+  <div class="caso"><p>La Fageda, a la Garrotxa (Girona), fa iogurts de granja des del 1992, i es venen a les botigues com els de qualsevol marca. Ha crescut fins a donar feina a totes les persones amb discapacitat intel·lectual o malaltia mental crònica de la comarca.</p><p class="fuente">Font: La Fageda, web oficial (qui són), consultada l'11-11-2026. <a class="font-link" href="https://www.fageda.com/es/que-es-la-fageda/" target="_blank" rel="noopener">Obre la font ↗</a></p></div>
+<div class="voto" data-ok="b"><p class="q">Què fa que La Fageda sigui un exemple d'innovació social?</p><div class="opc"><button data-v="a">Que fa iogurts de granja des del 1992</button><button data-v="b">Que dona feina real a qui quedava fora</button><button data-v="c">Que ven a les botigues com qualsevol marca</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>B · Atén una necessitat social, la feina, amb una idea nova</span></p>
+<p class="nop"><i>✗</i><span>A: confons un bon producte amb una innovació social</span></p>
+<p class="nop"><i>✗</i><span>C: confons l'èxit comercial amb resoldre un problema de la societat</span></p>
+<span class="ref hoja">Full d'estudi · pàg. 9</span></div> <span class="fuente">Font: La Fageda, web oficial, consultada l'11-11-2026. <a class="font-link" href="https://www.fageda.com/es/que-es-la-fageda/" target="_blank" rel="noopener">Obre la font ↗</a></span></div></div>
+</section>
+
+<section class="p" id="fageda-def">
+  <p class="temari"><b>7.2 · Emprenedoria tecnològica</b><span class="t-p">Full d'estudi · pàg. 9-13</span></p>
+  <p class="kicker">3 · Innovació social · la solució, 2 de 2</p>
+  <h2>Què és la innovació social</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=9" target="_blank">Full d'estudi · pàg. 9</a></div>
+  <div class="pas"><div class="idea"><b>Innovació social</b><span>idees noves que responen a necessitats socials, creen relacions socials i formen col·laboracions noves (Comissió Europea)</span></div></div>
+<div class="pas"><div class="filw"><div class="fil n3" style="--n:3"><span style="--i:0">Necessitat social · què falta? (a La Fageda, feina)</span><i>→</i><span style="--i:1">Relació social nova · qui es troba que abans no?</span><i>→</i><span style="--i:2">Col·laboració nova · qui treballa amb qui?</span></div></div></div>
+<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>La <a href="https://www.fageda.com/es/que-es-la-fageda/" target="_blank" rel="noopener">web de La Fageda</a> la presenta com un projecte social que vol millorar la qualitat de vida i la integració social de persones en risc d'exclusió de la Garrotxa, amb una feina real i digna, i que fa servir una estructura d'empresa: des que va començar el iogurt de granja, el 1992, ha entrat al mercat de gran consum i ha crescut fins a donar feina a totes les persones amb discapacitat intel·lectual o malaltia mental crònica de la comarca. La definició d'innovació social és de la Comissió Europea (full d'estudi, pàg. 9).</p></div></details>
+</section>
+
+<section class="p" id="lider-tecno">
+  <p class="temari"><b>7.2 · Emprenedoria tecnològica</b><span class="t-p">Full d'estudi · pàg. 9-13</span></p>
+  <p class="kicker">3 · El 7.2 · dues idees més</p>
+  <h2>El líder ètic, i la tecnologia al servei de les persones</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=10" target="_blank">Full d'estudi · pàg. 10-12 · taula 7.5</a></div>
+  <div class="pas"><div class="idea"><b>Lideratge ètic</b><span>decideix a partir de valors (honestedat i transparència, equitat, respecte per la gent i el medi ambient), i això genera confiança</span></div></div>
+<div class="pas"><div class="cuadro4"><div><h4>Ambició ètica</h4><small>per a tothom</small></div><div><h4>Confiança</h4><small>en l'equip</small></div><div><h4>Anticipació i innovació</h4><small>s'avança</small></div><div><h4>Exemplaritat</h4><small>la segueixen</small></div><div><h4>Comunicació i transparència</h4><small>parla clar</small></div><div><h4>Pensament crític</h4><small>qüestiona</small></div><div><h4>Curiositat i creativitat</h4><small>aprèn</small></div><div><h4>Temprança</h4><small>calma</small></div></div></div>
+<div class="pas"><div class="tres"><div><b>Indústria 4.0</b><span>Automatitzar per produir amb més eficiència</span></div><div><b>Societat 5.0</b><span>La mateixa tecnologia, centrada en les persones</span></div><div><b>No els barregis</b><span>Compta per a què la fas servir</span></div></div></div>
+<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>Les vuit competències són les de la taula 7.5 (pàg. 10-11): ambició ètica (busca beneficis bons per a tots els grups d'interès), confiança (creu en el seu equip i li deixa autonomia), anticipació i innovació (s'avança als canvis del mercat), exemplaritat (actua de manera que els altres el volen seguir), comunicació i transparència (parla clar i amb honestedat a tothom), pensament crític (analitza abans de decidir i qüestiona el que es dona per fet), curiositat i creativitat (busca idees noves i aprèn molt) i temprança (manté la calma sota pressió i es refà de les dificultats). El cas de Volkswagen (pàg. 11) n'és el contrari: el 2015, un programa als seus cotxes dièsel enganyava les proves d'emissions. La societat 5.0 és una idea que el Govern del Japó va proposar el gener del 2016; la indústria 4.0, la digitalització i l'automatització de la indústria, n'és la base (pàg. 11-12).</p></div></details>
+</section>
+
+<section class="p obertura" id="tema-4" data-titol="4 · 7.3 · Canvas ecosocial i ODS">
+  <p class="temari"><b>7.3 · Estratègies de disseny per al futur sostenible</b><span class="t-p">Full d'estudi · pàg. 13-17</span></p>
+  <p class="kicker">4 · De què parlem</p>
+  <h2>Estratègies de disseny per al futur sostenible</h2>
+  <div class="de-que">El 7.3 fa servir el pensament de disseny per a necessitats socials i ambientals, i hi afegeix el Canvas ecosocial: el mateix llenç, mirant també la gent i el planeta, i alineat amb els ODS.</div>
+  <h3>El que has de saber</h3>
+  <ol class="saber"><li>Les cinc fases del pensament de disseny (pàg. 13)</li><li>Les cinc coses que s'afegeixen al Canvas (taula 7.7, pàg. 15) i el greenwashing</li><li>Els ODS (objectius de desenvolupament sostenible de l'ONU, 2015) tenen metes (pàg. 16): la 6.1, l'aigua potable · la 8.5, la feina digna · la 12.3, el menjar que es llença · la 12.5, els residus</li></ol>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=13" target="_blank">Full d'estudi · pàg. 13-17</a></div>
+</section>
+
+<section class="p" id="cinc-fases">
+  <p class="temari"><span>7.3 · Estratègies de disseny per al futur sostenible</span><i>›</i><b>7.3.1 · Design thinking per a necessitats socials</b><span class="t-p">Full d'estudi · pàg. 13-14</span></p>
+  <p class="kicker">4 · El pensament de disseny · amb ulls socials</p>
+  <h2>Les cinc fases</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=13" target="_blank">Full d'estudi · pàg. 13</a></div>
+  <div class="pas"><div class="filw"><div class="fil n5" style="--n:5"><span style="--i:0">Empatitzar · observar en context i parlar amb la gent</span><i>→</i><span style="--i:1">Definir · el problema, clar i curt</span><i>→</i><span style="--i:2">Idear · moltes idees</span><i>→</i><span style="--i:3">Prototipar · una versió per tocar</span><i>→</i><span style="--i:4">Validar · la gent la prova</span></div></div></div>
+<div class="pas"><div class="idea"><b>Es pot tornar enrere</b><span>és un procés iteratiu: amb el que diu la gent, tornes a qualsevol fase. Aquí serveix per a necessitats socials i ambientals</span></div></div>
+</section>
+
+<section class="p" id="ecoalf">
+  <p class="temari"><span>7.3 · Estratègies de disseny per al futur sostenible</span><i>›</i><span>7.3.2 · Models de negoci ecosocials</span><i>›</i><b>B · Canvas ecosocial i ODS</b><span class="t-p">Full d'estudi · pàg. 15-17</span></p>
+  <p class="kicker">4 · Els ODS · el vot</p>
+  <h2>Ecoalf i les deixalles del fons del mar</h2>
+  <div class="caso noticia"><p class="cap-noticia"><span>📰 Forbes España, 8-6-2026</span><a class="font-link" href="https://forbes.es/ultima-hora/950501/fundacion-ecoalf-moviliza-a-4-775-pescadores-y-retira-del-mar-el-equivalente-a-84-camiones-de-basura/" target="_blank" rel="noopener">Llegeix la notícia ↗</a></p><p>Ecoalf és una marca de roba. El 2015, la seva fundació va començar amb tres pescadors d'Alacant a treure deixalles del fons del mar. El juny del 2026 n'eren 4.775, de 80 ports, i n'havien tret més de 2,1 milions de quilos. Amb les ampolles en fan fil.</p></div>
+<div class="voto" data-ok="c"><p class="q">Si Ecoalf volgués dir que s'alinea amb els ODS, quina d'aquestes frases (inventades) ho faria de debò?</p><div class="opc"><button data-v="a">«Som una marca sostenible que estima el mar»</button><button data-v="b">«Ajudem a complir l'ODS 14, la vida submarina»</button><button data-v="c">«Meta 12.5: comptem els quilos d'ampolles que fem fil»</button><button data-v="d">«Meta 6.1: comptem els quilos de plàstic que traiem del mar»</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>C · Meta concreta i dada que es pot comprovar</span></p>
+<p class="nop"><i>✗</i><span>A: només l'eslògan: ni meta ni dada</span></p>
+<p class="nop"><i>✗</i><span>B: l'objectiu, sense meta ni dada</span></p>
+<p class="nop"><i>✗</i><span>D: per «aigua»: la 6.1 és l'aigua potable</span></p>
+<span class="ref hoja">Full d'estudi · pàg. 16</span></div> <span class="fuente">Font: Forbes España, 8-6-2026. <a class="font-link" href="https://forbes.es/ultima-hora/950501/fundacion-ecoalf-moviliza-a-4-775-pescadores-y-retira-del-mar-el-equivalente-a-84-camiones-de-basura/" target="_blank" rel="noopener">Llegeix la notícia ↗</a></span></div></div>
+</section>
+
+<section class="p" id="ecoalf-canvas">
+  <p class="temari"><span>7.3 · Estratègies de disseny per al futur sostenible</span><i>›</i><span>7.3.2 · Models de negoci ecosocials</span><i>›</i><b>B · Canvas ecosocial i ODS</b><span class="t-p">Full d'estudi · pàg. 15-17</span></p>
+  <p class="kicker">4 · El Canvas ecosocial · la solució, 2 de 2</p>
+  <h2>Ecoalf, al Canvas ecosocial</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=15" target="_blank">Full d'estudi · pàg. 15-16 · taula 7.7</a></div>
+  <div class="pas"><div class="idea"><b>Alinear-se amb un ODS</b><span>dir quina meta concreta ajudes a complir i amb quina dada ho demostraràs. «Som sostenibles» no ho és</span></div></div>
+<div class="pas"><div class="cuadro4 cinc"><div><h4>Grups d'interès</h4><p>Pescadors, clientela i qui vindrà</p></div><div><h4>Benestar</h4><p>Un mar més net</p></div><div><h4>Aliances</h4><p>4.775 pescadors</p></div><div><h4>Impactes negatius</h4><p>Material reciclat</p><small>fer roba gasta recursos</small></div><div><h4>Regenerar</h4><p>Neteja el mar de deixalles d'altres</p></div></div></div>
+<div class="pas"><div class="idea"><b>Compte amb el greenwashing</b><span>presentar-se més sostenible del que s'és, anunciant el poc que es fa bé i callant la resta, és un impacte negatiu</span></div></div>
+<p class="nota">Posar cada cosa a cada casella és una classificació nostra: Ecoalf no publica cap Canvas ecosocial.</p>
+<details class="llegeix noproj"><summary>Llegeix-ho sencer</summary><div><p>Les dades són de <a href="https://forbes.es/ultima-hora/950501/fundacion-ecoalf-moviliza-a-4-775-pescadores-y-retira-del-mar-el-equivalente-a-84-camiones-de-basura/" target="_blank" rel="noopener">Forbes España</a> (8-6-2026), pel Dia Mundial dels Oceans: el projecte de la fundació d'Ecoalf retira residus del fons marí amb pescadors; va començar el 2015 amb tres pescadors d'Alacant i, el juny del 2026, n'eren 4.775, de 80 ports i 1.250 barques, a Espanya, França, Itàlia, Grècia i Egipte; havien retirat més de 2,1 milions de quilos de deixalles, i amb les ampolles de plàstic en fan fil per a roba, sabates i complements. Que Ecoalf fa la roba amb materials reciclats ho diu el full d'estudi (pàg. 5-6). La meta 12.5 dels ODS demana reduir molt els residus amb la prevenció, la reducció, el reciclatge i la reutilització (pàg. 16).</p></div></details>
+</section>
+
+<section class="p" id="auara" data-titol="Si cal: Auara">
+  <p class="temari"><span>7.3 · Estratègies de disseny per al futur sostenible</span><i>›</i><span>7.3.2 · Models de negoci ecosocials</span><i>›</i><b>B · Canvas ecosocial i ODS</b><span class="t-p">Full d'estudi · pàg. 15-17</span></p>
+  <p class="kicker">4 · Només si cal un cas més · dins el marge</p>
+  <h2>Auara: vendre aigua per portar-ne a qui no en té</h2>
+  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=15" target="_blank">Full d'estudi · pàg. 15 · taula 7.7</a></div>
+  <div class="caso noticia"><p class="cap-noticia"><span>📰 Corresponsables, actualitzat el 24-9-2025</span><a class="font-link" href="https://www.corresponsables.com/actualidad/auara-supera-100-mil-beneficiarios-152-proyectos-agua-comunidades-mas-desfavorecidas-mundo/" target="_blank" rel="noopener">Llegeix la notícia ↗</a></p><p>Auara és una empresa social espanyola que ven aigua i sucs. Construeix pous i dipòsits per recollir l'aigua de pluja en comunitats en pobresa extrema. Va començar el 2016. Segons l'empresa, el 2023 ja n'havien tret profit més de 104.000 persones, en 22 països.</p></div>
+<div class="preg"><span class="n">1</span> Al Canvas ecosocial d'Auara, quins grups d'interès hi posaries, també un de demà? <button class="revela">Veure la resposta</button><div class="sol">D'avui: els bars i restaurants que la venen, la gent que la beu i les comunitats que reben l'aigua. De demà: els infants d'aquelles comunitats, que creixeran amb aigua a prop.</div></div>
+</section>
+
+<section class="p" id="fitxa4" data-titol="5 · La fitxa 4" data-min="12">
+  <p class="temari"><b>7.3 · Estratègies de disseny per al futur sostenible</b><span class="t-p">Full d'estudi · pàg. 13-17</span></p>
+  <p class="kicker">5 · Sol · la fitxa 4 · 12 minuts</p>
+  <h2>El teu Canvas, a punt</h2>
+  <div class="tres"><div><b>① Acaba la fitxa 4</b><span>El mínim: els blocs 1 (segments de clientela), 2 (proposta de valor) i 5 (fonts d'ingressos). Després, els que tinguis buits.</span></div><div><b>② Et faig una foto</b><span>Passo per les taules i fotografio cada fitxa 4: és la base dels 2 punts del teu projecte a la prova de dijous.</span></div><div><b>③ Pregunta'm</b><span>Els dubtes de la prova de dijous, ara, a la taula.</span></div></div>
+<div class="clau">Sol · <b>12 minuts</b> · A les 16.45, la fitxa a la pila, tal com estigui</div>
+<p class="nota">És el Canvas que faràs ecosocial: el mateix llenç, mirant també la gent i el planeta (full d'estudi, pàg. 15). No tens projecte? El Canvas d'un negoci que coneguis.</p>
 </section>
 
 <section class="p tallsessio" id="tall" data-titol="✂ Fins aquí">
   <p class="kicker">✂ Final de la sessió d'avui</p>
   <h2>Fins aquí, la d'avui</h2>
   <div class="tisora"><span>avui</span><i>✂</i><span>si sobra temps</span></div>
-  <p>Si sobra temps, la resta del 7.1: el balanç social i el bé comú (full d'estudi, pàg. 6-8). No entra a la prova de dilluns 23.</p>
+  <p>Si sobra temps: el teu Canvas, ecosocial i amb els ODS (la fitxa 5, full d'estudi, pàg. 17), al darrere de la fitxa 4. No es corregeix.</p>
 </section>
 
-<section class="p dema" id="balanc" data-titol="3 · ➕ El balanç social">
-  <p class="cinta">Si sobra temps · la resta del 7.1</p>
-  <p class="temari"><span>7.1 · Economia circular en el teu projecte</span><i>›</i><b>7.1.1 · Innovació i sostenibilitat</b><span class="t-p">Full d'estudi · pàg. 3-7</span></p>
-  <p class="kicker">3 · ➕ Si hi ha temps · Si sobra temps · el vot</p>
-  <h2>El balanç social d'un supermercat</h2>
-  <div class="caso"><p>Una cadena de supermercats vol fer el seu primer balanç social. Tres persones de l'empresa proposen què hi ha de sortir.</p><p class="fuente"><span class="inventat">· exemple inventat</span></p></div>
-<div class="voto" data-ok="a"><p class="q">Quina proposta és la d'un balanç social?</p><div class="opc"><button data-v="a">Quanta gent té contracte indefinit i quants quilos de menjar llencen</button><button data-v="b">Quant ha venut aquest any, quant ha guanyat i quant deu</button><button data-v="c">Les fotos i els eslògans de la campanya «Supermercat verd»</button></div><div class="porque"><div class="pas"><p class="si"><i>✓</i><span>A · Dades que es poden comprovar, més enllà dels diners</span></p>
-<p class="nop"><i>✗</i><span>B: això és el balanç de comptes, el resultat econòmic</span></p>
-<p class="nop"><i>✗</i><span>C: un anunci no és cap dada que es pugui comprovar</span></p>
-<span class="ref hoja">Full d'estudi · pàg. 6</span></div></div></div>
-</section>
-
-<section class="p dema" id="balanc-trets">
-  <p class="cinta">Si sobra temps · la resta del 7.1</p>
-  <p class="temari"><span>7.1 · Economia circular en el teu projecte</span><i>›</i><b>7.1.1 · Innovació i sostenibilitat</b><span class="t-p">Full d'estudi · pàg. 3-7</span></p>
-  <p class="kicker">3 · Si sobra temps · la solució, 2 de 2</p>
-  <h2>Tres trets del balanç social</h2>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=6" target="_blank">Full d'estudi · pàg. 6</a></div>
-  <div class="tres"><div class="pas"><b>① El compromís</b><span>Reflecteix el que l'empresa fa amb l'RSC, la de la unitat 5</span></div><div class="pas"><b>② Indicadors</b><span>Condicions de feina, el que aporta al barri, els residus: el que un balanç de comptes no recull</span></div><div class="pas"><b>③ Transparència</b><span>Ajuda a explicar-se davant la plantilla, la clientela i el veïnat</span></div></div>
-<p class="nota">Parany: el balanç social no és una llista de donacions ni d'anuncis verds. Al full d'estudi, pàg. 6.</p>
-</section>
-
-<section class="p obertura dema" id="tema-4" data-titol="4 · ➕ El bé comú">
-  <p class="cinta">Si sobra temps · la resta del 7.1</p>
-  <p class="temari"><span>7.1 · Economia circular en el teu projecte</span><i>›</i><b>7.1.2 · Economia del bé comú</b><span class="t-p">Full d'estudi · pàg. 7-8</span></p>
-  <p class="kicker">4 · ➕ Si hi ha temps · De què parlem</p>
-  <h2>Economia del bé comú</h2>
-  <div class="de-que">L'economia del bé comú posa el benestar de les persones i del planeta per davant del rendiment econòmic: emprendre continua sent lliure, però al servei de la comunitat.</div>
-  <h3>El que has de saber</h3>
-  <ol class="saber"><li>Els quatre elements de la taula 7.3 (pàg. 7)</li><li>Un moviment real: el de l'economista Christian Felber, del 2010</li></ol>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=7" target="_blank">Full d'estudi · pàg. 7-8</a></div>
-</section>
-
-<section class="p dema" id="be-comu">
-  <p class="cinta">Si sobra temps · la resta del 7.1</p>
-  <p class="temari"><span>7.1 · Economia circular en el teu projecte</span><i>›</i><b>7.1.2 · Economia del bé comú</b><span class="t-p">Full d'estudi · pàg. 7-8</span></p>
-  <p class="kicker">4 · Si sobra temps · el bé comú</p>
-  <h2>Quatre elements</h2>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=7" target="_blank">Full d'estudi · pàg. 7 · taula 7.3</a></div>
-  <div class="cuadro4"><div class="pas"><h4>Acumular d'una altra manera</h4><p>Pensant en demà</p><small>Conservar els recursos perquè en gaudeixi tothom</small></div><div class="pas"><h4>Llibertat al servei del bé comú</h4><p>No només el màxim benefici</p><small>Un compromís amb el planeta i la gent</small></div><div class="pas"><h4>Consum responsable</h4><p>Reutilitzar, reparar i reciclar</p><small>En lloc de l'obsolescència programada</small></div><div class="pas"><h4>Col·laboració circular</h4><p>Els residus d'uns, recursos dels altres</p><small>Empreses i consumidors, junts</small></div></div>
-<p class="nota">L'obsolescència programada és fer que un producte s'espatlli o quedi antic abans d'hora, a propòsit. Al full d'estudi, pàg. 7.</p>
-</section>
-
-<section class="p dema" id="felber">
-  <p class="cinta">Si sobra temps · la resta del 7.1</p>
-  <p class="temari"><span>7.1 · Economia circular en el teu projecte</span><i>›</i><b>7.1.2 · Economia del bé comú</b><span class="t-p">Full d'estudi · pàg. 7-8</span></p>
-  <p class="kicker">4 · Si sobra temps · un moviment real</p>
-  <h2>El balanç del bé comú</h2>
-  <div class="refs"><a class="ref hoja" href="recursos/full-estudi-U7.pdf#page=7" target="_blank">Full d'estudi · pàg. 7-8</a></div>
-  <div class="caso"><p>L'economista austríac Christian Felber va proposar el 2010 l'economia del bé comú. Les empreses que la segueixen fan un balanç del bé comú, que mesura com viuen valors com la dignitat humana, la solidaritat, la justícia social, la sostenibilitat i la democràcia.</p><p class="fuente">Font: Viquipèdia en castellà, «Economía del bien común», consultada l'11-11-2026. <a class="font-link" href="https://es.wikipedia.org/wiki/Econom%C3%ADa_del_bien_com%C3%BAn" target="_blank" rel="noopener">Obre la font ↗</a></p></div>
-<div class="preg"><span class="n">1</span> Una d'aquestes empreses publica quina diferència hi ha entre el sou més alt i el més baix de la plantilla. Per què ho mesura, si no és cap dada de beneficis? <button class="revela">Veure la resposta</button><div class="sol">Perquè el bé comú no mira només el rendiment econòmic: mira la justícia social i la dignitat de la gent que hi treballa. Una diferència enorme no seria justa (full d'estudi, pàg. 7-8).</div></div>
+<section class="p dema" id="fitxa5" data-titol="6 · ➕ La fitxa 5">
+  <p class="cinta">Si sobra temps · la fitxa 5</p>
+  <p class="temari"><b>7.3 · Estratègies de disseny per al futur sostenible</b><span class="t-p">Full d'estudi · pàg. 13-17</span></p>
+  <p class="kicker">6 · ➕ Si hi ha temps · Si sobra temps · al darrere de la fitxa 4</p>
+  <h2>El teu projecte, ecosocial i amb els ODS</h2>
+  <div class="tres"><div><b>② Ecosocial</b><span>Al teu Canvas, afegeix-hi els grups d'interès (també un de demà), un impacte negatiu i com l'evitaràs, i el benestar que millora.</span></div><div><b>③ ODS</b><span>Una meta que el teu projecte ajuda a complir, i amb quina dada sabries si ho aconsegueixes.</span></div><div><b>On?</b><span>Al darrere de la fitxa 4, o en un foli amb el teu nom. Són el ② i el ③ de la fitxa 5 (full d'estudi, pàg. 17).</span></div></div>
+<p class="nota">Un impacte negatiu és un mal que podria fer el teu projecte (residus, dades, soroll…), no un problema de fora. Les quatre metes, a la pàgina 16. No es corregeix.</p>
 </section>
 
 <section class="p" id="cierre" data-titol="Tancament">
   <p class="kicker">Tancament</p>
-  <h2>Dijous 19 acabem la U7; dilluns 23, la prova</h2>
-  <div class="filw"><div class="cadena n4"><span>U6 · la prova (avui)</span><i>→</i><span>U7 · economia circular (avui)</span><i>→</i><span>Dijous 19 · ecosocial i ODS</span><i>→</i><span>Dilluns 23 · la prova de la U7</span></div></div>
-  <div class="clau"><b>El d'avui, el 7.1, no entra a la prova de dilluns 23</b>: l'economia circular, el balanç social i el bé comú es pregunten a la prova de la unitat 8.<br><b>Dilluns 23, la prova de la U7</b>: de 16.00 a 16.30, en paper, sense mòbil ni fitxes, sobre un cas nou (10 punts). Hi entren les fases del pensament de disseny (el record d'avui) i el que farem dijous 19 (del 7.2 i el 7.3).<br><b>Per llegir</b>, si vols: el 7.1, pàg. 3-8. Dijous, la fitxa 5, a classe.</div>
-  <p class="nota">Propera sessió (dijous 19 de novembre): la segona i última classe de la <b>unitat 7</b>: el teu projecte, ecosocial i amb els ODS (fitxa 5). <b>Dilluns 23</b>, la prova de la unitat 7.</p>
+  <h2>Dijous 19, la prova de la U6; dilluns 23, la de la U7</h2>
+  <div class="filw"><div class="cadena n4"><span>U6 · Model de negoci</span><i>→</i><span>U7 · tota la unitat (avui)</span><i>→</i><span>Dijous 19 · la prova de la U6</span><i>→</i><span>Dilluns 23 · la prova de la U7</span></div></div>
+  <div class="clau"><b>Dijous 19, la de la U6</b>: de 15.10 a 15.55; què hi entra, a la pàgina de la sessió 5.<br><b>Dilluns 23, la de la U7: de 16.00 a 16.30</b>, en paper, sense mòbil ni fitxes, <b>sobre un cas nou</b> (10 punts). Del teu projecte no se't demanarà res.<br><b>Entra</b> (full d'estudi): les fases del pensament de disseny, pàg. 13 · la innovació social, el lideratge ètic i les vuit competències, la indústria 4.0 i la societat 5.0, pàg. 9-12 · el Canvas ecosocial, el greenwashing i els ODS amb una meta i una dada, pàg. 15-16. Les metes que calguin, te les dona la prova.<br><b>El 7.1</b> (l'economia circular, el balanç social i el bé comú) es pregunta a la prova de la unitat 8, dijous 3-12.<br><b>No entra:</b> l'efectuació i la fórmula del canvi · els tres eixos del lideratge · les quatre maneres com la tecnologia fa circular la producció · els cinc models · «Per anar més enllà».<br><b>Les fitxes 4, a la pila</b>, tal com estiguin.</div>
+  <p class="nota">Propera sessió (dijous 19 de novembre): la <b>prova de la unitat 6</b>, de 15.10 a 15.55 (en paper, 45 minuts: 8 punts sobre el que has estudiat, amb exemples nous, i 2 sobre el teu projecte); quan entreguis, pots sortir. Dilluns 23, la <b>prova de la unitat 7</b> (en paper, 25 minuts, sobre un cas nou) i, després, comencem la <b>unitat 8</b>.</p>
+  <div class="progres" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><p class="cap">Unitat 7 · el que portem del temari</p><div class="barra"><i style="width:100%"></i><b>100 %</b></div><p class="falta">Ja tenim tot el temari: el que ve és la prova de la unitat.</p></div>
 </section>
 
 <div class="peu"><button onclick="window.print()">Imprimir / desar en PDF</button></div>
@@ -683,7 +779,7 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
 <script>
 (function(){
   "use strict";
-  var TX = {"clau": "ipo2-u7-u7-sessio-1-v1", "la_classe": "La classe: ", "dits": "Dits!", "temps": "⏱ Temps!", "proj": "▶ Projectar", "surt": "✕ Surt", "esborra": "Esborrar els vots i el marcador per començar amb un altre grup?", "hash": "projectar", "escriu_nom": "Escriu el teu nom i llinatges abans de descarregar.", "escriu_nom_alert": "Escriu el teu nom i llinatges a la primera pantalla i torna a prémer el botó.", "cap_resp": "Sessió 1 · Economia circular: de llençar a tornar · les meves respostes (IPO II, unitat 7)", "qui": "Alumne/a", "grup": "Grup", "amb_qui": "Amb qui he treballat", "ningu": "(ningú)", "data": "Data", "sense_resp": "(sense resposta)", "fitxer": "RESPOSTES-S1", "fet_baixa": "Fet: s'ha descarregat <b>{f}</b>. Desa'l per repassar.", "no_baixa": "Aquest navegador no ha deixat descarregar el fitxer."};
+  var TX = {"clau": "ipo2-u7-u7-sessio-1-v1", "la_classe": "La classe: ", "dits": "Dits!", "temps": "⏱ Temps!", "proj": "▶ Projectar", "surt": "✕ Surt", "esborra": "Esborrar els vots i el marcador per començar amb un altre grup?", "hash": "projectar", "escriu_nom": "Escriu el teu nom i llinatges abans de descarregar.", "escriu_nom_alert": "Escriu el teu nom i llinatges a la primera pantalla i torna a prémer el botó.", "cap_resp": "Sessió 1 · La unitat 7 en una classe: circular, ètica i ecosocial · les meves respostes (IPO II, unitat 7)", "qui": "Alumne/a", "grup": "Grup", "amb_qui": "Amb qui he treballat", "ningu": "(ningú)", "data": "Data", "sense_resp": "(sense resposta)", "fitxer": "RESPOSTES-S1", "fet_baixa": "Fet: s'ha descarregat <b>{f}</b>. Desa'l per repassar.", "no_baixa": "Aquest navegador no ha deixat descarregar el fitxer."};
   var CLAU = TX.clau;
   var pant = Array.prototype.slice.call(document.querySelectorAll("section.p"));
   var estat = {};
@@ -1049,6 +1145,35 @@ body.proj .pas.vist:not(.ara) .int{opacity:1}
     });
     ms.forEach(function(b){ aturaTecles(b); b.addEventListener("click", function(){ posa(b.getAttribute("data-m")); }); });
     var t = w.querySelector(".int-torna"); aturaTecles(t); t.addEventListener("click", function(){ posa("dafo"); });
+  });
+
+  /* decibels: cada +3 dB, el doble d'energia i la meitat de temps */
+  document.querySelectorAll(".int.decibels").forEach(function(w){
+    var N = json(w, "data-nivells") || [], k = 0;
+    var num = w.querySelector(".db-num b"), bn = w.querySelector(".db-barra i"), bh = w.querySelector(".db-hores i");
+    var vn = w.querySelector(".v-n"), ve = w.querySelector(".v-e"), vt = w.querySelector(".v-t"), msg = w.querySelector(".db-msg");
+    var maq = w.querySelectorAll(".db-maq svg"), menys = w.querySelector(".db-menys"), mes = w.querySelector(".db-mes"), chips = w.querySelectorAll(".db-chip");
+    var colors = ["var(--verd)", "var(--verd)", "var(--mostassa)", "var(--mostassa)", "var(--vermell)", "var(--vermell)"];
+    function pinta(){
+      var n = N[k];
+      num.textContent = n.db; bn.style.width = n.db + "%"; vn.textContent = "+" + (n.db - 85);
+      ve.textContent = "×" + n.x; vt.textContent = n.t; msg.innerHTML = n.m;
+      bh.style.width = (n.h / 8 * 100) + "%"; bh.style.background = colors[k];
+      maq.forEach(function(s, i){
+        var ara = i < n.x, abans = s.classList.contains("on");
+        s.classList.toggle("on", ara); s.classList.remove("nou");
+        if (ara && !abans) { void s.getBoundingClientRect(); s.classList.add("nou"); }
+      });
+      menys.disabled = k === 0; mes.disabled = k === N.length - 1;
+      chips.forEach(function(c, i){ c.classList.toggle("on", i === k); });
+    }
+    function ves(x){ k = Math.max(0, Math.min(N.length - 1, x)); pinta(); }
+    w.querySelectorAll("button").forEach(aturaTecles);
+    menys.addEventListener("click", function(){ ves(k - 1); });
+    mes.addEventListener("click", function(){ ves(k + 1); });
+    chips.forEach(function(c){ c.addEventListener("click", function(){ ves(+c.getAttribute("data-k")); }); });
+    w.querySelector(".int-torna").addEventListener("click", function(){ ves(0); });
+    pinta();
   });
 
   /* classifica: cada cosa, al seu grup */
