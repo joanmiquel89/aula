@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evaluar el riesgo · Sesión 2</title>
+<style>
+/* ESCENA · plantilla de presentacions d'aula (15-11-2026)
+   Tres idees: (1) el color diu què toca: NIT = pensar i respondre · PAPER = explicació · GROC = feina de l'alumnat ·
+   VERMELL = obrir i tancar; (2) la pregunta sempre a la vista i la resposta tapada fins que el docent la destapa;
+   (3) tot en «em» sobre una escena 16:9 que s'escala sola: el que cap a 1280×720 cap a qualsevol projector. */
+:root{
+  --nit:#0c1524; --nit2:#17243b; --paper:#f7f2e8; --blanc:#fffdf8; --tinta:#121925; --suau:#5a6474; --linia:#d9d1c1;
+  --groc:#ffc21a; --vermell:#e0392b; --verd:#1c9a57; --blau:#2a66d1;
+  --w:min(100vw,177.78vh); --h:min(56.25vw,100vh);
+  --f:"Segoe UI Variable Display","Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:#04070c;color:var(--tinta);font-family:var(--f);line-height:1.35;-webkit-font-smoothing:antialiased}
+b,strong{font-weight:800}
+a{color:inherit}
+svg{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+
+/* ───────── la diapositiva ───────── */
+.d{position:relative;display:flex;flex-direction:column;background:var(--paper);color:var(--tinta);--acc:var(--vermell);--fons2:var(--blanc);--vora:var(--linia);--tenue:var(--suau)}
+.d.to-nit{background:radial-gradient(120% 90% at 15% 0%,var(--nit2),var(--nit) 60%);color:#fff;--acc:var(--groc);--fons2:rgba(255,255,255,.07);--vora:rgba(255,255,255,.22);--tenue:#aab6c8}
+.d.to-groc{background:var(--groc);--acc:var(--tinta);--fons2:rgba(255,255,255,.55);--vora:rgba(18,25,37,.3);--tenue:#4a4326}
+.d.to-vermell{background:var(--vermell);color:#fff;--acc:#fff;--fons2:rgba(255,255,255,.14);--vora:rgba(255,255,255,.4);--tenue:#ffd9d3}
+.cap{display:flex;gap:.8em;align-items:center;font-size:.72em;font-weight:700;letter-spacing:.04em;color:var(--tenue);margin:0 0 .8em}
+.cap .sec{background:var(--acc);color:var(--paper);padding:.1em .7em;border-radius:99em}
+.to-nit .cap .sec,.to-vermell .cap .sec{color:var(--nit)}
+.cos{flex:1;min-height:0;display:flex;gap:2.2em;align-items:stretch}
+.txt{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.visual{flex:0 0 38%;min-width:0;margin:0;display:flex;flex-direction:column;justify-content:center;gap:.5em}
+.visual.ample{flex-basis:50%}
+.visual>svg,.visual>img{width:100%;height:auto;max-height:100%;object-fit:contain;border-radius:.6em}
+.visual figcaption{font-size:.62em;color:var(--tenue);line-height:1.3}
+.kicker{margin:0 0 .5em;font-size:.74em;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.to-groc .kicker{color:#7a1d12}
+h2{margin:0 0 .45em;font-size:2.35em;line-height:1.04;letter-spacing:-.025em;font-weight:800;text-wrap:balance}
+.lead{margin:0 0 .7em;font-size:1.22em;line-height:1.38;max-width:34em}
+.lead.cas{border-left:.3em solid var(--acc);padding:.1em 0 .1em .8em}
+.nota{font-size:.82em;color:var(--tenue);margin:.5em 0 0}
+.cinta{position:absolute;top:0;right:3em;background:var(--tinta);color:var(--groc);font-size:.66em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.45em 1em .4em;border-radius:0 0 .6em .6em;z-index:2}
+.to-nit .cinta{background:var(--groc);color:var(--tinta)}
+
+/* «Dónde lo estudias» i lleis: sempre al peu, en un requadre */
+.on{display:flex;flex-wrap:wrap;align-items:center;gap:.4em .6em;margin:.9em 0 0;font-size:.72em}
+.on .dl{font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--tenue)}
+.on .xip{border:.12em solid currentColor;border-radius:99em;padding:.12em .8em;font-weight:700}
+.on .xip.llei{border-style:dashed}
+a.font{display:inline-flex;align-items:center;gap:.3em;background:var(--blau);color:#fff;text-decoration:none;border-radius:99em;padding:.18em .9em;font-weight:800}
+a.font:hover{filter:brightness(1.15)}
+
+/* ───────── passos: tot el que es destapa ───────── */
+.pas{transition:opacity .35s,transform .35s}
+.escena .pas:not(.vist),.lectura .pas:not(.vist){opacity:0;transform:translateY(.5em);pointer-events:none}
+.lectura .pas:not(.vist){display:none}
+.ara{animation:flaix .7s ease-out}
+@keyframes flaix{0%{box-shadow:0 0 0 0 var(--groc)}40%{box-shadow:0 0 0 .5em rgba(255,194,26,.55)}100%{box-shadow:0 0 0 0 rgba(255,194,26,0)}}
+
+/* tapes: el títol i la pregunta a la vista; la resposta, sota la tapa */
+.tapes{display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));gap:.7em;margin:.2em 0 0}
+.tapa{position:relative;text-align:left;border:.14em dashed var(--vora);background:var(--fons2);border-radius:.8em;padding:.75em .9em .8em;cursor:pointer;display:flex;flex-direction:column;gap:.25em;min-height:6.4em;transition:border-color .3s,background .3s}
+.tapa:hover{border-color:var(--acc)}
+.tapa .n{position:absolute;top:-.55em;left:.7em;width:1.5em;height:1.5em;border-radius:50%;background:var(--acc);color:var(--paper);font-weight:800;font-size:.8em;display:grid;place-items:center}
+.to-nit .tapa .n{color:var(--nit)}
+.tapa .ic{width:2em;height:2em;color:var(--acc);flex:none}
+.tapa .ic svg{width:100%;height:100%}
+.tapa .t{font-weight:800;font-size:1.08em;line-height:1.15}
+.tapa .q{color:var(--tenue);font-size:.92em;line-height:1.3}
+.tapa .q::before{content:"? ";font-weight:800;color:var(--acc)}
+.tapa .r{display:none;font-weight:800;font-size:1.25em;line-height:1.15}
+.tapa .x{display:none;font-size:.86em;color:var(--tenue);line-height:1.3}
+.tapa.vist{border-style:solid;border-color:var(--verd);background:rgba(28,154,87,.14);cursor:default}
+.to-paper .tapa.vist{background:#e9f6ee}
+.tapa.vist .q{display:none}
+.tapa.vist .r,.tapa.vist .x{display:block}
+.tapa.gran .q{font-size:1.05em;color:inherit}
+
+/* vot: A, B, C grans; primer es prova, després es destapa */
+.ops{display:grid;gap:.55em;margin:.1em 0 0}
+.op{display:grid;grid-template-columns:2.1em 1fr;gap:.1em .8em;align-items:center;text-align:left;border:.14em solid var(--vora);background:var(--fons2);border-radius:.7em;padding:.55em .9em;cursor:pointer;transition:all .25s}
+.op:hover{border-color:var(--acc)}
+.op i{grid-row:span 2;font-style:normal;width:1.9em;height:1.9em;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--acc);color:var(--nit)}
+.to-paper .op i{color:#fff}
+.op span{font-weight:700;font-size:1.08em;line-height:1.25}
+.op small{display:none;grid-column:2;font-size:.86em;line-height:1.3;opacity:.92}
+.op.provat small,.resolt .op small{display:block}
+.op.provat.ok,.resolt .op.ok{background:var(--verd);border-color:var(--verd);color:#fff}
+.op.provat.ok i,.resolt .op.ok i{background:#fff;color:var(--verd)}
+.op.provat:not(.ok){border-color:var(--vermell);background:rgba(224,57,43,.18)}
+.op.provat:not(.ok) i{background:var(--vermell);color:#fff}
+.resolt .op:not(.ok):not(.provat){opacity:.62}
+.sol{display:none}
+.idea{display:flex;flex-direction:column;border-left:.3em solid var(--groc);background:var(--fons2);border-radius:.5em;padding:.45em .9em;margin:.7em 0 0;max-width:36em}
+.idea b{font-size:1.06em}
+.idea span{font-size:.92em;color:var(--tenue)}
+
+/* revisa: «hi ha N errors»: peces penjades a la paret; clic = veredicte */
+.paret{display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:.6em;margin:.1em 0 0}
+.it{position:relative;display:grid;grid-template-columns:4.6em 1fr;gap:.1em .7em;align-items:center;text-align:left;border:.14em solid var(--vora);background:var(--fons2);border-radius:.7em;padding:.55em .65em;cursor:pointer;min-height:5.6em}
+.it:hover{border-color:var(--acc)}
+.it .n{position:absolute;top:-.55em;left:-.4em;width:1.6em;height:1.6em;border-radius:50%;background:var(--acc);color:var(--nit);font-weight:800;font-size:.85em;display:grid;place-items:center;z-index:1}
+.it .img{grid-row:span 2;position:relative;height:4.4em;display:grid;place-items:center}
+.it .img svg,.it .img img{max-height:4.4em;width:auto;max-width:100%;filter:drop-shadow(0 .15em .25em rgba(0,0,0,.35))}
+.it .img .bo{display:none}
+.it b{font-size:.95em;line-height:1.15;align-self:end}
+.it small{font-size:.74em;color:var(--tenue);line-height:1.25;align-self:start}
+.it em{display:none;grid-column:1/-1;font-style:normal;font-size:.8em;font-weight:700;line-height:1.25;margin-top:.2em}
+.it.vist em,.tot .it em{display:block}
+.it.mal.vist,.tot .it.mal{border-color:var(--vermell);background:rgba(224,57,43,.2)}
+.it.be.vist,.tot .it.be{border-color:var(--verd);background:rgba(28,154,87,.2)}
+.it.mal.vist .img .dol,.tot .it.mal .img .dol{display:none}
+.it.mal.vist .img .bo,.tot .it.mal .img .bo{display:block;animation:gira .5s ease-out}
+@keyframes gira{from{transform:rotateY(90deg)}to{transform:none}}
+.it.mal.vist .n,.tot .it.mal .n{background:var(--vermell);color:#fff}
+.it.be.vist .n,.tot .it.be .n{background:var(--verd);color:#fff}
+
+/* llista de passos, cadena i xifres */
+.passos{list-style:none;counter-reset:p;margin:.1em 0 0;padding:0;display:grid;gap:.55em}
+.passos li{counter-increment:p;position:relative;padding:.05em 0 .05em 2.6em;font-size:1.1em;line-height:1.3}
+.passos li::before{content:counter(p);position:absolute;left:0;top:0;width:1.75em;height:1.75em;border-radius:50%;background:var(--acc);color:var(--paper);font-weight:800;display:grid;place-items:center}
+.to-nit .passos li::before{color:var(--nit)}
+.passos li.pas>b{display:block}
+.passos li span{color:var(--tenue);font-size:.9em}
+.fil{display:flex;align-items:stretch;gap:.45em;margin:.3em 0 .8em}
+.fil>span{flex:1 1 0;border:.14em solid var(--vora);background:var(--fons2);border-radius:.6em;padding:.5em .7em;font-weight:700;line-height:1.2;display:grid;align-content:center}
+.fil>span:last-of-type{background:var(--acc);border-color:var(--acc);color:var(--paper)}
+.to-nit .fil>span:last-of-type{color:var(--nit)}
+.fil>i{align-self:center;font-style:normal;font-weight:800;color:var(--acc);font-size:1.3em}
+.xifres{display:flex;flex-wrap:wrap;gap:.8em;margin:.2em 0 0}
+.xifra{flex:1 1 8em;border-top:.3em solid var(--acc);padding:.3em 0 0}
+.xifra b{display:block;font-size:3.4em;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.xifra b i{font-style:normal;font-size:.36em;letter-spacing:0;margin-left:.2em;color:var(--tenue)}
+.xifra span{font-size:.9em;color:var(--tenue)}
+.llista{margin:.1em 0 0;padding:0;list-style:none;display:grid;gap:.4em;font-size:1.08em}
+.llista li{padding-left:1.4em;position:relative}
+.llista li::before{content:"";position:absolute;left:.1em;top:.45em;width:.6em;height:.6em;background:var(--acc);border-radius:.12em}
+.dues{display:grid;grid-template-columns:1fr 1fr;gap:1em}
+.dues h3{margin:0 0 .4em;font-size:.8em;letter-spacing:.12em;text-transform:uppercase}
+.dues>div{border-top:.3em solid var(--verd);padding-top:.5em}
+.dues>div+div{border-color:var(--tenue)}
+.dues .llista{font-size:.86em;gap:.28em}
+
+/* captura de web, amb el marc del navegador i la marca que es destapa */
+.nav{margin:0;border-radius:.7em;overflow:hidden;box-shadow:0 .5em 1.6em rgba(0,0,0,.35);background:#fff;color:var(--tinta)}
+.nav .barra{display:flex;align-items:center;gap:.35em;background:#e7e3db;padding:.4em .7em;font-size:.6em}
+.nav .barra i{width:.75em;height:.75em;border-radius:50%;background:#c9c2b4}
+.nav .barra span{flex:1;margin-left:.6em;background:#fff;border-radius:99em;padding:.2em .9em;color:var(--suau);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav .pant{position:relative;line-height:0}
+.nav .pant img{width:100%;height:auto;display:block}
+.nav mark{position:absolute;background:rgba(255,194,26,.38);outline:.18em solid var(--groc);border-radius:.2em}
+.visual .peu-cap{display:flex;align-items:center;justify-content:space-between;gap:.8em;font-size:.66em;color:var(--tenue);margin-top:.5em}
+
+/* retall de premsa fet a codi (titular amb paraules pròpies + enllaç) */
+.retall{background:#fbf8f1;color:var(--tinta);border-radius:.5em;padding:1em 1.1em;box-shadow:0 .5em 1.6em rgba(0,0,0,.35);transform:rotate(-1.2deg);border-top:.5em solid var(--tinta)}
+.retall .mitja{display:flex;justify-content:space-between;font-size:.62em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-bottom:.1em solid var(--tinta);padding-bottom:.4em;margin-bottom:.6em}
+.retall h3{margin:0 0 .5em;font-family:Georgia,"Times New Roman",serif;font-size:1.35em;line-height:1.15}
+.retall p{margin:0 0 .7em;font-family:Georgia,serif;font-size:.86em;line-height:1.4;color:#333}
+
+/* feina de l'alumnat: consigna gran i compte enrere */
+.feina-g{display:grid;grid-template-columns:1fr auto;gap:1.5em;align-items:center}
+.crono{width:8.5em;height:8.5em;border-radius:50%;border:.5em solid var(--tinta);display:grid;place-items:center;text-align:center;background:rgba(255,255,255,.5);cursor:pointer}
+.crono b{font-size:2.3em;line-height:1;font-variant-numeric:tabular-nums}
+.crono span{display:block;font-size:.6em;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.crono.fi{background:var(--vermell);border-color:var(--vermell);color:#fff}
+
+/* portada i tancament */
+.t-portada h2,.t-tanca h2{font-size:4em;line-height:.98}
+.t-portada .lead,.t-tanca .lead{font-size:1.3em}
+.agenda{display:grid;gap:.45em;margin:.6em 0 0;padding:0;list-style:none;counter-reset:a}
+.agenda li{counter-increment:a;display:flex;gap:.7em;align-items:baseline;font-size:1.12em;font-weight:700}
+.agenda li::before{content:counter(a);font-size:1.5em;font-weight:800;min-width:1em;opacity:.75}
+.agenda li small{font-weight:500;opacity:.8}
+.t-obre .num{font-size:9em;line-height:.8;font-weight:800;letter-spacing:-.05em;color:var(--acc);margin:0 0 .12em}
+.t-obre h2{font-size:3.2em}
+
+.llegeix,.guio{display:none}
+
+/* ───────── mode ESCENA (projectar) ───────── */
+body.escena{overflow:hidden}
+body.escena .d{display:none;position:fixed;left:50%;top:50%;width:var(--w);height:var(--h);transform:translate(-50%,-50%);font-size:calc(var(--w)/64);padding:3.4em 3em 2.9em;overflow:hidden}
+body.escena .d.actual{display:flex;animation:entra .3s ease-out}
+@keyframes entra{from{opacity:.2}to{opacity:1}}
+body.escena .cap,body.escena .barra-lectura,body.escena .fi-lectura{display:none}
+#crom{display:none}
+body.escena #crom{display:block;position:fixed;left:50%;top:50%;width:var(--w);height:var(--h);transform:translate(-50%,-50%);font-size:calc(var(--w)/64);pointer-events:none;z-index:5;color:var(--tinta)}
+#crom.clar{color:#fff}
+#crom .dalt{position:absolute;left:3em;right:3em;top:.9em;display:flex;align-items:center;gap:.9em;font-size:.62em;font-weight:700}
+#crom .nom{font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.75;white-space:nowrap}
+#crom .secs{display:flex;gap:.35em;flex:1;min-width:0}
+#crom .secs a{pointer-events:auto;cursor:pointer;padding:.2em .8em;border-radius:99em;border:.12em solid currentColor;opacity:.45;white-space:nowrap}
+#crom .secs a.ara{opacity:1;background:currentColor}
+#crom .secs a.ara span{color:var(--paper);mix-blend-mode:normal}
+#crom.clar .secs a.ara span{color:var(--nit)}
+#crom .secs a.extra{border-style:dashed}
+#crom .tema{opacity:.8;white-space:nowrap;text-align:right}
+#crom .baix{position:absolute;left:3em;right:3em;bottom:.8em;display:flex;align-items:center;gap:.8em;font-size:.66em;font-weight:700}
+#crom .punts{letter-spacing:.2em;font-size:1.1em}
+#crom .queda{opacity:.7}
+#crom .esp{flex:1}
+#crom .temps{font-variant-numeric:tabular-nums;padding:.1em .7em;border-radius:99em;background:var(--groc);color:var(--tinta);display:none}
+#crom .temps.on{display:inline-block}
+#crom .temps.fi{background:var(--vermell);color:#fff}
+#crom .hora{font-variant-numeric:tabular-nums;opacity:.8}
+#crom button{pointer-events:auto;cursor:pointer;border:.12em solid currentColor;background:transparent;border-radius:.5em;width:2.1em;height:1.7em;font-weight:800;opacity:.7}
+#crom button:hover{opacity:1}
+
+/* ───────── mode LECTURA (mòbil, estudiar a casa, imprimir) ───────── */
+body.lectura{background:#e9e3d6}
+body.lectura main{max-width:54em;margin:0 auto;padding:4.2em 1em 5em;font-size:17px}
+body.lectura .d{border-radius:1em;padding:1.4em 1.5em 1.2em;margin:0 0 1.2em;overflow:hidden}
+body.lectura h2{font-size:1.7em}
+body.lectura .t-portada h2,body.lectura .t-tanca h2{font-size:2.3em}
+body.lectura .t-obre .num{font-size:4em}
+body.lectura .t-obre h2{font-size:2em}
+body.lectura .cos{flex-direction:column;gap:1em}
+body.lectura .visual{flex:none;max-width:26em}
+body.lectura .llegeix{display:block;margin:.9em 0 0;font-size:.92em;border-top:.1em dashed var(--vora);padding-top:.6em}
+body.lectura .llegeix summary{cursor:pointer;font-weight:800;color:var(--acc)}
+body.lectura .cinta{right:1em}
+.barra-lectura{position:fixed;top:0;left:0;right:0;z-index:9;background:var(--nit);color:#fff;display:flex;align-items:center;gap:.8em;padding:.55em 1em;font-size:15px}
+.barra-lectura b{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barra-lectura button,.fi-lectura button{border:0;border-radius:.5em;background:var(--groc);color:var(--tinta);font-weight:800;padding:.4em .9em;cursor:pointer}
+.fi-lectura{text-align:center;margin:2em 0 0}
+@media (max-width:720px){
+  body.lectura main{font-size:16px}
+  body.lectura .tapes,body.lectura .paret,body.lectura .dues,body.lectura .feina-g{grid-template-columns:1fr}
+  body.lectura .fil{flex-direction:column}
+  body.lectura .fil>i{transform:rotate(90deg)}
+  body.lectura .crono{display:none}
+}
+
+/* ───────── GUIÓ (mòbil del docent) i finestra del PRESENTADOR ───────── */
+body.guio-m,body.pres-m{background:var(--nit);color:#fff;font-size:17px}
+body.guio-m main,body.pres-m main,body.guio-m #crom,body.pres-m #crom,body.guio-m .barra-lectura,body.pres-m .barra-lectura{display:none}
+#guio{max-width:46em;margin:0 auto;padding:1em}
+#guio h1{font-size:1.3em;margin:.2em 0 .1em}
+#guio .ajuda{color:#aab6c8;font-size:.86em;margin:0 0 1.2em}
+.gd{border-top:.1em solid rgba(255,255,255,.2);padding:.9em 0}
+.gd .k{font-size:.74em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--groc);margin:0}
+.gd h2{font-size:1.25em;margin:.15em 0 .4em;letter-spacing:0}
+.gd ul{margin:.2em 0;padding-left:1.2em}
+.gd li{margin:.25em 0}
+.gd .clau,.pr .clau{background:rgba(28,154,87,.25);border-left:.3em solid var(--verd);border-radius:.4em;padding:.5em .8em;margin:.5em 0}
+.gd .clau::before,.pr .clau::before{content:"La respuesta · ";font-weight:800;color:#8fe3b6}
+.gd ol.ps,.pr ol.ps{margin:.5em 0 0;padding-left:1.4em;color:#cfd8e6;font-size:.92em}
+.pr ol.ps li.fet{opacity:.4;text-decoration:line-through}
+.pr ol.ps li.seg{color:var(--groc);font-weight:800}
+.pr{display:grid;grid-template-rows:auto 1fr auto;height:100vh}
+.pr header,.pr footer{display:flex;align-items:center;gap:1.2em;padding:.6em 1.2em;background:rgba(255,255,255,.08)}
+.pr header b{font-size:1.9em;font-variant-numeric:tabular-nums}
+.pr header .t{font-size:1.9em;font-weight:800;color:var(--groc);font-variant-numeric:tabular-nums}
+.pr header .t.fi{color:#ff8a7f}
+.pr header .e{flex:1}
+.pr .dos{display:grid;grid-template-columns:2fr 1fr;gap:1.5em;padding:1.2em;overflow:auto}
+.pr .k{font-size:.8em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--groc);margin:0}
+.pr h1{font-size:1.9em;line-height:1.1;margin:.15em 0 .5em}
+.pr .g{font-size:1.25em;line-height:1.4}
+.pr .g ul{margin:.2em 0;padding-left:1.1em}
+.pr .g li{margin:.35em 0}
+.pr .despres{border-left:.1em solid rgba(255,255,255,.2);padding-left:1.2em;color:#cfd8e6}
+.pr .despres h2{font-size:1.2em;letter-spacing:0;color:#fff}
+.pr footer button{border:0;border-radius:.6em;background:var(--groc);color:var(--tinta);font-weight:800;font-size:1.2em;padding:.5em 1.6em;cursor:pointer}
+.pr footer span{color:#aab6c8;font-size:.86em}
+
+@media print{
+  body{background:#fff!important}
+  .barra-lectura,.fi-lectura,#crom{display:none!important}
+  body.lectura main{padding:0;max-width:none;font-size:11pt}
+  .d{break-inside:avoid;border:1px solid #bbb;background:#fff!important;color:#000!important;--tenue:#444;--acc:#000;--fons2:#fff;--vora:#999}
+  .pas:not(.vist){display:block!important;opacity:1!important;transform:none!important}
+  .tapa .q{display:none}.tapa .r,.tapa .x,.op small,.it em{display:block!important}
+  .llegeix{display:block!important}
+}
+
+/* afegits: el text no pot empènyer la pantalla; a un vot o a un «hi ha N errors», on s'estudia surt quan ja s'ha resolt */
+.txt{min-height:0}
+.escena .t-vot:not(.resolt) .on,.escena .t-revisa:not(.tot) .on,.lectura .t-vot:not(.resolt) .on{visibility:hidden}
+.escena .fil i.vist+.segueix{opacity:1;transform:none;pointer-events:auto}
+.tapa .tim{height:5.2em;display:grid;place-items:center;margin:.1em 0 .3em}
+.tapa .tim svg,.tapa .tim img{height:5.2em;width:auto;filter:drop-shadow(0 .15em .25em rgba(0,0,0,.3))}
+.op.amb-img{grid-template-columns:2.1em 3.4em 1fr}
+.op.amb-img .oim{grid-row:span 2;display:grid;place-items:center}
+.op.amb-img .oim svg,.op.amb-img .oim img{height:3em;width:auto}
+.op.amb-img small{grid-column:3}
+
+.dues{grid-template-columns:repeat(auto-fit,minmax(0,1fr))}
+.fitxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:.7em;margin:.1em 0 .7em}
+.fitxes>div{border:.14em solid var(--vora);background:var(--fons2);border-radius:.7em;padding:.6em .8em;display:flex;flex-direction:column;gap:.2em}
+.fitxes .ic{width:1.8em;height:1.8em;color:var(--acc)}
+.fitxes b{font-size:1.1em}
+.fitxes span{font-size:.9em;line-height:1.3}
+.yt{position:relative;aspect-ratio:16/9;border-radius:.6em;overflow:hidden;background:#000;box-shadow:0 .5em 1.6em rgba(0,0,0,.35)}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-fora{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5em;padding:1em;text-align:center;text-decoration:none;color:#fff;background:radial-gradient(circle at 50% 40%,#3a1620,#0b0b10 70%)}
+.yt-fora i{font-style:normal;font-size:1.5em;line-height:1;background:#e62117;border-radius:.45em;padding:.38em .8em .42em .9em;box-shadow:0 .2em .8em rgba(0,0,0,.5)}
+.yt-fora b{font-size:1.05em}.yt-fora span{font-size:.6em;opacity:.75;max-width:22em}
+.yt-fora:hover i,.yt-fora:focus i{background:#ff3b30}
+.cinta.clau{background:var(--verd);color:#fff}
+.lectura .it{cursor:default}
+div.it{cursor:default}
+
+/* polit del 15-11 (mirant les captures a 1280×720) */
+body.escena #crom.clar{color:#fff}
+.cinta{top:2.45em;right:3em;border-radius:99em;padding:.35em 1em}
+body.lectura .cinta{top:.8em}
+.it{grid-template-columns:4.2em 1fr;min-height:0}
+.it .img{height:3.7em}
+.it .img svg,.it .img img{height:3.7em;max-height:none;width:auto}
+.tapa.gran.vist .q{display:block}
+.tapa.vist .r{color:#0e7a41}
+.to-nit .tapa.vist .r{color:#7fe6b0}
+.tapa.gran .q::before{content:""}
+.it .img{height:4.3em}
+.it .img svg,.it .img img{height:4.3em}
+.it{grid-template-columns:4.9em 1fr}
+.it.vist small,.tot .it small{display:none}
+.t-revisa h2{margin-bottom:.3em}
+.t-revisa .lead{margin-bottom:.6em;font-size:1.1em}
+.retall{margin:0 .5em}
+.visual{overflow:visible}
+.it .img,.it .img svg,.it .img img{height:4em}
+.t-revisa .nota{margin-top:.3em}
+.t-revisa .on{margin-top:.45em}
+.t-revisa .paret{gap:.5em}
+
+/* lectura: res d'alçades de projector; cada pantalla és una targeta que creix amb el que porta */
+body.lectura .d,body.lectura .cos,body.lectura .txt{display:block}
+body.lectura .visual{display:block;margin:1em auto 0;max-width:24em}
+body.lectura .tapa{min-height:0}
+body.lectura .cap{flex-wrap:wrap;gap:.3em .6em;margin-bottom:.9em}
+body.lectura .cinta{position:static;display:inline-block;margin:0 0 .7em}
+body.lectura .t-obre .num{line-height:1}
+body.lectura .feina-g{display:block}
+@media (max-width:720px){
+  body.lectura .xifra b{font-size:2.4em}
+  body.lectura .it{grid-template-columns:3.6em 1fr}
+  body.lectura .agenda li{font-size:1em}
+}
+a.xip{text-decoration:none}
+a.xip:hover{background:var(--fons2)}
+.tapa.gran:has(.tim).vist .q{display:none}
+
+
+.llegeix ol{padding-left:1.3em;margin:.4em 0}.llegeix li{margin:.3em 0}
+.llegeix .ley,.llegeix .ref{display:inline-block;font-size:.82em;font-weight:700;border:1.5px solid currentColor;border-radius:99em;padding:.05em .7em;margin:.4em .3em 0 0}
+.llegeix table{border-collapse:collapse;width:100%;font-size:.9em;margin:.5em 0}.llegeix th,.llegeix td{border:1px solid #bdb39d;padding:.3em .5em;text-align:left;vertical-align:top}
+.llegeix a{color:var(--blau)}
+a.taula{display:inline-block;white-space:nowrap;text-decoration:none;font-weight:800;border:.12em solid currentColor;border-radius:99em;padding:0 .5em;line-height:1.25}
+a.taula::after{content:" ↗"}
+a.taula:hover{background:rgba(42,102,209,.18)}
+.llegeix a.taula{color:var(--blau)}
+/* 16-11 · «Hay cuatro fallos»: la peça mal posada es queda, tatxada, al costat de la bona, i a sobre, què falla */
+.amb-canvi .it .img .bo{display:none}
+.amb-canvi .it.mal.vist,.tot .amb-canvi .it.mal{grid-template-columns:1fr;align-content:start;border-width:.24em;background:rgba(224,57,43,.32)}
+.amb-canvi .it.mal.vist .img,.tot .amb-canvi .it.mal .img{grid-row:auto;height:auto;justify-self:start;margin-left:.55em}
+.amb-canvi .it.mal.vist .img .bo,.tot .amb-canvi .it.mal .img .bo{display:flex;align-items:center;gap:.45em;animation:none}
+.amb-canvi .bo .abans,.amb-canvi .bo .ara{position:relative;display:grid;place-items:center}
+.amb-canvi .it .img .bo svg{height:3.1em;width:auto;max-width:4.7em}
+.amb-canvi .bo .abans svg{opacity:.8}
+.amb-canvi .bo .creu{position:absolute;inset:-.25em;pointer-events:none;filter:drop-shadow(0 0 .07em #fff) drop-shadow(0 0 .05em #fff);
+  background:linear-gradient(to top right,transparent calc(50% - .17em),#ff3b30 calc(50% - .17em),#ff3b30 calc(50% + .17em),transparent calc(50% + .17em)),
+             linear-gradient(to top left,transparent calc(50% - .17em),#ff3b30 calc(50% - .17em),#ff3b30 calc(50% + .17em),transparent calc(50% + .17em))}
+.amb-canvi .bo .fl{font-style:normal;font-weight:900;font-size:1.6em;line-height:1;color:var(--groc)}
+.amb-canvi .bo .ara{animation:gira .5s ease-out}
+.amb-canvi .bo .ara::after{content:"✔";position:absolute;right:-.45em;bottom:-.35em;width:1.35em;height:1.35em;border-radius:50%;background:var(--verd);color:#fff;font-size:.8em;font-weight:900;display:grid;place-items:center}
+.amb-canvi .it em .falla{display:inline-block;background:var(--groc);color:var(--nit);border-radius:.3em;padding:.02em .4em;margin:0 .3em .2em 0;font-weight:900}
+/* 16-11 · fotos reals: dins una targeta (cobreixen la caixa) i a la dreta, amb el seu crèdit */
+.tapa .tim:has(> img){height:auto;display:block}
+.tapa .tim img{display:block;height:9.5em;width:100%;object-fit:cover;border-radius:.45em;filter:none}
+.visual .foto-v img{display:block;width:100%;height:auto;max-height:24em;object-fit:cover;border-radius:.6em;box-shadow:0 .4em 1.2em rgba(0,0,0,.3)}
+.visual.ample .foto-v img{height:12.5em}
+.visual .credit{font-size:.58em;color:var(--tenue);line-height:1.3;margin:.35em 0 .5em}
+.visual .credit a,.nota a{color:inherit}
+/* 16-11, tarda · la pantalla de solucions de «Hay cuatro fallos»: tot a la vista, sense destapar (també a la web) */
+.solucions{display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:.75em;margin:.5em 0 0}
+.sl{position:relative;display:flex;flex-direction:column;gap:.4em;border:.22em solid var(--vermell);background:rgba(224,57,43,.24);border-radius:.7em;padding:.75em .7em .65em}
+.sl>.n{position:absolute;top:-.6em;left:-.45em;width:1.6em;height:1.6em;border-radius:50%;background:var(--vermell);color:#fff;font-weight:800;font-size:.85em;display:grid;place-items:center}
+.sl .canvi{display:flex;align-items:center;gap:.45em;margin-left:.3em}
+.sl .vell,.sl .nou{position:relative;display:grid;place-items:center}
+.sl .canvi svg{height:3.3em;width:auto;max-width:4.9em;filter:drop-shadow(0 .15em .25em rgba(0,0,0,.35))}
+.sl .vell svg{opacity:.8}
+.sl .creu{position:absolute;inset:-.25em;pointer-events:none;filter:drop-shadow(0 0 .07em #fff) drop-shadow(0 0 .05em #fff);
+  background:linear-gradient(to top right,transparent calc(50% - .17em),#ff3b30 calc(50% - .17em),#ff3b30 calc(50% + .17em),transparent calc(50% + .17em)),
+             linear-gradient(to top left,transparent calc(50% - .17em),#ff3b30 calc(50% - .17em),#ff3b30 calc(50% + .17em),transparent calc(50% + .17em))}
+.sl .fl{font-style:normal;font-weight:900;font-size:1.6em;line-height:1;color:var(--groc)}
+.sl .nou::after{content:"✔";position:absolute;right:-.45em;bottom:-.35em;width:1.35em;height:1.35em;border-radius:50%;background:var(--verd);color:#fff;font-size:.8em;font-weight:900;display:grid;place-items:center}
+.sl b{font-size:.95em;line-height:1.15}
+.sl .falla{align-self:flex-start;background:var(--groc);color:var(--nit);border-radius:.3em;padding:.02em .4em;font-weight:900;font-size:.8em}
+.sl p{margin:0;font-size:.8em;line-height:1.3}
+.sl-be{display:flex;flex-wrap:wrap;align-items:center;gap:.45em 1.2em;margin:.8em 0 0;border:.18em solid var(--verd);background:rgba(28,154,87,.2);border-radius:.7em;padding:.5em .8em;font-size:.82em}
+.sl-be .k{font-weight:900}
+.sl-be .b{display:inline-flex;align-items:center;gap:.4em}
+.sl-be .b svg{height:2.1em;width:auto}
+.sl-be .b i{font-style:normal;width:1.45em;height:1.45em;border-radius:50%;background:var(--verd);color:#fff;font-weight:800;font-size:.85em;display:grid;place-items:center;flex:none}
+/* 25-11 · la barra de «lo que llevamos del temario» (norma 48), a la pantalla de salida */
+.progres{margin:.9em 0 0;max-width:34em}
+.progres .pc{margin:0 0 .3em;font-size:.72em;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.progres .pb{height:1.05em;border-radius:99em;background:rgba(255,255,255,.28);overflow:hidden}
+.progres .pb i{display:block;height:100%;border-radius:99em;background:var(--groc)}
+.progres .pt{margin:.4em 0 0;font-size:.8em;line-height:1.35}
+/* 25-11 · la matriu del mètode de l'INSST: capçaleres a la vista, cel·les tapades */
+.matriu{display:grid;grid-template-columns:7.6em repeat(3,minmax(0,1fr));grid-auto-rows:min-content;align-content:start;gap:.45em;margin:.4em 0 0;height:auto;flex:none}
+.matriu .mh{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:800;font-size:.85em;line-height:1.15;padding:.3em;border-radius:.5em;background:rgba(255,255,255,.12)}
+.matriu .mh small{font-weight:500;font-size:.78em;opacity:.85}
+.matriu .mh br{display:none}
+.matriu .mh.fila{align-items:flex-start;text-align:left}
+.matriu .tapa{min-height:2.9em;height:auto;align-items:center;justify-content:center;text-align:center;padding:.35em}
+.matriu .tapa .q::before{content:""}
+.matriu .tapa .r{font-size:1.15em}
+.matriu .tapa.v-t.vist{background:rgba(28,154,87,.22)}
+.matriu .tapa.v-to.vist{background:rgba(130,190,60,.26)}
+.matriu .tapa.v-m.vist{background:rgba(240,190,40,.30)}
+.matriu .tapa.v-i.vist{background:rgba(240,120,40,.34);border-color:#f07828}
+.matriu .tapa.v-in.vist{background:rgba(224,57,43,.40);border-color:var(--vermell)}
+@media (max-width:720px){body.lectura .solucions{grid-template-columns:1fr}}
+@media (min-width:721px){body.lectura .solucions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+</style>
+</head>
+<body data-nom="IPO I · U3 · Sesión 2">
+<main>
+<section class="d to-vermell t-portada" id="d1" data-sec="Inicio"><div class="cap"><span class="sec">Inicio</span></div><div class="cos"><div class="txt"><p class="kicker">IPO I · Unidad 3 · Sesión 2 · lunes 30, después del patio</p><h2>Evaluar el riesgo</h2><p class="lead">Ya sabes quién se encarga de la prevención. Ahora, su trabajo principal: medir los riesgos que quedan y decidir qué se hace con ellos.</p><ol class="agenda"><li><span>Dos preguntas para entrar <small></small></span></li><li><span>Tres documentos, el plan y cuándo se evalúa <small>págs. 62-63</small></span></li><li><span>El método del INSST y un caso <small>págs. 64-65</small></span></li><li><span>Qué se hace en cada nivel <small>pág. 66</small></span></li><li><span>Para leer: quién evalúa y los accidentes <small>págs. 63 y 67</small></span></li></ol><p class="nota">Entra en el examen, de hoy: los tres documentos y qué parte del plan dice qué hacer en una emergencia, cuándo se evalúa, el método del INSST y qué se hace en cada nivel. Para leer, no entra: quién puede evaluar y la notificación de accidentes. Hoy no cuenta nada.</p></div></div></section>
+<section class="d to-nit t-idea" id="d2" data-sec="1 · Para entrar" data-min="4"><div class="cap"><span class="sec">1 · Para entrar</span></div><div class="cos"><div class="txt"><p class="kicker">Sin mirar · una de antes del patio y otra del lunes 9</p><h2>Dos preguntas, sin mirar</h2><div class="tapes" style="--cols:2"><div class="tapa gran" data-pas data-etq="Una academia de idiomas tiene 20 profesores, todos en un solo local, y la dueña da clase allí. ¿Puede asumir ella la prevención? (Caso inventado) → Sí, si se forma" tabindex="0"><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M5 21v-3a7 7 0 0114 0v3"/></svg></span><span class="q">Una academia de idiomas tiene 20 profesores, todos en un solo local, y la dueña da clase allí. <b>¿Puede asumir ella la prevención?</b> <small>(Caso inventado)</small></span><span class="r">Sí, si se forma</span><span class="x">Hasta 25 personas con un único centro, sin actividades peligrosas y trabajando allí. Nunca los reconocimientos médicos. · Libro, pág. 58</span></div><div class="tapa gran" data-pas data-etq="En un taller de pintura de coches, ¿qué va primero: repartir mascarillas o cambiar la pintura por una que no sea tóxica? (Caso inventado) → Cambiar la pintura" tabindex="0"><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/><path d="M7.5 15h9"/></svg></span><span class="q">En un taller de pintura de coches, <b>¿qué va primero: repartir mascarillas o cambiar la pintura por una que no sea tóxica?</b> <small>(Caso inventado)</small></span><span class="r">Cambiar la pintura</span><span class="x">Primero, quitar el peligro en el origen; el equipo de protección individual, la última barrera. · Libro, pág. 39, figura 2.11</span></div></div></div></div></section>
+<section class="d to-nit t-obre" id="d3" data-sec="2 · Documentos" data-tema="3.4 · Documentos · &lt;b&gt;Libro, págs. 62-63&lt;/b&gt;" data-min="13"><div class="cap"><span class="sec">2 · Documentos</span><span>3.4 · Documentos · <b>Libro, págs. 62-63</b></span></div><div class="cos"><div class="txt"><p class="num">2</p><p class="kicker">De qué hablamos</p><h2>¿Qué es evaluar un riesgo?</h2><ul class="llista"><li>¿Qué se mide?</li><li>¿Quién lo hace y dónde queda escrito?</li></ul></div></div></section>
+<section class="d to-paper t-idea" id="d4" data-sec="2 · Documentos" data-tema="3.4 · Documentos · &lt;b&gt;Libro, págs. 62 y 66&lt;/b&gt;"><span class="cinta">★ Entra en el examen</span><div class="cap"><span class="sec">2 · Documentos</span><span>3.4 · Documentos · <b>Libro, págs. 62 y 66</b></span></div><div class="cos"><div class="txt"><p class="kicker">Págs. 62 y 66 · tres papeles, una pregunta para cada uno</p><h2>Los tres documentos de la prevención</h2><div class="tapes" style="--cols:3"><div class="tapa" data-pas data-etq="Plan de prevención → Cómo se organiza la prevención" tabindex="0"><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M4 19V5M9 7h6"/></svg></span><span class="t">Plan de prevención</span><span class="q">¿Qué dice?</span><span class="r">Cómo se organiza la prevención</span><span class="x">quién, con qué medios y con qué política. Lo conoce toda la plantilla.</span></div><div class="tapa" data-pas data-etq="Evaluación de riesgos → Qué riesgos quedan y cuánto pesan" tabindex="0"><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span class="t">Evaluación de riesgos</span><span class="q">¿Qué dice?</span><span class="r">Qué riesgos quedan y cuánto pesan</span><span class="x">los que no se han podido evitar, puesto a puesto</span></div><div class="tapa" data-pas data-etq="Planificación → Qué se hace, quién, cuándo y con qué" tabindex="0"><span class="n">3</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="t">Planificación</span><span class="q">¿Qué dice?</span><span class="r">Qué se hace, quién, cuándo y con qué</span><span class="x">cada medida, con su plazo, su responsable y sus recursos</span></div></div><div class="on"><span class="dl">Dónde lo estudias</span><span class="xip">Libro · págs. 62 y 66 · 3.4.1, 3.4.2 y 3.4.4</span><span class="xip llei">LPRL · art. 16</span></div></div></div></section>
+<section class="d to-paper t-idea" id="d5" data-sec="2 · Documentos" data-tema="3.4.1 · Plan · &lt;b&gt;Libro, pág. 62&lt;/b&gt;"><span class="cinta">★ Entra en el examen</span><div class="cap"><span class="sec">2 · Documentos</span><span>3.4.1 · Plan · <b>Libro, pág. 62</b></span></div><div class="cos"><div class="txt"><p class="kicker"><a class="taula" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#f-3-4" target="_blank" rel="noopener">Figura 3.4</a> · criterio g · dos preguntas</p><h2>El plan, por dentro</h2><div class="tapes" style="--cols:2"><div class="tapa" data-pas data-etq="Hay un incendio → Las medidas de emergencia" tabindex="0"><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v5M12 17.5v.5"/></svg></span><span class="t">Hay un incendio</span><span class="q">¿Qué parte del plan te dice qué hacer?</span><span class="r">Las medidas de emergencia</span><span class="x">el punto 20 de los 22 del libro: quién avisa, quién apaga, cómo se evacua (LPRL, art. 20). Entero, en la unidad 4</span></div><div class="tapa" data-pas data-etq="Plan y evaluación → Para organizarlo todo" tabindex="0"><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2z"/><path d="M4 19V5M9 7h6"/></svg></span><span class="t">Plan y evaluación</span><span class="q">Si ya se ha evaluado, ¿para qué un plan?</span><span class="r">Para organizarlo todo</span><span class="x">la evaluación dice qué riesgos hay; el plan, quién hace qué, con qué medios y en qué orden, también en una emergencia (LPRL, art. 16.1)</span></div></div><div class="on"><span class="dl">Dónde lo estudias</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#f-3-4" target="_blank" rel="noopener">Libro · pág. 62 · figura 3.4 ↗</a><span class="xip llei">LPRL · arts. 16.1 y 20</span></div></div></div></section>
+<section class="d to-nit t-vot" id="d6" data-sec="2 · Documentos" data-tema="3.4.2 · Evaluación · &lt;b&gt;Libro, págs. 62-63&lt;/b&gt;"><div class="cap"><span class="sec">2 · Documentos</span><span>3.4.2 · Evaluación · <b>Libro, págs. 62-63</b></span></div><div class="cos"><div class="txt"><p class="kicker">Libro, pág. 77 · actividad final 3.9 · si se hizo antes del patio, sáltala (↓)</p><h2>¿Basta con evaluar una vez?</h2><p class="lead cas">Una oficina cambia todo el mobiliario y crea dos puestos nuevos.</p><div class="ops"><button type="button" class="op"><i>A</i><span>No: la evaluación se hizo al abrir y vale para siempre</span><small>La evaluación se repite cuando algo cambia</small></button><button type="button" class="op"><i>B</i><span>Sí, pero cuando alguien se haga daño en los puestos nuevos</span><small>No hay que esperar a un daño: basta con el cambio</small></button><button type="button" class="op ok"><i>C</i><span>Sí, los puestos que cambian, antes de usarlos</span><small>Cambia el lugar de trabajo: se actualiza la evaluación de esos puestos</small></button><button type="button" class="op"><i>D</i><span>Sí, pero la tiene que hacer la Inspección de Trabajo</span><small>La evalúa la empresa; la Inspección vigila</small></button></div><div class="sol" data-pas data-etq="Respuesta: C · Sí, los puestos que cambian, antes de usarlos"></div><div class="on"><span class="dl">Dónde lo estudias</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-3" target="_blank" rel="noopener">Libro · pág. 63 · tabla 3.3 ↗</a><span class="xip llei">RD 39/1997 · art. 4.2</span></div></div></div></section>
+<section class="d to-paper t-idea" id="d7" data-sec="2 · Documentos" data-tema="3.4.2 · Evaluación · &lt;b&gt;Libro, pág. 63&lt;/b&gt;"><span class="cinta">★ Entra en el examen</span><div class="cap"><span class="sec">2 · Documentos</span><span>3.4.2 · Evaluación · <b>Libro, pág. 63</b></span></div><div class="cos"><div class="txt"><p class="kicker"><a class="taula" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-3" target="_blank" rel="noopener">Tabla 3.3</a> · tres momentos</p><h2>¿Cuándo se evalúa?</h2><ol class="passos"><li class="pas" data-pas data-etq="Al empezar"><b>Al empezar</b><span>antes de que empiece la actividad: todos los puestos con riesgos que no se han podido evitar</span></li><li class="pas" data-pas data-etq="Cuando algo cambia"><b>Cuando algo cambia</b><span>otros equipos o productos, una tecnología nueva, el lugar, las condiciones, o llega alguien especialmente sensible</span></li><li class="pas" data-pas data-etq="Cuando hay un daño"><b>Cuando hay un daño</b><span>o se ve que las medidas no bastan: se revisa</span></li></ol><div class="on"><span class="dl">Dónde lo estudias</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-3" target="_blank" rel="noopener">Libro · pág. 63 · tabla 3.3 ↗</a><span class="xip llei">RD 39/1997 · arts. 4 y 6</span></div></div></div></section>
+<section class="d to-nit t-obre" id="d8" data-sec="3 · Método INSST" data-tema="3.4.3 · Método INSST · &lt;b&gt;Libro, págs. 64-66&lt;/b&gt;" data-min="17"><div class="cap"><span class="sec">3 · Método INSST</span><span>3.4.3 · Método INSST · <b>Libro, págs. 64-66</b></span></div><div class="cos"><div class="txt"><p class="num">3</p><p class="kicker">De qué hablamos</p><h2>¿Cómo se mide cuánto pesa un riesgo?</h2><ul class="llista"><li>¿Qué dos cosas hay que mirar?</li><li>¿Pesa igual un golpe que pasa una vez al año que uno de cada día?</li></ul></div></div></section>
+<section class="d to-nit t-idea" id="d9" data-sec="3 · Método INSST" data-tema="3.4.3 · Método INSST · &lt;b&gt;Libro, pág. 65&lt;/b&gt;"><span class="cinta">★ Entra en el examen</span><div class="cap"><span class="sec">3 · Método INSST</span><span>3.4.3 · Método INSST · <b>Libro, pág. 65</b></span></div><div class="cos"><div class="txt"><p class="kicker"><a class="taula" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-5" target="_blank" rel="noopener">Tablas 3.5</a> a <a class="taula" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-7" target="_blank" rel="noopener">3.7</a> · el método del INSST, el organismo público de prevención</p><h2>Cuánto daño haría × cada cuánto pasaría</h2><div class="matriu">
+<div class="mh"></div><div class="mh">Ligeramente dañino<br><small>un rasguño, una molestia</small></div><div class="mh">Dañino<br><small>una quemadura, una fractura menor, una sordera</small></div><div class="mh">Extremadamente dañino<br><small>una amputación, un cáncer, la muerte</small></div>
+<div class="mh fila">Baja<br><small>raras veces</small></div>
+<div class="tapa v-t" data-pas data-etq="Baja × ligeramente dañino → Trivial" tabindex="0"><span class="q">¿?</span><span class="r">Trivial</span></div>
+<div class="tapa v-to" data-pas data-etq="Baja × dañino → Tolerable" tabindex="0"><span class="q">¿?</span><span class="r">Tolerable</span></div>
+<div class="tapa v-m" data-pas data-etq="Baja × extremadamente dañino → Moderado" tabindex="0"><span class="q">¿?</span><span class="r">Moderado</span></div>
+<div class="mh fila">Media<br><small>en algunas ocasiones</small></div>
+<div class="tapa v-to" data-pas data-etq="Media × ligeramente dañino → Tolerable" tabindex="0"><span class="q">¿?</span><span class="r">Tolerable</span></div>
+<div class="tapa v-m" data-pas data-etq="Media × dañino → Moderado" tabindex="0"><span class="q">¿?</span><span class="r">Moderado</span></div>
+<div class="tapa v-i" data-pas data-etq="Media × extremadamente dañino → Importante" tabindex="0"><span class="q">¿?</span><span class="r">Importante</span></div>
+<div class="mh fila">Alta<br><small>siempre o casi</small></div>
+<div class="tapa v-m" data-pas data-etq="Alta × ligeramente dañino → Moderado" tabindex="0"><span class="q">¿?</span><span class="r">Moderado</span></div>
+<div class="tapa v-i" data-pas data-etq="Alta × dañino → Importante" tabindex="0"><span class="q">¿?</span><span class="r">Importante</span></div>
+<div class="tapa v-in" data-pas data-etq="Alta × extremadamente dañino → Intolerable" tabindex="0"><span class="q">¿?</span><span class="r">Intolerable</span></div>
+</div><div class="on"><span class="dl">Dónde lo estudias</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-7" target="_blank" rel="noopener">Libro · pág. 65 · tabla 3.7 ↗</a><a class="font" href="https://www.insst.es/documents/94886/96076/Evaluacion_riesgos.pdf" target="_blank" rel="noopener">El método, en el INSST ↗</a></div></div></div></section>
+<section class="d to-nit t-vot" id="d10" data-sec="3 · Método INSST" data-tema="3.4.3 · Método INSST · &lt;b&gt;Libro, pág. 66&lt;/b&gt;"><div class="cap"><span class="sec">3 · Método INSST</span><span>3.4.3 · Método INSST · <b>Libro, pág. 66</b></span></div><div class="cos"><div class="txt"><p class="kicker">Libro, pág. 66 · caso práctico resuelto 3.3 · antes de mirar la solución</p><h2>¿Qué nivel tiene el riesgo de Laura?</h2><p class="lead cas">Muy pocas veces, Laura tiene que manejar piezas pequeñas con filo. ¿Qué nivel tiene el riesgo de cortarse?</p><div class="ops"><button type="button" class="op ok"><i>A</i><span>Trivial</span><small>Un corte pequeño (ligeramente dañino) × raras veces (baja)</small></button><button type="button" class="op"><i>B</i><span>Tolerable</span><small>Sube un escalón «por si acaso»: la matriz no lo hace</small></button><button type="button" class="op"><i>C</i><span>Moderado</span><small>Un corte pequeño no es «dañino»</small></button><button type="button" class="op"><i>D</i><span>Importante</span><small>Confunde «afilado» con un daño grave</small></button></div><div class="sol" data-pas data-etq="Respuesta: A · Trivial"></div><div class="on"><span class="dl">Dónde lo estudias</span><span class="xip">Libro · pág. 66 · caso práctico resuelto 3.3</span></div></div></div></section>
+<section class="d to-groc t-feina" id="d11" data-sec="3 · Método INSST" data-tema="3.4.3 · Método INSST · &lt;b&gt;Libro, págs. 65 y 77&lt;/b&gt;" data-min="5"><div class="cap"><span class="sec">3 · Método INSST</span><span>3.4.3 · Método INSST · <b>Libro, págs. 65 y 77</b></span></div><div class="cos"><div class="txt"><p class="kicker">Cada uno solo · cinco minutos · con la matriz</p><h2>Un caso con la matriz</h2><div class="fitxes"><div><b>El técnico de soporte</b><span>Saca y mete servidores pesados del armario a mano; casi todos los días acaba con dolor de espalda, un trastorno musculoesquelético. <small>(Caso inventado)</small></span></div></div><div class="feina-g"><ol class="passos"><li><b>Severidad, probabilidad y nivel</b>, con la matriz.</li><li><b>Qué hay que hacer</b>, según el nivel.</li></ol><div class="crono" title="Clic o tecla T: empieza la cuenta atrás"><div><b>5:00</b><span>minutos</span></div></div></div><p class="nota">En la libreta o en el móvil. Hoy no cuenta.</p><div class="on"><span class="dl">Dónde lo estudias</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-7" target="_blank" rel="noopener">Libro · pág. 65 · tabla 3.7 ↗</a></div></div></div></section>
+<section class="d to-nit t-idea" id="d12" data-sec="3 · Método INSST" data-tema="3.4.3 · Método INSST · &lt;b&gt;Libro, pág. 65&lt;/b&gt;"><div class="cap"><span class="sec">3 · Método INSST</span><span>3.4.3 · Método INSST · <b>Libro, pág. 65</b></span></div><div class="cos"><div class="txt"><p class="kicker">Corrección</p><h2>El caso</h2><div class="tapes" style="--cols:1"><div class="tapa" data-pas data-etq="El técnico de soporte → Dañino × alta = importante" tabindex="0"><span class="n">1</span><span class="t">El técnico de soporte</span><span class="q">¿Severidad, probabilidad, nivel?</span><span class="r">Dañino × alta = importante</span><span class="x">un trastorno musculoesquelético, casi todos los días: hay que reducirlo ya (un carro elevador, dos personas)</span></div></div><div class="on"><span class="dl">Dónde lo estudias</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-7" target="_blank" rel="noopener">Libro · pág. 65 · tabla 3.7 ↗</a></div></div></div></section>
+<section class="d to-paper t-idea" id="d13" data-sec="4 · Qué se hace" data-tema="3.4.3 · Método INSST · &lt;b&gt;Libro, pág. 66&lt;/b&gt;" data-min="4"><span class="cinta">★ Entra en el examen</span><div class="cap"><span class="sec">4 · Qué se hace</span><span>3.4.3 · Método INSST · <b>Libro, pág. 66</b></span></div><div class="cos"><div class="txt"><p class="kicker"><a class="taula" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-8" target="_blank" rel="noopener">Tabla 3.8</a> · cinco niveles, cinco respuestas</p><h2>Y con lo que sale, ¿qué se hace?</h2><div class="tapes" style="--cols:5"><div class="tapa" data-pas data-etq="Trivial → Nada específico" tabindex="0"><span class="n">1</span><span class="t">Trivial</span><span class="q">¿Qué se hace?</span><span class="r">Nada específico</span></div><div class="tapa" data-pas data-etq="Tolerable → Comprobar de vez en cuando" tabindex="0"><span class="n">2</span><span class="t">Tolerable</span><span class="q">¿Qué se hace?</span><span class="r">Comprobar de vez en cuando</span></div><div class="tapa" data-pas data-etq="Moderado → Reducirlo, en un plazo" tabindex="0"><span class="n">3</span><span class="t">Moderado</span><span class="q">¿Qué se hace?</span><span class="r">Reducirlo, en un plazo</span></div><div class="tapa" data-pas data-etq="Importante → No, hasta reducirlo" tabindex="0"><span class="n">4</span><span class="t">Importante</span><span class="q">¿Se puede empezar?</span><span class="r">No, hasta reducirlo</span></div><div class="tapa" data-pas data-etq="Intolerable → Ni empezar ni seguir" tabindex="0"><span class="n">5</span><span class="t">Intolerable</span><span class="q">¿Se puede empezar?</span><span class="r">Ni empezar ni seguir</span><span class="x">si no se puede reducir, se prohíbe</span></div></div><div class="on"><span class="dl">Dónde lo estudias</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#t-3-8" target="_blank" rel="noopener">Libro · pág. 66 · tabla 3.8 ↗</a><a class="font" href="https://www.insst.es/documents/94886/96076/Evaluacion_riesgos.pdf" target="_blank" rel="noopener">El método, en el INSST ↗</a></div></div></div></section>
+<section class="d to-paper t-idea" id="d14" data-sec="✂ 5 · Para leer" data-tema="3.4.5 y 3.4.6 · &lt;b&gt;Libro, págs. 63 y 67&lt;/b&gt;" data-min="2"><div class="cap"><span class="sec">✂ 5 · Para leer</span><span>3.4.5 y 3.4.6 · <b>Libro, págs. 63 y 67</b></span></div><div class="cos"><div class="txt"><p class="kicker">Para leer, no entra en el examen</p><h2>Dos cosas para leer</h2><div class="fitxes"><div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M5 21v-3a7 7 0 0114 0v3"/></svg></span><b>¿Quién puede evaluar? (<a class="taula" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#f-3-6" target="_blank" rel="noopener">figura 3.6</a>)</b><span>Alguien con formación en prevención: nivel básico (un curso de 30 horas, o 50 si la actividad es peligrosa), intermedio o superior.</span></div><div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z"/><path d="M12 10v5M12 17.5v.5"/></svg></span><b>¿Y si hay un accidente? (pág. 67)</b><span>La empresa lo registra y lo comunica por los sistemas oficiales, como Delt@; los graves, enseguida.</span></div></div><div class="on"><span class="xip llei">RD 39/1997 · arts. 35-37</span></div></div></div></section>
+<section class="d to-vermell t-tanca" id="d15" data-sec="Salida"><div class="cap"><span class="sec">Salida</span></div><div class="cos"><div class="txt"><p class="kicker">Para salir</p><h2>El viernes: que te consulten y que te formen</h2><p class="lead">Hoy, cómo se mide un riesgo y qué se hace con lo que sale. El viernes 4 (15.05), quién te tiene que consultar, quién te representa en prevención y qué formación te toca (págs. 68-71).</p><div class="progres"><p class="pc">Unidad 3 · lo que llevamos del temario</p><div class="pb"><i style="width:60%"></i></div><p class="pt"><b>60 %</b> · Falta: consulta y participación, información y formación, vigilancia de la salud y responsabilidades. Al 100 %, el examen de la unidad.</p></div></div></div></section>
+<section class="d to-nit t-vot" id="d16" data-sec="➕ Consulta" data-tema="3.5 · Consulta · &lt;b&gt;Libro, pág. 68&lt;/b&gt;" data-extra><span class="cinta">➕ Si sobra tiempo · el comienzo del viernes</span><div class="cap"><span class="sec">➕ Consulta</span><span>3.5 · Consulta · <b>Libro, pág. 68</b></span></div><div class="cos"><div class="txt"><p class="kicker">Libro, pág. 77 · actividad final 3.14 · a la de tres</p><h2>¿Te tienen que preguntar?</h2><p class="lead cas">La empresa va a cambiar los guantes de protección. ¿Tiene que consultar a la plantilla?</p><div class="ops"><button type="button" class="op"><i>A</i><span>No: los equipos de protección los decide la empresa</span><small>También se consulta: afecta a la seguridad</small></button><button type="button" class="op ok"><i>B</i><span>Sí, antes de decidir, aunque no tiene que hacer lo que digan</span><small>Obligatoria y antes de decidir, pero no obliga a hacer lo que se diga</small></button><button type="button" class="op"><i>C</i><span>Sí, y tiene que hacer lo que diga la mayoría</span><small>Consultar no es votar: la empresa decide</small></button><button type="button" class="op"><i>D</i><span>Basta con avisar cuando ya los ha cambiado</span><small>Eso es informar, no consultar</small></button></div><div class="sol" data-pas data-etq="Respuesta: B · Sí, antes de decidir, aunque no tiene que hacer lo que digan"></div><div class="on"><span class="dl">Dónde lo estudias</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo1/u3-tablas/index.html#f-3-10" target="_blank" rel="noopener">Libro · pág. 68 · 3.5 y figura 3.10 ↗</a><span class="xip llei">LPRL · art. 33</span></div></div></div></section>
+</main>
+<script>
+/* ESCENA · el motor de la presentació (15-11-2026). Sense dependències: un sol fitxer HTML funciona sol, també obert des del disc.
+   Modes: escena (projectar) · lectura (mòbil, casa, imprimir) · #guio (el guió al mòbil del docent) · #presentador (segona finestra).
+   Tecles: → espai AvPàg = destapa el següent o avança · ← RePàg = torna a tapar o recula · ↓ ↑ = pantalla sencera ·
+   1-9 / A-D = toca aquella peça o opció · T = compte enrere · N = finestra del docent · P = projectar · L = llegir · R = torna a tapar · F = pantalla completa */
+(function(){
+'use strict';
+var $=function(s,e){return (e||document).querySelector(s)};
+var $$=function(s,e){return Array.prototype.slice.call((e||document).querySelectorAll(s))};
+var D=$$('main > section.d'), i=0, pres=null, crom=null;
+var T={queda:0,run:false,int:null};
+var h=location.hash;
+var mode=h==='#presentador'?'pres':(h==='#guio'?'guio':(window.innerWidth>=900?'escena':'lectura'));
+var TITOL=document.title;
+/* obert des del disc (file://), YouTube no deixa incrustar el vídeo (error 153): al seu lloc, un botó gran que l'obre en una pestanya */
+if(location.protocol==='file:')$$('.yt iframe').forEach(function(f){
+  var m=/embed\/([^?]+)/.exec(f.getAttribute('src')||''),a=document.createElement('a');
+  a.className='yt-fora';a.target='_blank';a.rel='noopener';a.href='https://www.youtube.com/watch?v='+(m?m[1]:'');
+  a.innerHTML='<i>▶</i><b>Ver el vídeo en YouTube</b><span>Se abre en otra pestaña: desde un archivo del ordenador, YouTube no deja verlo aquí.</span>';
+  f.replaceWith(a);
+});
+
+function passos(d){return $$('[data-pas]',d)}
+function titol(d){var t=$('h2',d);return t?t.textContent.trim():''}
+function minuts(n){for(var k=n;k>=0;k--){var m=D[k].getAttribute('data-min');if(m)return +m;if(D[k].getAttribute('data-sec')!==D[n].getAttribute('data-sec'))break}return 0}
+function mmss(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+function hora(){var n=new Date();return ('0'+n.getHours()).slice(-2)+':'+('0'+n.getMinutes()).slice(-2)}
+
+/* ───── destapar ───── */
+function sync(d){
+  d.classList.toggle('resolt',!!$('.sol.vist',d));
+  d.classList.toggle('tot',!!$('[data-tot].vist',d));
+  if(mode==='lectura'&&d.classList.contains('resolt'))passos(d).forEach(function(p){p.classList.add('vist')});
+  pinta();envia();
+}
+function destapa(p){
+  if(!p||p.classList.contains('vist'))return;
+  p.classList.add('vist','ara');setTimeout(function(){p.classList.remove('ara')},700);
+  sync(p.closest('.d'));
+}
+function tapa(p){
+  var d=p.closest('.d');p.classList.remove('vist');
+  if(p.classList.contains('sol'))$$('.op.provat',d).forEach(function(o){o.classList.remove('provat')});
+  sync(d);
+}
+function seg(){var p=passos(D[i]).filter(function(e){return !e.classList.contains('vist')})[0];if(p)destapa(p);else ves(i+1)}
+function ant(){var v=passos(D[i]).filter(function(e){return e.classList.contains('vist')});if(v.length)tapa(v[v.length-1]);else ves(i-1)}
+function reinicia(){var d=D[i];$$('.vist,.provat',d).forEach(function(e){e.classList.remove('vist','provat')});sync(d)}
+function totes(d){passos(d).forEach(function(p){p.classList.add('vist')});$$('.it',d).forEach(function(e){e.classList.add('vist')});sync(d)}
+function ves(n){
+  if(n<0||n>=D.length)return;
+  D[i].classList.remove('actual');i=n;D[i].classList.add('actual');
+  try{history.replaceState(null,'','#d'+(i+1))}catch(e){}
+  pinta();envia();
+}
+function toca(el){
+  var d=el.closest('.d');
+  if(el.classList.contains('op')){el.classList.add('provat');if(el.classList.contains('ok'))destapa($('.sol',d));else sync(d)}
+  else if(el.classList.contains('it')){if(el.hasAttribute('data-pas'))destapa(el);else{el.classList.add('vist');sync(d)}
+    if(mode==='lectura'&&!$('.it.mal:not(.vist)',d))destapa($('[data-tot]',d))}
+  else if(el.classList.contains('tapa'))destapa(el);
+}
+
+/* ───── el compte enrere ───── */
+function crono(){
+  if(T.run){clearInterval(T.int);T.run=false}
+  else{if(T.queda<=0)T.queda=(minuts(i)||3)*60;T.run=true;T.int=setInterval(function(){T.queda--;if(T.queda<=0){clearInterval(T.int);T.run=false}pintaTemps();envia()},1000)}
+  pintaTemps();envia();
+}
+function pintaTemps(){
+  var on=T.run||T.queda>0,fi=on&&T.queda<=0&&!T.run;
+  if(crom){var t=$('.temps',crom);t.textContent='⏱ '+mmss(T.queda);t.classList.toggle('on',T.run||T.queda>0);t.classList.toggle('fi',T.queda<=0&&!T.run&&t.classList.contains('on'))}
+  $$('.crono').forEach(function(c){var m=+c.closest('.d').getAttribute('data-min')||3;$('b',c).textContent=(T.run||T.queda>0)?mmss(T.queda):m+':00';c.classList.toggle('fi',fi)});
+}
+
+/* ───── el marc de l'escena: seccions, tema, punts, hora ───── */
+function fesCrom(){
+  crom=document.createElement('div');crom.id='crom';
+  var secs=[],vist={};
+  D.forEach(function(d,k){var s=d.getAttribute('data-sec');if(s&&!(s in vist)){vist[s]=1;secs.push({s:s,k:k,x:d.hasAttribute('data-extra')})}});
+  crom.innerHTML='<div class="dalt"><span class="nom"></span><span class="secs">'+secs.map(function(o){return '<a data-k="'+o.k+'"'+(o.x?' class="extra"':'')+'><span>'+o.s+'</span></a>'}).join('')+'</span><span class="tema"></span></div>'+
+    '<div class="baix"><span class="punts"></span><span class="queda"></span><span class="esp"></span><span class="temps"></span><span class="hora"></span><span class="num"></span><button data-c="ant" title="Atrás (←)">‹</button><button data-c="seg" title="Siguiente (→)">›</button></div>';
+  document.body.appendChild(crom);
+  $('.nom',crom).textContent=document.body.getAttribute('data-nom')||'';
+  crom.addEventListener('click',function(e){var a=e.target.closest('a[data-k]'),b=e.target.closest('button');if(a)ves(+a.getAttribute('data-k'));else if(b)(b.getAttribute('data-c')==='seg'?seg:ant)()});
+  setInterval(function(){$('.hora',crom).textContent=hora()},15000);
+}
+function pinta(){
+  if(mode!=='escena'||!crom)return;
+  var d=D[i],ps=passos(d),fets=ps.filter(function(p){return p.classList.contains('vist')}).length;
+  crom.classList.toggle('clar',d.classList.contains('to-nit')||d.classList.contains('to-vermell'));
+  $$('.secs a',crom).forEach(function(a){a.classList.toggle('ara',a.textContent===d.getAttribute('data-sec'))});
+  $('.tema',crom).innerHTML=d.getAttribute('data-tema')||'';
+  $('.punts',crom).textContent=ps.map(function(p,k){return k<fets?'●':'○'}).join('');
+  $('.queda',crom).textContent=ps.length&&fets<ps.length?(ps.length-fets)+' por destapar':'';
+  $('.num',crom).textContent=(i+1)+' / '+D.length;
+  $('.hora',crom).textContent=hora();
+}
+
+/* ───── la finestra del docent ───── */
+function estat(){return {escena:1,i:i,vist:passos(D[i]).map(function(p){return p.classList.contains('vist')?1:0}),queda:T.queda,run:T.run}}
+function envia(){if(pres&&!pres.closed)pres.postMessage(estat(),'*')}
+function obrePres(){pres=window.open(location.href.split('#')[0]+'#presentador','escena-docent','width=980,height=720');setTimeout(envia,800)}
+function guioDe(d){var g=$('.guio',d);return g?g.innerHTML:'<p class="nota">(sin guion)</p>'}
+function llistaPassos(d,vist){
+  var ps=passos(d),seg=false;if(!ps.length)return '';
+  return '<ol class="ps">'+ps.map(function(p,k){var f=vist&&vist[k],c=f?'fet':(!seg?(seg=true,'seg'):'');return '<li class="'+c+'">'+(p.getAttribute('data-etq')||'…')+'</li>'}).join('')+'</ol>';
+}
+function modePres(){
+  var c=document.createElement('div');c.className='pr';document.body.appendChild(c);
+  c.innerHTML='<header><b class="h"></b><span class="t"></span><span class="e"></span><span class="n"></span></header><div class="dos"><section class="ara-d"></section><aside class="despres"></aside></div>'+
+    '<footer><button data-c="ant">←</button><button data-c="seg">Siguiente →</button><span>Esta ventana es solo para ti. Las flechas mueven la pantalla proyectada. T = cuenta atrás.</span></footer>';
+  function cmd(x){if(window.opener)window.opener.postMessage({escena:1,cmd:x},'*')}
+  c.addEventListener('click',function(e){var b=e.target.closest('button');if(b)cmd(b.getAttribute('data-c'))});
+  document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowRight'||k===' '||k==='PageDown'){e.preventDefault();cmd('seg')}else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();cmd('ant')}else if(k==='t'||k==='T')cmd('crono')});
+  window.addEventListener('message',function(e){
+    var s=e.data;if(!s||!s.escena||s.cmd)return;var d=D[s.i],n=D[s.i+1];
+    $('.ara-d',c).innerHTML='<p class="k">'+(d.getAttribute('data-sec')||'')+'</p><h1>'+titol(d)+'</h1><div class="g">'+guioDe(d)+'</div>'+llistaPassos(d,s.vist);
+    $('.despres',c).innerHTML=n?'<p class="k">Después</p><h2>'+titol(n)+'</h2><div>'+guioDe(n)+'</div>':'<p class="k">Fin</p>';
+    $('.n',c).textContent=(s.i+1)+' / '+D.length;
+    var t=$('.t',c);t.textContent=(s.run||s.queda>0)?'⏱ '+mmss(s.queda):'';t.classList.toggle('fi',!s.run&&s.queda<=0);
+  });
+  setInterval(function(){$('.h',c).textContent=hora()},1000);$('.h',c).textContent=hora();
+  cmd('hola');
+}
+function modeGuio(){
+  var c=document.createElement('div');c.id='guio';document.body.appendChild(c);
+  c.innerHTML='<h1>'+TITOL+'</h1><p class="ajuda">El guion para tu móvil: qué preguntar en cada pantalla y la respuesta. La clase no lo ve.</p>'+
+    D.map(function(d,k){return '<div class="gd"><p class="k">'+(k+1)+' · '+(d.getAttribute('data-sec')||'')+(d.getAttribute('data-min')?' · '+d.getAttribute('data-min')+' min':'')+'</p><h2>'+titol(d)+'</h2>'+guioDe(d)+llistaPassos(d)+'</div>'}).join('');
+}
+
+/* ───── mode lectura ───── */
+function modeLectura(){
+  var b=document.createElement('div');b.className='barra-lectura';
+  b.innerHTML='<b>'+TITOL+'</b><button data-c="proj">▶ Proyectar</button>';document.body.appendChild(b);
+  var f=document.createElement('div');f.className='fi-lectura';f.innerHTML='<button data-c="print">Imprimir · guardar en PDF</button>';$('main').appendChild(f);
+  D.forEach(function(d){
+    $$('.pas',d).forEach(function(p){if(!d.classList.contains('t-vot')&&!p.hasAttribute('data-tot')&&!p.classList.contains('tapa'))p.classList.add('vist')});
+    var l=$('.llegeix',d);if(l&&l.tagName!=='DETAILS'){var det=document.createElement('details');det.className='llegeix';det.innerHTML='<summary>Léelo entero</summary><div>'+l.innerHTML+'</div>';l.replaceWith(det)}
+  });
+  document.addEventListener('click',function(e){var b=e.target.closest('button[data-c]');if(!b)return;if(b.getAttribute('data-c')==='print'){D.forEach(totes);window.print()}else canvia('escena')});
+}
+function canvia(m){location.hash='';mode=m;document.body.className=m;if(m==='escena'){if(!crom)fesCrom();ves(i);var b=$('.barra-lectura');if(b)b.remove();var f=$('.fi-lectura');if(f)f.remove()}else{D.forEach(function(d){d.classList.remove('actual')});modeLectura()}}
+
+/* ───── comprovació de maqueta: res no pot sobrar amb tot destapat (la crida munta.py comprova) ───── */
+window.escena={
+  comprova:function(){
+    var mal=[];
+    D.forEach(function(d,k){
+      var abans=$$('.vist',d);ves(k);totes(d);
+      [d,$('.cos',d),$('.txt',d),$('.visual',d)].forEach(function(e){
+        if(e&&(e.scrollHeight>e.clientHeight+2||e.scrollWidth>e.clientWidth+2))mal.push({n:k+1,titol:titol(d),on:e.className.split(' ')[0],sobra_alt:e.scrollHeight-e.clientHeight,sobra_ample:e.scrollWidth-e.clientWidth});
+      });
+      $$('.vist',d).forEach(function(e){if(abans.indexOf(e)<0)e.classList.remove('vist')});$$('.provat',d).forEach(function(e){e.classList.remove('provat')});sync(d);
+    });
+    ves(0);return mal;
+  },
+  ves:function(n){ves(n-1)},totes:function(){totes(D[i])},n:function(){return D.length}
+};
+
+/* ───── arrencada ───── */
+if(mode==='pres'){document.body.className='pres-m';modePres();return}
+if(mode==='guio'){document.body.className='guio-m';modeGuio();return}
+document.body.className=mode;
+document.addEventListener('click',function(e){
+  var el=e.target.closest('.op,.it,.tapa,.crono');if(!el||e.target.closest('a'))return;
+  if(el.classList.contains('crono'))crono();else toca(el);
+});
+window.addEventListener('message',function(e){var s=e.data;if(!s||!s.escena||!s.cmd)return;if(s.cmd==='seg')seg();else if(s.cmd==='ant')ant();else if(s.cmd==='crono')crono();else envia()});
+document.addEventListener('keydown',function(e){
+  if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;
+  var k=e.key,d=D[i];
+  if(k==='p'||k==='P'){if(mode!=='escena')canvia('escena');return}   // P = projectar (si ja es projecta, no fa res)
+  if((k==='l'||k==='L')&&mode==='escena'){canvia('lectura');return}
+  if(mode!=='escena')return;
+  if(k==='ArrowRight'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();seg()}
+  else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();ant()}
+  else if(k==='ArrowDown'){e.preventDefault();ves(i+1)}
+  else if(k==='ArrowUp'){e.preventDefault();ves(i-1)}
+  else if(k==='Home')ves(0);else if(k==='End')ves(D.length-1)
+  else if(k==='t'||k==='T')crono()
+  else if(k==='n'||k==='N')obrePres()
+  else if(k==='r'||k==='R')reinicia()
+  else if(k==='f'||k==='F'){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen()}
+  else{
+    var n=/^[1-9]$/.test(k)?+k:(/^[a-dA-D]$/.test(k)&&$('.ops',d)?k.toLowerCase().charCodeAt(0)-96:0);
+    if(n){var el=$$('.op,.it,.tapa',d)[n-1];if(el)toca(el)}
+  }
+});
+if(mode==='escena'){fesCrom();var m=/^#d(\d+)$/.exec(h);i=m?Math.min(D.length,Math.max(1,+m[1]))-1:0;D[i].classList.add('actual');pinta()}
+else modeLectura();
+pintaTemps();
+})();
+
+</script>
+</body>
+</html>
