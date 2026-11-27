@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El Canvas ecosocial, el greenwashing i els ODS · Unitat 7 · Sessió 3</title>
+<style>
+/* ESCENA · plantilla de presentacions d'aula (15-11-2026)
+   Tres idees: (1) el color diu què toca: NIT = pensar i respondre · PAPER = explicació · GROC = feina de l'alumnat ·
+   VERMELL = obrir i tancar; (2) la pregunta sempre a la vista i la resposta tapada fins que el docent la destapa;
+   (3) tot en «em» sobre una escena 16:9 que s'escala sola: el que cap a 1280×720 cap a qualsevol projector. */
+:root{
+  --nit:#0c1524; --nit2:#17243b; --paper:#f7f2e8; --blanc:#fffdf8; --tinta:#121925; --suau:#5a6474; --linia:#d9d1c1;
+  --groc:#ffc21a; --vermell:#e0392b; --verd:#1c9a57; --blau:#2a66d1;
+  --w:min(100vw,177.78vh); --h:min(56.25vw,100vh);
+  --f:"Segoe UI Variable Display","Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:#04070c;color:var(--tinta);font-family:var(--f);line-height:1.35;-webkit-font-smoothing:antialiased}
+b,strong{font-weight:800}
+a{color:inherit}
+svg{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+
+/* ───────── la diapositiva ───────── */
+.d{position:relative;display:flex;flex-direction:column;background:var(--paper);color:var(--tinta);--acc:var(--vermell);--fons2:var(--blanc);--vora:var(--linia);--tenue:var(--suau)}
+.d.to-nit{background:radial-gradient(120% 90% at 15% 0%,var(--nit2),var(--nit) 60%);color:#fff;--acc:var(--groc);--fons2:rgba(255,255,255,.07);--vora:rgba(255,255,255,.22);--tenue:#aab6c8}
+.d.to-groc{background:var(--groc);--acc:var(--tinta);--fons2:rgba(255,255,255,.55);--vora:rgba(18,25,37,.3);--tenue:#4a4326}
+.d.to-vermell{background:var(--vermell);color:#fff;--acc:#fff;--fons2:rgba(255,255,255,.14);--vora:rgba(255,255,255,.4);--tenue:#ffd9d3}
+.cap{display:flex;gap:.8em;align-items:center;font-size:.72em;font-weight:700;letter-spacing:.04em;color:var(--tenue);margin:0 0 .8em}
+.cap .sec{background:var(--acc);color:var(--paper);padding:.1em .7em;border-radius:99em}
+.to-nit .cap .sec,.to-vermell .cap .sec{color:var(--nit)}
+.cos{flex:1;min-height:0;display:flex;gap:2.2em;align-items:stretch}
+.txt{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.visual{flex:0 0 38%;min-width:0;margin:0;display:flex;flex-direction:column;justify-content:center;gap:.5em}
+.visual.ample{flex-basis:50%}
+.visual>svg,.visual>img{width:100%;height:auto;max-height:100%;object-fit:contain;border-radius:.6em}
+.visual figcaption{font-size:.62em;color:var(--tenue);line-height:1.3}
+.kicker{margin:0 0 .5em;font-size:.74em;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.to-groc .kicker{color:#7a1d12}
+h2{margin:0 0 .45em;font-size:2.35em;line-height:1.04;letter-spacing:-.025em;font-weight:800;text-wrap:balance}
+.lead{margin:0 0 .7em;font-size:1.22em;line-height:1.38;max-width:34em}
+.lead.cas{border-left:.3em solid var(--acc);padding:.1em 0 .1em .8em}
+.nota{font-size:.82em;color:var(--tenue);margin:.5em 0 0}
+.cinta{position:absolute;top:0;right:3em;background:var(--tinta);color:var(--groc);font-size:.66em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:.45em 1em .4em;border-radius:0 0 .6em .6em;z-index:2}
+.to-nit .cinta{background:var(--groc);color:var(--tinta)}
+
+/* «Dónde lo estudias» i lleis: sempre al peu, en un requadre */
+.on{display:flex;flex-wrap:wrap;align-items:center;gap:.4em .6em;margin:.9em 0 0;font-size:.72em}
+.on .dl{font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--tenue)}
+.on .xip{border:.12em solid currentColor;border-radius:99em;padding:.12em .8em;font-weight:700}
+.on .xip.llei{border-style:dashed}
+a.font{display:inline-flex;align-items:center;gap:.3em;background:var(--blau);color:#fff;text-decoration:none;border-radius:99em;padding:.18em .9em;font-weight:800}
+a.font:hover{filter:brightness(1.15)}
+
+/* ───────── passos: tot el que es destapa ───────── */
+.pas{transition:opacity .35s,transform .35s}
+.escena .pas:not(.vist),.lectura .pas:not(.vist){opacity:0;transform:translateY(.5em);pointer-events:none}
+.lectura .pas:not(.vist){display:none}
+.ara{animation:flaix .7s ease-out}
+@keyframes flaix{0%{box-shadow:0 0 0 0 var(--groc)}40%{box-shadow:0 0 0 .5em rgba(255,194,26,.55)}100%{box-shadow:0 0 0 0 rgba(255,194,26,0)}}
+
+/* tapes: el títol i la pregunta a la vista; la resposta, sota la tapa */
+.tapes{display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));gap:.7em;margin:.2em 0 0}
+.tapa{position:relative;text-align:left;border:.14em dashed var(--vora);background:var(--fons2);border-radius:.8em;padding:.75em .9em .8em;cursor:pointer;display:flex;flex-direction:column;gap:.25em;min-height:6.4em;transition:border-color .3s,background .3s}
+.tapa:hover{border-color:var(--acc)}
+.tapa .n{position:absolute;top:-.55em;left:.7em;width:1.5em;height:1.5em;border-radius:50%;background:var(--acc);color:var(--paper);font-weight:800;font-size:.8em;display:grid;place-items:center}
+.to-nit .tapa .n{color:var(--nit)}
+.tapa .ic{width:2em;height:2em;color:var(--acc);flex:none}
+.tapa .ic svg{width:100%;height:100%}
+.tapa .t{font-weight:800;font-size:1.08em;line-height:1.15}
+.tapa .q{color:var(--tenue);font-size:.92em;line-height:1.3}
+.tapa .q::before{content:"? ";font-weight:800;color:var(--acc)}
+.tapa .r{display:none;font-weight:800;font-size:1.25em;line-height:1.15}
+.tapa .x{display:none;font-size:.86em;color:var(--tenue);line-height:1.3}
+.tapa.vist{border-style:solid;border-color:var(--verd);background:rgba(28,154,87,.14);cursor:default}
+.to-paper .tapa.vist{background:#e9f6ee}
+.tapa.vist .q{display:none}
+.tapa.vist .r,.tapa.vist .x{display:block}
+.tapa.gran .q{font-size:1.05em;color:inherit}
+
+/* vot: A, B, C grans; primer es prova, després es destapa */
+.ops{display:grid;gap:.55em;margin:.1em 0 0}
+.op{display:grid;grid-template-columns:2.1em 1fr;gap:.1em .8em;align-items:center;text-align:left;border:.14em solid var(--vora);background:var(--fons2);border-radius:.7em;padding:.55em .9em;cursor:pointer;transition:all .25s}
+.op:hover{border-color:var(--acc)}
+.op i{grid-row:span 2;font-style:normal;width:1.9em;height:1.9em;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--acc);color:var(--nit)}
+.to-paper .op i{color:#fff}
+.op span{font-weight:700;font-size:1.08em;line-height:1.25}
+.op small{display:none;grid-column:2;font-size:.86em;line-height:1.3;opacity:.92}
+.op.provat small,.resolt .op small{display:block}
+.op.provat.ok,.resolt .op.ok{background:var(--verd);border-color:var(--verd);color:#fff}
+.op.provat.ok i,.resolt .op.ok i{background:#fff;color:var(--verd)}
+.op.provat:not(.ok){border-color:var(--vermell);background:rgba(224,57,43,.18)}
+.op.provat:not(.ok) i{background:var(--vermell);color:#fff}
+.resolt .op:not(.ok):not(.provat){opacity:.62}
+.sol{display:none}
+.idea{display:flex;flex-direction:column;border-left:.3em solid var(--groc);background:var(--fons2);border-radius:.5em;padding:.45em .9em;margin:.7em 0 0;max-width:36em}
+.idea b{font-size:1.06em}
+.idea span{font-size:.92em;color:var(--tenue)}
+
+/* revisa: «hi ha N errors»: peces penjades a la paret; clic = veredicte */
+.paret{display:grid;grid-template-columns:repeat(var(--cols,4),minmax(0,1fr));gap:.6em;margin:.1em 0 0}
+.it{position:relative;display:grid;grid-template-columns:4.6em 1fr;gap:.1em .7em;align-items:center;text-align:left;border:.14em solid var(--vora);background:var(--fons2);border-radius:.7em;padding:.55em .65em;cursor:pointer;min-height:5.6em}
+.it:hover{border-color:var(--acc)}
+.it .n{position:absolute;top:-.55em;left:-.4em;width:1.6em;height:1.6em;border-radius:50%;background:var(--acc);color:var(--nit);font-weight:800;font-size:.85em;display:grid;place-items:center;z-index:1}
+.it .img{grid-row:span 2;position:relative;height:4.4em;display:grid;place-items:center}
+.it .img svg,.it .img img{max-height:4.4em;width:auto;max-width:100%;filter:drop-shadow(0 .15em .25em rgba(0,0,0,.35))}
+.it .img .bo{display:none}
+.it b{font-size:.95em;line-height:1.15;align-self:end}
+.it small{font-size:.74em;color:var(--tenue);line-height:1.25;align-self:start}
+.it em{display:none;grid-column:1/-1;font-style:normal;font-size:.8em;font-weight:700;line-height:1.25;margin-top:.2em}
+.it.vist em,.tot .it em{display:block}
+.it.mal.vist,.tot .it.mal{border-color:var(--vermell);background:rgba(224,57,43,.2)}
+.it.be.vist,.tot .it.be{border-color:var(--verd);background:rgba(28,154,87,.2)}
+.it.mal.vist .img .dol,.tot .it.mal .img .dol{display:none}
+.it.mal.vist .img .bo,.tot .it.mal .img .bo{display:block;animation:gira .5s ease-out}
+@keyframes gira{from{transform:rotateY(90deg)}to{transform:none}}
+.it.mal.vist .n,.tot .it.mal .n{background:var(--vermell);color:#fff}
+.it.be.vist .n,.tot .it.be .n{background:var(--verd);color:#fff}
+
+/* llista de passos, cadena i xifres */
+.passos{list-style:none;counter-reset:p;margin:.1em 0 0;padding:0;display:grid;gap:.55em}
+.passos li{counter-increment:p;position:relative;padding:.05em 0 .05em 2.6em;font-size:1.1em;line-height:1.3}
+.passos li::before{content:counter(p);position:absolute;left:0;top:0;width:1.75em;height:1.75em;border-radius:50%;background:var(--acc);color:var(--paper);font-weight:800;display:grid;place-items:center}
+.to-nit .passos li::before{color:var(--nit)}
+.passos li.pas>b{display:block}
+.passos li span{color:var(--tenue);font-size:.9em}
+.fil{display:flex;align-items:stretch;gap:.45em;margin:.3em 0 .8em}
+.fil>span{flex:1 1 0;border:.14em solid var(--vora);background:var(--fons2);border-radius:.6em;padding:.5em .7em;font-weight:700;line-height:1.2;display:grid;align-content:center}
+.fil>span:last-of-type{background:var(--acc);border-color:var(--acc);color:var(--paper)}
+.to-nit .fil>span:last-of-type{color:var(--nit)}
+.fil>i{align-self:center;font-style:normal;font-weight:800;color:var(--acc);font-size:1.3em}
+.xifres{display:flex;flex-wrap:wrap;gap:.8em;margin:.2em 0 0}
+.xifra{flex:1 1 8em;border-top:.3em solid var(--acc);padding:.3em 0 0}
+.xifra b{display:block;font-size:3.4em;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.xifra b i{font-style:normal;font-size:.36em;letter-spacing:0;margin-left:.2em;color:var(--tenue)}
+.xifra span{font-size:.9em;color:var(--tenue)}
+.llista{margin:.1em 0 0;padding:0;list-style:none;display:grid;gap:.4em;font-size:1.08em}
+.llista li{padding-left:1.4em;position:relative}
+.llista li::before{content:"";position:absolute;left:.1em;top:.45em;width:.6em;height:.6em;background:var(--acc);border-radius:.12em}
+.dues{display:grid;grid-template-columns:1fr 1fr;gap:1em}
+.dues h3{margin:0 0 .4em;font-size:.8em;letter-spacing:.12em;text-transform:uppercase}
+.dues>div{border-top:.3em solid var(--verd);padding-top:.5em}
+.dues>div+div{border-color:var(--tenue)}
+.dues .llista{font-size:.86em;gap:.28em}
+
+/* captura de web, amb el marc del navegador i la marca que es destapa */
+.nav{margin:0;border-radius:.7em;overflow:hidden;box-shadow:0 .5em 1.6em rgba(0,0,0,.35);background:#fff;color:var(--tinta)}
+.nav .barra{display:flex;align-items:center;gap:.35em;background:#e7e3db;padding:.4em .7em;font-size:.6em}
+.nav .barra i{width:.75em;height:.75em;border-radius:50%;background:#c9c2b4}
+.nav .barra span{flex:1;margin-left:.6em;background:#fff;border-radius:99em;padding:.2em .9em;color:var(--suau);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav .pant{position:relative;line-height:0}
+.nav .pant img{width:100%;height:auto;display:block}
+.nav mark{position:absolute;background:rgba(255,194,26,.38);outline:.18em solid var(--groc);border-radius:.2em}
+.visual .peu-cap{display:flex;align-items:center;justify-content:space-between;gap:.8em;font-size:.66em;color:var(--tenue);margin-top:.5em}
+
+/* retall de premsa fet a codi (titular amb paraules pròpies + enllaç) */
+.retall{background:#fbf8f1;color:var(--tinta);border-radius:.5em;padding:1em 1.1em;box-shadow:0 .5em 1.6em rgba(0,0,0,.35);transform:rotate(-1.2deg);border-top:.5em solid var(--tinta)}
+.retall .mitja{display:flex;justify-content:space-between;font-size:.62em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;border-bottom:.1em solid var(--tinta);padding-bottom:.4em;margin-bottom:.6em}
+.retall h3{margin:0 0 .5em;font-family:Georgia,"Times New Roman",serif;font-size:1.35em;line-height:1.15}
+.retall p{margin:0 0 .7em;font-family:Georgia,serif;font-size:.86em;line-height:1.4;color:#333}
+
+/* feina de l'alumnat: consigna gran i compte enrere */
+.feina-g{display:grid;grid-template-columns:1fr auto;gap:1.5em;align-items:center}
+.crono{width:8.5em;height:8.5em;border-radius:50%;border:.5em solid var(--tinta);display:grid;place-items:center;text-align:center;background:rgba(255,255,255,.5);cursor:pointer}
+.crono b{font-size:2.3em;line-height:1;font-variant-numeric:tabular-nums}
+.crono span{display:block;font-size:.6em;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.crono.fi{background:var(--vermell);border-color:var(--vermell);color:#fff}
+
+/* portada i tancament */
+.t-portada h2,.t-tanca h2{font-size:4em;line-height:.98}
+.t-portada .lead,.t-tanca .lead{font-size:1.3em}
+.agenda{display:grid;gap:.45em;margin:.6em 0 0;padding:0;list-style:none;counter-reset:a}
+.agenda li{counter-increment:a;display:flex;gap:.7em;align-items:baseline;font-size:1.12em;font-weight:700}
+.agenda li::before{content:counter(a);font-size:1.5em;font-weight:800;min-width:1em;opacity:.75}
+.agenda li small{font-weight:500;opacity:.8}
+.t-obre .num{font-size:9em;line-height:.8;font-weight:800;letter-spacing:-.05em;color:var(--acc);margin:0 0 .12em}
+.t-obre h2{font-size:3.2em}
+
+.llegeix,.guio{display:none}
+
+/* ───────── mode ESCENA (projectar) ───────── */
+body.escena{overflow:hidden}
+body.escena .d{display:none;position:fixed;left:50%;top:50%;width:var(--w);height:var(--h);transform:translate(-50%,-50%);font-size:calc(var(--w)/64);padding:3.4em 3em 2.9em;overflow:hidden}
+body.escena .d.actual{display:flex;animation:entra .3s ease-out}
+@keyframes entra{from{opacity:.2}to{opacity:1}}
+body.escena .cap,body.escena .barra-lectura,body.escena .fi-lectura{display:none}
+#crom{display:none}
+body.escena #crom{display:block;position:fixed;left:50%;top:50%;width:var(--w);height:var(--h);transform:translate(-50%,-50%);font-size:calc(var(--w)/64);pointer-events:none;z-index:5;color:var(--tinta)}
+#crom.clar{color:#fff}
+#crom .dalt{position:absolute;left:3em;right:3em;top:.9em;display:flex;align-items:center;gap:.9em;font-size:.62em;font-weight:700}
+#crom .nom{font-weight:800;letter-spacing:.06em;text-transform:uppercase;opacity:.75;white-space:nowrap}
+#crom .secs{display:flex;gap:.35em;flex:1;min-width:0}
+#crom .secs a{pointer-events:auto;cursor:pointer;padding:.2em .8em;border-radius:99em;border:.12em solid currentColor;opacity:.45;white-space:nowrap}
+#crom .secs a.ara{opacity:1;background:currentColor}
+#crom .secs a.ara span{color:var(--paper);mix-blend-mode:normal}
+#crom.clar .secs a.ara span{color:var(--nit)}
+#crom .secs a.extra{border-style:dashed}
+#crom .tema{opacity:.8;white-space:nowrap;text-align:right}
+#crom .baix{position:absolute;left:3em;right:3em;bottom:.8em;display:flex;align-items:center;gap:.8em;font-size:.66em;font-weight:700}
+#crom .punts{letter-spacing:.2em;font-size:1.1em}
+#crom .queda{opacity:.7}
+#crom .esp{flex:1}
+#crom .temps{font-variant-numeric:tabular-nums;padding:.1em .7em;border-radius:99em;background:var(--groc);color:var(--tinta);display:none}
+#crom .temps.on{display:inline-block}
+#crom .temps.fi{background:var(--vermell);color:#fff}
+#crom .hora{font-variant-numeric:tabular-nums;opacity:.8}
+#crom button{pointer-events:auto;cursor:pointer;border:.12em solid currentColor;background:transparent;border-radius:.5em;width:2.1em;height:1.7em;font-weight:800;opacity:.7}
+#crom button:hover{opacity:1}
+
+/* ───────── mode LECTURA (mòbil, estudiar a casa, imprimir) ───────── */
+body.lectura{background:#e9e3d6}
+body.lectura main{max-width:54em;margin:0 auto;padding:4.2em 1em 5em;font-size:17px}
+body.lectura .d{border-radius:1em;padding:1.4em 1.5em 1.2em;margin:0 0 1.2em;overflow:hidden}
+body.lectura h2{font-size:1.7em}
+body.lectura .t-portada h2,body.lectura .t-tanca h2{font-size:2.3em}
+body.lectura .t-obre .num{font-size:4em}
+body.lectura .t-obre h2{font-size:2em}
+body.lectura .cos{flex-direction:column;gap:1em}
+body.lectura .visual{flex:none;max-width:26em}
+body.lectura .llegeix{display:block;margin:.9em 0 0;font-size:.92em;border-top:.1em dashed var(--vora);padding-top:.6em}
+body.lectura .llegeix summary{cursor:pointer;font-weight:800;color:var(--acc)}
+body.lectura .cinta{right:1em}
+.barra-lectura{position:fixed;top:0;left:0;right:0;z-index:9;background:var(--nit);color:#fff;display:flex;align-items:center;gap:.8em;padding:.55em 1em;font-size:15px}
+.barra-lectura b{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barra-lectura button,.fi-lectura button{border:0;border-radius:.5em;background:var(--groc);color:var(--tinta);font-weight:800;padding:.4em .9em;cursor:pointer}
+.fi-lectura{text-align:center;margin:2em 0 0}
+@media (max-width:720px){
+  body.lectura main{font-size:16px}
+  body.lectura .tapes,body.lectura .paret,body.lectura .dues,body.lectura .feina-g{grid-template-columns:1fr}
+  body.lectura .fil{flex-direction:column}
+  body.lectura .fil>i{transform:rotate(90deg)}
+  body.lectura .crono{display:none}
+}
+
+/* ───────── GUIÓ (mòbil del docent) i finestra del PRESENTADOR ───────── */
+body.guio-m,body.pres-m{background:var(--nit);color:#fff;font-size:17px}
+body.guio-m main,body.pres-m main,body.guio-m #crom,body.pres-m #crom,body.guio-m .barra-lectura,body.pres-m .barra-lectura{display:none}
+#guio{max-width:46em;margin:0 auto;padding:1em}
+#guio h1{font-size:1.3em;margin:.2em 0 .1em}
+#guio .ajuda{color:#aab6c8;font-size:.86em;margin:0 0 1.2em}
+.gd{border-top:.1em solid rgba(255,255,255,.2);padding:.9em 0}
+.gd .k{font-size:.74em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--groc);margin:0}
+.gd h2{font-size:1.25em;margin:.15em 0 .4em;letter-spacing:0}
+.gd ul{margin:.2em 0;padding-left:1.2em}
+.gd li{margin:.25em 0}
+.gd .clau,.pr .clau{background:rgba(28,154,87,.25);border-left:.3em solid var(--verd);border-radius:.4em;padding:.5em .8em;margin:.5em 0}
+.gd .clau::before,.pr .clau::before{content:"La resposta · ";font-weight:800;color:#8fe3b6}
+.gd ol.ps,.pr ol.ps{margin:.5em 0 0;padding-left:1.4em;color:#cfd8e6;font-size:.92em}
+.pr ol.ps li.fet{opacity:.4;text-decoration:line-through}
+.pr ol.ps li.seg{color:var(--groc);font-weight:800}
+.pr{display:grid;grid-template-rows:auto 1fr auto;height:100vh}
+.pr header,.pr footer{display:flex;align-items:center;gap:1.2em;padding:.6em 1.2em;background:rgba(255,255,255,.08)}
+.pr header b{font-size:1.9em;font-variant-numeric:tabular-nums}
+.pr header .t{font-size:1.9em;font-weight:800;color:var(--groc);font-variant-numeric:tabular-nums}
+.pr header .t.fi{color:#ff8a7f}
+.pr header .e{flex:1}
+.pr .dos{display:grid;grid-template-columns:2fr 1fr;gap:1.5em;padding:1.2em;overflow:auto}
+.pr .k{font-size:.8em;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--groc);margin:0}
+.pr h1{font-size:1.9em;line-height:1.1;margin:.15em 0 .5em}
+.pr .g{font-size:1.25em;line-height:1.4}
+.pr .g ul{margin:.2em 0;padding-left:1.1em}
+.pr .g li{margin:.35em 0}
+.pr .despres{border-left:.1em solid rgba(255,255,255,.2);padding-left:1.2em;color:#cfd8e6}
+.pr .despres h2{font-size:1.2em;letter-spacing:0;color:#fff}
+.pr footer button{border:0;border-radius:.6em;background:var(--groc);color:var(--tinta);font-weight:800;font-size:1.2em;padding:.5em 1.6em;cursor:pointer}
+.pr footer span{color:#aab6c8;font-size:.86em}
+
+@media print{
+  body{background:#fff!important}
+  .barra-lectura,.fi-lectura,#crom{display:none!important}
+  body.lectura main{padding:0;max-width:none;font-size:11pt}
+  .d{break-inside:avoid;border:1px solid #bbb;background:#fff!important;color:#000!important;--tenue:#444;--acc:#000;--fons2:#fff;--vora:#999}
+  .pas:not(.vist){display:block!important;opacity:1!important;transform:none!important}
+  .tapa .q{display:none}.tapa .r,.tapa .x,.op small,.it em{display:block!important}
+  .llegeix{display:block!important}
+}
+
+/* afegits: el text no pot empènyer la pantalla; a un vot o a un «hi ha N errors», on s'estudia surt quan ja s'ha resolt */
+.txt{min-height:0}
+.escena .t-vot:not(.resolt) .on,.escena .t-revisa:not(.tot) .on,.lectura .t-vot:not(.resolt) .on{visibility:hidden}
+.escena .fil i.vist+.segueix{opacity:1;transform:none;pointer-events:auto}
+.tapa .tim{height:5.2em;display:grid;place-items:center;margin:.1em 0 .3em}
+.tapa .tim svg,.tapa .tim img{height:5.2em;width:auto;filter:drop-shadow(0 .15em .25em rgba(0,0,0,.3))}
+.op.amb-img{grid-template-columns:2.1em 3.4em 1fr}
+.op.amb-img .oim{grid-row:span 2;display:grid;place-items:center}
+.op.amb-img .oim svg,.op.amb-img .oim img{height:3em;width:auto}
+.op.amb-img small{grid-column:3}
+
+.dues{grid-template-columns:repeat(auto-fit,minmax(0,1fr))}
+.fitxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:.7em;margin:.1em 0 .7em}
+.fitxes>div{border:.14em solid var(--vora);background:var(--fons2);border-radius:.7em;padding:.6em .8em;display:flex;flex-direction:column;gap:.2em}
+.fitxes .ic{width:1.8em;height:1.8em;color:var(--acc)}
+.fitxes b{font-size:1.1em}
+.fitxes span{font-size:.9em;line-height:1.3}
+.yt{position:relative;aspect-ratio:16/9;border-radius:.6em;overflow:hidden;background:#000;box-shadow:0 .5em 1.6em rgba(0,0,0,.35)}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-fora{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5em;padding:1em;text-align:center;text-decoration:none;color:#fff;background:radial-gradient(circle at 50% 40%,#3a1620,#0b0b10 70%)}
+.yt-fora i{font-style:normal;font-size:1.5em;line-height:1;background:#e62117;border-radius:.45em;padding:.38em .8em .42em .9em;box-shadow:0 .2em .8em rgba(0,0,0,.5)}
+.yt-fora b{font-size:1.05em}.yt-fora span{font-size:.6em;opacity:.75;max-width:22em}
+.yt-fora:hover i,.yt-fora:focus i{background:#ff3b30}
+.cinta.clau{background:var(--verd);color:#fff}
+.lectura .it{cursor:default}
+div.it{cursor:default}
+
+/* polit del 15-11 (mirant les captures a 1280×720) */
+body.escena #crom.clar{color:#fff}
+.cinta{top:2.45em;right:3em;border-radius:99em;padding:.35em 1em}
+body.lectura .cinta{top:.8em}
+.it{grid-template-columns:4.2em 1fr;min-height:0}
+.it .img{height:3.7em}
+.it .img svg,.it .img img{height:3.7em;max-height:none;width:auto}
+.tapa.gran.vist .q{display:block}
+.tapa.vist .r{color:#0e7a41}
+.to-nit .tapa.vist .r{color:#7fe6b0}
+.tapa.gran .q::before{content:""}
+.it .img{height:4.3em}
+.it .img svg,.it .img img{height:4.3em}
+.it{grid-template-columns:4.9em 1fr}
+.it.vist small,.tot .it small{display:none}
+.t-revisa h2{margin-bottom:.3em}
+.t-revisa .lead{margin-bottom:.6em;font-size:1.1em}
+.retall{margin:0 .5em}
+.visual{overflow:visible}
+.it .img,.it .img svg,.it .img img{height:4em}
+.t-revisa .nota{margin-top:.3em}
+.t-revisa .on{margin-top:.45em}
+.t-revisa .paret{gap:.5em}
+
+/* lectura: res d'alçades de projector; cada pantalla és una targeta que creix amb el que porta */
+body.lectura .d,body.lectura .cos,body.lectura .txt{display:block}
+body.lectura .visual{display:block;margin:1em auto 0;max-width:24em}
+body.lectura .tapa{min-height:0}
+body.lectura .cap{flex-wrap:wrap;gap:.3em .6em;margin-bottom:.9em}
+body.lectura .cinta{position:static;display:inline-block;margin:0 0 .7em}
+body.lectura .t-obre .num{line-height:1}
+body.lectura .feina-g{display:block}
+@media (max-width:720px){
+  body.lectura .xifra b{font-size:2.4em}
+  body.lectura .it{grid-template-columns:3.6em 1fr}
+  body.lectura .agenda li{font-size:1em}
+}
+a.xip{text-decoration:none}
+a.xip:hover{background:var(--fons2)}
+.tapa.gran:has(.tim).vist .q{display:none}
+
+
+</style>
+</head>
+<body data-nom="IPO II · U7 · Sessió 3">
+<main>
+<section class="d to-vermell t-portada" id="d1" data-sec="Inici"><div class="cap"><span class="sec">Inici</span></div><div class="cos"><div class="txt"><p class="kicker">IPO II · Unitat 7 · Sessió 3 · dilluns 30</p><h2>Un negoci, amb ulls socials</h2><p class="lead">Dijous vam acabar les cinc fases. Avui, l'últim que entra a la prova: el Canvas ecosocial, el greenwashing i els ODS.</p><ol class="agenda"><li><span>Dues preguntes de record <small>de dijous i de fa dues setmanes</small></span></li><li><span>El Canvas ecosocial: cinc caselles noves <small>full d'estudi, pàg. 15</small></span></li><li><span>El greenwashing: semblar més verd del que ets <small>pàg. 16</small></span></li><li><span>Els ODS: una meta i una dada <small>pàg. 16</small></span></li></ol><p class="nota">Dijous 3, a les 15.10, la prova de la unitat 7. Avui, al final, et dic què hi entra.</p></div></div></section>
+<section class="d to-nit t-vot" id="d2" data-sec="1 · Record" data-tema="7.3.1 · Design thinking social · &lt;b&gt;Full d&#x27;estudi, pàg. 13&lt;/b&gt;" data-min="3"><div class="cap"><span class="sec">1 · Record</span><span>7.3.1 · Design thinking social · <b>Full d'estudi, pàg. 13</b></span></div><div class="cos"><div class="txt"><p class="kicker">Record de dijous · sense mirar · a la de tres, amb els dits</p><h2>Quina fase és aquesta?</h2><p class="lead cas">Uns alumnes d'FP volen una app perquè els companys nous trobin les aules el primer dia. Abans de programar res, dibuixen les pantalles en paper i en fan una versió senzilla que ja es pot tocar. <small>(Cas inventat)</small></p><div class="ops"><button type="button" class="op"><i>A</i><span>Validar</span><small>Confons fer la versió amb que els usuaris la provin i diguin si és útil</small></button><button type="button" class="op ok"><i>B</i><span>Prototipar</span><small>Una versió que es pot tocar, encara que sigui senzilla</small></button><button type="button" class="op"><i>C</i><span>Definir</span><small>Confons escriure el problema en una pregunta amb fer una versió de la solució</small></button></div><div class="sol" data-pas data-etq="Resposta: B · Prototipar"></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=13" target="_blank" rel="noopener">Full d'estudi · pàg. 13 ↗</a></div></div></div></section>
+<section class="d to-nit t-vot" id="d3" data-sec="1 · Record" data-tema="7.2.1 · Innovació social · &lt;b&gt;Full d&#x27;estudi, pàg. 9&lt;/b&gt;" data-min="3"><div class="cap"><span class="sec">1 · Record</span><span>7.2.1 · Innovació social · <b>Full d'estudi, pàg. 9</b></span></div><div class="cos"><div class="txt"><p class="kicker">Record de fa dues setmanes · a la de tres, amb els dits</p><h2>Refugees Welcome: qui es troba amb qui?</h2><p class="lead cas">Des del 2014, també a Espanya, vol que les persones refugiades no visquin en camps, apartades. No construeix res: fa servir una cosa que molta gent té a casa.</p><p class="lead">Quina relació social nova crea?</p><div class="ops"><button type="button" class="op"><i>A</i><span>Refugiades amb altres refugiades, en un camp</span><small>Confons el que ja passava (els camps) amb una relació nova</small></button><button type="button" class="op"><i>B</i><span>Gent del país amb una constructora</span><small>Confons qui es troba: no construeix res, i hi falta qui té la necessitat</small></button><button type="button" class="op ok"><i>C</i><span>Refugiades amb gent del país que té una habitació lliure</span><small>Dues persones que abans no es trobaven ara comparteixen pis</small></button></div><div class="sol" data-pas data-etq="Resposta: C · Refugiades amb gent del país que té una habitació lliure"></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=9" target="_blank" rel="noopener">Full d'estudi · pàg. 9 ↗</a><a class="font" href="https://www.refugees-welcome.net/" target="_blank" rel="noopener">Refugees Welcome International (en anglès) ↗</a></div><div class="llegeix"><p><a href="https://www.refugees-welcome.net/" target="_blank" rel="noopener">Refugees Welcome</a> funciona des del 2014 i té equips a diversos països, també a Espanya. Posa en contacte persones refugiades que busquen allotjament amb gent del país que té una habitació lliure al seu pis o a casa, com un company de pis més, en lloc de viure en un camp. Segons la mateixa organització, viure amb gent del país els ajuda a aprendre la llengua i a fer amics. Amb les tres preguntes de la innovació social: la necessitat és de les persones refugiades (una casa i gent del país); la relació nova és entre elles i qui té l'habitació lliure.</p></div></div></div></section>
+<section class="d to-nit t-obre" id="d4" data-sec="2 · Canvas ecosocial" data-tema="7.3.2 · Canvas ecosocial · &lt;b&gt;Full d&#x27;estudi, pàg. 15&lt;/b&gt;" data-min="2"><div class="cap"><span class="sec">2 · Canvas ecosocial</span><span>7.3.2 · Canvas ecosocial · <b>Full d'estudi, pàg. 15</b></span></div><div class="cos"><div class="txt"><p class="num">2</p><p class="kicker">De què parlem</p><h2>El teu Canvas, amb ulls socials</h2><ul class="llista"><li>El Canvas de la unitat 6 mira la clientela. Qui més hi guanya o hi perd quan un negoci funciona?</li><li>Un taller que repara mòbils: a qui afecta, a més de qui hi porta el mòbil?</li></ul></div></div></section>
+<section class="d to-paper t-idea" id="d5" data-sec="2 · Canvas ecosocial" data-tema="7.3.2 · Canvas ecosocial · &lt;b&gt;Full d&#x27;estudi, pàg. 15&lt;/b&gt;" data-min="4"><div class="cap"><span class="sec">2 · Canvas ecosocial</span><span>7.3.2 · Canvas ecosocial · <b>Full d'estudi, pàg. 15</b></span></div><div class="cos"><div class="txt"><p class="kicker">Un taller que repara mòbils · la pregunta, a la vista; la resposta, tapada</p><h2>Cinc caselles noves</h2><div class="tapes" style="--cols:3"><div class="tapa" data-pas data-etq="Grups d&#x27;interès, també els de demà → El barri, i qui vindrà després i trobarà menys residus" tabindex="0"><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M5 21v-3a7 7 0 0114 0v3"/></svg></span><span class="t">Grups d'interès, també els de demà</span><span class="q">A qui afecta, a més de la clientela?</span><span class="r">El barri, i qui vindrà després i trobarà menys residus</span></div><div class="tapa" data-pas data-etq="Benestar social i ambiental → Mòbils que duren més i costen menys" tabindex="0"><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.5-7 10-7 10z"/><path d="M4 12h4l1.5-3 2 6 1.5-3h7"/></svg></span><span class="t">Benestar social i ambiental</span><span class="q">Què millores, de la gent o del planeta?</span><span class="r">Mòbils que duren més i costen menys</span></div><div class="tapa" data-pas data-etq="Una xarxa d&#x27;aliances més diversa → Una associació de veïns, un centre d&#x27;FP" tabindex="0"><span class="n">3</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 00-5 5L4 17l3 3 5.500-5.5a4 4 0 005-5L15 12l-3-3z"/></svg></span><span class="t">Una xarxa d'aliances més diversa</span><span class="q">Amb qui més t'alies?</span><span class="r">Una associació de veïns, un centre d'FP</span></div><div class="tapa" data-pas data-etq="Impactes negatius, evitats → Bateries velles a reciclar; dades dels clients, esborrades" tabindex="0"><span class="n">4</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="t">Impactes negatius, evitats</span><span class="q">Quin mal pot fer, i com l'evites?</span><span class="r">Bateries velles a reciclar; dades dels clients, esborrades</span></div><div class="tapa" data-pas data-etq="Regenerar → Mòbils reparats per a famílies que no en tenen" tabindex="0"><span class="n">5</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-3.500 10.900c.5.4.5 1 .5 1.600h6c0-.6 0-1.200.5-1.600A6 6 0 0012 3z"/></svg></span><span class="t">Regenerar</span><span class="q">Com tornes més del que prens?</span><span class="r">Mòbils reparats per a famílies que no en tenen</span></div></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=15" target="_blank" rel="noopener">Full d'estudi · taula 7.7, pàg. 15 ↗</a></div><div class="llegeix"><p>El Canvas de la unitat 6 explica com un negoci crea, captura i entrega valor a la clientela. Un model de negoci ecosocial fa servir el mateix llenç, però hi mira també la gent i el planeta: a qui afecta el negoci, què hi guanyen i què hi poden perdre. Hi afegeixes cinc coses (taula 7.7, pàg. 15), amb l'exemple d'un taller que repara mòbils: els grups d'interès, també els de demà (el barri, i qui vindrà després i trobarà menys residus electrònics); el benestar social i ambiental (mòbils que duren més i costen menys); una xarxa d'aliances més diversa (una associació de veïns, un centre d'FP); els impactes negatius, evitats o reduïts (les bateries velles van a un punt de recollida; les dades dels clients s'esborren de manera segura); i regenerar, tornar més del que prens (mòbils reparats per a famílies que no en tenen).</p></div></div></div></section>
+<section class="d to-nit t-vot" id="d6" data-sec="2 · Canvas ecosocial" data-tema="7.3.2 · Canvas ecosocial · &lt;b&gt;Full d&#x27;estudi, pàg. 15&lt;/b&gt;" data-min="3"><div class="cap"><span class="sec">2 · Canvas ecosocial</span><span>7.3.2 · Canvas ecosocial · <b>Full d'estudi, pàg. 15</b></span></div><div class="cos"><div class="txt"><p class="kicker">Un cas real · Fairphone · a la de tres, amb els dits</p><h2>Fairphone: a quina casella?</h2><p class="lead cas">Fairphone fa mòbils pensats per durar, que es reparen amb peces que ven ella mateixa. A més, per cada mòbil que ven, reutilitza o recicla el mateix pes en residus electrònics.</p><p class="lead">Recollir tant de residu com ven: al seu Canvas ecosocial, a quina casella va?</p><div class="ops"><button type="button" class="op ok"><i>A</i><span>Els impactes negatius, evitats o reduïts</span><small>El mòbil acabarà sent un residu: en recull el mateix pes perquè el negoci no en deixi més</small></button><button type="button" class="op"><i>B</i><span>Regenerar</span><small>Confons no deixar més residu del que fas amb tornar més del que prens</small></button><button type="button" class="op"><i>C</i><span>Els grups d'interès de demà</span><small>Confons el que fa l'empresa amb a qui afecta</small></button></div><div class="sol" data-pas data-etq="Resposta: A · Els impactes negatius, evitats o reduïts"></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=15" target="_blank" rel="noopener">Full d'estudi · taula 7.7, pàg. 15 ↗</a><a class="font" href="https://www.fairphone.com/hub/en/impact/circularity/" target="_blank" rel="noopener">Fairphone, «Circularity» (en anglès) ↗</a></div><div class="llegeix"><p><a href="https://www.fairphone.com/hub/en/impact/circularity/" target="_blank" rel="noopener">Fairphone</a> fa mòbils pensats per durar: es reparen fàcilment i les peces de recanvi es compren a la seva botiga. Diu que tots els seus mòbils i auriculars són «neutres en residus electrònics»: per cada producte que ven (i les peces de recanvi), reutilitza o recicla el mateix pes en residus electrònics. Ho fa amb un programa de recollida a Europa i, als països on els residus electrònics es processen sense control i fan mal a la salut, amb socis d'allà, perquè aquesta feina sigui més segura. Al seu Canvas ecosocial, el mòbil que acabarà sent un residu és un impacte negatiu, i recollir-ne el mateix pes és com el redueix. Si en recollís més del que ven, seria regenerar. Fairphone també surt al full d'estudi, pàg. 5 i 16.</p></div></div></div></section>
+<section class="d to-nit t-vot" id="d7" data-sec="2 · Canvas ecosocial" data-tema="7.3.2 · Canvas ecosocial · &lt;b&gt;Full d&#x27;estudi, pàg. 15&lt;/b&gt;" data-min="2"><div class="cap"><span class="sec">2 · Canvas ecosocial</span><span>7.3.2 · Canvas ecosocial · <b>Full d'estudi, pàg. 15</b></span></div><div class="cos"><div class="txt"><p class="kicker">Fairphone, una altra casella · a la de tres, amb els dits</p><h2>I els socis locals?</h2><p class="lead cas">Als països on els residus electrònics es processen sense control, Fairphone treballa amb socis d'allà per recollir-los.</p><p class="lead">Aquests socis, a quina casella del Canvas ecosocial de Fairphone van?</p><div class="ops"><button type="button" class="op"><i>A</i><span>Els impactes negatius, evitats o reduïts</span><small>Confons amb qui ho fas amb el mal que evites</small></button><button type="button" class="op"><i>B</i><span>El benestar social i ambiental</span><small>Confons amb qui ho fas amb el que millores</small></button><button type="button" class="op ok"><i>C</i><span>Una xarxa d'aliances més diversa</span><small>Són amb qui s'alia, a més dels socis de sempre</small></button></div><div class="sol" data-pas data-etq="Resposta: C · Una xarxa d&#x27;aliances més diversa"></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=15" target="_blank" rel="noopener">Full d'estudi · taula 7.7, pàg. 15 ↗</a><a class="font" href="https://www.fairphone.com/hub/en/impact/circularity/" target="_blank" rel="noopener">Fairphone, «Circularity» (en anglès) ↗</a></div></div></div></section>
+<section class="d to-paper t-idea" id="d8" data-sec="2 · Canvas ecosocial" data-tema="7.3.2 · Canvas ecosocial · &lt;b&gt;Full d&#x27;estudi, pàg. 15&lt;/b&gt;"><span class="cinta">★ Entra a la prova</span><div class="cap"><span class="sec">2 · Canvas ecosocial</span><span>7.3.2 · Canvas ecosocial · <b>Full d'estudi, pàg. 15</b></span></div><div class="cos"><div class="txt"><p class="kicker">El que t'has d'endur</p><h2>El Canvas ecosocial, en tres passos</h2><ol class="passos"><li class="pas" data-pas data-etq="Què és"><b>Què és</b><span>El mateix Canvas de la unitat 6, però hi mires també la gent i el planeta: a qui afecta el negoci, què hi guanyen i què hi poden perdre.</span></li><li class="pas" data-pas data-etq="Les cinc caselles noves"><b>Les cinc caselles noves</b><span>Grups d'interès, també els de demà · benestar social i ambiental · aliances més diverses · impactes negatius evitats · regenerar.</span></li><li class="pas" data-pas data-etq="Com hi poses un fet"><b>Com hi poses un fet</b><span>Fes-li la pregunta de cada casella: a qui afecta? · què millora? · amb qui ho fa? · quin mal evita? · què torna de més?</span></li></ol><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=15" target="_blank" rel="noopener">Full d'estudi · taula 7.7, pàg. 15 ↗</a></div></div></div></section>
+<section class="d to-nit t-idea" id="d9" data-sec="3 · Greenwashing" data-tema="7.3.2 · Greenwashing · &lt;b&gt;Full d&#x27;estudi, pàg. 16&lt;/b&gt;" data-min="4"><div class="cap"><span class="sec">3 · Greenwashing</span><span>7.3.2 · Greenwashing · <b>Full d'estudi, pàg. 16</b></span></div><div class="cos"><div class="txt"><p class="kicker">Un cas real · Apple · 2023-2025</p><h2>L'Apple Watch, «neutre en carboni»?</h2><p class="lead cas">El 2023, Apple va presentar l'Apple Watch Series 9 com el seu primer producte neutre en carboni.</p><div class="tapes" style="--cols:3"><div class="tapa" data-pas data-etq="Com ho feia → Reduïa emissions i «compensava» la resta amb eucaliptus (absorbeixen CO₂) en terrenys llogats" tabindex="0"><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 00-5 5L4 17l3 3 5.500-5.5a4 4 0 005-5L15 12l-3-3z"/></svg></span><span class="t">Com ho feia</span><span class="q">Com pot ser «neutre» un rellotge que es fabrica?</span><span class="r">Reduïa emissions i «compensava» la resta amb eucaliptus (absorbeixen CO₂) en terrenys llogats</span></div><div class="tapa" data-pas data-etq="Un jutjat de Frankfurt · 2025 → Que enganyava: els terrenys només estan llogats fins al 2029" tabindex="0"><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M6 20h12M5 8h14M5 8l-2.500 6a2.500 2.500 0 005 0zM19 8l-2.500 6a2.500 2.500 0 005 0z"/></svg></span><span class="t">Un jutjat de Frankfurt · 2025</span><span class="q">Què va dir?</span><span class="r">Que enganyava: els terrenys només estan llogats fins al 2029</span></div><div class="tapa" data-pas data-etq="Apple · tardor del 2025 → Els rellotges nous ja no diuen «neutre», ni a la web ni a la caixa" tabindex="0"><span class="n">3</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><span class="t">Apple · tardor del 2025</span><span class="q">Què ha canviat?</span><span class="r">Els rellotges nous ja no diuen «neutre», ni a la web ni a la caixa</span></div></div><div class="idea pas" data-pas data-etq="La UE, des del 27-9-2026: prohibeix dir que un producte és «neutre» en emissions perquè se&#x27;n compensen"><b>La UE, des del 27-9-2026</b><span>prohibeix dir que un producte és «neutre» en emissions perquè se'n compensen</span></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=16" target="_blank" rel="noopener">Full d'estudi · pàg. 16 ↗</a><a class="font" href="https://www.duh.de/presse/pressemitteilungen/pressemitteilung/erfolgreiche-klimaklage-der-deutschen-umwelthilfe-apple-darf-seine-apple-watch-nicht-mehr-wie-bishe/" target="_blank" rel="noopener">Deutsche Umwelthilfe, 26-8-2025 (en alemany) ↗</a></div><div class="llegeix"><p>El 2023, Apple va presentar l'Apple Watch Series 9 com el seu primer producte neutre en carboni: el fabricava amb un 30 % de material reciclat o renovable i amb electricitat renovable, i les emissions que quedaven les «compensava»: pagava plantacions d'eucaliptus, uns arbres que absorbeixen CO₂, en terrenys llogats al Paraguai (<a href="https://appleinsider.com/articles/25/10/02/apple-watch-mac-mini-no-longer-listed-as-carbon-neutral-after-greenwashing-concerns" target="_blank" rel="noopener">AppleInsider, 2-10-2025, en anglès</a>). Una associació ecologista alemanya, la Deutsche Umwelthilfe, ho va portar al jutjat, i el 26 d'agost del 2025 un jutjat de Frankfurt va dir que Apple no el podia anunciar així a Alemanya, perquè enganyava: els terrenys només estan llogats fins al 2029, i després no se sap què hi passarà (<a href="https://www.duh.de/presse/pressemitteilungen/pressemitteilung/erfolgreiche-klimaklage-der-deutschen-umwelthilfe-apple-darf-seine-apple-watch-nicht-mehr-wie-bishe/" target="_blank" rel="noopener">DUH, 26-8-2025, en alemany</a>). Els rellotges que Apple va presentar la tardor del 2025 ja no diuen «neutre en carboni», ni a la web ni a la caixa. I una norma europea, la <a href="https://eur-lex.europa.eu/legal-content/ES/TXT/HTML/?uri=CELEX:32024L0825" target="_blank" rel="noopener">Directiva 2024/825</a>, obliga els països de la UE a prohibir, des del 27 de setembre del 2026, que es digui que un producte té un impacte «neutre» en emissions perquè se'n compensen. És greenwashing: presentar-se com a més sostenible del que s'és (full d'estudi, pàg. 16).</p></div></div></div></section>
+<section class="d to-nit t-vot" id="d10" data-sec="3 · Greenwashing" data-tema="7.3.2 · Greenwashing · &lt;b&gt;Full d&#x27;estudi, pàg. 16&lt;/b&gt;" data-min="3"><div class="cap"><span class="sec">3 · Greenwashing</span><span>7.3.2 · Greenwashing · <b>Full d'estudi, pàg. 16</b></span></div><div class="cos"><div class="txt"><p class="kicker">Un altre cas · a la de tres, amb els dits</p><h2>Això és greenwashing?</h2><p class="lead cas">Una botiga d'electrònica posa a l'aparador «La botiga més verda de la ciutat» perquè dona les bosses de paper. Cada setmana ven mòbils nous i no en recull cap de vell. <small>(Cas inventat)</small></p><div class="ops"><button type="button" class="op"><i>A</i><span>No: les bosses de paper són millors que les de plàstic</span><small>Confons fer una cosa bé amb ser sostenible</small></button><button type="button" class="op ok"><i>B</i><span>Sí: diu «la més verda» per una cosa petita i calla la resta</span><small>Es presenta com a més sostenible del que és</small></button><button type="button" class="op"><i>C</i><span>No: si el que diu de les bosses és cert, no enganya</span><small>Confons no mentir amb no enganyar: callar la resta també enganya</small></button></div><div class="sol" data-pas data-etq="Resposta: B · Sí: diu «la més verda» per una cosa petita i calla la resta"></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=16" target="_blank" rel="noopener">Full d'estudi · pàg. 16 ↗</a></div></div></div></section>
+<section class="d to-paper t-idea" id="d11" data-sec="3 · Greenwashing" data-tema="7.3.2 · Greenwashing · &lt;b&gt;Full d&#x27;estudi, pàg. 16&lt;/b&gt;"><span class="cinta">★ Entra a la prova</span><div class="cap"><span class="sec">3 · Greenwashing</span><span>7.3.2 · Greenwashing · <b>Full d'estudi, pàg. 16</b></span></div><div class="cos"><div class="txt"><p class="kicker">El que t'has d'endur</p><h2>El greenwashing, en tres passos</h2><ol class="passos"><li class="pas" data-pas data-etq="Què és"><b>Què és</b><span>Rentat d'imatge verd: presentar-se com a més sostenible del que s'és. S'anuncia el poc que es fa bé i es calla la resta.</span></li><li class="pas" data-pas data-etq="Com el reconeixes"><b>Com el reconeixes</b><span>Compara el que anuncia amb tot el que fa: què calla? Desconfia de les paraules generals («verd», «sostenible», «neutre») que no es poden demostrar.</span></li><li class="pas" data-pas data-etq="Com l&#x27;evita un model ecosocial"><b>Com l'evita un model ecosocial</b><span>És un impacte negatiu: al Canvas ecosocial hi poses també el mal que fas i com el redueixes, i ho expliques amb dades, encara que no surtin bé.</span></li></ol><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=16" target="_blank" rel="noopener">Full d'estudi · pàg. 16 ↗</a></div></div></div></section>
+<section class="d to-nit t-obre" id="d12" data-sec="4 · ODS" data-tema="7.3.2 · ODS · &lt;b&gt;Full d&#x27;estudi, pàg. 16&lt;/b&gt;" data-min="2"><div class="cap"><span class="sec">4 · ODS</span><span>7.3.2 · ODS · <b>Full d'estudi, pàg. 16</b></span></div><div class="cos"><div class="txt"><p class="num">4</p><p class="kicker">De què parlem · els ODS, de la unitat 5 al teu model</p><h2>«Complim els ODS»: com ho comprovaries?</h2><ul class="llista"><li>Recordes quants ODS hi ha, i de qui són? (unitat 5)</li><li>Una empresa diu «complim els ODS». Què li demanaries per creure-la?</li></ul><div class="fil"><span>Un objectiu · n'hi ha 17</span><i class="pas" data-pas data-etq="Una meta · n&#x27;hi ha 169">→</i><span class="pas segueix">Una meta · n'hi ha 169</span><i class="pas" data-pas data-etq="Una dada que ho demostra">→</i><span class="pas segueix">Una dada que ho demostra</span></div></div></div></section>
+<section class="d to-paper t-idea" id="d13" data-sec="4 · ODS" data-tema="7.3.2 · ODS · &lt;b&gt;Full d&#x27;estudi, pàg. 16&lt;/b&gt;" data-min="3"><div class="cap"><span class="sec">4 · ODS</span><span>7.3.2 · ODS · <b>Full d'estudi, pàg. 16</b></span></div><div class="cos"><div class="txt"><p class="kicker">Quatre metes que surten sovint · d'aquí al 2030 · què demana, tapat</p><h2>Què demana cada meta?</h2><div class="tapes" style="--cols:2"><div class="tapa" data-pas data-etq="6.1 · Aigua → Que tothom tingui aigua potable, segura i assequible" tabindex="0"><span class="n">1</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17a4 4 0 010-8 5 5 0 019.6-1.2A4.5 4.5 0 0117 17z"/><path d="M9 20v1M12 20v1M15 20v1"/></svg></span><span class="t">6.1 · Aigua</span><span class="q">Què demana?</span><span class="r">Que tothom tingui aigua potable, segura i assequible</span></div><div class="tapa" data-pas data-etq="8.5 · Feina digna → Feina plena i treball digne per a tothom, també per als joves" tabindex="0"><span class="n">2</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M5 21v-3a7 7 0 0114 0v3"/></svg></span><span class="t">8.5 · Feina digna</span><span class="q">Què demana?</span><span class="r">Feina plena i treball digne per a tothom, també per als joves</span></div><div class="tapa" data-pas data-etq="12.3 · Menjar → Reduir a la meitat el menjar que es llença a les botigues i a les cases" tabindex="0"><span class="n">3</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 10c0 5.5-7 10-7 10z"/><path d="M4 12h4l1.5-3 2 6 1.5-3h7"/></svg></span><span class="t">12.3 · Menjar</span><span class="q">Què demana?</span><span class="r">Reduir a la meitat el menjar que es llença a les botigues i a les cases</span></div><div class="tapa" data-pas data-etq="12.5 · Residus → Reduir molt els residus: prevenir, reduir, reciclar i reutilitzar" tabindex="0"><span class="n">4</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4 4 0 00-5 5L4 17l3 3 5.500-5.5a4 4 0 005-5L15 12l-3-3z"/></svg></span><span class="t">12.5 · Residus</span><span class="q">Què demana?</span><span class="r">Reduir molt els residus: prevenir, reduir, reciclar i reutilitzar</span></div></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=16" target="_blank" rel="noopener">Full d'estudi · pàg. 16 ↗</a></div><div class="llegeix"><p>Els objectius de desenvolupament sostenible són els 17 de l'Agenda 2030 de les Nacions Unides (2015). Cada objectiu es concreta en metes, 169 en total. Alinear-hi el teu model vol dir explicar quina meta concreta ajudes a complir i amb quina dada ho demostraràs. «Som sostenibles» no és alinear-se; «reduïm els residus electrònics, com demana la meta 12.5, i ho mesurem amb els mòbils reparats en lloc de llençats» sí que ho és. Quatre metes que surten sovint, totes d'aquí al 2030 (full d'estudi, pàg. 16): 6.1, que tothom tingui accés a l'aigua potable, segura i assequible; 8.5, feina plena i productiva i treball digne per a totes les dones i tots els homes, també per als joves; 12.3, reduir a la meitat el menjar que es llença per persona a les botigues i a les cases; 12.5, reduir molt els residus amb la prevenció, la reducció, el reciclatge i la reutilització.</p></div></div></div></section>
+<section class="d to-nit t-vot" id="d14" data-sec="4 · ODS" data-tema="7.3.2 · ODS · &lt;b&gt;Full d&#x27;estudi, pàg. 16&lt;/b&gt;" data-min="3"><div class="cap"><span class="sec">4 · ODS</span><span>7.3.2 · ODS · <b>Full d'estudi, pàg. 16</b></span></div><div class="cos"><div class="txt"><p class="kicker">Una meta, una dada · a la de tres, amb els dits</p><h2>Quina dada ho demostra?</h2><p class="lead cas">Un taller que repara portàtils vol demostrar que ajuda a complir la meta 12.5: reduir molt els residus amb la prevenció, la reducció, el reciclatge i la reutilització. <small>(Cas inventat)</small></p><p class="lead">Amb quina dada ho demostraria?</p><div class="ops"><button type="button" class="op ok"><i>A</i><span>Quants portàtils repara cada mes en lloc que es llencin</span><small>Es compta, i diu si els residus es redueixen</small></button><button type="button" class="op"><i>B</i><span>Quants clients nous té cada mes</span><small>Confons tenir més clients amb fer menys residus</small></button><button type="button" class="op"><i>C</i><span>Quants seguidors té a les xarxes</span><small>Confons ser conegut amb complir la meta</small></button></div><div class="sol" data-pas data-etq="Resposta: A · Quants portàtils repara cada mes en lloc que es llencin"></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=16" target="_blank" rel="noopener">Full d'estudi · pàg. 16 ↗</a></div></div></div></section>
+<section class="d to-paper t-idea" id="d15" data-sec="4 · ODS" data-tema="7.3.2 · ODS · &lt;b&gt;Full d&#x27;estudi, pàg. 16&lt;/b&gt;"><span class="cinta">★ Entra a la prova</span><div class="cap"><span class="sec">4 · ODS</span><span>7.3.2 · ODS · <b>Full d'estudi, pàg. 16</b></span></div><div class="cos"><div class="txt"><p class="kicker">El que t'has d'endur</p><h2>Els ODS, en tres passos</h2><ol class="passos"><li class="pas" data-pas data-etq="Què són"><b>Què són</b><span>Els 17 objectius de l'Agenda 2030 de les Nacions Unides (2015). Cada objectiu es concreta en metes: 169 en total.</span></li><li class="pas" data-pas data-etq="Alinear-s&#x27;hi"><b>Alinear-s'hi</b><span>Dir quina meta concreta ajudes a complir i amb quina dada ho demostraràs: una cosa que es compta i diu si avances.</span></li><li class="pas" data-pas data-etq="Què no ho és"><b>Què no ho és</b><span>Dir «som sostenibles» o «complim els ODS», sense meta ni dada. Això s'acosta al greenwashing.</span></li></ol><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=16" target="_blank" rel="noopener">Full d'estudi · pàg. 16 ↗</a></div></div></div></section>
+<section class="d to-vermell t-tanca" id="d16" data-sec="Tancament"><div class="cap"><span class="sec">Tancament</span></div><div class="cos"><div class="txt"><p class="kicker">Per acabar · 16.45</p><h2>Dijous 3, la prova de la unitat 7</h2><p class="lead"><b>Dijous 3, a les 15.10:</b> la prova, 25 minuts, sobre un cas nou.<br><b>Entra</b> el que hem fet a classe: innovació social, líder ètic, 4.0 i 5.0, les cinc fases, el Canvas ecosocial, el greenwashing i els ODS (full d'estudi, pàg. 9-16, menys la taula 7.6).<br><b>No entra:</b> els cinc models de la taula 7.6 ni l'economia circular (7.1).</p><div style="display:flex;gap:.25em;margin:.7em 0 .2em;max-width:32em"><span style="flex:1;height:.6em;border-radius:.3em;background:#fff"></span><span style="flex:1;height:.6em;border-radius:.3em;background:#fff"></span><span style="flex:1;height:.6em;border-radius:.3em;background:#fff"></span><span style="flex:1;height:.6em;border-radius:.3em;background:#fff"></span><span style="flex:1;height:.6em;border-radius:.3em;background:#fff"></span><span style="flex:1;height:.6em;border-radius:.3em;background:rgba(255,255,255,.25)"></span></div><p class="nota">Unitat 7: 5 de 6. Ja hem fet tot el que entra a la prova. Per repassar, si vols: el «Comprova» 12, 15 i 16 (pàg. 17).</p></div></div></section>
+<section class="d to-nit t-obre" id="d17" data-sec="➕ Economia circular" data-tema="7.1 · Economia circular · &lt;b&gt;Full d&#x27;estudi, pàg. 3&lt;/b&gt;" data-extra><span class="cinta">➕ Si sobra temps</span><div class="cap"><span class="sec">➕ Economia circular</span><span>7.1 · Economia circular · <b>Full d'estudi, pàg. 3</b></span></div><div class="cos"><div class="txt"><p class="kicker">El començament de dijous, després de la prova · de què parlem</p><h2>On acaba la bici que ja no fas servir?</h2><ul class="llista"><li>Tens a casa alguna cosa que ja no fas servir: una bici, un mòbil, una pala? On acabarà?</li><li>Comprar, fer servir i llençar: per a qui és un problema?</li></ul></div></div></section>
+<section class="d to-nit t-vot" id="d18" data-sec="➕ Economia circular" data-tema="7.1.1 · Les 9R · &lt;b&gt;Full d&#x27;estudi, pàg. 3-4&lt;/b&gt;" data-min="2" data-extra><span class="cinta">➕ Si sobra temps</span><div class="cap"><span class="sec">➕ Economia circular</span><span>7.1.1 · Les 9R · <b>Full d'estudi, pàg. 3-4</b></span></div><div class="cos"><div class="txt"><p class="kicker">Un cas real · Decathlon · a la de tres, amb els dits</p><h2>La teva bici vella, a Decathlon: quina R?</h2><p class="lead cas">A Decathlon pots portar la bici que ja no fas servir. Un equip la valora i te la paga. Al taller la revisen, la netegen i la posen a punt, i la tornen a vendre.</p><div class="ops"><button type="button" class="op"><i>A</i><span>Reciclar</span><small>Confons fer-la servir de nou amb desfer-la per fer material nou</small></button><button type="button" class="op ok"><i>B</i><span>Reutilitzar</span><small>La bici torna a fer de bici, per a una altra persona</small></button><button type="button" class="op"><i>C</i><span>Recuperar</span><small>Confons tornar-la a fer servir amb cremar-la per fer energia</small></button></div><div class="sol" data-pas data-etq="Resposta: B · Reutilitzar"></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=3" target="_blank" rel="noopener">Full d'estudi · taula 7.1, pàg. 3-4 ↗</a><a class="font" href="https://saladeprensa.decathlon.es/wp-content/uploads/2025/10/NdP_El-material-deportivo-puede-tener-una-segunda-vida-con-la-Recompra-de-Decathlon.pdf" target="_blank" rel="noopener">Decathlon España, nota de premsa, 28-10-2025 ↗</a></div></div></div></section>
+<section class="d to-paper t-idea" id="d19" data-sec="➕ Economia circular" data-tema="7.1.1 · Les 9R · &lt;b&gt;Full d&#x27;estudi de la U7, pàg. 3-4&lt;/b&gt;" data-min="1" data-extra><span class="cinta">➕ Si sobra temps</span><div class="cap"><span class="sec">➕ Economia circular</span><span>7.1.1 · Les 9R · <b>Full d'estudi de la U7, pàg. 3-4</b></span></div><div class="cos"><div class="txt"><p class="kicker">Abans de les 9R · el model de sempre</p><h2>Del lineal al circular</h2><div class="fil"><span>Extreure</span><i class="pas" data-pas data-etq="Fabricar">→</i><span class="pas segueix">Fabricar</span><i class="pas" data-pas data-etq="Fer servir">→</i><span class="pas segueix">Fer servir</span><i class="pas" data-pas data-etq="Llençar">→</i><span class="pas segueix">Llençar</span></div><div class="idea pas" data-pas data-etq="L&#x27;economia circular: vol canviar el final: que el que ja no fas servir torni al cicle, i només s&#x27;extregui el que falta"><b>L'economia circular</b><span>vol canviar el final: que el que ja no fas servir torni al cicle, i només s'extregui el que falta</span></div><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=3" target="_blank" rel="noopener">Full d'estudi de la U7 · dibuix 1, pàg. 3 ↗</a></div></div></div></section>
+<section class="d to-paper t-idea" id="d20" data-sec="➕ Economia circular" data-tema="7.1.1 · Les 9R · &lt;b&gt;Full d&#x27;estudi de la U7, pàg. 3-4&lt;/b&gt;" data-min="3" data-extra><span class="cinta">➕ Si sobra temps</span><div class="cap"><span class="sec">➕ Economia circular</span><span>7.1.1 · Les 9R · <b>Full d'estudi de la U7, pàg. 3-4</b></span></div><div class="cos"><div class="txt"><p class="kicker">De més aviat a més tard · el nom, a la vista; què vol dir, tapat</p><h2>Les 9R</h2><div class="tapes" style="--cols:3"><div class="tapa" data-pas data-etq="Rebutjar → No comprar el que no cal" tabindex="0"><span class="n">1</span><span class="t">Rebutjar</span><span class="q"></span><span class="r">No comprar el que no cal</span></div><div class="tapa" data-pas data-etq="Repensar → Dissenyar-ho perquè gasti menys i duri" tabindex="0"><span class="n">2</span><span class="t">Repensar</span><span class="q"></span><span class="r">Dissenyar-ho perquè gasti menys i duri</span></div><div class="tapa" data-pas data-etq="Reduir ★ → Gastar menys material i energia" tabindex="0"><span class="n">3</span><span class="t">Reduir ★</span><span class="q"></span><span class="r">Gastar menys material i energia</span></div><div class="tapa" data-pas data-etq="Reutilitzar ★ → Tornar-ho a fer servir: la bici de Decathlon" tabindex="0"><span class="n">4</span><span class="t">Reutilitzar ★</span><span class="q"></span><span class="r">Tornar-ho a fer servir: la bici de Decathlon</span></div><div class="tapa" data-pas data-etq="Reparar → Arreglar el que s&#x27;ha espatllat" tabindex="0"><span class="n">5</span><span class="t">Reparar</span><span class="q"></span><span class="r">Arreglar el que s'ha espatllat</span></div><div class="tapa" data-pas data-etq="Renovar → Posar al dia el que és vell" tabindex="0"><span class="n">6</span><span class="t">Renovar</span><span class="q"></span><span class="r">Posar al dia el que és vell</span></div><div class="tapa" data-pas data-etq="Refabricar → Desmuntar-ho i deixar-ho com nou" tabindex="0"><span class="n">7</span><span class="t">Refabricar</span><span class="q"></span><span class="r">Desmuntar-ho i deixar-ho com nou</span></div><div class="tapa" data-pas data-etq="Reciclar ★ → Fer material nou amb el residu" tabindex="0"><span class="n">8</span><span class="t">Reciclar ★</span><span class="q"></span><span class="r">Fer material nou amb el residu</span></div><div class="tapa" data-pas data-etq="Recuperar → Treure energia del que ja no serveix" tabindex="0"><span class="n">9</span><span class="t">Recuperar</span><span class="q"></span><span class="r">Treure energia del que ja no serveix</span></div></div><p class="nota">★ Les 3R de sempre: reduir, reutilitzar, reciclar, en aquest ordre. Com més aviat actues, menys residu queda.</p><div class="on"><span class="dl">On s'estudia</span><a class="xip" href="https://joanmiquel89.github.io/aula/ipo2/u7-sessio-1/recursos/full-estudi-U7.pdf#page=3" target="_blank" rel="noopener">Full d'estudi de la U7 · taula 7.1, pàg. 3-4 ↗</a></div></div></div></section>
+</main>
+<script>
+/* ESCENA · el motor de la presentació (15-11-2026). Sense dependències: un sol fitxer HTML funciona sol, també obert des del disc.
+   Modes: escena (projectar) · lectura (mòbil, casa, imprimir) · #guio (el guió al mòbil del docent) · #presentador (segona finestra).
+   Tecles: → espai AvPàg = destapa el següent o avança · ← RePàg = torna a tapar o recula · ↓ ↑ = pantalla sencera ·
+   1-9 / A-D = toca aquella peça o opció · T = compte enrere · N = finestra del docent · P = projectar · L = llegir · R = torna a tapar · F = pantalla completa */
+(function(){
+'use strict';
+var $=function(s,e){return (e||document).querySelector(s)};
+var $$=function(s,e){return Array.prototype.slice.call((e||document).querySelectorAll(s))};
+var D=$$('main > section.d'), i=0, pres=null, crom=null;
+var T={queda:0,run:false,int:null};
+var h=location.hash;
+var mode=h==='#presentador'?'pres':(h==='#guio'?'guio':(window.innerWidth>=900?'escena':'lectura'));
+var TITOL=document.title;
+/* obert des del disc (file://), YouTube no deixa incrustar el vídeo (error 153): al seu lloc, un botó gran que l'obre en una pestanya */
+if(location.protocol==='file:')$$('.yt iframe').forEach(function(f){
+  var m=/embed\/([^?]+)/.exec(f.getAttribute('src')||''),a=document.createElement('a');
+  a.className='yt-fora';a.target='_blank';a.rel='noopener';a.href='https://www.youtube.com/watch?v='+(m?m[1]:'');
+  a.innerHTML='<i>▶</i><b>Obre el vídeo a YouTube</b><span>S&#39;obre en una altra pestanya: des d&#39;un fitxer de l&#39;ordinador, YouTube no el deixa veure aquí.</span>';
+  f.replaceWith(a);
+});
+
+function passos(d){return $$('[data-pas]',d)}
+function titol(d){var t=$('h2',d);return t?t.textContent.trim():''}
+function minuts(n){for(var k=n;k>=0;k--){var m=D[k].getAttribute('data-min');if(m)return +m;if(D[k].getAttribute('data-sec')!==D[n].getAttribute('data-sec'))break}return 0}
+function mmss(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+function hora(){var n=new Date();return ('0'+n.getHours()).slice(-2)+':'+('0'+n.getMinutes()).slice(-2)}
+
+/* ───── destapar ───── */
+function sync(d){
+  d.classList.toggle('resolt',!!$('.sol.vist',d));
+  d.classList.toggle('tot',!!$('[data-tot].vist',d));
+  if(mode==='lectura'&&d.classList.contains('resolt'))passos(d).forEach(function(p){p.classList.add('vist')});
+  pinta();envia();
+}
+function destapa(p){
+  if(!p||p.classList.contains('vist'))return;
+  p.classList.add('vist','ara');setTimeout(function(){p.classList.remove('ara')},700);
+  sync(p.closest('.d'));
+}
+function tapa(p){
+  var d=p.closest('.d');p.classList.remove('vist');
+  if(p.classList.contains('sol'))$$('.op.provat',d).forEach(function(o){o.classList.remove('provat')});
+  sync(d);
+}
+function seg(){var p=passos(D[i]).filter(function(e){return !e.classList.contains('vist')})[0];if(p)destapa(p);else ves(i+1)}
+function ant(){var v=passos(D[i]).filter(function(e){return e.classList.contains('vist')});if(v.length)tapa(v[v.length-1]);else ves(i-1)}
+function reinicia(){var d=D[i];$$('.vist,.provat',d).forEach(function(e){e.classList.remove('vist','provat')});sync(d)}
+function totes(d){passos(d).forEach(function(p){p.classList.add('vist')});$$('.it',d).forEach(function(e){e.classList.add('vist')});sync(d)}
+function ves(n){
+  if(n<0||n>=D.length)return;
+  D[i].classList.remove('actual');i=n;D[i].classList.add('actual');
+  try{history.replaceState(null,'','#d'+(i+1))}catch(e){}
+  pinta();envia();
+}
+function toca(el){
+  var d=el.closest('.d');
+  if(el.classList.contains('op')){el.classList.add('provat');if(el.classList.contains('ok'))destapa($('.sol',d));else sync(d)}
+  else if(el.classList.contains('it')){if(el.hasAttribute('data-pas'))destapa(el);else{el.classList.add('vist');sync(d)}
+    if(mode==='lectura'&&!$('.it.mal:not(.vist)',d))destapa($('[data-tot]',d))}
+  else if(el.classList.contains('tapa'))destapa(el);
+}
+
+/* ───── el compte enrere ───── */
+function crono(){
+  if(T.run){clearInterval(T.int);T.run=false}
+  else{if(T.queda<=0)T.queda=(minuts(i)||3)*60;T.run=true;T.int=setInterval(function(){T.queda--;if(T.queda<=0){clearInterval(T.int);T.run=false}pintaTemps();envia()},1000)}
+  pintaTemps();envia();
+}
+function pintaTemps(){
+  var on=T.run||T.queda>0,fi=on&&T.queda<=0&&!T.run;
+  if(crom){var t=$('.temps',crom);t.textContent='⏱ '+mmss(T.queda);t.classList.toggle('on',T.run||T.queda>0);t.classList.toggle('fi',T.queda<=0&&!T.run&&t.classList.contains('on'))}
+  $$('.crono').forEach(function(c){var m=+c.closest('.d').getAttribute('data-min')||3;$('b',c).textContent=(T.run||T.queda>0)?mmss(T.queda):m+':00';c.classList.toggle('fi',fi)});
+}
+
+/* ───── el marc de l'escena: seccions, tema, punts, hora ───── */
+function fesCrom(){
+  crom=document.createElement('div');crom.id='crom';
+  var secs=[],vist={};
+  D.forEach(function(d,k){var s=d.getAttribute('data-sec');if(s&&!(s in vist)){vist[s]=1;secs.push({s:s,k:k,x:d.hasAttribute('data-extra')})}});
+  crom.innerHTML='<div class="dalt"><span class="nom"></span><span class="secs">'+secs.map(function(o){return '<a data-k="'+o.k+'"'+(o.x?' class="extra"':'')+'><span>'+o.s+'</span></a>'}).join('')+'</span><span class="tema"></span></div>'+
+    '<div class="baix"><span class="punts"></span><span class="queda"></span><span class="esp"></span><span class="temps"></span><span class="hora"></span><span class="num"></span><button data-c="ant" title="Enrere (←)">‹</button><button data-c="seg" title="Següent (→)">›</button></div>';
+  document.body.appendChild(crom);
+  $('.nom',crom).textContent=document.body.getAttribute('data-nom')||'';
+  crom.addEventListener('click',function(e){var a=e.target.closest('a[data-k]'),b=e.target.closest('button');if(a)ves(+a.getAttribute('data-k'));else if(b)(b.getAttribute('data-c')==='seg'?seg:ant)()});
+  setInterval(function(){$('.hora',crom).textContent=hora()},15000);
+}
+function pinta(){
+  if(mode!=='escena'||!crom)return;
+  var d=D[i],ps=passos(d),fets=ps.filter(function(p){return p.classList.contains('vist')}).length;
+  crom.classList.toggle('clar',d.classList.contains('to-nit')||d.classList.contains('to-vermell'));
+  $$('.secs a',crom).forEach(function(a){a.classList.toggle('ara',a.textContent===d.getAttribute('data-sec'))});
+  $('.tema',crom).innerHTML=d.getAttribute('data-tema')||'';
+  $('.punts',crom).textContent=ps.map(function(p,k){return k<fets?'●':'○'}).join('');
+  $('.queda',crom).textContent=ps.length&&fets<ps.length?(ps.length-fets)+' per destapar':'';
+  $('.num',crom).textContent=(i+1)+' / '+D.length;
+  $('.hora',crom).textContent=hora();
+}
+
+/* ───── la finestra del docent ───── */
+function estat(){return {escena:1,i:i,vist:passos(D[i]).map(function(p){return p.classList.contains('vist')?1:0}),queda:T.queda,run:T.run}}
+function envia(){if(pres&&!pres.closed)pres.postMessage(estat(),'*')}
+function obrePres(){pres=window.open(location.href.split('#')[0]+'#presentador','escena-docent','width=980,height=720');setTimeout(envia,800)}
+function guioDe(d){var g=$('.guio',d);return g?g.innerHTML:'<p class="nota">(sense guió)</p>'}
+function llistaPassos(d,vist){
+  var ps=passos(d),seg=false;if(!ps.length)return '';
+  return '<ol class="ps">'+ps.map(function(p,k){var f=vist&&vist[k],c=f?'fet':(!seg?(seg=true,'seg'):'');return '<li class="'+c+'">'+(p.getAttribute('data-etq')||'…')+'</li>'}).join('')+'</ol>';
+}
+function modePres(){
+  var c=document.createElement('div');c.className='pr';document.body.appendChild(c);
+  c.innerHTML='<header><b class="h"></b><span class="t"></span><span class="e"></span><span class="n"></span></header><div class="dos"><section class="ara-d"></section><aside class="despres"></aside></div>'+
+    '<footer><button data-c="ant">←</button><button data-c="seg">Següent →</button><span>Aquesta finestra és només per a tu. Les fletxes mouen la pantalla projectada. T = compte enrere.</span></footer>';
+  function cmd(x){if(window.opener)window.opener.postMessage({escena:1,cmd:x},'*')}
+  c.addEventListener('click',function(e){var b=e.target.closest('button');if(b)cmd(b.getAttribute('data-c'))});
+  document.addEventListener('keydown',function(e){var k=e.key;if(k==='ArrowRight'||k===' '||k==='PageDown'){e.preventDefault();cmd('seg')}else if(k==='ArrowLeft'||k==='PageUp'){e.preventDefault();cmd('ant')}else if(k==='t'||k==='T')cmd('crono')});
+  window.addEventListener('message',function(e){
+    var s=e.data;if(!s||!s.escena||s.cmd)return;var d=D[s.i],n=D[s.i+1];
+    $('.ara-d',c).innerHTML='<p class="k">'+(d.getAttribute('data-sec')||'')+'</p><h1>'+titol(d)+'</h1><div class="g">'+guioDe(d)+'</div>'+llistaPassos(d,s.vist);
+    $('.despres',c).innerHTML=n?'<p class="k">Després</p><h2>'+titol(n)+'</h2><div>'+guioDe(n)+'</div>':'<p class="k">Fi</p>';
+    $('.n',c).textContent=(s.i+1)+' / '+D.length;
+    var t=$('.t',c);t.textContent=(s.run||s.queda>0)?'⏱ '+mmss(s.queda):'';t.classList.toggle('fi',!s.run&&s.queda<=0);
+  });
+  setInterval(function(){$('.h',c).textContent=hora()},1000);$('.h',c).textContent=hora();
+  cmd('hola');
+}
+function modeGuio(){
+  var c=document.createElement('div');c.id='guio';document.body.appendChild(c);
+  c.innerHTML='<h1>'+TITOL+'</h1><p class="ajuda">El guió per al teu mòbil: què preguntar a cada pantalla i la resposta. La classe no el veu.</p>'+
+    D.map(function(d,k){return '<div class="gd"><p class="k">'+(k+1)+' · '+(d.getAttribute('data-sec')||'')+(d.getAttribute('data-min')?' · '+d.getAttribute('data-min')+' min':'')+'</p><h2>'+titol(d)+'</h2>'+guioDe(d)+llistaPassos(d)+'</div>'}).join('');
+}
+
+/* ───── mode lectura ───── */
+function modeLectura(){
+  var b=document.createElement('div');b.className='barra-lectura';
+  b.innerHTML='<b>'+TITOL+'</b><button data-c="proj">▶ Projectar</button>';document.body.appendChild(b);
+  var f=document.createElement('div');f.className='fi-lectura';f.innerHTML='<button data-c="print">Imprimir · desar en PDF</button>';$('main').appendChild(f);
+  D.forEach(function(d){
+    $$('.pas',d).forEach(function(p){if(!d.classList.contains('t-vot')&&!p.hasAttribute('data-tot')&&!p.classList.contains('tapa'))p.classList.add('vist')});
+    var l=$('.llegeix',d);if(l&&l.tagName!=='DETAILS'){var det=document.createElement('details');det.className='llegeix';det.innerHTML='<summary>Llegeix-ho sencer</summary><div>'+l.innerHTML+'</div>';l.replaceWith(det)}
+  });
+  document.addEventListener('click',function(e){var b=e.target.closest('button[data-c]');if(!b)return;if(b.getAttribute('data-c')==='print'){D.forEach(totes);window.print()}else canvia('escena')});
+}
+function canvia(m){location.hash='';mode=m;document.body.className=m;if(m==='escena'){if(!crom)fesCrom();ves(i);var b=$('.barra-lectura');if(b)b.remove();var f=$('.fi-lectura');if(f)f.remove()}else{D.forEach(function(d){d.classList.remove('actual')});modeLectura()}}
+
+/* ───── comprovació de maqueta: res no pot sobrar amb tot destapat (la crida munta.py comprova) ───── */
+window.escena={
+  comprova:function(){
+    var mal=[];
+    D.forEach(function(d,k){
+      var abans=$$('.vist',d);ves(k);totes(d);
+      [d,$('.cos',d),$('.txt',d),$('.visual',d)].forEach(function(e){
+        if(e&&(e.scrollHeight>e.clientHeight+2||e.scrollWidth>e.clientWidth+2))mal.push({n:k+1,titol:titol(d),on:e.className.split(' ')[0],sobra_alt:e.scrollHeight-e.clientHeight,sobra_ample:e.scrollWidth-e.clientWidth});
+      });
+      $$('.vist',d).forEach(function(e){if(abans.indexOf(e)<0)e.classList.remove('vist')});$$('.provat',d).forEach(function(e){e.classList.remove('provat')});sync(d);
+    });
+    ves(0);return mal;
+  },
+  ves:function(n){ves(n-1)},totes:function(){totes(D[i])},n:function(){return D.length}
+};
+
+/* ───── arrencada ───── */
+if(mode==='pres'){document.body.className='pres-m';modePres();return}
+if(mode==='guio'){document.body.className='guio-m';modeGuio();return}
+document.body.className=mode;
+document.addEventListener('click',function(e){
+  var el=e.target.closest('.op,.it,.tapa,.crono');if(!el||e.target.closest('a'))return;
+  if(el.classList.contains('crono'))crono();else toca(el);
+});
+window.addEventListener('message',function(e){var s=e.data;if(!s||!s.escena||!s.cmd)return;if(s.cmd==='seg')seg();else if(s.cmd==='ant')ant();else if(s.cmd==='crono')crono();else envia()});
+document.addEventListener('keydown',function(e){
+  if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;
+  var k=e.key,d=D[i];
+  if(k==='p'||k==='P'){if(mode!=='escena')canvia('escena');return}   // P = projectar (si ja es projecta, no fa res)
+  if((k==='l'||k==='L')&&mode==='escena'){canvia('lectura');return}
+  if(mode!=='escena')return;
+  if(k==='ArrowRight'||k===' '||k==='PageDown'||k==='Enter'){e.preventDefault();seg()}
+  else if(k==='ArrowLeft'||k==='PageUp'||k==='Backspace'){e.preventDefault();ant()}
+  else if(k==='ArrowDown'){e.preventDefault();ves(i+1)}
+  else if(k==='ArrowUp'){e.preventDefault();ves(i-1)}
+  else if(k==='Home')ves(0);else if(k==='End')ves(D.length-1)
+  else if(k==='t'||k==='T')crono()
+  else if(k==='n'||k==='N')obrePres()
+  else if(k==='r'||k==='R')reinicia()
+  else if(k==='f'||k==='F'){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen()}
+  else{
+    var n=/^[1-9]$/.test(k)?+k:(/^[a-dA-D]$/.test(k)&&$('.ops',d)?k.toLowerCase().charCodeAt(0)-96:0);
+    if(n){var el=$$('.op,.it,.tapa',d)[n-1];if(el)toca(el)}
+  }
+});
+if(mode==='escena'){fesCrom();var m=/^#d(\d+)$/.exec(h);i=m?Math.min(D.length,Math.max(1,+m[1]))-1:0;D[i].classList.add('actual');pinta()}
+else modeLectura();
+pintaTemps();
+})();
+
+</script>
+</body>
+</html>
